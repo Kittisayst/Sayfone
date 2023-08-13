@@ -8,12 +8,15 @@
 	</parameter>
 	<parameter name="LogoPath" class="java.lang.String"/>
 	<parameter name="UserPrint" class="java.lang.String"/>
+	<parameter name="UserID" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[SELECT ClassRoomName,StudentNo,Gender,StudentName,SaveDate,Money,TransferMoney,FinancialMonth,FinancialComment,transferDate,transferTime  FROM tb_filetransfer
 INNER JOIN tb_financial ON tb_filetransfer.finacialID=tb_financial.FinancialID
 INNER JOIN tb_register ON tb_financial.RegisterID = tb_register.registerID
 INNER JOIN tb_student ON tb_financial.StudentID = tb_student.StudentID
-WHERE SaveDate=$P{parmDate} AND TransferMoney>0;]]>
+WHERE SaveDate=$P{parmDate} AND TransferMoney>0 AND UserID=$P{UserID};]]>
 	</queryString>
 	<field name="ClassRoomName" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -65,7 +68,7 @@ WHERE SaveDate=$P{parmDate} AND TransferMoney>0;]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Phetsarath OT" size="24"/>
 				</textElement>
-				<text><![CDATA[ໃບລາຍງານປະຈຳວັນ (ເງິນໂອນ)1]]></text>
+				<text><![CDATA[ໃບລາຍງານປະຈຳວັນ (ເງິນໂອນ)]]></text>
 			</staticText>
 		</band>
 	</title>

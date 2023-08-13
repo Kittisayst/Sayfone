@@ -4,6 +4,7 @@ import DAOInterface.StudentFn;
 import Database.JoConnect;
 import Database.JoSQL;
 import Log.JoLoger;
+import Model.GlobalDataModel;
 import Model.StudentModel;
 import java.util.List;
 import Tools.JoAlert;
@@ -24,8 +25,6 @@ public class StudentDAO implements StudentFn {
             + "DateofBirth=?,DateStart=?,DateStop=?,Preschool=?,Health=?,Talent=?,VaccinState=?,Disabled=?,Sibling=?,"
             + "GoHome=?,Status=?,nationalityID=?,ethnicID=?,religionID=? WHERE StudentID=?";
     private final String SQL_Delete = "DELETE FROM " + TableName + " WHERE StudentID=?";
-    private final String SQL_GET_All = "SELECT * FROM " + TableName;
-    private final String SQL_GET_ById = "SELECT * FROM " + TableName + " WHERE StudentID =?";
     private final String SQL_GET_LASTID = "SELECT MAX(StudentID) AS ID FROM " + TableName;
     private final String SQL_UpdateImage = "UPDATE " + TableName + " SET Image=? WHERE StudentID=?";
     private final String SQL_Count = "SELECT COUNT(StudentID) AS StudnetCount FROM " + TableName;
@@ -62,6 +61,7 @@ public class StudentDAO implements StudentFn {
             pre.setInt(i++, model.getNationalityID());
             pre.setInt(i++, model.getEthnicID());
             pre.setInt(i++, model.getReligionID());
+            pre.setInt(i++, GlobalDataModel.globalUsermodel.getUserID());
             return pre.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -123,37 +123,16 @@ public class StudentDAO implements StudentFn {
     public List<StudentModel> getAllStudent() {
         List<StudentModel> models = new ArrayList<>();
         try {
-            PreparedStatement pre = c.prepareStatement(SQL_GET_All);
-            ResultSet rs = pre.executeQuery();
+            ResultSet rs = sql.getSelectAll();
             while (rs.next()) {
-                int i = 1;
-                StudentModel model = new StudentModel();
-                model.setStudentID(rs.getInt(i++));
-                model.setStudentNo(rs.getString(i++));
-                model.setGender(rs.getInt(i++));
-                model.setStudentName(rs.getString(i++));
-                model.setStudentENG(rs.getString(i++));
-                model.setNickName(rs.getString(i++));
-                model.setDateofBirth(rs.getDate(i++));
-                model.setDateStart(rs.getDate(i++));
-                model.setDateStop(rs.getDate(i++));
-                model.setPreschool(rs.getString(i++));
-                model.setHealth(rs.getInt(i++));
-                model.setTalent(rs.getString(i++));
-                model.setVaccinState(rs.getInt(i++));
-                model.setDisabled(rs.getString(i++));
-                model.setSibling(rs.getInt(i++));
-                model.setImage(rs.getBlob(i++));
-                model.setGoHome(rs.getInt(i++));
-                model.setStatus(rs.getInt(i++));
-                model.setNationalityID(rs.getInt(i++));
-                model.setEthnicID(rs.getInt(i++));
-                model.setReligionID(rs.getInt(i++));
-                models.add(model);
+                models.add(getResult(rs));
             }
         } catch (SQLException e) {
             e.printStackTrace();
             JoAlert.Error(e, this);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JoAlert.Error(ex, this);
         }
         return models;
     }
@@ -162,32 +141,9 @@ public class StudentDAO implements StudentFn {
     public StudentModel getStudentById(int StudentID) {
         StudentModel model = new StudentModel();
         try {
-            PreparedStatement pre = c.prepareStatement(SQL_GET_ById);
-            pre.setInt(1, StudentID);
-            ResultSet rs = pre.executeQuery();
+            ResultSet rs = sql.getSelectById(StudentID);
             if (rs.next()) {
-                int i = 1;
-                model.setStudentID(rs.getInt(i++));
-                model.setStudentNo(rs.getString(i++));
-                model.setGender(rs.getInt(i++));
-                model.setStudentName(rs.getString(i++));
-                model.setStudentENG(rs.getString(i++));
-                model.setNickName(rs.getString(i++));
-                model.setDateofBirth(rs.getDate(i++));
-                model.setDateStart(rs.getDate(i++));
-                model.setDateStop(rs.getDate(i++));
-                model.setPreschool(rs.getString(i++));
-                model.setHealth(rs.getInt(i++));
-                model.setTalent(rs.getString(i++));
-                model.setVaccinState(rs.getInt(i++));
-                model.setDisabled(rs.getString(i++));
-                model.setSibling(rs.getInt(i++));
-                model.setImage(rs.getBlob(i++));
-                model.setGoHome(rs.getInt(i++));
-                model.setStatus(rs.getInt(i++));
-                model.setNationalityID(rs.getInt(i++));
-                model.setEthnicID(rs.getInt(i++));
-                model.setReligionID(rs.getInt(i++));
+                model = getResult(rs);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -251,30 +207,7 @@ public class StudentDAO implements StudentFn {
         try {
             ResultSet rs = c.createStatement().executeQuery(SQL_GetNewStudent);
             while (rs.next()) {
-                int i = 1;
-                StudentModel model = new StudentModel();
-                model.setStudentID(rs.getInt(i++));
-                model.setStudentNo(rs.getString(i++));
-                model.setGender(rs.getInt(i++));
-                model.setStudentName(rs.getString(i++));
-                model.setStudentENG(rs.getString(i++));
-                model.setNickName(rs.getString(i++));
-                model.setDateofBirth(rs.getDate(i++));
-                model.setDateStart(rs.getDate(i++));
-                model.setDateStop(rs.getDate(i++));
-                model.setPreschool(rs.getString(i++));
-                model.setHealth(rs.getInt(i++));
-                model.setTalent(rs.getString(i++));
-                model.setVaccinState(rs.getInt(i++));
-                model.setDisabled(rs.getString(i++));
-                model.setSibling(rs.getInt(i++));
-                model.setImage(rs.getBlob(i++));
-                model.setGoHome(rs.getInt(i++));
-                model.setStatus(rs.getInt(i++));
-                model.setNationalityID(rs.getInt(i++));
-                model.setEthnicID(rs.getInt(i++));
-                model.setReligionID(rs.getInt(i++));
-                models.add(model);
+                models.add(getResult(rs));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -293,30 +226,7 @@ public class StudentDAO implements StudentFn {
                     + "WHERE f.StudentID IS NULL;";
             ResultSet rs = c.createStatement().executeQuery(sql);
             while (rs.next()) {
-                int i = 1;
-                StudentModel model = new StudentModel();
-                model.setStudentID(rs.getInt(i++));
-                model.setStudentNo(rs.getString(i++));
-                model.setGender(rs.getInt(i++));
-                model.setStudentName(rs.getString(i++));
-                model.setStudentENG(rs.getString(i++));
-                model.setNickName(rs.getString(i++));
-                model.setDateofBirth(rs.getDate(i++));
-                model.setDateStart(rs.getDate(i++));
-                model.setDateStop(rs.getDate(i++));
-                model.setPreschool(rs.getString(i++));
-                model.setHealth(rs.getInt(i++));
-                model.setTalent(rs.getString(i++));
-                model.setVaccinState(rs.getInt(i++));
-                model.setDisabled(rs.getString(i++));
-                model.setSibling(rs.getInt(i++));
-                model.setImage(rs.getBlob(i++));
-                model.setGoHome(rs.getInt(i++));
-                model.setStatus(rs.getInt(i++));
-                model.setNationalityID(rs.getInt(i++));
-                model.setEthnicID(rs.getInt(i++));
-                model.setReligionID(rs.getInt(i++));
-                models.add(model);
+                models.add(getResult(rs));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -402,6 +312,7 @@ public class StudentDAO implements StudentFn {
         model.setNationalityID(rs.getInt(i++));
         model.setEthnicID(rs.getInt(i++));
         model.setReligionID(rs.getInt(i++));
+        model.setUserCreate(rs.getInt(i++));
         return model;
     }
 

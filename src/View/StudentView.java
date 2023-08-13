@@ -3,6 +3,7 @@ package View;
 import Components.JoButtonIconfont;
 import Components.JoTable;
 import DAOSevervice.FinancialService;
+import DAOSevervice.UserService;
 import Model.StudentModel;
 import Tools.JoDataTable;
 import java.util.List;
@@ -21,7 +22,9 @@ public class StudentView extends javax.swing.JPanel {
                 data.getStudentID(),
                 data.getStudentNo(),
                 data.getFullName(),
-                new FinancialService().getLastClass(data.getStudentID())});
+                new FinancialService().getLastClass(data.getStudentID()),
+                new UserService().getUserById(data.getUserCreate()).getFullName(),
+            });
         });
         JoDataTable dataTable = new JoDataTable(pn_Datatable);
         dataTable.setHiddenColumns(1);
@@ -89,11 +92,11 @@ public class StudentView extends javax.swing.JPanel {
 
             },
             new String [] {
-                "#", "ID", "ລະຫັດນັກຮຽນ", "ຊື່ນັກຮຽນ", "ຊັ້ນຮຽນ"
+                "#", "ID", "ລະຫັດນັກຮຽນ", "ຊື່ນັກຮຽນ", "ຊັ້ນຮຽນ", "ຜູ້ບັນທຶກ"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

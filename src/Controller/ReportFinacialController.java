@@ -11,6 +11,7 @@ import Tools.JoHookEvent;
 import Utility.MyFormat;
 import View.HomeView;
 import View.ReportFinacialView;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.DayOfWeek;
@@ -273,8 +274,10 @@ public class ReportFinacialController implements JoMVC, ActionListener {
             parameter.put("parmDate", "" + reportDate);
             parameter.put("LogoPath", logo);
             parameter.put("UserPrint", "( " + GlobalDataModel.globalUsermodel.getFullName() + " )");
+            parameter.put("UserID", GlobalDataModel.globalUsermodel.getUserID());
             JasperPrint print = JasperFillManager.fillReport("ReportTransferDay.jasper", parameter, new JoConnect().getConnectionDefault());
             JasperViewer showReport = new JasperViewer(print, false);
+            showReport.setTitle("ReportTransferDay");
             showReport.setVisible(true);
         } catch (Exception e) {
             e.printStackTrace();

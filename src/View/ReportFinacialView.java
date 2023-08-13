@@ -12,12 +12,12 @@ import java.awt.Color;
 import java.util.List;
 
 public class ReportFinacialView extends javax.swing.JPanel {
-
+    
     public ReportFinacialView(String Title) {
         initComponents();
         lbl_title.setText(Title);
     }
-
+    
     public void showDataReport(List<FinancialModel> models) {
         tb_data.JoClearModel();
         MyFormat format = new MyFormat();
@@ -40,7 +40,7 @@ public class ReportFinacialView extends javax.swing.JPanel {
         btnPrint.setEnabled(!models.isEmpty());
     }
     
-     public void showDataReportTransfer(List<FinancialModel> models) {
+    public void showDataReportTransfer(List<FinancialModel> models) {
         tb_data.JoClearModel();
         MyFormat format = new MyFormat();
         models.forEach(data -> {
@@ -61,50 +61,55 @@ public class ReportFinacialView extends javax.swing.JPanel {
         });
         btnPrint.setEnabled(!models.isEmpty());
     }
-
+    
     public void showOnlyState(boolean State) {
-        Color bg = new Color(204,51,0);
+        Color bg = new Color(204, 51, 0);
         Color bgdf = new Color(25, 118, 210);
         btnCashOnly.setBackground(State ? bg : bgdf);
         btnTransferOnly.setBackground(State ? bgdf : bg);
+        showMoneyTitle(State);
     }
-
+    
+    private void showMoneyTitle(boolean State) {
+        lblMoneyTitle.setText(State ? btnCashOnly.getText() : btnTransferOnly.getText());
+    }
+    
     public JoButtonIconfont getBtn_back() {
         return btn_back;
     }
-
+    
     public JoButtonIconfont getBtnShow() {
         return btnShow;
     }
-
+    
     public JoDateChooser getDtDate() {
         return dtDate;
     }
-
+    
     public JoDateChooser getDtDateEnd() {
         return dtDateEnd;
     }
-
+    
     public JoButtonIconfont getBtnReportWeek() {
         return btnReportWeek;
     }
-
+    
     public JoButtonIconfont getBtn_ReportDay() {
         return btn_ReportDay;
     }
-
+    
     public JoButtonIconfont getBtnCashOnly() {
         return btnCashOnly;
     }
-
+    
     public JoButtonIconfont getBtnTransferOnly() {
         return btnTransferOnly;
     }
-
+    
     public JoButtonIconfont getBtnPrint() {
         return btnPrint;
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -130,6 +135,8 @@ public class ReportFinacialView extends javax.swing.JPanel {
         pnDataReport = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_data = new Components.JoTable();
+        jPanel7 = new javax.swing.JPanel();
+        lblMoneyTitle = new Components.JoLable();
         jPanel6 = new javax.swing.JPanel();
         joPanel1 = new Components.JoPanel();
         btnCashOnly = new Components.JoButtonIconfont();
@@ -237,6 +244,16 @@ public class ReportFinacialView extends javax.swing.JPanel {
 
         pnDataReport.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
+        jPanel7.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 3, 0, new java.awt.Color(0, 0, 0)));
+
+        lblMoneyTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblMoneyTitle.setText("ສະແດງສະເພາະງິນສົດ");
+        lblMoneyTitle.setFont(new java.awt.Font("Phetsarath OT", 1, 24)); // NOI18N
+        lblMoneyTitle.setPreferredSize(new java.awt.Dimension(300, 40));
+        jPanel7.add(lblMoneyTitle);
+
+        pnDataReport.add(jPanel7, java.awt.BorderLayout.PAGE_START);
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -285,7 +302,7 @@ public class ReportFinacialView extends javax.swing.JPanel {
             .addComponent(Pn_Navigation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1167, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -318,10 +335,12 @@ public class ReportFinacialView extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private Components.JoLable joLable1;
     private Components.JoLable joLable2;
     private Components.JoPanel joPanel1;
+    private Components.JoLable lblMoneyTitle;
     private Components.JoLable lbl_title;
     private javax.swing.JPanel pnDataReport;
     private Components.JoTable tb_data;

@@ -32,9 +32,39 @@ public class StudentModel {
     private File LocationFile;
     private int GoHome;
     private int Status;
+    private int UserCreate;
 
     public int getStudentID() {
         return StudentID;
+    }
+
+    public StudentModel() {
+    }
+
+    public StudentModel(int StudentID, int nationalityID, int ethnicID, int religionID, String StudentNo, int Gender, String StudentName, String StudentENG, String NickName, Date DateofBirth, Date DateStart, Date DateStop, String Preschool, int Health, String Talent, int VaccinState, String Disabled, int Sibling, Blob Image, File LocationFile, int GoHome, int Status, int UserCreate) {
+        this.StudentID = StudentID;
+        this.nationalityID = nationalityID;
+        this.ethnicID = ethnicID;
+        this.religionID = religionID;
+        this.StudentNo = StudentNo;
+        this.Gender = Gender;
+        this.StudentName = StudentName;
+        this.StudentENG = StudentENG;
+        this.NickName = NickName;
+        this.DateofBirth = DateofBirth;
+        this.DateStart = DateStart;
+        this.DateStop = DateStop;
+        this.Preschool = Preschool;
+        this.Health = Health;
+        this.Talent = Talent;
+        this.VaccinState = VaccinState;
+        this.Disabled = Disabled;
+        this.Sibling = Sibling;
+        this.Image = Image;
+        this.LocationFile = LocationFile;
+        this.GoHome = GoHome;
+        this.Status = Status;
+        this.UserCreate = UserCreate;
     }
 
     public void setStudentID(int StudentID) {
@@ -207,6 +237,14 @@ public class StudentModel {
 
     public void setStatus(int Status) {
         this.Status = Status;
+    }
+
+    public int getUserCreate() {
+        return UserCreate;
+    }
+
+    public void setUserCreate(int UserCreate) {
+        this.UserCreate = UserCreate;
     }
 
     public Object getFullName() {

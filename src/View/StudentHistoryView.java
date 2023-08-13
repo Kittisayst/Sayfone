@@ -11,7 +11,9 @@ import Model.ProvinceModel;
 import Model.StudentHistoryModel;
 import Model.StudentAddressModel;
 import DAOSevervice.DistrictService;
+import DAOSevervice.FinancialService;
 import DAOSevervice.ProvinceService;
+import DAOSevervice.StudentService;
 import Model.BrotherAndSisterModel;
 import Tools.JoDataTable;
 import java.util.List;
@@ -95,6 +97,23 @@ public class StudentHistoryView extends javax.swing.JPanel {
             txt_village.setText(model.getVillage());
             txt_villageNow.setText(model.getVillageNow());
         }
+    }
+
+    public void showBorderAndSister(List<BrotherAndSisterModel> models) {
+        models.forEach(data -> {
+            tb_BrotherAndSister.AddJoModel(new Object[]{
+                tb_BrotherAndSister.autoNumber(),
+                data.getBsID(),
+                data.getStudentBSID(),
+                data.getStudentNo(),
+                data.getFullName(),
+                new FinancialService().getLastClass(data.getStudentBSID()),
+            });
+        });
+        JoDataTable dataTable = new JoDataTable(pnDataTable);
+        dataTable.showDataTableAll();
+        dataTable.setHiddenColumns(1);
+        dataTable.setHiddenColumns(2);
     }
 
     //====== Getter =========
@@ -255,20 +274,6 @@ public class StudentHistoryView extends javax.swing.JPanel {
 
     public JoTable getTb_BrotherAndSister() {
         return tb_BrotherAndSister;
-    }
-
-    public void showBorderAndSister(List<BrotherAndSisterModel> models) {
-        models.forEach(data -> {
-            tb_BrotherAndSister.AddJoModel(new Object[]{
-                tb_BrotherAndSister.autoNumber(),
-                data.getBsID(),
-                data.getStudentBSID(),
-                data.getStudentNo(),
-                data.getFullName()});
-        });
-        JoDataTable dataTable = new JoDataTable(pnDataTable);
-        dataTable.showDataTableAll();
-//        dataTable.setHiddenColumns(1);
     }
 
     @SuppressWarnings("unchecked")
@@ -925,11 +930,11 @@ public class StudentHistoryView extends javax.swing.JPanel {
 
             },
             new String [] {
-                "#", "BSID", "studentID", "ລະຫັດນັກຮຽນ", "ຊື່ ແລະ ນາມສະກຸນ"
+                "#", "BSID", "studentID", "ລະຫັດນັກຮຽນ", "ຊື່ ແລະ ນາມສະກຸນ", "ຂະແໜງ"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, true, false, false
+                false, true, true, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
