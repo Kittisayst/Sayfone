@@ -27,7 +27,7 @@ public interface StudentFn {
 
     public String getAutoStudentID();
 
-    public boolean getChekStudentID(String studentNo);
+    public boolean getChekStudentNo(String studentNo);
     
     public List<StudentModel> getStudentBrotherSister(int StudentID);
 

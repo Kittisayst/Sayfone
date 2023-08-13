@@ -471,6 +471,7 @@
                                   <Component id="btn_Register" alignment="0" pref="265" max="32767" attributes="0"/>
                                   <Component id="btnTeacherRank" alignment="0" max="32767" attributes="0"/>
                                   <Component id="btnFinancial" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="btnAbsent" alignment="0" max="32767" attributes="0"/>
                               </Group>
                             </DimensionLayout>
                             <DimensionLayout dim="1">
@@ -482,6 +483,8 @@
                                       <Component id="btnFinancial" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" max="-2" attributes="0"/>
                                       <Component id="btnTeacherRank" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="btnAbsent" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" max="-2" attributes="0"/>
                                       <Component id="joButtonIconfont6" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -523,6 +526,15 @@
                                 <Property name="horizontalAlignment" type="int" value="2"/>
                                 <Property name="joIcons" type="jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons" editor="org.netbeans.modules.form.editors.EnumEditor">
                                   <Value id="MONETIZATION_ON"/>
+                                </Property>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoButtonIconfont" name="btnAbsent">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="&#xe81;&#xeb2;&#xe99;&#xe82;&#xeb2;&#xe94;&#xeae;&#xebd;&#xe99;"/>
+                                <Property name="horizontalAlignment" type="int" value="2"/>
+                                <Property name="joIcons" type="jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons" editor="org.netbeans.modules.form.editors.EnumEditor">
+                                  <Value id="ASSIGNMENT_TURNED_IN"/>
                                 </Property>
                               </Properties>
                             </Component>

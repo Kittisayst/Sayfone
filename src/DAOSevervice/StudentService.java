@@ -44,8 +44,8 @@ public class StudentService {
         return aO.getAutoStudentID();
     }
 
-    public boolean getChekStudentID(String studentNo) {
-        return aO.getChekStudentID(studentNo);
+    public boolean getChekStudentNo(String studentNo) {
+        return aO.getChekStudentNo(studentNo);
     }
 
     public List<StudentModel> getStudentBrotherSister(int StudentID) {

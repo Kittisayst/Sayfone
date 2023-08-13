@@ -13,6 +13,8 @@ public class AppStudentData {
             StudentModel model = new StudentModel();
             StudentDataView view = new StudentDataView("ເພີ່ມນັກຮຽນໃໝ່");
             StudentDataController controller = new StudentDataController(model, view);
+            controller.Start();
+            controller.AddEvent();
         } catch (Exception e) {
             JoLoger.saveLog(e, this);
         }
@@ -24,6 +26,8 @@ public class AppStudentData {
             StudentModel model = new StudentService().getStudentById(StudentID);
             StudentDataView view = new StudentDataView("ຂໍ້ມູນນັກຮຽນ (" + model.getFullName() + ")");
             StudentDataController controller = new StudentDataController(model, view);
+            controller.Start();
+            controller.AddEvent();
         } catch (Exception e) {
             JoLoger.saveLog(e, this);
         }

@@ -44,8 +44,6 @@ public class StudentDataController implements JoMVC, ActionListener, MouseListen
         ethnicService = new EthnicService();
         religionService = new ReligionService();
         filechooser = new JoFilechooser();
-        Start();
-        AddEvent();
     }
 
     @Override
@@ -75,7 +73,7 @@ public class StudentDataController implements JoMVC, ActionListener, MouseListen
     @Override
     public void Create() {
         model.setStudentID(0);
-        model.setStudentNo(view.getTxt_StudentNo().getText());
+        model.setStudentNo(service.getAutoStudentID()); // ໄອດີອັດຕະໂນມັດ
         model.setGender(view.getRd_male().isSelected() ? 1 : 0);
         model.setStudentName(view.getTxt_name().getText());
         model.setStudentENG(view.getTxt_nameENG().getText());
@@ -177,7 +175,7 @@ public class StudentDataController implements JoMVC, ActionListener, MouseListen
         } else if (event.isEvent(view.getBtn_Save())) {
             if (model.getStudentID() == 0) {
                 if (emptyData()) {
-                    if (service.getChekStudentID(view.getTxt_StudentNo().getText())) { // ກວດສອບລະຫັດໃໝ່ຊ້ຳກັນ
+                    if (service.getChekStudentNo(view.getTxt_StudentNo().getText())) { // ກວດສອບລະຫັດໃໝ່ຊ້ຳກັນ
                         new JoAlert().messages("ລະຫັດນັກຮຽນ", "ລະຫັດນັກຮຽນຊ້ຳກັນ", JoAlert.Icons.warning);
                     } else {
                         Create();
@@ -188,7 +186,7 @@ public class StudentDataController implements JoMVC, ActionListener, MouseListen
                     if (view.getTxt_StudentNo().getText().equals(model.getStudentNo())) { // ກວດສອບລະຫັດເກົ່າກັບລະຫັດໃໝ່ຊ້ຳກັນ
                         Update();
                     } else {
-                        if (service.getChekStudentID(view.getTxt_StudentNo().getText())) { // ກວດສອບລະຫັດໃໝ່ຊ້ຳກັນ
+                        if (service.getChekStudentNo(view.getTxt_StudentNo().getText())) { // ກວດສອບລະຫັດໃໝ່ຊ້ຳກັນ
                             new JoAlert().messages("ລະຫັດນັກຮຽນ", "ລະຫັດນັກຮຽນຊ້ຳກັນ", JoAlert.Icons.warning);
                         } else {
                             Update();

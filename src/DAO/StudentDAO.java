@@ -20,8 +20,6 @@ public class StudentDAO implements StudentFn {
     private final Connection c = new JoConnect().getConnectionDefault();
     private final String TableName = "tb_student";
     JoSQL sql = new JoSQL(c, TableName);
-//    private final String SQL_Create = "INSERT INTO " + TableName + " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-//     private final String SQL_Create = sql.getCreate();
     private final String SQL_Update = "UPDATE " + TableName + " SET StudentNo=?,Gender=?,StudentName=?,StudentENG=?,NickName=?,"
             + "DateofBirth=?,DateStart=?,DateStop=?,Preschool=?,Health=?,Talent=?,VaccinState=?,Disabled=?,Sibling=?,"
             + "GoHome=?,Status=?,nationalityID=?,ethnicID=?,religionID=? WHERE StudentID=?";
@@ -343,7 +341,7 @@ public class StudentDAO implements StudentFn {
     }
 
     @Override
-    public boolean getChekStudentID(String studentNo) {
+    public boolean getChekStudentNo(String studentNo) {
         try {
             ResultSet rs = sql.getSelectByIndex(2, studentNo);
             String checkNo = "";
