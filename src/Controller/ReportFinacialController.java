@@ -14,7 +14,6 @@ import View.ReportFinacialView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.DayOfWeek;
-import static java.time.temporal.TemporalQueries.localDate;
 import java.util.HashMap;
 import java.util.Map;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -211,6 +210,7 @@ public class ReportFinacialController implements JoMVC, ActionListener {
             parameter.put("parmDate", "" + reportDate);
             parameter.put("LogoPath", logo);
             parameter.put("UserPrint", "( " + GlobalDataModel.globalUsermodel.getFullName() + " )");
+            parameter.put("UserID", GlobalDataModel.globalUsermodel.getUserID());
             JasperPrint print = JasperFillManager.fillReport("ReportCashDay.jasper", parameter, new JoConnect().getConnectionDefault());
             JasperViewer showReport = new JasperViewer(print, false);
             showReport.setVisible(true);

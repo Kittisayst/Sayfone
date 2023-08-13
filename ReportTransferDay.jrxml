@@ -65,7 +65,7 @@ WHERE SaveDate=$P{parmDate} AND TransferMoney>0;]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Phetsarath OT" size="24"/>
 				</textElement>
-				<text><![CDATA[ໃບລາຍງານປະຈຳວັນ (ເງິນໂອນ)]]></text>
+				<text><![CDATA[ໃບລາຍງານປະຈຳວັນ (ເງິນໂອນ)1]]></text>
 			</staticText>
 		</band>
 	</title>

@@ -14,6 +14,7 @@ import Log.JoLoger;
 import Model.FinancialModel;
 import Model.CreateRegisterModel;
 import Model.FileTranferModel;
+import Model.GlobalDataModel;
 import Model.GobalData;
 import Model.SayfoneModel;
 import Model.StudentHistoryModel;
@@ -22,7 +23,6 @@ import Model.UserModel;
 import Tools.JoAlert;
 import Tools.JoFileSystem;
 import Tools.JoHookEvent;
-import Utility.JoJasperPrinter;
 import Utility.MyFormat;
 import Utility.MyPopup;
 import View.AuthenPopUp;
@@ -337,17 +337,15 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
         String logo = fileSystem.getCurrentPath() + "/Icon/sfsc.png";
         FinancialService financialService = new FinancialService();
         financialModel = financialService.getFinancialById(view.getTb_data().getIntValue(1));
+        //ດຶງຂໍ້ມູນໂຮງຮຽນ
         SayfoneService service = new SayfoneService();
-        UserService userService = new UserService();
         SayfoneModel model = service.getById(1);
+        //ດຶງຂໍ້ມູນຜູ້ໃຊ້ງານ
+        UserService userService = new UserService();
         UserModel userModel = userService.getUserById(financialModel.getAuthenUserID());
-        String authName = "";
-        if (userModel.getUserID() == 0) {
-            authName = "";
-        } else {
-            authName = userModel.getFullName().toString();
-        }
-
+        String authName = userModel.getUserID() == 0 ? "" : userModel.getFullName().toString();
+        //ດຶງຂໍ້ມູນຜູ້ປີ້ນ
+        String teacherLogin = GlobalDataModel.globalUsermodel.getFullName().toString();
         try {
             if (financialModel.getFinancialIID() != 0) {
                 Map parameter = new HashMap();
@@ -358,6 +356,7 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
                 parameter.put("Contact", model.getContact());
                 parameter.put("Detail", model.getDetail());
                 parameter.put("UserAuthen", authName);
+                parameter.put("UserPrint", "( "+teacherLogin+" )");
                 JasperPrint print = JasperFillManager.fillReport("sayfoneBill.jasper", parameter, new JoConnect().getConnectionDefault());
 //                new JoJasperPrinter(print).print();
                 JasperViewer showReport = new JasperViewer(print, false);

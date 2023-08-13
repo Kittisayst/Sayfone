@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SayfoneBill" language="groovy" pageWidth="220" pageHeight="480" columnWidth="210" leftMargin="5" rightMargin="5" topMargin="5" bottomMargin="5" uuid="57154301-a25b-4480-9e2b-6ffdf54accdc">
 	<property name="ireport.zoom" value="2.1435888100000016"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="385"/>
+	<property name="ireport.y" value="448"/>
 	<parameter name="LogoPath" class="java.lang.String"/>
 	<parameter name="financiaID" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -12,6 +12,7 @@
 	<parameter name="Contact" class="java.lang.String"/>
 	<parameter name="Detail" class="java.lang.String"/>
 	<parameter name="UserAuthen" class="java.lang.String"/>
+	<parameter name="UserPrint" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT FinancialID,StudentNo,StudentName,ClassRoomName,Money,TransferMoney,Discount,OvertimePay,FinancialMonth,Year,SaveDate FROM tb_financial AS fnc
 INNER JOIN tb_student ON fnc.StudentID = tb_student.StudentID
@@ -80,7 +81,7 @@ WHERE FinancialID = $P{financiaID}]]>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="247" splitType="Stretch">
+		<band height="264" splitType="Stretch">
 			<staticText>
 				<reportElement x="148" y="0" width="25" height="17" uuid="3f152fab-2f08-457b-9007-7d637a16efb5"/>
 				<textElement verticalAlignment="Middle">
@@ -274,12 +275,20 @@ WHERE FinancialID = $P{financiaID}]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{UserAuthen}]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement x="113" y="250" width="97" height="14" uuid="ce729527-8a6c-4304-b8bd-6ba2fd8bfcb8"/>
+				<box rightPadding="4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Phetsarath OT" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{UserPrint}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageHeader>
 	<pageFooter>
-		<band height="36">
+		<band height="19">
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="76" y="25" width="64" height="11" uuid="a2d77a8f-aa64-4184-9572-94d25b16c555"/>
+				<reportElement x="0" y="8" width="210" height="11" uuid="a2d77a8f-aa64-4184-9572-94d25b16c555"/>
 				<textElement textAlignment="Center">
 					<font size="5"/>
 				</textElement>

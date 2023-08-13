@@ -8,11 +8,14 @@
 	</parameter>
 	<parameter name="LogoPath" class="java.lang.String"/>
 	<parameter name="UserPrint" class="java.lang.String"/>
+	<parameter name="UserID" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[SELECT ClassRoomName,StudentNo,Gender,StudentName,SaveDate,Money,FinancialMonth,FinancialComment  FROM tb_financial
 INNER JOIN tb_register ON tb_financial.RegisterID = tb_register.registerID
 INNER JOIN tb_student ON tb_financial.StudentID = tb_student.StudentID
-WHERE SaveDate=$P{parmDate};]]>
+WHERE SaveDate=$P{parmDate} AND UserID=$P{UserID};]]>
 	</queryString>
 	<field name="ClassRoomName" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
