@@ -16,4 +16,6 @@ public interface RegisterFn {
     public CreateRegisterModel getRegisterById(int ID);
     
     public int getCountRegister();
+    
+    public boolean getCheckClassRegister(int classID);
 }

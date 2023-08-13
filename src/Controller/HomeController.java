@@ -1,6 +1,8 @@
 package Controller;
 
 import App.About;
+import App.AppAbsent;
+import App.AppClass;
 import App.AppDashboard;
 import App.AppFinancialRoom;
 import App.AppRegister;
@@ -50,6 +52,9 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
         TeacherService teacherService = new TeacherService();
         view.showUserName(teacherService.getTeacherById(userModel.getTeacherID()));
         AppDashboard dashboard = new AppDashboard();
+        //============ Hind Module ===================
+        view.getBtnSubject().setVisible(false);
+        view.getBtnSubjectTeacher().setVisible(false);
     }
 
     @Override
@@ -58,7 +63,9 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
         view.getBtn_teacher().addActionListener(this);
         view.getBtn_Menu().addActionListener(this);
         view.getBtn_Student().addActionListener(this);
-        view.getBtn_classRoom().addActionListener(this);
+        view.getBtnSubject().addActionListener(this);
+        view.getBtnClass().addActionListener(this);
+        view.getBtnAbsent().addActionListener(this);
         view.getBtn_Register().addActionListener(this);
         view.getBtnFinancial().addActionListener(this);
         view.getBtnReportFinancial().addActionListener(this);
@@ -93,26 +100,32 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         JoHookEvent event = new JoHookEvent(e.getSource());
-        if (event.isEvent(view.getBtn_home())) {
+        if (event.isEvent(view.getBtn_home())) {  // ============== ໜ້າຫຼັ້ກ
             AppDashboard dashboard = new AppDashboard();
-        } else if (event.isEvent(view.getBtn_teacher())) {
+        } else if (event.isEvent(view.getBtn_teacher())) {  // ======== ຈັດການຂໍ້ມູນ
             AppTeacher appTeacher = new AppTeacher();
         } else if (event.isEvent(view.getBtn_Menu())) {
             view.getPn_Menu().setVisible(!view.getPn_Menu().isVisible());
         } else if (event.isEvent(view.getBtn_Student())) {
             AppStudent appStudent = new AppStudent();
-        } else if (event.isEvent(view.getBtn_classRoom())) {
+        } else if (event.isEvent(view.getBtnSubject())) {
             AppSubject appSubject = new AppSubject();
         } else if (event.isEvent(view.getBtnUser())) {
             AppUser user = new AppUser();
             user.Open();
-        } else if (event.isEvent(view.getBtn_Register())) {
+        }else if (event.isEvent(view.getBtnClass())) {
+            AppClass appClass = new AppClass();
+            appClass.Open();
+        }  else if (event.isEvent(view.getBtn_Register())) { // ======== ການຮຽນການສອນ
             AppRegister appRegister = new AppRegister();
             appRegister.OpenRegister();
         } else if (event.isEvent(view.getBtnFinancial())) {
             AppFinancialRoom app = new AppFinancialRoom();
             app.open();
-        } else if (event.isEvent(view.getBtnReportFinancial())) {
+        }else if (event.isEvent(view.getBtnAbsent())) {
+            AppAbsent absent = new AppAbsent();
+            absent.Open();
+        }  else if (event.isEvent(view.getBtnReportFinancial())) { // ===== ລາຍງານຂໍ້ມູນ
             AppReportFinacial appReportFinacialDate = new AppReportFinacial();
         } else if (event.isEvent(view.getBtnTeacherRank())) {
             AppTeacherRank appTeacherRank = new AppTeacherRank();

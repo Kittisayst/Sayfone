@@ -121,4 +121,18 @@ public class RegisterDAO implements RegisterFn {
         return count;
     }
 
+    @Override
+    public boolean getCheckClassRegister(int classID) {
+        try {
+            PreparedStatement pre = sql.getSelectCustom("classID=?");
+            pre.setInt(1, classID);
+            ResultSet rs = pre.executeQuery();
+            return rs.next();
+        } catch (Exception e) {
+            JoLoger.saveLog(e, this);
+            JoAlert.Error(e, this);
+            return false;
+        }
+    }
+
 }

@@ -279,7 +279,7 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Container class="javax.swing.JPanel" name="jPanel3">
+                    <Container class="javax.swing.JPanel" name="pnSideBar">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="8c" green="4d" red="f" type="rgb"/>
@@ -380,9 +380,10 @@
                                           <Component id="btn_Student" alignment="0" pref="263" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <Component id="btn_classRoom" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="joButtonIconfont5" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="btnSubject" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="btnSubjectTeacher" alignment="0" max="32767" attributes="0"/>
                                   <Component id="btnUser" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="btnClass" alignment="0" max="32767" attributes="0"/>
                               </Group>
                             </DimensionLayout>
                             <DimensionLayout dim="1">
@@ -393,10 +394,12 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="btn_Student" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="btn_classRoom" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnSubject" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="joButtonIconfont5" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnSubjectTeacher" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="btnClass" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" max="-2" attributes="0"/>
                                       <Component id="btnUser" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" max="-2" attributes="0"/>
                                       <Component id="joButtonIconfont4" min="-2" max="-2" attributes="0"/>
@@ -433,7 +436,7 @@
                                 </Property>
                               </Properties>
                             </Component>
-                            <Component class="Components.JoButtonIconfont" name="btn_classRoom">
+                            <Component class="Components.JoButtonIconfont" name="btnSubject">
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="&#xe88;&#xeb1;&#xe94;&#xe81;&#xeb2;&#xe99;&#xea5;&#xeb2;&#xe8d;&#xea7;&#xeb4;&#xe8a;&#xeb2;"/>
                                 <Property name="horizontalAlignment" type="int" value="2"/>
@@ -442,7 +445,7 @@
                                 </Property>
                               </Properties>
                             </Component>
-                            <Component class="Components.JoButtonIconfont" name="joButtonIconfont5">
+                            <Component class="Components.JoButtonIconfont" name="btnSubjectTeacher">
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="&#xe88;&#xeb1;&#xe94;&#xe81;&#xeb2;&#xe99;&#xea7;&#xeb4;&#xe8a;&#xeb2;-&#xe84;&#xeb8;&#xeaa;&#xead;&#xe99;"/>
                                 <Property name="horizontalAlignment" type="int" value="2"/>
@@ -457,6 +460,15 @@
                                 <Property name="horizontalAlignment" type="int" value="2"/>
                                 <Property name="joIcons" type="jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons" editor="org.netbeans.modules.form.editors.EnumEditor">
                                   <Value id="ACCOUNT_CIRCLE"/>
+                                </Property>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoButtonIconfont" name="btnClass">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="&#xe82;&#xecd;&#xec9;&#xea1;&#xeb9;&#xe99;&#xe82;&#xeb0;&#xec1;&#xedc;&#xe87;"/>
+                                <Property name="horizontalAlignment" type="int" value="2"/>
+                                <Property name="joIcons" type="jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons" editor="org.netbeans.modules.form.editors.EnumEditor">
+                                  <Value id="SCHOOL"/>
                                 </Property>
                               </Properties>
                             </Component>
@@ -531,7 +543,7 @@
                             </Component>
                             <Component class="Components.JoButtonIconfont" name="btnAbsent">
                               <Properties>
-                                <Property name="text" type="java.lang.String" value="&#xe81;&#xeb2;&#xe99;&#xe82;&#xeb2;&#xe94;&#xeae;&#xebd;&#xe99;"/>
+                                <Property name="text" type="java.lang.String" value="&#xe9a;&#xeb1;&#xe99;&#xe97;&#xeb6;&#xe81;&#xe81;&#xeb2;&#xe99;&#xe82;&#xeb2;&#xe94;&#xeae;&#xebd;&#xe99;"/>
                                 <Property name="horizontalAlignment" type="int" value="2"/>
                                 <Property name="joIcons" type="jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons" editor="org.netbeans.modules.form.editors.EnumEditor">
                                   <Value id="ASSIGNMENT_TURNED_IN"/>
@@ -571,30 +583,12 @@
                             </DimensionLayout>
                           </Layout>
                           <SubComponents>
-                            <Component class="Components.JoButtonIconfont" name="joButtonIconfont10">
-                              <Properties>
-                                <Property name="text" type="java.lang.String" value="menu"/>
-                                <Property name="horizontalAlignment" type="int" value="2"/>
-                                <Property name="joIcons" type="jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons" editor="org.netbeans.modules.form.editors.EnumEditor">
-                                  <Value id="NFC"/>
-                                </Property>
-                              </Properties>
-                            </Component>
                             <Component class="Components.JoButtonIconfont" name="btnReportFinancial">
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="&#xea5;&#xeb2;&#xe8d;&#xe87;&#xeb2;&#xe99;&#xe81;&#xeb2;&#xe99;&#xe88;&#xec8;&#xeb2;&#xe8d;&#xe84;&#xec8;&#xeb2;&#xeae;&#xebd;&#xe99;"/>
                                 <Property name="horizontalAlignment" type="int" value="2"/>
                                 <Property name="joIcons" type="jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons" editor="org.netbeans.modules.form.editors.EnumEditor">
                                   <Value id="MONETIZATION_ON"/>
-                                </Property>
-                              </Properties>
-                            </Component>
-                            <Component class="Components.JoButtonIconfont" name="joButtonIconfont11">
-                              <Properties>
-                                <Property name="text" type="java.lang.String" value="&#xea5;&#xeb2;&#xe8d;&#xe87;&#xeb2;&#xe99;&#xeaa;&#xeb0;&#xe96;&#xeb4;&#xe94;&#xe95;&#xeb4;&#xe99;&#xeb1;&#xe81;&#xeae;&#xebd;&#xe99;"/>
-                                <Property name="horizontalAlignment" type="int" value="2"/>
-                                <Property name="joIcons" type="jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons" editor="org.netbeans.modules.form.editors.EnumEditor">
-                                  <Value id="PERSON_PIN"/>
                                 </Property>
                               </Properties>
                             </Component>
@@ -613,6 +607,24 @@
                                 <Property name="horizontalAlignment" type="int" value="2"/>
                                 <Property name="joIcons" type="jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons" editor="org.netbeans.modules.form.editors.EnumEditor">
                                   <Value id="ASSIGNMENT_IND"/>
+                                </Property>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoButtonIconfont" name="joButtonIconfont11">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="&#xea5;&#xeb2;&#xe8d;&#xe87;&#xeb2;&#xe99;&#xeaa;&#xeb0;&#xe96;&#xeb4;&#xe94;&#xe95;&#xeb4;&#xe99;&#xeb1;&#xe81;&#xeae;&#xebd;&#xe99;"/>
+                                <Property name="horizontalAlignment" type="int" value="2"/>
+                                <Property name="joIcons" type="jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons" editor="org.netbeans.modules.form.editors.EnumEditor">
+                                  <Value id="PERSON_PIN"/>
+                                </Property>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoButtonIconfont" name="joButtonIconfont10">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="menu"/>
+                                <Property name="horizontalAlignment" type="int" value="2"/>
+                                <Property name="joIcons" type="jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons" editor="org.netbeans.modules.form.editors.EnumEditor">
+                                  <Value id="NFC"/>
                                 </Property>
                               </Properties>
                             </Component>
@@ -693,7 +705,7 @@
                           <SubComponents>
                             <Component class="Components.JoButtonIconfont" name="btnInfo">
                               <Properties>
-                                <Property name="text" type="java.lang.String" value="&#xe82;&#xecd;&#xec9;&#xea1;&#xeb9;&#xe99;&#xec2;&#xeae;&#xe87;&#xeae;&#xebd;&#xe99;"/>
+                                <Property name="text" type="java.lang.String" value="&#xe82;&#xecd;&#xec9;&#xea1;&#xeb9;&#xe99;&#xec2;&#xeae;&#xe87;&#xeae;&#xebd;&#xe99;&#xeaa;&#xeb2;&#xe8d;&#xe9d;&#xebb;&#xe99;"/>
                                 <Property name="horizontalAlignment" type="int" value="2"/>
                                 <Property name="joIcons" type="jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons" editor="org.netbeans.modules.form.editors.EnumEditor">
                                   <Value id="INFO"/>

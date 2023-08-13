@@ -32,4 +32,10 @@ public class RegisterService {
         return aO.getCountRegister();
     }
 
+    public boolean getCheckClassRegister(int classID) { 
+        return aO.getCheckClassRegister(classID);
+    }
+    
+    
+
 }

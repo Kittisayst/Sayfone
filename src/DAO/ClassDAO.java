@@ -1,6 +1,7 @@
 package DAO;
 
 import Database.JoConnect;
+import Database.JoSQL;
 import Model.ClassModel;
 import java.util.List;
 import java.sql.Connection;
@@ -8,20 +9,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ClassDAO implements DAOInterface.ClassFn {
 
     private final Connection c = new JoConnect().getConnectionDefault();
-    private final String SQL_Create_Class = "INSERT INTO tb_class VALUES(?,?)";
-    private final String SQL_Update_Class = "UPDATE tb_class SET className=? WHERE classID=?";
-    private final String SQL_Delete_Class = "DELETE FROM tb_class WHERE classID=?";
-    private final String SQL_GET_All_Class = "SELECT * FROM tb_class";
-    private final String SQL_GET_ById_Class = "SELECT * FROM tb_class WHERE classID=?";
+    private String tableName = "tb_class";
+    private JoSQL sql = new JoSQL(c, tableName);
 
     @Override
     public int CreaterClass(ClassModel classModel) {
         try {
-            PreparedStatement pre = c.prepareStatement(SQL_Create_Class);
+            PreparedStatement pre = sql.getCreate();
             pre.setInt(1, classModel.getClassID());
             pre.setString(2, classModel.getClassName());
             return pre.executeUpdate();
@@ -33,7 +33,7 @@ public class ClassDAO implements DAOInterface.ClassFn {
     @Override
     public int UpdateClass(ClassModel classModel) {
         try {
-            PreparedStatement pre = c.prepareStatement(SQL_Update_Class);
+            PreparedStatement pre = sql.getUpdate();
             pre.setString(1, classModel.getClassName());
             pre.setInt(2, classModel.getClassID());
             return pre.executeUpdate();
@@ -45,7 +45,7 @@ public class ClassDAO implements DAOInterface.ClassFn {
     @Override
     public int DeleteClass(ClassModel classModel) {
         try {
-            PreparedStatement pre = c.prepareStatement(SQL_Delete_Class);
+            PreparedStatement pre = sql.getDelete();
             pre.setInt(1, classModel.getClassID());
             return pre.executeUpdate();
         } catch (SQLException e) {
@@ -57,8 +57,7 @@ public class ClassDAO implements DAOInterface.ClassFn {
     public List<ClassModel> getAllClass() {
         List<ClassModel> models = new ArrayList<>();
         try {
-            PreparedStatement pre = c.prepareStatement(SQL_GET_All_Class);
-            ResultSet rs = pre.executeQuery();
+            ResultSet rs = sql.getSelectAll();
             while (rs.next()) {
                 ClassModel model = new ClassModel();
                 model.setClassID(rs.getInt(1));
@@ -67,6 +66,8 @@ public class ClassDAO implements DAOInterface.ClassFn {
             }
         } catch (SQLException e) {
             System.err.println(e);
+        } catch (Exception ex) {
+            Logger.getLogger(ClassDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return models;
     }
@@ -75,9 +76,7 @@ public class ClassDAO implements DAOInterface.ClassFn {
     public ClassModel getClassById(int ID) {
         ClassModel classModel = new ClassModel();
         try {
-            PreparedStatement pre = c.prepareStatement(SQL_GET_ById_Class);
-            pre.setInt(1, ID);
-            ResultSet rs = pre.executeQuery();
+            ResultSet rs = sql.getSelectById(ID);
             if (rs.next()) {
                 classModel.setClassID(rs.getInt(1));
                 classModel.setClassName(rs.getString(2));
