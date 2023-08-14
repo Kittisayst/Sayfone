@@ -2,7 +2,6 @@ package Controller;
 
 import App.AppAbsent;
 import DAOSevervice.FinancialService;
-import DAOSevervice.RegisterService;
 import Model.CreateRegisterModel;
 import Tools.JoHookEvent;
 import View.AbsentDataView;

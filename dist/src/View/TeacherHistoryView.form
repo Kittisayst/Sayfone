@@ -1,0 +1,1787 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroup1">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroup2">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroup3">
+    </Component>
+  </NonVisualComponents>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Component id="Pn_Navigation" max="32767" attributes="0"/>
+          <Component id="jPanel2" alignment="0" pref="1106" max="32767" attributes="0"/>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="Pn_Navigation" min="-2" pref="51" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="jPanel2" max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Container class="javax.swing.JPanel" name="Pn_Navigation">
+      <Properties>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
+            <MatteColorBorder bottom="2" left="0" right="0" top="0"/>
+          </Border>
+        </Property>
+      </Properties>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
+        <Property name="columns" type="int" value="0"/>
+        <Property name="rows" type="int" value="1"/>
+      </Layout>
+      <SubComponents>
+        <Container class="javax.swing.JPanel" name="jPanel3">
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
+            <Property name="alignment" type="int" value="0"/>
+          </Layout>
+          <SubComponents>
+            <Component class="Components.JoButtonIconfont" name="btn_back">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&#xe81;&#xeb1;&#xe9a;&#xe84;&#xeb7;&#xe99;"/>
+                <Property name="joIcons" type="jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons" editor="org.netbeans.modules.form.editors.EnumEditor">
+                  <Value id="ARROW_BACK"/>
+                </Property>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="jPanel4">
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
+            <Property name="verticalGap" type="int" value="10"/>
+          </Layout>
+          <SubComponents>
+            <Component class="Components.JoLable" name="lbl_title">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Title"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Phetsarath OT" size="18" style="0"/>
+                </Property>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="jPanel5">
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
+            <Property name="alignment" type="int" value="2"/>
+          </Layout>
+          <SubComponents>
+            <Container class="javax.swing.JPanel" name="jPanel7">
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <EmptySpace min="0" pref="100" max="32767" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <EmptySpace min="0" pref="100" max="32767" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+            </Container>
+          </SubComponents>
+        </Container>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="jPanel2">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+      <SubComponents>
+        <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+          <Properties>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="null"/>
+            </Property>
+            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+            <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+              <BorderConstraints direction="Center"/>
+            </Constraint>
+          </Constraints>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+          <SubComponents>
+            <Container class="javax.swing.JPanel" name="jPanel1">
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="Tab_History" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="Tab_History" min="-2" pref="633" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Container class="Components.JoTabbed" name="Tab_History">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Phetsarath OT" size="14" style="0"/>
+                    </Property>
+                  </Properties>
+
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
+                  <SubComponents>
+                    <Container class="javax.swing.JPanel" name="pn_history">
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                          <JTabbedPaneConstraints tabName="&#xe9b;&#xeb0;&#xeab;&#xea7;&#xeb1;&#xe94;&#xeab;&#xe8d;&#xecd;&#xec9;">
+                            <Property name="tabTitle" type="java.lang.String" value="&#xe9b;&#xeb0;&#xeab;&#xea7;&#xeb1;&#xe94;&#xeab;&#xe8d;&#xecd;&#xec9;"/>
+                          </JTabbedPaneConstraints>
+                        </Constraint>
+                      </Constraints>
+
+                      <Layout>
+                        <DimensionLayout dim="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                                  <Component id="joPanelTitle2" max="32767" attributes="0"/>
+                                  <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                                  <Component id="joPanelTitle1" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                        <DimensionLayout dim="1">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="2" attributes="0">
+                                      <Component id="joPanelTitle2" alignment="2" max="32767" attributes="0"/>
+                                      <Component id="joPanelTitle1" alignment="2" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                      </Layout>
+                      <SubComponents>
+                        <Container class="Component.JoPanelTitle" name="joPanelTitle1">
+                          <Properties>
+                            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+                            </Property>
+                            <Property name="joTitle" type="java.lang.String" value="&#xe82;&#xecd;&#xec9;&#xea1;&#xeb9;&#xe99;&#xe84;&#xead;&#xe9a;&#xe84;&#xebb;&#xea7;"/>
+                            <Property name="opaque" type="boolean" value="false"/>
+                          </Properties>
+
+                          <Layout>
+                            <DimensionLayout dim="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jPanel11" max="32767" attributes="0"/>
+                                          <Group type="102" attributes="0">
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Group type="102" attributes="0">
+                                                      <Group type="103" groupAlignment="0" attributes="0">
+                                                          <Component id="txt_fatherName" max="32767" attributes="0"/>
+                                                          <Component id="joLable14" max="32767" attributes="0"/>
+                                                      </Group>
+                                                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                          <Component id="txt_fatherAge" pref="0" max="32767" attributes="0"/>
+                                                          <Component id="joLable15" pref="71" max="32767" attributes="0"/>
+                                                      </Group>
+                                                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <Group type="103" groupAlignment="0" attributes="0">
+                                                          <Component id="txt_fatherPlace" alignment="0" max="32767" attributes="0"/>
+                                                          <Component id="joLable22" alignment="0" max="32767" attributes="0"/>
+                                                      </Group>
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="txt_fatherTel" pref="0" max="32767" attributes="0"/>
+                                                  <Component id="joLable17" alignment="1" max="32767" attributes="0"/>
+                                                  <Component id="joLable16" max="32767" attributes="0"/>
+                                                  <Component id="txt_fatherJob" pref="0" max="32767" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <Group type="103" groupAlignment="0" attributes="0">
+                                                          <Component id="txt_MotherName" alignment="0" pref="0" max="32767" attributes="0"/>
+                                                          <Component id="joLable18" alignment="0" max="32767" attributes="0"/>
+                                                      </Group>
+                                                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                          <Component id="txt_MotherAge" alignment="0" pref="0" max="32767" attributes="0"/>
+                                                          <Component id="joLable19" alignment="0" min="-2" pref="71" max="-2" attributes="0"/>
+                                                      </Group>
+                                                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <Group type="103" groupAlignment="0" attributes="0">
+                                                          <Component id="txt_MotherPlace" alignment="0" pref="239" max="32767" attributes="0"/>
+                                                          <Component id="joLable23" alignment="0" max="32767" attributes="0"/>
+                                                      </Group>
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="txt_MotherTel" alignment="0" pref="239" max="32767" attributes="0"/>
+                                                  <Component id="joLable21" alignment="1" max="32767" attributes="0"/>
+                                                  <Component id="joLable20" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="txt_MotherJob" alignment="0" max="32767" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                            </DimensionLayout>
+                            <DimensionLayout dim="1">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Group type="103" groupAlignment="3" attributes="0">
+                                                  <Component id="joLable15" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="joLable16" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace min="-2" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="3" attributes="0">
+                                                  <Component id="txt_fatherAge" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="txt_fatherJob" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <Component id="joLable14" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" max="-2" attributes="0"/>
+                                              <Component id="txt_fatherName" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Component id="joLable17" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="txt_fatherTel" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <Component id="joLable22" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" max="-2" attributes="0"/>
+                                              <Component id="txt_fatherPlace" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Group type="103" groupAlignment="3" attributes="0">
+                                                  <Component id="joLable19" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="joLable20" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace min="-2" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="3" attributes="0">
+                                                  <Component id="txt_MotherAge" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="txt_MotherJob" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="joLable18" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" max="-2" attributes="0"/>
+                                              <Component id="txt_MotherName" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="joLable21" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="txt_MotherTel" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="joLable23" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" max="-2" attributes="0"/>
+                                              <Component id="txt_MotherPlace" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                                      <Component id="jPanel11" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                            </DimensionLayout>
+                          </Layout>
+                          <SubComponents>
+                            <Component class="Components.JoLable" name="joLable14">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="&#xe8a;&#xeb7;&#xec8;&#xe9e;&#xecd;&#xec8;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoTextField" name="txt_fatherName">
+                              <Properties>
+                                <Property name="placeholder" type="java.lang.String" value="&#xe8a;&#xeb7;&#xec8;&#xe9e;&#xecd;&#xec8;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoLable" name="joLable15">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="&#xead;&#xeb2;&#xe8d;&#xeb8;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoTextField" name="txt_fatherAge">
+                              <Properties>
+                                <Property name="numberOnly" type="boolean" value="true"/>
+                                <Property name="placeholder" type="java.lang.String" value="&#xe9b;&#xeb5;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoTextField" name="txt_fatherJob">
+                              <Properties>
+                                <Property name="placeholder" type="java.lang.String" value="&#xead;&#xeb2;&#xe8a;&#xeb5;&#xe9a;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoLable" name="joLable16">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="&#xead;&#xeb2;&#xe8a;&#xeb5;&#xe9a;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoTextField" name="txt_fatherTel">
+                              <Properties>
+                                <Property name="numberOnly" type="boolean" value="true"/>
+                                <Property name="placeholder" type="java.lang.String" value="&#xec0;&#xe9a;&#xeb5;&#xec2;&#xe97;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoLable" name="joLable17">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="&#xec0;&#xe9a;&#xeb5;&#xec2;&#xe97;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoTextField" name="txt_fatherPlace">
+                              <Properties>
+                                <Property name="placeholder" type="java.lang.String" value="&#xe9b;&#xec8;&#xead;&#xe99;&#xe9b;&#xeb0;&#xe88;&#xeb3;&#xe81;&#xeb2;&#xe99;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoLable" name="joLable22">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="&#xe9b;&#xec8;&#xead;&#xe99;&#xe9b;&#xeb0;&#xe88;&#xeb3;&#xe81;&#xeb2;&#xe99;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoLable" name="joLable18">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="&#xe8a;&#xeb7;&#xec8;&#xec1;&#xea1;&#xec8;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoTextField" name="txt_MotherName">
+                              <Properties>
+                                <Property name="placeholder" type="java.lang.String" value="&#xe8a;&#xeb7;&#xec8;&#xec1;&#xea1;&#xec8;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoLable" name="joLable19">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="&#xead;&#xeb2;&#xe8d;&#xeb8;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoTextField" name="txt_MotherAge">
+                              <Properties>
+                                <Property name="numberOnly" type="boolean" value="true"/>
+                                <Property name="placeholder" type="java.lang.String" value="&#xe9b;&#xeb5;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoLable" name="joLable20">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="&#xead;&#xeb2;&#xe8a;&#xeb5;&#xe9a;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoTextField" name="txt_MotherJob">
+                              <Properties>
+                                <Property name="placeholder" type="java.lang.String" value="&#xead;&#xeb2;&#xe8a;&#xeb5;&#xe9a;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoLable" name="joLable23">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="&#xe9b;&#xec8;&#xead;&#xe99;&#xe9b;&#xeb0;&#xe88;&#xeb3;&#xe81;&#xeb2;&#xe99;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoTextField" name="txt_MotherPlace">
+                              <Properties>
+                                <Property name="placeholder" type="java.lang.String" value="&#xe9b;&#xec8;&#xead;&#xe99;&#xe9b;&#xeb0;&#xe88;&#xeb3;&#xe81;&#xeb2;&#xe99;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoLable" name="joLable21">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="&#xec0;&#xe9a;&#xeb5;&#xec2;&#xe97;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoTextField" name="txt_MotherTel">
+                              <Properties>
+                                <Property name="numberOnly" type="boolean" value="true"/>
+                                <Property name="placeholder" type="java.lang.String" value="&#xec0;&#xe9a;&#xeb5;&#xec2;&#xe97;"/>
+                              </Properties>
+                            </Component>
+                            <Container class="javax.swing.JPanel" name="jPanel11">
+
+                              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
+                              <SubComponents>
+                                <Component class="Components.JoButtonIconfont" name="btn_saveHistory">
+                                  <Properties>
+                                    <Property name="text" type="java.lang.String" value="&#xe9a;&#xeb1;&#xe81;&#xe97;&#xeb6;&#xe81;&#xe9b;&#xeb0;&#xeab;&#xea7;&#xeb1;&#xe94;&#xeab;&#xe8d;&#xecd;&#xec9;"/>
+                                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                      <Font name="Phetsarath OT" size="14" style="0"/>
+                                    </Property>
+                                    <Property name="joIcons" type="jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons" editor="org.netbeans.modules.form.editors.EnumEditor">
+                                      <Value id="SAVE"/>
+                                    </Property>
+                                  </Properties>
+                                </Component>
+                              </SubComponents>
+                            </Container>
+                          </SubComponents>
+                        </Container>
+                        <Container class="Component.JoPanelTitle" name="joPanelTitle2">
+                          <Properties>
+                            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+                            </Property>
+                            <Property name="joTitle" type="java.lang.String" value="&#xe82;&#xecd;&#xec9;&#xea1;&#xeb9;&#xe99;&#xeaa;&#xec8;&#xea7;&#xe99;&#xe95;&#xebb;&#xea7;"/>
+                            <Property name="opaque" type="boolean" value="false"/>
+                          </Properties>
+
+                          <Layout>
+                            <DimensionLayout dim="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="txt_FamiltyID" pref="0" max="32767" attributes="0"/>
+                                                  <Component id="joLable1" max="32767" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="2" attributes="0">
+                                                  <Component id="txt_peopleID" alignment="2" pref="0" max="32767" attributes="0"/>
+                                                  <Component id="joLable2" alignment="2" max="32767" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="2" attributes="0">
+                                                  <Component id="joLable3" alignment="2" max="32767" attributes="0"/>
+                                                  <Component id="txt_passportID" alignment="2" pref="0" max="32767" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                  <Component id="joLable4" alignment="0" max="32767" attributes="0"/>
+                                                  <Group type="102" attributes="0">
+                                                      <Component id="rd_BloodGroupA" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                                      <Component id="rd_BloodGroupB" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                                      <Component id="rd_BloodGroupAB" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                                      <Component id="rd_BloodGroupO" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                  <Component id="txt_Higth" pref="0" max="32767" attributes="0"/>
+                                                  <Component id="joLable5" pref="60" max="32767" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                  <Component id="txt_Weight" pref="0" max="32767" attributes="0"/>
+                                                  <Component id="joLable6" pref="60" max="32767" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Component id="jPanel12" max="32767" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                  <Component id="txt_DiverID" alignment="0" pref="0" max="32767" attributes="0"/>
+                                                  <Component id="joLable7" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="joLable8" max="32767" attributes="0"/>
+                                                  <Group type="102" attributes="0">
+                                                      <Component id="rd_DiverCategoryMotobike" min="-2" pref="67" max="-2" attributes="0"/>
+                                                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                                      <Component id="rd_DiverCategoryCar" min="-2" pref="67" max="-2" attributes="0"/>
+                                                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                                      <Component id="rd_DiverCategoryOther" max="32767" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                          </Group>
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <Group type="103" groupAlignment="1" attributes="0">
+                                                  <Group type="102" attributes="0">
+                                                      <Group type="103" groupAlignment="0" attributes="0">
+                                                          <Component id="txt_SpouseTel" pref="0" max="32767" attributes="0"/>
+                                                          <Component id="joLable11" max="32767" attributes="0"/>
+                                                      </Group>
+                                                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                          <Component id="txt_SpouseJob" alignment="0" pref="0" max="32767" attributes="0"/>
+                                                          <Component id="joLable12" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
+                                                      </Group>
+                                                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                                      <Group type="103" groupAlignment="0" attributes="0">
+                                                          <Component id="txt_SpousePlace" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
+                                                          <Component id="joLable13" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
+                                                      </Group>
+                                                  </Group>
+                                                  <Group type="102" attributes="0">
+                                                      <Group type="103" groupAlignment="0" attributes="0">
+                                                          <Component id="txt_SpouseName" pref="358" max="32767" attributes="0"/>
+                                                          <Component id="joLable9" max="32767" attributes="0"/>
+                                                      </Group>
+                                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                          <Group type="102" attributes="0">
+                                                              <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
+                                                              <Component id="txt_SpouseAge" pref="152" max="32767" attributes="0"/>
+                                                          </Group>
+                                                          <Component id="joLable10" min="-2" pref="151" max="-2" attributes="0"/>
+                                                      </Group>
+                                                  </Group>
+                                              </Group>
+                                              <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                            </DimensionLayout>
+                            <DimensionLayout dim="1">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Component id="joLable3" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" max="-2" attributes="0"/>
+                                              <Component id="txt_passportID" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <Component id="joLable2" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" max="-2" attributes="0"/>
+                                              <Component id="txt_peopleID" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <Component id="joLable1" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" max="-2" attributes="0"/>
+                                              <Component id="txt_FamiltyID" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Group type="103" groupAlignment="3" attributes="0">
+                                                  <Component id="joLable4" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="joLable5" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="joLable6" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="rd_BloodGroupAB" alignment="1" min="-2" pref="41" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="3" attributes="0">
+                                                      <Component id="rd_BloodGroupA" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+                                                      <Component id="rd_BloodGroupB" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+                                                      <Component id="rd_BloodGroupO" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                                                      <Component id="txt_Higth" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="txt_Weight" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                          </Group>
+                                          <Component id="jPanel12" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="joLable7" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="joLable8" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="txt_DiverID" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="rd_DiverCategoryMotobike" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+                                          <Component id="rd_DiverCategoryCar" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+                                          <Component id="rd_DiverCategoryOther" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="joLable9" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="joLable10" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="txt_SpouseName" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="txt_SpouseAge" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Component id="joLable11" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" max="-2" attributes="0"/>
+                                              <Component id="txt_SpouseTel" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <Component id="joLable12" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" max="-2" attributes="0"/>
+                                              <Component id="txt_SpouseJob" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <Component id="joLable13" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" max="-2" attributes="0"/>
+                                              <Component id="txt_SpousePlace" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace pref="138" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                            </DimensionLayout>
+                          </Layout>
+                          <SubComponents>
+                            <Component class="Components.JoTextField" name="txt_FamiltyID">
+                              <Properties>
+                                <Property name="placeholder" type="java.lang.String" value="&#xec0;&#xea5;&#xe81;&#xeaa;&#xeb3;&#xea1;&#xeb0;&#xec2;&#xe99;&#xe84;&#xebb;&#xea7;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoLable" name="joLable1">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="&#xec0;&#xea5;&#xe81;&#xeaa;&#xeb3;&#xea1;&#xeb0;&#xec2;&#xe99;&#xe84;&#xebb;&#xea7;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoLable" name="joLable2">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="&#xec0;&#xea5;&#xe81;&#xe9a;&#xeb1;&#xe94;&#xe9b;&#xeb0;&#xe88;&#xeb3;&#xe95;&#xebb;&#xea7;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoTextField" name="txt_peopleID">
+                              <Properties>
+                                <Property name="placeholder" type="java.lang.String" value="&#xec0;&#xea5;&#xe81;&#xe9a;&#xeb1;&#xe94;&#xe9b;&#xeb0;&#xe88;&#xeb3;&#xe95;&#xebb;&#xea7;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoLable" name="joLable3">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="&#xec0;&#xea5;&#xe81;&#xe9e;&#xeb2;&#xe94;&#xeaa;&#xeb0;&#xe9b;&#xead;&#xe94;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoTextField" name="txt_passportID">
+                              <Properties>
+                                <Property name="placeholder" type="java.lang.String" value="&#xec0;&#xea5;&#xe81;&#xe9e;&#xeb2;&#xe94;&#xeaa;&#xeb0;&#xe9b;&#xead;&#xe94;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoLable" name="joLable4">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="&#xe81;&#xeb8;&#xe9a;&#xec0;&#xea5;&#xeb7;&#xead;&#xe94;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Component.JoRadioButton" name="rd_BloodGroupA">
+                              <Properties>
+                                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                                  <ComponentRef name="buttonGroup1"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="&#xe81;&#xeb8;&#xe9a; A"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Component.JoRadioButton" name="rd_BloodGroupB">
+                              <Properties>
+                                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                                  <ComponentRef name="buttonGroup1"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="&#xe81;&#xeb8;&#xe9a; B"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Component.JoRadioButton" name="rd_BloodGroupAB">
+                              <Properties>
+                                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                                  <ComponentRef name="buttonGroup1"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="&#xe81;&#xeb8;&#xe9a; AB"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Component.JoRadioButton" name="rd_BloodGroupO">
+                              <Properties>
+                                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                                  <ComponentRef name="buttonGroup1"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="&#xe81;&#xeb8;&#xe9a; O"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoLable" name="joLable5">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="&#xeaa;&#xec8;&#xea7;&#xe99;&#xeaa;&#xeb9;&#xe87;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoLable" name="joLable6">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="&#xe99;&#xec9;&#xeb3;&#xedc;&#xeb1;&#xe81;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoTextField" name="txt_Higth">
+                              <Properties>
+                                <Property name="numberOnly" type="boolean" value="true"/>
+                                <Property name="placeholder" type="java.lang.String" value="CM"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoTextField" name="txt_Weight">
+                              <Properties>
+                                <Property name="numberOnly" type="boolean" value="true"/>
+                                <Property name="placeholder" type="java.lang.String" value="KG"/>
+                              </Properties>
+                            </Component>
+                            <Container class="javax.swing.JPanel" name="jPanel12">
+                              <Properties>
+                                <Property name="opaque" type="boolean" value="false"/>
+                              </Properties>
+
+                              <Layout>
+                                <DimensionLayout dim="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
+                                </DimensionLayout>
+                                <DimensionLayout dim="1">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
+                                </DimensionLayout>
+                              </Layout>
+                            </Container>
+                            <Component class="Components.JoLable" name="joLable7">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="&#xec0;&#xea5;&#xe81;&#xec3;&#xe9a;&#xe82;&#xeb1;&#xe9a;&#xe82;&#xeb5;&#xec8;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoTextField" name="txt_DiverID">
+                              <Properties>
+                                <Property name="placeholder" type="java.lang.String" value="&#xec0;&#xea5;&#xe81;&#xec3;&#xe9a;&#xe82;&#xeb1;&#xe9a;&#xe82;&#xeb5;&#xec8;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoLable" name="joLable8">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="&#xe9b;&#xeb0;&#xec0;&#xe9e;&#xe94;&#xe8d;&#xeb2;&#xe99;&#xe9e;&#xeb2;&#xeab;&#xeb0;&#xe99;&#xeb0;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Component.JoRadioButton" name="rd_DiverCategoryMotobike">
+                              <Properties>
+                                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                                  <ComponentRef name="buttonGroup2"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="&#xea5;&#xebb;&#xe94;&#xe88;&#xeb1;&#xe81;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Component.JoRadioButton" name="rd_DiverCategoryCar">
+                              <Properties>
+                                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                                  <ComponentRef name="buttonGroup2"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="&#xea5;&#xebb;&#xe94;&#xec3;&#xeab;&#xe8d;&#xec8;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Component.JoRadioButton" name="rd_DiverCategoryOther">
+                              <Properties>
+                                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                                  <ComponentRef name="buttonGroup2"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="&#xead;&#xeb7;&#xec8;&#xec8;&#xe99;&#xec6;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoLable" name="joLable9">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="&#xe8a;&#xeb7;&#xec8; &#xec1;&#xea5;&#xeb0; &#xe99;&#xeb2;&#xea1;&#xeaa;&#xeb0;&#xe81;&#xeb8;&#xe99; &#xe9c;&#xebb;&#xea7;/&#xec0;&#xea1;&#xe8d;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoTextField" name="txt_SpouseName">
+                              <Properties>
+                                <Property name="placeholder" type="java.lang.String" value="&#xe8a;&#xeb7;&#xec8; &#xec1;&#xea5;&#xeb0; &#xe99;&#xeb2;&#xea1;&#xeaa;&#xeb0;&#xe81;&#xeb8;&#xe99; &#xe9c;&#xebb;&#xea7;/&#xec0;&#xea1;&#xe8d;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoLable" name="joLable10">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="&#xead;&#xeb2;&#xe8d;&#xeb8;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoTextField" name="txt_SpouseAge">
+                              <Properties>
+                                <Property name="numberOnly" type="boolean" value="true"/>
+                                <Property name="placeholder" type="java.lang.String" value="&#xe9b;&#xeb5;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoLable" name="joLable11">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="&#xec0;&#xe9a;&#xeb5;&#xec2;&#xe97;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoTextField" name="txt_SpouseTel">
+                              <Properties>
+                                <Property name="numberOnly" type="boolean" value="true"/>
+                                <Property name="placeholder" type="java.lang.String" value="&#xec0;&#xe9a;&#xeb5;&#xec2;&#xe97;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoTextField" name="txt_SpouseJob">
+                              <Properties>
+                                <Property name="placeholder" type="java.lang.String" value="&#xead;&#xeb2;&#xe8a;&#xeb5;&#xe9a;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoLable" name="joLable12">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="&#xead;&#xeb2;&#xe8a;&#xeb5;&#xe9a;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoTextField" name="txt_SpousePlace">
+                              <Properties>
+                                <Property name="placeholder" type="java.lang.String" value="&#xe9a;&#xec8;&#xead;&#xe99;&#xe9b;&#xeb0;&#xe88;&#xeb3;&#xe81;&#xeb2;&#xe99;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoLable" name="joLable13">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="&#xe9a;&#xec8;&#xead;&#xe99;&#xe9b;&#xeb0;&#xe88;&#xeb3;&#xe81;&#xeb2;&#xe99;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                      </SubComponents>
+                    </Container>
+                    <Container class="javax.swing.JPanel" name="pn_location">
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                          <JTabbedPaneConstraints tabName="&#xe97;&#xeb5;&#xec8;&#xea2;&#xeb9;&#xec8;">
+                            <Property name="tabTitle" type="java.lang.String" value="&#xe97;&#xeb5;&#xec8;&#xea2;&#xeb9;&#xec8;"/>
+                          </JTabbedPaneConstraints>
+                        </Constraint>
+                      </Constraints>
+
+                      <Layout>
+                        <DimensionLayout dim="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace pref="230" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="jPanel14" max="32767" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <Component id="joPanelTitle4" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                                          <Component id="joPanelTitle5" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace pref="230" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                        <DimensionLayout dim="1">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="joPanelTitle4" max="32767" attributes="0"/>
+                                      <Component id="joPanelTitle5" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                                  <Component id="jPanel14" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace pref="210" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                      </Layout>
+                      <SubComponents>
+                        <Container class="Component.JoPanelTitle" name="joPanelTitle4">
+                          <Properties>
+                            <Property name="joTitle" type="java.lang.String" value="&#xeaa;&#xeb0;&#xe96;&#xeb2;&#xe99;&#xe97;&#xeb5;&#xec8;&#xec0;&#xe81;&#xeb5;&#xe94;"/>
+                            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                              <Dimension value="[300, 300]"/>
+                            </Property>
+                          </Properties>
+
+                          <Layout>
+                            <DimensionLayout dim="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="cb_province" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="cb_district" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="joLable24" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="joLable25" alignment="1" max="32767" attributes="0"/>
+                                          <Component id="txt_village" alignment="0" pref="272" max="32767" attributes="0"/>
+                                          <Component id="joLable26" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                            </DimensionLayout>
+                            <DimensionLayout dim="1">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="joLable24" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                                      <Component id="cb_province" min="-2" pref="40" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="joLable25" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                                      <Component id="cb_district" min="-2" pref="40" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                                      <Component id="joLable26" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="txt_village" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace pref="33" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                            </DimensionLayout>
+                          </Layout>
+                          <SubComponents>
+                            <Component class="Components.JoCombobox" name="cb_province">
+                            </Component>
+                            <Component class="Components.JoCombobox" name="cb_district">
+                            </Component>
+                            <Component class="Components.JoLable" name="joLable24">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="&#xec1;&#xe82;&#xea7;&#xe87;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoLable" name="joLable25">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="&#xec0;&#xea1;&#xeb7;&#xead;&#xe87;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoTextField" name="txt_village">
+                              <Properties>
+                                <Property name="placeholder" type="java.lang.String" value="&#xe9a;&#xec9;&#xeb2;&#xe99;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoLable" name="joLable26">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="&#xe9a;&#xec9;&#xeb2;&#xe99;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Container class="javax.swing.JPanel" name="jPanel14">
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
+                          <SubComponents>
+                            <Component class="Components.JoButtonIconfont" name="btn_saveLocation">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="&#xe9a;&#xeb1;&#xe99;&#xe97;&#xeb6;&#xe81;&#xe97;&#xeb5;&#xec8;&#xea2;&#xeb9;&#xec8;"/>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Phetsarath OT" size="14" style="0"/>
+                                </Property>
+                                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                                  <Dimension value="[165, 41]"/>
+                                </Property>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Container class="Component.JoPanelTitle" name="joPanelTitle5">
+                          <Properties>
+                            <Property name="joTitle" type="java.lang.String" value="&#xe9a;&#xec8;&#xead;&#xe99;&#xea2;&#xeb9;&#xec8;&#xe9b;&#xeb0;&#xe88;&#xeb8;&#xe9a;&#xeb1;&#xe99;"/>
+                            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                              <Dimension value="[300, 300]"/>
+                            </Property>
+                          </Properties>
+
+                          <Layout>
+                            <DimensionLayout dim="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="cb_provinceNow" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="cb_districtNow" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="joLable27" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="joLable28" alignment="1" max="32767" attributes="0"/>
+                                          <Component id="txt_villageNow" alignment="0" pref="272" max="32767" attributes="0"/>
+                                          <Component id="joLable29" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                            </DimensionLayout>
+                            <DimensionLayout dim="1">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="joLable27" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                                      <Component id="cb_provinceNow" min="-2" pref="40" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="joLable28" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                                      <Component id="cb_districtNow" min="-2" pref="40" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                                      <Component id="joLable29" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="txt_villageNow" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                            </DimensionLayout>
+                          </Layout>
+                          <SubComponents>
+                            <Component class="Components.JoCombobox" name="cb_provinceNow">
+                            </Component>
+                            <Component class="Components.JoCombobox" name="cb_districtNow">
+                            </Component>
+                            <Component class="Components.JoLable" name="joLable27">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="&#xec1;&#xe82;&#xea7;&#xe87;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoLable" name="joLable28">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="&#xec0;&#xea1;&#xeb7;&#xead;&#xe87;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoTextField" name="txt_villageNow">
+                              <Properties>
+                                <Property name="placeholder" type="java.lang.String" value="&#xe9a;&#xec9;&#xeb2;&#xe99;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoLable" name="joLable29">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="&#xe9a;&#xec9;&#xeb2;&#xe99;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                      </SubComponents>
+                    </Container>
+                    <Container class="javax.swing.JPanel" name="pn_education">
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                          <JTabbedPaneConstraints tabName="&#xe81;&#xeb2;&#xe99;&#xeaa;&#xeb6;&#xe81;&#xeaa;&#xeb2;">
+                            <Property name="tabTitle" type="java.lang.String" value="&#xe81;&#xeb2;&#xe99;&#xeaa;&#xeb6;&#xe81;&#xeaa;&#xeb2;"/>
+                          </JTabbedPaneConstraints>
+                        </Constraint>
+                      </Constraints>
+
+                      <Layout>
+                        <DimensionLayout dim="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="pn_Education" max="32767" attributes="0"/>
+                                      <Component id="jPanel16" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                        <DimensionLayout dim="1">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="jPanel16" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="pn_Education" pref="333" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                      </Layout>
+                      <SubComponents>
+                        <Container class="javax.swing.JPanel" name="pn_Education">
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+                          <SubComponents>
+                            <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+                              <AuxValues>
+                                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                              </AuxValues>
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                                  <BorderConstraints direction="Center"/>
+                                </Constraint>
+                              </Constraints>
+
+                              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                              <SubComponents>
+                                <Component class="Components.JoTable" name="tb_education">
+                                  <Properties>
+                                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                                      <Table columnCount="5" rowCount="0">
+                                        <Column editable="true" title="#" type="java.lang.Object"/>
+                                        <Column editable="true" title="ID" type="java.lang.Object"/>
+                                        <Column editable="true" title="&#xeaa;&#xeb2;&#xe82;&#xeb2;&#xea7;&#xeb4;&#xe8a;&#xeb2;" type="java.lang.Object"/>
+                                        <Column editable="true" title="&#xea7;&#xeb8;&#xe94;&#xe97;&#xeb4;&#xe81;&#xeb2;&#xe99;&#xeaa;&#xeb6;&#xe81;&#xeaa;&#xeb2;" type="java.lang.Object"/>
+                                        <Column editable="true" title="&#xeaa;&#xeb0;&#xe96;&#xeb2;&#xe9a;&#xeb1;&#xe99;" type="java.lang.Object"/>
+                                      </Table>
+                                    </Property>
+                                    <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                                      <TableColumnModel selectionModel="0">
+                                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                          <Title/>
+                                          <Editor/>
+                                          <Renderer/>
+                                        </Column>
+                                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                          <Title/>
+                                          <Editor/>
+                                          <Renderer/>
+                                        </Column>
+                                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                          <Title/>
+                                          <Editor/>
+                                          <Renderer/>
+                                        </Column>
+                                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                          <Title/>
+                                          <Editor/>
+                                          <Renderer/>
+                                        </Column>
+                                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                          <Title/>
+                                          <Editor/>
+                                          <Renderer/>
+                                        </Column>
+                                      </TableColumnModel>
+                                    </Property>
+                                    <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                                      <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+                                    </Property>
+                                  </Properties>
+                                </Component>
+                              </SubComponents>
+                            </Container>
+                          </SubComponents>
+                        </Container>
+                        <Container class="javax.swing.JPanel" name="jPanel16">
+
+                          <Layout>
+                            <DimensionLayout dim="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace pref="167" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                  <Component id="txt_major" pref="345" max="32767" attributes="0"/>
+                                                  <Component id="joLable30" max="32767" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                  <Component id="txt_school" max="32767" attributes="0"/>
+                                                  <Component id="joLable32" min="-2" pref="375" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="joLable31" alignment="0" min="-2" pref="345" max="-2" attributes="0"/>
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <Component id="rd_Middle" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                      <Component id="rd_High" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                      <Component id="rd_Bachelor" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                      <Component id="rd_Master" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                      <Component id="rd_PhD" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                  <Component id="joLable33" pref="375" max="32767" attributes="0"/>
+                                                  <Component id="dt_graduation" max="32767" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <Component id="jPanel17" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace pref="168" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                            </DimensionLayout>
+                            <DimensionLayout dim="1">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Component id="joLable32" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="txt_school" max="32767" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <Component id="joLable30" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="txt_major" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="joLable31" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="joLable33" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="rd_Bachelor" max="32767" attributes="0"/>
+                                              <Component id="rd_High" max="32767" attributes="0"/>
+                                              <Component id="rd_Middle" max="32767" attributes="0"/>
+                                              <Component id="rd_Master" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="rd_PhD" alignment="0" max="32767" attributes="0"/>
+                                          </Group>
+                                          <Component id="dt_graduation" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="jPanel17" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                            </DimensionLayout>
+                          </Layout>
+                          <SubComponents>
+                            <Component class="Components.JoLable" name="joLable30">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="&#xeaa;&#xeb2;&#xe82;&#xeb2;&#xea7;&#xeb4;&#xe8a;&#xeb2;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoTextField" name="txt_major">
+                              <Properties>
+                                <Property name="placeholder" type="java.lang.String" value="&#xeaa;&#xeb2;&#xe82;&#xeb2;&#xea7;&#xeb4;&#xe8a;&#xeb2;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoLable" name="joLable31">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="&#xea7;&#xeb9;&#xe94;&#xe97;&#xeb4;&#xe81;&#xeb2;&#xe99;&#xeaa;&#xeb6;&#xe81;&#xeaa;&#xeb2;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Component.JoRadioButton" name="rd_Middle">
+                              <Properties>
+                                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                                  <ComponentRef name="buttonGroup3"/>
+                                </Property>
+                                <Property name="selected" type="boolean" value="true"/>
+                                <Property name="text" type="java.lang.String" value="&#xe8a;&#xeb1;&#xec9;&#xe99;&#xe81;&#xeb2;&#xe87;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Component.JoRadioButton" name="rd_High">
+                              <Properties>
+                                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                                  <ComponentRef name="buttonGroup3"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="&#xe8a;&#xeb1;&#xec9;&#xe99;&#xeaa;&#xeb9;&#xe87;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Component.JoRadioButton" name="rd_Bachelor">
+                              <Properties>
+                                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                                  <ComponentRef name="buttonGroup3"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="&#xe9b;&#xeb0;&#xea5;&#xeb4;&#xe99;&#xe8d;&#xeb2;&#xe95;&#xeb5;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Component.JoRadioButton" name="rd_Master">
+                              <Properties>
+                                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                                  <ComponentRef name="buttonGroup3"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="&#xe9b;&#xeb0;&#xea5;&#xeb4;&#xe99;&#xe8d;&#xeb2;&#xec2;&#xe97;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Component.JoRadioButton" name="rd_PhD">
+                              <Properties>
+                                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                                  <ComponentRef name="buttonGroup3"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="&#xe9b;&#xeb0;&#xea5;&#xeb4;&#xe99;&#xe8d;&#xeb2;&#xec0;&#xead;&#xe81;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoLable" name="joLable32">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="&#xe8a;&#xeb7;&#xec8;&#xeaa;&#xeb0;&#xe96;&#xeb2;&#xe9a;&#xeb1;&#xe99;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoTextField" name="txt_school">
+                              <Properties>
+                                <Property name="placeholder" type="java.lang.String" value="&#xe8a;&#xeb7;&#xec8;&#xeaa;&#xeb0;&#xe96;&#xeb2;&#xe9a;&#xeb1;&#xe99;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoLable" name="joLable33">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="&#xea7;&#xeb1;&#xe99;&#xe97;&#xeb5;&#xeae;&#xebd;&#xe99;&#xe88;&#xebb;&#xe9a;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoDateChooser" name="dt_graduation">
+                            </Component>
+                            <Container class="javax.swing.JPanel" name="jPanel17">
+
+                              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
+                                <Property name="horizontalGap" type="int" value="15"/>
+                              </Layout>
+                              <SubComponents>
+                                <Component class="Components.JoButtonIconfont" name="btn_SaveEducation">
+                                  <Properties>
+                                    <Property name="text" type="java.lang.String" value="&#xe9a;&#xeb1;&#xe99;&#xe97;&#xeb6;&#xe81;&#xe81;&#xeb2;&#xe99;&#xeaa;&#xeb6;&#xe81;&#xeaa;&#xeb2;"/>
+                                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                      <Font name="Phetsarath OT" size="14" style="0"/>
+                                    </Property>
+                                  </Properties>
+                                </Component>
+                              </SubComponents>
+                            </Container>
+                          </SubComponents>
+                        </Container>
+                      </SubComponents>
+                    </Container>
+                    <Container class="javax.swing.JPanel" name="pn_work">
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                          <JTabbedPaneConstraints tabName="&#xe9b;&#xeb0;&#xeaa;&#xebb;&#xe9a;&#xe81;&#xeb2;&#xe99;">
+                            <Property name="tabTitle" type="java.lang.String" value="&#xe9b;&#xeb0;&#xeaa;&#xebb;&#xe9a;&#xe81;&#xeb2;&#xe99;"/>
+                          </JTabbedPaneConstraints>
+                        </Constraint>
+                      </Constraints>
+
+                      <Layout>
+                        <DimensionLayout dim="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="pn_Experience" max="32767" attributes="0"/>
+                                      <Component id="jPanel18" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                        <DimensionLayout dim="1">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                                  <Component id="jPanel18" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                                  <Component id="pn_Experience" pref="382" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                      </Layout>
+                      <SubComponents>
+                        <Container class="javax.swing.JPanel" name="pn_Experience">
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+                          <SubComponents>
+                            <Container class="javax.swing.JScrollPane" name="jScrollPane3">
+                              <AuxValues>
+                                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                              </AuxValues>
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                                  <BorderConstraints direction="Center"/>
+                                </Constraint>
+                              </Constraints>
+
+                              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                              <SubComponents>
+                                <Component class="Components.JoTable" name="tb_Experience">
+                                  <Properties>
+                                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                                      <Table columnCount="5" rowCount="0">
+                                        <Column editable="true" title="#" type="java.lang.Object"/>
+                                        <Column editable="true" title="ID" type="java.lang.Object"/>
+                                        <Column editable="true" title="&#xe9b;&#xeb0;&#xeaa;&#xebb;&#xe9a;&#xe81;&#xeb2;&#xe99;" type="java.lang.Object"/>
+                                        <Column editable="true" title="&#xeaa;&#xeb0;&#xe96;&#xeb2;&#xe99;&#xe97;&#xeb5;&#xec8;" type="java.lang.Object"/>
+                                        <Column editable="true" title="&#xea5;&#xeb2;&#xe8d;&#xea5;&#xeb0;&#xead;&#xebd;&#xe94;" type="java.lang.Object"/>
+                                      </Table>
+                                    </Property>
+                                    <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                                      <TableColumnModel selectionModel="0">
+                                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                          <Title/>
+                                          <Editor/>
+                                          <Renderer/>
+                                        </Column>
+                                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                          <Title/>
+                                          <Editor/>
+                                          <Renderer/>
+                                        </Column>
+                                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                          <Title/>
+                                          <Editor/>
+                                          <Renderer/>
+                                        </Column>
+                                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                          <Title/>
+                                          <Editor/>
+                                          <Renderer/>
+                                        </Column>
+                                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                          <Title/>
+                                          <Editor/>
+                                          <Renderer/>
+                                        </Column>
+                                      </TableColumnModel>
+                                    </Property>
+                                    <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                                      <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+                                    </Property>
+                                  </Properties>
+                                </Component>
+                              </SubComponents>
+                            </Container>
+                          </SubComponents>
+                        </Container>
+                        <Container class="javax.swing.JPanel" name="jPanel18">
+
+                          <Layout>
+                            <DimensionLayout dim="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace pref="79" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                  <Component id="joLable34" max="32767" attributes="0"/>
+                                                  <Component id="txt_experience" pref="240" max="32767" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                  <Component id="dt_ExperienceDateStart" pref="0" max="32767" attributes="0"/>
+                                                  <Component id="joLable36" min="-2" pref="164" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                  <Component id="txt_experiencePlace" max="32767" attributes="0"/>
+                                                  <Component id="joLable35" min="-2" pref="240" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                  <Component id="dt_ExperienceDateStop" alignment="0" pref="0" max="32767" attributes="0"/>
+                                                  <Component id="joLable37" alignment="0" min="-2" pref="164" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jScrollPane4" min="-2" pref="240" max="-2" attributes="0"/>
+                                          <Component id="joLable38" min="-2" pref="240" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="jPanel20" min="-2" pref="217" max="-2" attributes="0"/>
+                                      <EmptySpace pref="79" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                            </DimensionLayout>
+                            <DimensionLayout dim="1">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="joLable34" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="txt_experience" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Group type="102" attributes="0">
+                                                      <Component id="joLable37" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <Component id="dt_ExperienceDateStop" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Group type="102" attributes="0">
+                                                      <Component id="joLable35" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <Component id="txt_experiencePlace" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Group type="103" groupAlignment="3" attributes="0">
+                                                  <Component id="joLable36" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="joLable38" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="dt_ExperienceDateStart" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jPanel20" alignment="0" min="-2" pref="117" max="-2" attributes="0"/>
+                                                  <Component id="jScrollPane4" alignment="0" min="-2" pref="117" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                            </DimensionLayout>
+                          </Layout>
+                          <SubComponents>
+                            <Component class="Components.JoLable" name="joLable34">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="&#xe9b;&#xeb0;&#xeaa;&#xebb;&#xe9a;&#xe81;&#xeb2;&#xe99;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoTextField" name="txt_experience">
+                              <Properties>
+                                <Property name="placeholder" type="java.lang.String" value="&#xe9b;&#xeb0;&#xeaa;&#xebb;&#xe9a;&#xe81;&#xeb2;&#xe99;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoTextField" name="txt_experiencePlace">
+                              <Properties>
+                                <Property name="placeholder" type="java.lang.String" value="&#xeaa;&#xeb0;&#xe96;&#xeb2;&#xe99;&#xe97;&#xeb5;&#xec8;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoLable" name="joLable35">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="&#xeaa;&#xeb0;&#xe96;&#xeb2;&#xe99;&#xe97;&#xeb5;&#xec8;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoLable" name="joLable36">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="&#xec0;&#xea5;&#xeb5;&#xec8;&#xea1;&#xea7;&#xeb1;&#xe99;&#xe97;&#xeb5;&#xec8;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoDateChooser" name="dt_ExperienceDateStart">
+                            </Component>
+                            <Component class="Components.JoLable" name="joLable37">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="&#xeaa;&#xeb4;&#xec9;&#xe99;&#xeaa;&#xeb8;&#xe94;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoDateChooser" name="dt_ExperienceDateStop">
+                            </Component>
+                            <Component class="Components.JoLable" name="joLable38">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="&#xea5;&#xeb2;&#xe8d;&#xea5;&#xeb0;&#xead;&#xebd;&#xe94;"/>
+                              </Properties>
+                            </Component>
+                            <Container class="javax.swing.JScrollPane" name="jScrollPane4">
+                              <AuxValues>
+                                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                              </AuxValues>
+
+                              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                              <SubComponents>
+                                <Component class="Components.JoTextArea" name="txt_ExperienceInfo">
+                                </Component>
+                              </SubComponents>
+                            </Container>
+                            <Container class="javax.swing.JPanel" name="jPanel20">
+
+                              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
+                                <Property name="verticalGap" type="int" value="30"/>
+                              </Layout>
+                              <SubComponents>
+                                <Component class="Components.JoButtonIconfont" name="btn_SaveExperience">
+                                  <Properties>
+                                    <Property name="text" type="java.lang.String" value="&#xe9a;&#xeb1;&#xe99;&#xe97;&#xeb6;&#xe81;&#xe9b;&#xeb0;&#xeaa;&#xebb;&#xe9a;&#xe81;&#xeb2;&#xe99;"/>
+                                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                      <Font name="Phetsarath OT" size="14" style="0"/>
+                                    </Property>
+                                  </Properties>
+                                </Component>
+                              </SubComponents>
+                            </Container>
+                          </SubComponents>
+                        </Container>
+                      </SubComponents>
+                    </Container>
+                    <Container class="javax.swing.JPanel" name="pn_file">
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                          <JTabbedPaneConstraints tabName="&#xec0;&#xead;&#xe81;&#xeb0;&#xeaa;&#xeb2;&#xe99;">
+                            <Property name="tabTitle" type="java.lang.String" value="&#xec0;&#xead;&#xe81;&#xeb0;&#xeaa;&#xeb2;&#xe99;"/>
+                          </JTabbedPaneConstraints>
+                        </Constraint>
+                      </Constraints>
+
+                      <Layout>
+                        <DimensionLayout dim="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="pn_dataFile" pref="1065" max="32767" attributes="0"/>
+                                      <Component id="jPanel22" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                        <DimensionLayout dim="1">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                                  <Component id="jPanel22" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                                  <Component id="pn_dataFile" pref="461" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                      </Layout>
+                      <SubComponents>
+                        <Container class="javax.swing.JPanel" name="pn_dataFile">
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+                          <SubComponents>
+                            <Container class="javax.swing.JScrollPane" name="jScrollPane5">
+                              <AuxValues>
+                                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                              </AuxValues>
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                                  <BorderConstraints direction="Center"/>
+                                </Constraint>
+                              </Constraints>
+
+                              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                              <SubComponents>
+                                <Component class="Components.JoTable" name="tb_TeacherFile">
+                                  <Properties>
+                                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                                      <Table columnCount="4" rowCount="0">
+                                        <Column editable="true" title="#" type="java.lang.Object"/>
+                                        <Column editable="true" title="ID" type="java.lang.Object"/>
+                                        <Column editable="true" title="&#xe8a;&#xeb7;&#xec8;&#xec0;&#xead;&#xe81;&#xeb0;&#xeaa;&#xeb2;&#xe99;" type="java.lang.Object"/>
+                                        <Column editable="true" title="&#xea5;&#xeb2;&#xe8d;&#xea5;&#xeb0;&#xead;&#xebd;&#xe94;" type="java.lang.Object"/>
+                                      </Table>
+                                    </Property>
+                                    <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                                      <TableColumnModel selectionModel="0">
+                                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                          <Title/>
+                                          <Editor/>
+                                          <Renderer/>
+                                        </Column>
+                                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                          <Title/>
+                                          <Editor/>
+                                          <Renderer/>
+                                        </Column>
+                                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                          <Title/>
+                                          <Editor/>
+                                          <Renderer/>
+                                        </Column>
+                                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                          <Title/>
+                                          <Editor/>
+                                          <Renderer/>
+                                        </Column>
+                                      </TableColumnModel>
+                                    </Property>
+                                    <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                                      <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+                                    </Property>
+                                  </Properties>
+                                </Component>
+                              </SubComponents>
+                            </Container>
+                          </SubComponents>
+                        </Container>
+                        <Container class="javax.swing.JPanel" name="jPanel22">
+
+                          <Layout>
+                            <DimensionLayout dim="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace pref="297" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="joLable39" max="32767" attributes="0"/>
+                                          <Group type="102" attributes="0">
+                                              <Component id="txt_TeacherFileName" min="-2" pref="280" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="btn_uploadFile" min="-2" pref="40" max="-2" attributes="0"/>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Component id="btn_SaveFile" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace pref="291" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                            </DimensionLayout>
+                            <DimensionLayout dim="1">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="joLable39" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                              <Component id="txt_TeacherFileName" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="btn_uploadFile" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="btn_SaveFile" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                            </DimensionLayout>
+                          </Layout>
+                          <SubComponents>
+                            <Component class="Components.JoLable" name="joLable39">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="&#xeab;&#xebb;&#xea7;&#xe82;&#xecd;&#xec9;&#xec8;&#xec0;&#xead;&#xe81;&#xeb0;&#xeaa;&#xeb2;&#xe99;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoTextField" name="txt_TeacherFileName">
+                              <Properties>
+                                <Property name="placeholder" type="java.lang.String" value="&#xeab;&#xebb;&#xea7;&#xe82;&#xecd;&#xec9;&#xec8;&#xec0;&#xead;&#xe81;&#xeb0;&#xeaa;&#xeb2;&#xe99;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoButtonIconfont" name="btn_uploadFile">
+                              <Properties>
+                                <Property name="joIcons" type="jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons" editor="org.netbeans.modules.form.editors.EnumEditor">
+                                  <Value id="CLOUD_UPLOAD"/>
+                                </Property>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoButtonIconfont" name="btn_SaveFile">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="&#xe9a;&#xeb1;&#xe99;&#xe97;&#xeb6;&#xe81;&#xec0;&#xead;&#xe81;&#xeb0;&#xeaa;&#xeb2;&#xe99;"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                      </SubComponents>
+                    </Container>
+                  </SubComponents>
+                </Container>
+              </SubComponents>
+            </Container>
+          </SubComponents>
+        </Container>
+      </SubComponents>
+    </Container>
+  </SubComponents>
+</Form>
