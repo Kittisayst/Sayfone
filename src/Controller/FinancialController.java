@@ -170,33 +170,30 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
         FinancialService service = new FinancialService();
         FileTransferService transferService = new FileTransferService();
         JoAlert alert = new JoAlert();
-        if (!view.getTxtTransferMoney().getText().equals("0")) { //ກວດສອບຈຳນວນເງິນໂອນ
-            if (fileTranferModel.getFileTranferID() != 0) {
-                updateData();
-                service.Update(financialModel);
-                if (fileTranferModel.getFileTranferID() != 0) {
-                    alert.JoSubmit(transferService.Update(fileTranferModel), JoAlert.UPDATE);
-                }
-                AppFinancial appFinancial = new AppFinancial(registerModel, studentModel);
-            } else {
+        if (!view.getTxtTransferMoney().getText().equals("0")) { //ກວດສອບຕ້ອງບັນທຶກການໂອນຫຼືບໍ່
+            updateData(); // ຈັດເກັບຂໍ້ມູນໂອນຈາກ View
+            if (fileTranferModel.getFileTranferID() == 0) { // ກວດສອບມີການບັນທຶກເອກະສານເງິນໂອນຫຼືບໍ່
                 // ບັນທຶກຂໍ້ມູນການໂອນໃໝ່
-//                new JoAlert().messages("ຂໍ້ມູນບໍ່ຄົບ", "ກະລຸນາປ້ອນຂໍ້ມູນການໂອນ", JoAlert.Icons.warning);
                 fileTranferModel.setFinancialID(financialModel.getFinancialIID());
-                updateData();
                 service.Update(financialModel);
                 alert.JoSubmit(transferService.Creater(fileTranferModel), JoAlert.INSERT);
-                AppFinancial appFinancial = new AppFinancial(registerModel, studentModel);
-            }
-        } else {   //ກວດສອບເງິນສົດ
-            if (view.getTxtMoney().TextEmpty()) {
-                updateData();
+            } else {
+                // ແກ້ໄຂຂໍ້ມູນການໂອນໃໝ່
                 service.Update(financialModel);
                 if (fileTranferModel.getFileTranferID() != 0) {
                     alert.JoSubmit(transferService.Update(fileTranferModel), JoAlert.UPDATE);
                 }
-                AppFinancial appFinancial = new AppFinancial(registerModel, studentModel);
+            }
+        } else {   // ບັນທຶກສະເພາະເງິນສົດ
+            if (view.getTxtMoney().TextEmpty()) {
+                updateData(); // ຈັດເກັບຂໍ້ມູນໂອນຈາກ View
+                service.Update(financialModel);
+                if (fileTranferModel.getFileTranferID() != 0) {
+                    alert.JoSubmit(transferService.Update(fileTranferModel), JoAlert.UPDATE);
+                }
             }
         }
+        AppFinancial appFinancial = new AppFinancial(registerModel, studentModel);
     }
 
     @Override
@@ -251,13 +248,12 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
             AuthenPopUp popUp = new AuthenPopUp(AppHome.viewParent, true);
             popUp.setVisible(true);
             userAuthen = popUp.getUserModel();
-            if (userAuthen.getUserID() != 0) {
-                showEdit();
+            if (userAuthen.getUserID() != 0) { // ກວດສອບວ່າລະຫັດຢືກຢັນການແກ້ໄຂຖືກຫຼືບໍ່
+                showEdit(); // ສະແດງຂໍ້ມູນການແກ້ໄຂ
                 view.getCkDiscount().setSelected(true);
-                view.EnableDisCount(userAuthen);
+                view.EnableDisCount(userAuthen); // ສະແດງຂໍ້ມູນຜູ້ອານຸມັດ
             } else {
                 view.getCkDiscount().setSelected(false);
-                view.EnableDisCount(userAuthen);
             }
         } else if (event.isEvent(popup.getItemDelete())) { //ເມນູລົບ
             AuthenPopUp popUp = new AuthenPopUp(AppHome.viewParent, true);
@@ -271,7 +267,7 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
     }
 
     private void showEdit() {
-        //ລ້າງຂໍ້ມູນເກົ່າທີ່ແກ້ໄຂ
+        //ລ້າງຂໍ້ມູນຂອງເດືອນເກົ່າທີ່ແກ້ໄຂ
         if (financialModel.getFinancialIID() != 0) {
             view.setSelectMonth(financialModel);
             months.clear();

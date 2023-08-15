@@ -43,7 +43,7 @@ public class FinancialView extends javax.swing.JPanel {
         ckmonth.setForeground(new Color(25, 118, 210));
     }
 
-    public void EnableDisCount(UserModel model) {
+    public void EnableDisCount(UserModel model) { // ສະແດງຂໍ້ມູນຜູ້ອານຸມັດ
         txtDiscount.setEnabled(ckDiscount.isSelected());
         if (ckDiscount.isSelected()) {
             txtDiscount.requestFocus();
