@@ -98,6 +98,7 @@ public class UserDAO implements DAOInterface.UserFn {
                 TeacherService teacherService = new TeacherService();
                 TeacherModel teacherModel = teacherService.getTeacherById(rs.getInt(2));
                 model.setName(teacherModel.getName());
+                model.setGender(teacherModel.getGender());
                 models.add(model);
             }
         } catch (Exception e) {

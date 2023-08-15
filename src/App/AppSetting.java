@@ -4,14 +4,14 @@ import Controller.SayfoneController;
 import DAOSevervice.SayfoneService;
 import Log.JoLoger;
 import Tools.JoAlert;
-import View.SettingView;
+import View.SayfoneView;
 
 public class AppSetting {
 
     private SayfoneController controller;
 
     public AppSetting() {
-        SettingView view = new SettingView("ຕັ້ງຄ່າໂຮງຮຽນ");
+        SayfoneView view = new SayfoneView("ຕັ້ງຄ່າໂຮງຮຽນ");
         controller = new SayfoneController(view, new SayfoneService().getById(1));
     }
 

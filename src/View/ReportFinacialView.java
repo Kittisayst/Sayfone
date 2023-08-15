@@ -12,12 +12,12 @@ import java.awt.Color;
 import java.util.List;
 
 public class ReportFinacialView extends javax.swing.JPanel {
-    
+
     public ReportFinacialView(String Title) {
         initComponents();
         lbl_title.setText(Title);
     }
-    
+
     public void showDataReport(List<FinancialModel> models) {
         tb_data.JoClearModel();
         MyFormat format = new MyFormat();
@@ -39,7 +39,7 @@ public class ReportFinacialView extends javax.swing.JPanel {
         });
         btnPrint.setEnabled(!models.isEmpty());
     }
-    
+
     public void showDataReportTransfer(List<FinancialModel> models) {
         tb_data.JoClearModel();
         MyFormat format = new MyFormat();
@@ -61,61 +61,62 @@ public class ReportFinacialView extends javax.swing.JPanel {
         });
         btnPrint.setEnabled(!models.isEmpty());
     }
-    
+
     public void showOnlyState(boolean State) {
-        Color bg = new Color(204, 51, 0);
-        Color bgdf = new Color(25, 118, 210);
-        btnCashOnly.setBackground(State ? bg : bgdf);
-        btnTransferOnly.setBackground(State ? bgdf : bg);
+        Color cash = new Color(204, 51, 0);
+        Color transfer = new Color(0, 102, 51);
+        System.out.println(State);
+        tb_data.setJoBackgoundHead(State ? cash : transfer);
+        pnDataReport.repaint();
+        pnDataReport.revalidate();
         showMoneyTitle(State);
     }
-    
+
     private void showMoneyTitle(boolean State) {
         lblMoneyTitle.setText(State ? btnCashOnly.getText() : btnTransferOnly.getText());
     }
-    
+
     public JoButtonIconfont getBtn_back() {
         return btn_back;
     }
-    
+
     public JoButtonIconfont getBtnShow() {
         return btnShow;
     }
-    
+
     public JoDateChooser getDtDate() {
         return dtDate;
     }
-    
+
     public JoDateChooser getDtDateEnd() {
         return dtDateEnd;
     }
-    
+
     public JoButtonIconfont getBtnReportWeek() {
         return btnReportWeek;
     }
-    
+
     public JoButtonIconfont getBtn_ReportDay() {
         return btn_ReportDay;
     }
-    
+
     public JoButtonIconfont getBtnCashOnly() {
         return btnCashOnly;
     }
-    
+
     public JoButtonIconfont getBtnTransferOnly() {
         return btnTransferOnly;
     }
-    
+
     public JoButtonIconfont getBtnPrint() {
         return btnPrint;
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
         Pn_Navigation = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         btn_back = new Components.JoButtonIconfont();
@@ -272,11 +273,14 @@ public class ReportFinacialView extends javax.swing.JPanel {
         btnCashOnly.setText("ສະແດງສະເພາະງິນສົດ");
         btnCashOnly.setFont(new java.awt.Font("Phetsarath OT", 0, 14)); // NOI18N
         btnCashOnly.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.ATTACH_MONEY);
+        btnCashOnly.setJocolorHover(new java.awt.Color(163, 40, 0));
         joPanel1.add(btnCashOnly);
 
+        btnTransferOnly.setBackground(new java.awt.Color(0, 102, 51));
         btnTransferOnly.setText("ສະແດງສະເພາະເງິນໂອນ");
         btnTransferOnly.setFont(new java.awt.Font("Phetsarath OT", 0, 14)); // NOI18N
         btnTransferOnly.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.FILTER_DRAMA);
+        btnTransferOnly.setJocolorHover(new java.awt.Color(8, 80, 44));
         joPanel1.add(btnTransferOnly);
 
         jPanel6.add(joPanel1);
@@ -326,7 +330,6 @@ public class ReportFinacialView extends javax.swing.JPanel {
     private Components.JoButtonIconfont btnTransferOnly;
     private Components.JoButtonIconfont btn_ReportDay;
     private Components.JoButtonIconfont btn_back;
-    private javax.swing.ButtonGroup buttonGroup1;
     private Components.JoDateChooser dtDate;
     private Components.JoDateChooser dtDateEnd;
     private javax.swing.JPanel jPanel1;

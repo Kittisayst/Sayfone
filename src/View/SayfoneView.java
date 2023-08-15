@@ -3,9 +3,9 @@ package View;
 import Components.JoButtonIconfont;
 import Model.SayfoneModel;
 
-public class SettingView extends javax.swing.JPanel {
+public class SayfoneView extends javax.swing.JPanel {
 
-    public SettingView(String Title) {
+    public SayfoneView(String Title) {
         initComponents();
         lbl_title.setText(Title);
     }

@@ -23,6 +23,7 @@ import Model.UserModel;
 import Tools.JoAlert;
 import Tools.JoFileSystem;
 import Tools.JoHookEvent;
+import Utility.JoJasperPrinter;
 import Utility.MyFormat;
 import Utility.MyPopup;
 import View.AuthenPopUp;
@@ -356,12 +357,15 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
                 parameter.put("Contact", model.getContact());
                 parameter.put("Detail", model.getDetail());
                 parameter.put("UserAuthen", authName);
-                parameter.put("UserPrint", "( "+teacherLogin+" )");
+                parameter.put("UserPrint", "( " + teacherLogin + " )");
                 JasperPrint print = JasperFillManager.fillReport("sayfoneBill.jasper", parameter, new JoConnect().getConnectionDefault());
-//                new JoJasperPrinter(print).print();
-                JasperViewer showReport = new JasperViewer(print, false);
-                showReport.setTitle("sayfoneBill");
-                showReport.setVisible(true);
+                if (GlobalDataModel.printerBillState) {
+                    new JoJasperPrinter(print).print();
+                } else {
+                    JasperViewer showReport = new JasperViewer(print, false);
+                    showReport.setTitle("sayfoneBill");
+                    showReport.setVisible(true);
+                }
             }
         } catch (Exception err) {
             err.printStackTrace();

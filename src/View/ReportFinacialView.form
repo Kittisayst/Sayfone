@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
-  <NonVisualComponents>
-    <Component class="javax.swing.ButtonGroup" name="buttonGroup1">
-    </Component>
-  </NonVisualComponents>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -337,16 +333,25 @@
                     <Property name="joIcons" type="jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons" editor="org.netbeans.modules.form.editors.EnumEditor">
                       <Value id="ATTACH_MONEY"/>
                     </Property>
+                    <Property name="jocolorHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="0" green="28" red="a3" type="rgb"/>
+                    </Property>
                   </Properties>
                 </Component>
                 <Component class="Components.JoButtonIconfont" name="btnTransferOnly">
                   <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="33" green="66" red="0" type="rgb"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="&#xeaa;&#xeb0;&#xec1;&#xe94;&#xe87;&#xeaa;&#xeb0;&#xec0;&#xe9e;&#xeb2;&#xeb0;&#xec0;&#xe87;&#xeb4;&#xe99;&#xec2;&#xead;&#xe99;"/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Phetsarath OT" size="14" style="0"/>
                     </Property>
                     <Property name="joIcons" type="jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons" editor="org.netbeans.modules.form.editors.EnumEditor">
                       <Value id="FILTER_DRAMA"/>
+                    </Property>
+                    <Property name="jocolorHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="2c" green="50" red="8" type="rgb"/>
                     </Property>
                   </Properties>
                 </Component>

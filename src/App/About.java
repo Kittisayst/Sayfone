@@ -1,6 +1,7 @@
 package App;
 
 import Database.JoProperties;
+import Model.GlobalDataModel;
 
 public class About {
 
@@ -9,7 +10,10 @@ public class About {
     public About() {
         joProperties = new JoProperties("/Info/About.properties");
         joProperties.addValue("Bulid", "Sayfoneschool Buld");
-        joProperties.addValue("version", "1.0.9");
+        joProperties.addValue("version", "1.5.9");
+        //ຕັ້ງຕ່າເລີ່ມຕົ້ນປີ້ນເຕີ
+        GlobalDataModel.printerBillState = Boolean.parseBoolean(joProperties.getValueAt("PrinterBillState"));  //ໃບບິນ
+        GlobalDataModel.printerReportState = Boolean.parseBoolean(joProperties.getValueAt("PrinterReportState")); //ລາຍງານ
     }
 
     public String getVersion() {

@@ -3,15 +3,16 @@ package Controller;
 import App.AppDashboard;
 import DAOSevervice.FinancialService;
 import Database.JoConnect;
+import Log.JoLoger;
 import Model.FinancialModel;
 import Model.GlobalDataModel;
 import Tools.JoAlert;
 import Tools.JoFileSystem;
 import Tools.JoHookEvent;
+import Utility.JoJasperPrinter;
 import Utility.MyFormat;
 import View.HomeView;
 import View.ReportFinacialView;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.DayOfWeek;
@@ -213,10 +214,10 @@ public class ReportFinacialController implements JoMVC, ActionListener {
             parameter.put("UserPrint", "( " + GlobalDataModel.globalUsermodel.getFullName() + " )");
             parameter.put("UserID", GlobalDataModel.globalUsermodel.getUserID());
             JasperPrint print = JasperFillManager.fillReport("ReportCashDay.jasper", parameter, new JoConnect().getConnectionDefault());
-            JasperViewer showReport = new JasperViewer(print, false);
-            showReport.setVisible(true);
+            setPrintState(print,"ReportCashDay");
         } catch (Exception e) {
             e.printStackTrace();
+            JoLoger.saveLog(e, this);
             JoAlert.Error(e, this);
         }
     }
@@ -235,10 +236,10 @@ public class ReportFinacialController implements JoMVC, ActionListener {
             parameter.put("LogoPath", logo);
             parameter.put("UserPrint", "( " + GlobalDataModel.globalUsermodel.getFullName() + " )");
             JasperPrint print = JasperFillManager.fillReport("ReportCashWeek.jasper", parameter, new JoConnect().getConnectionDefault());
-            JasperViewer showReport = new JasperViewer(print, false);
-            showReport.setVisible(true);
+            setPrintState(print,"ReportCashWeek");
         } catch (Exception e) {
             e.printStackTrace();
+            JoLoger.saveLog(e, this);
             JoAlert.Error(e, this);
         }
     }
@@ -257,10 +258,10 @@ public class ReportFinacialController implements JoMVC, ActionListener {
             parameter.put("LogoPath", logo);
             parameter.put("UserPrint", "( " + GlobalDataModel.globalUsermodel.getFullName() + " )");
             JasperPrint print = JasperFillManager.fillReport("ReportCashDaytoDay.jasper", parameter, new JoConnect().getConnectionDefault());
-            JasperViewer showReport = new JasperViewer(print, false);
-            showReport.setVisible(true);
+            setPrintState(print,"ReportCashDaytoDay");
         } catch (Exception e) {
             e.printStackTrace();
+            JoLoger.saveLog(e, this);
             JoAlert.Error(e, this);
         }
     }
@@ -276,11 +277,10 @@ public class ReportFinacialController implements JoMVC, ActionListener {
             parameter.put("UserPrint", "( " + GlobalDataModel.globalUsermodel.getFullName() + " )");
             parameter.put("UserID", GlobalDataModel.globalUsermodel.getUserID());
             JasperPrint print = JasperFillManager.fillReport("ReportTransferDay.jasper", parameter, new JoConnect().getConnectionDefault());
-            JasperViewer showReport = new JasperViewer(print, false);
-            showReport.setTitle("ReportTransferDay");
-            showReport.setVisible(true);
+            setPrintState(print,"ReportTransferDay");
         } catch (Exception e) {
             e.printStackTrace();
+            JoLoger.saveLog(e, this);
             JoAlert.Error(e, this);
         }
     }
@@ -295,10 +295,10 @@ public class ReportFinacialController implements JoMVC, ActionListener {
             parameter.put("LogoPath", logo);
             parameter.put("UserPrint", "( " + GlobalDataModel.globalUsermodel.getFullName() + " )");
             JasperPrint print = JasperFillManager.fillReport("ReportTransferWeek.jasper", parameter, new JoConnect().getConnectionDefault());
-            JasperViewer showReport = new JasperViewer(print, false);
-            showReport.setVisible(true);
+            setPrintState(print,"ReportTransferWeek");
         } catch (Exception e) {
             e.printStackTrace();
+            JoLoger.saveLog(e, this);
             JoAlert.Error(e, this);
         }
     }
@@ -309,19 +309,27 @@ public class ReportFinacialController implements JoMVC, ActionListener {
             String logo = fileSystem.getCurrentPath() + "/Icon/sfsc.png";
             String reportDate = new MyFormat().getDateCustom(view.getDtDate().getDateData(), "yyyy-MM-dd");
             String reportDateEnd = new MyFormat().getDateCustom(view.getDtDateEnd().getDateData(), "yyyy-MM-dd");
-            System.out.println(GlobalDataModel.globalUsermodel.getName());
-
             Map parameter = new HashMap();
             parameter.put("parmDate", "" + reportDate);
             parameter.put("parmDateEnd", "" + reportDateEnd);
             parameter.put("LogoPath", logo);
             parameter.put("UserPrint", "( " + GlobalDataModel.globalUsermodel.getFullName() + " )");
             JasperPrint print = JasperFillManager.fillReport("ReportTransferDaytoDay.jasper", parameter, new JoConnect().getConnectionDefault());
-            JasperViewer showReport = new JasperViewer(print, false);
-            showReport.setVisible(true);
+            setPrintState(print,"ReportTransferDaytoDay");
         } catch (Exception e) {
             e.printStackTrace();
+            JoLoger.saveLog(e, this);
             JoAlert.Error(e, this);
+        }
+    }
+
+    private void setPrintState(JasperPrint print,String Title) {
+        if (GlobalDataModel.printerReportState) {
+            new JoJasperPrinter(print).print();
+        } else {
+            JasperViewer showReport = new JasperViewer(print, false);
+            showReport.setTitle(Title);
+            showReport.setVisible(true);
         }
     }
 

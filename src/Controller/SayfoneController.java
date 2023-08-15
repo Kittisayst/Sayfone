@@ -6,16 +6,16 @@ import Model.SayfoneModel;
 import Tools.JoAlert;
 import Tools.JoHookEvent;
 import View.HomeView;
-import View.SettingView;
+import View.SayfoneView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class SayfoneController implements JoMVC, ActionListener {
 
-    private SettingView view;
+    private SayfoneView view;
     private SayfoneModel model;
 
-    public SayfoneController(SettingView view, SayfoneModel model) {
+    public SayfoneController(SayfoneView view, SayfoneModel model) {
         this.view = view;
         this.model = model;
     }
