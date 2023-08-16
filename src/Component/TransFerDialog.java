@@ -12,6 +12,7 @@ public class TransFerDialog extends javax.swing.JDialog {
     private FileTranferModel tranferModel = new FileTranferModel();
 
     private boolean openFile;
+    private boolean submit = false;
     JoFilechooser filechooser = new JoFilechooser();
 
     public TransFerDialog(java.awt.Frame parent, boolean modal, FileTranferModel tranferModel) {
@@ -45,6 +46,10 @@ public class TransFerDialog extends javax.swing.JDialog {
         this.tranferModel = tranferModel;
     }
 
+    public boolean isSubmit() {
+        return submit;
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -63,6 +68,14 @@ public class TransFerDialog extends javax.swing.JDialog {
         lblImage = new Components.JoLabelImage();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         btnSave.setBackground(new java.awt.Color(0, 153, 102));
         btnSave.setText("ບັນທຶກ");
@@ -206,6 +219,7 @@ public class TransFerDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_btnAddImageActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        submit = true;
         if (tranferModel.getFileTranferID() == 0) {
             tranferModel = new FileTranferModel(0, 0, dtDate.getSQLDate(), Timer.getTime(), filechooser.getSelectedFile());
             setVisible(false);
@@ -215,6 +229,14 @@ public class TransFerDialog extends javax.swing.JDialog {
             setVisible(false);
         }
     }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        submit = false;
+    }//GEN-LAST:event_formWindowClosed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        submit = false;
+    }//GEN-LAST:event_formWindowClosing
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

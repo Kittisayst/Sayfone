@@ -29,6 +29,7 @@ import Utility.MyPopup;
 import View.AuthenPopUp;
 import View.FinancialView;
 import View.HomeView;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -41,9 +42,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JCheckBox;
+import jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.view.JasperViewer;
+import theme.MyColor;
 
 public class FinancialController implements JoMVC, ActionListener, MouseListener {
 
@@ -63,6 +66,7 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
         this.registerModel = registerModel;
         popup = new MyPopup();
         popup.getItemshow().setText("ປີ້ນບິນ");
+        popup.addMenuItem("ຂໍ້ມູນການໂອນ", GoogleMaterialDesignIcons.CLOUD_UPLOAD,MyColor.yellow700);
     }
 
     @Override
@@ -263,6 +267,27 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
                 showEdit();
                 Delete();
             }
+        } else if (event.isEvent(popup.getMenuItem(3))) { // ຂໍ້ມູນການໂອນຍ້ອນຫຼັງ
+            FinancialService financialService = new FinancialService();
+            financialModel = financialService.getFinancialById(view.getTb_data().getIntValue(1));
+            fileTranferModel = new FileTransferService().getFileTranferByFinancialID(financialModel.getFinancialIID()); //ດຶງຂໍ້ມູນເອກະສານການໂອນ
+            TransFerDialog dialog = new TransFerDialog(AppHome.viewParent, true, fileTranferModel);
+            dialog.setVisible(true);
+            fileTranferModel = dialog.getTranferModel();
+            FileTransferService transferService = new FileTransferService();
+            JoAlert alert = new JoAlert();
+            if (dialog.isSubmit()) { // ຫວດສອບວ່າມີການກົດບັນທຶກຫຼືບໍ່
+                if (fileTranferModel.getFileTranferID() == 0) { // ກວດສອບມີການບັນທຶກເອກະສານເງິນໂອນຫຼືບໍ່
+                    // ບັນທຶກຂໍ້ມູນການໂອນໃໝ່
+                    fileTranferModel.setFinancialID(financialModel.getFinancialIID());
+                    alert.JoSubmit(transferService.Creater(fileTranferModel), JoAlert.INSERT);
+                } else {
+                    // ແກ້ໄຂຂໍ້ມູນການໂອນໃໝ່
+                    if (fileTranferModel.getFileTranferID() != 0) {
+                        alert.JoSubmit(transferService.Update(fileTranferModel), JoAlert.UPDATE);
+                    }
+                }
+            }
         }
     }
 
@@ -274,7 +299,7 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
         }
         FinancialService financialService = new FinancialService();
         financialModel = financialService.getFinancialById(view.getTb_data().getIntValue(1));
-        view.showFinacial(financialModel); //ສະແດງຂໍ້ມູນການລົງທະບຽນເພື່ອແກ້ໄຂ
+        view.showFinacial(financialModel); //ສະແດງຂໍ້ມູນການລົງທະບຽນເພື່ອແກ້ໄຂໄປທີ view
         fileTranferModel = new FileTransferService().getFileTranferByFinancialID(financialModel.getFinancialIID()); //ດຶງຂໍ້ມູນເອກະສານການໂອນ
         // ສະແດງການເລືອກເດືອນ
         String monstr = financialModel.getFinancialMonth();
@@ -288,7 +313,6 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
                 }
             }
         }
-
     }
 
     @Override

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8dc3d15f-5b49-43c7-ba19-29c37451c88e">
-	<property name="ireport.zoom" value="1.2100000000000006"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="10" bottomMargin="5" uuid="8dc3d15f-5b49-43c7-ba19-29c37451c88e">
+	<property name="ireport.zoom" value="1.464100000000001"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="parmDate" class="java.lang.String">
@@ -45,13 +45,13 @@ WHERE SaveDate >=$P{parmDate}  AND SaveDate <= DATE_ADD($P{parmDate}, INTERVAL 6
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="93" splitType="Stretch">
+		<band height="50" splitType="Stretch">
 			<image hAlign="Center" vAlign="Middle">
-				<reportElement x="0" y="0" width="80" height="80" uuid="4c1fd241-9689-44d6-a51b-d5a86f63a034"/>
+				<reportElement x="207" y="0" width="40" height="40" uuid="4c1fd241-9689-44d6-a51b-d5a86f63a034"/>
 				<imageExpression><![CDATA[$P{LogoPath}]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="80" y="0" width="397" height="80" uuid="39d3bc49-390d-4263-8dc0-cf9f61dfe225"/>
+				<reportElement x="257" y="0" width="298" height="40" uuid="39d3bc49-390d-4263-8dc0-cf9f61dfe225"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Phetsarath OT" size="24"/>
 				</textElement>
@@ -62,7 +62,7 @@ WHERE SaveDate >=$P{parmDate}  AND SaveDate <= DATE_ADD($P{parmDate}, INTERVAL 6
 	<columnHeader>
 		<band height="20" splitType="Stretch">
 			<staticText>
-				<reportElement mode="Opaque" x="35" y="0" width="60" height="20" forecolor="#FFFFFF" backcolor="#3366FF" uuid="d2387aea-69bb-4c80-9ada-0b810a334954"/>
+				<reportElement mode="Opaque" x="35" y="0" width="100" height="20" forecolor="#FFFFFF" backcolor="#3366FF" uuid="d2387aea-69bb-4c80-9ada-0b810a334954"/>
 				<box leftPadding="2" rightPadding="2">
 					<pen lineWidth="0.75"/>
 					<topPen lineWidth="0.75"/>
@@ -90,7 +90,7 @@ WHERE SaveDate >=$P{parmDate}  AND SaveDate <= DATE_ADD($P{parmDate}, INTERVAL 6
 				<text><![CDATA[ລຳດັບ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="95" y="0" width="50" height="20" forecolor="#FFFFFF" backcolor="#3366FF" uuid="f6cf0cf3-9a5e-440e-8fc2-32d04cb93b70"/>
+				<reportElement mode="Opaque" x="135" y="0" width="60" height="20" forecolor="#FFFFFF" backcolor="#3366FF" uuid="f6cf0cf3-9a5e-440e-8fc2-32d04cb93b70"/>
 				<box leftPadding="2" rightPadding="2">
 					<pen lineWidth="0.75"/>
 					<topPen lineWidth="0.75"/>
@@ -104,7 +104,7 @@ WHERE SaveDate >=$P{parmDate}  AND SaveDate <= DATE_ADD($P{parmDate}, INTERVAL 6
 				<text><![CDATA[ລະຫັດນຮ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="145" y="0" width="105" height="20" forecolor="#FFFFFF" backcolor="#3366FF" uuid="2337ab00-c0d9-4d2b-912a-bc4d0f9c4792"/>
+				<reportElement mode="Opaque" x="195" y="0" width="120" height="20" forecolor="#FFFFFF" backcolor="#3366FF" uuid="2337ab00-c0d9-4d2b-912a-bc4d0f9c4792"/>
 				<box leftPadding="2" rightPadding="2">
 					<pen lineWidth="0.75"/>
 					<topPen lineWidth="0.75"/>
@@ -118,7 +118,7 @@ WHERE SaveDate >=$P{parmDate}  AND SaveDate <= DATE_ADD($P{parmDate}, INTERVAL 6
 				<text><![CDATA[ຊື່ ແລະ ນາມສະກຸນ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="250" y="0" width="68" height="20" forecolor="#FFFFFF" backcolor="#3366FF" uuid="38432305-1746-40ac-b922-bba2655790b6"/>
+				<reportElement mode="Opaque" x="315" y="0" width="90" height="20" forecolor="#FFFFFF" backcolor="#3366FF" uuid="38432305-1746-40ac-b922-bba2655790b6"/>
 				<box leftPadding="2" rightPadding="2">
 					<pen lineWidth="0.75"/>
 					<topPen lineWidth="0.75"/>
@@ -129,10 +129,10 @@ WHERE SaveDate >=$P{parmDate}  AND SaveDate <= DATE_ADD($P{parmDate}, INTERVAL 6
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Phetsarath OT" size="12"/>
 				</textElement>
-				<text><![CDATA[ວດປ]]></text>
+				<text><![CDATA[ວັນທີເດືອນປີ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="318" y="0" width="60" height="20" forecolor="#FFFFFF" backcolor="#3366FF" uuid="30366f7e-eb9f-4135-a311-9c1192a02b0a"/>
+				<reportElement mode="Opaque" x="405" y="0" width="80" height="20" forecolor="#FFFFFF" backcolor="#3366FF" uuid="30366f7e-eb9f-4135-a311-9c1192a02b0a"/>
 				<box leftPadding="2" rightPadding="2">
 					<pen lineWidth="0.75"/>
 					<topPen lineWidth="0.75"/>
@@ -146,7 +146,7 @@ WHERE SaveDate >=$P{parmDate}  AND SaveDate <= DATE_ADD($P{parmDate}, INTERVAL 6
 				<text><![CDATA[ຈຳນວນ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="378" y="0" width="90" height="20" forecolor="#FFFFFF" backcolor="#3366FF" uuid="781f7f75-1c6d-46a4-8d93-ed7aebb48dca"/>
+				<reportElement mode="Opaque" x="485" y="0" width="152" height="20" forecolor="#FFFFFF" backcolor="#3366FF" uuid="781f7f75-1c6d-46a4-8d93-ed7aebb48dca"/>
 				<box leftPadding="2" rightPadding="2">
 					<pen lineWidth="0.75"/>
 					<topPen lineWidth="0.75"/>
@@ -157,10 +157,10 @@ WHERE SaveDate >=$P{parmDate}  AND SaveDate <= DATE_ADD($P{parmDate}, INTERVAL 6
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Phetsarath OT" size="12"/>
 				</textElement>
-				<text><![CDATA[ເດືອນ]]></text>
+				<text><![CDATA[ປະຈຳເດືອນ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="468" y="0" width="87" height="20" forecolor="#FFFFFF" backcolor="#3366FF" uuid="163717ef-96da-475d-8cb9-88310102ff48"/>
+				<reportElement mode="Opaque" x="637" y="0" width="165" height="20" forecolor="#FFFFFF" backcolor="#3366FF" uuid="163717ef-96da-475d-8cb9-88310102ff48"/>
 				<box leftPadding="2" rightPadding="2">
 					<pen lineWidth="0.75"/>
 					<topPen lineWidth="0.75"/>
@@ -178,7 +178,7 @@ WHERE SaveDate >=$P{parmDate}  AND SaveDate <= DATE_ADD($P{parmDate}, INTERVAL 6
 	<detail>
 		<band height="20" splitType="Stretch">
 			<textField>
-				<reportElement x="35" y="0" width="60" height="20" uuid="0f6c262d-6445-4ae0-8b55-1b688a6efa70"/>
+				<reportElement x="35" y="0" width="100" height="20" uuid="0f6c262d-6445-4ae0-8b55-1b688a6efa70"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -191,7 +191,7 @@ WHERE SaveDate >=$P{parmDate}  AND SaveDate <= DATE_ADD($P{parmDate}, INTERVAL 6
 				<textFieldExpression><![CDATA[$F{ClassRoomName}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="95" y="0" width="50" height="20" uuid="1541b5fb-b062-467e-9fc2-5f43cea2ce5e"/>
+				<reportElement x="135" y="0" width="60" height="20" uuid="1541b5fb-b062-467e-9fc2-5f43cea2ce5e"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -204,7 +204,7 @@ WHERE SaveDate >=$P{parmDate}  AND SaveDate <= DATE_ADD($P{parmDate}, INTERVAL 6
 				<textFieldExpression><![CDATA[$F{StudentNo}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="145" y="0" width="105" height="20" uuid="6b2000ac-0769-47ff-8964-5be47389f36f"/>
+				<reportElement x="195" y="0" width="120" height="20" uuid="6b2000ac-0769-47ff-8964-5be47389f36f"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -217,7 +217,7 @@ WHERE SaveDate >=$P{parmDate}  AND SaveDate <= DATE_ADD($P{parmDate}, INTERVAL 6
 				<textFieldExpression><![CDATA[($F{Gender} == 1 ? "ທ. " : "ນ. ") + $F{StudentName}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="250" y="0" width="68" height="20" uuid="0a845b2a-9c8d-4116-898e-39f232340c2b"/>
+				<reportElement x="315" y="0" width="90" height="20" uuid="0a845b2a-9c8d-4116-898e-39f232340c2b"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -230,7 +230,7 @@ WHERE SaveDate >=$P{parmDate}  AND SaveDate <= DATE_ADD($P{parmDate}, INTERVAL 6
 				<textFieldExpression><![CDATA[$F{SaveDate}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,###">
-				<reportElement x="318" y="0" width="60" height="20" uuid="6e9c041d-06b8-4f02-90bc-f9d4482df44b"/>
+				<reportElement x="405" y="0" width="80" height="20" uuid="6e9c041d-06b8-4f02-90bc-f9d4482df44b"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -243,7 +243,7 @@ WHERE SaveDate >=$P{parmDate}  AND SaveDate <= DATE_ADD($P{parmDate}, INTERVAL 6
 				<textFieldExpression><![CDATA[$F{Money}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="378" y="0" width="90" height="20" uuid="937ef312-87bc-4efa-819d-aaf43e1d0b29"/>
+				<reportElement x="485" y="0" width="152" height="20" uuid="937ef312-87bc-4efa-819d-aaf43e1d0b29"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -256,7 +256,7 @@ WHERE SaveDate >=$P{parmDate}  AND SaveDate <= DATE_ADD($P{parmDate}, INTERVAL 6
 				<textFieldExpression><![CDATA[$F{FinancialMonth}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="468" y="0" width="87" height="20" uuid="25d4e3a2-ae74-41fc-a207-162a07817ded"/>
+				<reportElement x="637" y="0" width="165" height="20" uuid="25d4e3a2-ae74-41fc-a207-162a07817ded"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -283,13 +283,10 @@ WHERE SaveDate >=$P{parmDate}  AND SaveDate <= DATE_ADD($P{parmDate}, INTERVAL 6
 			</textField>
 		</band>
 	</detail>
-	<columnFooter>
-		<band height="45" splitType="Stretch"/>
-	</columnFooter>
 	<pageFooter>
-		<band height="54" splitType="Stretch">
+		<band height="20" splitType="Stretch">
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="229" y="0" width="100" height="20" uuid="f799fb38-1e4d-4879-a8f0-ffd3d1adaa34"/>
+				<reportElement x="0" y="0" width="802" height="20" uuid="f799fb38-1e4d-4879-a8f0-ffd3d1adaa34"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="5"/>
 				</textElement>
@@ -298,23 +295,23 @@ WHERE SaveDate >=$P{parmDate}  AND SaveDate <= DATE_ADD($P{parmDate}, INTERVAL 6
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="121" splitType="Stretch">
+		<band height="96" splitType="Stretch">
 			<staticText>
-				<reportElement x="353" y="35" width="202" height="26" uuid="323f22d6-9394-477c-ab4c-71e3c048ed05"/>
+				<reportElement x="600" y="22" width="202" height="26" uuid="323f22d6-9394-477c-ab4c-71e3c048ed05"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Phetsarath OT" size="12" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[ຜູ້ລາຍງານ]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="353" y="101" width="202" height="20" uuid="7a03a774-ff01-47b0-b018-4c038251defb"/>
+				<reportElement x="600" y="75" width="202" height="20" uuid="7a03a774-ff01-47b0-b018-4c038251defb"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Phetsarath OT" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{UserPrint}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="0" width="477" height="22" uuid="c5ed9283-3bab-4fda-926b-9b9c83b1c3d3"/>
+				<reportElement x="0" y="0" width="704" height="22" uuid="c5ed9283-3bab-4fda-926b-9b9c83b1c3d3"/>
 				<box rightPadding="5">
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
@@ -326,7 +323,7 @@ WHERE SaveDate >=$P{parmDate}  AND SaveDate <= DATE_ADD($P{parmDate}, INTERVAL 6
 				<text><![CDATA[ລວມເງິນທັງໝົດ]]></text>
 			</staticText>
 			<textField pattern="#,###" isBlankWhenNull="true">
-				<reportElement x="477" y="0" width="78" height="22" uuid="8ab01206-383d-42ab-b5e2-92a9ce70f294"/>
+				<reportElement x="704" y="0" width="98" height="22" uuid="8ab01206-383d-42ab-b5e2-92a9ce70f294"/>
 				<box rightPadding="5">
 					<topPen lineWidth="0.75"/>
 					<bottomPen lineWidth="2.0"/>

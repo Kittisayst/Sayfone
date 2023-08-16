@@ -2,6 +2,8 @@ package Utility;
 
 import Components.JoPopUpMenu;
 import Tools.JoIconFont;
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.util.logging.Level;
@@ -9,6 +11,7 @@ import java.util.logging.Logger;
 import javax.swing.JMenuItem;
 import javax.swing.UnsupportedLookAndFeelException;
 import jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons;
+import org.jfree.ui.action.ActionMenuItem;
 import theme.MyColor;
 
 public class MyPopup {
@@ -39,9 +42,10 @@ public class MyPopup {
     }
 
     public void addActionListener(ActionListener e) {
-        itemshow.addActionListener(e);
-        itemEdit.addActionListener(e);
-        itemDelete.addActionListener(e);
+        for (Component component : menu.getComponents()) {
+            JMenuItem item = (JMenuItem) component;
+            item.addActionListener(e);
+        }
     }
 
     public JoPopUpMenu getMenu() {
@@ -65,6 +69,27 @@ public class MyPopup {
         menu.add(itemshow);
         menu.add(itemEdit);
         menu.add(itemDelete);
+    }
+
+    public void addMenuItem(String text) {
+        JMenuItem item = new ActionMenuItem(text);
+        menu.add(item);
+    }
+
+    public void addMenuItem(String text, GoogleMaterialDesignIcons icons) {
+        JMenuItem item = new ActionMenuItem(text);
+        item.setIcon(new JoIconFont().setIconFont(icons, 20, Color.BLACK));
+        menu.add(item);
+    }
+
+    public void addMenuItem(String text, GoogleMaterialDesignIcons icons, Color color) {
+        JMenuItem item = new ActionMenuItem(text);
+        item.setIcon(new JoIconFont().setIconFont(icons, 20, color));
+        menu.add(item);
+    }
+
+    public JMenuItem getMenuItem(int indexItem) {
+        return menu.getMenuItem(indexItem);
     }
 
 }
