@@ -16,6 +16,7 @@ public class DialogBrotherAndSister extends javax.swing.JDialog {
     public DialogBrotherAndSister(java.awt.Frame parent, boolean modal, int StudentID) {
         super(parent, modal);
         this.StudentID = StudentID;
+        System.out.println("ok");
         initComponents();
         StudentService service = new StudentService();
         service.getStudentBrotherSister(StudentID).forEach(data -> {
