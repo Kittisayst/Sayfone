@@ -149,7 +149,7 @@ WHERE SaveDate=$P{parmDate} AND UserID=$P{UserID};]]>
 				<text><![CDATA[ຈຳນວນ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="485" y="0" width="152" height="20" forecolor="#FFFFFF" backcolor="#3366FF" uuid="781f7f75-1c6d-46a4-8d93-ed7aebb48dca"/>
+				<reportElement mode="Opaque" x="485" y="0" width="160" height="20" forecolor="#FFFFFF" backcolor="#3366FF" uuid="781f7f75-1c6d-46a4-8d93-ed7aebb48dca"/>
 				<box leftPadding="2" rightPadding="2">
 					<pen lineWidth="0.75"/>
 					<topPen lineWidth="0.75"/>
@@ -163,7 +163,7 @@ WHERE SaveDate=$P{parmDate} AND UserID=$P{UserID};]]>
 				<text><![CDATA[ປະຈຳເດືອນ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="637" y="0" width="165" height="20" forecolor="#FFFFFF" backcolor="#3366FF" uuid="163717ef-96da-475d-8cb9-88310102ff48"/>
+				<reportElement mode="Opaque" x="645" y="0" width="157" height="20" forecolor="#FFFFFF" backcolor="#3366FF" uuid="163717ef-96da-475d-8cb9-88310102ff48"/>
 				<box leftPadding="2" rightPadding="2">
 					<pen lineWidth="0.75"/>
 					<topPen lineWidth="0.75"/>
@@ -246,7 +246,7 @@ WHERE SaveDate=$P{parmDate} AND UserID=$P{UserID};]]>
 				<textFieldExpression><![CDATA[$F{Money}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="485" y="0" width="152" height="20" uuid="937ef312-87bc-4efa-819d-aaf43e1d0b29"/>
+				<reportElement x="485" y="0" width="160" height="20" uuid="937ef312-87bc-4efa-819d-aaf43e1d0b29"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -259,7 +259,7 @@ WHERE SaveDate=$P{parmDate} AND UserID=$P{UserID};]]>
 				<textFieldExpression><![CDATA[$F{FinancialMonth}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="637" y="0" width="165" height="20" uuid="25d4e3a2-ae74-41fc-a207-162a07817ded"/>
+				<reportElement x="645" y="0" width="157" height="20" uuid="25d4e3a2-ae74-41fc-a207-162a07817ded"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>

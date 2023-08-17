@@ -238,9 +238,6 @@ public class ReportFinacialView extends javax.swing.JPanel {
             tb_data.getColumnModel().getColumn(5).setMinWidth(150);
             tb_data.getColumnModel().getColumn(5).setPreferredWidth(150);
             tb_data.getColumnModel().getColumn(5).setMaxWidth(150);
-            tb_data.getColumnModel().getColumn(6).setMinWidth(80);
-            tb_data.getColumnModel().getColumn(6).setPreferredWidth(80);
-            tb_data.getColumnModel().getColumn(6).setMaxWidth(80);
         }
 
         pnDataReport.add(jScrollPane1, java.awt.BorderLayout.CENTER);
@@ -306,7 +303,7 @@ public class ReportFinacialView extends javax.swing.JPanel {
             .addComponent(Pn_Navigation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1166, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
