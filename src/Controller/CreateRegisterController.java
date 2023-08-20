@@ -4,7 +4,7 @@ import App.AppRegister;
 import DAOSevervice.ClassService;
 import DAOSevervice.RegisterService;
 import DAOSevervice.YearService;
-import Model.CreateRegisterModel;
+import Model.RegisterModel;
 import Tools.JoAlert;
 import Tools.JoHookEvent;
 import View.HomeView;
@@ -17,9 +17,9 @@ import java.awt.event.KeyListener;
 public class CreateRegisterController implements JoMVC, ActionListener, KeyListener {
 
     private CreateRegisterView view;
-    private CreateRegisterModel model;
+    private RegisterModel model;
 
-    public CreateRegisterController(CreateRegisterView view, CreateRegisterModel model) {
+    public CreateRegisterController(CreateRegisterView view, RegisterModel model) {
         this.view = view;
         this.model = model;
     }
@@ -43,7 +43,7 @@ public class CreateRegisterController implements JoMVC, ActionListener, KeyListe
     @Override
     public void Create() {
         if (emptyData()) {
-            model = new CreateRegisterModel(0,
+            model = new RegisterModel(0,
                     view.getTxt_ClassRoomName().getText(),
                     view.getCb_Year().getKeyInt(),
                     view.getCb_Class().getKeyInt(),
@@ -66,7 +66,7 @@ public class CreateRegisterController implements JoMVC, ActionListener, KeyListe
     @Override
     public void Update() {
         if (emptyData()) {
-            model = new CreateRegisterModel(model.getRegisterID(),
+            model = new RegisterModel(model.getRegisterID(),
                     view.getTxt_ClassRoomName().getText(),
                     view.getCb_Year().getKeyInt(),
                     view.getCb_Class().getKeyInt(),

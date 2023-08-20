@@ -2,7 +2,7 @@ package View;
 
 import Components.JoButtonIconfont;
 import Components.JoTable;
-import Model.CreateRegisterModel;
+import Model.RegisterModel;
 import Model.YearModel;
 import java.util.List;
 
@@ -25,7 +25,7 @@ public class AbsentView extends javax.swing.JPanel {
         return tb_data;
     }
     
-    public void showClassRoom(List<CreateRegisterModel> models) {
+    public void showClassRoom(List<RegisterModel> models) {
         tb_data.JoClearModel();
         models.forEach(data -> {
             tb_data.AddJoModel(new Object[]{tb_data.autoNumber(), data.getRegisterID(), data.getClassRoomName(), data.getYearModel().getYear()});

@@ -2,7 +2,7 @@ package App;
 
 import Controller.CreateRegisterController;
 import Log.JoLoger;
-import Model.CreateRegisterModel;
+import Model.RegisterModel;
 import View.CreateRegisterView;
 
 public class AppCreateRegister {
@@ -10,7 +10,7 @@ public class AppCreateRegister {
     public void showRegisterData() {
         try {
             CreateRegisterView view = new CreateRegisterView("ຈັດການຂໍ້ມູນຫ້ອງລົງທະບຽນ");
-            CreateRegisterModel model = new CreateRegisterModel();
+            RegisterModel model = new RegisterModel();
             CreateRegisterController controller = new CreateRegisterController(view, model);
             controller.Start();
             controller.AddEvent();
@@ -19,7 +19,7 @@ public class AppCreateRegister {
         }
     }
 
-    public void showRegisterData(CreateRegisterModel model) {
+    public void showRegisterData(RegisterModel model) {
         try {
             CreateRegisterView view = new CreateRegisterView("ຈັດການຂໍ້ມູນຫ້ອງລົງທະບຽນ");
             CreateRegisterController controller = new CreateRegisterController(view, model);

@@ -1,18 +1,18 @@
 package DAOSevervice;
 
 import DAO.RegisterDAO;
-import Model.CreateRegisterModel;
+import Model.RegisterModel;
 import java.util.List;
 
 public class RegisterService {
 
     private final RegisterDAO aO = new RegisterDAO();
 
-    public int Creater(CreateRegisterModel model) {
+    public int Creater(RegisterModel model) {
         return aO.Creater(model);
     }
 
-    public int Update(CreateRegisterModel model) {
+    public int Update(RegisterModel model) {
         return aO.Update(model);
     }
 
@@ -20,11 +20,11 @@ public class RegisterService {
         return aO.Delete(ID);
     }
 
-    public List<CreateRegisterModel> getRegisterAll() {
+    public List<RegisterModel> getRegisterAll() {
         return aO.getRegisterAll();
     }
 
-    public CreateRegisterModel getRegisterById(int ID) {
+    public RegisterModel getRegisterById(int ID) {
         return aO.getRegisterById(ID);
     }
 

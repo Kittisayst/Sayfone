@@ -5,7 +5,7 @@ import DAOSevervice.YearService;
 import java.sql.Date;
 import java.text.DecimalFormat;
 
-public class CreateRegisterModel {
+public class RegisterModel {
 
     private int registerID;
     private String ClassRoomName;
@@ -13,10 +13,10 @@ public class CreateRegisterModel {
     private int ClassID;
     private Date registerDate;
 
-    public CreateRegisterModel() {
+    public RegisterModel() {
     }
 
-    public CreateRegisterModel(int registerID, String ClassRoomName, int YearID, int ClassID, Date registerDate) {
+    public RegisterModel(int registerID, String ClassRoomName, int YearID, int ClassID, Date registerDate) {
         this.registerID = registerID;
         this.ClassRoomName = ClassRoomName;
         this.YearID = YearID;

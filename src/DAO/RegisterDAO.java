@@ -4,7 +4,7 @@ import DAOInterface.RegisterFn;
 import Database.JoConnect;
 import Database.JoSQL;
 import Log.JoLoger;
-import Model.CreateRegisterModel;
+import Model.RegisterModel;
 import java.util.List;
 import Tools.JoAlert;
 import java.sql.Connection;
@@ -20,7 +20,7 @@ public class RegisterDAO implements RegisterFn {
     private JoSQL sql = new JoSQL(c, TableName);
 
     @Override
-    public int Creater(CreateRegisterModel model) {
+    public int Creater(RegisterModel model) {
         try {
             PreparedStatement pre = getPrepareStatement(sql.getCreate(),
                     model.getRegisterID(),
@@ -38,7 +38,7 @@ public class RegisterDAO implements RegisterFn {
     }
 
     @Override
-    public int Update(CreateRegisterModel model) {
+    public int Update(RegisterModel model) {
         try {
             PreparedStatement pre = getPrepareStatement(sql.getUpdate(),
                     model.getClassRoomName(),
@@ -69,8 +69,8 @@ public class RegisterDAO implements RegisterFn {
     }
 
     @Override
-    public List<CreateRegisterModel> getRegisterAll() {
-        List<CreateRegisterModel> models = new ArrayList<>();
+    public List<RegisterModel> getRegisterAll() {
+        List<RegisterModel> models = new ArrayList<>();
         try {
             ResultSet rs = sql.getSelectAll();
             while (rs.next()) {
@@ -84,8 +84,8 @@ public class RegisterDAO implements RegisterFn {
     }
 
     @Override
-    public CreateRegisterModel getRegisterById(int ID) {
-        CreateRegisterModel model = new CreateRegisterModel();
+    public RegisterModel getRegisterById(int ID) {
+        RegisterModel model = new RegisterModel();
         try {
             ResultSet rs = sql.getSelectById(ID);
             if (rs.next()) {
@@ -98,8 +98,8 @@ public class RegisterDAO implements RegisterFn {
         return model;
     }
 
-    private CreateRegisterModel getResult(ResultSet rs) throws SQLException {
-        return new CreateRegisterModel(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getDate(5));
+    private RegisterModel getResult(ResultSet rs) throws SQLException {
+        return new RegisterModel(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getDate(5));
     }
 
     private PreparedStatement getPrepareStatement(PreparedStatement pre, Object... params) throws SQLException {

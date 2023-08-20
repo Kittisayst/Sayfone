@@ -4,7 +4,7 @@ import Components.JoButtonIconfont;
 import Components.JoDateChooser;
 import DAOSevervice.RegisterService;
 import DAOSevervice.StudentService;
-import Model.CreateRegisterModel;
+import Model.RegisterModel;
 import Model.FinancialModel;
 import Model.StudentModel;
 import Utility.MyFormat;
@@ -24,7 +24,7 @@ public class ReportFinacialView extends javax.swing.JPanel {
         models.forEach(data -> {
             RegisterService registerService = new RegisterService();
             StudentService studentService = new StudentService();
-            CreateRegisterModel registerModel = registerService.getRegisterById(data.getRegisterID());
+            RegisterModel registerModel = registerService.getRegisterById(data.getRegisterID());
             StudentModel studentModel = studentService.getStudentById(data.getStudentID());
             tb_data.AddJoModel(new Object[]{
                 tb_data.autoNumber(),
@@ -46,7 +46,7 @@ public class ReportFinacialView extends javax.swing.JPanel {
         models.forEach(data -> {
             RegisterService registerService = new RegisterService();
             StudentService studentService = new StudentService();
-            CreateRegisterModel registerModel = registerService.getRegisterById(data.getRegisterID());
+            RegisterModel registerModel = registerService.getRegisterById(data.getRegisterID());
             StudentModel studentModel = studentService.getStudentById(data.getStudentID());
             tb_data.AddJoModel(new Object[]{
                 tb_data.autoNumber(),

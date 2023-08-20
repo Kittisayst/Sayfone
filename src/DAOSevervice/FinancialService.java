@@ -2,7 +2,7 @@ package DAOSevervice;
 
 import DAO.FinancialDAO;
 import Model.FinancialModel;
-import Model.CreateRegisterModel;
+import Model.RegisterModel;
 import java.util.List;
 
 public class FinancialService {
@@ -60,14 +60,12 @@ public class FinancialService {
     public List<FinancialModel> getFinancialReportByDateToDateTransfer(String startDate, String endDate) {
         return aO.getFinancialReportByDateToDateTransfer(startDate, endDate);
     }
-    
-    
 
     public String getLastClass(int StudentID) {
         return aO.getLastClass(StudentID);
     }
 
-    public CreateRegisterModel getLastRegister(int studentID) {
+    public RegisterModel getLastRegister(int studentID) {
         return aO.getLastRegister(studentID);
     }
 
@@ -81,6 +79,10 @@ public class FinancialService {
 
     public int getCountFinancial() {
         return aO.getCountFinancial();
+    }
+
+    public List<FinancialModel> getFinancialFree(int YearID) {
+        return aO.getFinancialFree(YearID);
     }
 
 }

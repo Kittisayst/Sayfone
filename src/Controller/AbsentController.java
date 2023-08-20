@@ -4,7 +4,7 @@ import App.AppAbsentData;
 import App.AppDashboard;
 import DAOSevervice.RegisterService;
 import DAOSevervice.YearService;
-import Model.CreateRegisterModel;
+import Model.RegisterModel;
 import Tools.JoHookEvent;
 import View.AbsentView;
 import View.HomeView;
@@ -75,7 +75,7 @@ public class AbsentController implements JoMVC, ActionListener, MouseListener {
         JoHookEvent event = new JoHookEvent(e.getSource());
         if (event.isEvent(view.getTb_data())) {
             int registerID = view.getTb_data().getIntValue(1);
-            CreateRegisterModel registerModel = new RegisterService().getRegisterById(registerID);
+            RegisterModel registerModel = new RegisterService().getRegisterById(registerID);
             AppAbsentData absentData = new AppAbsentData(registerModel);
             absentData.Open();
         }

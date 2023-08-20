@@ -12,7 +12,7 @@ import DAOSevervice.UserService;
 import Database.JoConnect;
 import Log.JoLoger;
 import Model.FinancialModel;
-import Model.CreateRegisterModel;
+import Model.RegisterModel;
 import Model.FileTranferModel;
 import Model.GlobalDataModel;
 import Model.GobalData;
@@ -29,7 +29,6 @@ import Utility.MyPopup;
 import View.AuthenPopUp;
 import View.FinancialView;
 import View.HomeView;
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -52,7 +51,7 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
 
     private FinancialView view;
     private StudentModel studentModel;
-    private CreateRegisterModel registerModel;
+    private RegisterModel registerModel;
     private UserModel userAuthen = new UserModel();
     private FileTranferModel fileTranferModel = new FileTranferModel();
     private MyPopup popup;
@@ -60,7 +59,7 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
     HashMap<Integer, String> months = new HashMap<>();
     private MyFormat mf = new MyFormat();
 
-    public FinancialController(FinancialView view, StudentModel studentModel, CreateRegisterModel registerModel) {
+    public FinancialController(FinancialView view, StudentModel studentModel, RegisterModel registerModel) {
         this.view = view;
         this.studentModel = studentModel;
         this.registerModel = registerModel;

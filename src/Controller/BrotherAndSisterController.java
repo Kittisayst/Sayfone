@@ -13,18 +13,18 @@ import java.awt.event.ActionListener;
 public class BrotherAndSisterController implements JoMVC, ActionListener {
 
     private StudentHistoryView View;
-    private StudentHistoryModel StudentModel;
+    private int studentID;
     private BrotherAndSisterModel brotherAndSisterModel;
 
-    public BrotherAndSisterController(StudentHistoryView View, StudentHistoryModel StudentModel) {
+    public BrotherAndSisterController(StudentHistoryView View, int studentID) {
         this.View = View;
-        this.StudentModel = StudentModel;
+        this.studentID = studentID;
         brotherAndSisterModel = new BrotherAndSisterModel();
     }
 
     @Override
     public void Start() {
-        View.showBorderAndSister(new BroderSisterService().getBrotherSisterAll(StudentModel.getStudentID()));
+        View.showBorderAndSister(new BroderSisterService().getBrotherSisterAll(studentID));
     }
 
     @Override
@@ -56,7 +56,7 @@ public class BrotherAndSisterController implements JoMVC, ActionListener {
     public void actionPerformed(ActionEvent e) {
         JoHookEvent event = new JoHookEvent(e.getSource());
         if (event.isEvent(View.getBtnAddBS())) {
-            DialogBrotherAndSister bs = new DialogBrotherAndSister(AppHome.viewParent, true, StudentModel.getStudentID());
+            DialogBrotherAndSister bs = new DialogBrotherAndSister(AppHome.viewParent, true, studentID);
             bs.setVisible(true);
         }
     }

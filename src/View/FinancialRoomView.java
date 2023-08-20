@@ -2,7 +2,7 @@ package View;
 
 import Components.JoButtonIconfont;
 import Components.JoTable;
-import Model.CreateRegisterModel;
+import Model.RegisterModel;
 import Tools.JoDataTable;
 import Utility.MyFormat;
 import java.util.List;
@@ -14,7 +14,7 @@ public class FinancialRoomView extends javax.swing.JPanel {
         lbl_title.setText(Title);
     }
 
-    public void showRegister(List<CreateRegisterModel> models) {
+    public void showRegister(List<RegisterModel> models) {
         models.forEach(data -> {
             tb_data.AddJoModel(new Object[]{
                 tb_data.autoNumber(),

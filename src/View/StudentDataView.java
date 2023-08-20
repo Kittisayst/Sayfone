@@ -454,7 +454,6 @@ public class StudentDataView extends javax.swing.JPanel {
 
         joLable4.setText("ລະຫັດນັກສຶກສາ");
 
-        txt_StudentNo.setEditable(false);
         txt_StudentNo.setPlaceholder("ລະຫັດນັກສຶກສາ");
 
         joLable5.setText("ຊື່ ແລະ ນາມສະກຸນ");

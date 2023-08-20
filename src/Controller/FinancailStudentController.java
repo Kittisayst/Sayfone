@@ -5,7 +5,7 @@ import App.AppFinancialRoom;
 import DAOSevervice.FinancialService;
 import DAOSevervice.StudentService;
 import Model.FinancialModel;
-import Model.CreateRegisterModel;
+import Model.RegisterModel;
 import Model.StudentModel;
 import Tools.JoHookEvent;
 import View.HomeView;
@@ -20,9 +20,9 @@ import java.util.List;
 public class FinancailStudentController implements JoMVC, ActionListener, MouseListener {
 
     private FinancailStudentView view;
-    private CreateRegisterModel registerModel;
+    private RegisterModel registerModel;
 
-    public FinancailStudentController(FinancailStudentView view, CreateRegisterModel registerModel) {
+    public FinancailStudentController(FinancailStudentView view, RegisterModel registerModel) {
         this.view = view;
         this.registerModel = registerModel;
     }

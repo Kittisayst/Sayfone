@@ -490,7 +490,6 @@
             </Component>
             <Component class="Components.JoTextField" name="txt_StudentNo">
               <Properties>
-                <Property name="editable" type="boolean" value="false"/>
                 <Property name="placeholder" type="java.lang.String" value="&#xea5;&#xeb0;&#xeab;&#xeb1;&#xe94;&#xe99;&#xeb1;&#xe81;&#xeaa;&#xeb6;&#xe81;&#xeaa;&#xeb2;"/>
               </Properties>
             </Component>

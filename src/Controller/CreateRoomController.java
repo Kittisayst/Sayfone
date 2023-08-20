@@ -3,7 +3,7 @@ package Controller;
 import App.AppDashboard;
 import App.AppCreateRegister;
 import DAOSevervice.RegisterService;
-import Model.CreateRegisterModel;
+import Model.RegisterModel;
 import Tools.JoHookEvent;
 import Utility.MyPopup;
 import View.CreateRoomView;
@@ -16,10 +16,10 @@ import java.awt.event.MouseListener;
 public class CreateRoomController implements JoMVC, ActionListener, MouseListener {
 
     private final CreateRoomView view;
-    private final CreateRegisterModel model;
+    private final RegisterModel model;
     private MyPopup popup;
 
-    public CreateRoomController(CreateRoomView view, CreateRegisterModel model) {
+    public CreateRoomController(CreateRoomView view, RegisterModel model) {
         this.view = view;
         this.model = model;
         popup = new MyPopup();

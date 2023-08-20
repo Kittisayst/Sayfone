@@ -4,14 +4,14 @@ import Controller.FinancialController;
 import DAOSevervice.ClassService;
 import Log.JoLoger;
 import Model.ClassModel;
-import Model.CreateRegisterModel;
+import Model.RegisterModel;
 import Model.StudentModel;
 import Tools.JoAlert;
 import View.FinancialView;
 
 public class AppFinancial {
 
-    public AppFinancial(CreateRegisterModel registerModel, StudentModel studentModel) {
+    public AppFinancial(RegisterModel registerModel, StudentModel studentModel) {
         try {
             ClassModel classModel = new ClassService().getClassById(registerModel.getClassID());
             FinancialView view = new FinancialView(

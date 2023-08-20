@@ -5,7 +5,7 @@ import Database.JoConnect;
 import Database.JoSQL;
 import Log.JoLoger;
 import Model.FinancialModel;
-import Model.CreateRegisterModel;
+import Model.RegisterModel;
 import java.util.List;
 import Tools.JoAlert;
 import Utility.JoPrepared;
@@ -287,7 +287,7 @@ public class FinancialDAO implements FinancialFn {
     }
 
     @Override
-    public CreateRegisterModel getLastRegister(int studentID) {
+    public RegisterModel getLastRegister(int studentID) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -317,6 +317,26 @@ public class FinancialDAO implements FinancialFn {
             JoAlert.Error(e, this);
         }
         return count;
+    }
+
+    @Override
+    public List<FinancialModel> getFinancialFree(int YearID) {
+        List<FinancialModel> models = new ArrayList<>();
+        try {
+            String sqlc = "SELECT * FROM tb_financial\n"
+                    + "INNER JOIN tb_register ON tb_financial.RegisterID=tb_register.registerID\n"
+                    + "WHERE yearID=? GROUP BY StudentID";
+            PreparedStatement pre = c.prepareStatement(sqlc);
+            pre.setInt(1, YearID);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                models.add(resultModel(rs));
+            }
+        } catch (Exception e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        }
+        return models;
     }
 
 }

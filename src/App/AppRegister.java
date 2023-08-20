@@ -2,7 +2,7 @@ package App;
 
 import Controller.CreateRoomController;
 import Log.JoLoger;
-import Model.CreateRegisterModel;
+import Model.RegisterModel;
 import View.CreateRoomView;
 
 public class AppRegister {
@@ -10,7 +10,7 @@ public class AppRegister {
     public void OpenRegister() {
         try {
             CreateRoomView view = new CreateRoomView("ສ້າງຫ້ອງຮຽນ ລົງທະບຽນ");
-            CreateRegisterModel model = new CreateRegisterModel();
+            RegisterModel model = new RegisterModel();
             CreateRoomController controller = new CreateRoomController(view, model);
             controller.Start();
             controller.AddEvent();

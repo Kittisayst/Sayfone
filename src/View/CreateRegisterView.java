@@ -5,7 +5,7 @@ import Components.JoCombobox;
 import Components.JoDateChooser;
 import Components.JoTextField;
 import Model.ClassModel;
-import Model.CreateRegisterModel;
+import Model.RegisterModel;
 import Model.YearModel;
 import java.util.List;
 
@@ -32,7 +32,7 @@ public class CreateRegisterView extends javax.swing.JPanel {
         });
     }
 
-    public void showRegister(CreateRegisterModel model) {
+    public void showRegister(RegisterModel model) {
         txt_ClassRoomName.setText(model.getClassRoomName());
         cb_Year.setSelectIntValue(model.getYearID());
         cb_Class.setSelectIntValue(model.getClassID());

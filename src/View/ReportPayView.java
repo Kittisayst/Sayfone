@@ -4,13 +4,18 @@ import Components.JoButtonIconfont;
 import Components.JoCombobox;
 import Components.JoTable;
 import DAOSevervice.FinancialService;
+import DAOSevervice.RegisterService;
+import DAOSevervice.StudentService;
 import Model.FinancialModel;
-import Model.CreateRegisterModel;
+import Model.RegisterModel;
 import Model.StudentModel;
 import Model.YearModel;
-import Tools.JoDataTable;
-import Utility.MyFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ReportPayView extends javax.swing.JPanel {
 
@@ -43,40 +48,131 @@ public class ReportPayView extends javax.swing.JPanel {
     int overMoney = 0;
     int payMoney = 0;
 
-    public void showReportPay(List<StudentModel> models) {
-        FinancialService financialService = new FinancialService();
-        models.forEach(data -> {
-            String lastClass = financialService.getLastClass(data.getStudentID());
-            CreateRegisterModel registerModel = financialService.getLastRegister(data.getStudentID());
-            String overPayMonth = financialService.getPayMonth(registerModel.getRegisterID(), data.getStudentID());
-            YearModel yearModel = registerModel.getYearModel();
-            int fullMomey = 0;
-            List<FinancialModel> financialModels = new FinancialService().getFinancialByStudentID(registerModel.getRegisterID(), data.getStudentID());
-            financialModels.forEach(fn -> {
-                overMoney += fn.getOvertimePay();
-                payMoney += fn.getMoney();
+    public void showReportPay(List<FinancialModel> models) {
+        updateTable();
+        try {
+            models.forEach(model -> {
+                addData(model);
             });
-            if (registerModel.getRegisterID() != 0) {
-                if (fullMomey > 0) {
-                    tb_data.AddJoModel(new Object[]{
-                        tb_data.autoNumber(),
-                        data.getStudentID(),
-                        data.getFullName(),
-                        lastClass,
-                        registerModel.getClassRoomName(),
-                        overPayMonth,
-                        yearModel.getYear(),
-                        new MyFormat().formatMoney(overMoney),
-                        new MyFormat().formatMoney(fullMomey)
-                    });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void addData(FinancialModel model) {
+        StudentService studentService = new StudentService();
+        RegisterService registerService = new RegisterService();
+        StudentModel studentModel = studentService.getStudentById(model.getStudentID());
+        RegisterModel registerModel = registerService.getRegisterById(model.getRegisterID());
+        tb_data.AddJoModel(new Object[]{
+            tb_data.autoNumber(),
+            model.getStudentID(),
+            studentModel.getFullName(),
+            registerModel.getClassRoomName(),
+            getMonths(model),
+            registerModel.getYearModel().getYear(),});
+    }
+
+    String str = "";
+
+    private String getMonths(FinancialModel model) {
+        FinancialService service = new FinancialService();
+        List<FinancialModel> financialModels = service.getFinancialByStudentID(model.getRegisterID(), model.getStudentID());
+        if (financialModels.size() <= 1) {
+            String payMonth = model.getFinancialMonth();
+            String monthMiss = findMissingNumbers(payMonth); // ຫາຂໍ້ມູນເດືອນທີ່ຄ້າງຈ່າຍ
+            return monthMiss;
+        } else {
+            financialModels.forEach(data -> {
+                str += data.getFinancialMonth();
+            });
+            // Remove the square brackets and split the string into parts
+            String val = convertString(str); // ປ່ຽນເປັນ String
+            // Concatenate the parts into a single string
+            String sortNumber = ArrangeNumber(val); //ລຽງຕົວເລກໃຫ້ເປັນລຳດັບ
+            String monthMiss = findMissingNumbers(sortNumber); // ຫາຂໍ້ມູນເດືອນທີ່ຄ້າງຈ່າຍ
+            str = ""; // ລ້າງຂໍ້ມູນເດືອນ
+            return monthMiss;
+        }
+    }
+
+    private String convertString(String input) { //ລວມເດືອນ
+        Pattern pattern = Pattern.compile("\\d+");
+        Matcher matcher = pattern.matcher(input);
+        StringBuilder output = new StringBuilder();
+        while (matcher.find()) {
+            output.append(matcher.group()).append(", ");
+        }
+        output.setLength(output.length() - 2);
+        return "[" + output.toString() + "]";
+    }
+
+    private String ArrangeNumber(String str) { // ລຽງຕົວເລກເດືອນຕາມລະດັບ
+        String data = str;
+        if (str.equals("[]")) {
+            return "[]";
+        } else {
+            String[] numbersArray = data.substring(1, data.length() - 1).split(", ");
+            int[] numbers = new int[numbersArray.length];
+            for (int i = 0; i < numbersArray.length; i++) {
+                numbers[i] = Integer.parseInt(numbersArray[i]);
+            }
+            Arrays.sort(numbers);
+            ArrayList strlist = new ArrayList();
+            for (int num : numbers) {
+                strlist.add(num);
+            }
+            return strlist.toString();
+        }
+    }
+
+    private int count(String str) {
+        String data = str;
+        String[] numbersArray = data.substring(1, data.length() - 1).split(", ");
+        System.out.println(numbersArray.length);
+        return numbersArray.length;
+    }
+
+    private String findMissingNumbers(String missingValue) {
+        String value = "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]";
+        if (missingValue.equals("[]")) {
+            return value;
+        } else {
+            List<Integer> missingNumbers = new ArrayList<>();
+            // Convert the string values to arrays of integers
+            int[] numbers = parseArray(value);
+            int[] missingNumbersArray = parseArray(missingValue);
+            // Create a HashSet to store the missing numbers
+            HashSet<Integer> missingSet = new HashSet<>();
+            for (int num : missingNumbersArray) {
+                missingSet.add(num);
+            }
+            // Iterate over the numbers array and check for missing values
+            for (int num : numbers) {
+                if (!missingSet.contains(num)) {
+                    missingNumbers.add(num);
                 }
             }
-            payMoney = 0;
-            overMoney = 0;
-        });
-        JoDataTable dataTable = new JoDataTable(pn_Datatable);
-        dataTable.setHiddenColumns(1);
-        dataTable.showDataTableAll();
+            String payFull = missingNumbers.toString();
+            return payFull.equals("[]") ? "ຈ່າຍຄົບຖ້ວນ" : payFull;
+        }
+    }
+
+    private int[] parseArray(String value) {
+        String[] numberStrings = value.substring(1, value.length() - 1).split(", ");
+        // Convert the string values to integers
+        int[] numbers = new int[numberStrings.length];
+        for (int i = 0; i < numberStrings.length; i++) {
+            numbers[i] = Integer.parseInt(numberStrings[i].trim());
+        }
+        return numbers;
+    }
+
+    private void updateTable() {
+        tb_data.JoClearModel();
+        pn_Datatable.removeAll();
+        pn_Datatable.add(jScrollPane1);
+        pn_Datatable.repaint();
     }
 
     @SuppressWarnings("unchecked")
@@ -127,11 +223,11 @@ public class ReportPayView extends javax.swing.JPanel {
 
             },
             new String [] {
-                "#", "ID", "ຊື່ ແລະ ນາມສະກຸນ", "ຂະແໜງ", "ຫ້ອງຮຽນ", "ຄ້າງເດືອນ", "ສົກຮຽນ", "ລວມຄ່າຈ່າຍຊ້າ", "ລວມເງິນທີ່ຕ້ອງຈ່າຍທັງໝົດ"
+                "#", "ID", "ຊື່ ແລະ ນາມສະກຸນ", "ຫ້ອງຮຽນ", "ຄ້າງເດືອນ", "ສົກຮຽນ", "ລວມຄ່າຈ່າຍຊ້າ", "ລວມເງິນທີ່ຕ້ອງຈ່າຍທັງໝົດ"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

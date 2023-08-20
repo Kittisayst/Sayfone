@@ -18,6 +18,7 @@ public class ReportPayApp {
     public void Running() {
         try {
             controller.Start();
+            controller.AddEvent();
         } catch (Exception e) {
             JoLoger.saveLog(e, this);
         }

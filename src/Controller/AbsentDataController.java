@@ -2,7 +2,7 @@ package Controller;
 
 import App.AppAbsent;
 import DAOSevervice.FinancialService;
-import Model.CreateRegisterModel;
+import Model.RegisterModel;
 import Tools.JoHookEvent;
 import View.AbsentDataView;
 import View.HomeView;
@@ -12,9 +12,9 @@ import java.awt.event.ActionListener;
 public class AbsentDataController implements JoMVC, ActionListener {
 
     private AbsentDataView view;
-    private CreateRegisterModel registerModel;
+    private RegisterModel registerModel;
 
-    public AbsentDataController(AbsentDataView view, CreateRegisterModel registerModel) {
+    public AbsentDataController(AbsentDataView view, RegisterModel registerModel) {
         this.view = view;
         this.registerModel = registerModel;
     }

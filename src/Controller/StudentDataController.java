@@ -175,11 +175,7 @@ public class StudentDataController implements JoMVC, ActionListener, MouseListen
         } else if (event.isEvent(view.getBtn_Save())) {
             if (model.getStudentID() == 0) {
                 if (emptyData()) {
-                    if (service.getChekStudentNo(view.getTxt_StudentNo().getText())) { // ກວດສອບລະຫັດໃໝ່ຊ້ຳກັນ
-                        new JoAlert().messages("ລະຫັດນັກຮຽນ", "ລະຫັດນັກຮຽນຊ້ຳກັນ", JoAlert.Icons.warning);
-                    } else {
-                        Create();
-                    }
+                    Create();
                 }
             } else {
                 if (emptyData()) {
@@ -200,7 +196,7 @@ public class StudentDataController implements JoMVC, ActionListener, MouseListen
             AppStudentHistory appStudentHistory = new AppStudentHistory(model.getStudentID(), 0);
         } else if (event.isEvent(view.getBtn_Vaccine())) {
             AppStudentVaccince appStudentVaccince = new AppStudentVaccince(model);
-        }else if (event.isEvent(view.getBtn_BrotherSister())) {
+        } else if (event.isEvent(view.getBtn_BrotherSister())) {
             AppStudentHistory appStudentHistory = new AppStudentHistory(model.getStudentID(), 2);
         }
     }

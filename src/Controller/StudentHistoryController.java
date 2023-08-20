@@ -78,7 +78,7 @@ public class StudentHistoryController implements JoMVC, ActionListener, MouseLis
             view.showDistrictNow(districtService.getProvinceById(provinceNowID));
             view.showHistory(model);
             view.showStudnetAddress(addressService.getStudentLocationByStudentID(studentID));
-            BrotherAndSisterController brotherAndSisterController = new BrotherAndSisterController(view, model);
+            BrotherAndSisterController brotherAndSisterController = new BrotherAndSisterController(view, studentID);
             brotherAndSisterController.Start();
             brotherAndSisterController.AddEvent();
         } catch (Exception ex) {
