@@ -3,7 +3,7 @@ package Controller;
 import App.AppFinancial;
 import App.AppHome;
 import App.AppFinancailStudent;
-import Component.TransferDialog;
+import Component.FinancialTransferDialog;
 import DAOSevervice.FileTransferService;
 import DAOSevervice.FinancialService;
 import DAOSevervice.SayfoneService;
@@ -235,7 +235,7 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
                 view.EnableDisCount(userAuthen);
             }
         } else if (event.isEvent(view.getBtnAddTransfer())) { // ກົດປຸ່ມເພີ່ມເອກະສານການໂອນ
-            TransferDialog dialog = new TransferDialog(AppHome.viewParent, true, fileTranferModel);
+            FinancialTransferDialog dialog = new FinancialTransferDialog(AppHome.viewParent, true, fileTranferModel);
             dialog.setVisible(true);
             fileTranferModel = dialog.getTranferModel();
             System.out.println(fileTranferModel);
@@ -270,7 +270,7 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
             FinancialService financialService = new FinancialService();
             financialModel = financialService.getFinancialById(view.getTb_data().getIntValue(1));
             fileTranferModel = new FileTransferService().getFileTranferByFinancialID(financialModel.getFinancialIID()); //ດຶງຂໍ້ມູນເອກະສານການໂອນ
-            TransferDialog dialog = new TransferDialog(AppHome.viewParent, true, fileTranferModel);
+            FinancialTransferDialog dialog = new FinancialTransferDialog(AppHome.viewParent, true, fileTranferModel);
             dialog.setVisible(true);
             fileTranferModel = dialog.getTranferModel();
             FileTransferService transferService = new FileTransferService();

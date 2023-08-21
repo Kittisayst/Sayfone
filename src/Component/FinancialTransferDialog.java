@@ -7,7 +7,7 @@ import java.time.LocalTime;
 import java.util.Date;
 import javax.swing.ImageIcon;
 
-public class TransFerDialog extends javax.swing.JDialog {
+public class FinancialTransferDialog extends javax.swing.JDialog {
 
     private FileTranferModel tranferModel = new FileTranferModel();
 
@@ -15,10 +15,14 @@ public class TransFerDialog extends javax.swing.JDialog {
     private boolean submit = false;
     JoFilechooser filechooser = new JoFilechooser();
 
-    public TransFerDialog(java.awt.Frame parent, boolean modal, FileTranferModel tranferModel) {
+    public FinancialTransferDialog(java.awt.Frame parent, boolean modal, FileTranferModel tranferModel) {
         super(parent, modal);
         initComponents();
         this.tranferModel = tranferModel;
+        filechooser.addFilter("JPG", "jpg");
+        filechooser.addFilter("JPEG", "jpeg");
+        filechooser.addFilter("PNG", "png");
+        filechooser.addFilter("GIF", "gif");
         dtDate.setDateData(new Date());
         LocalTime currentTime = LocalTime.now();
         // Get the hour and minute
@@ -209,8 +213,6 @@ public class TransFerDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_btnOpenCarmeraActionPerformed
 
     private void btnAddImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddImageActionPerformed
-        filechooser.addFilter("JPG", "jpg");
-        filechooser.addFilter("PNG", "png");
         openFile = filechooser.showOpenDialog(null);
         if (openFile) {
             txtPath.setText(filechooser.getSelectedFile().getName());
