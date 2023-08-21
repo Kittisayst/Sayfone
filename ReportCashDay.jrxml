@@ -15,7 +15,7 @@
 		<![CDATA[SELECT ClassRoomName,StudentNo,Gender,StudentName,SaveDate,Money,FinancialMonth,FinancialComment  FROM tb_financial
 INNER JOIN tb_register ON tb_financial.RegisterID = tb_register.registerID
 INNER JOIN tb_student ON tb_financial.StudentID = tb_student.StudentID
-WHERE SaveDate=$P{parmDate} AND UserID=$P{UserID};]]>
+WHERE SaveDate=$P{parmDate} AND Money>0 AND UserID=$P{UserID};]]>
 	</queryString>
 	<field name="ClassRoomName" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -254,7 +254,7 @@ WHERE SaveDate=$P{parmDate} AND UserID=$P{UserID};]]>
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Phetsarath OT" size="12"/>
+					<font fontName="Phetsarath OT" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{FinancialMonth}]]></textFieldExpression>
 			</textField>
@@ -288,10 +288,10 @@ WHERE SaveDate=$P{parmDate} AND UserID=$P{UserID};]]>
 	</detail>
 	<pageFooter>
 		<band height="20" splitType="Stretch">
-			<textField pattern="dd/MM/yyyy">
+			<textField pattern="dd/MM/yyyy HH.mm.ss">
 				<reportElement x="0" y="0" width="822" height="20" uuid="f799fb38-1e4d-4879-a8f0-ffd3d1adaa34"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="5"/>
+					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
@@ -336,6 +336,13 @@ WHERE SaveDate=$P{parmDate} AND UserID=$P{UserID};]]>
 					<font fontName="Phetsarath OT" size="12"/>
 				</textElement>
 				<text><![CDATA[ລວມເງິນທັງໝົດ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="26" width="202" height="26" uuid="7ca0e534-dc80-41d1-9c45-2b35fb872f39"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Phetsarath OT" size="12" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[ຜູ້ອານຸມັດ]]></text>
 			</staticText>
 		</band>
 	</summary>

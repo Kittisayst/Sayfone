@@ -83,11 +83,14 @@ public class FinancialDAO implements FinancialFn {
     @Override
     public List<FinancialModel> getFinancialAll() {
         List<FinancialModel> financialModels = new ArrayList<>();
+        financialModels.clear();
+        ResultSet rs;
         try {
-            ResultSet rs = sql.getSelectAll();
+            rs = sql.getSelectAll();
             while (rs.next()) {
                 financialModels.add(resultModel(rs));
             }
+            rs.close();
         } catch (Exception e) {
             JoAlert.Error(e, this);
         }
@@ -158,11 +161,12 @@ public class FinancialDAO implements FinancialFn {
     }
 
     @Override
-    public List<FinancialModel> getFinancialReportByDate(String date) {
+    public List<FinancialModel> getFinancialReportByDate(String date, String userID) {  // ດຶງຂໍ້ມູນຈ່າຍຄ່າຮຽນປະຈຳວັນ ເງິນສົດ
         List<FinancialModel> models = new ArrayList<>();
         try {
-            PreparedStatement pre = sql.getSelectCustom("SaveDate=? AND Money>0");
+            PreparedStatement pre = sql.getSelectCustom("SaveDate=? AND Money>0 AND UserID=?");
             pre.setString(1, date);
+            pre.setString(2, userID);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
                 models.add(resultModel(rs));
@@ -174,13 +178,14 @@ public class FinancialDAO implements FinancialFn {
     }
 
     @Override
-    public List<FinancialModel> getFinancialReportByWeek(String date) {
+    public List<FinancialModel> getFinancialReportByWeek(String date, String userID) { // ດຶງຂໍ້ມູນຈ່າຍຄ່າຮຽນປະຈຳ ອາທິດ ເງິນສົດ
         List<FinancialModel> models = new ArrayList<>();
         try {
-            String sqlc = "SELECT * FROM tb_financial WHERE SaveDate >= ? AND SaveDate <= DATE_ADD(?, INTERVAL 6 DAY) AND Money>0";
+            String sqlc = "SELECT * FROM tb_financial WHERE SaveDate >= ? AND SaveDate <= DATE_ADD(?, INTERVAL 6 DAY) AND Money>0 AND UserID=?";
             PreparedStatement pre = c.prepareStatement(sqlc);
             pre.setString(1, date);
             pre.setString(2, date);
+            pre.setString(3, userID);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
                 models.add(resultModel(rs));
@@ -192,13 +197,14 @@ public class FinancialDAO implements FinancialFn {
     }
 
     @Override
-    public List<FinancialModel> getFinancialReportByDateToDate(String startDate, String endDate) {
+    public List<FinancialModel> getFinancialReportByDateToDate(String startDate, String endDate, String userID) {
         List<FinancialModel> models = new ArrayList<>();
         try {
-            String sqlc = "SELECT * FROM tb_financial WHERE SaveDate BETWEEN ? AND ? AND Money>0";
+            String sqlc = "SELECT * FROM tb_financial WHERE SaveDate BETWEEN ? AND ? AND Money>0 AND UserID=?";
             PreparedStatement pre = c.prepareStatement(sqlc);
             pre.setString(1, startDate);
             pre.setString(2, endDate);
+            pre.setString(3, userID);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
                 models.add(resultModel(rs));
@@ -210,11 +216,12 @@ public class FinancialDAO implements FinancialFn {
     }
 
     @Override
-    public List<FinancialModel> getFinancialReportByDateTransfer(String date) {
+    public List<FinancialModel> getFinancialReportByDateTransfer(String date, String userID) {  // ດຶງຂໍ້ມູນຈ່າຍຄ່າຮຽນປະຈຳວັນ ໂອນ
         List<FinancialModel> models = new ArrayList<>();
         try {
-            PreparedStatement pre = sql.getSelectCustom("SaveDate=? AND TransferMoney>0");
+            PreparedStatement pre = sql.getSelectCustom("SaveDate=? AND TransferMoney>0 AND UserID=?");
             pre.setString(1, date);
+            pre.setString(2, userID);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
                 models.add(resultModel(rs));
@@ -226,13 +233,14 @@ public class FinancialDAO implements FinancialFn {
     }
 
     @Override
-    public List<FinancialModel> getFinancialReportByWeekTransfer(String date) {
+    public List<FinancialModel> getFinancialReportByWeekTransfer(String date, String userID) {
         List<FinancialModel> models = new ArrayList<>();
         try {
-            String sqlc = "SELECT * FROM tb_financial WHERE SaveDate >= ? AND SaveDate <= DATE_ADD(?, INTERVAL 6 DAY) AND TransferMoney>0";
+            String sqlc = "SELECT * FROM tb_financial WHERE SaveDate >= ? AND SaveDate <= DATE_ADD(?, INTERVAL 6 DAY) AND TransferMoney>0 AND UserID=?";
             PreparedStatement pre = c.prepareStatement(sqlc);
             pre.setString(1, date);
             pre.setString(2, date);
+            pre.setString(3, userID);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
                 models.add(resultModel(rs));
@@ -244,13 +252,14 @@ public class FinancialDAO implements FinancialFn {
     }
 
     @Override
-    public List<FinancialModel> getFinancialReportByDateToDateTransfer(String startDate, String endDate) {
+    public List<FinancialModel> getFinancialReportByDateToDateTransfer(String startDate, String endDate, String userID) {
         List<FinancialModel> models = new ArrayList<>();
         try {
-            String sqlc = "SELECT * FROM tb_financial WHERE SaveDate BETWEEN ? AND ? AND TransferMoney>0";
+            String sqlc = "SELECT * FROM tb_financial WHERE SaveDate BETWEEN ? AND ? AND TransferMoney>0  AND UserID=?";
             PreparedStatement pre = c.prepareStatement(sqlc);
             pre.setString(1, startDate);
             pre.setString(2, endDate);
+            pre.setString(3, userID);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
                 models.add(resultModel(rs));
@@ -263,14 +272,16 @@ public class FinancialDAO implements FinancialFn {
 
     @Override
     public String getLastClass(int StudentID) {
+        PreparedStatement pre = null;
+        ResultSet rs = null;
         try {
             String sql = "SELECT MAX(FinancialID) AS MaxFinancialID,fn.RegisterID,rs.classID,className FROM tb_financial AS fn\n"
                     + "INNER JOIN tb_register AS rs ON fn.RegisterID=rs.registerID\n"
                     + "INNER JOIN tb_class AS cs ON rs.classID = cs.classID\n"
                     + "WHERE StudentID =?";
-            PreparedStatement pre = c.prepareStatement(sql);
+            pre = c.prepareStatement(sql);
             pre.setInt(1, StudentID);
-            ResultSet rs = pre.executeQuery();
+            rs = pre.executeQuery();
             if (rs.next()) {
                 if (rs.getString("className") == null) {
                     return "ນັກຮຽນໃໝ່";
@@ -283,6 +294,13 @@ public class FinancialDAO implements FinancialFn {
         } catch (Exception e) {
             e.printStackTrace();
             return "ຜິດພາດຂໍ້ມູນ";
+        } finally {
+            try {
+                pre.close();
+                rs.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 

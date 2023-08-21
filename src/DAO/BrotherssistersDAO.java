@@ -1,13 +1,10 @@
 package DAO;
 
 import DAOInterface.BrotherAndSisterFN;
-import DAOSevervice.BroderSisterService;
-import DAOSevervice.StudentService;
 import Database.JoConnect;
 import Database.JoSQL;
 import Log.JoLoger;
 import Model.BrotherAndSisterModel;
-import Model.StudentModel;
 import java.util.List;
 import Tools.JoAlert;
 import Utility.JoPrepared;

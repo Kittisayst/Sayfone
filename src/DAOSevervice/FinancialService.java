@@ -37,28 +37,28 @@ public class FinancialService {
         return aO.getStudentRegistered(RegisterID);
     }
 
-    public List<FinancialModel> getFinancialReportByDate(String date) {
-        return aO.getFinancialReportByDate(date);
+    public List<FinancialModel> getFinancialReportByDate(String date, String userID) {
+        return aO.getFinancialReportByDate(date, userID);
     }
 
-    public List<FinancialModel> getFinancialReportByWeek(String date) {
-        return aO.getFinancialReportByWeek(date);
+    public List<FinancialModel> getFinancialReportByWeek(String date, String userID) {
+        return aO.getFinancialReportByWeek(date, userID);
     }
 
-    public List<FinancialModel> getFinancialReportByDateToDate(String startDate, String endDate) {
-        return aO.getFinancialReportByDateToDate(startDate, endDate);
+    public List<FinancialModel> getFinancialReportByDateToDate(String startDate, String endDate, String userID) {
+        return aO.getFinancialReportByDateToDate(startDate, endDate, userID);
     }
 
-    public List<FinancialModel> getFinancialReportByDateTransfer(String date) {
-        return aO.getFinancialReportByDateTransfer(date);
+    public List<FinancialModel> getFinancialReportByDateTransfer(String date, String userID) {
+        return aO.getFinancialReportByDateTransfer(date, userID);
     }
 
-    public List<FinancialModel> getFinancialReportByWeekTransfer(String date) {
-        return aO.getFinancialReportByWeekTransfer(date);
+    public List<FinancialModel> getFinancialReportByWeekTransfer(String date, String userID) {
+        return aO.getFinancialReportByWeekTransfer(date, userID);
     }
 
-    public List<FinancialModel> getFinancialReportByDateToDateTransfer(String startDate, String endDate) {
-        return aO.getFinancialReportByDateToDateTransfer(startDate, endDate);
+    public List<FinancialModel> getFinancialReportByDateToDateTransfer(String startDate, String endDate, String userID) {
+        return aO.getFinancialReportByDateToDateTransfer(startDate, endDate, userID);
     }
 
     public String getLastClass(int StudentID) {

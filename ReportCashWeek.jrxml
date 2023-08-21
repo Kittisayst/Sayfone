@@ -8,11 +8,14 @@
 	</parameter>
 	<parameter name="LogoPath" class="java.lang.String"/>
 	<parameter name="UserPrint" class="java.lang.String"/>
+	<parameter name="UserID" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[SELECT ClassRoomName,StudentNo,Gender,StudentName,SaveDate,Money,FinancialMonth,FinancialComment  FROM tb_financial
 INNER JOIN tb_register ON tb_financial.RegisterID = tb_register.registerID
 INNER JOIN tb_student ON tb_financial.StudentID = tb_student.StudentID
-WHERE SaveDate >=$P{parmDate}  AND SaveDate <= DATE_ADD($P{parmDate}, INTERVAL 6 DAY);]]>
+WHERE SaveDate >=$P{parmDate}  AND SaveDate <= DATE_ADD($P{parmDate}, INTERVAL 6 DAY) AND UserID=$P{UserID} AND Money>0;]]>
 	</queryString>
 	<field name="ClassRoomName" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -251,7 +254,7 @@ WHERE SaveDate >=$P{parmDate}  AND SaveDate <= DATE_ADD($P{parmDate}, INTERVAL 6
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Phetsarath OT" size="12"/>
+					<font fontName="Phetsarath OT" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{FinancialMonth}]]></textFieldExpression>
 			</textField>
@@ -285,10 +288,10 @@ WHERE SaveDate >=$P{parmDate}  AND SaveDate <= DATE_ADD($P{parmDate}, INTERVAL 6
 	</detail>
 	<pageFooter>
 		<band height="20" splitType="Stretch">
-			<textField pattern="dd/MM/yyyy">
-				<reportElement x="0" y="0" width="802" height="20" uuid="f799fb38-1e4d-4879-a8f0-ffd3d1adaa34"/>
+			<textField pattern="dd/MM/yyyy HH.mm.ss">
+				<reportElement x="0" y="0" width="822" height="20" uuid="f799fb38-1e4d-4879-a8f0-ffd3d1adaa34"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="5"/>
+					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
@@ -334,6 +337,13 @@ WHERE SaveDate >=$P{parmDate}  AND SaveDate <= DATE_ADD($P{parmDate}, INTERVAL 6
 				</textElement>
 				<textFieldExpression><![CDATA[$V{SumMoney}]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="0" y="23" width="202" height="26" uuid="55100869-d98f-4534-9f06-e674eeae18de"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Phetsarath OT" size="12" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[ຜູ້ລາຍອານຸມັດ]]></text>
+			</staticText>
 		</band>
 	</summary>
 </jasperReport>

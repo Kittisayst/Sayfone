@@ -193,6 +193,7 @@ public class ReportPayView extends javax.swing.JPanel {
         joLable1 = new Components.JoLable();
         cbYear = new Components.JoCombobox();
         btnShow = new Components.JoButtonIconfont();
+        joButtonIconfont1 = new Components.JoButtonIconfont();
 
         Pn_Navigation.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
         Pn_Navigation.setLayout(new java.awt.GridLayout(1, 0));
@@ -253,6 +254,8 @@ public class ReportPayView extends javax.swing.JPanel {
         gridBagConstraints.weighty = 0.1;
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel1.add(joLable1, gridBagConstraints);
+
+        cbYear.setPreferredSize(new java.awt.Dimension(100, 25));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
         gridBagConstraints.weighty = 0.1;
@@ -266,6 +269,11 @@ public class ReportPayView extends javax.swing.JPanel {
         gridBagConstraints.weighty = 0.1;
         gridBagConstraints.insets = new java.awt.Insets(2, 10, 2, 10);
         jPanel1.add(btnShow, gridBagConstraints);
+
+        joButtonIconfont1.setBackground(new java.awt.Color(0, 102, 102));
+        joButtonIconfont1.setText("ກຳນົດຄ່າຮຽນ");
+        joButtonIconfont1.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.SETTINGS);
+        jPanel1.add(joButtonIconfont1, new java.awt.GridBagConstraints());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -300,6 +308,7 @@ public class ReportPayView extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private Components.JoButtonIconfont joButtonIconfont1;
     private Components.JoLable joLable1;
     private Components.JoLable lbl_title;
     private javax.swing.JPanel pn_Datatable;

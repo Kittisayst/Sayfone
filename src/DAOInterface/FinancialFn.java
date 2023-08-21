@@ -22,17 +22,17 @@ public interface FinancialFn {
 
     public FinancialModel getFinancialById(int ID);
 
-    public List<FinancialModel> getFinancialReportByDate(String date);
+    public List<FinancialModel> getFinancialReportByDate(String date, String userID); // ດຶງຂໍ້ມູນຈ່າຍຄ່າຮຽນປະຈຳວັນ ເງິນສົດ
 
-    public List<FinancialModel> getFinancialReportByWeek(String date);
+    public List<FinancialModel> getFinancialReportByWeek(String date, String userID); // ດຶງຂໍ້ມູນຈ່າຍຄ່າຮຽນປະຈຳອາທິດ ເງິນສົດ
 
-    public List<FinancialModel> getFinancialReportByDateToDate(String startDate, String endDate);
+    public List<FinancialModel> getFinancialReportByDateToDate(String startDate, String endDate, String userID); //// ດຶງຂໍ້ມູນຈ່າຍຄ່າຮຽນປະຈຳວັນທີ ເງິນສົດ
 
-    public List<FinancialModel> getFinancialReportByDateTransfer(String date);
+    public List<FinancialModel> getFinancialReportByDateTransfer(String date, String userID); // ດຶງຂໍ້ມູນຈ່າຍຄ່າຮຽນປະຈຳວັນ ໂອນ
 
-    public List<FinancialModel> getFinancialReportByWeekTransfer(String date);
+    public List<FinancialModel> getFinancialReportByWeekTransfer(String date, String userID); // ດຶງຂໍ້ມູນຈ່າຍຄ່າຮຽນປະຈຳ ອາທິດ ໂອນ
 
-    public List<FinancialModel> getFinancialReportByDateToDateTransfer(String startDate, String endDate);
+    public List<FinancialModel> getFinancialReportByDateToDateTransfer(String startDate, String endDate, String userID);
 
     public String getLastClass(int StudentID);
 

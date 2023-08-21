@@ -122,10 +122,12 @@ public class StudentDAO implements StudentFn {
     @Override
     public List<StudentModel> getAllStudent() {
         List<StudentModel> models = new ArrayList<>();
+        models.clear();
         try {
-            ResultSet rs = sql.getSelectAll();
-            while (rs.next()) {
-                models.add(getResult(rs));
+            try (ResultSet rs = sql.getSelectAll()) {
+                while (rs.next()) {
+                    models.add(getResult(rs));
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();

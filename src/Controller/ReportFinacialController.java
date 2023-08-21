@@ -25,7 +25,9 @@ import java.util.Calendar;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.TemporalAdjusters;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class ReportFinacialController implements JoMVC, ActionListener {
 
@@ -35,6 +37,7 @@ public class ReportFinacialController implements JoMVC, ActionListener {
     private boolean showWeek = false; // ສະແດງລາຍງານປະຈຳອາທິດ
     private boolean showDatetoDate = false; // ສະແດງລາຍງານປະຈຳວັນທີ່-ວັນທີ່
     private boolean moneyState = true; // false ໂອນ  , true ສົດ
+    private final String UserLogin = "" + GlobalDataModel.globalUsermodel.getUserID();
 
     public ReportFinacialController(ReportFinacialView view, FinancialModel model) {
         this.view = view;
@@ -45,7 +48,11 @@ public class ReportFinacialController implements JoMVC, ActionListener {
     public void Start() {
         HomeView.MyRouter.setRouter(view);
         view.getDtDateEnd().setDateData(new Date());
-        view.showDataReport(new FinancialService().getFinancialReportByDate(new MyFormat().getDateCustom(new Date(), "yyyy-MM-dd")));
+        // ສະແດງຂໍ້ມູນໃນຕາຕະລາງປະຈຳວັນທີ
+        FinancialService service = new FinancialService();
+        String dateNow = new MyFormat().getDateSQL(new Date());
+        List<FinancialModel> models = service.getFinancialReportByDate(dateNow, UserLogin);
+        view.showDataReport(models); //ເງິນສົດ
     }
 
     @Override
@@ -139,40 +146,51 @@ public class ReportFinacialController implements JoMVC, ActionListener {
         showDatetoDate = false; // ສະແດງລາຍງານປະຈຳວັນທີ່-ວັນທີ່
     }
 
-    private void showReportDay() {
+    private void showReportDay() {  // ສະແດງຂໍ້ມູນລາຍງານປະຈຳ ວັນ ໃນຕາຕະລາງ 
         showDay = true;
         FinancialService service = new FinancialService();
+        String dateNow = new MyFormat().getDateSQL(new Date());
+        List<FinancialModel> models;
         if (moneyState) {
-            view.showDataReport(service.getFinancialReportByDate(new MyFormat().getDateSQL(new Date())));
+            models = service.getFinancialReportByDate(dateNow, UserLogin);
+            view.showDataReport(models); //ເງິນສົດ
         } else {
-            view.showDataReportTransfer(service.getFinancialReportByDateTransfer(new MyFormat().getDateSQL(new Date())));
+            models = service.getFinancialReportByDateTransfer(dateNow, UserLogin);
+            view.showDataReportTransfer(models); //ໂອນ
         }
     }
 
-    private void showReportWeek() {
+    private void showReportWeek() { // ສະແດງຂໍ້ມູນລາຍງານປະຈຳ ອາທິດ ໃນຕາຕະລາງ 
         showWeek = true;
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
         calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
         Date startDateOfWeek = calendar.getTime();
         FinancialService service = new FinancialService();
+        String dateInWeek = new MyFormat().getDateSQL(startDateOfWeek);
+        List<FinancialModel> models;
         if (moneyState) {
-            view.showDataReport(service.getFinancialReportByWeek(new MyFormat().getDateSQL(startDateOfWeek)));
+            models = service.getFinancialReportByWeek(dateInWeek, UserLogin);
+            view.showDataReport(models); //ເງິນສົດ
         } else {
-            view.showDataReportTransfer(service.getFinancialReportByWeekTransfer(new MyFormat().getDateSQL(startDateOfWeek)));
+            models = service.getFinancialReportByWeekTransfer(dateInWeek, UserLogin);
+            view.showDataReportTransfer(models); //ໂອນ
         }
 
     }
 
-    private void showReportDatetoDate() {
+    private void showReportDatetoDate() { // ສະແດງຂໍ້ມູນລາຍງານປະຈຳວັນທີ່ໃນຕາຕະລາງ
         FinancialService service = new FinancialService();
         String dateStart, dateEnd;
         dateStart = view.getDtDate().getDateSQL();
         dateEnd = view.getDtDateEnd().getDateSQL();
+        List<FinancialModel> models;
         if (moneyState) {
-            view.showDataReport(service.getFinancialReportByDateToDate(dateStart, dateEnd));
+            models = service.getFinancialReportByDateToDate(dateStart, dateEnd, UserLogin);
+            view.showDataReport(models); //ເງິນສົດ
         } else {
-            view.showDataReportTransfer(service.getFinancialReportByDateToDateTransfer(dateStart, dateEnd));
+            models = service.getFinancialReportByDateToDateTransfer(dateStart, dateEnd, UserLogin);
+            view.showDataReportTransfer(models); //ໂອນ
         }
     }
 
@@ -212,9 +230,9 @@ public class ReportFinacialController implements JoMVC, ActionListener {
             parameter.put("parmDate", "" + reportDate);
             parameter.put("LogoPath", logo);
             parameter.put("UserPrint", "( " + GlobalDataModel.globalUsermodel.getFullName() + " )");
-            parameter.put("UserID", GlobalDataModel.globalUsermodel.getUserID());
+            parameter.put("UserID", UserLogin);
             JasperPrint print = JasperFillManager.fillReport("ReportCashDay.jasper", parameter, new JoConnect().getConnectionDefault());
-            setPrintState(print,"ReportCashDay");
+            setPrintState(print, "ReportCashDay");
         } catch (Exception e) {
             e.printStackTrace();
             JoLoger.saveLog(e, this);
@@ -226,17 +244,18 @@ public class ReportFinacialController implements JoMVC, ActionListener {
         try {
             JoFileSystem fileSystem = new JoFileSystem();
             String logo = fileSystem.getCurrentPath() + "/Icon/sfsc.png";
-            LocalDate localDate = LocalDate.now();
-            // Get the first date of the week
-            LocalDate firstDateOfWeek = localDate.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
-            Date date = Date.from(firstDateOfWeek.atStartOfDay(ZoneId.systemDefault()).toInstant());
-            String reportDate = new MyFormat().getDateCustom(date, "yyyy-MM-dd");
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(new Date());
+            calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+            Date startDateOfWeek = calendar.getTime();
+            String dateInWeek = new MyFormat().getDateSQL(startDateOfWeek);
             Map parameter = new HashMap();
-            parameter.put("parmDate", "" + reportDate);
+            parameter.put("parmDate", "" + dateInWeek);
             parameter.put("LogoPath", logo);
             parameter.put("UserPrint", "( " + GlobalDataModel.globalUsermodel.getFullName() + " )");
+            parameter.put("UserID", UserLogin);
             JasperPrint print = JasperFillManager.fillReport("ReportCashWeek.jasper", parameter, new JoConnect().getConnectionDefault());
-            setPrintState(print,"ReportCashWeek");
+            setPrintState(print, "ReportCashWeek");
         } catch (Exception e) {
             e.printStackTrace();
             JoLoger.saveLog(e, this);
@@ -250,15 +269,14 @@ public class ReportFinacialController implements JoMVC, ActionListener {
             String logo = fileSystem.getCurrentPath() + "/Icon/sfsc.png";
             String reportDate = new MyFormat().getDateCustom(view.getDtDate().getDateData(), "yyyy-MM-dd");
             String reportDateEnd = new MyFormat().getDateCustom(view.getDtDateEnd().getDateData(), "yyyy-MM-dd");
-            System.out.println(GlobalDataModel.globalUsermodel.getName());
-
             Map parameter = new HashMap();
             parameter.put("parmDate", "" + reportDate);
             parameter.put("parmDateEnd", "" + reportDateEnd);
             parameter.put("LogoPath", logo);
             parameter.put("UserPrint", "( " + GlobalDataModel.globalUsermodel.getFullName() + " )");
+            parameter.put("UserID", UserLogin);
             JasperPrint print = JasperFillManager.fillReport("ReportCashDaytoDay.jasper", parameter, new JoConnect().getConnectionDefault());
-            setPrintState(print,"ReportCashDaytoDay");
+            setPrintState(print, "ReportCashDaytoDay");
         } catch (Exception e) {
             e.printStackTrace();
             JoLoger.saveLog(e, this);
@@ -275,9 +293,9 @@ public class ReportFinacialController implements JoMVC, ActionListener {
             parameter.put("parmDate", "" + reportDate);
             parameter.put("LogoPath", logo);
             parameter.put("UserPrint", "( " + GlobalDataModel.globalUsermodel.getFullName() + " )");
-            parameter.put("UserID", GlobalDataModel.globalUsermodel.getUserID());
+            parameter.put("UserID", UserLogin);
             JasperPrint print = JasperFillManager.fillReport("ReportTransferDay.jasper", parameter, new JoConnect().getConnectionDefault());
-            setPrintState(print,"ReportTransferDay");
+            setPrintState(print, "ReportTransferDay");
         } catch (Exception e) {
             e.printStackTrace();
             JoLoger.saveLog(e, this);
@@ -289,13 +307,18 @@ public class ReportFinacialController implements JoMVC, ActionListener {
         try {
             JoFileSystem fileSystem = new JoFileSystem();
             String logo = fileSystem.getCurrentPath() + "/Icon/sfsc.png";
-            String reportDate = new MyFormat().getDateCustom(new Date(), "yyyy-MM-dd");
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(new Date());
+            calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+            Date startDateOfWeek = calendar.getTime();
+            String dateInWeek = new MyFormat().getDateSQL(startDateOfWeek);
             Map parameter = new HashMap();
-            parameter.put("parmDate", "" + reportDate);
+            parameter.put("parmDate", "" + dateInWeek);
             parameter.put("LogoPath", logo);
             parameter.put("UserPrint", "( " + GlobalDataModel.globalUsermodel.getFullName() + " )");
+            parameter.put("UserID", UserLogin);
             JasperPrint print = JasperFillManager.fillReport("ReportTransferWeek.jasper", parameter, new JoConnect().getConnectionDefault());
-            setPrintState(print,"ReportTransferWeek");
+            setPrintState(print, "ReportTransferWeek");
         } catch (Exception e) {
             e.printStackTrace();
             JoLoger.saveLog(e, this);
@@ -314,8 +337,9 @@ public class ReportFinacialController implements JoMVC, ActionListener {
             parameter.put("parmDateEnd", "" + reportDateEnd);
             parameter.put("LogoPath", logo);
             parameter.put("UserPrint", "( " + GlobalDataModel.globalUsermodel.getFullName() + " )");
+            parameter.put("UserID", UserLogin);
             JasperPrint print = JasperFillManager.fillReport("ReportTransferDaytoDay.jasper", parameter, new JoConnect().getConnectionDefault());
-            setPrintState(print,"ReportTransferDaytoDay");
+            setPrintState(print, "ReportTransferDaytoDay");
         } catch (Exception e) {
             e.printStackTrace();
             JoLoger.saveLog(e, this);
@@ -323,7 +347,7 @@ public class ReportFinacialController implements JoMVC, ActionListener {
         }
     }
 
-    private void setPrintState(JasperPrint print,String Title) {
+    private void setPrintState(JasperPrint print, String Title) {
         if (GlobalDataModel.printerReportState) {
             new JoJasperPrinter(print).print();
         } else {

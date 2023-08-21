@@ -56,14 +56,17 @@ public class ClassDAO implements DAOInterface.ClassFn {
     @Override
     public List<ClassModel> getAllClass() {
         List<ClassModel> models = new ArrayList<>();
+        models.clear();
+        ResultSet rs;
         try {
-            ResultSet rs = sql.getSelectAll();
+           rs = sql.getSelectAll();
             while (rs.next()) {
                 ClassModel model = new ClassModel();
                 model.setClassID(rs.getInt(1));
                 model.setClassName(rs.getString(2));
                 models.add(model);
             }
+            rs.close();
         } catch (SQLException e) {
             System.err.println(e);
         } catch (Exception ex) {
