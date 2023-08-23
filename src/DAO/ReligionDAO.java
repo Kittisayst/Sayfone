@@ -3,18 +3,17 @@ package DAO;
 import DAOInterface.ReligionFn;
 import Database.JoConnect;
 import Database.JoSQL;
+import Log.JoLoger;
 import Model.ReligionModel;
 import java.util.List;
 import Tools.JoAlert;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ReligionDAO implements ReligionFn {
 
-    private final Connection c = new JoConnect().getConnectionDefault();
-    private JoSQL sql = new JoSQL(c, "tb_religion");
+    private String TableName = "tb_religion";
 
     @Override
     public int CreaterReligionModel(ReligionModel model) {
@@ -33,6 +32,8 @@ public class ReligionDAO implements ReligionFn {
 
     @Override
     public List<ReligionModel> getAllReligionModel() {
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         List<ReligionModel> models = new ArrayList<>();
         try {
             ResultSet rs = sql.getSelectAll();
@@ -40,23 +41,29 @@ public class ReligionDAO implements ReligionFn {
                 models.add(new ReligionModel(rs.getInt(1), rs.getString(2)));
             }
         } catch (Exception e) {
-            e.printStackTrace();
             JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
         }
         return models;
     }
 
     @Override
     public ReligionModel getReligionModelById(int ReligionModelID) {
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         ReligionModel model = new ReligionModel();
         try {
             ResultSet rs = sql.getSelectById(ReligionModelID);
             if (rs.next()) {
                 model = new ReligionModel(rs.getInt(1), rs.getString(2));
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
             JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        }finally{
+            connect.close();
         }
         return model;
     }

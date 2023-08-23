@@ -85,4 +85,8 @@ public class FinancialService {
         return aO.getFinancialFree(YearID);
     }
 
+    public List<FinancialModel> getSearchStudentRegistered(int RegisterID, String search) {
+        return aO.getSearchStudentRegistered(RegisterID, search);
+    }
+
 }

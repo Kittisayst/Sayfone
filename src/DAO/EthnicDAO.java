@@ -3,18 +3,17 @@ package DAO;
 import DAOInterface.EthnicFn;
 import Database.JoConnect;
 import Database.JoSQL;
+import Log.JoLoger;
 import Model.EthnicModel;
 import java.util.List;
 import Tools.JoAlert;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class EthnicDAO implements EthnicFn {
 
-    private final Connection c = new JoConnect().getConnectionDefault();
-    private JoSQL sql = new JoSQL(c, "tb_ethnic");
+    private String TableName = "tb_ethnic";
 
     @Override
     public int CreaterEthnic(EthnicModel model) {
@@ -33,6 +32,8 @@ public class EthnicDAO implements EthnicFn {
 
     @Override
     public List<EthnicModel> getAllEthnic() {
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         List<EthnicModel> models = new ArrayList<>();
         try {
             ResultSet rs = sql.getSelectAll();
@@ -40,23 +41,29 @@ public class EthnicDAO implements EthnicFn {
                 models.add(new EthnicModel(rs.getInt(1), rs.getString(2)));
             }
         } catch (Exception e) {
-            e.printStackTrace();
             JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
         }
         return models;
     }
 
     @Override
     public EthnicModel getEthnicById(int ID) {
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         EthnicModel model = new EthnicModel();
         try {
             ResultSet rs = sql.getSelectById(ID);
             if (rs.next()) {
                 model = new EthnicModel(rs.getInt(1), rs.getString(2));
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
             JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
         }
         return model;
     }

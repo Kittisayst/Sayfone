@@ -12,22 +12,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import Model.UserModel;
 import Utility.JoPrepared;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 //import java.sql.Statement;
 public class UserDAO implements DAOInterface.UserFn {
-    
-    private final Connection c = new JoConnect().getConnectionDefault();
-    private final String SQL_Create_User = "INSERT INTO tb_user VALUES(?,?,?,?,?,?)";
-    private final String SQL_Update_User = "UPDATE tb_user SET tid=?,username=?,password=?,userlog=?,userdate=? WHERE uid=?";
-    private final String SQL_Delete_User = "DELETE FROM tb_user WHERE uid=?";
-    private final String SQL_GET_All_User = "SELECT * FROM tb_user";
-    private final String SQL_GET_ById_User = "SELECT * FROM tb_user WHERE uid=?";
+
     private final String SQL_Login_User = "SELECT * FROM tb_user WHERE username=? AND password=?";
-    private final JoSQL sql = new JoSQL(c, "tb_user");
-    
+    private String TableName = "tb_user";
+
     @Override
     public int CreateUser(UserModel userModel) {
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         try {
             PreparedStatement pre = sql.getCreate();
             int i = 1;
@@ -39,16 +36,19 @@ public class UserDAO implements DAOInterface.UserFn {
             pre.setDate(i++, userModel.getDate());
             pre.setString(i++, userModel.getAuthenKey());
             return pre.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
+            JoAlert.Error(e, this);
             JoLoger.saveLog(e, this);
-            new JoAlert().messages("ຂໍ້ຜິດພາດ", getClass().getName(), "error");
             return 0;
+        } finally {
+            connect.close();
         }
     }
-    
+
     @Override
     public int UpdateUser(UserModel userModel) {
-        System.out.println("U: " + userModel);
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         try {
             JoPrepared prepared = new JoPrepared();
             PreparedStatement pre = prepared.setAutoPrepared(sql.getUpdate(),
@@ -61,28 +61,36 @@ public class UserDAO implements DAOInterface.UserFn {
                     userModel.getUserID());
             System.out.println(pre);
             return pre.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
+            JoAlert.Error(e, this);
             JoLoger.saveLog(e, this);
-            new JoAlert().messages("ຂໍ້ຜິດພາດ", getClass().getName(), "error");
             return 0;
+        } finally {
+            connect.close();
         }
     }
-    
+
     @Override
     public int DeleteUser(UserModel userModel) {
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         try {
             PreparedStatement pre = sql.getDelete();
             pre.setInt(1, userModel.getUserID());
             return pre.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             JoLoger.saveLog(e, this);
             JoAlert.Error(e, this);
             return 0;
+        } finally {
+            connect.close();
         }
     }
-    
+
     @Override
     public List<UserModel> getUserAll() {
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         List<UserModel> models = new ArrayList<>();
         try {
             ResultSet rs = sql.getSelectAll();
@@ -102,14 +110,18 @@ public class UserDAO implements DAOInterface.UserFn {
                 models.add(model);
             }
         } catch (Exception e) {
-            JoLoger.saveLog(e, this);
             JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
         }
         return models;
     }
-    
+
     @Override
     public UserModel getUserById(int UserID) {
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         UserModel model = new UserModel();
         try {
             ResultSet rs = sql.getSelectById(UserID);
@@ -127,18 +139,21 @@ public class UserDAO implements DAOInterface.UserFn {
                 model.setName(teacherModel.getName());
                 model.setNameENG(teacherModel.getNameENG());
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             JoLoger.saveLog(e, this);
             JoAlert.Error(e, this);
+        } finally {
+            connect.close();
         }
         return model;
     }
-    
+
     @Override
     public UserModel UserLogin(String User, String Password) {
+        JoConnect connect = new JoConnect();
         UserModel model = new UserModel();
         try {
-            PreparedStatement pre = c.prepareStatement(SQL_Login_User);
+            PreparedStatement pre = connect.getConnectionDefault().prepareStatement(SQL_Login_User);
             pre.setString(1, User);
             pre.setString(2, Password);
             ResultSet rs = pre.executeQuery();
@@ -155,30 +170,38 @@ public class UserDAO implements DAOInterface.UserFn {
                 model.setGender(teacherModel.getGender());
                 model.setName(teacherModel.getName());
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             JoLoger.saveLog(e, this);
             JoAlert.Error(e, this);
+        } finally {
+            connect.close();
         }
         return model;
     }
-    
+
     @Override
     public int UpdateUserLogTime(UserModel userModel) {
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         try {
             PreparedStatement pre = sql.getUpdateByColumns(new String[]{"userlog", "userdate"});
             pre.setString(1, userModel.getUserLog());
             pre.setDate(2, userModel.getDate());
             pre.setInt(3, userModel.getUserID());
             return pre.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             JoLoger.saveLog(e, this);
             JoAlert.Error(e, this);
             return 0;
+        } finally {
+            connect.close();
         }
     }
-    
+
     @Override
     public UserModel getUserByAuthenKey(String authenKey) {
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         UserModel model = new UserModel();
         try {
             ResultSet rs = sql.getSelectByIndex(7, authenKey);
@@ -193,12 +216,14 @@ public class UserDAO implements DAOInterface.UserFn {
                 model.setTeacherID(rs.getInt(2));
                 model.setName(new TeacherService().getTeacherById(rs.getInt(2)).getName());
             }
-            
-        } catch (Exception e) {
+
+        } catch (SQLException e) {
             JoLoger.saveLog(e, this);
             JoAlert.Error(e, this);
+        } finally {
+            connect.close();
         }
         return model;
     }
-    
+
 }

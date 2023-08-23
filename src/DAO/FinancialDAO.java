@@ -9,7 +9,6 @@ import Model.RegisterModel;
 import java.util.List;
 import Tools.JoAlert;
 import Utility.JoPrepared;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,12 +16,12 @@ import java.util.ArrayList;
 
 public class FinancialDAO implements FinancialFn {
 
-    private final Connection c = new JoConnect().getConnectionDefault();
     private final String TableName = "tb_financial";
-    private final JoSQL sql = new JoSQL(c, TableName);
 
     @Override
     public int Creater(FinancialModel model) {
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         try {
             PreparedStatement pre = setAutoPrepared(sql.getCreate(),
                     model.getFinancialIID(),
@@ -39,19 +38,23 @@ public class FinancialDAO implements FinancialFn {
                     model.getUserID());
             return pre.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
             return 0;
+        } finally {
+            connect.close();
         }
     }
 
     @Override
     public int Update(FinancialModel model) {
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         try {
             PreparedStatement pre = new JoPrepared().setAutoPrepared(sql.getUpdateByColumns(
-                    new String[]{"Money", "TransferMoney", "SaveDate", "FinancialMonth", "FinancialComment", "AuthenUserID", "Discount", "OvertimePay", "UserID"}),
+                    new String[]{"Money", "TransferMoney", "FinancialMonth", "FinancialComment", "AuthenUserID", "Discount", "OvertimePay", "UserID"}),
                     model.getMoney(),
                     model.getTransferMoney(),
-                    model.getFinancialDate(),
                     model.getFinancialMonth(),
                     model.getFinancialComment(),
                     model.getAuthenUserID(),
@@ -60,28 +63,37 @@ public class FinancialDAO implements FinancialFn {
                     model.getUserID(),
                     model.getFinancialIID()
             );
-            System.out.println(pre);
             return pre.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();;
+        } catch (SQLException e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
             return 0;
+        } finally {
+            connect.close();
         }
     }
 
     @Override
     public int Delete(FinancialModel model) {
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         try {
             PreparedStatement pre = sql.getDelete();
             pre.setInt(1, model.getFinancialIID());
             return pre.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
             return 0;
+        } finally {
+            connect.close();
         }
     }
 
     @Override
     public List<FinancialModel> getFinancialAll() {
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         List<FinancialModel> financialModels = new ArrayList<>();
         financialModels.clear();
         ResultSet rs;
@@ -93,12 +105,17 @@ public class FinancialDAO implements FinancialFn {
             rs.close();
         } catch (Exception e) {
             JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
         }
         return financialModels;
     }
 
     @Override
     public int getMaxFinancialID() {
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         int max = 0;
         try {
             ResultSet rs = sql.getMaxColumn();
@@ -106,12 +123,18 @@ public class FinancialDAO implements FinancialFn {
                 max = rs.getInt(1);
             }
         } catch (Exception e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
         }
         return max;
     }
 
     @Override
     public List<FinancialModel> getFinancialByStudentID(int RegisterID, int StudentID) {
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         List<FinancialModel> models = new ArrayList<>();
         try {
             PreparedStatement pre = sql.getSelectCustom("RegisterID=? AND StudentID=?");
@@ -123,30 +146,38 @@ public class FinancialDAO implements FinancialFn {
             }
         } catch (Exception e) {
             JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
         }
         return models;
     }
 
     @Override
     public List<FinancialModel> getStudentRegistered(int RegisterID) {
+        JoConnect connect = new JoConnect();
         List<FinancialModel> models = new ArrayList<>();
         try {
             String csql = "SELECT * FROM tb_financial WHERE RegisterID=? GROUP BY StudentID";
-            PreparedStatement pre = c.prepareStatement(csql);
+            PreparedStatement pre = connect.getConnectionDefault().prepareStatement(csql);
             pre.setInt(1, RegisterID);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
                 models.add(resultModel(rs));
             }
         } catch (Exception e) {
-            e.printStackTrace();
             JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
         }
         return models;
     }
 
     @Override
     public FinancialModel getFinancialById(int ID) {
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         FinancialModel model = new FinancialModel();
         try {
             ResultSet rs = sql.getSelectById(ID);
@@ -154,14 +185,18 @@ public class FinancialDAO implements FinancialFn {
                 model = resultModel(rs);
             }
         } catch (Exception e) {
-            e.printStackTrace();
             JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
         }
         return model;
     }
 
     @Override
     public List<FinancialModel> getFinancialReportByDate(String date, String userID) {  // ດຶງຂໍ້ມູນຈ່າຍຄ່າຮຽນປະຈຳວັນ ເງິນສົດ
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         List<FinancialModel> models = new ArrayList<>();
         try {
             PreparedStatement pre = sql.getSelectCustom("SaveDate=? AND Money>0 AND UserID=?");
@@ -172,17 +207,21 @@ public class FinancialDAO implements FinancialFn {
                 models.add(resultModel(rs));
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
         }
         return models;
     }
 
     @Override
     public List<FinancialModel> getFinancialReportByWeek(String date, String userID) { // ດຶງຂໍ້ມູນຈ່າຍຄ່າຮຽນປະຈຳ ອາທິດ ເງິນສົດ
+        JoConnect connect = new JoConnect();
         List<FinancialModel> models = new ArrayList<>();
         try {
             String sqlc = "SELECT * FROM tb_financial WHERE SaveDate >= ? AND SaveDate <= DATE_ADD(?, INTERVAL 6 DAY) AND Money>0 AND UserID=?";
-            PreparedStatement pre = c.prepareStatement(sqlc);
+            PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sqlc);
             pre.setString(1, date);
             pre.setString(2, date);
             pre.setString(3, userID);
@@ -191,17 +230,21 @@ public class FinancialDAO implements FinancialFn {
                 models.add(resultModel(rs));
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
         }
         return models;
     }
 
     @Override
     public List<FinancialModel> getFinancialReportByDateToDate(String startDate, String endDate, String userID) {
+        JoConnect connect = new JoConnect();
         List<FinancialModel> models = new ArrayList<>();
         try {
             String sqlc = "SELECT * FROM tb_financial WHERE SaveDate BETWEEN ? AND ? AND Money>0 AND UserID=?";
-            PreparedStatement pre = c.prepareStatement(sqlc);
+            PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sqlc);
             pre.setString(1, startDate);
             pre.setString(2, endDate);
             pre.setString(3, userID);
@@ -210,13 +253,18 @@ public class FinancialDAO implements FinancialFn {
                 models.add(resultModel(rs));
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
         }
         return models;
     }
 
     @Override
     public List<FinancialModel> getFinancialReportByDateTransfer(String date, String userID) {  // ດຶງຂໍ້ມູນຈ່າຍຄ່າຮຽນປະຈຳວັນ ໂອນ
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         List<FinancialModel> models = new ArrayList<>();
         try {
             PreparedStatement pre = sql.getSelectCustom("SaveDate=? AND TransferMoney>0 AND UserID=?");
@@ -227,17 +275,21 @@ public class FinancialDAO implements FinancialFn {
                 models.add(resultModel(rs));
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
         }
         return models;
     }
 
     @Override
     public List<FinancialModel> getFinancialReportByWeekTransfer(String date, String userID) {
+        JoConnect connect = new JoConnect();
         List<FinancialModel> models = new ArrayList<>();
         try {
             String sqlc = "SELECT * FROM tb_financial WHERE SaveDate >= ? AND SaveDate <= DATE_ADD(?, INTERVAL 6 DAY) AND TransferMoney>0 AND UserID=?";
-            PreparedStatement pre = c.prepareStatement(sqlc);
+            PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sqlc);
             pre.setString(1, date);
             pre.setString(2, date);
             pre.setString(3, userID);
@@ -246,17 +298,21 @@ public class FinancialDAO implements FinancialFn {
                 models.add(resultModel(rs));
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
         }
         return models;
     }
 
     @Override
     public List<FinancialModel> getFinancialReportByDateToDateTransfer(String startDate, String endDate, String userID) {
+        JoConnect connect = new JoConnect();
         List<FinancialModel> models = new ArrayList<>();
         try {
             String sqlc = "SELECT * FROM tb_financial WHERE SaveDate BETWEEN ? AND ? AND TransferMoney>0  AND UserID=?";
-            PreparedStatement pre = c.prepareStatement(sqlc);
+            PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sqlc);
             pre.setString(1, startDate);
             pre.setString(2, endDate);
             pre.setString(3, userID);
@@ -265,42 +321,38 @@ public class FinancialDAO implements FinancialFn {
                 models.add(resultModel(rs));
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
         }
         return models;
     }
 
     @Override
     public String getLastClass(int StudentID) {
-        PreparedStatement pre = null;
-        ResultSet rs = null;
+        JoConnect connect = new JoConnect();
+        PreparedStatement pre;
+        ResultSet rs;
         try {
             String sql = "SELECT MAX(FinancialID) AS MaxFinancialID,fn.RegisterID,rs.classID,className FROM tb_financial AS fn\n"
                     + "INNER JOIN tb_register AS rs ON fn.RegisterID=rs.registerID\n"
                     + "INNER JOIN tb_class AS cs ON rs.classID = cs.classID\n"
                     + "WHERE StudentID =?";
-            pre = c.prepareStatement(sql);
+            pre = connect.getConnectionDefault().prepareStatement(sql);
             pre.setInt(1, StudentID);
             rs = pre.executeQuery();
             if (rs.next()) {
-                if (rs.getString("className") == null) {
-                    return "ນັກຮຽນໃໝ່";
-                } else {
-                    return rs.getString("className");
-                }
+                return rs.getString("className") == null ? "ນັກຮຽນໃໝ່" : rs.getString("className");
             } else {
                 return "ຜິດພາດຂໍ້ມູນ";
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
             return "ຜິດພາດຂໍ້ມູນ";
         } finally {
-            try {
-                pre.close();
-                rs.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            connect.close();
         }
     }
 
@@ -327,24 +379,29 @@ public class FinancialDAO implements FinancialFn {
 
     @Override
     public int getCountFinancial() {
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         int count = 0;
         try {
             count = sql.getCount();
         } catch (Exception e) {
             JoLoger.saveLog(e, this);
             JoAlert.Error(e, this);
+        } finally {
+            connect.close();
         }
         return count;
     }
 
     @Override
     public List<FinancialModel> getFinancialFree(int YearID) {
+        JoConnect connect = new JoConnect();
         List<FinancialModel> models = new ArrayList<>();
         try {
             String sqlc = "SELECT * FROM tb_financial\n"
                     + "INNER JOIN tb_register ON tb_financial.RegisterID=tb_register.registerID\n"
                     + "WHERE yearID=? GROUP BY StudentID";
-            PreparedStatement pre = c.prepareStatement(sqlc);
+            PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sqlc);
             pre.setInt(1, YearID);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
@@ -353,6 +410,33 @@ public class FinancialDAO implements FinancialFn {
         } catch (Exception e) {
             JoAlert.Error(e, this);
             JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
+        }
+        return models;
+    }
+
+    @Override
+    public List<FinancialModel> getSearchStudentRegistered(int RegisterID, String search) {
+        JoConnect connect = new JoConnect();
+        List<FinancialModel> models = new ArrayList<>();
+        try {
+            String csql = "SELECT * FROM tb_financial\n"
+                    + "INNER JOIN tb_student ON tb_financial.StudentID = tb_student.StudentID\n"
+                    + "WHERE RegisterID=? AND StudentNo LIKE ? OR StudentName LIKE ? GROUP BY tb_financial.StudentID";
+            PreparedStatement pre = connect.getConnectionDefault().prepareStatement(csql);
+            pre.setInt(1, RegisterID);
+            pre.setString(2, search);
+            pre.setString(3, search);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                models.add(resultModel(rs));
+            }
+        } catch (Exception e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
         }
         return models;
     }

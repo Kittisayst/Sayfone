@@ -2,21 +2,19 @@ package DAO;
 
 import DAOInterface.DistrictFn;
 import Database.JoConnect;
+import Database.JoSQL;
+import Log.JoLoger;
 import Model.DistrictModel;
 import java.util.List;
 import Tools.JoAlert;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class DistrictDAO implements DistrictFn {
 
-    private final Connection c = new JoConnect().getConnectionDefault();
-    private final String SQL_Create = "INSERT INTO tb_user VALUES(?,?,?,?,?,?)";
-    private final String SQL_Update = "UPDATE tb_user SET tid=?,username=?,password=?,userlog=?,userdate=? WHERE uid=?";
-    private final String SQL_Delete = "DELETE FROM tb_nationality WHERE nationalityID=?";
-    private final String SQL_GET_All = "SELECT * FROM tb_district";
+    private final String TableName = "tb_district";
     private final String SQL_GET_ById = "SELECT did,tb_district.pid,pname,dname FROM tb_district\n"
             + "INNER JOIN tb_province ON tb_district.pid = tb_province.pid WHERE did=?";
     private final String SQL_GET_ByProvinceID = "SELECT * FROM tb_district WHERE pid=?";
@@ -38,10 +36,11 @@ public class DistrictDAO implements DistrictFn {
 
     @Override
     public List<DistrictModel> getAllDistrict() {
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         List<DistrictModel> models = new ArrayList<>();
         try {
-            PreparedStatement pre = c.prepareStatement(SQL_GET_All);
-            ResultSet rs = pre.executeQuery();
+            ResultSet rs = sql.getSelectAll();
             while (rs.next()) {
                 DistrictModel model = new DistrictModel();
                 model.setDistrictID(rs.getInt(1));
@@ -49,36 +48,44 @@ public class DistrictDAO implements DistrictFn {
                 models.add(model);
             }
         } catch (Exception e) {
-            e.printStackTrace();
             JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+            JoAlert.Error(e, this);
+        } finally {
+            connect.close();
         }
         return models;
     }
 
     @Override
     public DistrictModel getDistrictById(int DistrictID) {
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         DistrictModel model = new DistrictModel();
         try {
-            PreparedStatement pre = c.prepareStatement(SQL_GET_ById);
-            pre.setInt(1, DistrictID);
-            ResultSet rs = pre.executeQuery();
+            ResultSet rs = sql.getSelectById(DistrictID);
             if (rs.next()) {
                 model.setDistrictID(rs.getInt(1));
                 model.setProvinceID(rs.getInt(2));
                 model.setProvinceName(rs.getString(3));
                 model.setDistrictName(rs.getString(4));
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
         }
         return model;
     }
 
     @Override
     public List<DistrictModel> getProvinceById(int ProvinceID) {
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         List<DistrictModel> models = new ArrayList<>();
         try {
-            PreparedStatement pre = c.prepareStatement(SQL_GET_ByProvinceID);
+            PreparedStatement pre = sql.getSelectCustom("pid=?");
             pre.setInt(1, ProvinceID);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
@@ -87,9 +94,11 @@ public class DistrictDAO implements DistrictFn {
                 model.setDistrictName(rs.getString(3));
                 models.add(model);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
             JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
         }
         return models;
     }

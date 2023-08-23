@@ -11,32 +11,40 @@ import Utility.JoPrepared;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class BrotherssistersDAO implements BrotherAndSisterFN {
 
-    private final Connection c = new JoConnect().getConnectionDefault();
     private final String TableName = "tb_brotherssisters";
-    private JoSQL sql = new JoSQL(c, TableName);
 
     @Override
     public int CreaterBrotherAndSister(BrotherAndSisterModel model) {
+        JoConnect connect = new JoConnect();
+        Connection c = connect.getConnectionDefault();
+        JoSQL sql = new JoSQL(c, TableName);
         try {
             PreparedStatement pre = new JoPrepared().setAutoPrepared(sql.getCreate(),
                     null,
                     model.getStudentID(),
                     model.getStudentBSID());
-            System.out.println(pre);
             return pre.executeUpdate();
         } catch (Exception e) {
             JoAlert.Error(e, this);
             JoLoger.saveLog(e, this);
             return 0;
+        } finally {
+            connect.close();
         }
     }
 
     @Override
     public int UpdateBrotherAndSister(BrotherAndSisterModel model) {
+        JoConnect connect = new JoConnect();
+        Connection c = connect.getConnectionDefault();
+        JoSQL sql = new JoSQL(c, TableName);
         try {
             PreparedStatement pre = new JoPrepared().setAutoPrepared(sql.getUpdate(),
                     model.getStudentID(),
@@ -48,11 +56,16 @@ public class BrotherssistersDAO implements BrotherAndSisterFN {
             JoAlert.Error(e, this);
             JoLoger.saveLog(e, this);
             return 0;
+        } finally {
+            connect.close();
         }
     }
 
     @Override
     public int DeleteBrotherAndSister(BrotherAndSisterModel model) {
+        JoConnect connect = new JoConnect();
+        Connection c = connect.getConnectionDefault();
+        JoSQL sql = new JoSQL(c, TableName);
         try {
             PreparedStatement pre = sql.getDelete();
             pre.setInt(1, model.getBsID());
@@ -61,12 +74,17 @@ public class BrotherssistersDAO implements BrotherAndSisterFN {
             JoAlert.Error(e, this);
             JoLoger.saveLog(e, this);
             return 0;
+        } finally {
+            connect.close();
         }
     }
 
     @Override
     public List<BrotherAndSisterModel> getBrotherAndSisterAll() {
         List<BrotherAndSisterModel> models = new ArrayList<>();
+        JoConnect connect = new JoConnect();
+        Connection c = connect.getConnectionDefault();
+        JoSQL sql = new JoSQL(c, TableName);
         try {
             ResultSet rs = sql.getSelectAll();
             while (rs.next()) {
@@ -75,6 +93,8 @@ public class BrotherssistersDAO implements BrotherAndSisterFN {
         } catch (Exception e) {
             JoAlert.Error(e, this);
             JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
         }
         return models;
     }
@@ -82,6 +102,9 @@ public class BrotherssistersDAO implements BrotherAndSisterFN {
     @Override
     public BrotherAndSisterModel getBrotherAndSisterById(int ID) {
         BrotherAndSisterModel model = new BrotherAndSisterModel();
+        JoConnect connect = new JoConnect();
+        Connection c = connect.getConnectionDefault();
+        JoSQL sql = new JoSQL(c, TableName);
         try {
             ResultSet rs = sql.getSelectById(ID);
             if (rs.next()) {
@@ -91,18 +114,17 @@ public class BrotherssistersDAO implements BrotherAndSisterFN {
         } catch (Exception e) {
             JoAlert.Error(e, this);
             JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
         }
         return model;
-    }
-
-    private BrotherAndSisterModel getModel(ResultSet rs) throws Exception {
-        BrotherAndSisterModel BrotherAndSister = new BrotherAndSisterModel(rs.getInt(1), rs.getInt(2), rs.getInt("StudentBSID"));
-        return BrotherAndSister;
     }
 
     @Override
     public List<BrotherAndSisterModel> getBrotherSisterAll(int StudentID) {
         List<BrotherAndSisterModel> models = new ArrayList<>();
+        JoConnect connect = new JoConnect();
+        Connection c = connect.getConnectionDefault();
         try {
             String sqlc = "SELECT bsID,tb_brotherssisters.StudentID,StudentBSID,StudentName,Gender,StudentNo FROM tb_brotherssisters\n"
                     + "INNER JOIN tb_student ON tb_brotherssisters.StudentBSID = tb_student.StudentID\n"
@@ -117,11 +139,18 @@ public class BrotherssistersDAO implements BrotherAndSisterFN {
                 model.setStudentNo(rs.getString(6));
                 models.add(model);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             JoAlert.Error(e, this);
             JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
         }
         return models;
+    }
+
+    private BrotherAndSisterModel getModel(ResultSet rs) throws Exception {
+        BrotherAndSisterModel BrotherAndSister = new BrotherAndSisterModel(rs.getInt(1), rs.getInt(2), rs.getInt("StudentBSID"));
+        return BrotherAndSister;
     }
 
 }

@@ -3,24 +3,27 @@ package DAO;
 import DAOInterface.FileTransferFn;
 import Database.JoConnect;
 import Database.JoSQL;
+import Log.JoLoger;
 import Model.FileTranferModel;
 import java.util.List;
 import Tools.JoAlert;
 import Utility.JoPrepared;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class FileTransferDAO implements FileTransferFn {
 
-    private final Connection c = new JoConnect().getConnectionDefault();
     private final String TableName = "tb_filetransfer";
-    private JoSQL sql = new JoSQL(c, TableName);
 
     @Override
     public int Creater(FileTranferModel model) {
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         try {
             FileInputStream fis = new FileInputStream(model.getFile());
             PreparedStatement pre = new JoPrepared().setAutoPrepared(sql.getCreate(),
@@ -31,14 +34,19 @@ public class FileTransferDAO implements FileTransferFn {
                     fis);
             System.out.println(pre);
             return pre.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (FileNotFoundException | SQLException e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
             return 0;
+        } finally {
+            connect.close();
         }
     }
 
     @Override
     public int Update(FileTranferModel model) {
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         try {
             if (model.getFile() != null) {
                 return updateImage(model);
@@ -51,33 +59,52 @@ public class FileTransferDAO implements FileTransferFn {
                 return pre.executeUpdate();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
             return 0;
+        } finally {
+            connect.close();
         }
 
     }
 
-    private int updateImage(FileTranferModel model) throws Exception {
-        FileInputStream fis = new FileInputStream(model.getFile());
-        PreparedStatement pre = new JoPrepared().setAutoPrepared(sql.getUpdateByColumns(new String[]{"image"}), fis, model.getFileTranferID());
-        System.out.println(pre);
-        return pre.executeUpdate();
+    private int updateImage(FileTranferModel model) {
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
+        try {
+            FileInputStream fis = new FileInputStream(model.getFile());
+            PreparedStatement pre = new JoPrepared().setAutoPrepared(sql.getUpdateByColumns(new String[]{"image"}), fis, model.getFileTranferID());
+            return pre.executeUpdate();
+        } catch (FileNotFoundException | SQLException e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+            return 0;
+        } finally {
+            connect.close();
+        }
     }
 
     @Override
     public int Delete(FileTranferModel model) {
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         try {
             PreparedStatement pre = sql.getDelete();
             pre.setInt(1, model.getFileTranferID());
             return pre.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
             return 0;
+        } finally {
+            connect.close();
         }
     }
 
     @Override
     public List<FileTranferModel> getFileTranferAll() {
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         List<FileTranferModel> models = new ArrayList<>();
         try {
             ResultSet rs = sql.getSelectAll();
@@ -85,13 +112,18 @@ public class FileTransferDAO implements FileTransferFn {
                 models.add(getResult(rs));
             }
         } catch (Exception e) {
-            System.out.println(e);
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
         }
         return models;
     }
 
     @Override
     public FileTranferModel getFileTranferById(int ID) {
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         FileTranferModel model = new FileTranferModel();
         try {
             ResultSet rs = sql.getSelectById(ID);
@@ -99,14 +131,18 @@ public class FileTransferDAO implements FileTransferFn {
                 model = getResult(rs);
             }
         } catch (Exception e) {
-            e.printStackTrace();
             JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
         }
         return model;
     }
 
     @Override
     public FileTranferModel getFileTranferByFinancialID(int FinancialID) {
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         FileTranferModel model = new FileTranferModel();
         try {
             ResultSet rs = sql.getSelectByIndex(2, FinancialID);
@@ -114,8 +150,10 @@ public class FileTransferDAO implements FileTransferFn {
                 model = getResult(rs);
             }
         } catch (Exception e) {
-            e.printStackTrace();
             JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
         }
         return model;
     }

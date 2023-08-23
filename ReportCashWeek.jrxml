@@ -342,7 +342,7 @@ WHERE SaveDate >=$P{parmDate}  AND SaveDate <= DATE_ADD($P{parmDate}, INTERVAL 6
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Phetsarath OT" size="12" isUnderline="true"/>
 				</textElement>
-				<text><![CDATA[ຜູ້ລາຍອານຸມັດ]]></text>
+				<text><![CDATA[ຜູ້ອານຸມັດ]]></text>
 			</staticText>
 		</band>
 	</summary>

@@ -21,10 +21,15 @@ public class FinancailStudentController implements JoMVC, ActionListener, MouseL
 
     private FinancailStudentView view;
     private RegisterModel registerModel;
+    private int currentPage = 1;
+    private int totalPages;
+    private StudentService studentService;
+    private boolean buttonState = true;
 
     public FinancailStudentController(FinancailStudentView view, RegisterModel registerModel) {
         this.view = view;
         this.registerModel = registerModel;
+        studentService = new StudentService();
     }
 
     @Override
@@ -32,8 +37,8 @@ public class FinancailStudentController implements JoMVC, ActionListener, MouseL
         HomeView.MyRouter.setRouter(view);
         view.getBtn_Add().setEnabled(false);
         //ສະແດງນັກສຶກສາທັງໝົດ
-        view.showStudentAll(FilterStudentRegistered());
-        view.setButtonState(true);
+        totalPages = studentService.getTotalPages();
+        showFilterStudentRegistered();
     }
 
     @Override
@@ -43,6 +48,9 @@ public class FinancailStudentController implements JoMVC, ActionListener, MouseL
         view.getTb_data().addMouseListener(this);
         view.getBtnRegister().addActionListener(this);
         view.getBtnRegistered().addActionListener(this);
+        view.getBtnPrevious().addActionListener(this);
+        view.getBtnNext().addActionListener(this);
+        view.getBtnSearch().addActionListener(this);
     }
 
     @Override
@@ -78,13 +86,15 @@ public class FinancailStudentController implements JoMVC, ActionListener, MouseL
                 AppFinancial app = new AppFinancial(registerModel, studentModel);
             }
         } else if (event.isEvent(view.getBtnRegister())) {
-            view.setButtonState(false);
-            view.ClearDataTable();
-            view.showStudentAll(new StudentService().getSutdentNotRegister());
+            showFilterStudentRegister();
         } else if (event.isEvent(view.getBtnRegistered())) {
-            view.setButtonState(true);
-             view.ClearDataTable();
-            view.showStudentAll(FilterStudentRegistered());
+            showFilterStudentRegistered();
+        } else if (event.isEvent(view.getBtnPrevious())) {
+            navigatePrevious();
+        } else if (event.isEvent(view.getBtnNext())) {
+            navigateNext();
+        } else if (event.isEvent(view.getBtnSearch())) {
+            searchStudent();
         }
     }
 
@@ -123,14 +133,83 @@ public class FinancailStudentController implements JoMVC, ActionListener, MouseL
 
     }
 
-    private List<StudentModel> FilterStudentRegistered() {
+    private void showFilterStudentRegister() { // ສະແດງນັກສຶກສາຍັງບໍ່ຈ່າຍຄ່າຮຽນ
+        buttonState = false;
+        view.setButtonState(buttonState);
+        view.ClearDataTable();
+        List<StudentModel> models = studentService.getSutdentNotRegister(registerModel.getYearID(), currentPage, 25);
+        view.showStudentAll(models);
+    }
+
+    private void showFilterStudentRegistered() { //ສະແດງນັກສຶກສາຈ່າຈະຮຽນແລ້ວ
         FinancialService financialService = new FinancialService();
         List<StudentModel> studentList = new ArrayList<>();
         List<FinancialModel> models = financialService.getStudentRegistered(registerModel.getRegisterID());
         models.forEach(data -> {
-            studentList.add(new StudentService().getStudentById(data.getStudentID()));
+            studentList.add(studentService.getStudentById(data.getStudentID()));
         });
-        return studentList;
+        buttonState = true;
+        view.setButtonState(buttonState);
+        view.ClearDataTable();
+        view.showStudentAll(studentList);
+    }
+
+    private void navigatePrevious() {
+        if (!buttonState) {
+            if (currentPage > 1) {
+                currentPage--;
+                List<StudentModel> models = studentService.getSutdentNotRegister(registerModel.getYearID(), currentPage, 25);
+                view.showStudentAll(models);
+            }
+        }
+    }
+
+    private void navigateNext() {
+        if (!buttonState) {
+            totalPages = studentService.getTotalPages();
+            if (currentPage < totalPages) {
+                currentPage++;
+                List<StudentModel> models = studentService.getSutdentNotRegister(registerModel.getYearID(), currentPage, 25);
+                view.showStudentAll(models);
+            }
+        }
+    }
+
+    private void searchStudent() {
+        String searchTerm = view.getTxtSearch().getText().trim();
+        if (buttonState) {
+            if (!searchTerm.isEmpty()) {
+                searchRegistered(searchTerm);
+            } else {
+                showFilterStudentRegistered();
+            }
+        } else {
+            if (!searchTerm.isEmpty()) {
+                System.out.println("ddd");
+                searchNotRegister(searchTerm);
+            } else {
+                showFilterStudentRegister();
+            }
+        }
+    }
+
+    private void searchNotRegister(String search) {
+        view.ClearDataTable();
+        List<StudentModel> models = studentService.getSearchSutdentNotRegister(registerModel.getYearID(), search);
+        view.showStudentAll(models);
+    }
+
+    private void searchRegistered(String search) {
+        FinancialService financialService = new FinancialService();
+        List<StudentModel> studentList = new ArrayList<>();
+        List<FinancialModel> models = financialService.getSearchStudentRegistered(registerModel.getRegisterID(), search);
+        models.forEach(data -> {
+            studentList.add(studentService.getStudentById(data.getStudentID()));
+        });
+        buttonState = true;
+        view.setButtonState(buttonState);
+        view.ClearDataTable();
+        view.showStudentAll(studentList);
     }
 
 }

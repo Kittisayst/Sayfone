@@ -36,8 +36,8 @@ public class StudentService {
         return aO.getStudentCount();
     }
 
-    public List<StudentModel> getSutdentNotRegister() {
-        return aO.getSutdentNotRegister();
+    public List<StudentModel> getSutdentNotRegister(int YearID, int page, int rowsPerPage) {
+        return aO.getSutdentNotRegister(YearID, page, rowsPerPage);
     }
 
     public String getAutoStudentID() {
@@ -51,5 +51,23 @@ public class StudentService {
     public List<StudentModel> getStudentBrotherSister(int StudentID) {
         return aO.getStudentBrotherSister(StudentID);
     }
+
+    public List<StudentModel> getStudentPagination(int page, int rowsPerPage) {
+        return aO.getStudentPagination(page, rowsPerPage);
+    }
+
+    public int getTotalPages() {
+        return aO.getTotalPages();
+    }
+
+    public List<StudentModel> getSearchStudent(String search) {
+        return aO.getSearchStudent(search);
+    }
+
+    public List<StudentModel> getSearchSutdentNotRegister(int YearID, String search) {
+        return aO.getSearchSutdentNotRegister(YearID, search);
+    }
+    
+    
 
 }

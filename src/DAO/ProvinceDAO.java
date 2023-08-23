@@ -2,21 +2,18 @@ package DAO;
 
 import DAOInterface.ProvinceFn;
 import Database.JoConnect;
+import Database.JoSQL;
+import Log.JoLoger;
 import Model.ProvinceModel;
+import Tools.JoAlert;
 import java.util.List;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
 public class ProvinceDAO implements ProvinceFn {
 
-    private final Connection c = new JoConnect().getConnectionDefault();
-    private final String SQL_Create = "INSERT INTO tb_user VALUES(?,?,?,?,?,?)";
-    private final String SQL_Update = "UPDATE tb_user SET tid=?,username=?,password=?,userlog=?,userdate=? WHERE uid=?";
-    private final String SQL_Delete = "DELETE FROM tb_nationality WHERE nationalityID=?";
-    private final String SQL_GET_All = "SELECT * FROM tb_province";
-    private final String SQL_GET_ById = "SELECT * FROM tb_province WHERE pid=?";
+    private final String TableName = "tb_province";
 
     @Override
     public int CreaterProvince(ProvinceModel model) {
@@ -35,15 +32,20 @@ public class ProvinceDAO implements ProvinceFn {
 
     @Override
     public List<ProvinceModel> getAllProvince() {
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         List<ProvinceModel> models = new ArrayList<>();
         try {
-            PreparedStatement pre = c.prepareStatement(SQL_GET_All);
-            ResultSet rs = pre.executeQuery();
+            ResultSet rs = sql.getSelectAll();
             while (rs.next()) {
                 ProvinceModel model = new ProvinceModel(rs.getInt(1), rs.getString(2));
                 models.add(model);
             }
         } catch (Exception e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
         }
         return models;
     }

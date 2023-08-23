@@ -3,6 +3,7 @@ package DAO;
 import DAOInterface.SayFoneFn;
 import Database.JoConnect;
 import Database.JoSQL;
+import Log.JoLoger;
 import Model.SayfoneModel;
 import java.util.List;
 import Tools.JoAlert;
@@ -10,12 +11,11 @@ import Utility.JoPrepared;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class SayfoneDao implements SayFoneFn {
 
-    private final Connection c = new JoConnect().getConnectionDefault();
     private final String TableName = "tb_sayfone";
-    private JoSQL sql = new JoSQL(c, TableName);
 
     @Override
     public int Creater(SayfoneModel model) {
@@ -24,6 +24,8 @@ public class SayfoneDao implements SayFoneFn {
 
     @Override
     public int Update(SayfoneModel model) {
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         try {
             PreparedStatement pre = new JoPrepared().setAutoPrepared(sql.getUpdate(),
                     model.getSchool(),
@@ -32,10 +34,12 @@ public class SayfoneDao implements SayFoneFn {
                     model.getDetail(),
                     model.getId());
             return pre.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
             JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
             return 0;
+        } finally {
+            connect.close();
         }
     }
 
@@ -51,6 +55,8 @@ public class SayfoneDao implements SayFoneFn {
 
     @Override
     public SayfoneModel getById(int ID) {
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         SayfoneModel model = new SayfoneModel();
         try {
             ResultSet rs = sql.getSelectById(ID);
@@ -59,9 +65,11 @@ public class SayfoneDao implements SayFoneFn {
             }
             return model;
         } catch (Exception e) {
-            e.printStackTrace();
             JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
             return model;
+        } finally {
+            connect.close();
         }
     }
 

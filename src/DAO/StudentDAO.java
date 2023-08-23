@@ -10,28 +10,27 @@ import java.util.List;
 import Tools.JoAlert;
 import Utility.JoBlobConvert;
 import java.io.InputStream;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class StudentDAO implements StudentFn {
 
-    private final Connection c = new JoConnect().getConnectionDefault();
     private final String TableName = "tb_student";
-    JoSQL sql = new JoSQL(c, TableName);
     private final String SQL_Update = "UPDATE " + TableName + " SET StudentNo=?,Gender=?,StudentName=?,StudentENG=?,NickName=?,"
             + "DateofBirth=?,DateStart=?,DateStop=?,Preschool=?,Health=?,Talent=?,VaccinState=?,Disabled=?,Sibling=?,"
             + "GoHome=?,Status=?,nationalityID=?,ethnicID=?,religionID=? WHERE StudentID=?";
-    private final String SQL_Delete = "DELETE FROM " + TableName + " WHERE StudentID=?";
     private final String SQL_GET_LASTID = "SELECT MAX(StudentID) AS ID FROM " + TableName;
     private final String SQL_UpdateImage = "UPDATE " + TableName + " SET Image=? WHERE StudentID=?";
-    private final String SQL_Count = "SELECT COUNT(StudentID) AS StudnetCount FROM " + TableName;
-    private String SQL_GetNewStudent = "SELECT * FROM tb_student WHERE tb_student.StudentID NOT IN (SELECT tb_registerdetail.StudentID FROM tb_registerdetail)";
+    private final String SQL_GetNewStudent = "SELECT * FROM tb_student WHERE tb_student.StudentID NOT IN (SELECT tb_registerdetail.StudentID FROM tb_registerdetail)";
+    private int totalPages = 0;
 
     @Override
     public int CreaterStudent(StudentModel model) {
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         try {
             PreparedStatement pre = sql.getCreate();
             int i = 1;
@@ -64,16 +63,19 @@ public class StudentDAO implements StudentFn {
             pre.setInt(i++, GlobalDataModel.globalUsermodel.getUserID());
             return pre.executeUpdate();
         } catch (Exception e) {
-            e.printStackTrace();
             JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
             return 0;
+        } finally {
+            connect.close();
         }
     }
 
     @Override
     public int UpdateStudent(StudentModel model) {
+        JoConnect connect = new JoConnect();
         try {
-            PreparedStatement pre = c.prepareStatement(SQL_Update);
+            PreparedStatement pre = connect.getConnectionDefault().prepareStatement(SQL_Update);
             int i = 1;
             pre.setString(i++, model.getStudentNo());
             pre.setInt(i++, model.getGender());
@@ -99,23 +101,29 @@ public class StudentDAO implements StudentFn {
             pre.setInt(i++, model.getReligionID());
             pre.setInt(i++, model.getStudentID());
             return pre.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
             JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
             return 0;
+        } finally {
+            connect.close();
         }
     }
 
     @Override
     public int DeleteStudent(StudentModel model) {
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         try {
-            PreparedStatement pre = c.prepareStatement(SQL_Delete);
+            PreparedStatement pre = sql.getDelete();
             pre.setInt(1, model.getStudentID());
             return pre.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
             JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
             return 0;
+        } finally {
+            connect.close();
         }
     }
 
@@ -123,6 +131,8 @@ public class StudentDAO implements StudentFn {
     public List<StudentModel> getAllStudent() {
         List<StudentModel> models = new ArrayList<>();
         models.clear();
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         try {
             try (ResultSet rs = sql.getSelectAll()) {
                 while (rs.next()) {
@@ -130,11 +140,13 @@ public class StudentDAO implements StudentFn {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
             JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
         } catch (Exception ex) {
-            ex.printStackTrace();
             JoAlert.Error(ex, this);
+            JoLoger.saveLog(ex, this);
+        } finally {
+            connect.close();
         }
         return models;
     }
@@ -142,14 +154,18 @@ public class StudentDAO implements StudentFn {
     @Override
     public StudentModel getStudentById(int StudentID) {
         StudentModel model = new StudentModel();
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         try {
             ResultSet rs = sql.getSelectById(StudentID);
             if (rs.next()) {
                 model = getResult(rs);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
             JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
         }
         return model;
     }
@@ -157,82 +173,105 @@ public class StudentDAO implements StudentFn {
     @Override
     public int getSudentLastID() {
         int LastID = 0;
+        JoConnect connect = new JoConnect();
         try {
-            PreparedStatement pre = c.prepareStatement(SQL_GET_LASTID);
+            PreparedStatement pre = connect.getConnectionDefault().prepareStatement(SQL_GET_LASTID);
             ResultSet rs = pre.executeQuery();
             if (rs.next()) {
                 LastID = rs.getInt(1);
             }
-        } catch (Exception e) {
-
+        } catch (SQLException e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
         }
         return LastID;
     }
 
     private void UpdateImage(StudentModel model) {
+        JoConnect connect = new JoConnect();
         try {
-            PreparedStatement pre = c.prepareStatement(SQL_UpdateImage);
+            PreparedStatement pre = connect.getConnectionDefault().prepareStatement(SQL_UpdateImage);
             InputStream in = new JoBlobConvert(model.getLocationFile()).getFileInput();
             pre.setBinaryStream(1, in, in.available());
             pre.setInt(2, model.getStudentID());
             pre.executeUpdate();
         } catch (Exception e) {
-            e.printStackTrace();
             JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
         }
     }
 
     @Override
     public int getStudentCount() {
         int Count = 0;
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         try {
-            PreparedStatement pre = c.prepareStatement(SQL_Count);
-            ResultSet rs = pre.executeQuery();
-            if (rs.next()) {
-                Count = rs.getInt(1);
-            }
+            return sql.getCount();
         } catch (Exception e) {
-            e.printStackTrace();
-            JoAlert.Error(e, Count);
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
         }
         return Count;
     }
 
     @Override
     public int getCountClass(int ClassID) {
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         return sql.getCount();
     }
 
     @Override
     public List<StudentModel> getNewStudent() {
         List<StudentModel> models = new ArrayList<>();
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         try {
-            ResultSet rs = c.createStatement().executeQuery(SQL_GetNewStudent);
+            ResultSet rs = connect.getConnectionDefault().createStatement().executeQuery(SQL_GetNewStudent);
             while (rs.next()) {
                 models.add(getResult(rs));
             }
         } catch (Exception e) {
             e.printStackTrace();
             JoAlert.Error(e, this);
+        } finally {
+            connect.close();
         }
         return models;
     }
 
     @Override
-    public List<StudentModel> getSutdentNotRegister() {
+    public List<StudentModel> getSutdentNotRegister(int YearID, int page, int rowsPerPage) {
         List<StudentModel> models = new ArrayList<>();
+        JoConnect connect = new JoConnect();
+        int offset = (page - 1) * rowsPerPage;
         try {
             String sql = "SELECT s.*\n"
                     + "FROM tb_student s\n"
                     + "LEFT JOIN tb_financial f ON s.StudentID = f.StudentID\n"
-                    + "WHERE f.StudentID IS NULL;";
-            ResultSet rs = c.createStatement().executeQuery(sql);
+                    + "LEFT JOIN tb_register rs ON f.RegisterID = rs.registerID AND rs.yearID=?\n"
+                    + "WHERE f.StudentID IS NULL ORDER BY StudentID DESC LIMIT ? OFFSET ?";
+            PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sql);
+            pre.setInt(1, YearID);
+            pre.setInt(2, rowsPerPage);
+            pre.setInt(3, offset);
+            ResultSet rs = pre.executeQuery();
             while (rs.next()) {
                 models.add(getResult(rs));
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+            calculateTotalNotRegisterPages(YearID, rowsPerPage);
+        } catch (SQLException e) {
             JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
         }
         return models;
     }
@@ -245,7 +284,7 @@ public class StudentDAO implements StudentFn {
             num += 1;
             String formatted = String.format("%05d", num);
             return formatted;
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             JoLoger.saveLog(e, this);
             JoAlert.Error(e, this);
             return "0000";
@@ -254,29 +293,33 @@ public class StudentDAO implements StudentFn {
 
     @Override
     public boolean getChekStudentNo(String studentNo) {
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         try {
             ResultSet rs = sql.getSelectByIndex(2, studentNo);
             String checkNo = "";
             if (rs.next()) {
-                System.out.println(rs.getString(2));
                 checkNo = rs.getString(2);
             }
             return checkNo.equals(studentNo);
-        } catch (Exception e) {
+        } catch (SQLException e) {
             JoLoger.saveLog(e, this);
             JoAlert.Error(e, this);
             return false;
+        } finally {
+            connect.close();
         }
     }
 
     @Override
     public List<StudentModel> getStudentBrotherSister(int StudentID) {
         List<StudentModel> models = new ArrayList<>();
+        JoConnect connect = new JoConnect();
         try {
             String sql = "SELECT * FROM tb_student\n"
                     + "WHERE StudentID NOT IN (SELECT tb_brotherssisters.StudentBSID FROM tb_brotherssisters WHERE tb_brotherssisters.StudentID=?)\n"
                     + "AND StudentID NOT IN (?)";
-            PreparedStatement pre = c.prepareStatement(sql);
+            PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sql);
             pre.setInt(1, StudentID);
             pre.setInt(2, StudentID);
             ResultSet rs = pre.executeQuery();
@@ -284,10 +327,121 @@ public class StudentDAO implements StudentFn {
                 models.add(getResult(rs));
             }
         } catch (Exception e) {
-            e.printStackTrace();
             JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
         }
         return models;
+    }
+
+    @Override
+    public List<StudentModel> getStudentPagination(int page, int rowsPerPage) {
+        JoConnect connect = new JoConnect();
+        List<StudentModel> models = new ArrayList<>();
+        int offset = (page - 1) * rowsPerPage;
+        try {
+            String sqlc = "SELECT * FROM tb_student ORDER BY StudentID DESC LIMIT ? OFFSET ?";
+            try (PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sqlc)) {
+                pre.setInt(1, rowsPerPage);
+                pre.setInt(2, offset);
+                try (ResultSet rs = pre.executeQuery()) {
+                    while (rs.next()) {
+                        models.add(getResult(rs));
+                    }
+                    calculateTotalPages(rowsPerPage);
+                }
+            }
+        } catch (SQLException e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
+        }
+        return models;
+    }
+
+    @Override
+    public List<StudentModel> getSearchStudent(String search) {
+        JoConnect connect = new JoConnect();
+        List<StudentModel> models = new ArrayList<>();
+        try {
+            String sqlc = "SELECT * FROM tb_student WHERE StudentNo LIKE ? OR StudentName LIKE ? ORDER BY StudentID DESC";
+            PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sqlc);
+            pre.setString(1, search + "%");
+            pre.setString(2, "%" + search + "%");
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                models.add(getResult(rs));
+            }
+        } catch (SQLException e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
+        }
+        return models;
+    }
+
+    @Override
+    public List<StudentModel> getSearchSutdentNotRegister(int YearID, String search) {
+        JoConnect connect = new JoConnect();
+        List<StudentModel> models = new ArrayList<>();
+        try {
+            String sql = "SELECT s.*\n"
+                    + "FROM tb_student s\n"
+                    + "LEFT JOIN tb_financial f ON s.StudentID = f.StudentID\n"
+                    + "LEFT JOIN tb_register rs ON f.RegisterID = rs.registerID AND rs.yearID=?\n"
+                    + "WHERE f.StudentID IS NULL AND StudentNo LIKE ? OR StudentName LIKE ?";
+            PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sql);
+            pre.setInt(1, YearID);
+            pre.setString(2, search + "%");
+            pre.setString(3, "%" + search + "%");
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                models.add(getResult(rs));
+            }
+        } catch (SQLException e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
+        }
+        return models;
+    }
+
+    private void calculateTotalPages(int rowsPerPage) throws SQLException {
+        JoConnect connect = new JoConnect();
+        String sql = "SELECT COUNT(*) FROM tb_student";
+        try (Statement statement = connect.getConnectionDefault().createStatement(); ResultSet resultSet = statement.executeQuery(sql)) {
+            if (resultSet.next()) {
+                int rowCount = resultSet.getInt(1);
+                totalPages = (int) Math.ceil((double) rowCount / rowsPerPage);
+            }
+        } finally {
+            connect.close();
+        }
+    }
+
+    private void calculateTotalNotRegisterPages(int YearID, int rowsPerPage) throws SQLException {
+        JoConnect connect = new JoConnect();
+        String sql = "SELECT COUNT(*)\n"
+                + "FROM tb_student s\n"
+                + "LEFT JOIN tb_financial f ON s.StudentID = f.StudentID\n"
+                + "LEFT JOIN tb_register rs ON f.RegisterID = rs.registerID AND rs.yearID=?\n"
+                + "WHERE f.StudentID IS NULL";
+        PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sql);
+        pre.setInt(1, YearID);
+        ResultSet rs = pre.executeQuery();
+        if (rs.next()) {
+            int rowCount = rs.getInt(1);
+            totalPages = (int) Math.ceil((double) rowCount / rowsPerPage);
+        }
+        connect.close();
+    }
+
+    public int getTotalPages() {
+        return totalPages;
     }
 
     private StudentModel getResult(ResultSet rs) throws SQLException {

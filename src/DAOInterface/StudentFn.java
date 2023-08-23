@@ -23,12 +23,18 @@ public interface StudentFn {
 
     public List<StudentModel> getNewStudent();
 
-    public List<StudentModel> getSutdentNotRegister();
+    public List<StudentModel> getSutdentNotRegister(int YearID, int page, int rowsPerPage);
 
     public String getAutoStudentID();
 
     public boolean getChekStudentNo(String studentNo);
-    
+
     public List<StudentModel> getStudentBrotherSister(int StudentID);
+
+    public List<StudentModel> getStudentPagination(int page, int rowsPerPage);
+    
+     public List<StudentModel> getSearchStudent(String search);
+     
+      public List<StudentModel> getSearchSutdentNotRegister(int YearID,String search);
 
 }

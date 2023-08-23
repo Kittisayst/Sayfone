@@ -28,6 +28,8 @@ public class StudentController implements JoMVC, ActionListener, MouseListener {
     private final StudentView view;
     private final StudentService service;
     private final JoPopup popup;
+    private int currentPage = 1;
+    private int totalPages;
 
     public StudentController(StudentView view) {
         this.view = view;
@@ -38,14 +40,18 @@ public class StudentController implements JoMVC, ActionListener, MouseListener {
     @Override
     public final void Start() {
         HomeView.MyRouter.setRouter(view);
-        view.showStudent(service.getAllStudent());
+        totalPages = service.getTotalPages();
+        view.showStudent(service.getStudentPagination(currentPage, 25));
     }
 
     @Override
     public final void AddEvent() {
         view.getBtn_back().addActionListener(this);
         view.getBtn_Add().addActionListener(this);
+        view.getBtnPrevious().addActionListener(this);
+        view.getBtnNext().addActionListener(this);
         view.getTb_data().addMouseListener(this);
+        view.getBtnSeach().addActionListener(this);
         popup.addActionListener(this);
     }
 
@@ -93,6 +99,12 @@ public class StudentController implements JoMVC, ActionListener, MouseListener {
             AppDashboard dashboard = new AppDashboard();
         } else if (event.isEvent(view.getBtn_Add())) {
             AppStudentData studentData = new AppStudentData();
+        } else if (event.isEvent(view.getBtnPrevious())) {
+            navigatePrevious();
+        } else if (event.isEvent(view.getBtnNext())) {
+            navigateNext();
+        } else if (event.isEvent(view.getBtnSeach())) {
+            search();
         } else if (event.isEvent(popup.getItemshow())) {
             StudentService studentService = new StudentService();
             StudentModel model = studentService.getStudentById(view.getTb_data().getIntValue(1));
@@ -151,5 +163,31 @@ public class StudentController implements JoMVC, ActionListener, MouseListener {
     public void mouseExited(MouseEvent e) {
 
     }
+
+    private void navigatePrevious() {
+        if (currentPage > 1) {
+            currentPage--;
+            view.showStudent(service.getStudentPagination(currentPage, 25));
+        }
+    }
+
+    private void navigateNext() {
+        totalPages = service.getTotalPages();
+        if (currentPage < totalPages) {
+            currentPage++;
+            view.showStudent(service.getStudentPagination(currentPage, 25));
+        }
+    }
+
+    private void search() {
+        String searchTerm = view.getTxtSearch().getText().trim();
+        if (!searchTerm.isEmpty()) {
+            view.showStudent(service.getSearchStudent(searchTerm));
+        } else {
+            view.showStudent(service.getStudentPagination(currentPage, 25));
+        }
+    }
+    
+    
 
 }
