@@ -101,3 +101,5 @@
 20/08/2023: App.AppStudent@39575696 Errorjava.lang.NullPointerException
 23/08/2023: App.AppStudent@24afe85b Errorjava.lang.NullPointerException
 23/08/2023: DAO.StudentDAO@76fee3a9 Errorjava.sql.SQLException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'ORDER BY StudentID ASC' at line 1
+24/08/2023: DAO.FinancialDAO@7119f8a3 Errorjava.sql.SQLException: Statement parameter 13 not set.
+24/08/2023: DAO.FinancialDAO@801bd69 Errorjava.sql.SQLException: Statement parameter 13 not set.

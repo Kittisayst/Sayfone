@@ -6,7 +6,6 @@ import Log.JoLoger;
 import Model.ClassModel;
 import Tools.JoAlert;
 import java.util.List;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

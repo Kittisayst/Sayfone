@@ -117,7 +117,7 @@
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="7" rowCount="0">
                     <Column editable="false" title="#" type="java.lang.Object"/>
-                    <Column editable="false" title="ID" type="java.lang.Object"/>
+                    <Column editable="false" title="&#xec0;&#xea5;&#xe81;&#xe97;&#xeb5;&#xe9a;&#xeb4;&#xe99;" type="java.lang.Object"/>
                     <Column editable="false" title="&#xea7;&#xe94;&#xe9b;" type="java.lang.Object"/>
                     <Column editable="false" title="&#xe88;&#xeb3;&#xe99;&#xea7;&#xe99;&#xec0;&#xe87;&#xeb4;&#xe99;&#xeaa;&#xebb;&#xe94;" type="java.lang.Object"/>
                     <Column editable="false" title="&#xe88;&#xeb3;&#xe99;&#xea7;&#xe99;&#xec0;&#xe87;&#xeb4;&#xe99;&#xec2;&#xead;&#xe99;" type="java.lang.Object"/>

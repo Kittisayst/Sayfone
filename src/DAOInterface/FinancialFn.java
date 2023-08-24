@@ -19,8 +19,8 @@ public interface FinancialFn {
     public List<FinancialModel> getFinancialByStudentID(int RegisterID, int StudentID); // ດຶງຂໍ້ມູນເດຶອນຂອງນັກຮຽນທີ່ລົງທະບຽນໃນສົກປີ
 
     public List<FinancialModel> getStudentRegistered(int RegisterID);
-    
-        public List<FinancialModel> getSearchStudentRegistered(int RegisterID,String search);
+
+    public List<FinancialModel> getSearchStudentRegistered(int RegisterID, String search);
 
     public FinancialModel getFinancialById(int ID);
 
@@ -45,5 +45,7 @@ public interface FinancialFn {
     public int getCountFinancial();
 
     public List<FinancialModel> getFinancialFree(int YearID);// ຂໍ້ມຸນນັກຮຽນທີ່ລົງທະບຽນໃນສົກປີ
+
+    public int getUpdateWithdrawMonth(int FinancialID);
 
 }

@@ -15,8 +15,8 @@ public class AppFinancial {
         try {
             ClassModel classModel = new ClassService().getClassById(registerModel.getClassID());
             FinancialView view = new FinancialView(
-                    "ຈ່າຍຄ່າຮຽນ: " + classModel.getClassName()
-                    + "/" + studentModel.getFullName());
+                    "ຈ່າຍຄ່າຮຽນ: " + classModel.getClassName() + " ,  ຫ້ອງ: " + registerModel.getClassRoomName()
+                    + " , " + studentModel.getFullName());
             FinancialController controller = new FinancialController(view, studentModel, registerModel);
             controller.Start();
             controller.AddEvent();

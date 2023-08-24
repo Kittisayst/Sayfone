@@ -12,7 +12,7 @@ public class AppFinancailStudent {
     public AppFinancailStudent(RegisterModel registerModel) {
         try {
             ClassModel classModel = new ClassService().getClassById(registerModel.getClassID());
-            FinancailStudentView view = new FinancailStudentView("ລົງທະບຽນນັກສຶກສາ: " + classModel.getClassName());
+            FinancailStudentView view = new FinancailStudentView("ລົງທະບຽນນັກສຶກສາ: " + classModel.getClassName()+", ຫ້ອງ: "+ registerModel.getClassRoomName());
             FinancailStudentController controller = new FinancailStudentController(view, registerModel);
             controller.Start();
             controller.AddEvent();

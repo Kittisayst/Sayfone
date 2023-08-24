@@ -14,6 +14,7 @@ import App.AppTeacher;
 import App.AppTeacherRank;
 import App.AppTutorial;
 import App.AppUser;
+import App.AppWithdraw;
 import App.ReportPayApp;
 import Model.UserModel;
 import DAOSevervice.TeacherService;
@@ -75,6 +76,7 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
         view.getBtnUser().addActionListener(this);
         view.getBtnInfo().addActionListener(this);
         view.getBtnPrinter().addActionListener(this);
+        view.getBtnWithdraw().addActionListener(this);
     }
 
     @Override
@@ -132,7 +134,10 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
         } else if (event.isEvent(view.getBtnReportPay())) {
             ReportPayApp reportPayApp = new ReportPayApp();
             reportPayApp.Running();
-        } else if (event.isEvent(view.getBtnInfo())) {
+        }else if (event.isEvent(view.getBtnWithdraw())) {
+            AppWithdraw appWithdraw = new AppWithdraw();
+            appWithdraw.Open();
+        }  else if (event.isEvent(view.getBtnInfo())) {   // ============ ຕັ້ງຄ່າ
             AppSetting app = new AppSetting();
             app.Open();
         } else if (event.isEvent(view.getBtnPrinter())) {

@@ -375,7 +375,6 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="joButtonIconfont4" max="32767" attributes="0"/>
                                           <Component id="btn_teacher" max="32767" attributes="0"/>
                                           <Component id="btn_Student" alignment="0" pref="263" max="32767" attributes="0"/>
                                       </Group>
@@ -384,6 +383,7 @@
                                   <Component id="btnSubjectTeacher" alignment="0" max="32767" attributes="0"/>
                                   <Component id="btnUser" alignment="1" max="32767" attributes="0"/>
                                   <Component id="btnClass" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="joButtonIconfont4" alignment="1" max="32767" attributes="0"/>
                               </Group>
                             </DimensionLayout>
                             <DimensionLayout dim="1">
@@ -562,6 +562,7 @@
                                   <Component id="joButtonIconfont11" alignment="0" max="32767" attributes="0"/>
                                   <Component id="btnReportPay" alignment="0" max="32767" attributes="0"/>
                                   <Component id="joButtonIconfont13" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="btnWithdraw" alignment="0" max="32767" attributes="0"/>
                               </Group>
                             </DimensionLayout>
                             <DimensionLayout dim="1">
@@ -572,12 +573,14 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="btnReportPay" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="btnWithdraw" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" max="-2" attributes="0"/>
                                       <Component id="joButtonIconfont13" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
                                       <Component id="joButtonIconfont11" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" max="-2" attributes="0"/>
                                       <Component id="joButtonIconfont10" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -597,7 +600,7 @@
                                 <Property name="text" type="java.lang.String" value="&#xea5;&#xeb2;&#xe8d;&#xe87;&#xeb2;&#xe99;&#xe9c;&#xeb9;&#xec9;&#xe84;&#xec9;&#xeb2;&#xe87;&#xe84;&#xec8;&#xeb2;&#xeae;&#xebd;&#xe99;"/>
                                 <Property name="horizontalAlignment" type="int" value="2"/>
                                 <Property name="joIcons" type="jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons" editor="org.netbeans.modules.form.editors.EnumEditor">
-                                  <Value id="SPEAKER_NOTES_OFF"/>
+                                  <Value id="EVENT_BUSY"/>
                                 </Property>
                               </Properties>
                             </Component>
@@ -615,7 +618,7 @@
                                 <Property name="text" type="java.lang.String" value="&#xea5;&#xeb2;&#xe8d;&#xe87;&#xeb2;&#xe99;&#xeaa;&#xeb0;&#xe96;&#xeb4;&#xe94;&#xe95;&#xeb4;&#xe99;&#xeb1;&#xe81;&#xeae;&#xebd;&#xe99;"/>
                                 <Property name="horizontalAlignment" type="int" value="2"/>
                                 <Property name="joIcons" type="jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons" editor="org.netbeans.modules.form.editors.EnumEditor">
-                                  <Value id="PERSON_PIN"/>
+                                  <Value id="RECENT_ACTORS"/>
                                 </Property>
                               </Properties>
                             </Component>
@@ -625,6 +628,15 @@
                                 <Property name="horizontalAlignment" type="int" value="2"/>
                                 <Property name="joIcons" type="jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons" editor="org.netbeans.modules.form.editors.EnumEditor">
                                   <Value id="NFC"/>
+                                </Property>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoButtonIconfont" name="btnWithdraw">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="&#xea5;&#xeb2;&#xe8d;&#xe87;&#xeb2;&#xe99;&#xe81;&#xeb2;&#xe99;&#xe96;&#xead;&#xe99;&#xec0;&#xe87;&#xeb4;&#xe99;&#xe84;&#xeb7;&#xe99;"/>
+                                <Property name="horizontalAlignment" type="int" value="2"/>
+                                <Property name="joIcons" type="jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons" editor="org.netbeans.modules.form.editors.EnumEditor">
+                                  <Value id="DIRECTIONS"/>
                                 </Property>
                               </Properties>
                             </Component>

@@ -278,7 +278,7 @@ public class FinancialView extends javax.swing.JPanel {
 
             },
             new String [] {
-                "#", "ID", "ວດປ", "ຈຳນວນເງິນສົດ", "ຈຳນວນເງິນໂອນ", "ເດືອນ", "ໝາຍເຫດ"
+                "#", "ເລກທີບິນ", "ວດປ", "ຈຳນວນເງິນສົດ", "ຈຳນວນເງິນໂອນ", "ເດືອນ", "ໝາຍເຫດ"
             }
         ) {
             boolean[] canEdit = new boolean [] {

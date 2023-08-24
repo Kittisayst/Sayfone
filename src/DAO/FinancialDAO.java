@@ -35,7 +35,8 @@ public class FinancialDAO implements FinancialFn {
                     model.getAuthenUserID(),
                     model.getDiscount(),
                     model.getOvertimePay(),
-                    model.getUserID());
+                    model.getUserID(),
+                    true);
             return pre.executeUpdate();
         } catch (SQLException e) {
             JoAlert.Error(e, this);
@@ -52,7 +53,7 @@ public class FinancialDAO implements FinancialFn {
         JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         try {
             PreparedStatement pre = new JoPrepared().setAutoPrepared(sql.getUpdateByColumns(
-                    new String[]{"Money", "TransferMoney", "FinancialMonth", "FinancialComment", "AuthenUserID", "Discount", "OvertimePay", "UserID"}),
+                    new String[]{"Money", "TransferMoney", "FinancialMonth", "FinancialComment", "AuthenUserID", "Discount", "OvertimePay"}),
                     model.getMoney(),
                     model.getTransferMoney(),
                     model.getFinancialMonth(),
@@ -60,7 +61,6 @@ public class FinancialDAO implements FinancialFn {
                     model.getAuthenUserID(),
                     model.getDiscount(),
                     model.getOvertimePay(),
-                    model.getUserID(),
                     model.getFinancialIID()
             );
             return pre.executeUpdate();
@@ -91,7 +91,7 @@ public class FinancialDAO implements FinancialFn {
     }
 
     @Override
-    public List<FinancialModel> getFinancialAll() {
+    public List<FinancialModel> getFinancialAll() {  //ດຶງຂໍ້ມູນຈ່າຍຄ່າຮຽນທັງໝົດ
         JoConnect connect = new JoConnect();
         JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         List<FinancialModel> financialModels = new ArrayList<>();
@@ -132,12 +132,12 @@ public class FinancialDAO implements FinancialFn {
     }
 
     @Override
-    public List<FinancialModel> getFinancialByStudentID(int RegisterID, int StudentID) {
+    public List<FinancialModel> getFinancialByStudentID(int RegisterID, int StudentID) { //ດຶງຂໍ້ມູນການຈ່າຍຄ່າຮຽນຕາໄອດີນັກຮຽນ
         JoConnect connect = new JoConnect();
         JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         List<FinancialModel> models = new ArrayList<>();
         try {
-            PreparedStatement pre = sql.getSelectCustom("RegisterID=? AND StudentID=?");
+            PreparedStatement pre = sql.getSelectCustom("RegisterID=? AND StudentID=? AND state=1");
             pre.setInt(1, RegisterID);
             pre.setInt(2, StudentID);
             ResultSet rs = pre.executeQuery();
@@ -154,7 +154,7 @@ public class FinancialDAO implements FinancialFn {
     }
 
     @Override
-    public List<FinancialModel> getStudentRegistered(int RegisterID) {
+    public List<FinancialModel> getStudentRegistered(int RegisterID) { // ດຶງຂໍ້ມູນນັກຮຽນທີ່ລົງທະບຽນແລ້ວ
         JoConnect connect = new JoConnect();
         List<FinancialModel> models = new ArrayList<>();
         try {
@@ -175,7 +175,7 @@ public class FinancialDAO implements FinancialFn {
     }
 
     @Override
-    public FinancialModel getFinancialById(int ID) {
+    public FinancialModel getFinancialById(int ID) {  //ດຶງຂໍ້ມູນການໂອນຕາມໄອດີ
         JoConnect connect = new JoConnect();
         JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         FinancialModel model = new FinancialModel();
@@ -199,7 +199,7 @@ public class FinancialDAO implements FinancialFn {
         JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         List<FinancialModel> models = new ArrayList<>();
         try {
-            PreparedStatement pre = sql.getSelectCustom("SaveDate=? AND Money>0 AND UserID=?");
+            PreparedStatement pre = sql.getSelectCustom("SaveDate=? AND Money>0 AND UserID=?  AND state=1");
             pre.setString(1, date);
             pre.setString(2, userID);
             ResultSet rs = pre.executeQuery();
@@ -220,7 +220,7 @@ public class FinancialDAO implements FinancialFn {
         JoConnect connect = new JoConnect();
         List<FinancialModel> models = new ArrayList<>();
         try {
-            String sqlc = "SELECT * FROM tb_financial WHERE SaveDate >= ? AND SaveDate <= DATE_ADD(?, INTERVAL 6 DAY) AND Money>0 AND UserID=?";
+            String sqlc = "SELECT * FROM tb_financial WHERE SaveDate >= ? AND SaveDate <= DATE_ADD(?, INTERVAL 6 DAY) AND Money>0 AND UserID=?  AND state=1";
             PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sqlc);
             pre.setString(1, date);
             pre.setString(2, date);
@@ -239,11 +239,11 @@ public class FinancialDAO implements FinancialFn {
     }
 
     @Override
-    public List<FinancialModel> getFinancialReportByDateToDate(String startDate, String endDate, String userID) {
+    public List<FinancialModel> getFinancialReportByDateToDate(String startDate, String endDate, String userID) { //ເງິນສົດປະຈຳ ວັນທີ
         JoConnect connect = new JoConnect();
         List<FinancialModel> models = new ArrayList<>();
         try {
-            String sqlc = "SELECT * FROM tb_financial WHERE SaveDate BETWEEN ? AND ? AND Money>0 AND UserID=?";
+            String sqlc = "SELECT * FROM tb_financial WHERE SaveDate BETWEEN ? AND ? AND Money>0 AND UserID=?  AND state=1";
             PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sqlc);
             pre.setString(1, startDate);
             pre.setString(2, endDate);
@@ -267,7 +267,7 @@ public class FinancialDAO implements FinancialFn {
         JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         List<FinancialModel> models = new ArrayList<>();
         try {
-            PreparedStatement pre = sql.getSelectCustom("SaveDate=? AND TransferMoney>0 AND UserID=?");
+            PreparedStatement pre = sql.getSelectCustom("SaveDate=? AND TransferMoney>0 AND UserID=?  AND state=1");
             pre.setString(1, date);
             pre.setString(2, userID);
             ResultSet rs = pre.executeQuery();
@@ -284,11 +284,11 @@ public class FinancialDAO implements FinancialFn {
     }
 
     @Override
-    public List<FinancialModel> getFinancialReportByWeekTransfer(String date, String userID) {
+    public List<FinancialModel> getFinancialReportByWeekTransfer(String date, String userID) { // ເງິນໂອນປະຈຳ ອາທິດ
         JoConnect connect = new JoConnect();
         List<FinancialModel> models = new ArrayList<>();
         try {
-            String sqlc = "SELECT * FROM tb_financial WHERE SaveDate >= ? AND SaveDate <= DATE_ADD(?, INTERVAL 6 DAY) AND TransferMoney>0 AND UserID=?";
+            String sqlc = "SELECT * FROM tb_financial WHERE SaveDate >= ? AND SaveDate <= DATE_ADD(?, INTERVAL 6 DAY) AND TransferMoney>0  AND state=1 AND UserID=?";
             PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sqlc);
             pre.setString(1, date);
             pre.setString(2, date);
@@ -307,11 +307,11 @@ public class FinancialDAO implements FinancialFn {
     }
 
     @Override
-    public List<FinancialModel> getFinancialReportByDateToDateTransfer(String startDate, String endDate, String userID) {
+    public List<FinancialModel> getFinancialReportByDateToDateTransfer(String startDate, String endDate, String userID) { //ເງິນໂອນປະຈຳ ວັນທີ
         JoConnect connect = new JoConnect();
         List<FinancialModel> models = new ArrayList<>();
         try {
-            String sqlc = "SELECT * FROM tb_financial WHERE SaveDate BETWEEN ? AND ? AND TransferMoney>0  AND UserID=?";
+            String sqlc = "SELECT * FROM tb_financial WHERE SaveDate BETWEEN ? AND ? AND TransferMoney>0  AND state=1  AND UserID=?";
             PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sqlc);
             pre.setString(1, startDate);
             pre.setString(2, endDate);
@@ -439,6 +439,24 @@ public class FinancialDAO implements FinancialFn {
             connect.close();
         }
         return models;
+    }
+
+    @Override
+    public int getUpdateWithdrawMonth(int FinancialID) { // ແກ້ໄຂຕາມການຖອນເງິນ
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
+        try {
+            PreparedStatement pre = sql.getUpdateByColumns(new String[]{"state"});
+            pre.setBoolean(1, false);
+            pre.setInt(2, FinancialID);
+            return pre.executeUpdate();
+        } catch (SQLException e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+            return 0;
+        } finally {
+            connect.close();
+        }
     }
 
 }

@@ -15,17 +15,12 @@ import View.HomeView;
 import View.ReportFinacialView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.DayOfWeek;
 import java.util.HashMap;
 import java.util.Map;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.view.JasperViewer;
 import java.util.Calendar;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.temporal.TemporalAdjusters;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -348,12 +343,17 @@ public class ReportFinacialController implements JoMVC, ActionListener {
     }
 
     private void setPrintState(JasperPrint print, String Title) {
-        if (GlobalDataModel.printerReportState) {
-            new JoJasperPrinter(print).print();
-        } else {
-            JasperViewer showReport = new JasperViewer(print, false);
-            showReport.setTitle(Title);
-            showReport.setVisible(true);
+        try {
+            if (GlobalDataModel.printerReportState) {
+                new JoJasperPrinter(print).print(1);
+            } else {
+                JasperViewer showReport = new JasperViewer(print, false);
+                showReport.setTitle(Title);
+                showReport.setVisible(true);
+            }
+        } catch (Exception e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
         }
     }
 

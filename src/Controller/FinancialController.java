@@ -3,7 +3,8 @@ package Controller;
 import App.AppFinancial;
 import App.AppHome;
 import App.AppFinancailStudent;
-import Component.FinancialTransferDialog;
+import Component.DialogFinancialTransfer;
+import Component.DialogWithdraw;
 import DAOSevervice.FileTransferService;
 import DAOSevervice.FinancialService;
 import DAOSevervice.SayfoneService;
@@ -49,15 +50,15 @@ import theme.MyColor;
 
 public class FinancialController implements JoMVC, ActionListener, MouseListener {
 
-    private FinancialView view;
-    private StudentModel studentModel;
-    private RegisterModel registerModel;
+    private final FinancialView view;
+    private final StudentModel studentModel;
+    private final RegisterModel registerModel;
     private UserModel userAuthen = new UserModel();
     private FileTranferModel fileTranferModel = new FileTranferModel();
-    private MyPopup popup;
+    private final MyPopup popup;
     private FinancialModel financialModel = new FinancialModel();
     HashMap<Integer, String> months = new HashMap<>();
-    private MyFormat mf = new MyFormat();
+    private final MyFormat mf = new MyFormat();
 
     public FinancialController(FinancialView view, StudentModel studentModel, RegisterModel registerModel) {
         this.view = view;
@@ -65,7 +66,8 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
         this.registerModel = registerModel;
         popup = new MyPopup();
         popup.getItemshow().setText("ປີ້ນບິນ");
-        popup.addMenuItem("ຂໍ້ມູນການໂອນ", GoogleMaterialDesignIcons.CLOUD_UPLOAD,MyColor.yellow700);
+        popup.addMenuItem("ຂໍ້ມູນການໂອນ", GoogleMaterialDesignIcons.CLOUD_UPLOAD, MyColor.yellow700);
+        popup.addMenuItem("ຖອນເງິນ", GoogleMaterialDesignIcons.SWAP_HORIZ, MyColor.cyan500);
     }
 
     @Override
@@ -108,7 +110,7 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
 
     private String convertMonth(HashMap<Integer, String> months) {
         Collection<String> values = months.values();
-// Convert the collection to a string array
+        // Convert the collection to a string array
         String[] valuesArray = values.toArray(String[]::new);
         return Arrays.toString(valuesArray);
     }
@@ -235,10 +237,9 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
                 view.EnableDisCount(userAuthen);
             }
         } else if (event.isEvent(view.getBtnAddTransfer())) { // ກົດປຸ່ມເພີ່ມເອກະສານການໂອນ
-            FinancialTransferDialog dialog = new FinancialTransferDialog(AppHome.viewParent, true, fileTranferModel);
+            DialogFinancialTransfer dialog = new DialogFinancialTransfer(AppHome.viewParent, true, fileTranferModel);
             dialog.setVisible(true);
             fileTranferModel = dialog.getTranferModel();
-            System.out.println(fileTranferModel);
         } else if (event.isEvent(view.getBtnSave())) {  // ກົດປຸ່ມບັນທຶກ
             if (financialModel.getFinancialIID() == 0) {
                 Create();
@@ -270,7 +271,7 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
             FinancialService financialService = new FinancialService();
             financialModel = financialService.getFinancialById(view.getTb_data().getIntValue(1));
             fileTranferModel = new FileTransferService().getFileTranferByFinancialID(financialModel.getFinancialIID()); //ດຶງຂໍ້ມູນເອກະສານການໂອນ
-            FinancialTransferDialog dialog = new FinancialTransferDialog(AppHome.viewParent, true, fileTranferModel);
+            DialogFinancialTransfer dialog = new DialogFinancialTransfer(AppHome.viewParent, true, fileTranferModel);
             dialog.setVisible(true);
             fileTranferModel = dialog.getTranferModel();
             FileTransferService transferService = new FileTransferService();
@@ -286,6 +287,16 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
                         alert.JoSubmit(transferService.Update(fileTranferModel), JoAlert.UPDATE);
                     }
                 }
+            }
+        } else if (event.isEvent(popup.getMenuItem(4))) {// ຖອນເງິນ
+            AuthenPopUp popUp = new AuthenPopUp(AppHome.viewParent, true);
+            popUp.setVisible(true);
+            userAuthen = popUp.getUserModel();
+            if (userAuthen.getUserID() != 0) {
+                FinancialModel fm = new FinancialService().getFinancialById(view.getTb_data().getIntValue(1));
+                DialogWithdraw dialogWithdraw = new DialogWithdraw(AppHome.viewParent, true, fm);
+                dialogWithdraw.setUserAuthen(userAuthen);
+                dialogWithdraw.setVisible(true);
             }
         }
     }

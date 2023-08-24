@@ -92,7 +92,7 @@ public class FinancialModel {
     }
 
     public String getFinancialComment() {
-        return FinancialComment;
+        return FinancialComment == null ? "ບໍ່ມີ" : FinancialComment;
     }
 
     public void setFinancialComment(String FinancialComment) {

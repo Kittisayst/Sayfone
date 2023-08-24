@@ -7,7 +7,7 @@ import java.time.LocalTime;
 import java.util.Date;
 import javax.swing.ImageIcon;
 
-public class FinancialTransferDialog extends javax.swing.JDialog {
+public class DialogFinancialTransfer extends javax.swing.JDialog {
 
     private FileTranferModel tranferModel = new FileTranferModel();
 
@@ -15,7 +15,7 @@ public class FinancialTransferDialog extends javax.swing.JDialog {
     private boolean submit = false;
     JoFilechooser filechooser = new JoFilechooser();
 
-    public FinancialTransferDialog(java.awt.Frame parent, boolean modal, FileTranferModel tranferModel) {
+    public DialogFinancialTransfer(java.awt.Frame parent, boolean modal, FileTranferModel tranferModel) {
         super(parent, modal);
         initComponents();
         this.tranferModel = tranferModel;

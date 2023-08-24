@@ -46,5 +46,28 @@ public class JoJasperPrinter {
             JoAlert.Error(ex, this);
         }
     }
+    
+     public void print(int copies) {
+        try {
+            JoProperties properties = new JoProperties("Info/About.properties");
+            PrintRequestAttributeSet printRequestAttributeSet = new HashPrintRequestAttributeSet();
+            printRequestAttributeSet.add(new Copies(copies));
+            PrinterName printerName = new PrinterName(properties.getValueAt("PrinterName"), null); //gets printer 
+            PrintServiceAttributeSet printServiceAttributeSet = new HashPrintServiceAttributeSet();
+            printServiceAttributeSet.add(printerName);
+            JRPrintServiceExporter exporter = new JRPrintServiceExporter();
+            SimplePrintServiceExporterConfiguration configuration = new SimplePrintServiceExporterConfiguration();
+            configuration.setPrintRequestAttributeSet(printRequestAttributeSet);
+            configuration.setPrintServiceAttributeSet(printServiceAttributeSet);
+            configuration.setDisplayPageDialog(false);
+            configuration.setDisplayPrintDialog(false);
+            exporter.setConfiguration(configuration);
+            exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+            exporter.exportReport();
+        } catch (JRException ex) {
+            JoLoger.saveLog(ex, this);
+            JoAlert.Error(ex, this);
+        }
+    }
 
 }

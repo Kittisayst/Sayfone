@@ -89,4 +89,8 @@ public class FinancialService {
         return aO.getSearchStudentRegistered(RegisterID, search);
     }
 
+    public int getUpdateWithdrawMonth(int FinancialID) {
+        return aO.getUpdateWithdrawMonth(FinancialID);
+    }
+
 }
