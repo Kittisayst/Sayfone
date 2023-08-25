@@ -47,8 +47,11 @@
                   <Component id="Pn_Menu" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="Pn_Navbar" pref="1091" max="32767" attributes="0"/>
-                      <Component id="MyRouter" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                          <Component id="MyRouter" max="32767" attributes="0"/>
+                      </Group>
+                      <Component id="Pn_Navbar" pref="1089" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -290,7 +293,7 @@
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <EmptySpace min="5" pref="5" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="btn_home" alignment="2" max="32767" attributes="0"/>
                                       <Component id="btn_Manage" alignment="2" max="32767" attributes="0"/>
@@ -301,7 +304,7 @@
                                       <Component id="pn_report" alignment="2" max="32767" attributes="0"/>
                                       <Component id="btn_Setting" alignment="1" max="32767" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="5" pref="5" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
@@ -376,7 +379,7 @@
                                       <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="btn_teacher" max="32767" attributes="0"/>
-                                          <Component id="btn_Student" alignment="0" pref="263" max="32767" attributes="0"/>
+                                          <Component id="btn_Student" alignment="0" pref="267" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Component id="btnSubject" alignment="0" max="32767" attributes="0"/>
@@ -480,7 +483,7 @@
                             <DimensionLayout dim="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="joButtonIconfont6" max="32767" attributes="0"/>
-                                  <Component id="btn_Register" alignment="0" pref="265" max="32767" attributes="0"/>
+                                  <Component id="btn_Register" alignment="0" pref="269" max="32767" attributes="0"/>
                                   <Component id="btnTeacherRank" alignment="0" max="32767" attributes="0"/>
                                   <Component id="btnFinancial" alignment="0" max="32767" attributes="0"/>
                                   <Component id="btnAbsent" alignment="0" max="32767" attributes="0"/>
@@ -558,7 +561,7 @@
                             <DimensionLayout dim="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="joButtonIconfont10" max="32767" attributes="0"/>
-                                  <Component id="btnReportFinancial" alignment="0" pref="265" max="32767" attributes="0"/>
+                                  <Component id="btnReportFinancial" alignment="0" pref="269" max="32767" attributes="0"/>
                                   <Component id="joButtonIconfont11" alignment="0" max="32767" attributes="0"/>
                                   <Component id="btnReportPay" alignment="0" max="32767" attributes="0"/>
                                   <Component id="joButtonIconfont13" alignment="0" max="32767" attributes="0"/>

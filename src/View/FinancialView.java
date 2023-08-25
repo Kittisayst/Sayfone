@@ -14,6 +14,7 @@ import Model.UserModel;
 import Tools.JoIconFont;
 import Utility.MyFormat;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -33,6 +34,11 @@ public class FinancialView extends javax.swing.JPanel {
         lblUserAuth.setVisible(false);
         lblfood.setIcon(new JoIconFont().setIconFont(GoogleMaterialDesignIcons.LOCAL_DINING, 20));
         lblslow.setIcon(new JoIconFont().setIconFont(GoogleMaterialDesignIcons.SLOW_MOTION_VIDEO, 20));
+        Dimension ss = new Dimension(50, 50);
+//        setMaximumSize(ss);
+//        setMinimumSize(ss);
+        repaint();
+        revalidate();
     }
 
     public void showParent(StudentHistoryModel historyModel) {
@@ -205,19 +211,15 @@ public class FinancialView extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
         Pn_Navigation = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         btn_back = new Components.JoButtonIconfont();
         jPanel4 = new javax.swing.JPanel();
         lbl_title = new Components.JoLable();
-        jPanel5 = new javax.swing.JPanel();
-        pn_Datatable = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tb_data = new Components.JoTable();
-        joPanel1 = new Components.JoPanel();
         lbl_parents = new Components.JoLable();
+        jPanel1 = new javax.swing.JPanel();
         joPanel2 = new Components.JoPanel();
         joLable1 = new Components.JoLable();
         pnShowMonth = new javax.swing.JPanel();
@@ -234,7 +236,6 @@ public class FinancialView extends javax.swing.JPanel {
         joCheckBoxUI11 = new Components.JoCheckBoxUI();
         joCheckBoxUI12 = new Components.JoCheckBoxUI();
         joPanel3 = new Components.JoPanel();
-        lblshowDate = new Components.JoLable();
         joLable7 = new Components.JoLable();
         txtDiscount = new Components.JoTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -245,6 +246,7 @@ public class FinancialView extends javax.swing.JPanel {
         lblUserAuth = new Components.JoLable();
         lblslow = new Components.JoLable();
         txtFood = new Components.JoTextField();
+        lblshowDate = new Components.JoLable();
         joPanel4 = new Components.JoPanel();
         joLable6 = new Components.JoLable();
         txtMoney = new Components.JoTextField();
@@ -254,11 +256,17 @@ public class FinancialView extends javax.swing.JPanel {
         txtTransferMoney = new Components.JoTextField();
         joLable8 = new Components.JoLable();
         btnAddTransfer = new Components.JoButton();
+        pn_Datatable = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tb_data = new Components.JoTable();
 
-        setMaximumSize(new java.awt.Dimension(1920, 1080));
+        setMaximumSize(new java.awt.Dimension(0, 0));
+        setMinimumSize(new java.awt.Dimension(0, 0));
+        setPreferredSize(new java.awt.Dimension(0, 0));
+        setLayout(new java.awt.GridBagLayout());
 
         Pn_Navigation.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
-        Pn_Navigation.setLayout(new java.awt.GridLayout(1, 0));
+        Pn_Navigation.setLayout(new java.awt.GridBagLayout());
 
         jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
@@ -266,7 +274,10 @@ public class FinancialView extends javax.swing.JPanel {
         btn_back.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.ARROW_BACK);
         jPanel3.add(btn_back);
 
-        Pn_Navigation.add(jPanel3);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        Pn_Navigation.add(jPanel3, gridBagConstraints);
 
         jPanel4.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 10));
 
@@ -274,50 +285,44 @@ public class FinancialView extends javax.swing.JPanel {
         lbl_title.setFont(new java.awt.Font("Phetsarath OT", 0, 18)); // NOI18N
         jPanel4.add(lbl_title);
 
-        Pn_Navigation.add(jPanel4);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 0.1;
+        Pn_Navigation.add(jPanel4, gridBagConstraints);
 
-        jPanel5.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
-        Pn_Navigation.add(jPanel5);
-
-        pn_Datatable.setLayout(new java.awt.BorderLayout());
-
-        tb_data.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "#", "ເລກທີບິນ", "ວດປ", "ຈຳນວນເງິນສົດ", "ຈຳນວນເງິນໂອນ", "ເດືອນ", "ໝາຍເຫດ"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(tb_data);
-
-        pn_Datatable.add(jScrollPane1, java.awt.BorderLayout.CENTER);
-
-        joPanel1.setJoPrimaryColor(new java.awt.Color(204, 204, 204));
-        joPanel1.setJoSecondaryColor(new java.awt.Color(204, 204, 204));
-        joPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 520;
+        gridBagConstraints.ipady = -3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        add(Pn_Navigation, gridBagConstraints);
 
         lbl_parents.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_parents.setText("info");
         lbl_parents.setFont(new java.awt.Font("Phetsarath OT", 0, 18)); // NOI18N
-        joPanel1.add(lbl_parents, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 950, 30));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 812;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        add(lbl_parents, gridBagConstraints);
 
-        joPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.setMaximumSize(new java.awt.Dimension(32767, 32767));
+
+        joPanel2.setPreferredSize(new java.awt.Dimension(330, 300));
+        joPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 10, 10));
 
         joLable1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         joLable1.setText("ເດືອນທີ່ຈ່າຍຄ່າຮຽນແລ້ວ");
         joLable1.setFont(new java.awt.Font("Phetsarath OT", 0, 18)); // NOI18N
-        joPanel2.add(joLable1, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 10, 240, -1));
+        joPanel2.add(joLable1);
 
         pnShowMonth.setOpaque(false);
+        pnShowMonth.setPreferredSize(new java.awt.Dimension(250, 200));
         pnShowMonth.setLayout(new java.awt.GridLayout(4, 3, 5, 5));
 
         joCheckBoxUI2.setText("ເດືອນ 1");
@@ -368,22 +373,28 @@ public class FinancialView extends javax.swing.JPanel {
         joCheckBoxUI12.setName("12"); // NOI18N
         pnShowMonth.add(joCheckBoxUI12);
 
-        joPanel2.add(pnShowMonth, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 60, 240, 210));
+        joPanel2.add(pnShowMonth);
 
-        joPanel1.add(joPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 290, 290));
+        jPanel1.add(joPanel2);
 
         joPanel3.setJoPrimaryColor(new java.awt.Color(234, 234, 234));
         joPanel3.setJoSecondaryColor(new java.awt.Color(234, 234, 234));
-        joPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblshowDate.setForeground(new java.awt.Color(25, 118, 210));
-        lblshowDate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblshowDate.setText("ວັນທີ");
-        lblshowDate.setFont(new java.awt.Font("Phetsarath OT", 1, 14)); // NOI18N
-        joPanel3.add(lblshowDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 300, -1));
+        joPanel3.setMinimumSize(new java.awt.Dimension(360, 280));
+        joPanel3.setPreferredSize(new java.awt.Dimension(330, 300));
+        java.awt.GridBagLayout joPanel3Layout = new java.awt.GridBagLayout();
+        joPanel3Layout.columnWidths = new int[] {0, 5, 0, 5, 0};
+        joPanel3Layout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
+        joPanel3.setLayout(joPanel3Layout);
 
         joLable7.setText("ໝາຍເຫດ");
-        joPanel3.add(joLable7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 168, 340, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 3, 0, 3);
+        joPanel3.add(joLable7, gridBagConstraints);
 
         txtDiscount.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtDiscount.setEnabled(false);
@@ -394,12 +405,28 @@ public class FinancialView extends javax.swing.JPanel {
                 txtDiscountKeyReleased(evt);
             }
         });
-        joPanel3.add(txtDiscount, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 110, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipady = 20;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 3, 0, 3);
+        joPanel3.add(txtDiscount, gridBagConstraints);
 
         txtComment.setRows(3);
         jScrollPane2.setViewportView(txtComment);
 
-        joPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 340, 80));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 3, 10, 3);
+        joPanel3.add(jScrollPane2, gridBagConstraints);
 
         txtOverPay.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtOverPay.setNumberOnly(true);
@@ -409,34 +436,99 @@ public class FinancialView extends javax.swing.JPanel {
                 txtOverPayKeyReleased(evt);
             }
         });
-        joPanel3.add(txtOverPay, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 110, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipady = 20;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 3, 0, 3);
+        joPanel3.add(txtOverPay, gridBagConstraints);
 
         lblfood.setText("ອາຫານ");
-        joPanel3.add(lblfood, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 45, 100, 30));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipady = 20;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 3, 0, 3);
+        joPanel3.add(lblfood, gridBagConstraints);
 
         ckDiscount.setText("ສ່ວນຫຼຸດ");
-        joPanel3.add(ckDiscount, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 45, 120, 30));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipady = 20;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 3, 0, 3);
+        joPanel3.add(ckDiscount, gridBagConstraints);
 
         lblUserAuth.setBackground(new java.awt.Color(51, 51, 51));
         lblUserAuth.setForeground(new java.awt.Color(255, 153, 153));
         lblUserAuth.setOpaque(true);
-        joPanel3.add(lblUserAuth, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 340, 30));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipady = 35;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 3, 0, 3);
+        joPanel3.add(lblUserAuth, gridBagConstraints);
 
         lblslow.setText("ຄ່າຈ່າຍຊ້າ");
-        joPanel3.add(lblslow, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 45, 110, 30));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipady = 20;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 3, 0, 3);
+        joPanel3.add(lblslow, gridBagConstraints);
 
+        txtFood.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtFood.setPlaceholder("ອາຫານ");
         txtFood.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtFoodKeyReleased(evt);
             }
         });
-        joPanel3.add(txtFood, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 80, 100, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipady = 20;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 3, 0, 3);
+        joPanel3.add(txtFood, gridBagConstraints);
 
-        joPanel1.add(joPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(335, 60, 380, 290));
+        lblshowDate.setForeground(new java.awt.Color(25, 118, 210));
+        lblshowDate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblshowDate.setText("ວັນທີ");
+        lblshowDate.setFont(new java.awt.Font("Phetsarath OT", 1, 14)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipady = 20;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 3, 0, 3);
+        joPanel3.add(lblshowDate, gridBagConstraints);
+
+        jPanel1.add(joPanel3);
 
         joPanel4.setJoPrimaryColor(new java.awt.Color(234, 234, 234));
         joPanel4.setJoSecondaryColor(new java.awt.Color(234, 234, 234));
+        joPanel4.setMinimumSize(new java.awt.Dimension(350, 271));
+        joPanel4.setPreferredSize(new java.awt.Dimension(330, 300));
         joPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         joLable6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -481,28 +573,48 @@ public class FinancialView extends javax.swing.JPanel {
         btnAddTransfer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/bcel.png"))); // NOI18N
         joPanel4.add(btnAddTransfer, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 180, 50, 40));
 
-        joPanel1.add(joPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 60, 310, 290));
+        jPanel1.add(joPanel4);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Pn_Navigation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pn_Datatable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(joPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1071, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(Pn_Navigation, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(joPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pn_Datatable, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE))
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipady = 40;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        add(jPanel1, gridBagConstraints);
+
+        pn_Datatable.setLayout(new java.awt.BorderLayout());
+
+        tb_data.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "#", "ເລກທີບິນ", "ວດປ", "ຈຳນວນເງິນສົດ", "ຈຳນວນເງິນໂອນ", "ເດືອນ", "ໝາຍເຫດ"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tb_data);
+
+        pn_Datatable.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 834;
+        gridBagConstraints.ipady = 140;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.weighty = 0.1;
+        add(pn_Datatable, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtOverPayKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtOverPayKeyReleased
@@ -531,11 +643,10 @@ public class FinancialView extends javax.swing.JPanel {
     private Components.JoButton btnAddTransfer;
     private Components.JoButtonIconfont btnSave;
     private Components.JoButtonIconfont btn_back;
-    private javax.swing.ButtonGroup buttonGroup1;
     private Components.JoCheckBox ckDiscount;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private Components.JoCheckBoxUI joCheckBoxUI1;
@@ -555,7 +666,6 @@ public class FinancialView extends javax.swing.JPanel {
     private Components.JoLable joLable6;
     private Components.JoLable joLable7;
     private Components.JoLable joLable8;
-    private Components.JoPanel joPanel1;
     private Components.JoPanel joPanel2;
     private Components.JoPanel joPanel3;
     private Components.JoPanel joPanel4;
