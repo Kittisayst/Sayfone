@@ -15,9 +15,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class FinancialDAO implements FinancialFn {
-
+    
     private final String TableName = "tb_financial";
-
+    
     @Override
     public int Creater(FinancialModel model) {
         JoConnect connect = new JoConnect();
@@ -36,7 +36,9 @@ public class FinancialDAO implements FinancialFn {
                     model.getDiscount(),
                     model.getOvertimePay(),
                     model.getUserID(),
-                    true);
+                    model.getFoodMoney(),
+                    model.isState());
+            System.out.println(pre);
             return pre.executeUpdate();
         } catch (SQLException e) {
             JoAlert.Error(e, this);
@@ -46,14 +48,14 @@ public class FinancialDAO implements FinancialFn {
             connect.close();
         }
     }
-
+    
     @Override
     public int Update(FinancialModel model) {
         JoConnect connect = new JoConnect();
         JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         try {
             PreparedStatement pre = new JoPrepared().setAutoPrepared(sql.getUpdateByColumns(
-                    new String[]{"Money", "TransferMoney", "FinancialMonth", "FinancialComment", "AuthenUserID", "Discount", "OvertimePay"}),
+                    new String[]{"Money", "TransferMoney", "FinancialMonth", "FinancialComment", "AuthenUserID", "Discount", "OvertimePay","foodMoney"}),
                     model.getMoney(),
                     model.getTransferMoney(),
                     model.getFinancialMonth(),
@@ -61,6 +63,7 @@ public class FinancialDAO implements FinancialFn {
                     model.getAuthenUserID(),
                     model.getDiscount(),
                     model.getOvertimePay(),
+                    model.getFoodMoney(),
                     model.getFinancialIID()
             );
             return pre.executeUpdate();
@@ -72,7 +75,7 @@ public class FinancialDAO implements FinancialFn {
             connect.close();
         }
     }
-
+    
     @Override
     public int Delete(FinancialModel model) {
         JoConnect connect = new JoConnect();
@@ -89,7 +92,7 @@ public class FinancialDAO implements FinancialFn {
             connect.close();
         }
     }
-
+    
     @Override
     public List<FinancialModel> getFinancialAll() {  //ດຶງຂໍ້ມູນຈ່າຍຄ່າຮຽນທັງໝົດ
         JoConnect connect = new JoConnect();
@@ -111,7 +114,7 @@ public class FinancialDAO implements FinancialFn {
         }
         return financialModels;
     }
-
+    
     @Override
     public int getMaxFinancialID() {
         JoConnect connect = new JoConnect();
@@ -130,7 +133,7 @@ public class FinancialDAO implements FinancialFn {
         }
         return max;
     }
-
+    
     @Override
     public List<FinancialModel> getFinancialByStudentID(int RegisterID, int StudentID) { //ດຶງຂໍ້ມູນການຈ່າຍຄ່າຮຽນຕາໄອດີນັກຮຽນ
         JoConnect connect = new JoConnect();
@@ -152,7 +155,7 @@ public class FinancialDAO implements FinancialFn {
         }
         return models;
     }
-
+    
     @Override
     public List<FinancialModel> getStudentRegistered(int RegisterID) { // ດຶງຂໍ້ມູນນັກຮຽນທີ່ລົງທະບຽນແລ້ວ
         JoConnect connect = new JoConnect();
@@ -173,7 +176,7 @@ public class FinancialDAO implements FinancialFn {
         }
         return models;
     }
-
+    
     @Override
     public FinancialModel getFinancialById(int ID) {  //ດຶງຂໍ້ມູນການໂອນຕາມໄອດີ
         JoConnect connect = new JoConnect();
@@ -192,7 +195,7 @@ public class FinancialDAO implements FinancialFn {
         }
         return model;
     }
-
+    
     @Override
     public List<FinancialModel> getFinancialReportByDate(String date, String userID) {  // ດຶງຂໍ້ມູນຈ່າຍຄ່າຮຽນປະຈຳວັນ ເງິນສົດ
         JoConnect connect = new JoConnect();
@@ -214,7 +217,7 @@ public class FinancialDAO implements FinancialFn {
         }
         return models;
     }
-
+    
     @Override
     public List<FinancialModel> getFinancialReportByWeek(String date, String userID) { // ດຶງຂໍ້ມູນຈ່າຍຄ່າຮຽນປະຈຳ ອາທິດ ເງິນສົດ
         JoConnect connect = new JoConnect();
@@ -237,7 +240,7 @@ public class FinancialDAO implements FinancialFn {
         }
         return models;
     }
-
+    
     @Override
     public List<FinancialModel> getFinancialReportByDateToDate(String startDate, String endDate, String userID) { //ເງິນສົດປະຈຳ ວັນທີ
         JoConnect connect = new JoConnect();
@@ -260,7 +263,7 @@ public class FinancialDAO implements FinancialFn {
         }
         return models;
     }
-
+    
     @Override
     public List<FinancialModel> getFinancialReportByDateTransfer(String date, String userID) {  // ດຶງຂໍ້ມູນຈ່າຍຄ່າຮຽນປະຈຳວັນ ໂອນ
         JoConnect connect = new JoConnect();
@@ -282,7 +285,7 @@ public class FinancialDAO implements FinancialFn {
         }
         return models;
     }
-
+    
     @Override
     public List<FinancialModel> getFinancialReportByWeekTransfer(String date, String userID) { // ເງິນໂອນປະຈຳ ອາທິດ
         JoConnect connect = new JoConnect();
@@ -305,7 +308,7 @@ public class FinancialDAO implements FinancialFn {
         }
         return models;
     }
-
+    
     @Override
     public List<FinancialModel> getFinancialReportByDateToDateTransfer(String startDate, String endDate, String userID) { //ເງິນໂອນປະຈຳ ວັນທີ
         JoConnect connect = new JoConnect();
@@ -328,7 +331,7 @@ public class FinancialDAO implements FinancialFn {
         }
         return models;
     }
-
+    
     @Override
     public String getLastClass(int StudentID) {
         JoConnect connect = new JoConnect();
@@ -355,28 +358,28 @@ public class FinancialDAO implements FinancialFn {
             connect.close();
         }
     }
-
+    
     @Override
     public RegisterModel getLastRegister(int studentID) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    
     @Override
     public String getPayMonth(int RegisterID, int StudentID) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    
     private FinancialModel resultModel(ResultSet rs) throws Exception {
-        return new FinancialModel(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getInt(5), rs.getDate(6), rs.getString(7), rs.getString(8), rs.getInt(9), rs.getInt(10), rs.getInt(11), rs.getInt(12));
+        return new FinancialModel(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getInt(5), rs.getDate(6), rs.getString(7), rs.getString(8), rs.getInt(9), rs.getInt(10), rs.getInt(11), rs.getInt(12), rs.getInt(13), rs.getBoolean(14));
     }
-
+    
     public static PreparedStatement setAutoPrepared(PreparedStatement pre, Object... params) throws SQLException {
         for (int i = 0; i < params.length; i++) {
             pre.setObject(i + 1, params[i]);
         }
         return pre;
     }
-
+    
     @Override
     public int getCountFinancial() {
         JoConnect connect = new JoConnect();
@@ -392,7 +395,7 @@ public class FinancialDAO implements FinancialFn {
         }
         return count;
     }
-
+    
     @Override
     public List<FinancialModel> getFinancialFree(int YearID) {
         JoConnect connect = new JoConnect();
@@ -415,7 +418,7 @@ public class FinancialDAO implements FinancialFn {
         }
         return models;
     }
-
+    
     @Override
     public List<FinancialModel> getSearchStudentRegistered(int RegisterID, String search) {
         JoConnect connect = new JoConnect();
@@ -440,7 +443,7 @@ public class FinancialDAO implements FinancialFn {
         }
         return models;
     }
-
+    
     @Override
     public int getUpdateWithdrawMonth(int FinancialID) { // ແກ້ໄຂຕາມການຖອນເງິນ
         JoConnect connect = new JoConnect();
@@ -458,5 +461,5 @@ public class FinancialDAO implements FinancialFn {
             connect.close();
         }
     }
-
+    
 }

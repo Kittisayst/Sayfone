@@ -24,6 +24,7 @@ import Model.UserModel;
 import Tools.JoAlert;
 import Tools.JoFileSystem;
 import Tools.JoHookEvent;
+import Tools.JoIconFont;
 import Utility.JoJasperPrinter;
 import Utility.MyFormat;
 import Utility.MyPopup;
@@ -46,6 +47,7 @@ import jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.view.JasperViewer;
+import theme.JoTheme;
 import theme.MyColor;
 
 public class FinancialController implements JoMVC, ActionListener, MouseListener {
@@ -66,6 +68,7 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
         this.registerModel = registerModel;
         popup = new MyPopup();
         popup.getItemshow().setText("ປີ້ນບິນ");
+        popup.getItemshow().setIcon(new JoIconFont().setIconFont(GoogleMaterialDesignIcons.PRINT, 25,JoTheme.Primary));
         popup.addMenuItem("ຂໍ້ມູນການໂອນ", GoogleMaterialDesignIcons.CLOUD_UPLOAD, MyColor.yellow700);
         popup.addMenuItem("ຖອນເງິນ", GoogleMaterialDesignIcons.SWAP_HORIZ, MyColor.cyan500);
     }
@@ -140,34 +143,6 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
             }
         }
 
-    }
-
-    private FinancialModel saveData() {
-        return new FinancialModel(
-                0,
-                registerModel.getRegisterID(),
-                studentModel.getStudentID(),
-                (int) mf.unFormatMoney(view.getTxtMoney().getText()),
-                (int) mf.unFormatMoney(view.getTxtTransferMoney().getText()),
-                mf.getSQLDate(new Date()),
-                convertMonth(months),
-                view.getTxtComment().getText(),
-                userAuthen.getUserID(),
-                (int) mf.unFormatMoney(view.getTxtDiscount().getText()),
-                (int) mf.unFormatMoney(view.getTxtOverPay().getText()),
-                GobalData.UserID);
-    }
-
-    private void updateData() {
-        financialModel.setMoney((int) mf.unFormatMoney(view.getTxtMoney().getText()));
-        financialModel.setTransferMoney((int) mf.unFormatMoney(view.getTxtTransferMoney().getText()));
-        financialModel.setFinancialDate(mf.getSQLDate(new Date()));
-        financialModel.setFinancialMonth(convertMonth(months));
-        financialModel.setFinancialComment(view.getTxtComment().getText());
-        financialModel.setAuthenUserID(userAuthen.getUserID());
-        financialModel.setDiscount((int) mf.unFormatMoney(view.getTxtDiscount().getText()));
-        financialModel.setOvertimePay((int) mf.unFormatMoney(view.getTxtOverPay().getText()));
-        financialModel.setUserID(GobalData.UserID);
     }
 
     @Override
@@ -301,15 +276,49 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
         }
     }
 
+    private FinancialModel saveData() {
+        return new FinancialModel(
+                0,
+                registerModel.getRegisterID(),
+                studentModel.getStudentID(),
+                (int) mf.unFormatMoney(view.getTxtMoney().getText()),
+                (int) mf.unFormatMoney(view.getTxtTransferMoney().getText()),
+                mf.getSQLDate(new Date()),
+                convertMonth(months),
+                view.getTxtComment().getText(),
+                userAuthen.getUserID(),
+                (int) mf.unFormatMoney(view.getTxtDiscount().getText()),
+                (int) mf.unFormatMoney(view.getTxtOverPay().getText()),
+                GobalData.UserID,
+                (int) mf.unFormatMoney(view.getTxtFood().getText()),
+                true
+        );
+    }
+
+    private void updateData() {
+        financialModel.setMoney((int) mf.unFormatMoney(view.getTxtMoney().getText()));
+        financialModel.setTransferMoney((int) mf.unFormatMoney(view.getTxtTransferMoney().getText()));
+        financialModel.setFinancialDate(mf.getSQLDate(new Date()));
+        financialModel.setFinancialMonth(convertMonth(months));
+        financialModel.setFinancialComment(view.getTxtComment().getText());
+        financialModel.setAuthenUserID(userAuthen.getUserID());
+        financialModel.setDiscount((int) mf.unFormatMoney(view.getTxtDiscount().getText()));
+        financialModel.setOvertimePay((int) mf.unFormatMoney(view.getTxtOverPay().getText()));
+        financialModel.setFoodMoney((int) mf.unFormatMoney(view.getTxtFood().getText()));
+        financialModel.setUserID(GobalData.UserID);
+    }
+
     private void showEdit() {
         //ລ້າງຂໍ້ມູນຂອງເດືອນເກົ່າທີ່ແກ້ໄຂ
         if (financialModel.getFinancialIID() != 0) {
             view.setSelectMonth(financialModel);
             months.clear();
         }
+        // ດຶງຂໍ້ມູນການຈ່າຍເງິນ
         FinancialService financialService = new FinancialService();
         financialModel = financialService.getFinancialById(view.getTb_data().getIntValue(1));
-        view.showFinacial(financialModel); //ສະແດງຂໍ້ມູນການລົງທະບຽນເພື່ອແກ້ໄຂໄປທີ view
+        // =================== ສະແດງຂໍ້ມູນການລົງທະບຽນເພື່ອແກ້ໄຂໄປທີ view =================
+        view.showFinacial(financialModel);
         fileTranferModel = new FileTransferService().getFileTranferByFinancialID(financialModel.getFinancialIID()); //ດຶງຂໍ້ມູນເອກະສານການໂອນ
         // ສະແດງການເລືອກເດືອນ
         String monstr = financialModel.getFinancialMonth();

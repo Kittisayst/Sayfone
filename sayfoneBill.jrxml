@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SayfoneBill" language="groovy" pageWidth="220" pageHeight="490" columnWidth="210" leftMargin="5" rightMargin="5" topMargin="5" bottomMargin="5" uuid="57154301-a25b-4480-9e2b-6ffdf54accdc">
 	<property name="ireport.zoom" value="3.797498335832417"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="817"/>
+	<property name="ireport.y" value="1033"/>
 	<parameter name="LogoPath" class="java.lang.String"/>
 	<parameter name="financiaID" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -14,7 +14,7 @@
 	<parameter name="UserAuthen" class="java.lang.String"/>
 	<parameter name="UserPrint" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[SELECT FinancialID,StudentNo,StudentName,ClassRoomName,Money,TransferMoney,Discount,OvertimePay,FinancialMonth,Year,SaveDate,FinancialComment FROM tb_financial AS fnc
+		<![CDATA[SELECT FinancialID,StudentNo,StudentName,ClassRoomName,Money,TransferMoney,Discount,OvertimePay,FinancialMonth,Year,SaveDate,foodMoney,FinancialComment FROM tb_financial AS fnc
 INNER JOIN tb_student ON fnc.StudentID = tb_student.StudentID
 INNER JOIN tb_register ON fnc.RegisterID=tb_register.registerID
 INNER JOIN tb_year ON tb_register.yearID=tb_year.yearID
@@ -39,6 +39,7 @@ WHERE FinancialID = $P{financiaID}]]>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="SaveDate" class="java.sql.Date"/>
+	<field name="foodMoney" class="java.lang.Integer"/>
 	<field name="FinancialComment" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
@@ -154,7 +155,7 @@ WHERE FinancialID = $P{financiaID}]]>
 				<text><![CDATA[ສົດ:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="125" y="103" width="17" height="16" uuid="f81f1fc8-407d-453b-a6fd-0950c725b333"/>
+				<reportElement x="125" y="103" width="18" height="16" uuid="f81f1fc8-407d-453b-a6fd-0950c725b333"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Phetsarath OT" size="9"/>
 				</textElement>
@@ -175,11 +176,11 @@ WHERE FinancialID = $P{financiaID}]]>
 				<text><![CDATA[ຜູ້ຮັບເງິນ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="-1" y="120" width="76" height="16" uuid="fade2344-f06b-4eb4-af74-30339b586b97"/>
+				<reportElement x="-1" y="120" width="36" height="16" uuid="fade2344-f06b-4eb4-af74-30339b586b97"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Phetsarath OT" size="9"/>
 				</textElement>
-				<text><![CDATA[ຈຳນວນເງິນຄ່າຈ່າຍຊ້າ:]]></text>
+				<text><![CDATA[ຄ່າຈ່າຍຊ້າ:]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="173" y="0" width="37" height="17" uuid="378aa705-3085-4005-8e58-8a37e0e22a46"/>
@@ -233,7 +234,7 @@ WHERE FinancialID = $P{financiaID}]]>
 				<textFieldExpression><![CDATA[$F{TransferMoney}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,### ກີບ">
-				<reportElement x="75" y="120" width="135" height="16" uuid="de93260d-c8dc-46e9-93f6-e801bc5221ef"/>
+				<reportElement x="35" y="120" width="72" height="16" uuid="de93260d-c8dc-46e9-93f6-e801bc5221ef"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Phetsarath OT" size="9" isBold="true"/>
 				</textElement>
@@ -295,9 +296,23 @@ WHERE FinancialID = $P{financiaID}]]>
 				<reportElement x="35" y="136" width="175" height="16" uuid="2ebc7bb9-bd50-4925-92aa-61fa416489b2"/>
 				<box leftPadding="2" bottomPadding="1" rightPadding="0"/>
 				<textElement verticalAlignment="Middle">
-					<font size="8"/>
+					<font fontName="Phetsarath OT" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{FinancialComment}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="107" y="120" width="36" height="16" uuid="f419f263-e149-4bbb-8033-724cfdddcb6b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Phetsarath OT" size="9"/>
+				</textElement>
+				<text><![CDATA[ຄ່າອາຫານ:]]></text>
+			</staticText>
+			<textField pattern="#,### ກີບ">
+				<reportElement x="143" y="120" width="67" height="16" uuid="a802ceb3-bd56-4f71-883a-e6caff5439ab"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Phetsarath OT" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{foodMoney}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>

@@ -16,11 +16,13 @@ public class FinancialModel {
     private int Discount;
     private int OvertimePay;
     private int UserID;
+    private int foodMoney;
+    private boolean state;
 
     public FinancialModel() {
     }
 
-    public FinancialModel(int FinancialIID, int RegisterID, int StudentID, int Money, int TransferMoney, Date FinancialDate, String FinancialMonth, String FinancialComment, int AuthenUserID, int Discount, int OvertimePay, int UserID) {
+    public FinancialModel(int FinancialIID, int RegisterID, int StudentID, int Money, int TransferMoney, Date FinancialDate, String FinancialMonth, String FinancialComment, int AuthenUserID, int Discount, int OvertimePay, int UserID, int foodMoney, boolean state) {
         this.FinancialIID = FinancialIID;
         this.RegisterID = RegisterID;
         this.StudentID = StudentID;
@@ -33,6 +35,8 @@ public class FinancialModel {
         this.Discount = Discount;
         this.OvertimePay = OvertimePay;
         this.UserID = UserID;
+        this.foodMoney = foodMoney;
+        this.state = state;
     }
 
     public int getFinancialIID() {
@@ -92,7 +96,7 @@ public class FinancialModel {
     }
 
     public String getFinancialComment() {
-        return FinancialComment == null ? "ບໍ່ມີ" : FinancialComment;
+        return FinancialComment;
     }
 
     public void setFinancialComment(String FinancialComment) {
@@ -123,6 +127,14 @@ public class FinancialModel {
         this.OvertimePay = OvertimePay;
     }
 
+    public int getFoodMoney() {
+        return foodMoney;
+    }
+
+    public void setFoodMoney(int foodMoney) {
+        this.foodMoney = foodMoney;
+    }
+
     public int getUserID() {
         return UserID;
     }
@@ -131,9 +143,12 @@ public class FinancialModel {
         this.UserID = UserID;
     }
 
-    @Override
-    public String toString() {
-        return "FinancialModel{" + "FinancialIID=" + FinancialIID + ", RegisterID=" + RegisterID + ", StudentID=" + StudentID + ", Money=" + Money + ", TransferMoney=" + TransferMoney + ", FinancialDate=" + FinancialDate + ", FinancialMonth=" + FinancialMonth + ", FinancialComment=" + FinancialComment + ", AuthenUserID=" + AuthenUserID + ", Discount=" + Discount + ", OvertimePay=" + OvertimePay + ", UserID=" + UserID + '}';
+    public boolean isState() {
+        return state;
+    }
+
+    public void setState(boolean state) {
+        this.state = state;
     }
 
 }

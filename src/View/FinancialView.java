@@ -11,6 +11,7 @@ import DAOSevervice.UserService;
 import Model.FinancialModel;
 import Model.StudentHistoryModel;
 import Model.UserModel;
+import Tools.JoIconFont;
 import Utility.MyFormat;
 import java.awt.Color;
 import java.awt.Font;
@@ -22,6 +23,7 @@ import java.util.List;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
+import jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons;
 
 public class FinancialView extends javax.swing.JPanel {
 
@@ -29,6 +31,8 @@ public class FinancialView extends javax.swing.JPanel {
         initComponents();
         lbl_title.setText(Title);
         lblUserAuth.setVisible(false);
+        lblfood.setIcon(new JoIconFont().setIconFont(GoogleMaterialDesignIcons.BRIGHTNESS_4, 20));
+        lblslow.setIcon(new JoIconFont().setIconFont(GoogleMaterialDesignIcons.SLOW_MOTION_VIDEO, 20));
     }
 
     public void showParent(StudentHistoryModel historyModel) {
@@ -127,6 +131,7 @@ public class FinancialView extends javax.swing.JPanel {
         txtComment.setText(financialModel.getFinancialComment());
         txtMoney.setText(format.formatMoney(financialModel.getMoney()));
         txtTransferMoney.setText(format.formatMoney(financialModel.getTransferMoney()));
+        txtFood.setText(format.formatMoney(financialModel.getFoodMoney()));
     }
 
     private String toMonthString(String month) {
@@ -143,10 +148,6 @@ public class FinancialView extends javax.swing.JPanel {
         } else {
             return "[]";
         }
-    }
-
-    public void showFinancial(FinancialModel model) {
-
     }
 
     public JoButtonIconfont getBtn_back() {
@@ -193,6 +194,10 @@ public class FinancialView extends javax.swing.JPanel {
         return txtOverPay;
     }
 
+    public JoTextField getTxtFood() {
+        return txtFood;
+    }
+
     public JoTextField getTxtTransferMoney() {
         return txtTransferMoney;
     }
@@ -235,11 +240,12 @@ public class FinancialView extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         txtComment = new Components.JoTextArea();
         txtOverPay = new Components.JoTextField();
-        joLable4 = new Components.JoLable();
+        lblfood = new Components.JoLable();
         ckDiscount = new Components.JoCheckBox();
         lblUserAuth = new Components.JoLable();
+        lblslow = new Components.JoLable();
+        txtFood = new Components.JoTextField();
         joPanel4 = new Components.JoPanel();
-        btnPrint = new Components.JoButtonIconfont();
         joLable6 = new Components.JoLable();
         txtMoney = new Components.JoTextField();
         joLable5 = new Components.JoLable();
@@ -375,7 +381,7 @@ public class FinancialView extends javax.swing.JPanel {
         joPanel3.add(lblshowDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 300, -1));
 
         joLable7.setText("ໝາຍເຫດ");
-        joPanel3.add(joLable7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 310, -1));
+        joPanel3.add(joLable7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 168, 340, -1));
 
         txtDiscount.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtDiscount.setEnabled(false);
@@ -386,12 +392,12 @@ public class FinancialView extends javax.swing.JPanel {
                 txtDiscountKeyReleased(evt);
             }
         });
-        joPanel3.add(txtDiscount, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 150, -1));
+        joPanel3.add(txtDiscount, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 110, -1));
 
         txtComment.setRows(3);
         jScrollPane2.setViewportView(txtComment);
 
-        joPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 185, 310, 80));
+        joPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 340, 80));
 
         txtOverPay.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtOverPay.setNumberOnly(true);
@@ -401,33 +407,39 @@ public class FinancialView extends javax.swing.JPanel {
                 txtOverPayKeyReleased(evt);
             }
         });
-        joPanel3.add(txtOverPay, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 140, -1));
+        joPanel3.add(txtOverPay, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 110, -1));
 
-        joLable4.setText("ຄ່າຈ່າຍຊ້າ");
-        joPanel3.add(joLable4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 140, -1));
+        lblfood.setText("ອາຫານ");
+        joPanel3.add(lblfood, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 45, 100, 30));
 
         ckDiscount.setText("ສ່ວນຫຼຸດ");
-        joPanel3.add(ckDiscount, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 150, -1));
+        joPanel3.add(ckDiscount, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 45, 120, 30));
 
         lblUserAuth.setBackground(new java.awt.Color(51, 51, 51));
         lblUserAuth.setForeground(new java.awt.Color(255, 153, 153));
         lblUserAuth.setOpaque(true);
-        joPanel3.add(lblUserAuth, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 125, 310, 30));
+        joPanel3.add(lblUserAuth, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 340, 30));
 
-        joPanel1.add(joPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(335, 60, 350, 290));
+        lblslow.setText("ຄ່າຈ່າຍຊ້າ");
+        joPanel3.add(lblslow, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 45, 110, 30));
+
+        txtFood.setPlaceholder("ອາຫານ");
+        txtFood.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtFoodKeyReleased(evt);
+            }
+        });
+        joPanel3.add(txtFood, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 80, 100, -1));
+
+        joPanel1.add(joPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(335, 60, 380, 290));
 
         joPanel4.setJoPrimaryColor(new java.awt.Color(234, 234, 234));
         joPanel4.setJoSecondaryColor(new java.awt.Color(234, 234, 234));
         joPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnPrint.setBackground(new java.awt.Color(0, 153, 0));
-        btnPrint.setEnabled(false);
-        btnPrint.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.PRINT);
-        joPanel4.add(btnPrint, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, 60, 40));
-
         joLable6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         joLable6.setText("ຈ່າຍຄ່າຮຽນປະຈຳເດືອນ");
-        joPanel4.add(joLable6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 240, -1));
+        joPanel4.add(joLable6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 210, -1));
 
         txtMoney.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtMoney.setNumberOnly(true);
@@ -437,19 +449,19 @@ public class FinancialView extends javax.swing.JPanel {
                 txtMoneyKeyReleased(evt);
             }
         });
-        joPanel4.add(txtMoney, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 105, 240, -1));
+        joPanel4.add(txtMoney, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 270, -1));
 
         joLable5.setText("ຈຳນວນເງິນໂອນ");
-        joPanel4.add(joLable5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 155, 240, 20));
+        joPanel4.add(joLable5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 155, 270, 20));
 
         btnSave.setText("ບັນທຶກ");
         btnSave.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.SAVE);
-        joPanel4.add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 170, -1));
+        joPanel4.add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 270, -1));
 
         pnSelectMonths.setBackground(new java.awt.Color(51, 51, 51));
         pnSelectMonths.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 204)));
         pnSelectMonths.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
-        joPanel4.add(pnSelectMonths, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 240, 50));
+        joPanel4.add(pnSelectMonths, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 35, 270, 50));
 
         txtTransferMoney.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtTransferMoney.setNumberOnly(true);
@@ -459,26 +471,26 @@ public class FinancialView extends javax.swing.JPanel {
                 txtTransferMoneyKeyReleased(evt);
             }
         });
-        joPanel4.add(txtTransferMoney, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 175, 195, 40));
+        joPanel4.add(txtTransferMoney, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 210, 40));
 
         joLable8.setText("ຈຳນວນເງິນສົດ");
-        joPanel4.add(joLable8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 85, 240, -1));
+        joPanel4.add(joLable8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 270, -1));
 
         btnAddTransfer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/bcel.png"))); // NOI18N
-        joPanel4.add(btnAddTransfer, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 175, 50, 40));
+        joPanel4.add(btnAddTransfer, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 180, 50, 40));
 
-        joPanel1.add(joPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 60, 280, 290));
+        joPanel1.add(joPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 60, 310, 290));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(Pn_Navigation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pn_Datatable, javax.swing.GroupLayout.DEFAULT_SIZE, 1125, Short.MAX_VALUE)
+            .addComponent(pn_Datatable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(joPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1002, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE)
+                .addComponent(joPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1071, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -507,11 +519,14 @@ public class FinancialView extends javax.swing.JPanel {
         txtTransferMoney.setText(new MyFormat().formatMoney(txtTransferMoney.getText()));
     }//GEN-LAST:event_txtTransferMoneyKeyReleased
 
+    private void txtFoodKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFoodKeyReleased
+        txtFood.setText(new MyFormat().formatMoney(txtFood.getText()));
+    }//GEN-LAST:event_txtFoodKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Pn_Navigation;
     private Components.JoButton btnAddTransfer;
-    private Components.JoButtonIconfont btnPrint;
     private Components.JoButtonIconfont btnSave;
     private Components.JoButtonIconfont btn_back;
     private javax.swing.ButtonGroup buttonGroup1;
@@ -534,7 +549,6 @@ public class FinancialView extends javax.swing.JPanel {
     private Components.JoCheckBoxUI joCheckBoxUI8;
     private Components.JoCheckBoxUI joCheckBoxUI9;
     private Components.JoLable joLable1;
-    private Components.JoLable joLable4;
     private Components.JoLable joLable5;
     private Components.JoLable joLable6;
     private Components.JoLable joLable7;
@@ -546,13 +560,16 @@ public class FinancialView extends javax.swing.JPanel {
     private Components.JoLable lblUserAuth;
     private Components.JoLable lbl_parents;
     private Components.JoLable lbl_title;
+    private Components.JoLable lblfood;
     private Components.JoLable lblshowDate;
+    private Components.JoLable lblslow;
     private javax.swing.JPanel pnSelectMonths;
     private javax.swing.JPanel pnShowMonth;
     private javax.swing.JPanel pn_Datatable;
     private Components.JoTable tb_data;
     private Components.JoTextArea txtComment;
     private Components.JoTextField txtDiscount;
+    private Components.JoTextField txtFood;
     private Components.JoTextField txtMoney;
     private Components.JoTextField txtOverPay;
     private Components.JoTextField txtTransferMoney;
