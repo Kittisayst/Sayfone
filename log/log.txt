@@ -104,3 +104,9 @@
 24/08/2023: DAO.FinancialDAO@7119f8a3 Errorjava.sql.SQLException: Statement parameter 13 not set.
 24/08/2023: DAO.FinancialDAO@801bd69 Errorjava.sql.SQLException: Statement parameter 13 not set.
 25/08/2023: DAO.FinancialDAO@2343bb3d Errorjava.sql.SQLException: Statement parameter 14 not set.
+26/08/2023: DAO.DistrictDAO@1cb53df3 Errorjava.sql.SQLException: Column Index out of range, 4 > 3. 
+26/08/2023: DAO.DistrictDAO@1cb53df3 Errorjava.sql.SQLException: Column Index out of range, 4 > 3. 
+26/08/2023: DAO.DistrictDAO@7c18cbe0 Errorjava.sql.SQLException: Column Index out of range, 4 > 3. 
+26/08/2023: DAO.DistrictDAO@7c18cbe0 Errorjava.sql.SQLException: Column Index out of range, 4 > 3. 
+26/08/2023: DAO.DistrictDAO@1437be2a Errorjava.sql.SQLException: Column Index out of range, 4 > 3. 
+26/08/2023: DAO.DistrictDAO@1437be2a Errorjava.sql.SQLException: Column Index out of range, 4 > 3. 
