@@ -149,6 +149,18 @@ public class DialogWithdraw extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnWithdrawActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWithdrawActionPerformed
+        int money = (int) new MyFormat().unFormatMoney(txtMoneyWithdraw.getText());
+        int transfer = (int) new MyFormat().unFormatMoney(txtTransferMoneyWithdraw.getText());
+        int resultMoney = moneyWithdow - money;
+        int resultTransfer = transferMoneyWithdraw - transfer;
+        System.out.println("money: " + resultMoney);
+        System.out.println("transfer: " + resultTransfer);
+        if (resultMoney == 0 && resultTransfer == 0) {
+
+        }else{
+            
+        }
+
 //        JoAlert alert = new JoAlert();
 //        alert.setButtonOption(new String[]{"ຢືນຢັນ", "ຍົກເລີກ"});
 //        int conff = alert.messages("ຢືນຢັນການຖອນເງິນ", "ໝາຍເຫດ: ຖ້າຫາກວ່າຖອນເງິນການຈ່າຍຄ່າຮຽນນີ້ຈະຖືກລະງັບ ແລະ ຈຳນວນເດືອນທີ່ລົງທະບຽນຈະຖືກຍົກເລີກ", JoAlert.Icons.warning);
