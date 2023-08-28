@@ -1,9 +1,10 @@
-package View;
+package Component;
 
 import Components.JoPasswordField;
 import DAOSevervice.UserService;
 import Model.UserModel;
 import Tools.JoAlert;
+import java.awt.event.KeyEvent;
 
 public class AuthenPopUp extends javax.swing.JDialog {
 
@@ -47,6 +48,11 @@ public class AuthenPopUp extends javax.swing.JDialog {
         joPanel1.add(btnAuthen, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, 170, -1));
 
         txt_Authen.setPlaceholder("Confirm Password");
+        txt_Authen.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_AuthenKeyPressed(evt);
+            }
+        });
         joPanel1.add(txt_Authen, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 350, -1));
 
         getContentPane().add(joPanel1, java.awt.BorderLayout.CENTER);
@@ -64,6 +70,18 @@ public class AuthenPopUp extends javax.swing.JDialog {
             setVisible(userModel.getUserID() == 0);
         }
     }//GEN-LAST:event_btnAuthenActionPerformed
+
+    private void txt_AuthenKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_AuthenKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (txt_Authen.TextEmpty()) {
+                userModel = new UserService().getUserByAuthenKey(txt_Authen.getText());
+                if (userModel.getUserID() == 0) {
+                    new JoAlert().messages("ກວດສວບລະຫັດຢືນຢັນ", "ລະຫັດຢືນຢັນບໍ່ຖືກຕ້ອງ", JoAlert.Icons.warning);
+                }
+                setVisible(userModel.getUserID() == 0);
+            }
+        }
+    }//GEN-LAST:event_txt_AuthenKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

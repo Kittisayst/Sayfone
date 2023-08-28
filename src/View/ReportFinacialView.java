@@ -4,8 +4,10 @@ import Components.JoButtonIconfont;
 import Components.JoDateChooser;
 import DAOSevervice.RegisterService;
 import DAOSevervice.StudentService;
+import DAOSevervice.UserService;
 import Model.RegisterModel;
 import Model.FinancialModel;
+import Model.GlobalDataModel;
 import Model.StudentModel;
 import Utility.MyFormat;
 import java.awt.Color;
@@ -21,21 +23,25 @@ public class ReportFinacialView extends javax.swing.JPanel {
     public void showDataReport(List<FinancialModel> models) {
         tb_data.JoClearModel();
         MyFormat format = new MyFormat();
+        RegisterService registerService = new RegisterService();
+        StudentService studentService = new StudentService();
+        UserService userService = new UserService();
         models.forEach(data -> {
-            RegisterService registerService = new RegisterService();
-            StudentService studentService = new StudentService();
             RegisterModel registerModel = registerService.getRegisterById(data.getRegisterID());
             StudentModel studentModel = studentService.getStudentById(data.getStudentID());
-            tb_data.AddJoModel(new Object[]{
-                tb_data.autoNumber(),
-                registerModel.getClassRoomName(),
-                studentModel.getStudentNo(),
-                studentModel.getFullName(),
-                format.getDate(data.getFinancialDate()),
-                format.formatMoney(data.getMoney()),
-                data.getFinancialMonth(),
-                data.getFinancialComment()
-            });
+            if (studentModel.getStudentName() != null) {
+                tb_data.AddJoModel(new Object[]{
+                    tb_data.autoNumber(),
+                    registerModel.getClassRoomName(),
+                    studentModel.getStudentNo(),
+                    studentModel.getFullName(),
+                    format.getDate(data.getFinancialDate()),
+                    format.formatMoney(data.getMoney()),
+                    data.getFinancialMonth(),
+                    data.getFinancialComment(),
+                    userService.getUserById(data.getUserID()).getFullName()
+                });
+            }
         });
         btnPrint.setEnabled(!models.isEmpty());
     }
@@ -43,21 +49,25 @@ public class ReportFinacialView extends javax.swing.JPanel {
     public void showDataReportTransfer(List<FinancialModel> models) {
         tb_data.JoClearModel();
         MyFormat format = new MyFormat();
+        RegisterService registerService = new RegisterService();
+        StudentService studentService = new StudentService();
+        UserService userService = new UserService();
         models.forEach(data -> {
-            RegisterService registerService = new RegisterService();
-            StudentService studentService = new StudentService();
             RegisterModel registerModel = registerService.getRegisterById(data.getRegisterID());
             StudentModel studentModel = studentService.getStudentById(data.getStudentID());
-            tb_data.AddJoModel(new Object[]{
-                tb_data.autoNumber(),
-                registerModel.getClassRoomName(),
-                studentModel.getStudentNo(),
-                studentModel.getFullName(),
-                format.getDate(data.getFinancialDate()),
-                format.formatMoney(data.getTransferMoney()),
-                data.getFinancialMonth(),
-                data.getFinancialComment()
-            });
+            if (studentModel.getStudentName() != null) {
+                tb_data.AddJoModel(new Object[]{
+                    tb_data.autoNumber(),
+                    registerModel.getClassRoomName(),
+                    studentModel.getStudentNo(),
+                    studentModel.getFullName(),
+                    format.getDate(data.getFinancialDate()),
+                    format.formatMoney(data.getTransferMoney()),
+                    data.getFinancialMonth(),
+                    data.getFinancialComment(),
+                    userService.getUserById(data.getUserID()).getFullName()
+                });
+            }
         });
         btnPrint.setEnabled(!models.isEmpty());
     }
@@ -212,11 +222,11 @@ public class ReportFinacialView extends javax.swing.JPanel {
 
             },
             new String [] {
-                "#", "ຫ້ອງຮຽນ", "ລະຫັດນັກສຶກສາ", "ຊື່ ແລະ ນາມສະກຸນ", "ວັນທີ່ເດີອນປີ", "ຈຳນວນເງິນ", "ເດືອນ", "ໝາຍເຫດ"
+                "#", "ຫ້ອງຮຽນ", "ລະຫັດນັກສຶກສາ", "ຊື່ ແລະ ນາມສະກຸນ", "ວັນທີ່ເດີອນປີ", "ຈຳນວນເງິນ", "ເດືອນ", "ໝາຍເຫດ", "ຜູ້ລົງບັນຊີ"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -229,6 +239,9 @@ public class ReportFinacialView extends javax.swing.JPanel {
             tb_data.getColumnModel().getColumn(0).setMinWidth(70);
             tb_data.getColumnModel().getColumn(0).setPreferredWidth(70);
             tb_data.getColumnModel().getColumn(0).setMaxWidth(70);
+            tb_data.getColumnModel().getColumn(1).setMinWidth(100);
+            tb_data.getColumnModel().getColumn(1).setPreferredWidth(100);
+            tb_data.getColumnModel().getColumn(1).setMaxWidth(100);
             tb_data.getColumnModel().getColumn(2).setMinWidth(80);
             tb_data.getColumnModel().getColumn(2).setPreferredWidth(80);
             tb_data.getColumnModel().getColumn(2).setMaxWidth(80);

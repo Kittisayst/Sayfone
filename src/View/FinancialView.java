@@ -258,6 +258,7 @@ public class FinancialView extends javax.swing.JPanel {
         txtTransferMoney = new Components.JoTextField();
         joLable8 = new Components.JoLable();
         btnAddTransfer = new Components.JoButton();
+        btnRefresh = new Components.JoButtonIconfont();
         pn_Datatable = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_data = new Components.JoTable();
@@ -567,13 +568,21 @@ public class FinancialView extends javax.swing.JPanel {
                 txtTransferMoneyKeyReleased(evt);
             }
         });
-        joPanel4.add(txtTransferMoney, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 210, 40));
+        joPanel4.add(txtTransferMoney, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 160, 40));
 
         joLable8.setText("ຈຳນວນເງິນສົດ");
         joPanel4.add(joLable8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 270, -1));
 
         btnAddTransfer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/bcel.png"))); // NOI18N
-        joPanel4.add(btnAddTransfer, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 180, 50, 40));
+        joPanel4.add(btnAddTransfer, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, 50, 40));
+
+        btnRefresh.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.REFRESH);
+        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshActionPerformed(evt);
+            }
+        });
+        joPanel4.add(btnRefresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(245, 179, 45, -1));
 
         jPanel1.add(joPanel4);
 
@@ -639,10 +648,17 @@ public class FinancialView extends javax.swing.JPanel {
         txtFood.setText(new MyFormat().formatMoney(txtFood.getText()));
     }//GEN-LAST:event_txtFoodKeyReleased
 
+    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
+        if (txtTransferMoney.getText().equals("0")) {
+            txtTransferMoney.setText("");
+        }
+    }//GEN-LAST:event_btnRefreshActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Pn_Navigation;
     private Components.JoButton btnAddTransfer;
+    private Components.JoButtonIconfont btnRefresh;
     private Components.JoButtonIconfont btnSave;
     private Components.JoButtonIconfont btn_back;
     private Components.JoCheckBox ckDiscount;

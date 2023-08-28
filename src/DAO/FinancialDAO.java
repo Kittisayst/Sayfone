@@ -202,9 +202,9 @@ public class FinancialDAO implements FinancialFn {
         JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         List<FinancialModel> models = new ArrayList<>();
         try {
-            PreparedStatement pre = sql.getSelectCustom("SaveDate=? AND Money>0  AND state=1");
+            PreparedStatement pre = sql.getSelectCustom("SaveDate=? AND Money>0  AND state=1 AND UserID=?");
             pre.setString(1, date);
-//            pre.setString(2, userID);
+            pre.setString(2, userID);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
                 models.add(resultModel(rs));
@@ -223,11 +223,11 @@ public class FinancialDAO implements FinancialFn {
         JoConnect connect = new JoConnect();
         List<FinancialModel> models = new ArrayList<>();
         try {
-            String sqlc = "SELECT * FROM tb_financial WHERE SaveDate >= ? AND SaveDate <= DATE_ADD(?, INTERVAL 6 DAY) AND Money>0  AND state=1";
+            String sqlc = "SELECT * FROM tb_financial WHERE SaveDate >= ? AND SaveDate <= DATE_ADD(?, INTERVAL 6 DAY) AND Money>0  AND state=1 AND UserID=?";
             PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sqlc);
             pre.setString(1, date);
             pre.setString(2, date);
-//            pre.setString(3, userID);
+            pre.setString(3, userID);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
                 models.add(resultModel(rs));
@@ -246,11 +246,11 @@ public class FinancialDAO implements FinancialFn {
         JoConnect connect = new JoConnect();
         List<FinancialModel> models = new ArrayList<>();
         try {
-            String sqlc = "SELECT * FROM tb_financial WHERE SaveDate BETWEEN ? AND ? AND Money>0  AND state=1";
+            String sqlc = "SELECT * FROM tb_financial WHERE SaveDate BETWEEN ? AND ? AND Money>0  AND state=1 AND UserID=?";
             PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sqlc);
             pre.setString(1, startDate);
             pre.setString(2, endDate);
-//            pre.setString(3, userID);
+            pre.setString(3, userID);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
                 models.add(resultModel(rs));
@@ -270,9 +270,9 @@ public class FinancialDAO implements FinancialFn {
         JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         List<FinancialModel> models = new ArrayList<>();
         try {
-            PreparedStatement pre = sql.getSelectCustom("SaveDate=? AND TransferMoney>0  AND state=1");
+            PreparedStatement pre = sql.getSelectCustom("SaveDate=? AND TransferMoney>0  AND state=1 AND UserID=?");
             pre.setString(1, date);
-//            pre.setString(2, userID);
+            pre.setString(2, userID);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
                 models.add(resultModel(rs));
@@ -291,11 +291,11 @@ public class FinancialDAO implements FinancialFn {
         JoConnect connect = new JoConnect();
         List<FinancialModel> models = new ArrayList<>();
         try {
-            String sqlc = "SELECT * FROM tb_financial WHERE SaveDate >= ? AND SaveDate <= DATE_ADD(?, INTERVAL 6 DAY) AND TransferMoney>0  AND state=1";
+            String sqlc = "SELECT * FROM tb_financial WHERE SaveDate >= ? AND SaveDate <= DATE_ADD(?, INTERVAL 6 DAY) AND TransferMoney>0  AND state=1 AND UserID=?";
             PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sqlc);
             pre.setString(1, date);
             pre.setString(2, date);
-//            pre.setString(3, userID);
+            pre.setString(3, userID);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
                 models.add(resultModel(rs));
@@ -314,11 +314,11 @@ public class FinancialDAO implements FinancialFn {
         JoConnect connect = new JoConnect();
         List<FinancialModel> models = new ArrayList<>();
         try {
-            String sqlc = "SELECT * FROM tb_financial WHERE SaveDate BETWEEN ? AND ? AND TransferMoney>0  AND state=1";
+            String sqlc = "SELECT * FROM tb_financial WHERE SaveDate BETWEEN ? AND ? AND TransferMoney>0  AND state=1 AND UserID=?";
             PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sqlc);
             pre.setString(1, startDate);
             pre.setString(2, endDate);
-//            pre.setString(3, userID);
+            pre.setString(3, userID);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
                 models.add(resultModel(rs));

@@ -151,4 +151,9 @@ public class FinancialModel {
         this.state = state;
     }
 
+    @Override
+    public String toString() {
+        return "FinancialModel{" + "FinancialIID=" + FinancialIID + ", RegisterID=" + RegisterID + ", StudentID=" + StudentID + ", Money=" + Money + ", TransferMoney=" + TransferMoney + ", FinancialDate=" + FinancialDate + ", FinancialMonth=" + FinancialMonth + ", FinancialComment=" + FinancialComment + ", AuthenUserID=" + AuthenUserID + ", Discount=" + Discount + ", OvertimePay=" + OvertimePay + ", UserID=" + UserID + ", foodMoney=" + foodMoney + ", state=" + state + '}';
+    }
+
 }

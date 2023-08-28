@@ -28,11 +28,11 @@ import Tools.JoIconFont;
 import Utility.JoJasperPrinter;
 import Utility.MyFormat;
 import Utility.MyPopup;
-import View.AuthenPopUp;
+import Component.AuthenPopUp;
+import Component.DialogTransferImage;
 import View.FinancialView;
 import View.HomeView;
 import java.awt.Component;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -69,9 +69,10 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
         this.registerModel = registerModel;
         popup = new MyPopup();
         popup.getItemshow().setText("ປີ້ນບິນ");
-        popup.getItemshow().setIcon(new JoIconFont().setIconFont(GoogleMaterialDesignIcons.PRINT, 25,JoTheme.Primary));
+        popup.getItemshow().setIcon(new JoIconFont().setIconFont(GoogleMaterialDesignIcons.PRINT, 25, JoTheme.Primary));
         popup.addMenuItem("ຂໍ້ມູນການໂອນ", GoogleMaterialDesignIcons.CLOUD_UPLOAD, MyColor.yellow700);
         popup.addMenuItem("ຖອນເງິນ", GoogleMaterialDesignIcons.SWAP_HORIZ, MyColor.cyan500);
+        popup.addMenuItem("ຮູບບິນໂອນເງິນ", GoogleMaterialDesignIcons.COLLECTIONS, MyColor.lime600);
     }
 
     @Override
@@ -121,6 +122,7 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
 
     @Override
     public void Create() {
+        view.getBtnSave().setEnabled(!view.getBtnSave().isEnabled());
         FinancialService service = new FinancialService();
         FileTransferService transferService = new FileTransferService();
         JoAlert alert = new JoAlert();
@@ -143,21 +145,26 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
                 }
             }
         }
-
+        view.getBtnSave().setEnabled(!view.getBtnSave().isEnabled());
     }
 
     @Override
     public void Update() {
+        view.getBtnSave().setEnabled(!view.getBtnSave().isEnabled());
         FinancialService service = new FinancialService();
         FileTransferService transferService = new FileTransferService();
         JoAlert alert = new JoAlert();
         if (!view.getTxtTransferMoney().getText().equals("0")) { //ກວດສອບຕ້ອງບັນທຶກການໂອນຫຼືບໍ່
             updateData(); // ຈັດເກັບຂໍ້ມູນໂອນຈາກ View
+            fileTranferModel.setFinancialID(financialModel.getFinancialIID());
             if (fileTranferModel.getFileTranferID() == 0) { // ກວດສອບມີການບັນທຶກເອກະສານເງິນໂອນຫຼືບໍ່
                 // ບັນທຶກຂໍ້ມູນການໂອນໃໝ່
-                fileTranferModel.setFinancialID(financialModel.getFinancialIID());
-                service.Update(financialModel);
-                alert.JoSubmit(transferService.Creater(fileTranferModel), JoAlert.INSERT);
+                if (fileTranferModel.getFile() == null) {
+                    alert.JoSubmit(service.Update(financialModel), JoAlert.UPDATE);
+                } else {
+                    System.out.println("create " + fileTranferModel);
+                    alert.JoSubmit(transferService.Creater(fileTranferModel), JoAlert.INSERT);
+                }
             } else {
                 // ແກ້ໄຂຂໍ້ມູນການໂອນໃໝ່
                 service.Update(financialModel);
@@ -175,6 +182,7 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
             }
         }
         AppFinancial appFinancial = new AppFinancial(registerModel, studentModel);
+        view.getBtnSave().setEnabled(!view.getBtnSave().isEnabled());
     }
 
     @Override
@@ -218,8 +226,10 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
             fileTranferModel = dialog.getTranferModel();
         } else if (event.isEvent(view.getBtnSave())) {  // ກົດປຸ່ມບັນທຶກ
             if (financialModel.getFinancialIID() == 0) {
+                System.out.println("create");
                 Create();
             } else {
+                System.out.println("update");
                 Update();
             }
         } else if (event.isEvent(popup.getItemshow())) { //ເມນູສະແດງ
@@ -274,6 +284,17 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
                 dialogWithdraw.setUserAuthen(userAuthen);
                 dialogWithdraw.setVisible(true);
             }
+        } else if (event.isEvent(popup.getMenuItem(5))) {
+            FileTransferService fileTransferService = new FileTransferService();
+            FileTranferModel ftm = fileTransferService.getFileTranferByFinancialID(view.getTb_data().getIntValue(1));
+            JoAlert alert = new JoAlert();
+            if (ftm.getFileTranferID() == 0) {
+                alert.messages("ຮູບບິນການໂອນ", "ບໍ່ມີຮູບການໂອນ", JoAlert.Icons.warning);
+            } else {
+                DialogTransferImage dialog = new DialogTransferImage(AppHome.viewParent, true, ftm.getImageIcon());
+                dialog.setVisible(true);
+            }
+            System.out.println(ftm);
         }
     }
 
