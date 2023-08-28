@@ -329,6 +329,8 @@ public class StudentDataView extends javax.swing.JPanel {
         lbl_AddImage.setJoIconColor(new java.awt.Color(153, 153, 153));
         lbl_AddImage.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.CAMERA_ALT);
         jPanel6.add(lbl_AddImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 90, -1, -1));
+
+        img_avatar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/sticon.png"))); // NOI18N
         jPanel6.add(img_avatar, new org.netbeans.lib.awtextra.AbsoluteConstraints(63, 11, 100, 100));
 
         joLable14.setText("ຊື່ຫຼີ້ນ");

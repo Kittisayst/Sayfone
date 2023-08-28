@@ -32,6 +32,7 @@ import View.AuthenPopUp;
 import View.FinancialView;
 import View.HomeView;
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -383,7 +384,7 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
         //ດຶງຂໍ້ມູນຜູ້ໃຊ້ງານ
         UserService userService = new UserService();
         UserModel userModel = userService.getUserById(financialModel.getAuthenUserID());
-        String authName = userModel.getUserID() == 0 ? "" : userModel.getFullName().toString();
+        String authName = userModel.getUserID() == 0 ? "" : userModel.getUserName();
         //ດຶງຂໍ້ມູນຜູ້ປີ້ນ
         String teacherLogin = GlobalDataModel.globalUsermodel.getFullName().toString();
         try {

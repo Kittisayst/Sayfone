@@ -72,6 +72,7 @@ public class StudentDataController implements JoMVC, ActionListener, MouseListen
 
     @Override
     public void Create() {
+        view.getBtn_Save().setEnabled(false);
         model.setStudentID(0);
         model.setStudentNo(service.getAutoStudentID()); // ໄອດີອັດຕະໂນມັດ
         model.setGender(view.getRd_male().isSelected() ? 1 : 0);
@@ -99,6 +100,7 @@ public class StudentDataController implements JoMVC, ActionListener, MouseListen
         JoAlert alert = new JoAlert();
         if (alert.JoSubmit(respon, JoAlert.INSERT)) {
             AppStudentData studentData = new AppStudentData(service.getSudentLastID());
+            view.getBtn_Save().setEnabled(true);
         }
     }
 

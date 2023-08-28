@@ -322,6 +322,8 @@ public void showNationality(List<NationalityModel> models) {
         lbl_AddImage.setJoIconColor(new java.awt.Color(153, 153, 153));
         lbl_AddImage.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.CAMERA_ALT);
         jPanel6.add(lbl_AddImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 90, -1, -1));
+
+        img_avatar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/tcicon.png"))); // NOI18N
         jPanel6.add(img_avatar, new org.netbeans.lib.awtextra.AbsoluteConstraints(63, 11, 100, 100));
 
         joLable14.setText("ຊື່ຫຼີ້ນ");
@@ -582,11 +584,11 @@ public void showNationality(List<NationalityModel> models) {
                             .addGroup(joPanelTitle2Layout.createSequentialGroup()
                                 .addComponent(rd_Complete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(rd_probation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(rd_probation, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(rd_unemployed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(joLable3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(36, 36, 36)
                         .addGroup(joPanelTitle2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(joLable13, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(joPanelTitle2Layout.createSequentialGroup()
@@ -596,7 +598,7 @@ public void showNationality(List<NationalityModel> models) {
                         .addGap(10, 10, 10)
                         .addGroup(joPanelTitle2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                             .addComponent(joLable18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txt_talent, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE))))
+                            .addComponent(txt_talent, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         joPanelTitle2Layout.setVerticalGroup(
@@ -726,7 +728,7 @@ public void showNationality(List<NationalityModel> models) {
                 .addContainerGap()
                 .addComponent(joPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(joPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 676, Short.MAX_VALUE)
+                .addComponent(joPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 778, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(

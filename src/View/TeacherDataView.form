@@ -128,7 +128,7 @@
                           <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Component id="joPanel1" min="-2" pref="311" max="-2" attributes="0"/>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
-                          <Component id="joPanel2" pref="676" max="32767" attributes="0"/>
+                          <Component id="joPanel2" pref="778" max="32767" attributes="0"/>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -248,6 +248,11 @@
                           </Constraints>
                         </Component>
                         <Container class="Components.JoImageAvatar" name="img_avatar">
+                          <Properties>
+                            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                              <Image iconType="3" name="/Source/tcicon.png"/>
+                            </Property>
+                          </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                               <AbsoluteConstraints x="63" y="11" width="100" height="100"/>
@@ -577,13 +582,13 @@
                                               <Group type="102" attributes="0">
                                                   <Component id="rd_Complete" min="-2" max="-2" attributes="0"/>
                                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                  <Component id="rd_probation" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <Component id="rd_probation" min="-2" pref="100" max="-2" attributes="0"/>
+                                                  <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                                                   <Component id="rd_unemployed" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                               <Component id="joLable3" max="32767" attributes="0"/>
                                           </Group>
-                                          <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="joLable13" min="-2" pref="150" max="-2" attributes="0"/>
                                               <Group type="102" attributes="0">
@@ -595,7 +600,7 @@
                                           <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="2" attributes="0">
                                               <Component id="joLable18" alignment="2" max="32767" attributes="0"/>
-                                              <Component id="txt_talent" alignment="2" pref="187" max="32767" attributes="0"/>
+                                              <Component id="txt_talent" alignment="2" pref="225" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>

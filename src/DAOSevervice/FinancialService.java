@@ -93,4 +93,8 @@ public class FinancialService {
         return aO.getUpdateWithdrawMonth(FinancialID);
     }
 
+    public boolean getStudentIsReister(int StudentID) {
+        return aO.getStudentIsReister(StudentID);
+    }
+
 }

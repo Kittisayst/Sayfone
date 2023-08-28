@@ -1,6 +1,7 @@
 package DAO;
 
 import DAOInterface.StudentFn;
+import DAOSevervice.FinancialService;
 import Database.JoConnect;
 import Database.JoSQL;
 import Log.JoLoger;
@@ -114,17 +115,40 @@ public class StudentDAO implements StudentFn {
     public int DeleteStudent(StudentModel model) {
         JoConnect connect = new JoConnect();
         JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
-        try {
-            PreparedStatement pre = sql.getDelete();
-            pre.setInt(1, model.getStudentID());
-            return pre.executeUpdate();
-        } catch (SQLException e) {
-            JoAlert.Error(e, this);
-            JoLoger.saveLog(e, this);
-            return 0;
-        } finally {
-            connect.close();
+        FinancialService service = new FinancialService();
+        if (service.getStudentIsReister(model.getStudentID())) {
+            JoAlert alert = new JoAlert();
+            alert.setButtonOption(JoAlert.Option.LAOS_YES_NO);
+            int conff = alert.messages("ຢືນຢັນການລືບ", "ນັກສຶກສານີ້ໄດ້ມີການລົງທະບຽນຮຽນ ຖ້າລົບນັກສຶກສາຂໍ້ມູນການລົງທະບຽນຈະຫາຍ", JoAlert.Icons.warning);
+            if (conff == 0) {
+                try {
+                    PreparedStatement pre = sql.getDelete();
+                    pre.setInt(1, model.getStudentID());
+                    return pre.executeUpdate();
+                } catch (SQLException e) {
+                    JoAlert.Error(e, this);
+                    JoLoger.saveLog(e, this);
+                    return 0;
+                } finally {
+                    connect.close();
+                }
+            } else {
+                return 0;
+            }
+        } else {
+            try {
+                PreparedStatement pre = sql.getDelete();
+                pre.setInt(1, model.getStudentID());
+                return pre.executeUpdate();
+            } catch (SQLException e) {
+                JoAlert.Error(e, this);
+                JoLoger.saveLog(e, this);
+                return 0;
+            } finally {
+                connect.close();
+            }
         }
+
     }
 
     @Override

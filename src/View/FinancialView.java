@@ -70,7 +70,7 @@ public class FinancialView extends javax.swing.JPanel {
         months.forEach((key, data) -> {
             JoLable lable = new JoLable();
             lable.setText(data);
-            lable.setFont(new Font("Phetsarath OT", 0, 10));
+            lable.setFont(new Font("Phetsarath OT", 0, 18));
             lable.setForeground(new Color(153, 255, 204));
             pnSelectMonths.add(lable);
             pnShowMonth.revalidate();
@@ -100,6 +100,7 @@ public class FinancialView extends javax.swing.JPanel {
             if (arr.length > 0) {
                 for (String str : arr) {
                     JCheckBox checkBox = (JCheckBox) pnShowMonth.getComponent(Integer.parseInt(str) - 1);
+                    checkBox.setFont(new Font("phetsarath ot", 0, 14));
                     checkBox.setSelected(true);
                     checkBox.setEnabled(false);
                 }
@@ -114,6 +115,7 @@ public class FinancialView extends javax.swing.JPanel {
             if (arr.length > 0) {
                 for (String str : arr) {
                     JCheckBox checkBox = (JCheckBox) pnShowMonth.getComponent(Integer.parseInt(str) - 1);
+                    checkBox.setFont(new Font("phetsarath ot", 0, 14));
                     checkBox.setSelected(true);
                     checkBox.setEnabled(true);
                 }
@@ -310,8 +312,6 @@ public class FinancialView extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         add(lbl_parents, gridBagConstraints);
-
-        jPanel1.setMaximumSize(new java.awt.Dimension(32767, 32767));
 
         joPanel2.setPreferredSize(new java.awt.Dimension(330, 300));
         joPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 10, 10));
@@ -554,7 +554,9 @@ public class FinancialView extends javax.swing.JPanel {
 
         pnSelectMonths.setBackground(new java.awt.Color(51, 51, 51));
         pnSelectMonths.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 204)));
-        pnSelectMonths.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+        pnSelectMonths.setToolTipText("");
+        pnSelectMonths.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        pnSelectMonths.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 10));
         joPanel4.add(pnSelectMonths, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 35, 270, 50));
 
         txtTransferMoney.setHorizontalAlignment(javax.swing.JTextField.RIGHT);

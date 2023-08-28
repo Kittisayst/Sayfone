@@ -19,6 +19,8 @@ public interface FinancialFn {
     public List<FinancialModel> getFinancialByStudentID(int RegisterID, int StudentID); // ດຶງຂໍ້ມູນເດຶອນຂອງນັກຮຽນທີ່ລົງທະບຽນໃນສົກປີ
 
     public List<FinancialModel> getStudentRegistered(int RegisterID);
+    
+    public boolean getStudentIsReister(int StudentID);
 
     public List<FinancialModel> getSearchStudentRegistered(int RegisterID, String search);
 
