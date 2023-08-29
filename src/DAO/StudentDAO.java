@@ -176,6 +176,32 @@ public class StudentDAO implements StudentFn {
     }
 
     @Override
+    public List<StudentModel> getAllStudent(int max) {
+        List<StudentModel> models = new ArrayList<>();
+        models.clear();
+        JoConnect connect = new JoConnect();
+        String sql  = "SELECT * FROM tb_student ORDER BY StudentID DESC LIMIT ?";
+        try {
+            PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sql);
+            pre.setInt(1, max);
+            try (ResultSet rs = pre.executeQuery()) {
+                while (rs.next()) {
+                    models.add(getResult(rs));
+                }
+            }
+        } catch (SQLException e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } catch (Exception ex) {
+            JoAlert.Error(ex, this);
+            JoLoger.saveLog(ex, this);
+        } finally {
+            connect.close();
+        }
+        return models;
+    }
+
+    @Override
     public StudentModel getStudentById(int StudentID) {
         StudentModel model = new StudentModel();
         JoConnect connect = new JoConnect();

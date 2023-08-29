@@ -1,6 +1,7 @@
 package DAO;
 
 import DAOInterface.RegisterFn;
+import DAOSevervice.YearService;
 import Database.JoConnect;
 import Database.JoSQL;
 import Log.JoLoger;
@@ -95,6 +96,27 @@ public class RegisterDAO implements RegisterFn {
                 statement.cancel();
             }
         } catch (SQLException e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
+        }
+        return models;
+    }
+
+    @Override
+    public List<RegisterModel> getRegisterLastYearAll() {
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
+        List<RegisterModel> models = new ArrayList<>();
+        YearService yearService = new YearService();
+        try {
+            int lastYearID = yearService.getLastYear().getYearID();
+            ResultSet rs = sql.getSelectByIndex(3, lastYearID);
+            while (rs.next()) {                
+                models.add(getResult(rs));
+            }
+        } catch (Exception e) {
             JoAlert.Error(e, this);
             JoLoger.saveLog(e, this);
         } finally {

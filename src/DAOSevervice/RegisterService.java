@@ -32,10 +32,12 @@ public class RegisterService {
         return aO.getCountRegister();
     }
 
-    public boolean getCheckClassRegister(int classID) { 
+    public boolean getCheckClassRegister(int classID) {
         return aO.getCheckClassRegister(classID);
     }
-    
-    
+
+    public List<RegisterModel> getRegisterLastYearAll() {
+        return aO.getRegisterLastYearAll();
+    }
 
 }

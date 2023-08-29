@@ -12,6 +12,8 @@ public interface StudentFn {
     public int DeleteStudent(StudentModel model);
 
     public List<StudentModel> getAllStudent();
+    
+    public List<StudentModel> getAllStudent(int max);
 
     public StudentModel getStudentById(int StudentID);
 

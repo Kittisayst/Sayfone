@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SayfoneBill" language="groovy" pageWidth="220" pageHeight="450" columnWidth="210" leftMargin="5" rightMargin="5" topMargin="5" bottomMargin="5" uuid="57154301-a25b-4480-9e2b-6ffdf54accdc">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SayfoneBill" language="groovy" pageWidth="220" pageHeight="440" columnWidth="210" leftMargin="5" rightMargin="5" topMargin="5" bottomMargin="5" uuid="57154301-a25b-4480-9e2b-6ffdf54accdc">
 	<property name="ireport.zoom" value="2.8531167061100082"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="433"/>
 	<parameter name="LogoPath" class="java.lang.String"/>
 	<parameter name="financiaID" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -48,9 +48,9 @@ WHERE FinancialID = $P{financiaID}]]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="138" splitType="Stretch">
+		<band height="118" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="109" width="207" height="29" uuid="26048721-1410-4125-a627-9e65f546ca24"/>
+				<reportElement x="0" y="89" width="207" height="29" uuid="26048721-1410-4125-a627-9e65f546ca24"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Phetsarath OT" size="12" isBold="true"/>
 				</textElement>
@@ -61,15 +61,15 @@ WHERE FinancialID = $P{financiaID}]]>
 				<imageExpression><![CDATA[$P{LogoPath}]]></imageExpression>
 			</image>
 			<textField>
-				<reportElement x="0" y="59" width="207" height="36" uuid="22970059-d2ec-415a-9bee-e8bebc9d0790"/>
+				<reportElement x="0" y="59" width="207" height="18" uuid="22970059-d2ec-415a-9bee-e8bebc9d0790"/>
 				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None">
-					<font fontName="Phetsarath OT" size="11" isBold="true"/>
+					<font fontName="Phetsarath OT" size="9" isBold="true"/>
 					<paragraph lineSpacing="AtLeast"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{School}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="97" width="207" height="12" uuid="cb7010f4-9ce9-46c1-87c6-92e5d53b52f1"/>
+				<reportElement x="-1" y="77" width="207" height="12" uuid="cb7010f4-9ce9-46c1-87c6-92e5d53b52f1"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font fontName="Phetsarath OT" size="6" isBold="true"/>
 				</textElement>
@@ -78,7 +78,7 @@ WHERE FinancialID = $P{financiaID}]]>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="262" splitType="Stretch">
+		<band height="276" splitType="Stretch">
 			<staticText>
 				<reportElement x="148" y="0" width="25" height="17" uuid="3f152fab-2f08-457b-9007-7d637a16efb5"/>
 				<textElement verticalAlignment="Middle">
@@ -150,14 +150,14 @@ WHERE FinancialID = $P{financiaID}]]>
 				<text><![CDATA[ໂອນ:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="112" y="182" width="35" height="16" uuid="d07e8a3a-3a24-4c28-9c95-136ed93101f6"/>
+				<reportElement x="112" y="188" width="35" height="16" uuid="d07e8a3a-3a24-4c28-9c95-136ed93101f6"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Phetsarath OT" size="9"/>
 				</textElement>
 				<text><![CDATA[ວັນເດືອນປີ:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="112" y="198" width="95" height="16" uuid="70bd5db2-065d-469f-b060-2d33422ec5e0"/>
+				<reportElement x="112" y="204" width="95" height="16" uuid="70bd5db2-065d-469f-b060-2d33422ec5e0"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Phetsarath OT" size="9" isUnderline="true"/>
 				</textElement>
@@ -244,7 +244,7 @@ WHERE FinancialID = $P{financiaID}]]>
 				<textFieldExpression><![CDATA[$F{Year}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="147" y="182" width="60" height="16" uuid="5b78bde6-4361-4ef3-867a-5d4e262f7414"/>
+				<reportElement x="147" y="188" width="60" height="16" uuid="5b78bde6-4361-4ef3-867a-5d4e262f7414"/>
 				<box leftPadding="2"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Phetsarath OT" size="9"/>
@@ -252,7 +252,7 @@ WHERE FinancialID = $P{financiaID}]]>
 				<textFieldExpression><![CDATA[$F{SaveDate}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="140" width="207" height="42" uuid="cd7be511-4cd5-442c-9059-f263daa03608"/>
+				<reportElement x="0" y="140" width="207" height="48" uuid="cd7be511-4cd5-442c-9059-f263daa03608"/>
 				<textElement verticalAlignment="Top">
 					<font fontName="Phetsarath OT" size="7" isUnderline="false" isStrikeThrough="false"/>
 				</textElement>
@@ -266,7 +266,7 @@ WHERE FinancialID = $P{financiaID}]]>
 				<textFieldExpression><![CDATA["ຜູ້ອະນຸມັດ: "+$P{UserAuthen}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="112" y="248" width="95" height="14" uuid="ce729527-8a6c-4304-b8bd-6ba2fd8bfcb8"/>
+				<reportElement x="112" y="262" width="95" height="14" uuid="ce729527-8a6c-4304-b8bd-6ba2fd8bfcb8"/>
 				<box rightPadding="4"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Phetsarath OT" size="8"/>
@@ -303,7 +303,7 @@ WHERE FinancialID = $P{financiaID}]]>
 				<textFieldExpression><![CDATA[$F{foodMoney}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="198" width="64" height="16" uuid="6df314c0-4817-46db-95d5-1c71af6f7ba5"/>
+				<reportElement x="0" y="204" width="64" height="16" uuid="6df314c0-4817-46db-95d5-1c71af6f7ba5"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Phetsarath OT" size="9" isUnderline="true"/>
 				</textElement>
@@ -312,16 +312,16 @@ WHERE FinancialID = $P{financiaID}]]>
 		</band>
 	</pageHeader>
 	<pageFooter>
-		<band height="40">
+		<band height="36">
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="0" y="31" width="207" height="9" uuid="a2d77a8f-aa64-4184-9572-94d25b16c555"/>
+				<reportElement x="0" y="27" width="207" height="9" uuid="a2d77a8f-aa64-4184-9572-94d25b16c555"/>
 				<textElement textAlignment="Center">
 					<font size="5"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="0" width="207" height="27" uuid="36de6f6c-6824-4342-80e5-127390e08640"/>
+				<reportElement x="-1" y="0" width="207" height="27" uuid="36de6f6c-6824-4342-80e5-127390e08640"/>
 				<box leftPadding="3"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Phetsarath OT" size="6"/>

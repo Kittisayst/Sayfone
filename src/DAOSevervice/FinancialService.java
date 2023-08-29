@@ -65,7 +65,7 @@ public class FinancialService {
         return aO.getLastClass(StudentID);
     }
 
-    public RegisterModel getLastRegister(int studentID) {
+    public FinancialModel getLastRegister(int studentID) {
         return aO.getLastRegister(studentID);
     }
 

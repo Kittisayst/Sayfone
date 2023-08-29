@@ -1,78 +1,70 @@
 package View;
 
-import Chart.PieChartUI;
-import Chart.PieChartUIModel;
 import Component.JoDashboardItem;
+import Components.JoButtonIconfont;
+import Components.JoCombobox;
+import Components.JoTable;
+import Components.JoTextField;
+import DAOSevervice.StudentService;
+import Model.FinancialModel;
+import Model.RegisterModel;
+import Model.StudentModel;
 import java.util.List;
 
 public class DasboardView extends javax.swing.JPanel {
-    
+
     public DasboardView() {
         initComponents();
     }
-    
+
     public void ShowStudentCount(int Count) {
         ds_Student.setItemTitle("" + Count);
     }
-    
+
     public void ShowTeacherCount(int Count) {
         ds_Teacher.setItemTitle("" + Count);
     }
-    
+
     public void showFinalcailCount(int countFinancial) {
         ds_Financail.setItemTitle("" + countFinancial);
     }
-    
+
     public void showRegisterCount(int countRegister) {
         ds_ClassRoom.setItemTitle("" + countRegister);
     }
-    
+
     public JoDashboardItem getDs_Student() {
         return ds_Student;
     }
-    
+
     public JoDashboardItem getDs_Teacher() {
         return ds_Teacher;
     }
-    
-    public PieChartUI getPieChartElementary() {
-        return PieChartKindergarten;
-    }
-    
-    public PieChartUI getPieChartKindergarten() {
-        return PieChartElementary;
-    }
-    
-    public PieChartUI getPieChartSecondary() {
-        return PieChartSecondary;
-    }
-    
+
     public JoDashboardItem getDs_ClassRoom() {
         return ds_ClassRoom;
     }
-    
+
     public JoDashboardItem getDs_Financail() {
         return ds_Financail;
     }
-    
-    public void showElementary(List<PieChartUIModel> models) {
-        models.forEach(data -> {
-            PieChartElementary.addData(data);
-        });
+
+    public JoButtonIconfont getBtnSearch() {
+        return btnSearch;
     }
-    
-    public void showKindergarten(List<PieChartUIModel> models) {
-        models.forEach(data -> {
-            PieChartKindergarten.addData(data);
-        });
+
+    public JoCombobox getCbClass() {
+        return cbClass;
     }
-    
-    public void showSecondary(List<PieChartUIModel> models) {
-        models.forEach(data -> {
-            PieChartSecondary.addData(data);
-        });
+
+    public JoTable getTbData() {
+        return tbData;
     }
-    
+
+    public JoTextField getTxtSearch() {
+        return txtSearch;
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -82,12 +74,14 @@ public class DasboardView extends javax.swing.JPanel {
         ds_Teacher = new Component.JoDashboardItem();
         ds_ClassRoom = new Component.JoDashboardItem();
         ds_Financail = new Component.JoDashboardItem();
-        joPanelTitle1 = new Components.JoPanelTitle();
-        PieChartElementary = new Chart.PieChartUI();
-        joPanelTitle2 = new Components.JoPanelTitle();
-        PieChartKindergarten = new Chart.PieChartUI();
-        joPanelTitle3 = new Components.JoPanelTitle();
-        PieChartSecondary = new Chart.PieChartUI();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbData = new Components.JoTable();
+        txtSearch = new Components.JoTextField();
+        btnSearch = new Components.JoButtonIconfont();
+        cbClass = new Components.JoCombobox();
+        joLable3 = new Components.JoLable();
+        joLable1 = new Components.JoLable();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 0, new java.awt.Color(0, 0, 0)), "Dashboard", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Phetsarath OT", 0, 18))); // NOI18N
 
@@ -120,7 +114,7 @@ public class DasboardView extends javax.swing.JPanel {
                 .addComponent(ds_Student, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(ds_Teacher, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addGap(18, 22, Short.MAX_VALUE)
                 .addComponent(ds_ClassRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 22, Short.MAX_VALUE)
                 .addComponent(ds_Financail, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -139,71 +133,78 @@ public class DasboardView extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        joPanelTitle1.setJoTitle("ນັກຮຽນ ອານຸບານ");
-        joPanelTitle1.setJoTitlePosition(Components.JoPanelTitle.JoTitlePosition.Center);
+        jPanel2.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 0, 0, 0, new java.awt.Color(0, 0, 0)));
 
-        PieChartElementary.setBackground(new java.awt.Color(204, 204, 204));
+        tbData.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
-        javax.swing.GroupLayout joPanelTitle1Layout = new javax.swing.GroupLayout(joPanelTitle1);
-        joPanelTitle1.setLayout(joPanelTitle1Layout);
-        joPanelTitle1Layout.setHorizontalGroup(
-            joPanelTitle1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, joPanelTitle1Layout.createSequentialGroup()
+            },
+            new String [] {
+                "#", "studentID", "ລະຫັດນັກຮຽນ", "ຊື່ ແລະ ນາມສະກຸນ"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tbData);
+        if (tbData.getColumnModel().getColumnCount() > 0) {
+            tbData.getColumnModel().getColumn(1).setMinWidth(0);
+            tbData.getColumnModel().getColumn(1).setPreferredWidth(0);
+            tbData.getColumnModel().getColumn(1).setMaxWidth(0);
+        }
+
+        txtSearch.setPlaceholder("ຄົ້ນຫານັກຮຽນ");
+
+        btnSearch.setText("ສະແດງ");
+        btnSearch.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnSearch.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.SEARCH);
+        btnSearch.setMargin(new java.awt.Insets(2, 5, 2, 5));
+
+        joLable3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        joLable3.setText("ຫ້ອງຮຽນ");
+        joLable3.setFont(new java.awt.Font("Phetsarath OT", 0, 14)); // NOI18N
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(PieChartElementary, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(joLable3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbClass, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-        joPanelTitle1Layout.setVerticalGroup(
-            joPanelTitle1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(joPanelTitle1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(PieChartElementary, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(50, 50, 50))
-        );
-
-        joPanelTitle2.setJoTitle("ນັກຮຽນ ປະຖົມ");
-        joPanelTitle2.setJoTitlePosition(Components.JoPanelTitle.JoTitlePosition.Center);
-
-        PieChartKindergarten.setBackground(new java.awt.Color(204, 204, 204));
-
-        javax.swing.GroupLayout joPanelTitle2Layout = new javax.swing.GroupLayout(joPanelTitle2);
-        joPanelTitle2.setLayout(joPanelTitle2Layout);
-        joPanelTitle2Layout.setHorizontalGroup(
-            joPanelTitle2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, joPanelTitle2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(PieChartKindergarten, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbClass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(joLable3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 446, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        joPanelTitle2Layout.setVerticalGroup(
-            joPanelTitle2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(joPanelTitle2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(PieChartKindergarten, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
-                .addGap(50, 50, 50))
-        );
 
-        joPanelTitle3.setJoTitle("ນັກຮຽນ ມັດທະຍົມ");
-        joPanelTitle3.setJoTitlePosition(Components.JoPanelTitle.JoTitlePosition.Center);
-
-        PieChartSecondary.setBackground(new java.awt.Color(204, 204, 204));
-
-        javax.swing.GroupLayout joPanelTitle3Layout = new javax.swing.GroupLayout(joPanelTitle3);
-        joPanelTitle3.setLayout(joPanelTitle3Layout);
-        joPanelTitle3Layout.setHorizontalGroup(
-            joPanelTitle3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, joPanelTitle3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(PieChartSecondary, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        joPanelTitle3Layout.setVerticalGroup(
-            joPanelTitle3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(joPanelTitle3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(PieChartSecondary, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
-                .addGap(50, 50, 50))
-        );
+        joLable1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        joLable1.setText("ຂໍ້ມູນນັກຮຽນ");
+        joLable1.setFont(new java.awt.Font("Phetsarath OT", 0, 24)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -211,41 +212,54 @@ public class DasboardView extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addComponent(joPanelTitle1, javax.swing.GroupLayout.DEFAULT_SIZE, 333, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(joPanelTitle2, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(joPanelTitle3, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
-                .addGap(46, 46, 46))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(joLable1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(joPanelTitle3, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
-                    .addComponent(joPanelTitle2, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
-                    .addComponent(joPanelTitle1, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE))
-                .addGap(152, 152, 152))
+                .addGap(36, 36, 36)
+                .addComponent(joLable1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private Chart.PieChartUI PieChartElementary;
-    private Chart.PieChartUI PieChartKindergarten;
-    private Chart.PieChartUI PieChartSecondary;
+    private Components.JoButtonIconfont btnSearch;
+    private Components.JoCombobox cbClass;
     private Component.JoDashboardItem ds_ClassRoom;
     private Component.JoDashboardItem ds_Financail;
     private Component.JoDashboardItem ds_Student;
     private Component.JoDashboardItem ds_Teacher;
     private javax.swing.JPanel jPanel1;
-    private Components.JoPanelTitle joPanelTitle1;
-    private Components.JoPanelTitle joPanelTitle2;
-    private Components.JoPanelTitle joPanelTitle3;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private Components.JoLable joLable1;
+    private Components.JoLable joLable3;
+    private Components.JoTable tbData;
+    private Components.JoTextField txtSearch;
     // End of variables declaration//GEN-END:variables
+
+    public void showClassRoom(List<RegisterModel> models) {
+        models.forEach(data -> {
+            cbClass.JoAddIntModel(data.getRegisterID(), data.getClassRoomName());
+        });
+    }
+
+    public void showTableData(List<StudentModel> models) {
+        tbData.JoClearModel();
+        models.forEach(data -> {
+            tbData.AddJoModel(new Object[]{tbData.autoNumber(), data.getStudentID(), data.getStudentNo(), data.getFullName()});
+        });
+
+    }
 
 }

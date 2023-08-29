@@ -360,8 +360,24 @@ public class FinancialDAO implements FinancialFn {
     }
 
     @Override
-    public RegisterModel getLastRegister(int studentID) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public FinancialModel getLastRegister(int studentID) {
+        FinancialModel financialModel = new FinancialModel();
+        JoConnect connect = new JoConnect();
+        String sql = "SELECT *, MAX(FinancialID)AS maxID FROM tb_financial WHERE StudentID=?";
+        try {
+            PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sql);
+            pre.setInt(1, studentID);
+            ResultSet rs = pre.executeQuery();
+            if (rs.next()) {
+                financialModel = resultModel(rs);
+            }
+        } catch (Exception e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
+        }
+        return financialModel;
     }
 
     @Override

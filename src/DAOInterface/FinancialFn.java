@@ -40,7 +40,7 @@ public interface FinancialFn {
 
     public String getLastClass(int StudentID);
 
-    public RegisterModel getLastRegister(int studentID);
+    public FinancialModel getLastRegister(int studentID);
 
     public String getPayMonth(int RegisterID, int StudentID);
 

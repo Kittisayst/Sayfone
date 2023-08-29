@@ -24,6 +24,10 @@ public class StudentService {
         return aO.getAllStudent();
     }
 
+    public List<StudentModel> getAllStudent(int max) {
+        return aO.getAllStudent(max);
+    }
+
     public StudentModel getStudentById(int StudentID) {
         return aO.getStudentById(StudentID);
     }
@@ -67,7 +71,5 @@ public class StudentService {
     public List<StudentModel> getSearchSutdentNotRegister(int YearID, String search) {
         return aO.getSearchSutdentNotRegister(YearID, search);
     }
-    
-    
 
 }

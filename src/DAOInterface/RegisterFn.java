@@ -13,9 +13,11 @@ public interface RegisterFn {
 
     public List<RegisterModel> getRegisterAll();
 
+    public List<RegisterModel> getRegisterLastYearAll();
+
     public RegisterModel getRegisterById(int ID);
-    
+
     public int getCountRegister();
-    
+
     public boolean getCheckClassRegister(int classID);
 }

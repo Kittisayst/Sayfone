@@ -1,5 +1,6 @@
 package Controller;
 
+import App.AppFinancial;
 import App.AppFinancialRoom;
 import App.AppRegister;
 import App.AppStudent;
@@ -8,13 +9,23 @@ import DAOSevervice.FinancialService;
 import DAOSevervice.RegisterService;
 import DAOSevervice.StudentService;
 import DAOSevervice.TeacherService;
+import Model.FinancialModel;
+import Model.RegisterModel;
+import Model.StudentModel;
+import Tools.JoAlert;
 import Tools.JoHookEvent;
 import View.DasboardView;
 import View.HomeView;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.List;
 
-public class DasboardController implements JoMVC, MouseListener {
+public class DasboardController implements JoMVC, MouseListener, ActionListener, ItemListener {
 
     private final DasboardView view;
     private final StudentService studentService;
@@ -27,7 +38,7 @@ public class DasboardController implements JoMVC, MouseListener {
         studentService = new StudentService();
         teacherService = new TeacherService();
         financialService = new FinancialService();
-        registerService  = new RegisterService();
+        registerService = new RegisterService();
         Start();
         AddEvent();
     }
@@ -39,6 +50,10 @@ public class DasboardController implements JoMVC, MouseListener {
         view.ShowTeacherCount(teacherService.getTeacherCount());
         view.showFinalcailCount(financialService.getCountFinancial());
         view.showRegisterCount(registerService.getCountRegister());
+        view.showClassRoom(new RegisterService().getRegisterLastYearAll());
+        view.getTbData().addMouseListener(this);
+        view.getBtnSearch().addActionListener(this);
+        showStudentAll();
     }
 
     @Override
@@ -47,6 +62,8 @@ public class DasboardController implements JoMVC, MouseListener {
         view.getDs_Teacher().getLbl_more().addMouseListener(this);
         view.getDs_Financail().getLbl_more().addMouseListener(this);
         view.getDs_ClassRoom().getLbl_more().addMouseListener(this);
+        view.getBtnSearch().addActionListener(this);
+        view.getCbClass().addItemListener(this);
     }
 
     @Override
@@ -81,12 +98,30 @@ public class DasboardController implements JoMVC, MouseListener {
             AppStudent appStudent = new AppStudent();
         } else if (event.isEvent(view.getDs_Teacher().getLbl_more())) {
             AppTeacher appTeacher = new AppTeacher();
-        }else if (event.isEvent(view.getDs_Financail().getLbl_more())) {
+        } else if (event.isEvent(view.getDs_Financail().getLbl_more())) {
             AppFinancialRoom room = new AppFinancialRoom();
             room.open();
-        }else if (event.isEvent(view.getDs_ClassRoom().getLbl_more())) {
+        } else if (event.isEvent(view.getDs_ClassRoom().getLbl_more())) {
             AppRegister appRegister = new AppRegister();
             appRegister.OpenRegister();
+        } else if (event.isEvent(view.getTbData())) {
+            if (e.getClickCount() == 2) {
+                int studentID = view.getTbData().getIntValue(1);
+                FinancialModel financialModel = financialService.getLastRegister(studentID);
+                if (financialModel.getFinancialIID() == 0) {
+                    JoAlert alert = new JoAlert();
+                    alert.setButtonOption(new String[]{"ເລືອນຫ້ອງຮຽນ", "ຍົກເລີກ"});
+                    int conff = alert.messages("ລົງທະບຽນ", "ນັກຮຽນຍັງບໍ່ທັນໄດ້ລົງທະບຽນ ຕ້ອງການເລືອກຫ້ອງລົງທະບຽນຫຼືບໍ່", JoAlert.Icons.warning);
+                    if (conff == 0) {
+                        AppFinancialRoom financialRoom = new AppFinancialRoom();
+                        financialRoom.open();
+                    }
+                } else {
+                    RegisterModel registerModel = registerService.getRegisterById(financialModel.getRegisterID());
+                    StudentModel studentModel = studentService.getStudentById(studentID);
+                    AppFinancial appFinancial = new AppFinancial(registerModel, studentModel);
+                }
+            }
         }
     }
 
@@ -105,4 +140,32 @@ public class DasboardController implements JoMVC, MouseListener {
 
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JoHookEvent event = new JoHookEvent(e.getSource());
+        if (event.isEvent(view.getBtnSearch())) {
+            view.showTableData(new StudentService().getSearchStudent(view.getTxtSearch().getText()));
+        }
+    }
+
+    @Override
+    public void itemStateChanged(ItemEvent e) {
+        JoHookEvent event = new JoHookEvent(e.getSource());
+        if (event.isEvent(view.getCbClass())) {
+            showStudentByClassRoom();
+        }
+    }
+
+    private void showStudentAll() {
+        view.showTableData(new StudentService().getAllStudent(25));
+    }
+
+    private void showStudentByClassRoom() {
+        List<StudentModel> studentList = new ArrayList<>();
+        List<FinancialModel> models = financialService.getStudentRegistered(view.getCbClass().getKeyInt());
+        models.forEach(data -> {
+            studentList.add(studentService.getStudentById(data.getStudentID()));
+        });
+        view.showTableData(studentList);
+    }
 }
