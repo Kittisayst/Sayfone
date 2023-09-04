@@ -2,20 +2,28 @@ package Controller;
 
 import App.AppFinancial;
 import App.AppFinancialRoom;
+import App.AppHome;
+import Component.DialogChangeClassRoom;
 import DAOSevervice.FinancialService;
 import DAOSevervice.StudentService;
 import Model.FinancialModel;
 import Model.RegisterModel;
 import Model.StudentModel;
 import Tools.JoHookEvent;
+import Tools.JoIconFont;
+import Utility.MyPopup;
 import View.HomeView;
 import View.FinancailStudentView;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
+import jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons;
+import theme.JoTheme;
+import theme.MyColor;
 
 public class FinancailStudentController implements JoMVC, ActionListener, MouseListener {
 
@@ -25,11 +33,16 @@ public class FinancailStudentController implements JoMVC, ActionListener, MouseL
     private int totalPages;
     private StudentService studentService;
     private boolean buttonState = true;
+    private MyPopup popup;
 
     public FinancailStudentController(FinancailStudentView view, RegisterModel registerModel) {
         this.view = view;
         this.registerModel = registerModel;
         studentService = new StudentService();
+        popup = new MyPopup();
+        popup.getItemEdit().setText("ຍ້າຍຫ້ອງຮຽນ");
+        popup.getItemEdit().setIcon(new JoIconFont().setIconFont(GoogleMaterialDesignIcons.ARCHIVE, 25, MyColor.green700));
+        popup.getItemDelete().setVisible(false);
     }
 
     @Override
@@ -51,6 +64,7 @@ public class FinancailStudentController implements JoMVC, ActionListener, MouseL
         view.getBtnPrevious().addActionListener(this);
         view.getBtnNext().addActionListener(this);
         view.getBtnSearch().addActionListener(this);
+        popup.addActionListener(this);
     }
 
     @Override
@@ -95,6 +109,13 @@ public class FinancailStudentController implements JoMVC, ActionListener, MouseL
             navigateNext();
         } else if (event.isEvent(view.getBtnSearch())) {
             searchStudent();
+        } else if (event.isEvent(popup.getItemshow())) {
+            StudentModel studentModel = studentService.getStudentById(view.getTb_data().getIntValue(1));
+            AppFinancial app = new AppFinancial(registerModel, studentModel);
+        } else if (event.isEvent(popup.getItemEdit())) {
+            int studentID = view.getTb_data().getIntValue(currentPage);
+            DialogChangeClassRoom classRoom = new DialogChangeClassRoom(AppHome.viewParent, true, registerModel, studentID);
+            classRoom.setVisible(true);
         }
     }
 
@@ -103,7 +124,6 @@ public class FinancailStudentController implements JoMVC, ActionListener, MouseL
         JoHookEvent event = new JoHookEvent(e.getSource());
         if (event.isEvent(view.getTb_data())) {
             if (e.getClickCount() == 2) {
-                StudentService studentService = new StudentService();
                 StudentModel studentModel = studentService.getStudentById(view.getTb_data().getIntValue(1));
                 AppFinancial app = new AppFinancial(registerModel, studentModel);
             }
@@ -120,7 +140,10 @@ public class FinancailStudentController implements JoMVC, ActionListener, MouseL
 
     @Override
     public void mouseReleased(MouseEvent e) {
-
+        JoHookEvent event = new JoHookEvent(e.getSource());
+        if (event.isEvent(view.getTb_data())) {
+            popup.ShowPopup(e);
+        }
     }
 
     @Override

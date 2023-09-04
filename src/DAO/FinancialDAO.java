@@ -5,7 +5,6 @@ import Database.JoConnect;
 import Database.JoSQL;
 import Log.JoLoger;
 import Model.FinancialModel;
-import Model.RegisterModel;
 import java.util.List;
 import Tools.JoAlert;
 import Utility.JoPrepared;
@@ -66,6 +65,25 @@ public class FinancialDAO implements FinancialFn {
                     model.getFoodMoney(),
                     model.getFinancialIID()
             );
+            return pre.executeUpdate();
+        } catch (SQLException e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+            return 0;
+        } finally {
+            connect.close();
+        }
+    }
+
+    @Override
+    public int UpdateClassRoom(int RegisterOldClassID, int RegisterNewClassID, int StudentID) {
+        JoConnect connect = new JoConnect();
+        String sql = "UPDATE tb_financial SET RegisterID=? WHERE RegisterID=? AND StudentID=?";
+        try {
+            PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sql);
+            pre.setInt(1, RegisterNewClassID);
+            pre.setInt(2, RegisterOldClassID);
+            pre.setInt(3, StudentID);
             return pre.executeUpdate();
         } catch (SQLException e) {
             JoAlert.Error(e, this);

@@ -2,7 +2,6 @@ package DAOSevervice;
 
 import DAO.FinancialDAO;
 import Model.FinancialModel;
-import Model.RegisterModel;
 import java.util.List;
 
 public class FinancialService {
@@ -15,6 +14,10 @@ public class FinancialService {
 
     public int Update(FinancialModel model) {
         return aO.Update(model);
+    }
+
+    public int UpdateClassRoom(int RegisterOldClassID, int RegisterNewClassID, int StudentID) {
+        return aO.UpdateClassRoom(RegisterOldClassID, RegisterNewClassID, StudentID);
     }
 
     public int Delete(FinancialModel model) {

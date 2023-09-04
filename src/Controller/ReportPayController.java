@@ -2,6 +2,7 @@ package Controller;
 
 import App.AppDashboard;
 import DAOSevervice.FinancialService;
+import DAOSevervice.RegisterService;
 import DAOSevervice.YearService;
 import Model.FinancialModel;
 import Tools.JoHookEvent;
@@ -9,8 +10,10 @@ import View.HomeView;
 import View.ReportPayView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
-public class ReportPayController implements JoMVC, ActionListener {
+public class ReportPayController implements JoMVC, ActionListener, ItemListener {
 
     private final ReportPayView view;
     private final FinancialModel model;
@@ -25,14 +28,15 @@ public class ReportPayController implements JoMVC, ActionListener {
         HomeView.MyRouter.setRouter(view);
         view.showYear(new YearService().getYearAll());
         view.getCbYear().setSelectedIndex(new YearService().getYearAll().size() - 1);
-        FinancialService financialService = new FinancialService();
-        view.showReportPay(financialService.getFinancialFree(view.getCbYear().getKeyInt()));
+        view.showClassRoom(new RegisterService().getRegisterAllByYearID(view.getCbYear().getKeyInt()));
+//        view.showReportPay(financialService.getFinancialFree(view.getCbYear().getKeyInt()));
     }
 
     @Override
     public void AddEvent() {
         view.getBtn_back().addActionListener(this);
         view.getBtnShow().addActionListener(this);
+        view.getCbYear().addItemListener(this);
     }
 
     @Override
@@ -63,6 +67,14 @@ public class ReportPayController implements JoMVC, ActionListener {
         } else if (event.isEvent(view.getBtnShow())) {
             FinancialService financialService = new FinancialService();
             view.showReportPay(financialService.getFinancialFree(view.getCbYear().getKeyInt()));
+        }
+    }
+
+    @Override
+    public void itemStateChanged(ItemEvent e) {
+        JoHookEvent event = new JoHookEvent(e.getSource());
+        if (event.isEvent(view.getCbYear())) {
+            view.showClassRoom(new RegisterService().getRegisterAllByYearID(view.getCbYear().getKeyInt()));
         }
     }
 

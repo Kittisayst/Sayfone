@@ -13,6 +13,8 @@ public interface RegisterFn {
 
     public List<RegisterModel> getRegisterAll();
 
+    public List<RegisterModel> getRegisterAllByYearID(int YearID);
+
     public List<RegisterModel> getRegisterLastYearAll();
 
     public RegisterModel getRegisterById(int ID);

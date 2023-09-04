@@ -10,14 +10,12 @@ import Model.FinancialModel;
 import Model.RegisterModel;
 import Model.StudentModel;
 import Model.YearModel;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
+import Utility.MonthCaculator;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class ReportPayView extends javax.swing.JPanel {
+
+    String month = "";
 
     public ReportPayView(String Title) {
         initComponents();
@@ -40,19 +38,28 @@ public class ReportPayView extends javax.swing.JPanel {
         return cbYear;
     }
 
+    public JoCombobox getCbMonth() {
+        return cbMonth;
+    }
+
     public void showYear(List<YearModel> models) {
         models.forEach(data -> {
             cbYear.JoAddIntModel(data.getYearID(), data.getYear());
         });
     }
-    int overMoney = 0;
-    int payMoney = 0;
+
+    public void showClassRoom(List<RegisterModel> models) {
+        cbMonth.JoClearData();
+        models.forEach(data -> {
+            cbMonth.JoAddIntModel(data.getRegisterID(), data.getClassRoomName());
+        });
+    }
 
     public void showReportPay(List<FinancialModel> models) {
         updateTable();
         try {
             models.forEach(model -> {
-                addData(model);
+                tb_data.AddJoModel(new Object[]{tb_data.autoNumber(), model.getStudentID()});
             });
         } catch (Exception e) {
             e.printStackTrace();
@@ -73,99 +80,26 @@ public class ReportPayView extends javax.swing.JPanel {
             registerModel.getYearModel().getYear(),});
     }
 
-    String str = "";
-
     private String getMonths(FinancialModel model) {
         FinancialService service = new FinancialService();
+        MonthCaculator monthCaculator = new MonthCaculator();
         List<FinancialModel> financialModels = service.getFinancialByStudentID(model.getRegisterID(), model.getStudentID());
         if (financialModels.size() <= 1) {
             String payMonth = model.getFinancialMonth();
-            String monthMiss = findMissingNumbers(payMonth); // ຫາຂໍ້ມູນເດືອນທີ່ຄ້າງຈ່າຍ
+            String monthMiss = monthCaculator.getMissingMonth(payMonth); // ຫາຂໍ້ມູນເດືອນທີ່ຄ້າງຈ່າຍ
             return monthMiss;
         } else {
             financialModels.forEach(data -> {
-                str += data.getFinancialMonth();
+                month += data.getFinancialMonth();
             });
             // Remove the square brackets and split the string into parts
-            String val = convertString(str); // ປ່ຽນເປັນ String
+            String val = monthCaculator.getSumMonth(month); // ປ່ຽນເປັນ String
             // Concatenate the parts into a single string
-            String sortNumber = ArrangeNumber(val); //ລຽງຕົວເລກໃຫ້ເປັນລຳດັບ
-            String monthMiss = findMissingNumbers(sortNumber); // ຫາຂໍ້ມູນເດືອນທີ່ຄ້າງຈ່າຍ
-            str = ""; // ລ້າງຂໍ້ມູນເດືອນ
+            String sortNumber = monthCaculator.getArrangeMonth(val); //ລຽງຕົວເລກໃຫ້ເປັນລຳດັບ
+            String monthMiss = monthCaculator.getMissingMonth(sortNumber); // ຫາຂໍ້ມູນເດືອນທີ່ຄ້າງຈ່າຍ
+            month = ""; // ລ້າງຂໍ້ມູນເດືອນ
             return monthMiss;
         }
-    }
-
-    private String convertString(String input) { //ລວມເດືອນ
-        Pattern pattern = Pattern.compile("\\d+");
-        Matcher matcher = pattern.matcher(input);
-        StringBuilder output = new StringBuilder();
-        while (matcher.find()) {
-            output.append(matcher.group()).append(", ");
-        }
-        output.setLength(output.length() - 2);
-        return "[" + output.toString() + "]";
-    }
-
-    private String ArrangeNumber(String str) { // ລຽງຕົວເລກເດືອນຕາມລະດັບ
-        String data = str;
-        if (str.equals("[]")) {
-            return "[]";
-        } else {
-            String[] numbersArray = data.substring(1, data.length() - 1).split(", ");
-            int[] numbers = new int[numbersArray.length];
-            for (int i = 0; i < numbersArray.length; i++) {
-                numbers[i] = Integer.parseInt(numbersArray[i]);
-            }
-            Arrays.sort(numbers);
-            ArrayList strlist = new ArrayList();
-            for (int num : numbers) {
-                strlist.add(num);
-            }
-            return strlist.toString();
-        }
-    }
-
-    private int count(String str) {
-        String data = str;
-        String[] numbersArray = data.substring(1, data.length() - 1).split(", ");
-        System.out.println(numbersArray.length);
-        return numbersArray.length;
-    }
-
-    private String findMissingNumbers(String missingValue) {
-        String value = "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]";
-        if (missingValue.equals("[]")) {
-            return value;
-        } else {
-            List<Integer> missingNumbers = new ArrayList<>();
-            // Convert the string values to arrays of integers
-            int[] numbers = parseArray(value);
-            int[] missingNumbersArray = parseArray(missingValue);
-            // Create a HashSet to store the missing numbers
-            HashSet<Integer> missingSet = new HashSet<>();
-            for (int num : missingNumbersArray) {
-                missingSet.add(num);
-            }
-            // Iterate over the numbers array and check for missing values
-            for (int num : numbers) {
-                if (!missingSet.contains(num)) {
-                    missingNumbers.add(num);
-                }
-            }
-            String payFull = missingNumbers.toString();
-            return payFull.equals("[]") ? "ຈ່າຍຄົບຖ້ວນ" : payFull;
-        }
-    }
-
-    private int[] parseArray(String value) {
-        String[] numberStrings = value.substring(1, value.length() - 1).split(", ");
-        // Convert the string values to integers
-        int[] numbers = new int[numberStrings.length];
-        for (int i = 0; i < numberStrings.length; i++) {
-            numbers[i] = Integer.parseInt(numberStrings[i].trim());
-        }
-        return numbers;
     }
 
     private void updateTable() {
@@ -192,8 +126,9 @@ public class ReportPayView extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         joLable1 = new Components.JoLable();
         cbYear = new Components.JoCombobox();
+        joLable2 = new Components.JoLable();
+        cbMonth = new Components.JoCombobox();
         btnShow = new Components.JoButtonIconfont();
-        joButtonIconfont1 = new Components.JoButtonIconfont();
 
         Pn_Navigation.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
         Pn_Navigation.setLayout(new java.awt.GridLayout(1, 0));
@@ -224,11 +159,11 @@ public class ReportPayView extends javax.swing.JPanel {
 
             },
             new String [] {
-                "#", "ID", "ຊື່ ແລະ ນາມສະກຸນ", "ຫ້ອງຮຽນ", "ຄ້າງເດືອນ", "ສົກຮຽນ", "ລວມຄ່າຈ່າຍຊ້າ", "ລວມເງິນທີ່ຕ້ອງຈ່າຍທັງໝົດ"
+                "#", "ID", "ຊື່ ແລະ ນາມສະກຸນ", "ຫ້ອງຮຽນ", "ຄ້າງເດືອນ", "ສົກຮຽນ"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -244,11 +179,16 @@ public class ReportPayView extends javax.swing.JPanel {
 
         pn_Datatable.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
-        jPanel1.setLayout(new java.awt.GridBagLayout());
+        java.awt.GridBagLayout jPanel1Layout = new java.awt.GridBagLayout();
+        jPanel1Layout.columnWidths = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0};
+        jPanel1Layout.rowHeights = new int[] {0};
+        jPanel1.setLayout(jPanel1Layout);
 
         joLable1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         joLable1.setText("ສົກປີຮຽນ");
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.weighty = 0.1;
@@ -257,23 +197,35 @@ public class ReportPayView extends javax.swing.JPanel {
 
         cbYear.setPreferredSize(new java.awt.Dimension(100, 25));
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
         gridBagConstraints.weighty = 0.1;
         gridBagConstraints.insets = new java.awt.Insets(2, 10, 2, 2);
         jPanel1.add(cbYear, gridBagConstraints);
 
+        joLable2.setText("ຫ້ອງຮຽນ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 0;
+        jPanel1.add(joLable2, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 39;
+        gridBagConstraints.insets = new java.awt.Insets(2, 9, 2, 2);
+        jPanel1.add(cbMonth, gridBagConstraints);
+
         btnShow.setText("ສະແດງ");
         btnShow.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.SEARCH);
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
         gridBagConstraints.weighty = 0.1;
         gridBagConstraints.insets = new java.awt.Insets(2, 10, 2, 10);
         jPanel1.add(btnShow, gridBagConstraints);
-
-        joButtonIconfont1.setBackground(new java.awt.Color(0, 102, 102));
-        joButtonIconfont1.setText("ກຳນົດຄ່າຮຽນ");
-        joButtonIconfont1.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.SETTINGS);
-        jPanel1.add(joButtonIconfont1, new java.awt.GridBagConstraints());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -302,14 +254,15 @@ public class ReportPayView extends javax.swing.JPanel {
     private javax.swing.JPanel Pn_Navigation;
     private Components.JoButtonIconfont btnShow;
     private Components.JoButtonIconfont btn_back;
+    private Components.JoCombobox cbMonth;
     private Components.JoCombobox cbYear;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private Components.JoButtonIconfont joButtonIconfont1;
     private Components.JoLable joLable1;
+    private Components.JoLable joLable2;
     private Components.JoLable lbl_title;
     private javax.swing.JPanel pn_Datatable;
     private Components.JoTable tb_data;

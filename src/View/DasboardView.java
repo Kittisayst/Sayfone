@@ -203,7 +203,7 @@ public class DasboardView extends javax.swing.JPanel {
         );
 
         joLable1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        joLable1.setText("ຂໍ້ມູນນັກຮຽນ");
+        joLable1.setText("ຂໍ້ມູນນັກຮຽນຈ່າຍຄ່າຮຽນ");
         joLable1.setFont(new java.awt.Font("Phetsarath OT", 0, 24)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

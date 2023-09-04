@@ -40,4 +40,8 @@ public class RegisterService {
         return aO.getRegisterLastYearAll();
     }
 
+    public List<RegisterModel> getRegisterAllByYearID(int YearID) {
+        return aO.getRegisterAllByYearID(YearID);
+    }
+
 }

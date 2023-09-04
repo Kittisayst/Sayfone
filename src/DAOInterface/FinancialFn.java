@@ -1,7 +1,6 @@
 package DAOInterface;
 
 import Model.FinancialModel;
-import Model.RegisterModel;
 import java.util.List;
 
 public interface FinancialFn {
@@ -9,6 +8,8 @@ public interface FinancialFn {
     public int Creater(FinancialModel model);
 
     public int Update(FinancialModel model);
+
+    public int UpdateClassRoom(int RegisterOldClassID, int RegisterNewClassID, int StudentID);
 
     public int Delete(FinancialModel model);
 
@@ -19,7 +20,7 @@ public interface FinancialFn {
     public List<FinancialModel> getFinancialByStudentID(int RegisterID, int StudentID); // ດຶງຂໍ້ມູນເດຶອນຂອງນັກຮຽນທີ່ລົງທະບຽນໃນສົກປີ
 
     public List<FinancialModel> getStudentRegistered(int RegisterID);
-    
+
     public boolean getStudentIsReister(int StudentID);
 
     public List<FinancialModel> getSearchStudentRegistered(int RegisterID, String search);

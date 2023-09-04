@@ -113,7 +113,7 @@ public class RegisterDAO implements RegisterFn {
         try {
             int lastYearID = yearService.getLastYear().getYearID();
             ResultSet rs = sql.getSelectByIndex(3, lastYearID);
-            while (rs.next()) {                
+            while (rs.next()) {
                 models.add(getResult(rs));
             }
         } catch (Exception e) {
@@ -190,6 +190,27 @@ public class RegisterDAO implements RegisterFn {
             pre.setObject(i + 1, params[i]);
         }
         return pre;
+    }
+
+    @Override
+    public List<RegisterModel> getRegisterAllByYearID(int YearID) {
+        List<RegisterModel> models = new ArrayList<>();
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
+        try {
+            PreparedStatement pre = sql.getSelectCustom("yearID=?");
+            pre.setInt(1, YearID);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                models.add(getResult(rs));
+            }
+        } catch (SQLException e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
+        }
+        return models;
     }
 
 }
