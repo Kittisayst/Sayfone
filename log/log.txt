@@ -110,3 +110,43 @@
 26/08/2023: DAO.DistrictDAO@7c18cbe0 Errorjava.sql.SQLException: Column Index out of range, 4 > 3. 
 26/08/2023: DAO.DistrictDAO@1437be2a Errorjava.sql.SQLException: Column Index out of range, 4 > 3. 
 26/08/2023: DAO.DistrictDAO@1437be2a Errorjava.sql.SQLException: Column Index out of range, 4 > 3. 
+06/09/2023: DAO.FinancialDAO@411ddcfa Errorjava.sql.SQLException: Unknown type '246 in column 3 of 14 in binary-encoded result set.
+06/09/2023: DAO.FinancialDAO@411ddcfa Errorjava.sql.SQLException: Unknown type '246 in column 3 of 14 in binary-encoded result set.
+06/09/2023: DAO.FinancialDAO@411ddcfa Errorjava.sql.SQLException: Unknown type '246 in column 3 of 14 in binary-encoded result set.
+06/09/2023: DAO.FinancialDAO@6b52eded Errorjava.sql.SQLException: Unknown type '246 in column 3 of 14 in binary-encoded result set.
+06/09/2023: DAO.FinancialDAO@6b52eded Errorjava.sql.SQLException: Unknown type '246 in column 3 of 14 in binary-encoded result set.
+06/09/2023: DAO.FinancialDAO@6b52eded Errorjava.sql.SQLException: Unknown type '246 in column 3 of 14 in binary-encoded result set.
+06/09/2023: DAO.FinancialDAO@4ed9f3d4 Errorjava.sql.SQLException: Unknown type '246 in column 3 of 14 in binary-encoded result set.
+06/09/2023: DAO.FinancialDAO@4ed9f3d4 Errorjava.sql.SQLException: Unknown type '246 in column 3 of 14 in binary-encoded result set.
+06/09/2023: DAO.FinancialDAO@4ed9f3d4 Errorjava.sql.SQLException: Unknown type '246 in column 3 of 14 in binary-encoded result set.
+06/09/2023: DAO.FinancialDAO@39c20d01 Errorjava.sql.SQLException: Unknown type '246 in column 3 of 14 in binary-encoded result set.
+06/09/2023: DAO.FinancialDAO@39c20d01 Errorjava.sql.SQLException: Unknown type '246 in column 3 of 14 in binary-encoded result set.
+06/09/2023: DAO.FinancialDAO@39c20d01 Errorjava.sql.SQLException: Unknown type '246 in column 3 of 14 in binary-encoded result set.
+06/09/2023: DAO.FinancialDAO@667d1ab1 Errorjava.sql.SQLException: Unknown type '246 in column 3 of 14 in binary-encoded result set.
+06/09/2023: DAO.FinancialDAO@667d1ab1 Errorjava.sql.SQLException: Unknown type '246 in column 3 of 14 in binary-encoded result set.
+06/09/2023: DAO.FinancialDAO@667d1ab1 Errorjava.sql.SQLException: Unknown type '246 in column 3 of 14 in binary-encoded result set.
+06/09/2023: DAO.FinancialDAO@5abe4e28 Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+06/09/2023: DAO.FinancialDAO@5abe4e28 Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+06/09/2023: DAO.FinancialDAO@5abe4e28 Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+06/09/2023: DAO.FinancialDAO@3e4da0ee Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+06/09/2023: DAO.FinancialDAO@3e4da0ee Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+06/09/2023: DAO.FinancialDAO@3e4da0ee Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+06/09/2023: DAO.FinancialDAO@68fd9d69 Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+06/09/2023: DAO.FinancialDAO@68fd9d69 Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+06/09/2023: DAO.FinancialDAO@68fd9d69 Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+06/09/2023: DAO.FinancialDAO@5d37199d Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+06/09/2023: DAO.FinancialDAO@5d37199d Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+06/09/2023: DAO.FinancialDAO@5d37199d Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+06/09/2023: DAO.FinancialDAO@232b81ce Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+06/09/2023: DAO.FinancialDAO@232b81ce Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+06/09/2023: DAO.FinancialDAO@232b81ce Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+06/09/2023: DAO.FinancialDAO@759b85c8 Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+06/09/2023: DAO.FinancialDAO@759b85c8 Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+06/09/2023: DAO.FinancialDAO@759b85c8 Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+06/09/2023: DAO.FinancialDAO@67e9fee6 Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+06/09/2023: DAO.FinancialDAO@67e9fee6 Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+06/09/2023: DAO.FinancialDAO@67e9fee6 Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+06/09/2023: DAO.FinancialDAO@63f087c0 Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+06/09/2023: DAO.FinancialDAO@63f087c0 Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+06/09/2023: DAO.FinancialDAO@63f087c0 Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+06/09/2023: DAO.FinancialDAO@67e9fee6 Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.

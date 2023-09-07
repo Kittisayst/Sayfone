@@ -100,4 +100,12 @@ public class FinancialService {
         return aO.getStudentIsReister(StudentID);
     }
 
+    public FinancialModel getFinancialCalculator(int RegisterID, int StudentID) {
+        return aO.getFinancialCalculator(RegisterID, StudentID);
+    }
+
+    public String getFinancialFoodTotal(int RegisterID, int StudentID) {
+        return aO.getFinancialFoodTotal(RegisterID, StudentID);
+    }
+
 }

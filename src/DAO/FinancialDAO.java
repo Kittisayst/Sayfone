@@ -404,7 +404,22 @@ public class FinancialDAO implements FinancialFn {
     }
 
     private FinancialModel resultModel(ResultSet rs) throws Exception {
-        return new FinancialModel(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getInt(5), rs.getDate(6), rs.getString(7), rs.getString(8), rs.getInt(9), rs.getInt(10), rs.getInt(11), rs.getInt(12), rs.getInt(13), rs.getBoolean(14));
+        return new FinancialModel(
+                rs.getInt(1),
+                rs.getInt(2),
+                rs.getInt(3),
+                rs.getInt(4),
+                rs.getInt(5),
+                rs.getDate(6),
+                rs.getString(7),
+                rs.getString(8),
+                rs.getInt(9),
+                rs.getInt(10),
+                rs.getInt(11),
+                rs.getInt(12),
+                rs.getInt(13),
+                rs.getBoolean(14)
+        );
     }
 
     public static PreparedStatement setAutoPrepared(PreparedStatement pre, Object... params) throws SQLException {
@@ -512,6 +527,68 @@ public class FinancialDAO implements FinancialFn {
         } finally {
             connect.close();
         }
+    }
+
+    @Override
+    public FinancialModel getFinancialCalculator(int RegisterID, int StudentID) {
+        JoConnect connect = new JoConnect();
+        FinancialModel model = new FinancialModel();
+        try {
+            String sql = "SELECT FinancialID,RegisterID,StudentID,SUM(Money) AS totalMoney,\n"
+                    + "SUM(TransferMoney) AS totalTransferMoney,SaveDate,\n"
+                    + "REPLACE(GROUP_CONCAT(FinancialMonth),',[]', '') AS month,\n"
+                    + "FinancialComment,AuthenUserID,Discount,OvertimePay,UserID,SUM(foodMoney) AS TotalFoodMoney,state \n"
+                    + "FROM tb_financial WHERE RegisterID="+RegisterID+" AND StudentID = "+StudentID;
+            ResultSet rs = connect.getConnectionDefault().createStatement().executeQuery(sql);
+            if (rs.next()) {
+                model = resultModel(rs);
+//                model = new FinancialModel(
+//                        rs.getInt("FinancialID"),
+//                        rs.getInt("RegisterID"),
+//                        rs.getInt("StudentID"),
+//                        rs.getInt("totalMoney"),
+//                        rs.getInt("totalTransferMoney"),
+//                        rs.getDate("SaveDate"),
+//                        rs.getString("month"),
+//                        rs.getString("FinancialComment"),
+//                        rs.getInt("AuthenUserID"),
+//                        rs.getInt("Discount"),
+//                        rs.getInt("OvertimePay"),
+//                        rs.getInt("UserID"),
+//                        rs.getInt("TotalFoodMoney"),
+//                        rs.getBoolean("state"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
+        }
+        return model;
+    }
+
+    @Override
+    public String getFinancialFoodTotal(int RegisterID, int StudentID) {
+        JoConnect connect = new JoConnect();
+        String total = "0";
+        try {
+            String sql = "SELECT SUM(foodMoney) AS TotalFoodMoney\n"
+                    + "FROM tb_financial\n"
+                    + "WHERE RegisterID = "+RegisterID+" AND StudentID = "+StudentID;
+            ResultSet rs = connect.getConnectionDefault().createStatement().executeQuery(sql);
+            if (rs.next()) {
+                System.out.println(rs.getBigDecimal("TotalFoodMoney"));
+//                total =rs.getString("TotalFoodMoney");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
+        }
+        return total;
     }
 
 }

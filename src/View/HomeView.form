@@ -47,10 +47,7 @@
                   <Component id="Pn_Menu" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                          <Component id="MyRouter" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="MyRouter" max="32767" attributes="0"/>
                       <Component id="Pn_Navbar" pref="1089" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -334,7 +331,7 @@
                                   <Component id="btn_Setting" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="pnSetting" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="71" max="32767" attributes="0"/>
+                                  <EmptySpace pref="65" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -566,6 +563,7 @@
                                   <Component id="btnReportPay" alignment="0" max="32767" attributes="0"/>
                                   <Component id="joButtonIconfont13" alignment="0" max="32767" attributes="0"/>
                                   <Component id="btnWithdraw" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="btnFood" alignment="0" max="32767" attributes="0"/>
                               </Group>
                             </DimensionLayout>
                             <DimensionLayout dim="1">
@@ -576,6 +574,8 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="btnReportPay" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="btnFood" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" max="-2" attributes="0"/>
                                       <Component id="btnWithdraw" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" max="-2" attributes="0"/>
                                       <Component id="joButtonIconfont13" min="-2" max="-2" attributes="0"/>
@@ -640,6 +640,15 @@
                                 <Property name="horizontalAlignment" type="int" value="2"/>
                                 <Property name="joIcons" type="jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons" editor="org.netbeans.modules.form.editors.EnumEditor">
                                   <Value id="DIRECTIONS"/>
+                                </Property>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoButtonIconfont" name="btnFood">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="&#xea5;&#xeb2;&#xe8d;&#xe87;&#xeb2;&#xe99;&#xe84;&#xec8;&#xeb2;&#xead;&#xeb2;&#xeab;&#xeb2;&#xe99;"/>
+                                <Property name="horizontalAlignment" type="int" value="2"/>
+                                <Property name="joIcons" type="jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons" editor="org.netbeans.modules.form.editors.EnumEditor">
+                                  <Value id="LOCAL_DINING"/>
                                 </Property>
                               </Properties>
                             </Component>
