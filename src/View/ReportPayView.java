@@ -6,10 +6,13 @@ import Components.JoTable;
 import DAOSevervice.FinancialService;
 import DAOSevervice.RegisterService;
 import DAOSevervice.StudentService;
+import Log.JoLoger;
 import Model.FinancialModel;
 import Model.RegisterModel;
 import Model.StudentModel;
 import Model.YearModel;
+import Tools.JoAlert;
+import Tools.JoDataTable;
 import Utility.MonthCaculator;
 import java.util.List;
 
@@ -38,8 +41,8 @@ public class ReportPayView extends javax.swing.JPanel {
         return cbYear;
     }
 
-    public JoCombobox getCbMonth() {
-        return cbMonth;
+    public JoCombobox getCbClassRoom() {
+        return cbClassRoom;
     }
 
     public void showYear(List<YearModel> models) {
@@ -49,20 +52,34 @@ public class ReportPayView extends javax.swing.JPanel {
     }
 
     public void showClassRoom(List<RegisterModel> models) {
-        cbMonth.JoClearData();
+        cbClassRoom.JoClearData();
         models.forEach(data -> {
-            cbMonth.JoAddIntModel(data.getRegisterID(), data.getClassRoomName());
+            cbClassRoom.JoAddIntModel(data.getRegisterID(), data.getClassRoomName());
         });
     }
 
     public void showReportPay(List<FinancialModel> models) {
         updateTable();
+        FinancialService financialService = new FinancialService();
+        RegisterService registerService = new RegisterService();
+        StudentService studentService = new StudentService();
+        MonthCaculator mc = new MonthCaculator();
         try {
-            models.forEach(model -> {
-                tb_data.AddJoModel(new Object[]{tb_data.autoNumber(), model.getStudentID()});
+            models.forEach(data -> {
+                FinancialModel fm = financialService.getFinancialCalculator(data.getRegisterID(), data.getStudentID());
+                RegisterModel rm = registerService.getRegisterById(fm.getRegisterID());
+                StudentModel sm = studentService.getStudentById(data.getStudentID());
+                String findMissingMonth = mc.getMissingMonth(fm.getFinancialMonth());
+                tb_data.AddJoModel(new Object[]{tb_data.autoNumber(), data.getFinancialIID(), data.getStudentID(), sm.getStudentNo(), sm.getFullName(), rm.getClassRoomName(), findMissingMonth});
             });
         } catch (Exception e) {
-            e.printStackTrace();
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            JoDataTable dataTable = new JoDataTable(pn_Datatable);
+            dataTable.setHiddenColumns(1);
+            dataTable.setHiddenColumns(2);
+            dataTable.showDataTableAll();
         }
     }
 
@@ -127,8 +144,10 @@ public class ReportPayView extends javax.swing.JPanel {
         joLable1 = new Components.JoLable();
         cbYear = new Components.JoCombobox();
         joLable2 = new Components.JoLable();
-        cbMonth = new Components.JoCombobox();
+        cbClassRoom = new Components.JoCombobox();
         btnShow = new Components.JoButtonIconfont();
+        jPanel2 = new javax.swing.JPanel();
+        joButtonIconfont1 = new Components.JoButtonIconfont();
 
         Pn_Navigation.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
         Pn_Navigation.setLayout(new java.awt.GridLayout(1, 0));
@@ -159,11 +178,11 @@ public class ReportPayView extends javax.swing.JPanel {
 
             },
             new String [] {
-                "#", "ID", "ຊື່ ແລະ ນາມສະກຸນ", "ຫ້ອງຮຽນ", "ຄ້າງເດືອນ", "ສົກຮຽນ"
+                "#", "ID", "StudentID", "ສົກຮຽນ", "ຊື່ ແລະ ນາມສະກຸນ", "ຫ້ອງຮຽນ", "ຄ້າງເດືອນ"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -215,7 +234,7 @@ public class ReportPayView extends javax.swing.JPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 39;
         gridBagConstraints.insets = new java.awt.Insets(2, 9, 2, 2);
-        jPanel1.add(cbMonth, gridBagConstraints);
+        jPanel1.add(cbClassRoom, gridBagConstraints);
 
         btnShow.setText("ສະແດງ");
         btnShow.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.SEARCH);
@@ -227,15 +246,23 @@ public class ReportPayView extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(2, 10, 2, 10);
         jPanel1.add(btnShow, gridBagConstraints);
 
+        jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+
+        joButtonIconfont1.setText("ປີ້ນລາຍງານ");
+        joButtonIconfont1.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.PRINT);
+        jPanel2.add(joButtonIconfont1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(Pn_Navigation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pn_Datatable, javax.swing.GroupLayout.DEFAULT_SIZE, 1125, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -245,7 +272,10 @@ public class ReportPayView extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24)
-                .addComponent(pn_Datatable, javax.swing.GroupLayout.DEFAULT_SIZE, 586, Short.MAX_VALUE))
+                .addComponent(pn_Datatable, javax.swing.GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -254,13 +284,15 @@ public class ReportPayView extends javax.swing.JPanel {
     private javax.swing.JPanel Pn_Navigation;
     private Components.JoButtonIconfont btnShow;
     private Components.JoButtonIconfont btn_back;
-    private Components.JoCombobox cbMonth;
+    private Components.JoCombobox cbClassRoom;
     private Components.JoCombobox cbYear;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private Components.JoButtonIconfont joButtonIconfont1;
     private Components.JoLable joLable1;
     private Components.JoLable joLable2;
     private Components.JoLable lbl_title;

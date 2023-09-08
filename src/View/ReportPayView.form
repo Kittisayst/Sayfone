@@ -18,9 +18,12 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="Pn_Navigation" max="32767" attributes="0"/>
           <Component id="pn_Datatable" alignment="0" pref="1125" max="32767" attributes="0"/>
-          <Group type="102" alignment="1" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel1" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jPanel1" max="32767" attributes="0"/>
+                  <Component id="jPanel2" max="32767" attributes="0"/>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -29,10 +32,13 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Component id="Pn_Navigation" min="-2" pref="51" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-              <Component id="pn_Datatable" pref="586" max="32767" attributes="0"/>
+              <Component id="pn_Datatable" pref="523" max="32767" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -111,18 +117,24 @@
             <Component class="Components.JoTable" name="tb_data">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="6" rowCount="0">
+                  <Table columnCount="7" rowCount="0">
                     <Column editable="false" title="#" type="java.lang.Object"/>
                     <Column editable="false" title="ID" type="java.lang.Object"/>
+                    <Column editable="false" title="StudentID" type="java.lang.Object"/>
+                    <Column editable="false" title="&#xeaa;&#xebb;&#xe81;&#xeae;&#xebd;&#xe99;" type="java.lang.Object"/>
                     <Column editable="false" title="&#xe8a;&#xeb7;&#xec8; &#xec1;&#xea5;&#xeb0; &#xe99;&#xeb2;&#xea1;&#xeaa;&#xeb0;&#xe81;&#xeb8;&#xe99;" type="java.lang.Object"/>
                     <Column editable="false" title="&#xeab;&#xec9;&#xead;&#xe87;&#xeae;&#xebd;&#xe99;" type="java.lang.Object"/>
                     <Column editable="false" title="&#xe84;&#xec9;&#xeb2;&#xe87;&#xec0;&#xe94;&#xeb7;&#xead;&#xe99;" type="java.lang.Object"/>
-                    <Column editable="false" title="&#xeaa;&#xebb;&#xe81;&#xeae;&#xebd;&#xe99;" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">
                     <Column maxWidth="80" minWidth="80" prefWidth="80" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>
@@ -198,7 +210,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="Components.JoCombobox" name="cbMonth">
+        <Component class="Components.JoCombobox" name="cbClassRoom">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
               <GridBagConstraints gridX="6" gridY="0" gridWidth="1" gridHeight="1" fill="1" ipadX="39" ipadY="0" insetsTop="2" insetsLeft="9" insetsBottom="2" insetsRight="2" anchor="10" weightX="0.0" weightY="0.0"/>
@@ -628,11 +640,11 @@
             <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component, java.lang.Object"/>
           </StatementProvider>
           <Parameters>
-            <CodeExpression id="30_cbMonth">
-              <CodeVariable name="cbMonth" type="8194" declaredType="Components.JoCombobox"/>
+            <CodeExpression id="30_cbClassRoom">
+              <CodeVariable name="cbClassRoom" type="8194" declaredType="Components.JoCombobox"/>
               <ExpressionOrigin>
                 <ExpressionProvider type="ComponentRef">
-                  <ComponentRef name="cbMonth"/>
+                  <ComponentRef name="cbClassRoom"/>
                 </ExpressionProvider>
               </ExpressionOrigin>
             </CodeExpression>
@@ -737,6 +749,22 @@
           </Parameters>
         </CodeStatement>
       </LayoutCode>
+    </Container>
+    <Container class="javax.swing.JPanel" name="jPanel2">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
+        <Property name="alignment" type="int" value="2"/>
+      </Layout>
+      <SubComponents>
+        <Component class="Components.JoButtonIconfont" name="joButtonIconfont1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="&#xe9b;&#xeb5;&#xec9;&#xe99;&#xea5;&#xeb2;&#xe8d;&#xe87;&#xeb2;&#xe99;"/>
+            <Property name="joIcons" type="jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons" editor="org.netbeans.modules.form.editors.EnumEditor">
+              <Value id="PRINT"/>
+            </Property>
+          </Properties>
+        </Component>
+      </SubComponents>
     </Container>
   </SubComponents>
 </Form>
