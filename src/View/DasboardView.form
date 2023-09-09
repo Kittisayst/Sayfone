@@ -16,14 +16,15 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jPanel2" alignment="1" max="32767" attributes="0"/>
-                  <Component id="joLable1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jPanel1" alignment="2" max="32767" attributes="0"/>
+                  <Component id="joLable2" alignment="2" max="32767" attributes="0"/>
+                  <Component id="joLable1" alignment="2" max="32767" attributes="0"/>
+                  <Component id="jPanel2" alignment="2" max="32767" attributes="0"/>
+                  <Component id="pnClassRoom" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -32,11 +33,15 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Component id="joLable2" min="-2" pref="45" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="pnClassRoom" min="-2" pref="188" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="joLable1" min="-2" pref="40" max="-2" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="jPanel2" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -60,15 +65,15 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace pref="87" max="32767" attributes="0"/>
+                  <EmptySpace pref="90" max="32767" attributes="0"/>
                   <Component id="ds_Student" min="-2" pref="218" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="32767" attributes="0"/>
                   <Component id="ds_Teacher" min="-2" pref="218" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" pref="22" max="32767" attributes="0"/>
+                  <EmptySpace type="separate" pref="25" max="32767" attributes="0"/>
                   <Component id="ds_ClassRoom" min="-2" pref="218" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" pref="22" max="32767" attributes="0"/>
+                  <EmptySpace type="separate" pref="25" max="32767" attributes="0"/>
                   <Component id="ds_Financail" min="-2" pref="218" max="-2" attributes="0"/>
-                  <EmptySpace pref="90" max="32767" attributes="0"/>
+                  <EmptySpace pref="92" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -140,6 +145,28 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="Components.JoLable" name="joLable2">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+        <Property name="text" type="java.lang.String" value="&#xeab;&#xec9;&#xead;&#xe87;&#xeae;&#xebd;&#xe99;&#xe97;&#xeb1;&#xe87;&#xedd;&#xebb;&#xe94;"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Phetsarath OT" size="24" style="0"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Container class="javax.swing.JPanel" name="pnClassRoom">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+    </Container>
+    <Component class="Components.JoLable" name="joLable1">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+        <Property name="text" type="java.lang.String" value="&#xe82;&#xecd;&#xec9;&#xea1;&#xeb9;&#xe99;&#xe99;&#xeb1;&#xe81;&#xeae;&#xebd;&#xe99;&#xe88;&#xec8;&#xeb2;&#xe8d;&#xe84;&#xec8;&#xeb2;&#xeae;&#xebd;&#xe99;"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Phetsarath OT" size="24" style="0"/>
+        </Property>
+      </Properties>
+    </Component>
     <Container class="javax.swing.JPanel" name="jPanel2">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -152,38 +179,21 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane1" max="32767" attributes="0"/>
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="joLable3" max="32767" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="cbClass" min="-2" pref="149" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtSearch" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="btnSearch" min="-2" pref="94" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
+                  <Component id="jScrollPane1" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
+              <Component id="jPanel3" alignment="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtSearch" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnSearch" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Component id="cbClass" max="32767" attributes="0"/>
-                      <Component id="joLable3" max="32767" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" pref="446" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPane1" pref="269" max="32767" attributes="0"/>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -238,44 +248,33 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="Components.JoTextField" name="txtSearch">
-          <Properties>
-            <Property name="placeholder" type="java.lang.String" value="&#xe84;&#xebb;&#xec9;&#xe99;&#xeab;&#xeb2;&#xe99;&#xeb1;&#xe81;&#xeae;&#xebd;&#xe99;"/>
-          </Properties>
-        </Component>
-        <Component class="Components.JoButtonIconfont" name="btnSearch">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="&#xeaa;&#xeb0;&#xec1;&#xe94;&#xe87;"/>
-            <Property name="horizontalAlignment" type="int" value="2"/>
-            <Property name="joIcons" type="jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons" editor="org.netbeans.modules.form.editors.EnumEditor">
-              <Value id="SEARCH"/>
-            </Property>
-            <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-              <Insets value="[2, 5, 2, 5]"/>
-            </Property>
-          </Properties>
-        </Component>
-        <Component class="Components.JoCombobox" name="cbClass">
-        </Component>
-        <Component class="Components.JoLable" name="joLable3">
-          <Properties>
-            <Property name="horizontalAlignment" type="int" value="4"/>
-            <Property name="text" type="java.lang.String" value="&#xeab;&#xec9;&#xead;&#xe87;&#xeae;&#xebd;&#xe99;"/>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Phetsarath OT" size="14" style="0"/>
-            </Property>
-          </Properties>
-        </Component>
+        <Container class="javax.swing.JPanel" name="jPanel3">
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
+            <Property name="alignment" type="int" value="2"/>
+            <Property name="horizontalGap" type="int" value="10"/>
+          </Layout>
+          <SubComponents>
+            <Component class="Components.JoTextField" name="txtSearch">
+              <Properties>
+                <Property name="placeholder" type="java.lang.String" value="&#xe84;&#xebb;&#xec9;&#xe99;&#xeab;&#xeb2;&#xe99;&#xeb1;&#xe81;&#xeae;&#xebd;&#xe99;"/>
+              </Properties>
+            </Component>
+            <Component class="Components.JoButtonIconfont" name="btnSearch">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&#xeaa;&#xeb0;&#xec1;&#xe94;&#xe87;"/>
+                <Property name="horizontalAlignment" type="int" value="2"/>
+                <Property name="joIcons" type="jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons" editor="org.netbeans.modules.form.editors.EnumEditor">
+                  <Value id="SEARCH"/>
+                </Property>
+                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+                  <Insets value="[2, 5, 2, 10]"/>
+                </Property>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
       </SubComponents>
     </Container>
-    <Component class="Components.JoLable" name="joLable1">
-      <Properties>
-        <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="&#xe82;&#xecd;&#xec9;&#xea1;&#xeb9;&#xe99;&#xe99;&#xeb1;&#xe81;&#xeae;&#xebd;&#xe99;&#xe88;&#xec8;&#xeb2;&#xe8d;&#xe84;&#xec8;&#xeb2;&#xeae;&#xebd;&#xe99;"/>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Phetsarath OT" size="24" style="0"/>
-        </Property>
-      </Properties>
-    </Component>
   </SubComponents>
 </Form>

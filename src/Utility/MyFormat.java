@@ -15,6 +15,11 @@ public class MyFormat {
         String strDate = new SimpleDateFormat("dd/MM/yyyy").format(date);
         return strDate;
     }
+    
+    public String getTime(java.util.Date date,String pattern){
+        String strDate = new SimpleDateFormat(pattern).format(date);
+        return strDate;
+    }
 
     public String getDateSQL(java.util.Date date) {
         String strDate = new SimpleDateFormat("yyyy-MM-dd").format(date);

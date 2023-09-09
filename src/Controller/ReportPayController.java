@@ -44,6 +44,7 @@ public class ReportPayController implements JoMVC, ActionListener, ItemListener,
         view.getBtnShow().addActionListener(this);
         view.getCbYear().addItemListener(this);
         view.getTb_data().addMouseListener(this);
+        view.getBtnPrint().addActionListener(this);
     }
 
     @Override
@@ -74,6 +75,9 @@ public class ReportPayController implements JoMVC, ActionListener, ItemListener,
         } else if (event.isEvent(view.getBtnShow())) {
             FinancialService financialService = new FinancialService();
             view.showReportPay(financialService.getStudentRegistered(view.getCbClassRoom().getKeyInt()));
+        }else if (event.isEvent(view.getBtnPrint())) {
+            FinancialService financialService = new FinancialService();
+            financialService.ExportPayment(view.getCbClassRoom().getKeyInt());
         }
     }
 

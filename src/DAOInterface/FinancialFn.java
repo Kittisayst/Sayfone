@@ -52,7 +52,9 @@ public interface FinancialFn {
     public int getUpdateWithdrawMonth(int FinancialID);
 
     public FinancialModel getFinancialCalculator(int RegisterID, int StudentID);
-    
-     public String getFinancialFoodTotal(int RegisterID, int StudentID);
+
+    public void ExportPayment(int RegisterID);
+
+    public List<FinancialModel> getReportUserFinancial(int YearID, int UserID);
 
 }

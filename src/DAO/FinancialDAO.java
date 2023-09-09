@@ -1,17 +1,23 @@
 package DAO;
 
 import DAOInterface.FinancialFn;
+import DAOSevervice.StudentService;
 import Database.JoConnect;
 import Database.JoSQL;
 import Log.JoLoger;
 import Model.FinancialModel;
+import Model.StudentModel;
 import java.util.List;
 import Tools.JoAlert;
+import Tools.JoFileSystem;
 import Utility.JoPrepared;
+import Utility.JoSheet;
+import Utility.MyFormat;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class FinancialDAO implements FinancialFn {
 
@@ -538,28 +544,12 @@ public class FinancialDAO implements FinancialFn {
                     + "SUM(TransferMoney) AS totalTransferMoney,SaveDate,\n"
                     + "REPLACE(GROUP_CONCAT(FinancialMonth),',[]', '') AS month,\n"
                     + "FinancialComment,AuthenUserID,Discount,OvertimePay,UserID,SUM(foodMoney) AS TotalFoodMoney,state \n"
-                    + "FROM tb_financial WHERE RegisterID="+RegisterID+" AND StudentID = "+StudentID;
+                    + "FROM tb_financial WHERE RegisterID=" + RegisterID + " AND StudentID = " + StudentID;
             ResultSet rs = connect.getConnectionDefault().createStatement().executeQuery(sql);
             if (rs.next()) {
                 model = resultModel(rs);
-//                model = new FinancialModel(
-//                        rs.getInt("FinancialID"),
-//                        rs.getInt("RegisterID"),
-//                        rs.getInt("StudentID"),
-//                        rs.getInt("totalMoney"),
-//                        rs.getInt("totalTransferMoney"),
-//                        rs.getDate("SaveDate"),
-//                        rs.getString("month"),
-//                        rs.getString("FinancialComment"),
-//                        rs.getInt("AuthenUserID"),
-//                        rs.getInt("Discount"),
-//                        rs.getInt("OvertimePay"),
-//                        rs.getInt("UserID"),
-//                        rs.getInt("TotalFoodMoney"),
-//                        rs.getBoolean("state"));
             }
         } catch (Exception e) {
-            e.printStackTrace();
             JoAlert.Error(e, this);
             JoLoger.saveLog(e, this);
         } finally {
@@ -569,26 +559,75 @@ public class FinancialDAO implements FinancialFn {
     }
 
     @Override
-    public String getFinancialFoodTotal(int RegisterID, int StudentID) {
+    public void ExportPayment(int RegisterID) {
         JoConnect connect = new JoConnect();
-        String total = "0";
+        JoAlert alert = new JoAlert();
+        JoFileSystem fileSystem = new JoFileSystem();
+        String sql = "SELECT * FROM tb_financial";
         try {
-            String sql = "SELECT SUM(foodMoney) AS TotalFoodMoney\n"
-                    + "FROM tb_financial\n"
-                    + "WHERE RegisterID = "+RegisterID+" AND StudentID = "+StudentID;
+            String genfileName = "Report" + new MyFormat().getTime(new Date(), "HH-mm-ss") + ".xls";
+            String csvFile = fileSystem.getUserPath() + "/Downloads/" + genfileName;
+            System.out.println(fileSystem.getUserPath());
+            // Write column names to CSV file
             ResultSet rs = connect.getConnectionDefault().createStatement().executeQuery(sql);
-            if (rs.next()) {
-                System.out.println(rs.getBigDecimal("TotalFoodMoney"));
-//                total =rs.getString("TotalFoodMoney");
+            // Create header row
+            String[] columns = {"ລຳດັບ", "ໄອດີ", "RegisterID", "ລະຫັດນັກຮຽນ", "ຈຳນວນເງິນ", "ເງິນໂອນ", "ວັນທີ່ບັນທຶກ", "ຈ່າຍປະຈຳເດືອນ", "ໝາຍເຫດ", "ຜູ້ອານຸມັດ", "ສ່ວນຫຼຸດ", "ຄ່າຈ່າຍຊ້າ", "ຜຸ້ລົງບັນຊີ", "ຄ່າອາຫານ"};
+            JoSheet joSheet = new JoSheet(csvFile, "Data", columns);
+            StudentService ss = new StudentService();
+            int rowNum = 1;
+            while (rs.next()) {
+                StudentModel sm = ss.getStudentById(rs.getInt(3));
+                joSheet.addRow(
+                        rowNum++,
+                        rowNum - 1,
+                        rs.getString(1),
+                        rs.getString(2),
+                        sm.getFullName(),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getString(12),
+                        rs.getString(13)
+                );
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            joSheet.getCreateSheet();
+        } catch (Exception e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
+            alert.messages("ສົ່ງອອກ Excel ສຳເລັດ!");
+        }
+    }
+
+    @Override
+    public List<FinancialModel> getReportUserFinancial(int YearID, int UserID) {
+        List<FinancialModel> models = new ArrayList<>();
+        JoConnect connect = new JoConnect();
+        String sql = "SELECT FinancialID,fn.RegisterID,StudentID,Money,TransferMoney,SaveDate,FinancialMonth,FinancialComment,AuthenUserID,Discount,OvertimePay,UserID,foodMoney,state \n"
+                + "FROM tb_financial AS fn\n"
+                + "INNER JOIN tb_register AS rs ON fn.RegisterID=rs.registerID\n"
+                + "WHERE rs.yearID=? AND UserID=? ORDER BY FinancialID DESC";
+        try {
+            PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sql);
+            pre.setInt(1, YearID);
+            pre.setInt(2, UserID);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                models.add(resultModel(rs));
+            }
+        } catch (Exception e) {
             JoAlert.Error(e, this);
             JoLoger.saveLog(e, this);
         } finally {
             connect.close();
         }
-        return total;
+        return models;
     }
 
 }

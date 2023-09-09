@@ -25,7 +25,7 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DasboardController implements JoMVC, MouseListener, ActionListener, ItemListener {
+public class DasboardController implements JoMVC, MouseListener, ActionListener {
 
     private final DasboardView view;
     private final StudentService studentService;
@@ -53,7 +53,6 @@ public class DasboardController implements JoMVC, MouseListener, ActionListener,
         view.showClassRoom(new RegisterService().getRegisterLastYearAll());
         view.getTbData().addMouseListener(this);
         view.getBtnSearch().addActionListener(this);
-        showStudentAll();
     }
 
     @Override
@@ -63,7 +62,6 @@ public class DasboardController implements JoMVC, MouseListener, ActionListener,
         view.getDs_Financail().getLbl_more().addMouseListener(this);
         view.getDs_ClassRoom().getLbl_more().addMouseListener(this);
         view.getBtnSearch().addActionListener(this);
-        view.getCbClass().addItemListener(this);
     }
 
     @Override
@@ -144,15 +142,12 @@ public class DasboardController implements JoMVC, MouseListener, ActionListener,
     public void actionPerformed(ActionEvent e) {
         JoHookEvent event = new JoHookEvent(e.getSource());
         if (event.isEvent(view.getBtnSearch())) {
-            view.showTableData(new StudentService().getSearchStudent(view.getTxtSearch().getText()));
-        }
-    }
-
-    @Override
-    public void itemStateChanged(ItemEvent e) {
-        JoHookEvent event = new JoHookEvent(e.getSource());
-        if (event.isEvent(view.getCbClass())) {
-            showStudentByClassRoom();
+            if (view.getTxtSearch().getText().equals("")) {
+                view.getTbData().JoClearModel();
+            } else {
+                view.showTableData(new StudentService().getSearchStudent(view.getTxtSearch().getText()));
+            }
+            view.getTxtSearch().requestFocus();
         }
     }
 
@@ -160,12 +155,4 @@ public class DasboardController implements JoMVC, MouseListener, ActionListener,
         view.showTableData(new StudentService().getAllStudent(25));
     }
 
-    private void showStudentByClassRoom() {
-        List<StudentModel> studentList = new ArrayList<>();
-        List<FinancialModel> models = financialService.getStudentRegistered(view.getCbClass().getKeyInt());
-        models.forEach(data -> {
-            studentList.add(studentService.getStudentById(data.getStudentID()));
-        });
-        view.showTableData(studentList);
-    }
 }

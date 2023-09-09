@@ -140,6 +140,10 @@ public class HomeView extends javax.swing.JFrame {
         return btnFood;
     }
 
+    public JoButtonIconfont getBtnReportUserFinancial() {
+        return btnReportUserFinancial;
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -186,6 +190,7 @@ public class HomeView extends javax.swing.JFrame {
         joButtonIconfont10 = new Components.JoButtonIconfont();
         btnWithdraw = new Components.JoButtonIconfont();
         btnFood = new Components.JoButtonIconfont();
+        btnReportUserFinancial = new Components.JoButtonIconfont();
         btn_Service = new Components.JoButtonIconfont();
         btn_report = new Components.JoButtonIconfont();
         btn_Setting = new Components.JoButtonIconfont();
@@ -440,6 +445,10 @@ public class HomeView extends javax.swing.JFrame {
         btnFood.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnFood.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.LOCAL_DINING);
 
+        btnReportUserFinancial.setText("ລາຍງານການຈ່າຍຄ່າຮຽນຕາມຜູ້ໃຊ່ງານ");
+        btnReportUserFinancial.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnReportUserFinancial.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.FOLDER_SHARED);
+
         javax.swing.GroupLayout pn_reportLayout = new javax.swing.GroupLayout(pn_report);
         pn_report.setLayout(pn_reportLayout);
         pn_reportLayout.setHorizontalGroup(
@@ -451,12 +460,15 @@ public class HomeView extends javax.swing.JFrame {
             .addComponent(joButtonIconfont13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnWithdraw, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnFood, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnReportUserFinancial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pn_reportLayout.setVerticalGroup(
             pn_reportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_reportLayout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addComponent(btnReportFinancial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnReportUserFinancial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnReportPay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -559,7 +571,7 @@ public class HomeView extends javax.swing.JFrame {
                 .addComponent(btn_Setting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnSetting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         scrollMenu.setViewportView(pnSideBar);
@@ -623,6 +635,7 @@ public class HomeView extends javax.swing.JFrame {
     private Components.JoButtonIconfont btnPrinter;
     private Components.JoButtonIconfont btnReportFinancial;
     private Components.JoButtonIconfont btnReportPay;
+    private Components.JoButtonIconfont btnReportUserFinancial;
     private Components.JoButtonIconfont btnSubject;
     private Components.JoButtonIconfont btnSubjectTeacher;
     private Components.JoButtonIconfont btnTeacherRank;

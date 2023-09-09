@@ -150,3 +150,24 @@
 06/09/2023: DAO.FinancialDAO@63f087c0 Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
 06/09/2023: DAO.FinancialDAO@63f087c0 Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
 06/09/2023: DAO.FinancialDAO@67e9fee6 Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+08/09/2023: DAO.FinancialDAO@2230f225 Errorjava.sql.SQLException: Can not issue empty query.
+08/09/2023: DAO.FinancialDAO@e786427 Errorjava.sql.SQLException: Column Index out of range, 15 > 14. 
+08/09/2023: DAO.FinancialDAO@1186f77c Errorjava.sql.SQLException: Column Index out of range, 0 > 14. 
+08/09/2023: DAO.FinancialDAO@14bb2659 Errorjava.sql.SQLException: Column Index out of range, 15 > 14. 
+08/09/2023: DAO.FinancialDAO@124aa2d2 Errorjava.io.FileNotFoundException: D:\Java Project\SayFoneSchool\Info\data.csv (The process cannot access the file because it is being used by another process)
+08/09/2023: DAO.FinancialDAO@3e7f723 Errorjava.lang.ArrayIndexOutOfBoundsException: Index 14 out of bounds for length 14
+08/09/2023: DAO.FinancialDAO@7334a296 Errorjava.lang.ArrayIndexOutOfBoundsException: Index 14 out of bounds for length 14
+08/09/2023: DAO.FinancialDAO@424c703e Errorjava.lang.ArrayIndexOutOfBoundsException: Index 14 out of bounds for length 14
+08/09/2023: DAO.FinancialDAO@679c32a4 Errorjava.lang.ArrayIndexOutOfBoundsException: Index 14 out of bounds for length 14
+08/09/2023: DAO.FinancialDAO@6ea4dbc0 Errorjava.lang.ArrayIndexOutOfBoundsException: Index 14 out of bounds for length 14
+08/09/2023: DAO.FinancialDAO@53a0c279 Errorjava.sql.SQLException: Column Index out of range, 0 > 14. 
+08/09/2023: DAO.FinancialDAO@66260c01 Errorjava.sql.SQLException: Column Index out of range, 15 > 14. 
+08/09/2023: DAO.FinancialDAO@4f73be30 Errorjava.io.FileNotFoundException: C:\Users\LENOVO\Downloads\Report08\09\2023.xls (The system cannot find the path specified)
+08/09/2023: DAO.FinancialDAO@4eb7b8fb Errorjava.lang.NullPointerException
+08/09/2023: DAO.FinancialDAO@18fc232f Errorjava.lang.NullPointerException
+08/09/2023: DAO.FinancialDAO@3af5ac5d Errorjava.lang.NullPointerException
+08/09/2023: DAO.FinancialDAO@6253473 Errorjava.lang.NullPointerException
+08/09/2023: DAO.FinancialDAO@4e1b97fa Errorjava.lang.NullPointerException
+08/09/2023: DAO.FinancialDAO@710cff26 Errorjava.lang.NullPointerException
+08/09/2023: DAO.FinancialDAO@755f4b9c Errorjava.lang.NullPointerException
+08/09/2023: DAO.FinancialDAO@3a896870 Errorjava.lang.NullPointerException

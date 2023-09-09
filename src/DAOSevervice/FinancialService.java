@@ -104,8 +104,12 @@ public class FinancialService {
         return aO.getFinancialCalculator(RegisterID, StudentID);
     }
 
-    public String getFinancialFoodTotal(int RegisterID, int StudentID) {
-        return aO.getFinancialFoodTotal(RegisterID, StudentID);
+    public void ExportPayment(int RegisterID) {
+        aO.ExportPayment(RegisterID);
+    }
+
+    public List<FinancialModel> getReportUserFinancial(int YearID, int UserID) {
+        return aO.getReportUserFinancial(YearID, UserID);
     }
 
 }
