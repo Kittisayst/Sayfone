@@ -2,10 +2,10 @@ package View;
 
 import Components.JoButtonIconfont;
 import Components.JoCombobox;
+import Components.JoDateChooser;
 import Components.JoTable;
 import DAOSevervice.StudentService;
 import Model.FinancialModel;
-import Model.RegisterModel;
 import Model.StudentModel;
 import Model.UserModel;
 import Model.YearModel;
@@ -47,17 +47,19 @@ public class ReportUserFainancialView extends javax.swing.JPanel {
         StudentService service = new StudentService();
         MyFormat format = new MyFormat();
         models.forEach(data -> {
-            StudentModel model = service.getStudentById(data.getStudentID());
-            tb_data.AddJoModel(new Object[]{
-                tb_data.autoNumber(),
-                data.getFinancialIID(),
-                model.getFullName(),
-                data.getFinancialMonth(),
-                format.getDate(data.getFinancialDate()),
-                format.formatMoney(data.getFoodMoney()),
-                format.formatMoney(data.getTransferMoney()),
-                data.getFinancialComment().equals("") ? "ບໍ່ມີ" : data.getFinancialComment()
-            });
+            if (data.getMoney() > 0 && data.getTransferMoney() > 0) {
+                StudentModel model = service.getStudentById(data.getStudentID());
+                tb_data.AddJoModel(new Object[]{
+                    tb_data.autoNumber(),
+                    data.getFinancialIID(),
+                    model.getFullName(),
+                    data.getFinancialMonth(),
+                    format.getDate(data.getFinancialDate()),
+                    format.formatMoney(data.getFoodMoney()),
+                    format.formatMoney(data.getTransferMoney()),
+                    data.getFinancialComment().equals("") ? "ບໍ່ມີ" : data.getFinancialComment()
+                });
+            }
         });
         updateTable();
     }
@@ -68,6 +70,14 @@ public class ReportUserFainancialView extends javax.swing.JPanel {
         JoDataTable dataTable = new JoDataTable(pn_Datatable);
         dataTable.showDataTableAll();
         dataTable.setHiddenColumns(1);
+    }
+
+    public JoDateChooser getDtEnd() {
+        return dtEnd;
+    }
+
+    public JoDateChooser getDtStart() {
+        return dtStart;
     }
 
     public JoCombobox getCbYear() {
@@ -96,6 +106,10 @@ public class ReportUserFainancialView extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_data = new Components.JoTable();
         jPanel1 = new javax.swing.JPanel();
+        joLable3 = new Components.JoLable();
+        dtStart = new Components.JoDateChooser();
+        joLable4 = new Components.JoLable();
+        dtEnd = new Components.JoDateChooser();
         joLable1 = new Components.JoLable();
         cbYear = new Components.JoCombobox();
         joLable2 = new Components.JoLable();
@@ -168,6 +182,18 @@ public class ReportUserFainancialView extends javax.swing.JPanel {
 
         jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 10, 5));
 
+        joLable3.setText("ເລິ່ມວັນທີ");
+        jPanel1.add(joLable3);
+
+        dtStart.setPreferredSize(new java.awt.Dimension(150, 40));
+        jPanel1.add(dtStart);
+
+        joLable4.setText("ຈົນເຖິງວັນທີ");
+        jPanel1.add(joLable4);
+
+        dtEnd.setPreferredSize(new java.awt.Dimension(150, 40));
+        jPanel1.add(dtEnd);
+
         joLable1.setText("ສົກຮຽນ");
         jPanel1.add(joLable1);
 
@@ -210,6 +236,8 @@ public class ReportUserFainancialView extends javax.swing.JPanel {
     private Components.JoButtonIconfont btn_back;
     private Components.JoCombobox cbUser;
     private Components.JoCombobox cbYear;
+    private Components.JoDateChooser dtEnd;
+    private Components.JoDateChooser dtStart;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -217,6 +245,8 @@ public class ReportUserFainancialView extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private Components.JoLable joLable1;
     private Components.JoLable joLable2;
+    private Components.JoLable joLable3;
+    private Components.JoLable joLable4;
     private Components.JoLable lbl_title;
     private javax.swing.JPanel pn_Datatable;
     private Components.JoTable tb_data;

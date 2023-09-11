@@ -122,30 +122,36 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
 
     @Override
     public void Create() {
-        view.getBtnSave().setEnabled(!view.getBtnSave().isEnabled());
+        view.getBtnSave().setEnabled(false);
         FinancialService service = new FinancialService();
         FileTransferService transferService = new FileTransferService();
         JoAlert alert = new JoAlert();
-        if (view.getTxtTransferMoney().getText().equals("")) {  //ກວດສອບຈຳນວນເງິນໂອນວ່າງ
-            if (view.getTxtMoney().TextEmpty()) {  //ກວດສອບຈຳນວນເງິນວ່າງ
-                boolean issave = alert.JoSubmit(service.Creater(saveData()), JoAlert.INSERT);
-                if (issave) {
-                    AppFinancial appFinancial = new AppFinancial(registerModel, studentModel);
+        try {
+            if (view.getTxtTransferMoney().getText().equals("")) {  //ກວດສອບຈຳນວນເງິນໂອນວ່າງ
+                if (view.getTxtMoney().TextEmpty()) {  //ກວດສອບຈຳນວນເງິນວ່າງ
+                    boolean issave = alert.JoSubmit(service.Creater(saveData()), JoAlert.INSERT);
+                    if (issave) {
+                        AppFinancial appFinancial = new AppFinancial(registerModel, studentModel);
+                    }
                 }
-            }
-        } else {
-            if (fileTranferModel.getFile() == null) {   // ກວດສອບປ້ອນຂໍ້ມູນການໂອນໃຫ້ຄົວຖ້ວນ
-                new JoAlert().messages("ຂໍ້ມູນບໍ່ຄົບ", "ກະລຸນາປ້ອນຂໍ້ມູນການໂອນ " + fileTranferModel.getFile(), JoAlert.Icons.warning);
             } else {
-                boolean issave = alert.JoSubmit(service.Creater(saveData()), JoAlert.INSERT);
-                if (issave) {
-                    fileTranferModel.setFinancialID(service.getMaxFinancialID());
-                    transferService.Creater(fileTranferModel);
-                    AppFinancial appFinancial = new AppFinancial(registerModel, studentModel);
+                if (fileTranferModel.getFile() == null) {   // ກວດສອບປ້ອນຂໍ້ມູນການໂອນໃຫ້ຄົວຖ້ວນ
+                    new JoAlert().messages("ຂໍ້ມູນບໍ່ຄົບ", "ກະລຸນາປ້ອນຂໍ້ມູນການໂອນ " + fileTranferModel.getFile(), JoAlert.Icons.warning);
+                } else {
+                    boolean issave = alert.JoSubmit(service.Creater(saveData()), JoAlert.INSERT);
+                    if (issave) {
+                        fileTranferModel.setFinancialID(service.getMaxFinancialID());
+                        transferService.Creater(fileTranferModel);
+                        AppFinancial appFinancial = new AppFinancial(registerModel, studentModel);
+                    }
                 }
             }
+        } catch (Exception e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            view.getBtnSave().setEnabled(true);
         }
-        view.getBtnSave().setEnabled(!view.getBtnSave().isEnabled());
     }
 
     @Override

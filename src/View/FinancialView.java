@@ -79,8 +79,10 @@ public class FinancialView extends javax.swing.JPanel {
 
     public void showFinancial(List<FinancialModel> models) {
         MyFormat format = new MyFormat();
+        UserService userService = new UserService();
         models.forEach(data -> {
             setSelectMonth(data);
+            UserModel um = userService.getUserById(data.getUserID());
             tb_data.AddJoModel(new Object[]{
                 tb_data.autoNumber(),
                 data.getFinancialIID(),
@@ -88,7 +90,8 @@ public class FinancialView extends javax.swing.JPanel {
                 format.formatMoney(data.getMoney()),
                 format.formatMoney(data.getTransferMoney()),
                 toMonthString(data.getFinancialMonth()),
-                data.getFinancialComment()
+                data.getFinancialComment(),
+                um.getFullName()
             });
         });
     }
@@ -601,11 +604,11 @@ public class FinancialView extends javax.swing.JPanel {
 
             },
             new String [] {
-                "#", "ເລກທີບິນ", "ວດປ", "ຈຳນວນເງິນສົດ", "ຈຳນວນເງິນໂອນ", "ເດືອນ", "ໝາຍເຫດ"
+                "#", "ເລກທີບິນ", "ວດປ", "ຈຳນວນເງິນສົດ", "ຈຳນວນເງິນໂອນ", "ເດືອນ", "ໝາຍເຫດ", "ຜູ້ລົງບັນຊີ"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -613,6 +616,26 @@ public class FinancialView extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(tb_data);
+        if (tb_data.getColumnModel().getColumnCount() > 0) {
+            tb_data.getColumnModel().getColumn(0).setMinWidth(80);
+            tb_data.getColumnModel().getColumn(0).setPreferredWidth(80);
+            tb_data.getColumnModel().getColumn(0).setMaxWidth(80);
+            tb_data.getColumnModel().getColumn(1).setMinWidth(80);
+            tb_data.getColumnModel().getColumn(1).setPreferredWidth(80);
+            tb_data.getColumnModel().getColumn(1).setMaxWidth(80);
+            tb_data.getColumnModel().getColumn(2).setMinWidth(120);
+            tb_data.getColumnModel().getColumn(2).setPreferredWidth(120);
+            tb_data.getColumnModel().getColumn(2).setMaxWidth(120);
+            tb_data.getColumnModel().getColumn(3).setMinWidth(120);
+            tb_data.getColumnModel().getColumn(3).setPreferredWidth(120);
+            tb_data.getColumnModel().getColumn(3).setMaxWidth(120);
+            tb_data.getColumnModel().getColumn(4).setMinWidth(120);
+            tb_data.getColumnModel().getColumn(4).setPreferredWidth(120);
+            tb_data.getColumnModel().getColumn(4).setMaxWidth(120);
+            tb_data.getColumnModel().getColumn(7).setMinWidth(120);
+            tb_data.getColumnModel().getColumn(7).setPreferredWidth(120);
+            tb_data.getColumnModel().getColumn(7).setMaxWidth(120);
+        }
 
         pn_Datatable.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 

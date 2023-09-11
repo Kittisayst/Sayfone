@@ -55,6 +55,6 @@ public interface FinancialFn {
 
     public void ExportPayment(int RegisterID);
 
-    public List<FinancialModel> getReportUserFinancial(int YearID, int UserID);
+    public List<FinancialModel> getReportUserFinancial(int YearID, int UserID, String dateStart, String dateEnd);
 
 }

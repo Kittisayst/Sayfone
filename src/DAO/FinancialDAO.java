@@ -606,17 +606,19 @@ public class FinancialDAO implements FinancialFn {
     }
 
     @Override
-    public List<FinancialModel> getReportUserFinancial(int YearID, int UserID) {
+    public List<FinancialModel> getReportUserFinancial(int YearID, int UserID, String dateStart, String dateEnd) {
         List<FinancialModel> models = new ArrayList<>();
         JoConnect connect = new JoConnect();
         String sql = "SELECT FinancialID,fn.RegisterID,StudentID,Money,TransferMoney,SaveDate,FinancialMonth,FinancialComment,AuthenUserID,Discount,OvertimePay,UserID,foodMoney,state \n"
                 + "FROM tb_financial AS fn\n"
                 + "INNER JOIN tb_register AS rs ON fn.RegisterID=rs.registerID\n"
-                + "WHERE rs.yearID=? AND UserID=? ORDER BY FinancialID DESC";
+                + "WHERE rs.yearID=? AND UserID=? AND SaveDate BETWEEN ? AND ? ORDER BY FinancialID DESC";
         try {
             PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sql);
             pre.setInt(1, YearID);
             pre.setInt(2, UserID);
+            pre.setString(3, dateStart);
+            pre.setString(4, dateEnd);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
                 models.add(resultModel(rs));

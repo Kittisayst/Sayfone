@@ -79,7 +79,7 @@ public class ReportUserFinancialController implements JoMVC, ActionListener, Mou
 
     @Override
     public boolean emptyData() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return view.getDtStart().DateEmpty() && view.getDtEnd().DateEmpty();
     }
 
     @Override
@@ -88,9 +88,9 @@ public class ReportUserFinancialController implements JoMVC, ActionListener, Mou
         if (event.isEvent(view.getBtn_back())) {
             AppDashboard dashboard = new AppDashboard();
         } else if (event.isEvent(view.getBtnShow())) {
-            int yearID = view.getCbYear().getKeyInt();
-            int UserID = view.getCbUser().getKeyInt();
-            view.showUserFinancial(service.getReportUserFinancial(yearID, UserID));
+            if (emptyData()) {
+                showReport();
+            }
         } else if (event.isEvent(popup.getItemshow())) {
             int financialID = view.getTb_data().getIntValue(1);
             showDialogFinancial(service.getFinancialById(financialID));
@@ -134,6 +134,14 @@ public class ReportUserFinancialController implements JoMVC, ActionListener, Mou
     @Override
     public void mouseExited(MouseEvent e) {
 
+    }
+
+    private void showReport() {
+        int yearID = view.getCbYear().getKeyInt();
+        int UserID = view.getCbUser().getKeyInt();
+        String dateStart = view.getDtStart().getDateSQL();
+        String dateEnd = view.getDtEnd().getDateSQL();
+        view.showUserFinancial(service.getReportUserFinancial(yearID, UserID, dateStart, dateEnd));
     }
 
     private void showDialogFinancial(FinancialModel model) {

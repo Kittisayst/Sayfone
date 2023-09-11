@@ -178,6 +178,30 @@
         <Property name="horizontalGap" type="int" value="10"/>
       </Layout>
       <SubComponents>
+        <Component class="Components.JoLable" name="joLable3">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="&#xec0;&#xea5;&#xeb4;&#xec8;&#xea1;&#xea7;&#xeb1;&#xe99;&#xe97;&#xeb5;"/>
+          </Properties>
+        </Component>
+        <Component class="Components.JoDateChooser" name="dtStart">
+          <Properties>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[150, 40]"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="Components.JoLable" name="joLable4">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="&#xe88;&#xebb;&#xe99;&#xec0;&#xe96;&#xeb4;&#xe87;&#xea7;&#xeb1;&#xe99;&#xe97;&#xeb5;"/>
+          </Properties>
+        </Component>
+        <Component class="Components.JoDateChooser" name="dtEnd">
+          <Properties>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[150, 40]"/>
+            </Property>
+          </Properties>
+        </Component>
         <Component class="Components.JoLable" name="joLable1">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#xeaa;&#xebb;&#xe81;&#xeae;&#xebd;&#xe99;"/>

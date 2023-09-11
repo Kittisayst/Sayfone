@@ -108,8 +108,8 @@ public class FinancialService {
         aO.ExportPayment(RegisterID);
     }
 
-    public List<FinancialModel> getReportUserFinancial(int YearID, int UserID) {
-        return aO.getReportUserFinancial(YearID, UserID);
+    public List<FinancialModel> getReportUserFinancial(int YearID, int UserID, String dateStart, String dateEnd) {
+        return aO.getReportUserFinancial(YearID, UserID, dateStart, dateEnd);
     }
 
 }
