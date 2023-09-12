@@ -171,3 +171,12 @@
 08/09/2023: DAO.FinancialDAO@710cff26 Errorjava.lang.NullPointerException
 08/09/2023: DAO.FinancialDAO@755f4b9c Errorjava.lang.NullPointerException
 08/09/2023: DAO.FinancialDAO@3a896870 Errorjava.lang.NullPointerException
+12/09/2023: View.ReportPayView[,0,0,1645x958,invalid,layout=javax.swing.GroupLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=] Errorjava.lang.NumberFormatException: For input string: "],[9"
+12/09/2023: View.ReportPayView[,0,0,1645x958,invalid,layout=javax.swing.GroupLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=] Errorjava.lang.NumberFormatException: For input string: "12],[8],[9"
+12/09/2023: View.ReportPayView[,0,0,1645x958,invalid,layout=javax.swing.GroupLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=] Errorjava.lang.NumberFormatException: For input string: "12],[8],[9"
+12/09/2023: View.ReportPayView[,0,0,1645x958,invalid,layout=javax.swing.GroupLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=] Errorjava.lang.NumberFormatException: For input string: "],[9"
+12/09/2023: View.ReportPayView[,0,0,1645x958,invalid,layout=javax.swing.GroupLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=] Errorjava.lang.NumberFormatException: For input string: "],[9"
+12/09/2023: View.ReportPayView[,0,0,1645x958,invalid,layout=javax.swing.GroupLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=] Errorjava.lang.NumberFormatException: For input string: "],[9"
+12/09/2023: View.ReportPayView[,0,0,1645x958,invalid,layout=javax.swing.GroupLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=] Errorjava.lang.NumberFormatException: For input string: "],[9"
+12/09/2023: View.ReportPayView[,0,0,1645x958,invalid,layout=javax.swing.GroupLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=] Errorjava.lang.IllegalStateException: No match found
+12/09/2023: View.ReportPayView[,0,0,1645x958,invalid,layout=javax.swing.GroupLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=] Errorjava.lang.NumberFormatException: For input string: "],[9"

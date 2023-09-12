@@ -47,7 +47,7 @@ public class ReportUserFainancialView extends javax.swing.JPanel {
         StudentService service = new StudentService();
         MyFormat format = new MyFormat();
         models.forEach(data -> {
-            if (data.getMoney() > 0 && data.getTransferMoney() > 0) {
+            if (data.getMoney() > 0 || data.getTransferMoney() > 0) {
                 StudentModel model = service.getStudentById(data.getStudentID());
                 tb_data.AddJoModel(new Object[]{
                     tb_data.autoNumber(),
@@ -55,7 +55,7 @@ public class ReportUserFainancialView extends javax.swing.JPanel {
                     model.getFullName(),
                     data.getFinancialMonth(),
                     format.getDate(data.getFinancialDate()),
-                    format.formatMoney(data.getFoodMoney()),
+                    format.formatMoney(data.getMoney()),
                     format.formatMoney(data.getTransferMoney()),
                     data.getFinancialComment().equals("") ? "ບໍ່ມີ" : data.getFinancialComment()
                 });

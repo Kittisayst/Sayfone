@@ -53,6 +53,7 @@ public class ReportPayView extends javax.swing.JPanel {
                 tb_data.AddJoModel(new Object[]{tb_data.autoNumber(), data.getFinancialIID(), data.getStudentID(), sm.getStudentNo(), sm.getFullName(), rm.getClassRoomName(), findMissingMonth});
             });
         } catch (Exception e) {
+            e.printStackTrace();
             JoAlert.Error(e, this);
             JoLoger.saveLog(e, this);
         } finally {

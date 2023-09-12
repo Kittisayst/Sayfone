@@ -200,7 +200,7 @@ public class RegisterDAO implements RegisterFn {
         JoConnect connect = new JoConnect();
         JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         try {
-            PreparedStatement pre = sql.getSelectCustom("yearID=?");
+            PreparedStatement pre = sql.getSelectCustom("yearID=? ORDER BY classID ASC");
             pre.setInt(1, YearID);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {

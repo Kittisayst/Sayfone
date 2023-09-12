@@ -9,6 +9,7 @@ import Model.FinancialModel;
 import Model.RegisterModel;
 import Model.StudentModel;
 import Model.YearModel;
+import Tools.JoDataTable;
 import Utility.MyFormat;
 import java.util.List;
 
@@ -17,6 +18,7 @@ public class ReportFoodView extends javax.swing.JPanel {
     public ReportFoodView(String Title) {
         initComponents();
         lbl_title.setText(Title);
+        clearData();
     }
 
     public JoButtonIconfont getBtn_back() {
@@ -49,8 +51,19 @@ public class ReportFoodView extends javax.swing.JPanel {
             StudentModel studentModel = service.getStudentById(data.getStudentID());
             FinancialModel financialModel = financialService.getFinancialCalculator(data.getRegisterID(), data.getStudentID());
             String foodMoney = new MyFormat().formatMoney(financialModel.getFoodMoney());
-            tb_data.AddJoModel(new Object[]{tb_data.autoNumber(), data.getFinancialIID(), foodMoney, financialModel.getFinancialMonth(), studentModel.getFullName()});
+            tb_data.AddJoModel(new Object[]{tb_data.autoNumber(), data.getFinancialIID(), data.getRegisterID(), data.getStudentID(), foodMoney, financialModel.getFinancialMonth(), studentModel.getFullName()});
         });
+        clearData();
+    }
+
+    private void clearData() {
+        pn_Datatable.removeAll();
+        pn_Datatable.add(jScrollPane1);
+        JoDataTable dataTable = new JoDataTable(pn_Datatable);
+        dataTable.setHiddenColumns(1);
+        dataTable.setHiddenColumns(2);
+        dataTable.setHiddenColumns(3);
+        dataTable.showDataTableAll();
     }
 
     public JoCombobox getCbClassRoom() {
@@ -114,11 +127,11 @@ public class ReportFoodView extends javax.swing.JPanel {
 
             },
             new String [] {
-                "#", "FinacialID", "ຄ່າອາຫານ", "ເດືອນ", "ຊື່ນັກຮຽນ"
+                "#", "FinacialID", "RegisterID", "StudentID", "ຄ່າອາຫານ", "ເດືອນ", "ຊື່ນັກຮຽນ"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

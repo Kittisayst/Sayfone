@@ -69,7 +69,12 @@ public class MonthCaculator {
         // Convert the string values to integers
         int[] numbers = new int[numberStrings.length];
         for (int i = 0; i < numberStrings.length; i++) {
-            numbers[i] = Integer.parseInt(numberStrings[i].trim());
+            Pattern pattern = Pattern.compile("\\d+");
+            Matcher matcher = pattern.matcher(numberStrings[i]);
+            matcher.find();
+            String number = matcher.group();
+            System.out.println(number);
+            numbers[i] = Integer.parseInt(number.trim());
         }
         return numbers;
     }

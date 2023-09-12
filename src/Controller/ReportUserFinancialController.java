@@ -22,7 +22,6 @@ import Utility.MyFormat;
 import Utility.MyPopup;
 import View.HomeView;
 import View.ReportUserFainancialView;
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
