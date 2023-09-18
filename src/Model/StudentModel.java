@@ -96,7 +96,7 @@ public class StudentModel {
     }
 
     public String getStudentNo() {
-        return StudentNo;
+        return StudentNo == null ? "" + StudentID : StudentNo;
     }
 
     public void setStudentNo(String StudentNo) {

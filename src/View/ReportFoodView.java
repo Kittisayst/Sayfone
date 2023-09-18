@@ -51,7 +51,16 @@ public class ReportFoodView extends javax.swing.JPanel {
             StudentModel studentModel = service.getStudentById(data.getStudentID());
             FinancialModel financialModel = financialService.getFinancialCalculator(data.getRegisterID(), data.getStudentID());
             String foodMoney = new MyFormat().formatMoney(financialModel.getFoodMoney());
-            tb_data.AddJoModel(new Object[]{tb_data.autoNumber(), data.getFinancialIID(), data.getRegisterID(), data.getStudentID(), foodMoney, financialModel.getFinancialMonth(), studentModel.getFullName()});
+            tb_data.AddJoModel(new Object[]{
+                tb_data.autoNumber(), 
+                data.getFinancialIID(), 
+                data.getRegisterID(), 
+                data.getStudentID(), 
+                foodMoney, 
+                financialModel.getFinancialMonth(),
+                studentModel.getStudentNo(),
+                studentModel.getFullName()
+            });
         });
         clearData();
     }
@@ -127,11 +136,11 @@ public class ReportFoodView extends javax.swing.JPanel {
 
             },
             new String [] {
-                "#", "FinacialID", "RegisterID", "StudentID", "ຄ່າອາຫານ", "ເດືອນ", "ຊື່ນັກຮຽນ"
+                "#", "FinacialID", "RegisterID", "StudentID", "ຄ່າອາຫານ", "ເດືອນ", "ລະຫັດນັກຮຽນ", "ຊື່ນັກຮຽນ"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

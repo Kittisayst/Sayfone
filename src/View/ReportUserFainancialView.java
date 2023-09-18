@@ -52,6 +52,7 @@ public class ReportUserFainancialView extends javax.swing.JPanel {
                 tb_data.AddJoModel(new Object[]{
                     tb_data.autoNumber(),
                     data.getFinancialIID(),
+                    model.getStudentNo().equals("0") ? data.getFinancialIID() : model.getStudentNo(),
                     model.getFullName(),
                     data.getFinancialMonth(),
                     format.getDate(data.getFinancialDate()),
@@ -145,11 +146,11 @@ public class ReportUserFainancialView extends javax.swing.JPanel {
 
             },
             new String [] {
-                "#", "FinancailID", "ຊື່ ແລະ ນາມສະກຸນ", "ຈ່າຍເດືອນ", "ວັນທີເດືອນປີ", "ເງິນສົດ", "ເງິນໂອນ", "ໝາຍເຫດ"
+                "#", "FinancailID", "ລະຫັດນັກຮຽນ", "ຊື່ ແລະ ນາມສະກຸນ", "ຈ່າຍເດືອນ", "ວັນທີເດືອນປີ", "ເງິນສົດ", "ເງິນໂອນ", "ໝາຍເຫດ"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -164,18 +165,18 @@ public class ReportUserFainancialView extends javax.swing.JPanel {
             tb_data.getColumnModel().getColumn(1).setMinWidth(80);
             tb_data.getColumnModel().getColumn(1).setPreferredWidth(80);
             tb_data.getColumnModel().getColumn(1).setMaxWidth(80);
-            tb_data.getColumnModel().getColumn(2).setMinWidth(200);
-            tb_data.getColumnModel().getColumn(2).setPreferredWidth(200);
-            tb_data.getColumnModel().getColumn(2).setMaxWidth(200);
-            tb_data.getColumnModel().getColumn(4).setMinWidth(100);
-            tb_data.getColumnModel().getColumn(4).setPreferredWidth(100);
-            tb_data.getColumnModel().getColumn(4).setMaxWidth(100);
+            tb_data.getColumnModel().getColumn(3).setMinWidth(200);
+            tb_data.getColumnModel().getColumn(3).setPreferredWidth(200);
+            tb_data.getColumnModel().getColumn(3).setMaxWidth(200);
             tb_data.getColumnModel().getColumn(5).setMinWidth(100);
             tb_data.getColumnModel().getColumn(5).setPreferredWidth(100);
             tb_data.getColumnModel().getColumn(5).setMaxWidth(100);
             tb_data.getColumnModel().getColumn(6).setMinWidth(100);
             tb_data.getColumnModel().getColumn(6).setPreferredWidth(100);
             tb_data.getColumnModel().getColumn(6).setMaxWidth(100);
+            tb_data.getColumnModel().getColumn(7).setMinWidth(100);
+            tb_data.getColumnModel().getColumn(7).setPreferredWidth(100);
+            tb_data.getColumnModel().getColumn(7).setMaxWidth(100);
         }
 
         pn_Datatable.add(jScrollPane1, java.awt.BorderLayout.CENTER);

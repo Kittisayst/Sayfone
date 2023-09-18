@@ -18,7 +18,6 @@ import java.util.List;
 
 public class ReportPayView extends javax.swing.JPanel {
 
-    String month = "";
 
     public ReportPayView(String Title) {
         initComponents();
@@ -50,7 +49,14 @@ public class ReportPayView extends javax.swing.JPanel {
                 RegisterModel rm = registerService.getRegisterById(fm.getRegisterID());
                 StudentModel sm = studentService.getStudentById(data.getStudentID());
                 String findMissingMonth = mc.getMissingMonth(fm.getFinancialMonth());
-                tb_data.AddJoModel(new Object[]{tb_data.autoNumber(), data.getFinancialIID(), data.getStudentID(), sm.getStudentNo(), sm.getFullName(), rm.getClassRoomName(), findMissingMonth});
+                tb_data.AddJoModel(new Object[]{
+                    tb_data.autoNumber(), 
+                    data.getFinancialIID(), 
+                    data.getStudentID(), 
+                    sm.getStudentNo(), 
+                    sm.getFullName(), 
+                    rm.getClassRoomName(), 
+                    findMissingMonth});
             });
         } catch (Exception e) {
             e.printStackTrace();
@@ -147,11 +153,11 @@ public class ReportPayView extends javax.swing.JPanel {
 
             },
             new String [] {
-                "#", "ID", "StudentID", "ສົກຮຽນ", "ຊື່ ແລະ ນາມສະກຸນ", "ຫ້ອງຮຽນ", "ຄ້າງເດືອນ"
+                "#", "ID", "StudentID", "ສົກຮຽນ", "ລະຫັດນັກຮຽນ", "ຊື່ ແລະ ນາມສະກຸນ", "ຫ້ອງຮຽນ", "ຄ້າງເດືອນ"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

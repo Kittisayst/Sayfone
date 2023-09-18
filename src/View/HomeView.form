@@ -250,7 +250,7 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="2"/>
-                    <Property name="text" type="java.lang.String" value="Sayfoneschool"/>
+                    <Property name="text" type="java.lang.String" value="Sayfone School"/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Phetsarath OT" size="20" style="1"/>
                     </Property>

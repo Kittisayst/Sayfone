@@ -263,7 +263,7 @@ public class HomeView extends javax.swing.JFrame {
 
         joLable1.setForeground(new java.awt.Color(255, 255, 255));
         joLable1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        joLable1.setText("Sayfoneschool");
+        joLable1.setText("Sayfone School");
         joLable1.setFont(new java.awt.Font("Phetsarath OT", 1, 20)); // NOI18N
         joLable1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
