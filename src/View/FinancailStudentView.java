@@ -59,13 +59,15 @@ public class FinancailStudentView extends javax.swing.JPanel {
     public void showStudentAll(List<StudentModel> models) {
         tb_data.JoClearModel();
         models.forEach(data -> {
-            tb_data.AddJoModel(new Object[]{
-                tb_data.autoNumber(),
-                data.getStudentID(),
-                data.getStudentNo(),
-                data.getFullName(),
-                data.getDateStart() == null ? "ວ່າງ" : data.getDateStart()
-            });
+            if (data.getStudentID() > 0) {
+                tb_data.AddJoModel(new Object[]{
+                    tb_data.autoNumber(),
+                    data.getStudentID(),
+                    data.getStudentNo(),
+                    data.getFullName(),
+                    data.getDateStart() == null ? "ວ່າງ" : data.getDateStart()
+                });
+            }
         });
     }
 

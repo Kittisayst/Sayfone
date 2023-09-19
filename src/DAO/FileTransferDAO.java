@@ -4,16 +4,18 @@ import DAOInterface.FileTransferFn;
 import Database.JoConnect;
 import Database.JoSQL;
 import Log.JoLoger;
+import Main.JoHttp;
+import Main.JoUploadFile;
 import Model.FileTranferModel;
 import java.util.List;
 import Tools.JoAlert;
 import Utility.JoPrepared;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class FileTransferDAO implements FileTransferFn {
 
@@ -23,22 +25,30 @@ public class FileTransferDAO implements FileTransferFn {
     public int Creater(FileTranferModel model) {
         JoConnect connect = new JoConnect();
         JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH-mm-ss");
+        String FileName = model.getFinancialID() + "-" + dateFormat.format(new Date());
+        JoUploadFile uploadFile = new JoUploadFile("http://sayfoneapi/upload.php", "fileToUpload", model.getFile(), FileName);
         try {
-            FileInputStream fis = new FileInputStream(model.getFile());
-            PreparedStatement pre = new JoPrepared().setAutoPrepared(sql.getCreate(),
-                    null,
-                    model.getFinancialID(),
-                    model.getFileTranferDate(),
-                    model.getTransferTime(),
-                    fis);
-            System.out.println(pre);
-            return pre.executeUpdate();
-        } catch (FileNotFoundException | SQLException e) {
+            if (uploadFile.upload()) {
+                PreparedStatement pre = new JoPrepared().setAutoPrepared(sql.getCreate(),
+                        null,
+                        model.getFinancialID(),
+                        model.getFileTranferDate(),
+                        model.getTransferTime(),
+                        FileName + "." + uploadFile.getExtension());
+                System.out.println(pre);
+                return pre.executeUpdate();
+            } else {
+                return 0;
+            }
+
+        } catch (SQLException e) {
             JoAlert.Error(e, this);
             JoLoger.saveLog(e, this);
             return 0;
         } finally {
             connect.close();
+            uploadFile.close();
         }
     }
 
@@ -57,7 +67,7 @@ public class FileTransferDAO implements FileTransferFn {
                 System.out.println(pre);
                 return pre.executeUpdate();
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             JoAlert.Error(e, this);
             JoLoger.saveLog(e, this);
             return 0;
@@ -69,17 +79,37 @@ public class FileTransferDAO implements FileTransferFn {
 
     private int updateImage(FileTranferModel model) {
         JoConnect connect = new JoConnect();
-        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
+        String sql = "UPDATE tb_filetransfer SET fileName=? WHERE transferID=?";
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH-mm-ss");
+        String FileName = model.getFinancialID() + "-" + dateFormat.format(new Date());
+        JoUploadFile uploadFile = new JoUploadFile("http://sayfoneapi/upload.php", "fileToUpload", model.getFile(), FileName);
         try {
-            FileInputStream fis = new FileInputStream(model.getFile());
-            PreparedStatement pre = new JoPrepared().setAutoPrepared(sql.getUpdateByColumns(new String[]{"image"}), fis, model.getFileTranferID());
-            return pre.executeUpdate();
-        } catch (FileNotFoundException | SQLException e) {
+            if (uploadFile.upload()) {
+                PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sql);
+                pre.setString(1, FileName + "." + uploadFile.getExtension());
+                pre.setInt(2, model.getFileTranferID());
+                int state = pre.executeUpdate();
+                System.out.println("file Delete " + model.getFileName());
+                System.out.println("new file " + FileName + "." + uploadFile.getExtension());
+                deleteFile(state, "http://sayfoneapi/deletefile.php?filename=" + model.getFileName()); // ລົບໄຟເກົ່າ
+                return state;
+            } else {
+                return 0;
+            }
+        } catch (SQLException e) {
             JoAlert.Error(e, this);
             JoLoger.saveLog(e, this);
             return 0;
         } finally {
             connect.close();
+            uploadFile.close();
+        }
+    }
+
+    private void deleteFile(int state, String url) {
+        if (state > 0) {
+            JoHttp http = new JoHttp(url);
+            http.Open();
         }
     }
 
@@ -158,8 +188,7 @@ public class FileTransferDAO implements FileTransferFn {
     }
 
     private FileTranferModel getResult(ResultSet rs) throws Exception {
-        FileTranferModel model = new FileTranferModel(rs.getInt(1), rs.getInt(2), rs.getDate(3), rs.getString(4), null);
-        model.setImage(rs.getBlob(5));
+        FileTranferModel model = new FileTranferModel(rs.getInt(1), rs.getInt(2), rs.getDate(3), rs.getString(4), null, rs.getString(5));
         return model;
     }
 

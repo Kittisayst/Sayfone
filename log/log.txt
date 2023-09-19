@@ -180,3 +180,4 @@
 12/09/2023: View.ReportPayView[,0,0,1645x958,invalid,layout=javax.swing.GroupLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=] Errorjava.lang.NumberFormatException: For input string: "],[9"
 12/09/2023: View.ReportPayView[,0,0,1645x958,invalid,layout=javax.swing.GroupLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=] Errorjava.lang.IllegalStateException: No match found
 12/09/2023: View.ReportPayView[,0,0,1645x958,invalid,layout=javax.swing.GroupLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=] Errorjava.lang.NumberFormatException: For input string: "],[9"
+19/09/2023: DAO.FileTransferDAO@282cb2b7 Errorjava.sql.SQLException: Incorrect string value: '\xFF\xD8\xFF\xE0\x00\x10...' for column `db_sayfoneschool2022`.`tb_filetransfer`.`fileName` at row 1

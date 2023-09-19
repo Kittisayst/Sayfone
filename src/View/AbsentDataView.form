@@ -18,7 +18,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="Pn_Navigation" max="32767" attributes="0"/>
           <Component id="pn_Datatable" alignment="0" max="32767" attributes="0"/>
-          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
+          <Component id="jPanel1" alignment="0" pref="1173" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -28,7 +28,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-              <Component id="pn_Datatable" max="32767" attributes="0"/>
+              <Component id="pn_Datatable" pref="494" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

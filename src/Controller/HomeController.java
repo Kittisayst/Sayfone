@@ -8,6 +8,7 @@ import App.AppFinancialRoom;
 import App.AppRegister;
 import App.AppReportFinacial;
 import App.AppReportFood;
+import App.AppReportStudent;
 import App.AppReportUserFinancial;
 import App.AppSetting;
 import App.AppStudent;
@@ -18,6 +19,7 @@ import App.AppTutorial;
 import App.AppUser;
 import App.AppWithdraw;
 import App.ReportPayApp;
+import Component.DialogCreateImage;
 import Model.UserModel;
 import DAOSevervice.TeacherService;
 import DAOSevervice.UserService;
@@ -62,6 +64,7 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
 
     @Override
     public final void AddEvent() {
+        view.getBtnImage().addActionListener(this);
         view.getBtn_home().addActionListener(this);
         view.getBtn_teacher().addActionListener(this);
         view.getBtn_Menu().addActionListener(this);
@@ -81,6 +84,7 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
         view.getBtnWithdraw().addActionListener(this);
         view.getBtnFood().addActionListener(this);
         view.getBtnReportUserFinancial().addActionListener(this);
+        view.getBtnReportStudent().addActionListener(this);
     }
 
     @Override
@@ -147,11 +151,17 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
         }else if (event.isEvent(view.getBtnWithdraw())) {
             AppWithdraw appWithdraw = new AppWithdraw();
             appWithdraw.Open();
-        }  else if (event.isEvent(view.getBtnInfo())) {   // ============ ຕັ້ງຄ່າ
+        }else if (event.isEvent(view.getBtnReportStudent())) {
+            AppReportStudent reportStudent = new AppReportStudent();
+            reportStudent.Open();
+        }   else if (event.isEvent(view.getBtnInfo())) {   // ============ ຕັ້ງຄ່າ
             AppSetting app = new AppSetting();
             app.Open();
         } else if (event.isEvent(view.getBtnPrinter())) {
             HomeView.MyRouter.setRouter(new PrinterView("ຕັ້ງຄ່າປີ້ນເຕີ"));
+        }else if (event.isEvent(view.getBtnImage())) {
+            DialogCreateImage createImage = new DialogCreateImage(view, true);
+            createImage.setVisible(true);
         }
     }
 

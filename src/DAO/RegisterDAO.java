@@ -87,7 +87,7 @@ public class RegisterDAO implements RegisterFn {
         JoConnect connect = new JoConnect();
         List<RegisterModel> models = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM tb_register GROUP BY registerID DESC";
+            String sql = "SELECT * FROM tb_register ORDER BY classID ASC";
             Statement statement = connect.getConnectionDefault().createStatement();
             try (ResultSet rs = statement.executeQuery(sql)) {
                 while (rs.next()) {

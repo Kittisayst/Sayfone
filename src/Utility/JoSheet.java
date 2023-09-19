@@ -2,8 +2,6 @@ package Utility;
 
 import java.io.FileOutputStream;
 import java.io.OutputStream;
-import java.sql.ResultSet;
-import java.util.List;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
@@ -62,9 +60,14 @@ public class JoSheet {
         Row row = sheet.createRow(indexRow);
         for (int i = 0; i < values.length; i++) {
             Cell cell = row.createCell(i);
-            cell.setCellValue(values[i].toString());
+//            System.out.println("data: "+values[i].toString());
+            cell.setCellValue(validate(values[i]));
             cell.setCellStyle(sheetStyle);
         }
+    }
+
+    private String validate(Object value) {
+        return value == null ? "" : value.toString();
     }
 
     public void getCreateSheet() throws Exception {

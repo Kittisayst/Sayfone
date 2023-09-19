@@ -35,7 +35,6 @@ public class ReportPayController implements JoMVC, ActionListener, ItemListener,
         view.showYear(new YearService().getYearAll());
         view.getCbYear().setSelectedIndex(new YearService().getYearAll().size() - 1);
         view.showClassRoom(new RegisterService().getRegisterAllByYearID(view.getCbYear().getKeyInt()));
-//        view.showReportPay(financialService.getFinancialFree(view.getCbYear().getKeyInt()));
     }
 
     @Override

@@ -243,6 +243,11 @@
               </Layout>
               <SubComponents>
                 <Component class="Components.JoLabelImage" name="lblLogo">
+                  <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/Source/bcel.png"/>
+                    </Property>
+                  </Properties>
                 </Component>
                 <Component class="Components.JoLable" name="joLable1">
                   <Properties>
@@ -383,7 +388,7 @@
                                   <Component id="btnSubjectTeacher" alignment="0" max="32767" attributes="0"/>
                                   <Component id="btnUser" alignment="1" max="32767" attributes="0"/>
                                   <Component id="btnClass" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="joButtonIconfont4" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="btnImage" alignment="1" max="32767" attributes="0"/>
                               </Group>
                             </DimensionLayout>
                             <DimensionLayout dim="1">
@@ -402,7 +407,7 @@
                                       <EmptySpace min="-2" max="-2" attributes="0"/>
                                       <Component id="btnUser" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                                      <Component id="joButtonIconfont4" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnImage" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
@@ -418,7 +423,7 @@
                                 </Property>
                               </Properties>
                             </Component>
-                            <Component class="Components.JoButtonIconfont" name="joButtonIconfont4">
+                            <Component class="Components.JoButtonIconfont" name="btnImage">
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="menu"/>
                                 <Property name="horizontalAlignment" type="int" value="2"/>
@@ -559,7 +564,7 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="joButtonIconfont10" max="32767" attributes="0"/>
                                   <Component id="btnReportFinancial" alignment="0" pref="269" max="32767" attributes="0"/>
-                                  <Component id="joButtonIconfont11" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="btnReportStudent" alignment="0" max="32767" attributes="0"/>
                                   <Component id="btnReportPay" alignment="0" max="32767" attributes="0"/>
                                   <Component id="joButtonIconfont13" alignment="0" max="32767" attributes="0"/>
                                   <Component id="btnWithdraw" alignment="0" max="32767" attributes="0"/>
@@ -583,7 +588,7 @@
                                       <EmptySpace min="-2" max="-2" attributes="0"/>
                                       <Component id="joButtonIconfont13" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="joButtonIconfont11" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnReportStudent" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" max="-2" attributes="0"/>
                                       <Component id="joButtonIconfont10" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
@@ -619,9 +624,9 @@
                                 </Property>
                               </Properties>
                             </Component>
-                            <Component class="Components.JoButtonIconfont" name="joButtonIconfont11">
+                            <Component class="Components.JoButtonIconfont" name="btnReportStudent">
                               <Properties>
-                                <Property name="text" type="java.lang.String" value="&#xea5;&#xeb2;&#xe8d;&#xe87;&#xeb2;&#xe99;&#xeaa;&#xeb0;&#xe96;&#xeb4;&#xe94;&#xe95;&#xeb4;&#xe99;&#xeb1;&#xe81;&#xeae;&#xebd;&#xe99;"/>
+                                <Property name="text" type="java.lang.String" value="&#xea5;&#xeb2;&#xe8d;&#xe87;&#xeb2;&#xe99;&#xe82;&#xecd;&#xec9;&#xea1;&#xeb9;&#xe99;&#xe99;&#xeb1;&#xe81;&#xeae;&#xebd;&#xe99;"/>
                                 <Property name="horizontalAlignment" type="int" value="2"/>
                                 <Property name="joIcons" type="jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons" editor="org.netbeans.modules.form.editors.EnumEditor">
                                   <Value id="RECENT_ACTORS"/>

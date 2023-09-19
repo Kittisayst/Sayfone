@@ -1,12 +1,15 @@
 package Model;
 
+import Main.JoUploadFile;
 import Tools.JoCreateImage;
 import java.io.File;
+import java.net.URL;
 import java.sql.Blob;
 import java.sql.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 public class FileTranferModel {
 
@@ -15,20 +18,19 @@ public class FileTranferModel {
     private Date FileTranferDate;
     private String TransferTime;
     private File File;
-    private Blob Image;
+    private String FileName;
 
     public FileTranferModel() {
     }
 
-    public FileTranferModel(int FileTranferID, int FinancialID, Date FileTranferDate, String TransferTime, File File) {
+    public FileTranferModel(int FileTranferID, int FinancialID, Date FileTranferDate, String TransferTime, File File, String FileName) {
         this.FileTranferID = FileTranferID;
         this.FinancialID = FinancialID;
         this.FileTranferDate = FileTranferDate;
         this.TransferTime = TransferTime;
         this.File = File;
+        this.FileName = FileName;
     }
-
-  
 
     public int getFileTranferID() {
         return FileTranferID;
@@ -70,28 +72,31 @@ public class FileTranferModel {
         this.File = File;
     }
 
-    public Blob getImage() {
-        return Image;
+    public String getFileName() {
+        return FileName;
     }
 
-    public void setImage(Blob Image) {
-        this.Image = Image;
+    public void setFileName(String FileName) {
+        this.FileName = FileName;
     }
 
     public Icon getImageIcon() {
         try {
-            return new JoCreateImage().JoCreateImage(Image);
-        } catch (Exception ex) {
-            Logger.getLogger(StudentModel.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
+            if (FileName == null) {
+                return new ImageIcon(getClass().getResource("/Source/empty.jpg"));
+            } else {
+                URL url = new URL("http://sayfoneapi/imageAPI.php?fileName=" + FileName);
+                return new ImageIcon(url);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ImageIcon(getClass().getResource("/Source/empty.png"));
         }
     }
 
     @Override
     public String toString() {
-        return "FileTranferModel{" + "FileTranferID=" + FileTranferID + ", FinancialID=" + FinancialID + ", FileTranferDate=" + FileTranferDate + ", TransferTime=" + TransferTime + ", File=" + File + ", Image=" + Image + '}';
+        return "FileTranferModel{" + "FileTranferID=" + FileTranferID + ", FinancialID=" + FinancialID + ", FileTranferDate=" + FileTranferDate + ", TransferTime=" + TransferTime + ", File=" + File + ", FileName=" + FileName + '}';
     }
-
-
 
 }

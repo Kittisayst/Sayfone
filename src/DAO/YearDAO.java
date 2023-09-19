@@ -77,7 +77,7 @@ public class YearDAO implements YearFn {
         JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         List<YearModel> models = new ArrayList<>();
         try {
-            ResultSet rs = sql.getSelectAll();
+            ResultSet rs = sql.getSelectAll(JoSQL.ORDER.DESC);
             while (rs.next()) {
                 models.add(new YearModel(rs.getInt(1), rs.getString(2)));
             }

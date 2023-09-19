@@ -11,6 +11,7 @@ import Model.UserModel;
 import Model.YearModel;
 import Tools.JoDataTable;
 import Utility.MyFormat;
+import java.util.Date;
 import java.util.List;
 
 public class ReportUserFainancialView extends javax.swing.JPanel {
@@ -70,8 +71,15 @@ public class ReportUserFainancialView extends javax.swing.JPanel {
         pn_Datatable.add(jScrollPane1);
         JoDataTable dataTable = new JoDataTable(pn_Datatable);
         dataTable.showDataTableAll();
-        dataTable.setHiddenColumns(1);
+//        dataTable.setHiddenColumns(1);
     }
+    
+    public void setDateNow() {
+       dtStart.setDateData(new Date());
+       dtEnd.setDateData(new Date());
+    }
+    
+    //=========== GETTER SETTER ===================
 
     public JoDateChooser getDtEnd() {
         return dtEnd;
@@ -252,4 +260,6 @@ public class ReportUserFainancialView extends javax.swing.JPanel {
     private javax.swing.JPanel pn_Datatable;
     private Components.JoTable tb_data;
     // End of variables declaration//GEN-END:variables
+
+    
 }

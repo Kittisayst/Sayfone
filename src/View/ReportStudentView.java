@@ -3,22 +3,16 @@ package View;
 import Components.JoButtonIconfont;
 import Components.JoCombobox;
 import Components.JoTable;
-import DAOSevervice.FinancialService;
-import DAOSevervice.StudentService;
-import Model.FinancialModel;
 import Model.RegisterModel;
 import Model.StudentModel;
 import Model.YearModel;
-import Tools.JoDataTable;
-import Utility.MyFormat;
 import java.util.List;
 
-public class ReportFoodView extends javax.swing.JPanel {
+public class ReportStudentView extends javax.swing.JPanel {
 
-    public ReportFoodView(String Title) {
+    public ReportStudentView(String Title) {
         initComponents();
         lbl_title.setText(Title);
-        clearData();
     }
 
     public JoButtonIconfont getBtn_back() {
@@ -43,38 +37,25 @@ public class ReportFoodView extends javax.swing.JPanel {
         });
     }
 
-    public void showFood(List<FinancialModel> models) {
+    public void showStudent(List<StudentModel> models) {
         tb_data.JoClearModel();
-        StudentService service = new StudentService();
-        FinancialService financialService = new FinancialService();
         models.forEach(data -> {
-            if (data.getFoodMoney() > 0) {
-                StudentModel studentModel = service.getStudentById(data.getStudentID());
-                FinancialModel financialModel = financialService.getFinancialCalculator(data.getRegisterID(), data.getStudentID());
-                String foodMoney = new MyFormat().formatMoney(financialModel.getFoodMoney());
-                tb_data.AddJoModel(new Object[]{
-                    tb_data.autoNumber(),
-                    data.getFinancialIID(),
-                    data.getRegisterID(),
-                    data.getStudentID(),
-                    foodMoney,
-                    financialModel.getFinancialMonth(),
-                    studentModel.getStudentNo(),
-                    studentModel.getFullName()
-                });
+            if (data.getStudentID() > 0) {
+                tb_data.AddJoModel(new Object[]{tb_data.autoNumber(), data.getStudentID(), data.getStudentNo(), data.getFullName()});
             }
         });
-        clearData();
     }
 
-    private void clearData() {
-        pn_Datatable.removeAll();
-        pn_Datatable.add(jScrollPane1);
-        JoDataTable dataTable = new JoDataTable(pn_Datatable);
-        dataTable.setHiddenColumns(1);
-        dataTable.setHiddenColumns(2);
-        dataTable.setHiddenColumns(3);
-        dataTable.showDataTableAll();
+    public void setExportState() {
+        btnExport.setEnabled(tb_data.getJoModel().getRowCount() > 0);
+    }
+
+    public int getRegisterID() {
+        return cbClassRoom.getKeyInt();
+    }
+
+    public String getClassRoomName() {
+        return cbClassRoom.getValue();
     }
 
     public JoCombobox getCbClassRoom() {
@@ -85,13 +66,18 @@ public class ReportFoodView extends javax.swing.JPanel {
         return cbYear;
     }
 
-    public JoButtonIconfont getBtnShow() {
-        return btnShow;
+    public JoButtonIconfont getBtnSearch() {
+        return btnSearch;
+    }
+
+    public JoButtonIconfont getBtnExport() {
+        return btnExport;
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         Pn_Navigation = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -105,9 +91,11 @@ public class ReportFoodView extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         cbYear = new Components.JoCombobox();
         cbClassRoom = new Components.JoCombobox();
-        btnShow = new Components.JoButtonIconfont();
+        btnSearch = new Components.JoButtonIconfont();
+        joLable1 = new Components.JoLable();
+        joLable2 = new Components.JoLable();
         jPanel2 = new javax.swing.JPanel();
-        joButtonIconfont2 = new Components.JoButtonIconfont();
+        btnExport = new Components.JoButtonIconfont();
 
         Pn_Navigation.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
         Pn_Navigation.setLayout(new java.awt.GridLayout(1, 0));
@@ -138,11 +126,11 @@ public class ReportFoodView extends javax.swing.JPanel {
 
             },
             new String [] {
-                "#", "FinacialID", "RegisterID", "StudentID", "ຄ່າອາຫານ", "ເດືອນ", "ລະຫັດນັກຮຽນ", "ຊື່ນັກຮຽນ"
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -153,32 +141,63 @@ public class ReportFoodView extends javax.swing.JPanel {
 
         pn_Datatable.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
-        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 10, 5));
+        jPanel1.setMaximumSize(new java.awt.Dimension(100, 50));
+        jPanel1.setPreferredSize(new java.awt.Dimension(418, 50));
+        java.awt.GridBagLayout jPanel1Layout = new java.awt.GridBagLayout();
+        jPanel1Layout.columnWidths = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0};
+        jPanel1Layout.rowHeights = new int[] {0};
+        jPanel1.setLayout(jPanel1Layout);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        gridBagConstraints.ipadx = 10;
+        jPanel1.add(cbYear, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        gridBagConstraints.ipadx = 10;
+        jPanel1.add(cbClassRoom, gridBagConstraints);
 
-        cbYear.setPreferredSize(new java.awt.Dimension(100, 35));
-        jPanel1.add(cbYear);
+        btnSearch.setText("ສະແດງ");
+        btnSearch.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.SEARCH);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 10);
+        jPanel1.add(btnSearch, gridBagConstraints);
 
-        cbClassRoom.setPreferredSize(new java.awt.Dimension(100, 35));
-        jPanel1.add(cbClassRoom);
+        joLable1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        joLable1.setText("ສົກຮຽນ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 0.1;
+        jPanel1.add(joLable1, gridBagConstraints);
 
-        btnShow.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.SEARCH);
-        btnShow.setLabel("ສະແດງ");
-        btnShow.setMargin(new java.awt.Insets(2, 5, 2, 10));
-        btnShow.setPreferredSize(new java.awt.Dimension(89, 36));
-        jPanel1.add(btnShow);
+        joLable2.setText("ຫ້ອງຮຽນ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        jPanel1.add(joLable2, gridBagConstraints);
 
-        jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+        jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 10, 5));
 
-        joButtonIconfont2.setText("ປີ້ນລາຍງານ");
-        joButtonIconfont2.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.PRINT);
-        jPanel2.add(joButtonIconfont2);
+        btnExport.setBackground(new java.awt.Color(0, 153, 102));
+        btnExport.setText("Export Excel");
+        btnExport.setEnabled(false);
+        btnExport.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.GRID_ON);
+        jPanel2.add(btnExport);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(Pn_Navigation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pn_Datatable, javax.swing.GroupLayout.DEFAULT_SIZE, 1128, Short.MAX_VALUE)
+            .addComponent(pn_Datatable, javax.swing.GroupLayout.DEFAULT_SIZE, 1140, Short.MAX_VALUE)
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -188,18 +207,19 @@ public class ReportFoodView extends javax.swing.JPanel {
                 .addComponent(Pn_Navigation, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pn_Datatable, javax.swing.GroupLayout.DEFAULT_SIZE, 552, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(pn_Datatable, javax.swing.GroupLayout.DEFAULT_SIZE, 548, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Pn_Navigation;
-    private Components.JoButtonIconfont btnShow;
+    private Components.JoButtonIconfont btnExport;
+    private Components.JoButtonIconfont btnSearch;
     private Components.JoButtonIconfont btn_back;
     private Components.JoCombobox cbClassRoom;
     private Components.JoCombobox cbYear;
@@ -209,10 +229,10 @@ public class ReportFoodView extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private Components.JoButtonIconfont joButtonIconfont2;
+    private Components.JoLable joLable1;
+    private Components.JoLable joLable2;
     private Components.JoLable lbl_title;
     private javax.swing.JPanel pn_Datatable;
     private Components.JoTable tb_data;
     // End of variables declaration//GEN-END:variables
-
 }

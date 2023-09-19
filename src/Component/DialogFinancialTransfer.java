@@ -223,7 +223,13 @@ public class DialogFinancialTransfer extends javax.swing.JDialog {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         submit = true;
         if (tranferModel.getFileTranferID() == 0) {
-            tranferModel = new FileTranferModel(0, 0, dtDate.getSQLDate(), Timer.getTime(), filechooser.getSelectedFile());
+            tranferModel = new FileTranferModel(
+                    0, 
+                    0,
+                    dtDate.getSQLDate(),
+                    Timer.getTime(),
+                    filechooser.getSelectedFile(),
+                    filechooser.getSelectedFile().getName());
             setVisible(false);
         } else if (tranferModel.getFileTranferID() > 0) {
             tranferModel.setTransferTime(Timer.getTime());

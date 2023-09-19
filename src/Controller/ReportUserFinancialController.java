@@ -51,6 +51,7 @@ public class ReportUserFinancialController implements JoMVC, ActionListener, Mou
         HomeView.MyRouter.setRouter(view);
         view.showYear(new YearService().getYearAll());
         view.showUser(new UserService().getUserAll());
+        view.setDateNow();
     }
 
     @Override
