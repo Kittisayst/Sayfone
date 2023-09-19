@@ -2,6 +2,7 @@ package DAO;
 
 import DAOInterface.FileTransferFn;
 import Database.JoConnect;
+import Database.JoProperties;
 import Database.JoSQL;
 import Log.JoLoger;
 import Main.JoHttp;
@@ -20,6 +21,8 @@ import java.util.Date;
 public class FileTransferDAO implements FileTransferFn {
 
     private final String TableName = "tb_filetransfer";
+    private JoProperties property = new JoProperties("/JoConfig/config.properties");
+    private String server = property.getValueAt("db.Server");
 
     @Override
     public int Creater(FileTranferModel model) {
@@ -27,7 +30,7 @@ public class FileTransferDAO implements FileTransferFn {
         JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH-mm-ss");
         String FileName = model.getFinancialID() + "-" + dateFormat.format(new Date());
-        JoUploadFile uploadFile = new JoUploadFile("http://sayfoneapi/upload.php", "fileToUpload", model.getFile(), FileName);
+        JoUploadFile uploadFile = new JoUploadFile("http://" + server + "/upload.php", "fileToUpload", model.getFile(), FileName);
         try {
             if (uploadFile.upload()) {
                 PreparedStatement pre = new JoPrepared().setAutoPrepared(sql.getCreate(),
@@ -82,7 +85,7 @@ public class FileTransferDAO implements FileTransferFn {
         String sql = "UPDATE tb_filetransfer SET fileName=? WHERE transferID=?";
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH-mm-ss");
         String FileName = model.getFinancialID() + "-" + dateFormat.format(new Date());
-        JoUploadFile uploadFile = new JoUploadFile("http://sayfoneapi/upload.php", "fileToUpload", model.getFile(), FileName);
+        JoUploadFile uploadFile = new JoUploadFile("http://" + server + "/upload.php", "fileToUpload", model.getFile(), FileName);
         try {
             if (uploadFile.upload()) {
                 PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sql);
@@ -91,7 +94,7 @@ public class FileTransferDAO implements FileTransferFn {
                 int state = pre.executeUpdate();
                 System.out.println("file Delete " + model.getFileName());
                 System.out.println("new file " + FileName + "." + uploadFile.getExtension());
-                deleteFile(state, "http://sayfoneapi/deletefile.php?filename=" + model.getFileName()); // ລົບໄຟເກົ່າ
+                deleteFile(state, "http://" + server + "/deletefile.php?filename=" + model.getFileName()); // ລົບໄຟເກົ່າ
                 return state;
             } else {
                 return 0;
