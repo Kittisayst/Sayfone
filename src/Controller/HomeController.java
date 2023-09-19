@@ -64,7 +64,6 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
 
     @Override
     public final void AddEvent() {
-        view.getBtnImage().addActionListener(this);
         view.getBtn_home().addActionListener(this);
         view.getBtn_teacher().addActionListener(this);
         view.getBtn_Menu().addActionListener(this);
@@ -159,9 +158,6 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
             app.Open();
         } else if (event.isEvent(view.getBtnPrinter())) {
             HomeView.MyRouter.setRouter(new PrinterView("ຕັ້ງຄ່າປີ້ນເຕີ"));
-        }else if (event.isEvent(view.getBtnImage())) {
-            DialogCreateImage createImage = new DialogCreateImage(view, true);
-            createImage.setVisible(true);
         }
     }
 
