@@ -29,6 +29,10 @@ public class ReportFoodView extends javax.swing.JPanel {
         return tb_data;
     }
 
+    public JoButtonIconfont getBtnExport() {
+        return btnExport;
+    }
+
     public void showYear(List<YearModel> models) {
         cbYear.JoClearData();
         models.forEach(data -> {
@@ -77,6 +81,10 @@ public class ReportFoodView extends javax.swing.JPanel {
         dataTable.showDataTableAll();
     }
 
+    public void setAmount(int amount) {
+        lblAmount.setText("ລວມເງິນທັງໝົດ: " + new MyFormat().formatMoney(amount) + " ກີບ");
+    }
+
     public JoCombobox getCbClassRoom() {
         return cbClassRoom;
     }
@@ -107,7 +115,8 @@ public class ReportFoodView extends javax.swing.JPanel {
         cbClassRoom = new Components.JoCombobox();
         btnShow = new Components.JoButtonIconfont();
         jPanel2 = new javax.swing.JPanel();
-        joButtonIconfont2 = new Components.JoButtonIconfont();
+        lblAmount = new Components.JoLable();
+        btnExport = new Components.JoButtonIconfont();
 
         Pn_Navigation.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
         Pn_Navigation.setLayout(new java.awt.GridLayout(1, 0));
@@ -167,11 +176,17 @@ public class ReportFoodView extends javax.swing.JPanel {
         btnShow.setPreferredSize(new java.awt.Dimension(89, 36));
         jPanel1.add(btnShow);
 
-        jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+        jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 10, 10));
 
-        joButtonIconfont2.setText("ປີ້ນລາຍງານ");
-        joButtonIconfont2.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.PRINT);
-        jPanel2.add(joButtonIconfont2);
+        lblAmount.setText("ລວມເງິນ");
+        lblAmount.setFont(new java.awt.Font("Phetsarath OT", 0, 18)); // NOI18N
+        jPanel2.add(lblAmount);
+
+        btnExport.setBackground(new java.awt.Color(0, 153, 102));
+        btnExport.setText("Export Excel");
+        btnExport.setEnabled(false);
+        btnExport.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.GRID_ON);
+        jPanel2.add(btnExport);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -189,7 +204,7 @@ public class ReportFoodView extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pn_Datatable, javax.swing.GroupLayout.DEFAULT_SIZE, 552, Short.MAX_VALUE)
+                .addComponent(pn_Datatable, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
@@ -199,6 +214,7 @@ public class ReportFoodView extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Pn_Navigation;
+    private Components.JoButtonIconfont btnExport;
     private Components.JoButtonIconfont btnShow;
     private Components.JoButtonIconfont btn_back;
     private Components.JoCombobox cbClassRoom;
@@ -209,10 +225,22 @@ public class ReportFoodView extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private Components.JoButtonIconfont joButtonIconfont2;
+    private Components.JoLable lblAmount;
     private Components.JoLable lbl_title;
     private javax.swing.JPanel pn_Datatable;
     private Components.JoTable tb_data;
     // End of variables declaration//GEN-END:variables
+
+    public void ExportEnable() {
+        btnExport.setEnabled(tb_data.getJoModel().getRowCount() > 0);
+    }
+
+    public String getClassName() {
+        return cbClassRoom.getValue();
+    }
+
+    public String getExportName() {
+        return cbYear.getValue() + "-" + cbClassRoom.getValue();
+    }
 
 }

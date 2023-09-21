@@ -1,7 +1,6 @@
 package Controller;
 
 import App.AppDashboard;
-import App.AppHome;
 import DAOSevervice.EthnicService;
 import DAOSevervice.FinancialService;
 import DAOSevervice.NationalityService;
@@ -138,11 +137,6 @@ public class ReportStudentController implements JoMVC, ActionListener, ItemListe
                 JoSheet sheet = new JoSheet(csvFile, view.getClassRoomName(), columns);
                 HomeView.MyRouter.setRouter(loading);
                 studentModels.forEach(data -> {
-                    try {
-                        Thread.sleep(50);
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(ReportStudentController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
                     sheet.addRow(row++,
                             row - 1,
                             data.getStudentNo(),

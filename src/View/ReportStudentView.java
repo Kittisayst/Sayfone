@@ -126,7 +126,7 @@ public class ReportStudentView extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "#", "StudentID", "ລະຫັດນັກຮຽນ", "ຊື່ ແລະ ນາມສະກຸນນັກຮຽນ"
             }
         ) {
             boolean[] canEdit = new boolean [] {

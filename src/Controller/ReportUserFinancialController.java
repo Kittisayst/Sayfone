@@ -10,22 +10,30 @@ import DAOSevervice.RegisterService;
 import DAOSevervice.StudentService;
 import DAOSevervice.UserService;
 import DAOSevervice.YearService;
+import Log.JoLoger;
 import Model.FileTranferModel;
 import Model.FinancialModel;
 import Model.RegisterModel;
 import Model.StudentModel;
 import Model.UserModel;
 import Tools.JoAlert;
+import Tools.JoFileSystem;
 import Tools.JoHookEvent;
 import Tools.JoIconFont;
+import Utility.JoSheet;
 import Utility.MyFormat;
 import Utility.MyPopup;
 import View.HomeView;
+import View.PnLoading;
 import View.ReportUserFainancialView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import javax.swing.SwingUtilities;
 import jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons;
 import theme.MyColor;
 
@@ -34,6 +42,11 @@ public class ReportUserFinancialController implements JoMVC, ActionListener, Mou
     private final ReportUserFainancialView view;
     private MyPopup popup;
     private FinancialService service;
+    private List<FinancialModel> listFinancials = new ArrayList<>();
+    private PnLoading loading = new PnLoading();
+    private RegisterService registerService = new RegisterService();
+    private StudentService studentService = new StudentService();
+    private MyFormat format = new MyFormat();
 
     public ReportUserFinancialController(ReportUserFainancialView view) {
         this.view = view;
@@ -59,6 +72,7 @@ public class ReportUserFinancialController implements JoMVC, ActionListener, Mou
         view.getBtn_back().addActionListener(this);
         view.getBtnShow().addActionListener(this);
         view.getTb_data().addMouseListener(this);
+        view.getBtnExport().addActionListener(this);
         popup.addActionListener(this);
     }
 
@@ -105,6 +119,8 @@ public class ReportUserFinancialController implements JoMVC, ActionListener, Mou
             RegisterModel registerModel = new RegisterService().getRegisterById(financialModel.getRegisterID());
             StudentModel studentModel = new StudentService().getStudentById(financialModel.getStudentID());
             AppFinancial appFinancial = new AppFinancial(registerModel, studentModel);
+        } else if (event.isEvent(view.getBtnExport())) {
+            ExportData();
         }
     }
 
@@ -142,17 +158,99 @@ public class ReportUserFinancialController implements JoMVC, ActionListener, Mou
         String dateStart = view.getDtStart().getDateSQL();
         String dateEnd = view.getDtEnd().getDateSQL();
         view.showUserFinancial(service.getReportUserFinancial(yearID, UserID, dateStart, dateEnd));
+        createListExport(service.getReportUserFinancial(yearID, UserID, dateStart, dateEnd));
+    }
+
+    int amountMoney = 0;
+    int amountTransfer = 0;
+
+    private void createListExport(List<FinancialModel> reportUserFinancial) {
+        listFinancials.clear();
+        amountMoney = 0;
+        amountTransfer = 0;
+        reportUserFinancial.forEach(data -> {
+            listFinancials.add(data);
+            amountMoney += data.getMoney();
+            amountTransfer += data.getTransferMoney();
+        });
+        view.ExportEnable();
+        view.setAMountMoney(amountMoney, amountTransfer);
+    }
+
+    private int row = 1;
+
+    private void ExportData() {
+        Thread thread = new Thread(() -> {
+            try {
+                JoFileSystem fileSystem = new JoFileSystem();
+                String genfileName = "Export" + new MyFormat().getTime(new Date(), "-HH-mm-ss") + ".xls";
+                String csvFile = fileSystem.getUserPath() + "/Downloads/" + genfileName;
+                String[] columns = {
+                    "ລຳດັບ",
+                    "ເລກທີບິນ",
+                    "ຫ້ອງຮຽນ",
+                    "ຊື່ ແລະ ນາມສະກຸນນັກຮຽນ",
+                    "ເງິນສົດ",
+                    "ເງິນໂອນ",
+                    "ສ່ວນຫຼຸດ",
+                    "ຈ່າຍຊ້າ",
+                    "ຄ່າອາຫານ",
+                    "ເດືອນ",
+                    "ວັນທີລົງບັນຊີ",
+                    "ໝາຍເຫດ",
+                    "ຜູ້ລົງບັນຊີ"
+                };
+                JoSheet sheet = new JoSheet(csvFile, view.getExportName(), columns);
+                HomeView.MyRouter.setRouter(loading);
+                listFinancials.forEach(data -> {
+                    RegisterModel registerModel = registerService.getRegisterById(data.getRegisterID());
+                    StudentModel studentModel = studentService.getStudentById(data.getStudentID());
+                    sheet.addRow(row++,
+                            row - 1,
+                            data.getFinancialIID(),
+                            registerModel.getClassRoomName(),
+                            studentModel.getFullName(),
+                            format.formatMoney(data.getMoney()),
+                            format.formatMoney(data.getTransferMoney()),
+                            format.formatMoney(data.getDiscount()),
+                            format.formatMoney(data.getOvertimePay()),
+                            format.formatMoney(data.getFoodMoney()),
+                            data.getFinancialMonth(),
+                            format.getDate(data.getFinancialDate()),
+                            data.getFinancialComment(),
+                            view.getCbUser().getValue()
+                    );
+                    int progress = (int) ((double) row / listFinancials.size() * 100);
+                    SwingUtilities.invokeLater(() -> {
+                        loading.setValue(progress);
+                    });
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                });
+                sheet.getCreateSheet();
+            } catch (Exception e) {
+                e.printStackTrace();
+                JoAlert.Error(e, this);
+                JoLoger.saveLog(e, this);
+            } finally {
+                row = 1;
+                HomeView.MyRouter.setRouter(view);
+            }
+        });
+        thread.start();
     }
 
     private void showDialogFinancial(FinancialModel model) {
-        StudentService studentService = new StudentService();
-        RegisterService registerService = new RegisterService();
+        studentService = new StudentService();
+        registerService = new RegisterService();
         RegisterModel registerModel = registerService.getRegisterById(model.getRegisterID());
         StudentModel studentModel = studentService.getStudentById(model.getStudentID());
         String userName = view.getCbUser().getValue();
         UserService userService = new UserService();
         UserModel userModel = userService.getUserById(model.getAuthenUserID());
-        MyFormat format = new MyFormat();
         String[] students = new String[]{
             "ເລກທີ: " + model.getFinancialIID() + "   ຊື່ ແລະ ນາມສະກຸນນັກຮຽນ: " + studentModel.getFullName(),
             "ຫ້ອງຮຽນ " + registerModel.getClassRoomName() + "   ວັນທີເດືອນປີ: " + format.getDate(model.getFinancialDate()),

@@ -73,7 +73,6 @@ public class MonthCaculator {
             Matcher matcher = pattern.matcher(numberStrings[i]);
             matcher.find();
             String number = matcher.group();
-            System.out.println(number);
             numbers[i] = Integer.parseInt(number.trim());
         }
         return numbers;

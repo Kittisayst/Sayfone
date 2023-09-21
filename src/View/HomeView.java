@@ -207,7 +207,7 @@ public class HomeView extends javax.swing.JFrame {
         btnPrinter = new Components.JoButtonIconfont();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Sayfonschool");
+        setTitle("Sayfone School");
         setExtendedState(MAXIMIZED_BOTH);
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));

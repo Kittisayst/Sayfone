@@ -73,14 +73,26 @@ public class ReportUserFainancialView extends javax.swing.JPanel {
         dataTable.showDataTableAll();
 //        dataTable.setHiddenColumns(1);
     }
-    
-    public void setDateNow() {
-       dtStart.setDateData(new Date());
-       dtEnd.setDateData(new Date());
-    }
-    
-    //=========== GETTER SETTER ===================
 
+    public void setDateNow() {
+        dtStart.setDateData(new Date());
+        dtEnd.setDateData(new Date());
+    }
+
+    public void ExportEnable() {
+        btnExport.setEnabled(tb_data.getJoModel().getRowCount() > 0);
+    }
+
+    public String getExportName() {
+        return cbYear.getValue() + "-" + cbUser.getValue();
+    }
+
+    public void setAMountMoney(int money, int transfer) {
+        lblAmountMoney.setText("ລວມເງິນສົດ: " + new MyFormat().formatMoney(money) + " ກີບ");
+        lblAmountTransfer.setText("ລວມເງິນໂອນ: " + new MyFormat().formatMoney(transfer) + " ກີບ");
+    }
+
+    //=========== GETTER SETTER ===================
     public JoDateChooser getDtEnd() {
         return dtEnd;
     }
@@ -99,6 +111,10 @@ public class ReportUserFainancialView extends javax.swing.JPanel {
 
     public JoButtonIconfont getBtnShow() {
         return btnShow;
+    }
+
+    public JoButtonIconfont getBtnExport() {
+        return btnExport;
     }
 
     @SuppressWarnings("unchecked")
@@ -124,6 +140,10 @@ public class ReportUserFainancialView extends javax.swing.JPanel {
         joLable2 = new Components.JoLable();
         cbUser = new Components.JoCombobox();
         btnShow = new Components.JoButtonIconfont();
+        jPanel2 = new javax.swing.JPanel();
+        lblAmountMoney = new Components.JoLable();
+        lblAmountTransfer = new Components.JoLable();
+        btnExport = new Components.JoButtonIconfont();
 
         Pn_Navigation.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
         Pn_Navigation.setLayout(new java.awt.GridLayout(1, 0));
@@ -219,6 +239,22 @@ public class ReportUserFainancialView extends javax.swing.JPanel {
         btnShow.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.SEARCH);
         jPanel1.add(btnShow);
 
+        jPanel2.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 0, 0, 0, new java.awt.Color(0, 0, 0)));
+        jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 10, 10));
+
+        lblAmountMoney.setText("ລວມເງິນ");
+        lblAmountMoney.setFont(new java.awt.Font("Phetsarath OT", 0, 18)); // NOI18N
+        jPanel2.add(lblAmountMoney);
+
+        lblAmountTransfer.setText("ລວມເງິນ");
+        lblAmountTransfer.setFont(new java.awt.Font("Phetsarath OT", 0, 18)); // NOI18N
+        jPanel2.add(lblAmountTransfer);
+
+        btnExport.setBackground(new java.awt.Color(0, 153, 102));
+        btnExport.setText("Export Excel");
+        btnExport.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.GRID_ON);
+        jPanel2.add(btnExport);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -226,6 +262,7 @@ public class ReportUserFainancialView extends javax.swing.JPanel {
             .addComponent(Pn_Navigation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pn_Datatable, javax.swing.GroupLayout.DEFAULT_SIZE, 1125, Short.MAX_VALUE)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -234,13 +271,16 @@ public class ReportUserFainancialView extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pn_Datatable, javax.swing.GroupLayout.DEFAULT_SIZE, 598, Short.MAX_VALUE))
+                .addComponent(pn_Datatable, javax.swing.GroupLayout.DEFAULT_SIZE, 529, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Pn_Navigation;
+    private Components.JoButtonIconfont btnExport;
     private Components.JoButtonIconfont btnShow;
     private Components.JoButtonIconfont btn_back;
     private Components.JoCombobox cbUser;
@@ -248,6 +288,7 @@ public class ReportUserFainancialView extends javax.swing.JPanel {
     private Components.JoDateChooser dtEnd;
     private Components.JoDateChooser dtStart;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
@@ -256,10 +297,11 @@ public class ReportUserFainancialView extends javax.swing.JPanel {
     private Components.JoLable joLable2;
     private Components.JoLable joLable3;
     private Components.JoLable joLable4;
+    private Components.JoLable lblAmountMoney;
+    private Components.JoLable lblAmountTransfer;
     private Components.JoLable lbl_title;
     private javax.swing.JPanel pn_Datatable;
     private Components.JoTable tb_data;
     // End of variables declaration//GEN-END:variables
 
-    
 }

@@ -1,13 +1,12 @@
 package View;
 
+import App.AppHome;
 import Component.JoDashboardItem;
-import Components.JoButton;
 import Components.JoButtonIconfont;
-import Components.JoCombobox;
+import Components.JoScrollBar;
 import Components.JoTable;
 import Components.JoTextField;
 import DAOSevervice.FinancialService;
-import DAOSevervice.StudentService;
 import Model.FinancialModel;
 import Model.RegisterModel;
 import Model.StudentModel;
@@ -16,13 +15,17 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.util.List;
-import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class DasboardView extends javax.swing.JPanel {
 
+    private JoScrollBar scrollBar;
+
     public DasboardView() {
         initComponents();
+        scrollBar = new JoScrollBar(scrollDashbord);
     }
 
     public void ShowStudentCount(int Count) {
@@ -72,7 +75,10 @@ public class DasboardView extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
+        scrollDashbord = new javax.swing.JScrollPane();
+        jPanel4 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         ds_Student = new Component.JoDashboardItem();
         ds_Teacher = new Component.JoDashboardItem();
@@ -82,73 +88,157 @@ public class DasboardView extends javax.swing.JPanel {
         pnClassRoom = new javax.swing.JPanel();
         joLable1 = new Components.JoLable();
         jPanel2 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tbData = new Components.JoTable();
         jPanel3 = new javax.swing.JPanel();
         txtSearch = new Components.JoTextField();
         btnSearch = new Components.JoButtonIconfont();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbData = new Components.JoTable();
+        jPanel5 = new javax.swing.JPanel();
+        lblKindergarten = new Components.JoLable();
+        lblElementary = new Components.JoLable();
+        lblJuniorHighSchool = new Components.JoLable();
+        lblHighSchool = new Components.JoLable();
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 0, new java.awt.Color(0, 0, 0)), "Dashboard", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Phetsarath OT", 0, 18))); // NOI18N
+        setLayout(new java.awt.BorderLayout());
+
+        scrollDashbord.setBorder(null);
+        scrollDashbord.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollDashbord.setToolTipText("");
+
+        jPanel4.setLayout(new java.awt.GridBagLayout());
+
+        jPanel1.setMaximumSize(new java.awt.Dimension(618, 120));
+        jPanel1.setMinimumSize(new java.awt.Dimension(618, 120));
+        jPanel1.setPreferredSize(new java.awt.Dimension(618, 120));
+        java.awt.GridBagLayout jPanel1Layout = new java.awt.GridBagLayout();
+        jPanel1Layout.columnWidths = new int[] {0, 20, 0, 20, 0, 20, 0};
+        jPanel1Layout.rowHeights = new int[] {0};
+        jPanel1.setLayout(jPanel1Layout);
 
         ds_Student.setForeground(new java.awt.Color(255, 255, 255));
         ds_Student.setIcon(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.PEOPLE);
         ds_Student.setItemBackground(new java.awt.Color(0, 153, 153));
         ds_Student.setItemDetail("ນັກຮຽນ");
         ds_Student.setItemTitle("205");
+        ds_Student.setMaximumSize(new java.awt.Dimension(200, 150));
+        ds_Student.setMinimumSize(new java.awt.Dimension(200, 150));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weighty = 0.1;
+        jPanel1.add(ds_Student, gridBagConstraints);
 
         ds_Teacher.setIcon(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.ACCOUNT_BOX);
         ds_Teacher.setItemBackground(new java.awt.Color(142, 144, 124));
         ds_Teacher.setItemDetail("ຄູສອນ");
         ds_Teacher.setItemTitle("200");
+        ds_Teacher.setMaximumSize(new java.awt.Dimension(200, 150));
+        ds_Teacher.setMinimumSize(new java.awt.Dimension(200, 150));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        jPanel1.add(ds_Teacher, gridBagConstraints);
 
         ds_ClassRoom.setItemBackground(new java.awt.Color(255, 204, 0));
         ds_ClassRoom.setItemDetail("ຫ້ອງຮຽນ");
         ds_ClassRoom.setItemTitle("50");
+        ds_ClassRoom.setMaximumSize(new java.awt.Dimension(200, 150));
+        ds_ClassRoom.setMinimumSize(new java.awt.Dimension(200, 150));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        jPanel1.add(ds_ClassRoom, gridBagConstraints);
 
         ds_Financail.setIcon(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.ACCOUNT_BALANCE_WALLET);
         ds_Financail.setItemBackground(new java.awt.Color(0, 153, 51));
         ds_Financail.setItemDetail("ຈ່າຍຄ່າຮຽນ");
         ds_Financail.setItemTitle("150");
+        ds_Financail.setMaximumSize(new java.awt.Dimension(200, 150));
+        ds_Financail.setMinimumSize(new java.awt.Dimension(200, 150));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        jPanel1.add(ds_Financail, gridBagConstraints);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(90, Short.MAX_VALUE)
-                .addComponent(ds_Student, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addComponent(ds_Teacher, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 25, Short.MAX_VALUE)
-                .addComponent(ds_ClassRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 25, Short.MAX_VALUE)
-                .addComponent(ds_Financail, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(92, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(ds_Student, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addComponent(ds_Teacher, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addComponent(ds_ClassRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(ds_Financail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(15, 0, 0, 0);
+        jPanel4.add(jPanel1, gridBagConstraints);
 
         joLable2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         joLable2.setText("ຫ້ອງຮຽນທັງໝົດ");
-        joLable2.setFont(new java.awt.Font("Phetsarath OT", 0, 24)); // NOI18N
+        joLable2.setFont(new java.awt.Font("Phetsarath OT", 0, 18)); // NOI18N
+        joLable2.setPreferredSize(new java.awt.Dimension(106, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
+        jPanel4.add(joLable2, gridBagConstraints);
 
+        pnClassRoom.setMaximumSize(new java.awt.Dimension(0, 0));
+        pnClassRoom.setPreferredSize(new java.awt.Dimension(0, 200));
         pnClassRoom.setLayout(new java.awt.BorderLayout());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 15, 0, 15);
+        jPanel4.add(pnClassRoom, gridBagConstraints);
 
         joLable1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         joLable1.setText("ຂໍ້ມູນນັກຮຽນຈ່າຍຄ່າຮຽນ");
-        joLable1.setFont(new java.awt.Font("Phetsarath OT", 0, 24)); // NOI18N
+        joLable1.setFont(new java.awt.Font("Phetsarath OT", 0, 18)); // NOI18N
+        joLable1.setPreferredSize(new java.awt.Dimension(161, 35));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 0);
+        jPanel4.add(joLable1, gridBagConstraints);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 0, 0, 0, new java.awt.Color(0, 0, 0)));
+        jPanel2.setMaximumSize(new java.awt.Dimension(618, 168));
+        jPanel2.setPreferredSize(new java.awt.Dimension(618, 168));
+        jPanel2.setLayout(new java.awt.GridBagLayout());
+
+        jPanel3.setMaximumSize(new java.awt.Dimension(100, 50));
+        jPanel3.setMinimumSize(new java.awt.Dimension(100, 50));
+        jPanel3.setPreferredSize(new java.awt.Dimension(100, 50));
+        jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 10, 5));
+
+        txtSearch.setPlaceholder("ຄົ້ນຫານັກຮຽນ");
+        jPanel3.add(txtSearch);
+
+        btnSearch.setText("ສະແດງ");
+        btnSearch.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnSearch.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.SEARCH);
+        btnSearch.setMargin(new java.awt.Insets(2, 5, 2, 10));
+        jPanel3.add(btnSearch);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        jPanel2.add(jPanel3, gridBagConstraints);
 
         tbData.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -173,65 +263,55 @@ public class DasboardView extends javax.swing.JPanel {
             tbData.getColumnModel().getColumn(1).setMaxWidth(0);
         }
 
-        jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 10, 5));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.1;
+        gridBagConstraints.weighty = 1.1;
+        jPanel2.add(jScrollPane1, gridBagConstraints);
 
-        txtSearch.setPlaceholder("ຄົ້ນຫານັກຮຽນ");
-        jPanel3.add(txtSearch);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.weighty = 0.1;
+        jPanel4.add(jPanel2, gridBagConstraints);
 
-        btnSearch.setText("ສະແດງ");
-        btnSearch.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnSearch.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.SEARCH);
-        btnSearch.setMargin(new java.awt.Insets(2, 5, 2, 10));
-        jPanel3.add(btnSearch);
+        jPanel5.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 40, 5));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        lblKindergarten.setForeground(new java.awt.Color(255, 82, 73));
+        lblKindergarten.setText("ອານຸບານ");
+        lblKindergarten.setFont(new java.awt.Font("Phetsarath OT", 1, 18)); // NOI18N
+        jPanel5.add(lblKindergarten);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(joLable2, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(joLable1, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnClassRoom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(joLable2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnClassRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(joLable1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        lblElementary.setForeground(new java.awt.Color(214, 187, 122));
+        lblElementary.setText("ປະຖົມ");
+        lblElementary.setFont(new java.awt.Font("Phetsarath OT", 1, 18)); // NOI18N
+        jPanel5.add(lblElementary);
+
+        lblJuniorHighSchool.setForeground(new java.awt.Color(19, 208, 201));
+        lblJuniorHighSchool.setText("ມັດທະຍົມ");
+        lblJuniorHighSchool.setFont(new java.awt.Font("Phetsarath OT", 1, 18)); // NOI18N
+        jPanel5.add(lblJuniorHighSchool);
+
+        lblHighSchool.setForeground(new java.awt.Color(79, 128, 220));
+        lblHighSchool.setText("ມັດທະຍົມປາຍ");
+        lblHighSchool.setFont(new java.awt.Font("Phetsarath OT", 1, 18)); // NOI18N
+        jPanel5.add(lblHighSchool);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel4.add(jPanel5, gridBagConstraints);
+
+        scrollDashbord.setViewportView(jPanel4);
+
+        add(scrollDashbord, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
 
@@ -244,10 +324,17 @@ public class DasboardView extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private Components.JoLable joLable1;
     private Components.JoLable joLable2;
+    private Components.JoLable lblElementary;
+    private Components.JoLable lblHighSchool;
+    private Components.JoLable lblJuniorHighSchool;
+    private Components.JoLable lblKindergarten;
     private javax.swing.JPanel pnClassRoom;
+    private javax.swing.JScrollPane scrollDashbord;
     private Components.JoTable tbData;
     private Components.JoTextField txtSearch;
     // End of variables declaration//GEN-END:variables
@@ -256,18 +343,84 @@ public class DasboardView extends javax.swing.JPanel {
         pnClassRoom.removeAll();
         pnClassRoom.setSize(500, 500);
         FinancialService financialService = new FinancialService();
-        JPanel classRoomLayout = new JPanel(new WrapLayout(WrapLayout.LEFT, 5, 5));
+        JPanel classRoomLayout = new JPanel(new WrapLayout(WrapLayout.LEFT, 2, 2));
         classRoomLayout.setSize(200, 200);
         models.forEach(data -> {
-            JButton btnClass = new JButton();
+            JLabel btnClass = new JLabel();
             btnClass.setFont(new Font("Phetsarath OT", 0, 12));
             btnClass.setPreferredSize(new Dimension(140, 30));
             btnClass.setFocusable(false);
             int CountStudent = financialService.getStudentRegistered(data.getRegisterID()).size();
             btnClass.setText(data.getClassRoomName() + " : ( " + CountStudent + " )");
             classRoomLayout.add(btnClass);
+            CoutClass(data.getClassID(), CountStudent); //ສະແດງຈຳນວນລວມນັກຮຽນ
         });
         pnClassRoom.add(classRoomLayout, BorderLayout.CENTER);
+    }
+
+    int Kindergarten = 0;
+    int Elementary = 0;
+    int JuniorHighSchool = 0;
+    int HighSchool = 0;
+
+    private void CoutClass(int classID, int count) {
+        switch (classID) {
+            case 1:
+                Kindergarten += count;
+                break;
+            case 18:
+                Kindergarten += count;
+                break;
+            case 19:
+                Kindergarten += count;
+                break;
+            case 20:
+                Kindergarten += count;
+                break;
+            case 21:
+                Elementary += count;
+                break;
+            case 22:
+                Elementary += count;
+                break;
+            case 23:
+                Elementary += count;
+                break;
+            case 24:
+                Elementary += count;
+                break;
+            case 25:
+                Elementary += count;
+                break;
+            case 26:
+                JuniorHighSchool += count;
+                break;
+            case 27:
+                JuniorHighSchool += count;
+                break;
+            case 28:
+                JuniorHighSchool += count;
+                break;
+            case 29:
+                JuniorHighSchool += count;
+                break;
+            case 30:
+                HighSchool += count;
+                break;
+            case 31:
+                HighSchool += count;
+                break;
+            case 32:
+                HighSchool += count;
+                break;
+            default:
+                break;
+        }
+
+        lblKindergarten.setText("ອານຸບານ: " + Kindergarten + " ຄົນ");
+        lblElementary.setText("ປະຖົມ: " + Elementary + " ຄົນ");
+        lblJuniorHighSchool.setText("ມັດທະຍົມຕົ້ນ: " + JuniorHighSchool + " ຄົນ");
+        lblHighSchool.setText("ມັດທະຍົມປາຍ: " + HighSchool + " ຄົນ");
     }
 
     public void showTableData(List<StudentModel> models) {
@@ -275,7 +428,6 @@ public class DasboardView extends javax.swing.JPanel {
         models.forEach(data -> {
             tbData.AddJoModel(new Object[]{tbData.autoNumber(), data.getStudentID(), data.getStudentNo(), data.getFullName()});
         });
-
     }
 
 }

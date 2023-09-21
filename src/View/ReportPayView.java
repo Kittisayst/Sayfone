@@ -6,6 +6,7 @@ import Components.JoTable;
 import DAOSevervice.FinancialService;
 import DAOSevervice.RegisterService;
 import DAOSevervice.StudentService;
+import DAOSevervice.YearService;
 import Log.JoLoger;
 import Model.FinancialModel;
 import Model.RegisterModel;
@@ -17,7 +18,6 @@ import Utility.MonthCaculator;
 import java.util.List;
 
 public class ReportPayView extends javax.swing.JPanel {
-
 
     public ReportPayView(String Title) {
         initComponents();
@@ -50,12 +50,13 @@ public class ReportPayView extends javax.swing.JPanel {
                 StudentModel sm = studentService.getStudentById(data.getStudentID());
                 String findMissingMonth = mc.getMissingMonth(fm.getFinancialMonth());
                 tb_data.AddJoModel(new Object[]{
-                    tb_data.autoNumber(), 
-                    data.getFinancialIID(), 
-                    data.getStudentID(), 
-                    sm.getStudentNo(), 
-                    sm.getFullName(), 
-                    rm.getClassRoomName(), 
+                    tb_data.autoNumber(),
+                    data.getFinancialIID(),
+                    rm.getYearModel().getYear(),
+                    data.getStudentID(),
+                    sm.getStudentNo(),
+                    sm.getFullName(),
+                    rm.getClassRoomName(),
                     findMissingMonth});
             });
         } catch (Exception e) {
@@ -90,8 +91,8 @@ public class ReportPayView extends javax.swing.JPanel {
         return cbClassRoom;
     }
 
-    public JoButtonIconfont getBtnPrint() {
-        return btnPrint;
+    public JoButtonIconfont getBtnExport() {
+        return btnExport;
     }
 
     private void updateTable() {
@@ -122,7 +123,7 @@ public class ReportPayView extends javax.swing.JPanel {
         cbClassRoom = new Components.JoCombobox();
         btnShow = new Components.JoButtonIconfont();
         jPanel2 = new javax.swing.JPanel();
-        btnPrint = new Components.JoButtonIconfont();
+        btnExport = new Components.JoButtonIconfont();
 
         Pn_Navigation.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
         Pn_Navigation.setLayout(new java.awt.GridLayout(1, 0));
@@ -223,9 +224,10 @@ public class ReportPayView extends javax.swing.JPanel {
 
         jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
-        btnPrint.setText("ປີ້ນລາຍງານ");
-        btnPrint.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.PRINT);
-        jPanel2.add(btnPrint);
+        btnExport.setBackground(new java.awt.Color(0, 153, 102));
+        btnExport.setText("Export Excel");
+        btnExport.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.GRID_ON);
+        jPanel2.add(btnExport);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -257,7 +259,7 @@ public class ReportPayView extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Pn_Navigation;
-    private Components.JoButtonIconfont btnPrint;
+    private Components.JoButtonIconfont btnExport;
     private Components.JoButtonIconfont btnShow;
     private Components.JoButtonIconfont btn_back;
     private Components.JoCombobox cbClassRoom;
@@ -274,4 +276,16 @@ public class ReportPayView extends javax.swing.JPanel {
     private javax.swing.JPanel pn_Datatable;
     private Components.JoTable tb_data;
     // End of variables declaration//GEN-END:variables
+
+    public void ExportEnable() {
+        btnExport.setEnabled(tb_data.getJoModel().getRowCount() > 0);
+    }
+    
+    public String getClassName(){
+        return cbClassRoom.getValue();
+    }
+
+    public String getExportName() {
+        return cbYear.getValue() + "-" + cbClassRoom.getValue();
+    }
 }
