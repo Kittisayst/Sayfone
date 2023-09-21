@@ -30,7 +30,7 @@ public class FileTransferDAO implements FileTransferFn {
         JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH-mm-ss");
         String FileName = model.getFinancialID() + "-" + dateFormat.format(new Date());
-        JoUploadFile uploadFile = new JoUploadFile("http://" + server + "/upload.php", "fileToUpload", model.getFile(), FileName);
+        JoUploadFile uploadFile = new JoUploadFile("http://" + server + "/sayfone/upload.php", "fileToUpload", model.getFile(), FileName);
         try {
             if (uploadFile.upload()) {
                 PreparedStatement pre = new JoPrepared().setAutoPrepared(sql.getCreate(),
@@ -39,7 +39,6 @@ public class FileTransferDAO implements FileTransferFn {
                         model.getFileTranferDate(),
                         model.getTransferTime(),
                         FileName + "." + uploadFile.getExtension());
-                System.out.println(pre);
                 return pre.executeUpdate();
             } else {
                 return 0;
@@ -85,7 +84,7 @@ public class FileTransferDAO implements FileTransferFn {
         String sql = "UPDATE tb_filetransfer SET fileName=? WHERE transferID=?";
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH-mm-ss");
         String FileName = model.getFinancialID() + "-" + dateFormat.format(new Date());
-        JoUploadFile uploadFile = new JoUploadFile("http://" + server + "/upload.php", "fileToUpload", model.getFile(), FileName);
+        JoUploadFile uploadFile = new JoUploadFile("http://" + server + "/sayfone/upload.php", "fileToUpload", model.getFile(), FileName);
         try {
             if (uploadFile.upload()) {
                 PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sql);
@@ -94,7 +93,7 @@ public class FileTransferDAO implements FileTransferFn {
                 int state = pre.executeUpdate();
                 System.out.println("file Delete " + model.getFileName());
                 System.out.println("new file " + FileName + "." + uploadFile.getExtension());
-                deleteFile(state, "http://" + server + "/deletefile.php?filename=" + model.getFileName()); // ລົບໄຟເກົ່າ
+                deleteFile(state, "http://" + server + "/sayfone/deletefile.php?filename=" + model.getFileName()); // ລົບໄຟເກົ່າ
                 return state;
             } else {
                 return 0;

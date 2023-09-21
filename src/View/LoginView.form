@@ -98,14 +98,14 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="50" max="32767" attributes="0"/>
+                      <EmptySpace pref="45" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="2" attributes="0">
                           <Component id="joLable3" alignment="2" max="32767" attributes="0"/>
                           <Component id="joLable4" alignment="2" max="32767" attributes="0"/>
                           <Component id="joLabelImage1" alignment="2" min="-2" pref="287" max="-2" attributes="0"/>
                           <Component id="lbl_version" alignment="2" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="49" max="32767" attributes="0"/>
+                      <EmptySpace pref="44" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -160,7 +160,7 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="&#xec0;&#xe82;&#xebb;&#xec9;&#xeb2;&#xeaa;&#xeb9;&#xec8;&#xea5;&#xeb0;&#xe9a;&#xebb;&#xe9a; Sayfoneschool"/>
+                <Property name="text" type="java.lang.String" value="&#xec0;&#xe82;&#xebb;&#xec9;&#xeb2;&#xeaa;&#xeb9;&#xec8;&#xea5;&#xeb0;&#xe9a;&#xebb;&#xe9a; Sayfone School"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Phetsarath OT" size="24" style="1"/>
                 </Property>

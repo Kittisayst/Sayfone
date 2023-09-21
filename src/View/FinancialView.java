@@ -632,9 +632,9 @@ public class FinancialView extends javax.swing.JPanel {
             tb_data.getColumnModel().getColumn(4).setMinWidth(120);
             tb_data.getColumnModel().getColumn(4).setPreferredWidth(120);
             tb_data.getColumnModel().getColumn(4).setMaxWidth(120);
-            tb_data.getColumnModel().getColumn(7).setMinWidth(120);
-            tb_data.getColumnModel().getColumn(7).setPreferredWidth(120);
-            tb_data.getColumnModel().getColumn(7).setMaxWidth(120);
+            tb_data.getColumnModel().getColumn(7).setMinWidth(150);
+            tb_data.getColumnModel().getColumn(7).setPreferredWidth(150);
+            tb_data.getColumnModel().getColumn(7).setMaxWidth(150);
         }
 
         pn_Datatable.add(jScrollPane1, java.awt.BorderLayout.CENTER);
