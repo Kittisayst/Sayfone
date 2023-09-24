@@ -85,16 +85,6 @@
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
             <Property name="alignment" type="int" value="2"/>
           </Layout>
-          <SubComponents>
-            <Component class="Components.JoButtonIconfont" name="btn_add">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="&#xec0;&#xe9e;&#xeb5;&#xec8;&#xea1;&#xe82;&#xecd;&#xec9;&#xea1;&#xeb9;&#xe99;"/>
-                <Property name="joIcons" type="jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons" editor="org.netbeans.modules.form.editors.EnumEditor">
-                  <Value id="ADD_CIRCLE"/>
-                </Property>
-              </Properties>
-            </Component>
-          </SubComponents>
         </Container>
       </SubComponents>
     </Container>

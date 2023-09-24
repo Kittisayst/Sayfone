@@ -6,20 +6,18 @@ public class AbsentModel {
 
     private int absentID;
     private int RegisterID;
-    private int studentID;
     private Date absentDate;
-    private int absentState;
+    private String absentData;
     private int UserID;
 
     public AbsentModel() {
     }
 
-    public AbsentModel(int absentID, int RegisterID, int studentID, Date absentDate, int absentState, int UserID) {
+    public AbsentModel(int absentID, int RegisterID, Date absentDate, String absentData, int UserID) {
         this.absentID = absentID;
         this.RegisterID = RegisterID;
-        this.studentID = studentID;
         this.absentDate = absentDate;
-        this.absentState = absentState;
+        this.absentData = absentData;
         this.UserID = UserID;
     }
 
@@ -39,14 +37,6 @@ public class AbsentModel {
         this.RegisterID = RegisterID;
     }
 
-    public int getStudentID() {
-        return studentID;
-    }
-
-    public void setStudentID(int studentID) {
-        this.studentID = studentID;
-    }
-
     public Date getAbsentDate() {
         return absentDate;
     }
@@ -55,12 +45,12 @@ public class AbsentModel {
         this.absentDate = absentDate;
     }
 
-    public int getAbsentState() {
-        return absentState;
+    public void setAbsentData(String absentData) {
+        this.absentData = absentData;
     }
 
-    public void setAbsentState(int absentState) {
-        this.absentState = absentState;
+    public String getAbsentData() {
+        return absentData;
     }
 
     public int getUserID() {
@@ -73,7 +63,7 @@ public class AbsentModel {
 
     @Override
     public String toString() {
-        return "AbsentModel{" + "absentID=" + absentID + ", RegisterID=" + RegisterID + ", studentID=" + studentID + ", absentDate=" + absentDate + ", absentState=" + absentState + ", UserID=" + UserID + '}';
+        return "AbsentModel{" + "absentID=" + absentID + ", RegisterID=" + RegisterID + ", absentDate=" + absentDate + ", absentData=" + absentData + ", UserID=" + UserID + '}';
     }
 
 }

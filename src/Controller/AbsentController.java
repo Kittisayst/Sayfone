@@ -30,7 +30,6 @@ public class AbsentController implements JoMVC, ActionListener, MouseListener {
 
     @Override
     public void AddEvent() {
-        view.getBtn_Add().addActionListener(this);
         view.getBtn_back().addActionListener(this);
         view.getTb_data().addMouseListener(this);
     }
@@ -60,9 +59,7 @@ public class AbsentController implements JoMVC, ActionListener, MouseListener {
         JoHookEvent event = new JoHookEvent(e.getSource());
         if (event.isEvent(view.getBtn_back())) {
             AppDashboard dashboard = new AppDashboard();
-        } else if (event.isEvent(view.getBtn_Add())) {
-
-        }
+        } 
     }
 
     @Override

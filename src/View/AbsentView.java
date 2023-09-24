@@ -7,38 +7,34 @@ import Model.YearModel;
 import java.util.List;
 
 public class AbsentView extends javax.swing.JPanel {
-    
+
     public AbsentView(String Title) {
         initComponents();
         lbl_title.setText(Title);
     }
-    
+
     public JoButtonIconfont getBtn_back() {
         return btn_back;
     }
-    
-    public JoButtonIconfont getBtn_Add() {
-        return btn_add;
-    }
-    
+
     public JoTable getTb_data() {
         return tb_data;
     }
-    
+
     public void showClassRoom(List<RegisterModel> models) {
         tb_data.JoClearModel();
         models.forEach(data -> {
             tb_data.AddJoModel(new Object[]{tb_data.autoNumber(), data.getRegisterID(), data.getClassRoomName(), data.getYearModel().getYear()});
         });
     }
-    
+
     public void showYear(List<YearModel> models) {
         models.forEach(data -> {
             cbYear.JoAddIntModel(data.getYearID(), data.getYear());
         });
         cbYear.setSelectedIndex(models.size() - 1);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -49,7 +45,6 @@ public class AbsentView extends javax.swing.JPanel {
         jPanel4 = new javax.swing.JPanel();
         lbl_title = new Components.JoLable();
         jPanel5 = new javax.swing.JPanel();
-        btn_add = new Components.JoButtonIconfont();
         pn_Datatable = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_data = new Components.JoTable();
@@ -78,11 +73,6 @@ public class AbsentView extends javax.swing.JPanel {
         Pn_Navigation.add(jPanel4);
 
         jPanel5.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
-
-        btn_add.setText("ເພີ່ມຂໍ້ມູນ");
-        btn_add.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.ADD_CIRCLE);
-        jPanel5.add(btn_add);
-
         Pn_Navigation.add(jPanel5);
 
         pn_Datatable.setLayout(new java.awt.BorderLayout());
@@ -144,7 +134,6 @@ public class AbsentView extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Pn_Navigation;
-    private Components.JoButtonIconfont btn_add;
     private Components.JoButtonIconfont btn_back;
     private Components.JoCombobox cbYear;
     private javax.swing.JPanel jPanel1;

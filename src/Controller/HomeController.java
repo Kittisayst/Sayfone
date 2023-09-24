@@ -6,6 +6,7 @@ import App.AppClass;
 import App.AppDashboard;
 import App.AppFinancialRoom;
 import App.AppRegister;
+import App.AppReportDiscount;
 import App.AppReportFinacial;
 import App.AppReportFood;
 import App.AppReportStudent;
@@ -19,7 +20,6 @@ import App.AppTutorial;
 import App.AppUser;
 import App.AppWithdraw;
 import App.ReportPayApp;
-import Component.DialogCreateImage;
 import Model.UserModel;
 import DAOSevervice.TeacherService;
 import DAOSevervice.UserService;
@@ -84,6 +84,7 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
         view.getBtnFood().addActionListener(this);
         view.getBtnReportUserFinancial().addActionListener(this);
         view.getBtnReportStudent().addActionListener(this);
+        view.getBtnReportDiscount().addActionListener(this);
     }
 
     @Override
@@ -122,38 +123,41 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
         } else if (event.isEvent(view.getBtnUser())) {
             AppUser user = new AppUser();
             user.Open();
-        }else if (event.isEvent(view.getBtnClass())) {
+        } else if (event.isEvent(view.getBtnClass())) {
             AppClass appClass = new AppClass();
             appClass.Open();
-        }  else if (event.isEvent(view.getBtn_Register())) { // ======== ການຮຽນການສອນ
+        } else if (event.isEvent(view.getBtn_Register())) { // ======== ການຮຽນການສອນ
             AppRegister appRegister = new AppRegister();
             appRegister.OpenRegister();
         } else if (event.isEvent(view.getBtnFinancial())) {
             AppFinancialRoom app = new AppFinancialRoom();
             app.open();
-        }else if (event.isEvent(view.getBtnAbsent())) {
+        } else if (event.isEvent(view.getBtnAbsent())) {
             AppAbsent absent = new AppAbsent();
             absent.Open();
-        }  else if (event.isEvent(view.getBtnReportFinancial())) { // ===== ລາຍງານຂໍ້ມູນ
-            AppReportFinacial appReportFinacial = new AppReportFinacial();  
-        }else if (event.isEvent(view.getBtnReportUserFinancial())) {
+        } else if (event.isEvent(view.getBtnReportFinancial())) { // ===== ລາຍງານຂໍ້ມູນ
+            AppReportFinacial appReportFinacial = new AppReportFinacial();
+        } else if (event.isEvent(view.getBtnReportUserFinancial())) {
             AppReportUserFinancial userFinancial = new AppReportUserFinancial();
             userFinancial.OPen();
         } else if (event.isEvent(view.getBtnFood())) {
             AppReportFood reportFood = new AppReportFood();
             reportFood.open();
-        }  else if (event.isEvent(view.getBtnTeacherRank())) {
+        } else if (event.isEvent(view.getBtnTeacherRank())) {
             AppTeacherRank appTeacherRank = new AppTeacherRank();
         } else if (event.isEvent(view.getBtnReportPay())) {
             ReportPayApp reportPayApp = new ReportPayApp();
             reportPayApp.Running();
-        }else if (event.isEvent(view.getBtnWithdraw())) {
+        } else if (event.isEvent(view.getBtnWithdraw())) {
             AppWithdraw appWithdraw = new AppWithdraw();
             appWithdraw.Open();
-        }else if (event.isEvent(view.getBtnReportStudent())) {
+        } else if (event.isEvent(view.getBtnReportStudent())) {
             AppReportStudent reportStudent = new AppReportStudent();
             reportStudent.Open();
-        }   else if (event.isEvent(view.getBtnInfo())) {   // ============ ຕັ້ງຄ່າ
+        } else if (event.isEvent(view.getBtnReportDiscount())) {
+            AppReportDiscount reportDiscount = new AppReportDiscount();
+            reportDiscount.Open();
+        } else if (event.isEvent(view.getBtnInfo())) {   // ============ ຕັ້ງຄ່າ
             AppSetting app = new AppSetting();
             app.Open();
         } else if (event.isEvent(view.getBtnPrinter())) {

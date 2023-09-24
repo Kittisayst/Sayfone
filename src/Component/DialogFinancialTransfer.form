@@ -181,7 +181,7 @@
           <Color blue="cc" green="99" red="0" type="rgb"/>
         </Property>
         <Property name="joIcons" type="jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons" editor="org.netbeans.modules.form.editors.EnumEditor">
-          <Value id="ADD_A_PHOTO"/>
+          <Value id="IMPORTANT_DEVICES"/>
         </Property>
         <Property name="jocolorHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="95" green="6f" red="0" type="rgb"/>

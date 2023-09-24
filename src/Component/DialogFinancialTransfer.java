@@ -1,8 +1,10 @@
 package Component;
 
+import Database.JoProperties;
 import Model.FileTranferModel;
 import Tools.JoFileSystem;
 import Tools.JoFilechooser;
+import Utility.JoQRcode;
 import java.time.LocalTime;
 import java.util.Date;
 import javax.swing.ImageIcon;
@@ -14,6 +16,8 @@ public class DialogFinancialTransfer extends javax.swing.JDialog {
     private boolean openFile;
     private boolean submit = false;
     JoFilechooser filechooser = new JoFilechooser();
+    private JoProperties property = new JoProperties("/JoConfig/config.properties");
+    private String server = property.getValueAt("db.Server");
 
     public DialogFinancialTransfer(java.awt.Frame parent, boolean modal, FileTranferModel tranferModel) {
         super(parent, modal);
@@ -30,8 +34,10 @@ public class DialogFinancialTransfer extends javax.swing.JDialog {
         int minute = currentTime.getMinute();
         Timer.setTime(hour, minute);
         if (tranferModel.getFileTranferID() == 0) {
+            btnOpenCarmera.setEnabled(false);
             btnAddImage.doClick();
         } else {
+            btnOpenCarmera.setEnabled(true);
             dtDate.setDateData(tranferModel.getFileTranferDate());
             String[] parts = tranferModel.getTransferTime().split(":");
             String strhour = parts[0]; // "15"
@@ -115,7 +121,7 @@ public class DialogFinancialTransfer extends javax.swing.JDialog {
         });
 
         btnOpenCarmera.setBackground(new java.awt.Color(0, 153, 204));
-        btnOpenCarmera.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.ADD_A_PHOTO);
+        btnOpenCarmera.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.IMPORTANT_DEVICES);
         btnOpenCarmera.setJocolorHover(new java.awt.Color(0, 111, 149));
         btnOpenCarmera.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -208,8 +214,9 @@ public class DialogFinancialTransfer extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOpenCarmeraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpenCarmeraActionPerformed
-        JoFileSystem fileSystem = new JoFileSystem();
-        fileSystem.OpenFile(fileSystem.getCurrentPath() + "/webcamera/Camera.html");
+        String url = "http://" + server + "/sayfone/mobiletransfer.php?transferID=" + tranferModel.getFileTranferID() + "&financialID=" + tranferModel.getFinancialID();
+        JoQRcode qRcode = new JoQRcode(url);
+        lblImage.setIcon(qRcode.getCreateQRcode());
     }//GEN-LAST:event_btnOpenCarmeraActionPerformed
 
     private void btnAddImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddImageActionPerformed
@@ -224,7 +231,7 @@ public class DialogFinancialTransfer extends javax.swing.JDialog {
         submit = true;
         if (tranferModel.getFileTranferID() == 0) {
             tranferModel = new FileTranferModel(
-                    0, 
+                    0,
                     0,
                     dtDate.getSQLDate(),
                     Timer.getTime(),
