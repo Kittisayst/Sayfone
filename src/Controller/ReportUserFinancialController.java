@@ -1,8 +1,6 @@
 package Controller;
 
-import App.AppDashboard;
 import App.AppFinancial;
-import App.AppHome;
 import Component.DialogTransferImage;
 import DAOSevervice.FileTransferService;
 import DAOSevervice.FinancialService;
@@ -13,6 +11,7 @@ import DAOSevervice.YearService;
 import Log.JoLoger;
 import Model.FileTranferModel;
 import Model.FinancialModel;
+import Model.GlobalDataModel;
 import Model.RegisterModel;
 import Model.StudentModel;
 import Model.UserModel;
@@ -23,7 +22,6 @@ import Tools.JoIconFont;
 import Utility.JoSheet;
 import Utility.MyFormat;
 import Utility.MyPopup;
-import View.HomeView;
 import View.PnLoading;
 import View.ReportUserFainancialView;
 import java.awt.event.ActionEvent;
@@ -61,7 +59,7 @@ public class ReportUserFinancialController implements JoMVC, ActionListener, Mou
 
     @Override
     public void Start() {
-        HomeView.MyRouter.setRouter(view);
+        GlobalDataModel.rootView.setView(view);
         view.showYear(new YearService().getYearAll());
         view.showUser(new UserService().getUserAll());
         view.setDateNow();
@@ -100,7 +98,7 @@ public class ReportUserFinancialController implements JoMVC, ActionListener, Mou
     public void actionPerformed(ActionEvent e) {
         JoHookEvent event = new JoHookEvent(e.getSource());
         if (event.isEvent(view.getBtn_back())) {
-            AppDashboard dashboard = new AppDashboard();
+            GlobalDataModel.rootView.showDashbord();
         } else if (event.isEvent(view.getBtnShow())) {
             if (emptyData()) {
                 showReport();
@@ -201,7 +199,7 @@ public class ReportUserFinancialController implements JoMVC, ActionListener, Mou
                     "ຜູ້ລົງບັນຊີ"
                 };
                 JoSheet sheet = new JoSheet(csvFile, view.getExportName(), columns);
-                HomeView.MyRouter.setRouter(loading);
+                GlobalDataModel.rootView.setView(loading);
                 listFinancials.forEach(data -> {
                     RegisterModel registerModel = registerService.getRegisterById(data.getRegisterID());
                     StudentModel studentModel = studentService.getStudentById(data.getStudentID());
@@ -237,7 +235,7 @@ public class ReportUserFinancialController implements JoMVC, ActionListener, Mou
                 JoLoger.saveLog(e, this);
             } finally {
                 row = 1;
-                HomeView.MyRouter.setRouter(view);
+                GlobalDataModel.rootView.setView(view);
             }
         });
         thread.start();
@@ -264,7 +262,7 @@ public class ReportUserFinancialController implements JoMVC, ActionListener, Mou
     }
 
     private void showImageTransfer(FileTranferModel fileTranferModel) {
-        DialogTransferImage transferImage = new DialogTransferImage(AppHome.viewParent, true, fileTranferModel.getImageIcon());
+        DialogTransferImage transferImage = new DialogTransferImage(GlobalDataModel.rootView, true, fileTranferModel.getImageIcon());
         transferImage.setVisible(true);
     }
 

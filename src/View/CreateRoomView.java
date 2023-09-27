@@ -2,6 +2,7 @@ package View;
 
 import Components.JoButtonIconfont;
 import Components.JoTable;
+import Model.GlobalDataModel;
 import Model.RegisterModel;
 import Tools.JoDataTable;
 import Utility.MyFormat;
@@ -9,24 +10,40 @@ import java.util.List;
 
 public class CreateRoomView extends javax.swing.JPanel {
 
+    private PnLoading loading = new PnLoading();
+
     public CreateRoomView(String Title) {
         initComponents();
         lbl_title.setText(Title);
     }
 
     public void showRegister(List<RegisterModel> models) {
-        models.forEach(data -> {
-            tb_data.AddJoModel(new Object[]{
-                tb_data.autoNumber(),
-                data.getRegisterID(),
-                data.getClassModel().getClassName(),
-                data.getClassRoomName(),
-                data.getYearModel().getYear(),
-                new MyFormat().getDate(data.getRegisterDate())});
+        tb_data.JoClearModel();
+        loading.setTitle("ໂຫຼດຂໍ້ມູນຫ້ອງຮຽນ");
+        Thread thread = new Thread(() -> {
+            try {
+                GlobalDataModel.rootView.setView(loading);
+                models.forEach(data -> {
+                    tb_data.AddJoModel(new Object[]{
+                        tb_data.autoNumber(),
+                        data.getRegisterID(),
+                        data.getClassModel().getClassName(),
+                        data.getClassRoomName(),
+                        data.getYearModel().getYear(),
+                        new MyFormat().getDate(data.getRegisterDate())});
+                    loading.StartProgress(models.size(), 20);
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                GlobalDataModel.rootView.setView(this);
+                loading.close();
+                JoDataTable dataTable = new JoDataTable(pn_Datatable);
+                dataTable.setHiddenColumns(1);
+                dataTable.showDataTableAll();
+            }
         });
-        JoDataTable dataTable = new JoDataTable(pn_Datatable);
-        dataTable.setHiddenColumns(1);
-        dataTable.showDataTableAll();
+        thread.start();
     }
 
     public JoButtonIconfont getBtn_back() {

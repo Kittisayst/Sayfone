@@ -1,9 +1,9 @@
 package Controller;
 
 import App.AppAbsentData;
-import App.AppDashboard;
 import DAOSevervice.RegisterService;
 import DAOSevervice.YearService;
+import Model.GlobalDataModel;
 import Model.RegisterModel;
 import Tools.JoHookEvent;
 import View.AbsentView;
@@ -23,7 +23,7 @@ public class AbsentController implements JoMVC, ActionListener, MouseListener {
 
     @Override
     public void Start() {
-        HomeView.MyRouter.setRouter(view);
+        GlobalDataModel.rootView.setView(view);
         view.showClassRoom(new RegisterService().getRegisterAll());
         view.showYear(new YearService().getYearAll());
     }
@@ -58,7 +58,7 @@ public class AbsentController implements JoMVC, ActionListener, MouseListener {
     public void actionPerformed(ActionEvent e) {
         JoHookEvent event = new JoHookEvent(e.getSource());
         if (event.isEvent(view.getBtn_back())) {
-            AppDashboard dashboard = new AppDashboard();
+            GlobalDataModel.rootView.showDashbord();
         } 
     }
 

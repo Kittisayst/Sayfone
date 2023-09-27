@@ -6,15 +6,13 @@ import Model.TeacherOutstandingModel;
 import DAOSevervice.OutStandingCatService;
 import DAOSevervice.TeacherOutStandingService;
 import DAOSevervice.TeacherService;
+import Model.GlobalDataModel;
 import Tools.JoAlert;
 import Tools.JoHookEvent;
 import Tools.JoPopup;
-import View.HomeView;
 import View.TeacherOutstandingView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.Date;
 
 public class TeacherOutstandingController implements JoMVC, ActionListener {
@@ -39,7 +37,7 @@ public class TeacherOutstandingController implements JoMVC, ActionListener {
 
     @Override
     public final void Start() {
-        HomeView.MyRouter.setRouter(view);
+       GlobalDataModel.rootView.setView(view);
         view.showTeacherOutstanding(service.getAllByTeacherID(TeacherID));
         view.showOutstandingCategory(catService.getAllOutstanding());
         view.getDt_date().setDateData(new Date());

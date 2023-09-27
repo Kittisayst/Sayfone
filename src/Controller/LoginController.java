@@ -67,7 +67,7 @@ public class LoginController implements JoMVC, ActionListener, KeyListener {
             password = view.getTxt_password().getText();
             UserModel model = service.UserLogin(user, password);
             if (model.getUserID() != 0) {
-                GlobalDataModel.globalUsermodel = model;
+                GlobalDataModel.userModel = model;
                 model.setUserLog(new JoDateTime().getTimeNow());
                 model.setDate(new JoDateTime().getParseDate(new Date()));
                 service.UpdateUserLogTime(model);

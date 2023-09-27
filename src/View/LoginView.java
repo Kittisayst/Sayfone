@@ -55,6 +55,7 @@ public class LoginView extends javax.swing.JFrame {
         btn_setting = new Components.JoButtonIconfont();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Sayfone School");
 
         jPanel1.setBackground(new java.awt.Color(243, 243, 243));
 

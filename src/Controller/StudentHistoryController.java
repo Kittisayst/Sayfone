@@ -1,6 +1,5 @@
 package Controller;
 
-import App.AppHome;
 import App.AppStudentData;
 import App.AppStudentHistory;
 import Component.DialogBrotherAndSister;
@@ -16,12 +15,12 @@ import DAOSevervice.StudentAddressService;
 import DAOSevervice.StudentHistoryService;
 import DAOSevervice.StudentService;
 import Model.BrotherAndSisterModel;
+import Model.GlobalDataModel;
 import Model.StudentModel;
 import Tools.JoAlert;
 import Tools.JoHookEvent;
 import Tools.JoIconFont;
 import Utility.MyPopup;
-import View.HomeView;
 import View.StudentHistoryView;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -69,7 +68,7 @@ public class StudentHistoryController implements JoMVC, ActionListener, MouseLis
     public final void Start() {
         try {
             view.getTapHistory().setSelectedIndex(TapIndex);
-            HomeView.MyRouter.setRouter(view);
+            GlobalDataModel.rootView.setView(view);
             view.showProvince(provinceService.getAllProvince());
             view.showProvinceNow(provinceService.getAllProvince());
             int provinceID = view.getCb_province().getKeyInt();
@@ -271,10 +270,10 @@ public class StudentHistoryController implements JoMVC, ActionListener, MouseLis
                 "ສັນຊາດ: " + NationalyName + "   ສາດສະໜາ: " + ReligionName + "   ຊົນເຜົ່າ: " + EthnicName,};
             JoAlert alert = new JoAlert();
             alert.messages("ຂໍ້ມູນນັກຮຽນ", students, JoAlert.Icons.info);
-        }else if (event.isEvent(popup.getItemEdit())) {
-            DialogBrotherAndSister dialogBrotherAndSister = new DialogBrotherAndSister(AppHome.viewParent, true, studentID);
+        } else if (event.isEvent(popup.getItemEdit())) {
+            DialogBrotherAndSister dialogBrotherAndSister = new DialogBrotherAndSister(GlobalDataModel.rootView, true, studentID);
             dialogBrotherAndSister.setVisible(true);
-        }  else if (event.isEvent(popup.getItemDelete())) {
+        } else if (event.isEvent(popup.getItemDelete())) {
             JoAlert alert = new JoAlert();
             if (alert.JoSubmitDelete()) {
                 int bsID = view.getTb_BrotherAndSister().getIntValue(1);

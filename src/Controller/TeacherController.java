@@ -1,6 +1,5 @@
 package Controller;
 
-import App.AppDashboard;
 import App.AppTeacher;
 import App.AppTeacherData;
 import Model.ClassModel;
@@ -16,10 +15,10 @@ import DAOSevervice.TeacherHistoryService;
 import DAOSevervice.TeacherOutStandingService;
 import DAOSevervice.TeacherService;
 import DAOSevervice.TeacherVaccinService;
+import Model.GlobalDataModel;
 import Tools.JoAlert;
 import Tools.JoHookEvent;
 import Tools.JoPopup;
-import View.HomeView;
 import View.TeacherView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -42,7 +41,7 @@ public class TeacherController implements JoMVC, ActionListener, MouseListener {
 
     @Override
     public final void Start() {
-        HomeView.MyRouter.setRouter(view);
+        GlobalDataModel.rootView.setView(view);
         view.showTeacher(teacherService.getAllTeacher());
     }
 
@@ -121,7 +120,7 @@ public class TeacherController implements JoMVC, ActionListener, MouseListener {
     public void actionPerformed(ActionEvent e) {
         JoHookEvent event = new JoHookEvent(e.getSource());
         if (event.isEvent(view.getBtn_back())) {
-            AppDashboard dashboard = new AppDashboard();
+            GlobalDataModel.rootView.showDashbord();
         } else if (event.isEvent(view.getBtn_Add())) {
             AppTeacherData appTeacherData = new AppTeacherData();
         } else if (event.isEvent(popup.getItemshow())) {

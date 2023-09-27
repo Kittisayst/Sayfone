@@ -5,10 +5,10 @@ import App.AppStudentVaccince;
 import Model.StudentVacinceModel;
 import DAOSevervice.StudentService;
 import DAOSevervice.StudentVaccinceService;
+import Model.GlobalDataModel;
 import Tools.JoAlert;
 import Tools.JoHookEvent;
 import Tools.JoPopup;
-import View.HomeView;
 import View.StudentVaccinView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -33,7 +33,7 @@ public class StudentVaccinceController implements JoMVC, ActionListener {
 
     @Override
     public final void Start() {
-        HomeView.MyRouter.setRouter(view);
+        GlobalDataModel.rootView.setView(view);
         view.showStudentVaccince(service.getStudentVacinceAllByStudentID(StudentID));
     }
 

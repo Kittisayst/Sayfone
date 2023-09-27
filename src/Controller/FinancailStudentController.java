@@ -7,14 +7,13 @@ import Component.DialogChangeClassRoom;
 import DAOSevervice.FinancialService;
 import DAOSevervice.StudentService;
 import Model.FinancialModel;
+import Model.GlobalDataModel;
 import Model.RegisterModel;
 import Model.StudentModel;
 import Tools.JoHookEvent;
 import Tools.JoIconFont;
 import Utility.MyPopup;
-import View.HomeView;
 import View.FinancailStudentView;
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -22,7 +21,6 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 import jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons;
-import theme.JoTheme;
 import theme.MyColor;
 
 public class FinancailStudentController implements JoMVC, ActionListener, MouseListener {
@@ -47,7 +45,7 @@ public class FinancailStudentController implements JoMVC, ActionListener, MouseL
 
     @Override
     public void Start() {
-        HomeView.MyRouter.setRouter(view);
+        GlobalDataModel.rootView.setView(view);
         view.getBtn_Add().setEnabled(false);
         //ສະແດງນັກສຶກສາທັງໝົດ
         totalPages = studentService.getTotalPages();
@@ -114,7 +112,7 @@ public class FinancailStudentController implements JoMVC, ActionListener, MouseL
             AppFinancial app = new AppFinancial(registerModel, studentModel);
         } else if (event.isEvent(popup.getItemEdit())) {
             int studentID = view.getTb_data().getIntValue(currentPage);
-            DialogChangeClassRoom classRoom = new DialogChangeClassRoom(AppHome.viewParent, true, registerModel, studentID);
+            DialogChangeClassRoom classRoom = new DialogChangeClassRoom(GlobalDataModel.rootView, true, registerModel, studentID);
             classRoom.setVisible(true);
         }
     }

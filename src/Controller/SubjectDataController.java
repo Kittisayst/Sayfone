@@ -2,10 +2,10 @@ package Controller;
 
 import App.AppSubject;
 import DAOSevervice.SubjectService;
+import Model.GlobalDataModel;
 import Model.SubjectModel;
 import Tools.JoAlert;
 import Tools.JoHookEvent;
-import View.HomeView;
 import View.SubjectDataView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,7 +23,7 @@ public class SubjectDataController implements JoMVC, ActionListener {
     @Override
     public void Start() {
         view.showSubject(model);
-        HomeView.MyRouter.setRouter(view);
+        GlobalDataModel.rootView.setView(view);
     }
 
     @Override

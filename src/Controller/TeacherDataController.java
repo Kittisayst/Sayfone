@@ -20,6 +20,7 @@ import DAOSevervice.TeacherHistoryService;
 import DAOSevervice.TeacherOutStandingService;
 import DAOSevervice.TeacherService;
 import DAOSevervice.TeacherVaccinService;
+import Model.GlobalDataModel;
 import Tools.JoAlert;
 import Tools.JoFilechooser;
 import Tools.JoHookEvent;
@@ -56,7 +57,7 @@ public class TeacherDataController implements JoMVC, ActionListener, MouseListen
 
     @Override
     public final void Start() {
-        HomeView.MyRouter.setRouter(view);
+        GlobalDataModel.rootView.setView(view);
         view.showClass(classService.getAllClass());
         view.showNationality(nationalityService.getAllNationality());
         view.showReligion(religionService.getAllReligionModel());

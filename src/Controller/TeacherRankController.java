@@ -1,14 +1,12 @@
 package Controller;
 
-import App.AppDashboard;
 import DAO.TeacherDAO;
-import DAO.YearDAO;
 import DAOSevervice.TeacherService;
 import DAOSevervice.YearService;
+import Model.GlobalDataModel;
 import Model.TeacherRankModel;
 import Model.YearModel;
 import Tools.JoHookEvent;
-import View.HomeView;
 import View.TeacherRinkView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,7 +23,7 @@ public class TeacherRankController implements JoMVC, ActionListener {
 
     @Override
     public void Start() {
-        HomeView.MyRouter.setRouter(view);
+        GlobalDataModel.rootView.setView(view);
         YearService yearService = new YearService();
         view.showYear(yearService.getYearAll());
         YearModel yearModel = yearService.getLastYear();
@@ -63,7 +61,7 @@ public class TeacherRankController implements JoMVC, ActionListener {
     public void actionPerformed(ActionEvent e) {
         JoHookEvent event = new JoHookEvent(e.getSource());
         if (event.isEvent(view.getBtn_back())) {
-            AppDashboard dashboard = new AppDashboard();
+            GlobalDataModel.rootView.showDashbord();
         } else if (event.isEvent(view.getBtnShow())) {
             System.out.println("ok");
             YearModel yearModel = new YearService().getYearById(view.getCbYear().getKeyInt());

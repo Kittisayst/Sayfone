@@ -1,6 +1,5 @@
 package Component;
 
-import Components.JoLable;
 import Components.JoScrollBar;
 import DAOSevervice.AbsentService;
 import Model.AbsentModel;
@@ -10,7 +9,6 @@ import Model.StudentModel;
 import Tools.JoAlert;
 import Utility.JoJson;
 import View.AbsentDataView;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.util.Date;
 import java.util.HashMap;
@@ -163,7 +161,7 @@ public class DialogAbsent extends javax.swing.JDialog {
         JoJson joJson = new JoJson(jsonModel);
 
         boolean state;
-        int userID = GlobalDataModel.globalUsermodel.getUserID();
+        int userID = GlobalDataModel.userModel.getUserID();
 
         if (absentModel.getAbsentID() == 0) {
             absentModel = new AbsentModel(0, registerModel.getRegisterID(), dtDate.getSQLDate(), joJson.getJsonString(), userID);

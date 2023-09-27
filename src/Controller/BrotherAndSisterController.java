@@ -1,10 +1,9 @@
 package Controller;
 
-import App.AppHome;
 import Component.DialogBrotherAndSister;
 import DAOSevervice.BroderSisterService;
 import Model.BrotherAndSisterModel;
-import Model.StudentHistoryModel;
+import Model.GlobalDataModel;
 import Tools.JoHookEvent;
 import View.StudentHistoryView;
 import java.awt.event.ActionEvent;
@@ -56,7 +55,7 @@ public class BrotherAndSisterController implements JoMVC, ActionListener {
     public void actionPerformed(ActionEvent e) {
         JoHookEvent event = new JoHookEvent(e.getSource());
         if (event.isEvent(View.getBtnAddBS())) {
-            DialogBrotherAndSister bs = new DialogBrotherAndSister(AppHome.viewParent, true, studentID);
+            DialogBrotherAndSister bs = new DialogBrotherAndSister(GlobalDataModel.rootView, true, studentID);
             bs.setVisible(true);
         }
     }

@@ -1,11 +1,14 @@
 package App;
 
+import Component.LoadingResources;
 import Controller.LoginController;
 import DAOSevervice.UserService;
 import Log.JoLoger;
 import Tools.JoAlert;
+import Tools.JoFrameDesign;
 import Utility.SayfoneFile;
 import View.LoginView;
+import javax.swing.ImageIcon;
 import theme.JoTheme;
 
 public class SayFoneSchool {
@@ -14,10 +17,9 @@ public class SayFoneSchool {
         java.awt.EventQueue.invokeLater(() -> {
             try {
                 new JoTheme().setLookUI();
-                LoginView view = new LoginView();
-                UserService service = new UserService();
-                LoginController controller = new LoginController(service, view);
-                SayfoneFile file = new SayfoneFile();
+                LoadingResources resource = new LoadingResources();
+                resource.startLoading();
+                resource.setVisible(true);
             } catch (Exception e) {
                 JoAlert.Error(e, args);
                 JoLoger.saveLog(e, args);

@@ -5,27 +5,44 @@ import Components.JoTable;
 import Components.JoTextField;
 import DAOSevervice.FinancialService;
 import DAOSevervice.UserService;
+import Model.GlobalDataModel;
 import Model.StudentModel;
 import java.util.List;
 
 public class StudentView extends javax.swing.JPanel {
 
+    private PnLoading loading = new PnLoading();
+
     public StudentView(String Title) {
         initComponents();
         lbl_title.setText(Title);
+        loading.setTitle("ໂຫຼດຂໍ້ມູນນັກຮຽນ");
     }
 
     public void showStudent(List<StudentModel> models) {
         tb_data.JoClearModel();
-        models.forEach(data -> {
-            tb_data.AddJoModel(new Object[]{
-                tb_data.autoNumber(),
-                data.getStudentID(),
-                data.getStudentNo(),
-                data.getFullName(),
-                new FinancialService().getLastClass(data.getStudentID()),
-                new UserService().getUserById(data.getUserCreate()).getFullName(),});
+        Thread thread = new Thread(() -> {
+            GlobalDataModel.rootView.setView(loading);
+            try {
+                models.forEach(data -> {
+                    tb_data.AddJoModel(new Object[]{
+                        tb_data.autoNumber(),
+                        data.getStudentID(),
+                        data.getStudentNo(),
+                        data.getFullName(),
+                        new FinancialService().getLastClass(data.getStudentID()),
+                        new UserService().getUserById(data.getUserCreate()).getFullName(),});
+                    loading.StartProgress(models.size(), 20);
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                loading.close();
+                GlobalDataModel.rootView.setView(this);
+            }
+
         });
+        thread.start();
     }
 
     public JoButtonIconfont getBtn_back() {

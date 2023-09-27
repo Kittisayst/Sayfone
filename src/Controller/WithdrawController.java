@@ -1,8 +1,8 @@
 package Controller;
 
 import DAOSevervice.WithdrawService;
+import Model.GlobalDataModel;
 import Model.WithdrawModel;
-import View.HomeView;
 import View.WithDrawView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,7 +19,7 @@ public class WithdrawController implements JoMVC, ActionListener {
 
     @Override
     public void Start() {
-        HomeView.MyRouter.setRouter(view);
+        GlobalDataModel.rootView.setView(view);
         view.showWithdraw(new WithdrawService().getWithdrawAll());
     }
 

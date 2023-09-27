@@ -1,9 +1,12 @@
 package App;
 
+import Controller.DasboardController;
 import Controller.StudentDataController;
 import Model.StudentModel;
 import DAOSevervice.StudentService;
 import Log.JoLoger;
+import Model.GlobalDataModel;
+import View.DasboardView;
 import View.StudentDataView;
 
 public class AppStudentData {
@@ -22,6 +25,10 @@ public class AppStudentData {
     }
 
     public AppStudentData(int StudentID) {
+        DasboardView dasboardView = new DasboardView();
+        GlobalDataModel.dasboardView = dasboardView;
+        DasboardController dasboardController = new DasboardController(dasboardView);
+        dasboardController.UpdateView();
         try {
             StudentModel model = new StudentService().getStudentById(StudentID);
             StudentDataView view = new StudentDataView("ຂໍ້ມູນນັກຮຽນ (" + model.getFullName() + ")");

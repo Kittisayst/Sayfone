@@ -23,7 +23,7 @@ import App.ReportPayApp;
 import Model.UserModel;
 import DAOSevervice.TeacherService;
 import DAOSevervice.UserService;
-import Model.GobalData;
+import Model.GlobalDataModel;
 import Tools.JoFileSystem;
 import Tools.JoHookEvent;
 import View.HomeView;
@@ -49,14 +49,13 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
     @Override
     public final void Start() {
         view.setVisible(true);
-        GobalData.UserID = userModel.getUserID();
         view.getLblVersion().setText(new About().getVersion());
         JoFileSystem fileSystem = new JoFileSystem();
         String logo = fileSystem.getCurrentPath() + "/Icon/sfsc.png";
         view.showBandLogo(new ImageIcon(logo));
         TeacherService teacherService = new TeacherService();
         view.showUserName(teacherService.getTeacherById(userModel.getTeacherID()));
-        AppDashboard dashboard = new AppDashboard();
+        view.setView(GlobalDataModel.dasboardView);
         //============ Hind Module ===================
         view.getBtnSubject().setVisible(false);
         view.getBtnSubjectTeacher().setVisible(false);
@@ -111,7 +110,7 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
     public void actionPerformed(ActionEvent e) {
         JoHookEvent event = new JoHookEvent(e.getSource());
         if (event.isEvent(view.getBtn_home())) {  // ============== ໜ້າຫຼັ້ກ
-            AppDashboard dashboard = new AppDashboard();
+            GlobalDataModel.rootView.showDashbord();
         } else if (event.isEvent(view.getBtn_teacher())) {  // ======== ຈັດການຂໍ້ມູນ
             AppTeacher appTeacher = new AppTeacher();
         } else if (event.isEvent(view.getBtn_Menu())) {
@@ -161,7 +160,7 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
             AppSetting app = new AppSetting();
             app.Open();
         } else if (event.isEvent(view.getBtnPrinter())) {
-            HomeView.MyRouter.setRouter(new PrinterView("ຕັ້ງຄ່າປີ້ນເຕີ"));
+            GlobalDataModel.rootView.setView(new PrinterView("ຕັ້ງຄ່າປີ້ນເຕີ"));
         }
     }
 

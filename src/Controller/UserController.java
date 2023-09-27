@@ -1,15 +1,13 @@
 package Controller;
 
-import App.AppDashboard;
-import App.AppHome;
 import App.AppUser;
 import Component.DialogUser;
 import DAOSevervice.UserService;
+import Model.GlobalDataModel;
 import Model.UserModel;
 import Tools.JoAlert;
 import Tools.JoHookEvent;
 import Utility.MyPopup;
-import View.HomeView;
 import View.UserView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,7 +28,7 @@ public class UserController implements JoMVC, ActionListener, MouseListener {
 
     @Override
     public void Start() {
-        HomeView.MyRouter.setRouter(view);
+        GlobalDataModel.rootView.setView(view);
         view.showUser(new UserService().getUserAll());
     }
 
@@ -66,9 +64,9 @@ public class UserController implements JoMVC, ActionListener, MouseListener {
     public void actionPerformed(ActionEvent e) {
         JoHookEvent event = new JoHookEvent(e.getSource());
         if (event.isEvent(view.getBtn_back())) {
-            new AppDashboard();
+            GlobalDataModel.rootView.showDashbord();
         } else if (event.isEvent(view.getBtn_Add())) {
-            dialogUser = new DialogUser(AppHome.viewParent, true, Model);
+            dialogUser = new DialogUser(GlobalDataModel.rootView, true, Model);
             dialogUser.setVisible(true);
         } else if (event.isEvent(popup.getItemshow())) {
 
@@ -77,7 +75,7 @@ public class UserController implements JoMVC, ActionListener, MouseListener {
             UserService service = new UserService();
             Model = service.getUserById(userID);
             if (Model.getUserID() != 0) {
-                dialogUser = new DialogUser(AppHome.viewParent, true, Model);
+                dialogUser = new DialogUser(GlobalDataModel.rootView, true, Model);
                 dialogUser.setVisible(true);
             }
         } else if (event.isEvent(popup.getItemDelete())) {

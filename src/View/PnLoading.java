@@ -1,5 +1,7 @@
 package View;
 
+import javax.swing.SwingUtilities;
+
 public class PnLoading extends javax.swing.JPanel {
 
     private int state = 1;
@@ -17,20 +19,16 @@ public class PnLoading extends javax.swing.JPanel {
         lblTitle.setText(text);
     }
 
-    public void startState() {
+    public void StartProgress(int maxSize, int time) {
         state++;
-    }
-
-    public int getState() {
-        return state;
-    }
-
-    public void StartProgress(int maxSize) {
         progress = (int) ((double) state / maxSize * 100);
-        joProgressBar1.setValue(progress);
+        SwingUtilities.invokeLater(() -> {
+            joProgressBar1.setValue(progress);
+        });
+        setSleep(time);
     }
 
-    public void setSleep(int time) {
+    private void setSleep(int time) {
         try {
             Thread.sleep(time);
         } catch (InterruptedException e) {

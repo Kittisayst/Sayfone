@@ -2,16 +2,15 @@ package Controller;
 
 import App.AppClass;
 import App.AppDashboard;
-import App.AppHome;
 import Component.DialogClass;
 import DAOSevervice.ClassService;
 import DAOSevervice.RegisterService;
 import Model.ClassModel;
+import Model.GlobalDataModel;
 import Tools.JoAlert;
 import Tools.JoHookEvent;
 import Utility.MyPopup;
 import View.ClassView;
-import View.HomeView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -29,7 +28,7 @@ public class ClassController implements JoMVC, ActionListener, MouseListener {
 
     @Override
     public void Start() {
-        HomeView.MyRouter.setRouter(view);
+        GlobalDataModel.rootView.setView(view);
         view.showClass(new ClassService().getAllClass());
     }
 
@@ -65,15 +64,15 @@ public class ClassController implements JoMVC, ActionListener, MouseListener {
     public void actionPerformed(ActionEvent e) {
         JoHookEvent event = new JoHookEvent(e.getSource());
         if (event.isEvent(view.getBtn_Add())) {
-            DialogClass dc = new DialogClass(AppHome.viewParent, true, new ClassModel());
+            DialogClass dc = new DialogClass(GlobalDataModel.rootView, true, new ClassModel());
             dc.setVisible(true);
         } else if (event.isEvent(view.getBtn_back())) {
-            AppDashboard dashboard = new AppDashboard();
+           GlobalDataModel.rootView.showDashbord();
         } else if (event.isEvent(popup.getItemshow())) {
 
         } else if (event.isEvent(popup.getItemEdit())) {
             int ID = view.getTb_data().getIntValue(1);
-            DialogClass dc = new DialogClass(AppHome.viewParent, true, new ClassService().getClassById(ID));
+            DialogClass dc = new DialogClass(GlobalDataModel.rootView, true, new ClassService().getClassById(ID));
             dc.setVisible(true);
         } else if (event.isEvent(popup.getItemDelete())) {
             int ID = view.getTb_data().getIntValue(1);

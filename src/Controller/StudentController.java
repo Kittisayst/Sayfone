@@ -1,6 +1,5 @@
 package Controller;
 
-import App.AppDashboard;
 import App.AppStudent;
 import App.AppStudentData;
 import DAOSevervice.EthnicService;
@@ -13,10 +12,10 @@ import DAOSevervice.StudentAddressService;
 import DAOSevervice.StudentHistoryService;
 import DAOSevervice.StudentService;
 import DAOSevervice.StudentVaccinceService;
+import Model.GlobalDataModel;
 import Tools.JoAlert;
 import Tools.JoHookEvent;
 import Tools.JoPopup;
-import View.HomeView;
 import View.StudentView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -39,7 +38,7 @@ public class StudentController implements JoMVC, ActionListener, MouseListener {
 
     @Override
     public final void Start() {
-        HomeView.MyRouter.setRouter(view);
+        GlobalDataModel.rootView.setView(view);
         totalPages = service.getTotalPages();
         view.showStudent(service.getStudentPagination(currentPage, 25));
     }
@@ -96,7 +95,7 @@ public class StudentController implements JoMVC, ActionListener, MouseListener {
     public void actionPerformed(ActionEvent e) {
         JoHookEvent event = new JoHookEvent(e.getSource());
         if (event.isEvent(view.getBtn_back())) {
-            AppDashboard dashboard = new AppDashboard();
+            GlobalDataModel.rootView.showDashbord();
         } else if (event.isEvent(view.getBtn_Add())) {
             AppStudentData studentData = new AppStudentData();
         } else if (event.isEvent(view.getBtnPrevious())) {
@@ -187,7 +186,5 @@ public class StudentController implements JoMVC, ActionListener, MouseListener {
             view.showStudent(service.getStudentPagination(currentPage, 25));
         }
     }
-    
-    
 
 }

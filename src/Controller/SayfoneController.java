@@ -1,11 +1,10 @@
 package Controller;
 
-import App.AppDashboard;
 import DAOSevervice.SayfoneService;
+import Model.GlobalDataModel;
 import Model.SayfoneModel;
 import Tools.JoAlert;
 import Tools.JoHookEvent;
-import View.HomeView;
 import View.SayfoneView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,7 +21,7 @@ public class SayfoneController implements JoMVC, ActionListener {
 
     @Override
     public void Start() {
-        HomeView.MyRouter.setRouter(view);
+        GlobalDataModel.rootView.setView(view);
         view.showSetting(model);
     }
 
@@ -61,13 +60,13 @@ public class SayfoneController implements JoMVC, ActionListener {
     public void actionPerformed(ActionEvent e) {
         JoHookEvent event = new JoHookEvent(e.getSource());
         if (event.isEvent(view.getBtn_back())) {
-            AppDashboard ad = new AppDashboard();
+           GlobalDataModel.rootView.showDashbord();
         } else if (event.isEvent(view.getBtnSave())) {
             if (emptyData()) {
                 Update();
             }
-        }else if (event.isEvent(view.getBtnCancel())) {
-            AppDashboard ad = new AppDashboard();
+        } else if (event.isEvent(view.getBtnCancel())) {
+           GlobalDataModel.rootView.showDashbord();
         }
     }
 

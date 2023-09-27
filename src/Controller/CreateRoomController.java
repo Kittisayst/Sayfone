@@ -1,13 +1,12 @@
 package Controller;
 
-import App.AppDashboard;
 import App.AppCreateRegister;
 import DAOSevervice.RegisterService;
+import Model.GlobalDataModel;
 import Model.RegisterModel;
 import Tools.JoHookEvent;
 import Utility.MyPopup;
 import View.CreateRoomView;
-import View.HomeView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -28,8 +27,8 @@ public class CreateRoomController implements JoMVC, ActionListener, MouseListene
 
     @Override
     public void Start() {
-        HomeView.MyRouter.setRouter(view);
-        view.showRegister(new RegisterService().getRegisterAll());
+        GlobalDataModel.rootView.setView(view);
+        view.showRegister(GlobalDataModel.registerModels);
     }
 
     @Override
@@ -64,7 +63,7 @@ public class CreateRoomController implements JoMVC, ActionListener, MouseListene
     public void actionPerformed(ActionEvent e) {
         JoHookEvent event = new JoHookEvent(e.getSource());
         if (event.isEvent(view.getBtn_back())) {
-            AppDashboard appDashboard = new AppDashboard();
+            GlobalDataModel.rootView.showDashbord();
         } else if (event.isEvent(view.getBtn_Add())) {
             AppCreateRegister appRegisterData = new AppCreateRegister();
             appRegisterData.showRegisterData();

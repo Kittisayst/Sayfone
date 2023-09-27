@@ -1,22 +1,22 @@
 package App;
 
 import Controller.DasboardController;
-import Log.JoLoger;
+import Model.GlobalDataModel;
 import View.DasboardView;
 
 public class AppDashboard {
 
-    public static DasboardView dasboardView;
+    private DasboardController controller;
 
     public AppDashboard() {
-        try {
-            DasboardView view = new DasboardView();
-            dasboardView = view;
-            DasboardController controller = new DasboardController(view);
-        } catch (Exception e) {
-            JoLoger.saveLog(e, this);
-        }
+        DasboardView view = new DasboardView();
+        GlobalDataModel.dasboardView = view;
+        controller = new DasboardController(view);
+    }
 
+    public void Open() {
+        controller.Start();
+        controller.AddEvent();
     }
 
 }

@@ -1,6 +1,5 @@
 package Controller;
 
-import App.AppDashboard;
 import DAOSevervice.FinancialService;
 import Database.JoConnect;
 import Log.JoLoger;
@@ -11,7 +10,6 @@ import Tools.JoFileSystem;
 import Tools.JoHookEvent;
 import Utility.JoJasperPrinter;
 import Utility.MyFormat;
-import View.HomeView;
 import View.ReportFinacialView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,7 +30,7 @@ public class ReportFinacialController implements JoMVC, ActionListener {
     private boolean showWeek = false; // ສະແດງລາຍງານປະຈຳອາທິດ
     private boolean showDatetoDate = false; // ສະແດງລາຍງານປະຈຳວັນທີ່-ວັນທີ່
     private boolean moneyState = true; // false ໂອນ  , true ສົດ
-    private final String UserLogin = "" + GlobalDataModel.globalUsermodel.getUserID();
+    private final String UserLogin = "" + GlobalDataModel.userModel.getUserID();
 
     public ReportFinacialController(ReportFinacialView view, FinancialModel model) {
         this.view = view;
@@ -41,7 +39,7 @@ public class ReportFinacialController implements JoMVC, ActionListener {
 
     @Override
     public void Start() {
-        HomeView.MyRouter.setRouter(view);
+        GlobalDataModel.rootView.setView(view);
         view.getDtDateEnd().setDateData(new Date());
         // ສະແດງຂໍ້ມູນໃນຕາຕະລາງປະຈຳວັນທີ
         FinancialService service = new FinancialService();
@@ -85,7 +83,7 @@ public class ReportFinacialController implements JoMVC, ActionListener {
     public void actionPerformed(ActionEvent e) {
         JoHookEvent event = new JoHookEvent(e.getSource());
         if (event.isEvent(view.getBtn_back())) {
-            AppDashboard appDashboard = new AppDashboard();
+           GlobalDataModel.rootView.showDashbord();
         } else if (event.isEvent(view.getBtn_ReportDay())) { // ລາຍງານປະຈຳວັນ
             setDefaultShow();
             showDay = true;
@@ -220,11 +218,11 @@ public class ReportFinacialController implements JoMVC, ActionListener {
             JoFileSystem fileSystem = new JoFileSystem();
             String logo = fileSystem.getCurrentPath() + "/Icon/sfsc.png";
             String reportDate = new MyFormat().getDateCustom(new Date(), "yyyy-MM-dd");
-            System.out.println(GlobalDataModel.globalUsermodel.getName());
+            System.out.println(GlobalDataModel.userModel.getName());
             Map parameter = new HashMap();
             parameter.put("parmDate", "" + reportDate);
             parameter.put("LogoPath", logo);
-            parameter.put("UserPrint", "( " + GlobalDataModel.globalUsermodel.getFullName() + " )");
+            parameter.put("UserPrint", "( " + GlobalDataModel.userModel.getFullName() + " )");
             parameter.put("UserID", UserLogin);
             JasperPrint print = JasperFillManager.fillReport("ReportCashDay.jasper", parameter, new JoConnect().getConnectionDefault());
             setPrintState(print, "ReportCashDay");
@@ -247,7 +245,7 @@ public class ReportFinacialController implements JoMVC, ActionListener {
             Map parameter = new HashMap();
             parameter.put("parmDate", "" + dateInWeek);
             parameter.put("LogoPath", logo);
-            parameter.put("UserPrint", "( " + GlobalDataModel.globalUsermodel.getFullName() + " )");
+            parameter.put("UserPrint", "( " + GlobalDataModel.userModel.getFullName() + " )");
             parameter.put("UserID", UserLogin);
             JasperPrint print = JasperFillManager.fillReport("ReportCashWeek.jasper", parameter, new JoConnect().getConnectionDefault());
             setPrintState(print, "ReportCashWeek");
@@ -268,7 +266,7 @@ public class ReportFinacialController implements JoMVC, ActionListener {
             parameter.put("parmDate", "" + reportDate);
             parameter.put("parmDateEnd", "" + reportDateEnd);
             parameter.put("LogoPath", logo);
-            parameter.put("UserPrint", "( " + GlobalDataModel.globalUsermodel.getFullName() + " )");
+            parameter.put("UserPrint", "( " + GlobalDataModel.userModel.getFullName() + " )");
             parameter.put("UserID", UserLogin);
             JasperPrint print = JasperFillManager.fillReport("ReportCashDaytoDay.jasper", parameter, new JoConnect().getConnectionDefault());
             setPrintState(print, "ReportCashDaytoDay");
@@ -287,7 +285,7 @@ public class ReportFinacialController implements JoMVC, ActionListener {
             Map parameter = new HashMap();
             parameter.put("parmDate", "" + reportDate);
             parameter.put("LogoPath", logo);
-            parameter.put("UserPrint", "( " + GlobalDataModel.globalUsermodel.getFullName() + " )");
+            parameter.put("UserPrint", "( " + GlobalDataModel.userModel.getFullName() + " )");
             parameter.put("UserID", UserLogin);
             JasperPrint print = JasperFillManager.fillReport("ReportTransferDay.jasper", parameter, new JoConnect().getConnectionDefault());
             setPrintState(print, "ReportTransferDay");
@@ -310,7 +308,7 @@ public class ReportFinacialController implements JoMVC, ActionListener {
             Map parameter = new HashMap();
             parameter.put("parmDate", "" + dateInWeek);
             parameter.put("LogoPath", logo);
-            parameter.put("UserPrint", "( " + GlobalDataModel.globalUsermodel.getFullName() + " )");
+            parameter.put("UserPrint", "( " + GlobalDataModel.userModel.getFullName() + " )");
             parameter.put("UserID", UserLogin);
             JasperPrint print = JasperFillManager.fillReport("ReportTransferWeek.jasper", parameter, new JoConnect().getConnectionDefault());
             setPrintState(print, "ReportTransferWeek");
@@ -331,7 +329,7 @@ public class ReportFinacialController implements JoMVC, ActionListener {
             parameter.put("parmDate", "" + reportDate);
             parameter.put("parmDateEnd", "" + reportDateEnd);
             parameter.put("LogoPath", logo);
-            parameter.put("UserPrint", "( " + GlobalDataModel.globalUsermodel.getFullName() + " )");
+            parameter.put("UserPrint", "( " + GlobalDataModel.userModel.getFullName() + " )");
             parameter.put("UserID", UserLogin);
             JasperPrint print = JasperFillManager.fillReport("ReportTransferDaytoDay.jasper", parameter, new JoConnect().getConnectionDefault());
             setPrintState(print, "ReportTransferDaytoDay");

@@ -1,12 +1,10 @@
 package Controller;
 
-import App.AppDashboard;
-import App.AppHome;
 import Component.DialogTutorial;
+import Model.GlobalDataModel;
 import Model.TutorialModel;
 import Tools.JoFileSystem;
 import Tools.JoHookEvent;
-import View.HomeView;
 import View.TutorialView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,7 +13,6 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 
 public class TutorialController implements JoMVC, ActionListener {
@@ -28,7 +25,7 @@ public class TutorialController implements JoMVC, ActionListener {
 
     @Override
     public void Start() {
-        HomeView.MyRouter.setRouter(view);
+        GlobalDataModel.rootView.setView(view);
         view.showTutorial(ReadFileTutorial());
 
     }
@@ -62,7 +59,7 @@ public class TutorialController implements JoMVC, ActionListener {
     public void actionPerformed(ActionEvent e) {
         JoHookEvent event = new JoHookEvent(e.getSource());
         if (event.isEvent(view.getBtn_back())) {
-            AppDashboard dashboard = new AppDashboard();
+            GlobalDataModel.rootView.showDashbord();
         }
     }
 
@@ -90,10 +87,10 @@ public class TutorialController implements JoMVC, ActionListener {
         int no = 1;
         for (File file : files) {
             if (file.isFile()) {
-                models.add(new TutorialModel("ວິທີການ", no++ +" "+file.getName(), "0", file, new MouseAdapter() {
+                models.add(new TutorialModel("ວິທີການ", no++ + " " + file.getName(), "0", file, new MouseAdapter() {
                     @Override
                     public void mousePressed(MouseEvent e) {
-                        DialogTutorial tutorial = new DialogTutorial(AppHome.viewParent, true, file.getName(), file);
+                        DialogTutorial tutorial = new DialogTutorial(GlobalDataModel.rootView, true, file.getName(), file);
                         tutorial.setVisible(true);
                         super.mousePressed(e);
                     }

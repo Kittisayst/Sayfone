@@ -6,6 +6,7 @@ import Components.JoLable;
 import Components.JoLableIcon;
 import Components.JoRouter;
 import Components.JoScrollBar;
+import Model.GlobalDataModel;
 import Model.TeacherModel;
 import Tools.JoFrameDesign;
 import javax.swing.Icon;
@@ -60,8 +61,12 @@ public class HomeView extends javax.swing.JFrame {
         return btn_teacher;
     }
 
-    public static JoRouter getMyRouter() {
-        return MyRouter;
+    public void showDashbord() {
+        MyRouter.setRouter(GlobalDataModel.dasboardView);
+    }
+
+    public void setView(JPanel view) {
+        MyRouter.setRouter(view);
     }
 
     public JoButtonIconfont getBtn_Student() {
@@ -643,7 +648,7 @@ public class HomeView extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static Components.JoRouter MyRouter;
+    private Components.JoRouter MyRouter;
     private javax.swing.JPanel Nav_Left;
     private javax.swing.JPanel Nav_Right;
     private javax.swing.JPanel PN_Manage;

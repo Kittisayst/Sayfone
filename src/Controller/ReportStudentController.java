@@ -1,6 +1,5 @@
 package Controller;
 
-import App.AppDashboard;
 import DAOSevervice.EthnicService;
 import DAOSevervice.FinancialService;
 import DAOSevervice.NationalityService;
@@ -9,12 +8,12 @@ import DAOSevervice.ReligionService;
 import DAOSevervice.StudentService;
 import DAOSevervice.UserService;
 import DAOSevervice.YearService;
+import Model.GlobalDataModel;
 import Model.StudentModel;
 import Tools.JoFileSystem;
 import Tools.JoHookEvent;
 import Utility.JoSheet;
 import Utility.MyFormat;
-import View.HomeView;
 import View.PnLoading;
 import View.ReportStudentView;
 import java.awt.event.ActionEvent;
@@ -43,7 +42,7 @@ public class ReportStudentController implements JoMVC, ActionListener, ItemListe
 
     @Override
     public void Start() {
-        HomeView.MyRouter.setRouter(view);
+        GlobalDataModel.rootView.setView(view);
         view.showYear(new YearService().getYearAll());
         view.showClassRoom(new RegisterService().getRegisterAllByYearID(view.getCbYear().getKeyInt()));
     }
@@ -80,7 +79,7 @@ public class ReportStudentController implements JoMVC, ActionListener, ItemListe
     public void actionPerformed(ActionEvent e) {
         JoHookEvent event = new JoHookEvent(e.getSource());
         if (event.isEvent(view.getBtn_back())) {
-            AppDashboard dashboard = new AppDashboard();
+            GlobalDataModel.rootView.showDashbord();
         } else if (event.isEvent(view.getBtnSearch())) {
             FinancialService financialService = new FinancialService();
             studentModels.clear();
@@ -135,7 +134,7 @@ public class ReportStudentController implements JoMVC, ActionListener, ItemListe
                 };
 
                 JoSheet sheet = new JoSheet(csvFile, view.getClassRoomName(), columns);
-                HomeView.MyRouter.setRouter(loading);
+                GlobalDataModel.rootView.setView(loading);
                 studentModels.forEach(data -> {
                     sheet.addRow(row++,
                             row - 1,
@@ -176,7 +175,7 @@ public class ReportStudentController implements JoMVC, ActionListener, ItemListe
                 e.printStackTrace();
             } finally {
                 row = 1;
-                HomeView.MyRouter.setRouter(view);
+                GlobalDataModel.rootView.setView(view);
             }
         });
         thread.start();

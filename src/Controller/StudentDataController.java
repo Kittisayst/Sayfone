@@ -14,10 +14,10 @@ import DAOSevervice.StudentAddressService;
 import DAOSevervice.StudentHistoryService;
 import DAOSevervice.StudentService;
 import DAOSevervice.StudentVaccinceService;
+import Model.GlobalDataModel;
 import Tools.JoAlert;
 import Tools.JoFilechooser;
 import Tools.JoHookEvent;
-import View.HomeView;
 import View.StudentDataView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -48,7 +48,7 @@ public class StudentDataController implements JoMVC, ActionListener, MouseListen
 
     @Override
     public final void Start() {
-        HomeView.MyRouter.setRouter(view);
+        GlobalDataModel.rootView.setView(view);
         view.showNationality(nationalityService.getAllNationality());
         view.showEthnic(ethnicService.getAllEthnic());
         view.showReligion(religionService.getAllReligionModel());

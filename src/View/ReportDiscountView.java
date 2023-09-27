@@ -6,6 +6,7 @@ import Components.JoTable;
 import DAOSevervice.FinancialService;
 import DAOSevervice.StudentService;
 import Model.FinancialModel;
+import Model.GlobalDataModel;
 import Model.RegisterModel;
 import Model.StudentModel;
 import Model.YearModel;
@@ -44,11 +45,10 @@ public class ReportDiscountView extends javax.swing.JPanel {
         tb_data.JoClearModel();
         Thread thread = new Thread(() -> {
             try {
-                HomeView.MyRouter.setRouter(pnLoading);
+                GlobalDataModel.rootView.setView(pnLoading);
                 StudentService service = new StudentService();
                 FinancialService financialService = new FinancialService();
                 models.forEach(data -> {
-                    pnLoading.startState();
                     StudentModel studentModel = service.getStudentById(data.getStudentID());
                     FinancialModel financialModel = financialService.getFinancialCalculator(data.getRegisterID(), data.getStudentID());
                     if (financialModel.getDiscount() > 0) {
@@ -61,20 +61,13 @@ public class ReportDiscountView extends javax.swing.JPanel {
                             financialModel.getFinancialMonth(),
                             studentModel.getStudentNo(),
                             studentModel.getFullName(),});
-                        SwingUtilities.invokeLater(() -> {
-                            pnLoading.StartProgress(models.size());
-                        });
-                        try {
-                            Thread.sleep(100);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+                        pnLoading.StartProgress(models.size(), 100);
                     }
                 });
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
-                HomeView.MyRouter.setRouter(this);
+                GlobalDataModel.rootView.setView(this);
                 clearData();
                 ExportEnable();
                 pnLoading.close();

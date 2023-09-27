@@ -10,12 +10,12 @@ import DAOSevervice.RegisterService;
 import DAOSevervice.StudentService;
 import DAOSevervice.TeacherService;
 import Model.FinancialModel;
+import Model.GlobalDataModel;
 import Model.RegisterModel;
 import Model.StudentModel;
 import Tools.JoAlert;
 import Tools.JoHookEvent;
 import View.DasboardView;
-import View.HomeView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -41,18 +41,34 @@ public class DasboardController implements JoMVC, MouseListener, ActionListener 
 
     @Override
     public final void Start() {
-        HomeView.MyRouter.setRouter(view);
+//        GlobalDataModel.rootView.setView(view);
         view.ShowStudentCount(studentService.getStudentCount());
         view.ShowTeacherCount(teacherService.getTeacherCount());
         view.showFinalcailCount(financialService.getCountFinancial());
         view.showRegisterCount(registerService.getCountRegister());
-        view.showClassRoom(new RegisterService().getRegisterLastYearAll());
+        view.showClassRoom(GlobalDataModel.registerModels);
         view.getTbData().addMouseListener(this);
         view.getBtnSearch().addActionListener(this);
     }
 
     @Override
     public final void AddEvent() {
+        view.getDs_Student().getLbl_more().addMouseListener(this);
+        view.getDs_Teacher().getLbl_more().addMouseListener(this);
+        view.getDs_Financail().getLbl_more().addMouseListener(this);
+        view.getDs_ClassRoom().getLbl_more().addMouseListener(this);
+        view.getBtnSearch().addActionListener(this);
+    }
+
+    public void UpdateView() {
+        view.ShowStudentCount(studentService.getStudentCount());
+        view.ShowTeacherCount(teacherService.getTeacherCount());
+        view.showFinalcailCount(financialService.getCountFinancial());
+        view.showRegisterCount(registerService.getCountRegister());
+         view.showClassRoom(GlobalDataModel.registerModels);
+        
+        view.getTbData().addMouseListener(this);
+        view.getBtnSearch().addActionListener(this);
         view.getDs_Student().getLbl_more().addMouseListener(this);
         view.getDs_Teacher().getLbl_more().addMouseListener(this);
         view.getDs_Financail().getLbl_more().addMouseListener(this);

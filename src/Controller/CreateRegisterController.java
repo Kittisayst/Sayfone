@@ -1,13 +1,11 @@
 package Controller;
 
 import App.AppRegister;
-import DAOSevervice.ClassService;
 import DAOSevervice.RegisterService;
-import DAOSevervice.YearService;
+import Model.GlobalDataModel;
 import Model.RegisterModel;
 import Tools.JoAlert;
 import Tools.JoHookEvent;
-import View.HomeView;
 import View.CreateRegisterView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,9 +24,9 @@ public class CreateRegisterController implements JoMVC, ActionListener, KeyListe
 
     @Override
     public void Start() {
-        HomeView.MyRouter.setRouter(view);
-        view.showYear(new YearService().getYearAll());
-        view.showClass(new ClassService().getAllClass());
+        GlobalDataModel.rootView.setView(view);
+        view.showYear(GlobalDataModel.yearModels);
+        view.showClass(GlobalDataModel.classModels);
         if (model.getRegisterID() != 0) {
             view.showRegister(model);
         }

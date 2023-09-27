@@ -1,9 +1,6 @@
 package Model;
 
-import DAOSevervice.ClassService;
-import DAOSevervice.YearService;
 import java.sql.Date;
-import java.text.DecimalFormat;
 
 public class RegisterModel {
 
@@ -65,11 +62,25 @@ public class RegisterModel {
     }
 
     public ClassModel getClassModel() {
-        return new ClassService().getClassById(ClassID);
+        ClassModel cm = new ClassModel();
+        for (ClassModel data : GlobalDataModel.classModels) {
+            if (data.getClassID() == ClassID) {
+                cm = data;
+                break;
+            }
+        }
+        return cm;
     }
 
     public YearModel getYearModel() {
-        return new YearService().getYearById(YearID);
+        YearModel ym = new YearModel();
+        for (YearModel data : GlobalDataModel.yearModels) {
+            if (data.getYearID() == YearID) {
+                ym = data;
+                break;
+            }
+        }
+        return ym;
     }
 
     @Override

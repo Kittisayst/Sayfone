@@ -1,18 +1,17 @@
 package Controller;
 
 import App.AppAbsent;
-import App.AppHome;
 import Component.DialogAbsent;
 import DAOSevervice.AbsentService;
 import DAOSevervice.FinancialService;
 import DAOSevervice.StudentService;
 import Model.AbsentModel;
 import Model.FinancialModel;
+import Model.GlobalDataModel;
 import Model.RegisterModel;
 import Model.StudentModel;
 import Tools.JoHookEvent;
 import View.AbsentDataView;
-import View.HomeView;
 import View.PnLoading;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -41,7 +40,7 @@ public class AbsentDataController implements JoMVC, ActionListener, MouseListene
     
     @Override
     public void Start() {
-        HomeView.MyRouter.setRouter(view);
+        GlobalDataModel.rootView.setView(view);
         loading();
         view.showAbsent(service.readByRegisterID(registerModel.getRegisterID()));
         view.getDtDate().setDateData(new Date());
@@ -82,7 +81,7 @@ public class AbsentDataController implements JoMVC, ActionListener, MouseListene
             AppAbsent absent = new AppAbsent();
             absent.Open();
         } else if (event.isEvent(view.getBtnCheckStudent())) {
-            DialogAbsent dialogAbsent = new DialogAbsent(AppHome.viewParent, true, registerModel, studentModels, new AbsentModel(), view);
+            DialogAbsent dialogAbsent = new DialogAbsent(GlobalDataModel.rootView, true, registerModel, studentModels, new AbsentModel(), view);
             dialogAbsent.setTitle(registerModel.getClassRoomName());
             dialogAbsent.setVisible(true);
         } else if (event.isEvent(view.getBtnShow())) {
@@ -96,7 +95,7 @@ public class AbsentDataController implements JoMVC, ActionListener, MouseListene
         Thread thread = new Thread(() -> {
             try {
                 studentModels.clear();
-                HomeView.MyRouter.setRouter(loading);
+                GlobalDataModel.rootView.setView(loading);
                 List<FinancialModel> financialModels = new FinancialService().getStudentRegistered(registerModel.getRegisterID());
                 financialModels.forEach(data -> {
                     row++;
@@ -115,7 +114,7 @@ public class AbsentDataController implements JoMVC, ActionListener, MouseListene
                 e.printStackTrace();
             } finally {
                 row = 1;
-                HomeView.MyRouter.setRouter(view);
+                GlobalDataModel.rootView.setView(view);
             }
         });
         thread.start();
@@ -132,7 +131,7 @@ public class AbsentDataController implements JoMVC, ActionListener, MouseListene
         if (event.isEvent(view.getTbData())) {
             if (e.getClickCount() == 2) {
                 AbsentModel absentModel = service.read(view.getAbsentID());
-                DialogAbsent absent = new DialogAbsent(AppHome.viewParent, true, registerModel, studentModels, absentModel, view);
+                DialogAbsent absent = new DialogAbsent(GlobalDataModel.rootView, true, registerModel, studentModels, absentModel, view);
                 absent.setTitle(registerModel.getClassRoomName() + " ວັນທີ: " + absentModel.getAbsentDate());
                 absent.setVisible(true);
             }

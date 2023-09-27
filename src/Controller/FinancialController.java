@@ -1,7 +1,6 @@
 package Controller;
 
 import App.AppFinancial;
-import App.AppHome;
 import App.AppFinancailStudent;
 import Component.DialogFinancialTransfer;
 import Component.DialogWithdraw;
@@ -16,7 +15,6 @@ import Model.FinancialModel;
 import Model.RegisterModel;
 import Model.FileTranferModel;
 import Model.GlobalDataModel;
-import Model.GobalData;
 import Model.SayfoneModel;
 import Model.StudentHistoryModel;
 import Model.StudentModel;
@@ -31,7 +29,6 @@ import Utility.MyPopup;
 import Component.AuthenPopUp;
 import Component.DialogTransferImage;
 import View.FinancialView;
-import View.HomeView;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -77,7 +74,7 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
 
     @Override
     public void Start() {
-        HomeView.MyRouter.setRouter(view);
+        GlobalDataModel.rootView.setView(view);
         view.showCurentMonth(); //ສະແດງເດືອນປະຈຸບັນ
         StudentHistoryModel historyModel = new StudentHistoryService().getStudentHistoryByStudentID(studentModel.getStudentID()); //ດຶງປະຫວັດນັກຮຽນ
         view.showParent(historyModel); //ສະແດງປະຫວັດນັກຮຽນ
@@ -216,7 +213,7 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
         if (event.isEvent(view.getBtn_back())) { // ກັບຄືນ
             AppFinancailStudent app = new AppFinancailStudent(registerModel);
         } else if (event.isEvent(view.getCkDiscount())) { //ເລືອກສ່ວນຫຼຸດ
-            AuthenPopUp popUp = new AuthenPopUp(AppHome.viewParent, true);
+            AuthenPopUp popUp = new AuthenPopUp(GlobalDataModel.rootView, true);
             popUp.setVisible(true);
             userAuthen = popUp.getUserModel();
             if (userAuthen.getUserID() != 0) {
@@ -227,7 +224,7 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
                 view.EnableDisCount(userAuthen);
             }
         } else if (event.isEvent(view.getBtnAddTransfer())) { // ກົດປຸ່ມເພີ່ມເອກະສານການໂອນ
-            DialogFinancialTransfer dialog = new DialogFinancialTransfer(AppHome.viewParent, true, fileTranferModel);
+            DialogFinancialTransfer dialog = new DialogFinancialTransfer(GlobalDataModel.rootView, true, fileTranferModel);
             dialog.setVisible(true);
             fileTranferModel = dialog.getTranferModel();
         } else if (event.isEvent(view.getBtnSave())) {  // ກົດປຸ່ມບັນທຶກ
@@ -241,7 +238,7 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
         } else if (event.isEvent(popup.getItemshow())) { //ເມນູສະແດງ
             Printer();
         } else if (event.isEvent(popup.getItemEdit())) { //ເມນູແກ້ໄຂ
-            AuthenPopUp popUp = new AuthenPopUp(AppHome.viewParent, true);
+            AuthenPopUp popUp = new AuthenPopUp(GlobalDataModel.rootView, true);
             popUp.setVisible(true);
             userAuthen = popUp.getUserModel();
             if (userAuthen.getUserID() != 0) { // ກວດສອບວ່າລະຫັດຢືກຢັນການແກ້ໄຂຖືກຫຼືບໍ່
@@ -252,7 +249,7 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
                 view.getCkDiscount().setSelected(false);
             }
         } else if (event.isEvent(popup.getItemDelete())) { //ເມນູລົບ
-            AuthenPopUp popUp = new AuthenPopUp(AppHome.viewParent, true);
+            AuthenPopUp popUp = new AuthenPopUp(GlobalDataModel.rootView, true);
             popUp.setVisible(true);
             userAuthen = popUp.getUserModel();
             if (userAuthen.getUserID() != 0) {
@@ -263,7 +260,7 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
             FinancialService financialService = new FinancialService();
             financialModel = financialService.getFinancialById(view.getTb_data().getIntValue(1));
             fileTranferModel = new FileTransferService().getFileTranferByFinancialID(financialModel.getFinancialIID()); //ດຶງຂໍ້ມູນເອກະສານການໂອນ
-            DialogFinancialTransfer dialog = new DialogFinancialTransfer(AppHome.viewParent, true, fileTranferModel);
+            DialogFinancialTransfer dialog = new DialogFinancialTransfer(GlobalDataModel.rootView, true, fileTranferModel);
             dialog.setVisible(true);
             fileTranferModel = dialog.getTranferModel();
             FileTransferService transferService = new FileTransferService();
@@ -281,12 +278,12 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
                 }
             }
         } else if (event.isEvent(popup.getMenuItem(4))) {// ຖອນເງິນ
-            AuthenPopUp popUp = new AuthenPopUp(AppHome.viewParent, true);
+            AuthenPopUp popUp = new AuthenPopUp(GlobalDataModel.rootView, true);
             popUp.setVisible(true);
             userAuthen = popUp.getUserModel();
             if (userAuthen.getUserID() != 0) {
                 FinancialModel fm = new FinancialService().getFinancialById(view.getTb_data().getIntValue(1));
-                DialogWithdraw dialogWithdraw = new DialogWithdraw(AppHome.viewParent, true, fm);
+                DialogWithdraw dialogWithdraw = new DialogWithdraw(GlobalDataModel.rootView, true, fm);
                 dialogWithdraw.setUserAuthen(userAuthen);
                 dialogWithdraw.setVisible(true);
             }
@@ -297,7 +294,7 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
             if (ftm.getFileTranferID() == 0) {
                 alert.messages("ຮູບບິນການໂອນ", "ບໍ່ມີຮູບການໂອນ", JoAlert.Icons.warning);
             } else {
-                DialogTransferImage dialog = new DialogTransferImage(AppHome.viewParent, true, ftm.getImageIcon());
+                DialogTransferImage dialog = new DialogTransferImage(GlobalDataModel.rootView, true, ftm.getImageIcon());
                 dialog.setVisible(true);
             }
             System.out.println(ftm);
@@ -317,7 +314,7 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
                 userAuthen.getUserID(),
                 (int) mf.unFormatMoney(view.getTxtDiscount().getText()),
                 (int) mf.unFormatMoney(view.getTxtOverPay().getText()),
-                GobalData.UserID,
+                GlobalDataModel.userModel.getUserID(),
                 (int) mf.unFormatMoney(view.getTxtFood().getText()),
                 true
         );
@@ -333,7 +330,7 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
         financialModel.setDiscount((int) mf.unFormatMoney(view.getTxtDiscount().getText()));
         financialModel.setOvertimePay((int) mf.unFormatMoney(view.getTxtOverPay().getText()));
         financialModel.setFoodMoney((int) mf.unFormatMoney(view.getTxtFood().getText()));
-        financialModel.setUserID(GobalData.UserID);
+        financialModel.setUserID(GlobalDataModel.userModel.getUserID());
     }
 
     private void showEdit() {
@@ -413,7 +410,7 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
         UserModel userModel = userService.getUserById(financialModel.getAuthenUserID());
         String authName = userModel.getUserID() == 0 ? "" : userModel.getUserName();
         //ດຶງຂໍ້ມູນຜູ້ປີ້ນ
-        String teacherLogin = GlobalDataModel.globalUsermodel.getFullName().toString();
+        String teacherLogin = GlobalDataModel.userModel.getFullName().toString();
         try {
             if (financialModel.getFinancialIID() != 0) {
                 Map parameter = new HashMap();

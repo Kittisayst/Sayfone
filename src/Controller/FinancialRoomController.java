@@ -1,11 +1,10 @@
 package Controller;
 
-import App.AppDashboard;
 import App.AppFinancailStudent;
 import DAOSevervice.RegisterService;
+import Model.GlobalDataModel;
 import Tools.JoHookEvent;
 import View.FinancialRoomView;
-import View.HomeView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -21,8 +20,8 @@ public class FinancialRoomController implements JoMVC,ActionListener ,MouseListe
 
     @Override
     public void Start() {
-        HomeView.MyRouter.setRouter(view);
-        view.showRegister(new RegisterService().getRegisterAll());
+        GlobalDataModel.rootView.setView(view);
+        view.showRegister(GlobalDataModel.registerModels);
     }
 
     @Override
@@ -55,7 +54,7 @@ public class FinancialRoomController implements JoMVC,ActionListener ,MouseListe
     public void actionPerformed(ActionEvent e) {
       JoHookEvent event = new JoHookEvent(e.getSource());
         if (event.isEvent(view.getBtn_back())) {
-            AppDashboard dashboard = new AppDashboard();
+            GlobalDataModel.rootView.showDashbord();
         }
     }
 

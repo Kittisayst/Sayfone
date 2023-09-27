@@ -1,14 +1,13 @@
 package Controller;
 
-import App.AppDashboard;
 import App.AppSubject;
 import App.AppSubjectData;
 import DAOSevervice.SubjectService;
+import Model.GlobalDataModel;
 import Model.SubjectModel;
 import Tools.JoAlert;
 import Tools.JoHookEvent;
 import Tools.JoPopup;
-import View.HomeView;
 import View.SubjectView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,7 +27,7 @@ public class SubjectController implements JoMVC, ActionListener, MouseListener {
 
     @Override
     public void Start() {
-        HomeView.MyRouter.setRouter(view);
+        GlobalDataModel.rootView.setView(view);
         view.showSubject(service.getAll());
     }
 
@@ -65,9 +64,9 @@ public class SubjectController implements JoMVC, ActionListener, MouseListener {
         JoHookEvent event = new JoHookEvent(e.getSource());
         if (event.isEvent(view.getBtn_Add())) {
             AppSubjectData subjectData = new AppSubjectData(new SubjectModel());
-        }else if (event.isEvent(view.getBtn_back())) {
-            new AppDashboard();
-        }  else if (event.isEvent(popup.getItemshow())) {
+        } else if (event.isEvent(view.getBtn_back())) {
+            GlobalDataModel.rootView.showDashbord();
+        } else if (event.isEvent(popup.getItemshow())) {
             new JoAlert().messages(view.getTb_data().getValue(2));
         } else if (event.isEvent(popup.getItemEdit())) {
             AppSubjectData subjectData = new AppSubjectData(service.getSubjectById(view.getTb_data().getIntValue(1)));

@@ -61,7 +61,7 @@ public class StudentDAO implements StudentFn {
             pre.setInt(i++, model.getNationalityID());
             pre.setInt(i++, model.getEthnicID());
             pre.setInt(i++, model.getReligionID());
-            pre.setInt(i++, GlobalDataModel.globalUsermodel.getUserID());
+            pre.setInt(i++, GlobalDataModel.userModel.getUserID());
             return pre.executeUpdate();
         } catch (Exception e) {
             JoAlert.Error(e, this);

@@ -182,9 +182,6 @@
           </SubComponents>
         </Container>
         <Component class="Components.JoRouter" name="MyRouter">
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
-          </AuxValues>
         </Component>
         <Container class="javax.swing.JPanel" name="Pn_Menu">
 

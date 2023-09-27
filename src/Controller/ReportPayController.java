@@ -1,6 +1,5 @@
 package Controller;
 
-import App.AppDashboard;
 import App.AppFinancial;
 import DAOSevervice.FinancialService;
 import DAOSevervice.RegisterService;
@@ -9,6 +8,7 @@ import DAOSevervice.UserService;
 import DAOSevervice.YearService;
 import Log.JoLoger;
 import Model.FinancialModel;
+import Model.GlobalDataModel;
 import Model.RegisterModel;
 import Model.StudentModel;
 import Model.UserModel;
@@ -18,7 +18,6 @@ import Tools.JoHookEvent;
 import Utility.JoSheet;
 import Utility.MonthCaculator;
 import Utility.MyFormat;
-import View.HomeView;
 import View.PnLoading;
 import View.ReportPayView;
 import java.awt.event.ActionEvent;
@@ -51,7 +50,7 @@ public class ReportPayController implements JoMVC, ActionListener, ItemListener,
 
     @Override
     public void Start() {
-        HomeView.MyRouter.setRouter(view);
+        GlobalDataModel.rootView.setView(view);
         view.showYear(new YearService().getYearAll());
         view.getCbYear().setSelectedIndex(new YearService().getYearAll().size() - 1);
         view.showClassRoom(new RegisterService().getRegisterAllByYearID(view.getCbYear().getKeyInt()));
@@ -90,7 +89,7 @@ public class ReportPayController implements JoMVC, ActionListener, ItemListener,
     public void actionPerformed(ActionEvent e) {
         JoHookEvent event = new JoHookEvent(e.getSource());
         if (event.isEvent(view.getBtn_back())) {
-            AppDashboard dashboard = new AppDashboard();
+            GlobalDataModel.rootView.showDashbord();
         } else if (event.isEvent(view.getBtnShow())) {
             FinancialService financialService = new FinancialService();
             view.showReportPay(financialService.getStudentRegistered(view.getCbClassRoom().getKeyInt()));
@@ -170,7 +169,7 @@ public class ReportPayController implements JoMVC, ActionListener, ItemListener,
                     "ຜູ້ລົງບັນຊີ"
                 };
                 JoSheet sheet = new JoSheet(csvFile, view.getExportName(), columns);
-                HomeView.MyRouter.setRouter(loading);
+                GlobalDataModel.rootView.setView(loading);
                 listFinancials.forEach(data -> {
                     UserModel userModel = userService.getUserById(data.getUserID());
                     StudentModel studentModel = studentService.getStudentById(data.getStudentID());
@@ -206,7 +205,7 @@ public class ReportPayController implements JoMVC, ActionListener, ItemListener,
                 JoLoger.saveLog(e, this);
             } finally {
                 row = 1;
-                HomeView.MyRouter.setRouter(view);
+                GlobalDataModel.rootView.setView(view);
             }
         });
         thread.start();

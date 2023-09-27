@@ -16,11 +16,11 @@ import DAOSevervice.TeacherExperienceService;
 import DAOSevervice.TeacherFileService;
 import DAOSevervice.TeacherHistoryService;
 import DAOSevervice.TeacherService;
+import Model.GlobalDataModel;
 import Tools.JoAlert;
 import Tools.JoFilechooser;
 import Tools.JoHookEvent;
 import Utility.MyPopup;
-import View.HomeView;
 import View.TeacherHistoryView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -90,7 +90,7 @@ public class TeacherHistoryController implements JoMVC, ActionListener, ChangeLi
 
     @Override
     public final void Start() {
-        HomeView.MyRouter.setRouter(view);
+        GlobalDataModel.rootView.setView(view);
         view.showHistory(historyModel);
     }
 

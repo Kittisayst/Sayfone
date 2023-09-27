@@ -1,6 +1,5 @@
 package Controller;
 
-import App.AppDashboard;
 import App.AppFinancial;
 import DAOSevervice.FinancialService;
 import DAOSevervice.RegisterService;
@@ -9,6 +8,7 @@ import DAOSevervice.UserService;
 import DAOSevervice.YearService;
 import Log.JoLoger;
 import Model.FinancialModel;
+import Model.GlobalDataModel;
 import Model.RegisterModel;
 import Model.StudentModel;
 import Model.UserModel;
@@ -18,7 +18,6 @@ import Tools.JoHookEvent;
 import Utility.JoSheet;
 import Utility.MonthCaculator;
 import Utility.MyFormat;
-import View.HomeView;
 import View.PnLoading;
 import View.ReportFoodView;
 import java.awt.event.ActionEvent;
@@ -49,7 +48,7 @@ public class ReportFoodController implements JoMVC, ActionListener, ItemListener
 
     @Override
     public void Start() {
-        HomeView.MyRouter.setRouter(view);
+        GlobalDataModel.rootView.setView(view);
         view.showYear(new YearService().getYearAll());
         showClassRoom();
     }
@@ -87,7 +86,7 @@ public class ReportFoodController implements JoMVC, ActionListener, ItemListener
     public void actionPerformed(ActionEvent e) {
         JoHookEvent event = new JoHookEvent(e.getSource());
         if (event.isEvent(view.getBtn_back())) {
-            AppDashboard ad = new AppDashboard();
+            GlobalDataModel.rootView.showDashbord();
         } else if (event.isEvent(view.getBtnShow())) {
             FinancialService service = new FinancialService();
             int registerID = view.getCbClassRoom().getKeyInt();
@@ -145,15 +144,15 @@ public class ReportFoodController implements JoMVC, ActionListener, ItemListener
     public void mouseExited(MouseEvent e) {
 
     }
-    
-    int amount=0;
+
+    int amount = 0;
 
     private void createListExport(List<FinancialModel> reportUserFinancial) {
         listFinancials.clear();
-        amount=0;
+        amount = 0;
         reportUserFinancial.forEach(data -> {
             listFinancials.add(data);
-            amount+=data.getFoodMoney();
+            amount += data.getFoodMoney();
         });
         view.ExportEnable();
         view.setAmount(amount);
@@ -176,7 +175,7 @@ public class ReportFoodController implements JoMVC, ActionListener, ItemListener
                     "ຜູ້ລົງບັນຊີ"
                 };
                 JoSheet sheet = new JoSheet(csvFile, view.getExportName(), columns);
-                HomeView.MyRouter.setRouter(loading);
+                GlobalDataModel.rootView.setView(loading);
                 listFinancials.forEach(data -> {
                     if (data.getFoodMoney() > 0) {
                         UserModel userModel = userService.getUserById(data.getUserID());
@@ -209,7 +208,7 @@ public class ReportFoodController implements JoMVC, ActionListener, ItemListener
             } finally {
                 row = 1;
                 view.ExportEnable();
-                HomeView.MyRouter.setRouter(view);
+                GlobalDataModel.rootView.setView(view);
             }
         });
         thread.start();

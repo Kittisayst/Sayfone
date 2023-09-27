@@ -1,6 +1,5 @@
 package Controller;
 
-import App.AppDashboard;
 import DAOSevervice.FinancialService;
 import DAOSevervice.RegisterService;
 import DAOSevervice.StudentService;
@@ -8,6 +7,7 @@ import DAOSevervice.UserService;
 import DAOSevervice.YearService;
 import Log.JoLoger;
 import Model.FinancialModel;
+import Model.GlobalDataModel;
 import Model.StudentModel;
 import Model.UserModel;
 import Tools.JoAlert;
@@ -16,7 +16,6 @@ import Tools.JoHookEvent;
 import Utility.JoSheet;
 import Utility.MonthCaculator;
 import Utility.MyFormat;
-import View.HomeView;
 import View.PnLoading;
 import View.ReportDiscountView;
 import java.awt.event.ActionEvent;
@@ -46,7 +45,7 @@ public class ReportDiscountController implements JoMVC, ActionListener, ItemList
 
     @Override
     public void Start() {
-        HomeView.MyRouter.setRouter(view);
+        GlobalDataModel.rootView.setView(view);
         view.showYear(new YearService().getYearAll());
         showClassRoom();
     }
@@ -88,7 +87,7 @@ public class ReportDiscountController implements JoMVC, ActionListener, ItemList
     public void actionPerformed(ActionEvent e) {
         JoHookEvent event = new JoHookEvent(e.getSource());
         if (event.isEvent(view.getBtn_back())) {
-            HomeView.MyRouter.setRouter(AppDashboard.dasboardView);
+            GlobalDataModel.rootView.showDashbord();
         } else if (event.isEvent(view.getBtnShow())) {
             FinancialService service = new FinancialService();
             int registerID = view.getCbClassRoom().getKeyInt();
@@ -118,6 +117,8 @@ public class ReportDiscountController implements JoMVC, ActionListener, ItemList
         view.setAmount(amount);
     }
 
+    int num = 1;
+
     private void ExportData() {
         Thread thread = new Thread(() -> {
             try {
@@ -134,14 +135,12 @@ public class ReportDiscountController implements JoMVC, ActionListener, ItemList
                     "ຜູ້ລົງບັນຊີ"
                 };
                 JoSheet sheet = new JoSheet(csvFile, view.getExportName(), columns);
-                HomeView.MyRouter.setRouter(view.getPnLoading());
+                GlobalDataModel.rootView.setView(view.getPnLoading());
                 listFinancials.forEach(data -> {
                     if (data.getDiscount() > 0) {
-                        view.getPnLoading().startState();
                         UserModel userModel = userService.getUserById(data.getUserID());
                         StudentModel studentModel = studentService.getStudentById(data.getStudentID());
-                        int num = view.getPnLoading().getState();
-                        sheet.addRow(num,
+                        sheet.addRow(num++,
                                 num - 1,
                                 view.getClassName(),
                                 studentModel.getStudentNo(),
@@ -150,10 +149,7 @@ public class ReportDiscountController implements JoMVC, ActionListener, ItemList
                                 data.getFinancialMonth(),
                                 userModel.getFullName()
                         );
-                        SwingUtilities.invokeLater(() -> {
-                            view.getPnLoading().StartProgress(listFinancials.size());
-                        });
-                        view.getPnLoading().setSleep(100);
+                        view.getPnLoading().StartProgress(listFinancials.size(), 100);
                     }
                 });
                 sheet.getCreateSheet();
@@ -163,7 +159,7 @@ public class ReportDiscountController implements JoMVC, ActionListener, ItemList
                 JoLoger.saveLog(e, this);
             } finally {
                 view.ExportEnable();
-                HomeView.MyRouter.setRouter(view);
+                GlobalDataModel.rootView.setView(view);
                 view.getPnLoading().close();
             }
         });
