@@ -159,21 +159,14 @@ public class ReportStudentController implements JoMVC, ActionListener, ItemListe
                             status(data.getStatus()),
                             userCreate(data.getUserCreate())
                     );
-                    int progress = (int) ((double) row / studentModels.size() * 100);
-                    SwingUtilities.invokeLater(() -> {
-                        loading.setValue(progress);
-                    });
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(ReportStudentController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                    loading.StartProgress(studentModels.size(), 100);
                 });
-
                 sheet.getCreateSheet();
+                fileSystem.OpenFile(csvFile);
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
+                loading.close();
                 row = 1;
                 GlobalDataModel.rootView.setView(view);
             }

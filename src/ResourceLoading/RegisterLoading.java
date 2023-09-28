@@ -1,12 +1,13 @@
 package ResourceLoading;
 
 import DAOSevervice.RegisterService;
-import Model.GlobalDataModel;
+import Model.RegisterModel;
+import java.util.List;
 
 public class RegisterLoading {
 
-    public void createGlobalRegister() {
+    public List<RegisterModel> createGlobalRegister() {
         RegisterService registerService = new RegisterService();
-        GlobalDataModel.registerModels = registerService.getRegisterLastYearAll();
+        return registerService.getRegisterLastYearAll();
     }
 }

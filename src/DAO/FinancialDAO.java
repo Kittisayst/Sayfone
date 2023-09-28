@@ -543,7 +543,7 @@ public class FinancialDAO implements FinancialFn {
             String sql = "SELECT FinancialID,RegisterID,StudentID,SUM(Money) AS totalMoney,\n"
                     + "SUM(TransferMoney) AS totalTransferMoney,SaveDate,\n"
                     + "REPLACE(GROUP_CONCAT(FinancialMonth),',[]', '') AS month,\n"
-                    + "FinancialComment,AuthenUserID,SUM(Discount) AS disSUM,OvertimePay,UserID,SUM(foodMoney) AS TotalFoodMoney,state \n"
+                    + "GROUP_CONCAT(FinancialComment) AS comments,AuthenUserID,SUM(Discount) AS disSUM,OvertimePay,UserID,SUM(foodMoney) AS TotalFoodMoney,state \n"
                     + "FROM tb_financial WHERE RegisterID=" + RegisterID + " AND StudentID = " + StudentID;
             ResultSet rs = connect.getConnectionDefault().createStatement().executeQuery(sql);
             if (rs.next()) {

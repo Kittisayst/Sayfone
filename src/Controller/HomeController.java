@@ -3,8 +3,8 @@ package Controller;
 import App.About;
 import App.AppAbsent;
 import App.AppClass;
-import App.AppDashboard;
 import App.AppFinancialRoom;
+import App.AppPermission;
 import App.AppRegister;
 import App.AppReportDiscount;
 import App.AppReportFinacial;
@@ -84,6 +84,7 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
         view.getBtnReportUserFinancial().addActionListener(this);
         view.getBtnReportStudent().addActionListener(this);
         view.getBtnReportDiscount().addActionListener(this);
+        view.getBtnPermission().addActionListener(this);
     }
 
     @Override
@@ -125,6 +126,9 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
         } else if (event.isEvent(view.getBtnClass())) {
             AppClass appClass = new AppClass();
             appClass.Open();
+        } else if (event.isEvent(view.getBtnPermission())) {
+            AppPermission permission = new AppPermission();
+            permission.Open();
         } else if (event.isEvent(view.getBtn_Register())) { // ======== ການຮຽນການສອນ
             AppRegister appRegister = new AppRegister();
             appRegister.OpenRegister();

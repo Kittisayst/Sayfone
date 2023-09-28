@@ -7,7 +7,6 @@ import Components.JoScrollBar;
 import Components.JoTable;
 import Components.JoTextField;
 import DAOSevervice.FinancialService;
-import Model.FinancialModel;
 import Model.RegisterModel;
 import Model.StudentModel;
 import Utility.WrapLayout;
@@ -15,7 +14,6 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.util.List;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -341,6 +339,7 @@ public class DasboardView extends javax.swing.JPanel {
 
     public void showClassRoom(List<RegisterModel> models) {
         pnClassRoom.removeAll();
+        resetCount();
         pnClassRoom.setSize(500, 500);
         FinancialService financialService = new FinancialService();
         JPanel classRoomLayout = new JPanel(new WrapLayout(WrapLayout.LEFT, 2, 2));
@@ -362,6 +361,13 @@ public class DasboardView extends javax.swing.JPanel {
     int Elementary = 0;
     int JuniorHighSchool = 0;
     int HighSchool = 0;
+
+    private void resetCount() {
+        Kindergarten = 0;
+        Elementary = 0;
+        JuniorHighSchool = 0;
+        HighSchool = 0;
+    }
 
     private void CoutClass(int classID, int count) {
         switch (classID) {

@@ -1,14 +1,8 @@
 package App;
 
-import Component.LoadingResources;
-import Controller.LoginController;
-import DAOSevervice.UserService;
+import ResourceLoading.LoadingResources;
 import Log.JoLoger;
 import Tools.JoAlert;
-import Tools.JoFrameDesign;
-import Utility.SayfoneFile;
-import View.LoginView;
-import javax.swing.ImageIcon;
 import theme.JoTheme;
 
 public class SayFoneSchool {

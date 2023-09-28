@@ -183,3 +183,24 @@
 19/09/2023: DAO.FileTransferDAO@282cb2b7 Errorjava.sql.SQLException: Incorrect string value: '\xFF\xD8\xFF\xE0\x00\x10...' for column `db_sayfoneschool2022`.`tb_filetransfer`.`fileName` at row 1
 24/09/2023: DAO.AbsentDAO@59127863 Errorjava.sql.SQLException: Data too long for column 'AbsentData' at row 1
 26/09/2023: App.AppHome@5a50a603 Errorjava.lang.NullPointerException
+27/09/2023: DAO.PermissionDAO@1f81d976 Errorjava.sql.SQLException: Statement parameter 1 not set.
+27/09/2023: DAO.PermissionDAO@1f81d976 Errorjava.sql.SQLException: Statement parameter 1 not set.
+27/09/2023: DAO.PermissionDAO@1f81d976 Errorjava.sql.SQLException: Statement parameter 1 not set.
+27/09/2023: DAO.PermissionDAO@1f81d976 Errorjava.sql.SQLException: Statement parameter 1 not set.
+27/09/2023: DAO.PermissionDAO@1f81d976 Errorjava.sql.SQLException: Statement parameter 1 not set.
+27/09/2023: DAO.PermissionDAO@1f81d976 Errorjava.sql.SQLException: Statement parameter 1 not set.
+27/09/2023: DAO.PermissionDAO@1f81d976 Errorjava.sql.SQLException: Statement parameter 1 not set.
+27/09/2023: DAO.PermissionDAO@1f81d976 Errorjava.sql.SQLException: Statement parameter 1 not set.
+27/09/2023: DAO.PermissionDAO@1f81d976 Errorjava.sql.SQLException: Statement parameter 1 not set.
+27/09/2023: DAO.PermissionDAO@1f81d976 Errorjava.sql.SQLException: Statement parameter 1 not set.
+27/09/2023: DAO.PermissionDAO@1f81d976 Errorjava.sql.SQLException: Statement parameter 1 not set.
+27/09/2023: DAO.PermissionDAO@1f81d976 Errorjava.sql.SQLException: Statement parameter 1 not set.
+27/09/2023: DAO.PermissionDAO@1f81d976 Errorjava.sql.SQLException: Statement parameter 1 not set.
+27/09/2023: DAO.PermissionDAO@1f81d976 Errorjava.sql.SQLException: Statement parameter 1 not set.
+27/09/2023: DAO.PermissionDAO@1f81d976 Errorjava.sql.SQLException: Statement parameter 1 not set.
+27/09/2023: DAO.PermissionDAO@1f81d976 Errorjava.sql.SQLException: Statement parameter 1 not set.
+27/09/2023: DAO.PermissionDAO@1f81d976 Errorjava.sql.SQLException: Statement parameter 1 not set.
+27/09/2023: DAO.PermissionDAO@1f81d976 Errorjava.sql.SQLException: Statement parameter 1 not set.
+27/09/2023: DAO.PermissionDAO@1f81d976 Errorjava.sql.SQLException: Statement parameter 1 not set.
+27/09/2023: DAO.PermissionDAO@1f81d976 Errorjava.sql.SQLException: Statement parameter 1 not set.
+27/09/2023: DAO.PermissionDAO@1f81d976 Errorjava.sql.SQLException: Statement parameter 1 not set.

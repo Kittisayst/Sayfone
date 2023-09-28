@@ -18,6 +18,10 @@ public class PnLoading extends javax.swing.JPanel {
     public void setTitle(String text) {
         lblTitle.setText(text);
     }
+    
+    public String getTitle(){
+        return lblTitle.getText();
+    }
 
     public void StartProgress(int maxSize, int time) {
         state++;

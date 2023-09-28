@@ -1,12 +1,13 @@
 package ResourceLoading;
 
 import DAOSevervice.YearService;
-import Model.GlobalDataModel;
+import Model.YearModel;
+import java.util.List;
 
 public class YearLoading {
 
-    public void createGlobalYear() {
+    public List<YearModel> createGlobalYear() {
         YearService service = new YearService();
-        GlobalDataModel.yearModels = service.getYearAll();
+        return service.getYearAll();
     }
 }

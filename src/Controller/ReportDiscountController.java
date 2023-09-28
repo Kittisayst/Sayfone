@@ -25,7 +25,6 @@ import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.swing.SwingUtilities;
 
 public class ReportDiscountController implements JoMVC, ActionListener, ItemListener {
 
@@ -34,6 +33,7 @@ public class ReportDiscountController implements JoMVC, ActionListener, ItemList
     private PnLoading loading = new PnLoading();
     private UserService userService = new UserService();
     private StudentService studentService = new StudentService();
+    private FinancialService service = new FinancialService();
     private MyFormat format = new MyFormat();
     MonthCaculator monthCaculator = new MonthCaculator();
     private int amount = 0;
@@ -89,7 +89,7 @@ public class ReportDiscountController implements JoMVC, ActionListener, ItemList
         if (event.isEvent(view.getBtn_back())) {
             GlobalDataModel.rootView.showDashbord();
         } else if (event.isEvent(view.getBtnShow())) {
-            FinancialService service = new FinancialService();
+            service = new FinancialService();
             int registerID = view.getCbClassRoom().getKeyInt();
             view.showDiscount(service.getStudentRegistered(registerID));
             createListExport(service.getStudentRegistered(registerID));
@@ -132,27 +132,32 @@ public class ReportDiscountController implements JoMVC, ActionListener, ItemList
                     "ຊື່ ແລະ ນາມສະກຸນນັກຮຽນ",
                     "ສ່ວນຫຼຸດ",
                     "ເດືອນ",
+                    "ໝາຍເຫດ",
                     "ຜູ້ລົງບັນຊີ"
                 };
                 JoSheet sheet = new JoSheet(csvFile, view.getExportName(), columns);
                 GlobalDataModel.rootView.setView(view.getPnLoading());
+                view.getPnLoading().setTitle("ກຳລັງສ້າງລາຍງານສ່ວນຫຼຸດ.");
                 listFinancials.forEach(data -> {
                     if (data.getDiscount() > 0) {
                         UserModel userModel = userService.getUserById(data.getUserID());
                         StudentModel studentModel = studentService.getStudentById(data.getStudentID());
+                        FinancialModel financialModel = service.getFinancialCalculator(data.getRegisterID(), data.getStudentID());
                         sheet.addRow(num++,
                                 num - 1,
                                 view.getClassName(),
                                 studentModel.getStudentNo(),
                                 studentModel.getFullName(),
-                                format.formatMoney(data.getDiscount()),
+                                format.formatMoney(financialModel.getDiscount()),
                                 data.getFinancialMonth(),
+                                financialModel.getFinancialComment(),
                                 userModel.getFullName()
                         );
                         view.getPnLoading().StartProgress(listFinancials.size(), 100);
                     }
                 });
                 sheet.getCreateSheet();
+                fileSystem.OpenFile(csvFile);
             } catch (Exception e) {
                 e.printStackTrace();
                 JoAlert.Error(e, this);
@@ -161,6 +166,7 @@ public class ReportDiscountController implements JoMVC, ActionListener, ItemList
                 view.ExportEnable();
                 GlobalDataModel.rootView.setView(view);
                 view.getPnLoading().close();
+                num=1;
             }
         });
         thread.start();

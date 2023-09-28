@@ -189,23 +189,17 @@ public class ReportFoodController implements JoMVC, ActionListener, ItemListener
                                 data.getFinancialMonth(),
                                 userModel.getFullName()
                         );
-                        int progress = (int) ((double) row / listFinancials.size() * 100);
-                        SwingUtilities.invokeLater(() -> {
-                            loading.setValue(progress);
-                        });
-                        try {
-                            Thread.sleep(100);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+                        loading.StartProgress(listFinancials.size(), 100);
                     }
                 });
                 sheet.getCreateSheet();
+                fileSystem.OpenFile(csvFile);
             } catch (Exception e) {
                 e.printStackTrace();
                 JoAlert.Error(e, this);
                 JoLoger.saveLog(e, this);
             } finally {
+                loading.close();
                 row = 1;
                 view.ExportEnable();
                 GlobalDataModel.rootView.setView(view);

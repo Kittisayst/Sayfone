@@ -1,12 +1,13 @@
 package ResourceLoading;
 
 import DAOSevervice.ClassService;
-import Model.GlobalDataModel;
+import Model.ClassModel;
+import java.util.List;
 
 public class ClassLoading {
 
-    public void createGlobalClass() {
+    public List<ClassModel> createGlobalClass() {
         ClassService classService = new ClassService();
-        GlobalDataModel.classModels = classService.getAllClass();
+        return classService.getAllClass();
     }
 }

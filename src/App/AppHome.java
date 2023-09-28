@@ -13,6 +13,8 @@ public class AppHome {
         try {
             HomeView view = new HomeView();
             GlobalDataModel.rootView = view;
+            AppPermissionRole role = new AppPermissionRole(view);
+            role.Active();
             UserService service = new UserService();
             HomeController controller = new HomeController(service, view, model);
         } catch (Exception e) {

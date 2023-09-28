@@ -13,7 +13,6 @@ import Model.YearModel;
 import Tools.JoDataTable;
 import Utility.MyFormat;
 import java.util.List;
-import javax.swing.SwingUtilities;
 
 public class ReportDiscountView extends javax.swing.JPanel {
 
@@ -60,7 +59,9 @@ public class ReportDiscountView extends javax.swing.JPanel {
                             new MyFormat().formatMoney(financialModel.getDiscount()),
                             financialModel.getFinancialMonth(),
                             studentModel.getStudentNo(),
-                            studentModel.getFullName(),});
+                            studentModel.getFullName(),
+                            financialModel.getFinancialComment()
+                        });
                         pnLoading.StartProgress(models.size(), 100);
                     }
                 });
@@ -180,11 +181,11 @@ public class ReportDiscountView extends javax.swing.JPanel {
 
             },
             new String [] {
-                "#", "FinancilID", "RegisterID", "StudentID", "ສ່ວນຫຼຸດ", "ເດືອນ", "ລະຫັດນັກຮຽນ", "ຊື່ ແລະ ນາມສະກຸນ"
+                "#", "FinancilID", "RegisterID", "StudentID", "ສ່ວນຫຼຸດ", "ເດືອນ", "ລະຫັດນັກຮຽນ", "ຊື່ ແລະ ນາມສະກຸນ", "ໝາຍເຫດ"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

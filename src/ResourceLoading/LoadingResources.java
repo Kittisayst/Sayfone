@@ -1,13 +1,8 @@
-package Component;
+package ResourceLoading;
 
 import Controller.LoginController;
 import DAOSevervice.UserService;
-import ResourceLoading.ClassLoading;
-import ResourceLoading.ConnectMysql;
-import ResourceLoading.DashboardLoading;
-import ResourceLoading.RegisterLoading;
-import ResourceLoading.SayfoneAPI;
-import ResourceLoading.YearLoading;
+import Model.GlobalDataModel;
 import Tools.JoAlert;
 import Tools.JoFrameDesign;
 import Utility.SayfoneFile;
@@ -20,8 +15,8 @@ import javax.swing.ImageIcon;
 
 public class LoadingResources extends javax.swing.JFrame {
 
-    private PnLoading loading = new PnLoading();
-    private ArrayList resourses = new ArrayList();
+    private final PnLoading loading = new PnLoading();
+    private final ArrayList resourses = new ArrayList();
     private boolean state = false;
     private String message = "ໂຫຼດຂໍ້ມູນຜິດພາດ";
 
@@ -43,22 +38,32 @@ public class LoadingResources extends javax.swing.JFrame {
         pnLayout.add(loading, BorderLayout.CENTER);
         Thread thread = new Thread(() -> {
             try {
-                resourses.forEach(data -> {
+                for (Object data : resourses) {
                     if (data instanceof SayfoneAPI) {
-                        sayfoneAPI();
+                        if (!sayfoneAPI()) {
+                            break;
+                        }
                     } else if (data instanceof ConnectMysql) {
-                        connect();
+                        if (!connect()) {
+                            break;
+                        }
                     } else if (data instanceof YearLoading) {
-                        yearloading();
+                        if (!yearloading()) {
+                            break;
+                        }
                     } else if (data instanceof RegisterLoading) {
-                        registerloading();
+                        if (!registerloading()) {
+                            break;
+                        }
                     } else if (data instanceof ClassLoading) {
-                        classloading();
+                        if (!classloading()) {
+                            break;
+                        }
                     } else if (data instanceof DashboardLoading) {
                         dashboard();
                     }
                     loading.StartProgress(resourses.size(), 100);
-                });
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
@@ -86,32 +91,66 @@ public class LoadingResources extends javax.swing.JFrame {
         alert.setButtonOption(new String[]{"ກວດສອບໃໝ່", "ປິດໂປຣແກຣມ"});
         int conf = alert.messages("ການໂຫຼດຊັບພະຍາກອນ", message, JoAlert.Icons.warning);
         if (conf == 0) {
+            message = "";
+            state = false;
             startLoading();
         } else {
             System.exit(0);
         }
     }
 
-    private void sayfoneAPI() {
-        loading.setTitle("ກວດສອບ Sayfone API");
-        SayfoneAPI sayfoneAPI = new SayfoneAPI();
-        if (sayfoneAPI.checkAPI()) {
+    private void setState(boolean data) {
+        if (data) {
             state = true;
         } else {
-            message = "ໂຫຼດຂໍ້ມູນ Sayfone API ຜິດພາດ";
+            message += loading.getTitle() + " ຜິດພາດ";
             state = false;
         }
     }
 
-    private void connect() {
+    private boolean sayfoneAPI() {
+        loading.setTitle("ກວດສອບ Sayfone API");
+        SayfoneAPI sayfoneAPI = new SayfoneAPI();
+        setState(sayfoneAPI.checkAPI());
+        return state;
+    }
+
+    private boolean connect() {
         loading.setTitle("ກວດສອບ ການເຊື່ອມຕໍ່ຖານຂໍ້ມູນ");
         ConnectMysql mysql = new ConnectMysql();
-        if (mysql.getConnect()) {
-            state = true;
-        } else {
-            message = "ໂຫຼດຂໍ້ມູນ ການເຊື່ອມຕໍ່ຖານຂໍ້ມູນ ຜິດພາດ";
-            state = false;
-        }
+        setState(mysql.getConnect());
+        return state;
+    }
+
+    private boolean yearloading() {
+        loading.setTitle("ໂຫຼດຂໍ້ມູນສົກປີ");
+        YearLoading yearLoading = new YearLoading();
+        GlobalDataModel.yearModels = yearLoading.createGlobalYear();
+        setState(!GlobalDataModel.yearModels.isEmpty());
+        return state;
+    }
+
+    private boolean registerloading() {
+        loading.setTitle("ໂຫຼດຂໍ້ມູນຫ້ອງຮຽນ");
+        RegisterLoading registerLoading = new RegisterLoading();
+        GlobalDataModel.registerModels = registerLoading.createGlobalRegister();
+        setState(!GlobalDataModel.registerModels.isEmpty());
+        return state;
+    }
+
+    private boolean classloading() {
+        loading.setTitle("ໂຫຼດຂໍ້ມູນຂໍ້ມູນຂະແໜງ");
+        ClassLoading classLoading = new ClassLoading();
+        GlobalDataModel.classModels = classLoading.createGlobalClass();
+        setState(!GlobalDataModel.classModels.isEmpty());
+        return state;
+    }
+
+    private void dashboard() {
+        loading.setTitle("ໂຫຼດຂໍ້ມູນ ໜ້າ Dashboard");
+        DashboardLoading dashboardLoading = new DashboardLoading();
+        dashboardLoading.createGlobalDashboard();
+
     }
 
     @SuppressWarnings("unchecked")
@@ -161,33 +200,9 @@ public class LoadingResources extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 20, 0);
         getContentPane().add(pnLayout, gridBagConstraints);
 
-        setSize(new java.awt.Dimension(1032, 625));
+        setSize(new java.awt.Dimension(1204, 705));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void yearloading() {
-        loading.setTitle("ໂຫຼດຂໍ້ມູນສົກປີ");
-        YearLoading yearLoading = new YearLoading();
-        yearLoading.createGlobalYear();
-    }
-
-    private void registerloading() {
-        loading.setTitle("ໂຫຼດຂໍ້ມູນຫ້ອງຮຽນ");
-        RegisterLoading registerLoading = new RegisterLoading();
-        registerLoading.createGlobalRegister();
-    }
-
-    private void dashboard() {
-        loading.setTitle("ໂຫຼດຂໍ້ມູນ ໜ້າ Dashboard");
-        DashboardLoading dashboardLoading = new DashboardLoading();
-        dashboardLoading.createGlobalDashboard();
-    }
-
-    private void classloading() {
-        loading.setTitle("ໂຫຼດຂໍ້ມູນຂໍ້ມູນຂະແໜງ");
-        ClassLoading classLoading = new ClassLoading();
-        classLoading.createGlobalClass();
-    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

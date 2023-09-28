@@ -385,7 +385,7 @@
                                   <Component id="btnSubjectTeacher" alignment="0" max="32767" attributes="0"/>
                                   <Component id="btnUser" alignment="1" max="32767" attributes="0"/>
                                   <Component id="btnClass" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="btnImage" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="btnPermission" alignment="0" max="32767" attributes="0"/>
                               </Group>
                             </DimensionLayout>
                             <DimensionLayout dim="1">
@@ -403,8 +403,8 @@
                                       <Component id="btnClass" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" max="-2" attributes="0"/>
                                       <Component id="btnUser" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                                      <Component id="btnImage" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="btnPermission" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
@@ -417,15 +417,6 @@
                                 <Property name="horizontalAlignment" type="int" value="2"/>
                                 <Property name="joIcons" type="jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons" editor="org.netbeans.modules.form.editors.EnumEditor">
                                   <Value id="ASSIGNMENT_IND"/>
-                                </Property>
-                              </Properties>
-                            </Component>
-                            <Component class="Components.JoButtonIconfont" name="btnImage">
-                              <Properties>
-                                <Property name="text" type="java.lang.String" value="menu"/>
-                                <Property name="horizontalAlignment" type="int" value="2"/>
-                                <Property name="joIcons" type="jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons" editor="org.netbeans.modules.form.editors.EnumEditor">
-                                  <Value id="NFC"/>
                                 </Property>
                               </Properties>
                             </Component>
@@ -471,6 +462,15 @@
                                 <Property name="horizontalAlignment" type="int" value="2"/>
                                 <Property name="joIcons" type="jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons" editor="org.netbeans.modules.form.editors.EnumEditor">
                                   <Value id="SCHOOL"/>
+                                </Property>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoButtonIconfont" name="btnPermission">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="&#xe88;&#xeb1;&#xe94;&#xe81;&#xeb2;&#xe99;&#xe82;&#xecd;&#xec9;&#xea1;&#xeb9;&#xe99;&#xeaa;&#xeb4;&#xe94;&#xe97;&#xeb4;"/>
+                                <Property name="horizontalAlignment" type="int" value="2"/>
+                                <Property name="joIcons" type="jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons" editor="org.netbeans.modules.form.editors.EnumEditor">
+                                  <Value id="ASSIGNMENT_IND"/>
                                 </Property>
                               </Properties>
                             </Component>
@@ -563,7 +563,7 @@
                                   <Component id="btnReportFinancial" alignment="0" pref="269" max="32767" attributes="0"/>
                                   <Component id="btnReportStudent" alignment="0" max="32767" attributes="0"/>
                                   <Component id="btnReportPay" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="joButtonIconfont13" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="btnReportTeacher" alignment="0" max="32767" attributes="0"/>
                                   <Component id="btnWithdraw" alignment="0" max="32767" attributes="0"/>
                                   <Component id="btnFood" alignment="0" max="32767" attributes="0"/>
                                   <Component id="btnReportUserFinancial" alignment="0" max="32767" attributes="0"/>
@@ -586,7 +586,7 @@
                                       <EmptySpace min="-2" max="-2" attributes="0"/>
                                       <Component id="btnWithdraw" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                                      <Component id="joButtonIconfont13" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnReportTeacher" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
                                       <Component id="btnReportStudent" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -615,7 +615,7 @@
                                 </Property>
                               </Properties>
                             </Component>
-                            <Component class="Components.JoButtonIconfont" name="joButtonIconfont13">
+                            <Component class="Components.JoButtonIconfont" name="btnReportTeacher">
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="&#xea5;&#xeb2;&#xe8d;&#xe87;&#xeb2;&#xe99;&#xeaa;&#xeb0;&#xe96;&#xeb4;&#xe95;&#xeb4;&#xe84;&#xeb9;"/>
                                 <Property name="horizontalAlignment" type="int" value="2"/>
