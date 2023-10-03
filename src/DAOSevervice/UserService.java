@@ -9,15 +9,15 @@ public class UserService {
     private final UserDAO userDAO = new UserDAO();
 
     public int CreateUser(UserModel userModel) {
-     return userDAO.CreateUser(userModel);
+        return userDAO.CreateUser(userModel);
     }
 
     public int UpdateUser(UserModel userModel) {
-       return userDAO.UpdateUser(userModel);
+        return userDAO.UpdateUser(userModel);
     }
 
     public int DeleteUser(UserModel userModel) {
-       return userDAO.DeleteUser(userModel);
+        return userDAO.DeleteUser(userModel);
     }
 
     public List<UserModel> getUserAll() {
@@ -38,6 +38,10 @@ public class UserService {
 
     public UserModel getUserByAuthenKey(String authenKey) {
         return userDAO.getUserByAuthenKey(authenKey);
+    }
+
+    public boolean CheckAuthen(String authenText) {
+        return userDAO.CheckAuthen(authenText);
     }
 
 }

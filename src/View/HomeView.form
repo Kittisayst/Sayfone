@@ -647,7 +647,7 @@
                                 <Property name="text" type="java.lang.String" value="&#xea5;&#xeb2;&#xe8d;&#xe87;&#xeb2;&#xe99;&#xe81;&#xeb2;&#xe99;&#xe96;&#xead;&#xe99;&#xec0;&#xe87;&#xeb4;&#xe99;&#xe84;&#xeb7;&#xe99;"/>
                                 <Property name="horizontalAlignment" type="int" value="2"/>
                                 <Property name="joIcons" type="jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons" editor="org.netbeans.modules.form.editors.EnumEditor">
-                                  <Value id="DIRECTIONS"/>
+                                  <Value id="ROTATE_90_DEGREES_CCW"/>
                                 </Property>
                               </Properties>
                             </Component>

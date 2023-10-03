@@ -1,7 +1,10 @@
 package Component;
 
 import Components.JoPasswordField;
+import DAOSevervice.PermissionService;
 import DAOSevervice.UserService;
+import Model.GlobalDataModel;
+import Model.PermissionModel;
 import Model.UserModel;
 import Tools.JoAlert;
 import java.awt.event.KeyEvent;
@@ -62,27 +65,32 @@ public class AuthenPopUp extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAuthenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAuthenActionPerformed
-        if (txt_Authen.TextEmpty()) {
-            userModel = new UserService().getUserByAuthenKey(txt_Authen.getText());
-            if (userModel.getUserID() == 0) {
-                new JoAlert().messages("ກວດສວບລະຫັດຢືນຢັນ", "ລະຫັດຢືນຢັນບໍ່ຖືກຕ້ອງ", JoAlert.Icons.warning);
-            }
-            setVisible(userModel.getUserID() == 0);
-        }
+        AuthenActive();
     }//GEN-LAST:event_btnAuthenActionPerformed
 
     private void txt_AuthenKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_AuthenKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (txt_Authen.TextEmpty()) {
-                userModel = new UserService().getUserByAuthenKey(txt_Authen.getText());
-                if (userModel.getUserID() == 0) {
-                    new JoAlert().messages("ກວດສວບລະຫັດຢືນຢັນ", "ລະຫັດຢືນຢັນບໍ່ຖືກຕ້ອງ", JoAlert.Icons.warning);
-                }
-                setVisible(userModel.getUserID() == 0);
-            }
+            AuthenActive();
         }
     }//GEN-LAST:event_txt_AuthenKeyPressed
 
+    private void AuthenActive() {
+        if (txt_Authen.TextEmpty()) {
+            userModel = new UserService().getUserByAuthenKey(txt_Authen.getText());
+            if (userModel.getUserID() == 0) {
+                new JoAlert().messages("ກວດສວບລະຫັດຢືນຢັນ", "ລະຫັດຢືນຢັນບໍ່ຖືກຕ້ອງ", JoAlert.Icons.warning);
+            } else {
+                PermissionService permissionService = new PermissionService();
+                PermissionModel permissionModel = permissionService.getRole(userModel.getUserID(), 22);
+                if (!permissionModel.isState()) {
+                    new JoAlert().messages("ສິດທີການໃຊ້ງານ", "ຜູ້ໃຊ້ງານ " + userModel.getUserName() + " ບໍ່ໄດ້ຮັບອານຸມັດໃນການແກ້ໄຂຂໍ້ມູນ", JoAlert.Icons.warning);
+                    userModel = new UserModel();
+                } else {
+                    setVisible(false);
+                }
+            }
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Components.JoButtonIconfont btnAuthen;

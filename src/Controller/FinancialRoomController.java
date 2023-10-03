@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class FinancialRoomController implements JoMVC,ActionListener ,MouseListener{
+public class FinancialRoomController implements JoMVC, ActionListener, MouseListener {
 
     private FinancialRoomView view;
 
@@ -21,6 +21,7 @@ public class FinancialRoomController implements JoMVC,ActionListener ,MouseListe
     @Override
     public void Start() {
         GlobalDataModel.rootView.setView(view);
+        GlobalDataModel.TableStudentRegistered = null;
         view.showRegister(GlobalDataModel.registerModels);
     }
 
@@ -52,7 +53,7 @@ public class FinancialRoomController implements JoMVC,ActionListener ,MouseListe
 
     @Override
     public void actionPerformed(ActionEvent e) {
-      JoHookEvent event = new JoHookEvent(e.getSource());
+        JoHookEvent event = new JoHookEvent(e.getSource());
         if (event.isEvent(view.getBtn_back())) {
             GlobalDataModel.rootView.showDashbord();
         }
@@ -60,7 +61,7 @@ public class FinancialRoomController implements JoMVC,ActionListener ,MouseListe
 
     @Override
     public void mouseClicked(MouseEvent e) {
-      
+
     }
 
     @Override
@@ -75,17 +76,17 @@ public class FinancialRoomController implements JoMVC,ActionListener ,MouseListe
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        
+
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-       
+
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-       
+
     }
 
 }

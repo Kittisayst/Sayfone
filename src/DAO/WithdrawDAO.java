@@ -14,9 +14,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class WithdrawDAO implements WithdrawFn {
-    
+
     private final String TableName = "tb_withdraw";
-    
+
     @Override
     public int CreaterWithdraw(WithdrawModel model) {
         JoConnect connect = new JoConnect();
@@ -41,7 +41,7 @@ public class WithdrawDAO implements WithdrawFn {
             connect.close();
         }
     }
-    
+
     @Override
     public int UpdateWithdraw(WithdrawModel model) {
         JoConnect connect = new JoConnect();
@@ -53,6 +53,8 @@ public class WithdrawDAO implements WithdrawFn {
                     model.getTransferMoney(),
                     model.getWithdrawDate(),
                     model.getUserID(),
+                    model.getUserAuthen(),
+                    model.getWithdrawComment(),
                     model.getWithdrawID()
             );
             return pre.executeUpdate();
@@ -64,7 +66,7 @@ public class WithdrawDAO implements WithdrawFn {
             connect.close();
         }
     }
-    
+
     @Override
     public int DeleteWithdraw(WithdrawModel model) {
         JoConnect connect = new JoConnect();
@@ -81,7 +83,7 @@ public class WithdrawDAO implements WithdrawFn {
             connect.close();
         }
     }
-    
+
     @Override
     public List<WithdrawModel> getWithdrawAll() {
         List<WithdrawModel> models = new ArrayList<>();
@@ -100,7 +102,7 @@ public class WithdrawDAO implements WithdrawFn {
         }
         return models;
     }
-    
+
     @Override
     public WithdrawModel getWithdrawById(int ID) {
         JoConnect connect = new JoConnect();
@@ -119,7 +121,7 @@ public class WithdrawDAO implements WithdrawFn {
         }
         return model;
     }
-    
+
     @Override
     public WithdrawModel getWithdrawByFinancailID(int FinancailID) {
         JoConnect connect = new JoConnect();
@@ -127,12 +129,13 @@ public class WithdrawDAO implements WithdrawFn {
         WithdrawModel model = new WithdrawModel();
         try {
             PreparedStatement pre = sql.getSelectCustom("finacialID=?");
-            ResultSet rs = pre.executeQuery();
             pre.setInt(1, FinancailID);
+            ResultSet rs = pre.executeQuery();
             if (rs.next()) {
                 model = getResult(rs);
             }
         } catch (Exception e) {
+            e.printStackTrace();
             JoAlert.Error(e, this);
             JoLoger.saveLog(e, this);
         } finally {
@@ -140,9 +143,9 @@ public class WithdrawDAO implements WithdrawFn {
         }
         return model;
     }
-    
+
     private WithdrawModel getResult(ResultSet rs) throws Exception {
         return new WithdrawModel(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getString(5), rs.getInt(6), rs.getInt(7), rs.getString(8));
     }
-    
+
 }

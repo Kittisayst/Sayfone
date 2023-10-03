@@ -101,5 +101,4 @@ public class UserModel extends TeacherModel {
         return "UserModel{" + "UserID=" + UserID + ", UserName=" + UserName + ", Password=" + Password + ", UserLog=" + UserLog + ", Date=" + Date + ", AuthenKey=" + AuthenKey + '}';
     }
 
- 
 }

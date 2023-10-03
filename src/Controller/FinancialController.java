@@ -32,6 +32,8 @@ import View.FinancialView;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Arrays;
@@ -48,7 +50,7 @@ import net.sf.jasperreports.view.JasperViewer;
 import theme.JoTheme;
 import theme.MyColor;
 
-public class FinancialController implements JoMVC, ActionListener, MouseListener {
+public class FinancialController implements JoMVC, ActionListener, MouseListener, KeyListener {
 
     private final FinancialView view;
     private final StudentModel studentModel;
@@ -59,6 +61,8 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
     private FinancialModel financialModel = new FinancialModel();
     HashMap<Integer, String> months = new HashMap<>();
     private final MyFormat mf = new MyFormat();
+    FinancialService service = new FinancialService();
+    FileTransferService transferService = new FileTransferService();
 
     public FinancialController(FinancialView view, StudentModel studentModel, RegisterModel registerModel) {
         this.view = view;
@@ -80,6 +84,7 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
         view.showParent(historyModel); //ສະແດງປະຫວັດນັກຮຽນ
         List<FinancialModel> models = new FinancialService().getFinancialByStudentID(registerModel.getRegisterID(), studentModel.getStudentID()); //ດຶງຂໍ້ມູນການລົງທະບຽນ
         view.showFinancial(models); // ສະແດງຂໍ້ມູນລົງທະບຽນ
+        view.setButtonState();
     }
 
     @Override
@@ -88,7 +93,10 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
         view.getCkDiscount().addActionListener(this);
         view.getBtnAddTransfer().addActionListener(this);
         view.getBtnSave().addActionListener(this);
+        view.getBtnRefresh().addActionListener(this);
         view.getTb_data().addMouseListener(this);
+        view.getTxtMoney().addKeyListener(this);
+        view.getTxtTransferMoney().addKeyListener(this);
         popup.addActionListener(this);
         //ເຫດການຂອງເດືອນ
         Component[] components = view.getPnShowMonth().getComponents();
@@ -120,30 +128,14 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
     @Override
     public void Create() {
         view.getBtnSave().setEnabled(false);
-        FinancialService service = new FinancialService();
-        FileTransferService transferService = new FileTransferService();
-        JoAlert alert = new JoAlert();
         try {
-            if (view.getTxtTransferMoney().getText().equals("")) {  //ກວດສອບຈຳນວນເງິນໂອນວ່າງ
-                if (view.getTxtMoney().TextEmpty()) {  //ກວດສອບຈຳນວນເງິນວ່າງ
-                    boolean issave = alert.JoSubmit(service.Creater(saveData()), JoAlert.INSERT);
-                    if (issave) {
-                        AppFinancial appFinancial = new AppFinancial(registerModel, studentModel);
-                    }
-                }
+            if (!view.TransferMoneyEmpty()) {
+                SaveTransferMoney();
             } else {
-                if (fileTranferModel.getFile() == null) {   // ກວດສອບປ້ອນຂໍ້ມູນການໂອນໃຫ້ຄົວຖ້ວນ
-                    new JoAlert().messages("ຂໍ້ມູນບໍ່ຄົບ", "ກະລຸນາປ້ອນຂໍ້ມູນການໂອນ " + fileTranferModel.getFile(), JoAlert.Icons.warning);
-                } else {
-                    boolean issave = alert.JoSubmit(service.Creater(saveData()), JoAlert.INSERT);
-                    if (issave) {
-                        fileTranferModel.setFinancialID(service.getMaxFinancialID());
-                        transferService.Creater(fileTranferModel);
-                        AppFinancial appFinancial = new AppFinancial(registerModel, studentModel);
-                    }
-                }
+                SaveMoney();
             }
         } catch (Exception e) {
+            System.err.println(e);
             JoAlert.Error(e, this);
             JoLoger.saveLog(e, this);
         } finally {
@@ -151,41 +143,116 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
         }
     }
 
-    @Override
-    public void Update() {
-        view.getBtnSave().setEnabled(!view.getBtnSave().isEnabled());
-        FinancialService service = new FinancialService();
-        FileTransferService transferService = new FileTransferService();
-        JoAlert alert = new JoAlert();
-        if (!view.getTxtTransferMoney().getText().equals("0")) { //ກວດສອບຕ້ອງບັນທຶກການໂອນຫຼືບໍ່
-            updateData(); // ຈັດເກັບຂໍ້ມູນໂອນຈາກ View
-            fileTranferModel.setFinancialID(financialModel.getFinancialIID());
-            if (fileTranferModel.getFileTranferID() == 0) { // ກວດສອບມີການບັນທຶກເອກະສານເງິນໂອນຫຼືບໍ່
-                // ບັນທຶກຂໍ້ມູນການໂອນໃໝ່
-                if (fileTranferModel.getFile() == null) {
-                    alert.JoSubmit(service.Update(financialModel), JoAlert.UPDATE);
+    private void SaveMoney() {
+        financialModel = FinancialViewData(0);
+        int state = service.Creater(financialModel);
+        if (state > 0) {
+            view.Message("ບັນທຶກຂໍ້ມູນ", "ບັນທຶກຂໍ້ມູນຈ່າຍຄ່າຮຽນສຳເລັດ", JoAlert.Icons.success);
+            AppFinancial appFinancial = new AppFinancial(registerModel, studentModel);
+        } else {
+            view.Message("ບັນທຶກຂໍ້ມູນ", "ບັນທຶກຂໍ້ມູນຈ່າຍຄ່າຮຽນຜິດພາດ", JoAlert.Icons.error);
+        }
+    }
+
+    private void SaveTransferMoney() {
+        if (fileTranferModel.getFile() != null) {
+            financialModel = FinancialViewData(0);
+            int state = service.Creater(financialModel);
+            if (state > 0) {
+                fileTranferModel.setFinancialID(service.getMaxFinancialID());
+                int tranState = transferService.Creater(fileTranferModel);
+                if (tranState > 0) {
+                    view.Message("ບັນທຶກຂໍ້ມູນ", "ບັນທຶກຂໍ້ມູນຈ່າຍຄ່າຮຽນສຳເລັດ", JoAlert.Icons.success);
+                    AppFinancial appFinancial = new AppFinancial(registerModel, studentModel);
                 } else {
-                    System.out.println("create " + fileTranferModel);
-                    alert.JoSubmit(transferService.Creater(fileTranferModel), JoAlert.INSERT);
+                    view.Message("ບັນທຶກຂໍ້ມູນ", "ບັນທຶກຂໍ້ມູນການໂອນຜິດພາດ", JoAlert.Icons.error);
                 }
             } else {
-                // ແກ້ໄຂຂໍ້ມູນການໂອນໃໝ່
-                service.Update(financialModel);
-                if (fileTranferModel.getFileTranferID() != 0) {
-                    alert.JoSubmit(transferService.Update(fileTranferModel), JoAlert.UPDATE);
-                }
+                view.Message("ບັນທຶກຂໍ້ມູນ", "ບັນທຶກຂໍ້ມູນຈ່າຍຄ່າຮຽນຜິດພາດ", JoAlert.Icons.error);
             }
-        } else {   // ບັນທຶກສະເພາະເງິນສົດ
-            if (view.getTxtMoney().TextEmpty()) {
-                updateData(); // ຈັດເກັບຂໍ້ມູນໂອນຈາກ View
-                service.Update(financialModel);
-                if (fileTranferModel.getFileTranferID() != 0) {
-                    alert.JoSubmit(transferService.Update(fileTranferModel), JoAlert.UPDATE);
-                }
-            }
+        } else {
+            view.Message("ຂໍ້ມູນການໂອນ", "ກະລຸນາປ້ອນຂໍ້ມູນການໂອນ", JoAlert.Icons.warning);
         }
-        AppFinancial appFinancial = new AppFinancial(registerModel, studentModel);
-        view.getBtnSave().setEnabled(!view.getBtnSave().isEnabled());
+    }
+
+    @Override
+    public void Update() {
+        view.getBtnSave().setEnabled(false);
+        try {
+            if (!view.getTransferMoneyZero()) {
+                UpdateTransfer();
+            } else {
+                UpdateMoney();
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            view.setButtonTextState("ບັນທຶກການຈ່າຍຄ້າຮຽນ");
+            view.getBtnSave().setEnabled(true);
+        }
+    }
+
+    private void UpdateMoney() {
+        FinancialModel model = FinancialViewData(0);
+        model.setFinancialIID(financialModel.getFinancialIID());
+        int state = service.Update(model);
+        if (state > 0) {
+            view.Message("ແກ້ໄຂຂໍ້ມູນ", "ແກ້ໄຂຂໍ້ມູນຈ່າຍຄ່າຮຽນສຳເລັດ", JoAlert.Icons.success);
+            AppFinancial appFinancial = new AppFinancial(registerModel, studentModel);
+        } else {
+            view.Message("ແກ້ໄຂຂໍ້ມູນ", "ແກ້ໄຂຂໍ້ມູນຈ່າຍຄ່າຮຽນຜິດພາດ", JoAlert.Icons.error);
+        }
+    }
+
+    private void UpdateTransfer() {
+        if (fileTranferModel.getFileName() != null) {
+            if (fileTranferModel.getFileTranferID() == 0) {
+                CreateTransfer();
+                System.out.println("CreateTransfer");
+            } else {
+                updateTransferOnly();
+                System.out.println("updateTransferOnly");
+            }
+        } else {
+            view.Message("ຂໍ້ມູນການໂອນ", "ກະລຸນາປ້ອນຂໍ້ມູນການໂອນ", JoAlert.Icons.warning);
+        }
+    }
+
+    private void CreateTransfer() {
+        FinancialModel model = FinancialViewData(0);
+        model.setFinancialIID(financialModel.getFinancialIID());
+        int state = service.Update(model);
+        if (state > 0) {
+            fileTranferModel.setFinancialID(model.getFinancialIID());
+            int tState = transferService.Creater(fileTranferModel);
+            if (tState > 0) {
+                view.Message("ແກ້ໄຂຂໍ້ມູນ", "ແກ້ໄຂຂໍ້ມູນຈ່າຍຄ່າຮຽນສຳເລັດ", JoAlert.Icons.success);
+                AppFinancial appFinancial = new AppFinancial(registerModel, studentModel);
+            } else {
+                view.Message("ແກ້ໄຂຂໍ້ມູນ", "ແກ້ໄຂຂໍ້ມູນຈ່າຍຄ່າຮຽນເງິນໂອນຜິດພາດ", JoAlert.Icons.error);
+            }
+        } else {
+            view.Message("ແກ້ໄຂຂໍ້ມູນ", "ແກ້ໄຂຂໍ້ມູນຈ່າຍຄ່າຮຽນຜິດພາດ", JoAlert.Icons.error);
+        }
+    }
+
+    private void updateTransferOnly() {
+        FinancialModel model = FinancialViewData(0);
+        model.setFinancialIID(financialModel.getFinancialIID());
+        int state = service.Update(model);
+        if (state > 0) {
+            int tState = transferService.Update(fileTranferModel);
+            if (tState > 0) {
+                view.Message("ແກ້ໄຂຂໍ້ມູນ", "ແກ້ໄຂຂໍ້ມູນຈ່າຍຄ່າຮຽນສຳເລັດ", JoAlert.Icons.success);
+                AppFinancial appFinancial = new AppFinancial(registerModel, studentModel);
+            } else {
+                view.Message("ແກ້ໄຂຂໍ້ມູນ", "ແກ້ໄຂຂໍ້ມູນຈ່າຍຄ່າຮຽນເງິນໂອນຜິດພາດ", JoAlert.Icons.error);
+            }
+        } else {
+            view.Message("ແກ້ໄຂຂໍ້ມູນ", "ແກ້ໄຂຂໍ້ມູນຈ່າຍຄ່າຮຽນຜິດພາດ", JoAlert.Icons.error);
+        }
     }
 
     @Override
@@ -212,6 +279,8 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
         JoHookEvent event = new JoHookEvent(e.getSource());
         if (event.isEvent(view.getBtn_back())) { // ກັບຄືນ
             AppFinancailStudent app = new AppFinancailStudent(registerModel);
+        } else if (event.isEvent(view.getBtnRefresh())) {
+            view.getTxtTransferMoney().setText("");
         } else if (event.isEvent(view.getCkDiscount())) { //ເລືອກສ່ວນຫຼຸດ
             AuthenPopUp popUp = new AuthenPopUp(GlobalDataModel.rootView, true);
             popUp.setVisible(true);
@@ -229,11 +298,19 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
             fileTranferModel = dialog.getTranferModel();
         } else if (event.isEvent(view.getBtnSave())) {  // ກົດປຸ່ມບັນທຶກ
             if (financialModel.getFinancialIID() == 0) {
-                System.out.println("create");
-                Create();
+                if (view.MoneyEmpty() && view.TransferMoneyEmpty()) {
+                    view.Message("ກວດສອບຂໍ້ມູນ", "ຂໍ້ມູນບໍຄົບຖວນກະລຸນາກວດສອບ", JoAlert.Icons.warning);
+                    view.getTxtMoney().requestFocus();
+                } else {
+                    Create();
+                }
             } else {
-                System.out.println("update");
-                Update();
+                if (view.MoneyEmpty() && view.TransferMoneyEmpty()) {
+                    view.Message("ກວດສອບຂໍ້ມູນ", "ຂໍ້ມູນບໍຄົບຖວນກະລຸນາກວດສອບ", JoAlert.Icons.warning);
+                    view.getTxtMoney().requestFocus();
+                } else {
+                    Update();
+                }
             }
         } else if (event.isEvent(popup.getItemshow())) { //ເມນູສະແດງ
             Printer();
@@ -283,7 +360,7 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
             userAuthen = popUp.getUserModel();
             if (userAuthen.getUserID() != 0) {
                 FinancialModel fm = new FinancialService().getFinancialById(view.getTb_data().getIntValue(1));
-                DialogWithdraw dialogWithdraw = new DialogWithdraw(GlobalDataModel.rootView, true, fm);
+                DialogWithdraw dialogWithdraw = new DialogWithdraw(GlobalDataModel.rootView, true, fm, view);
                 dialogWithdraw.setUserAuthen(userAuthen);
                 dialogWithdraw.setVisible(true);
             }
@@ -301,36 +378,22 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
         }
     }
 
-    private FinancialModel saveData() {
+    private FinancialModel FinancialViewData(int ID) {
         return new FinancialModel(
                 0,
                 registerModel.getRegisterID(),
                 studentModel.getStudentID(),
-                (int) mf.unFormatMoney(view.getTxtMoney().getText()),
-                (int) mf.unFormatMoney(view.getTxtTransferMoney().getText()),
+                view.getMoney(),
+                view.getTransferMoney(),
                 mf.getSQLDate(new Date()),
                 convertMonth(months),
-                view.getTxtComment().getText(),
+                view.getComment(),
                 userAuthen.getUserID(),
-                (int) mf.unFormatMoney(view.getTxtDiscount().getText()),
-                (int) mf.unFormatMoney(view.getTxtOverPay().getText()),
+                view.getDiscount(),
+                view.getOverPay(),
                 GlobalDataModel.userModel.getUserID(),
-                (int) mf.unFormatMoney(view.getTxtFood().getText()),
-                true
-        );
-    }
-
-    private void updateData() {
-        financialModel.setMoney((int) mf.unFormatMoney(view.getTxtMoney().getText()));
-        financialModel.setTransferMoney((int) mf.unFormatMoney(view.getTxtTransferMoney().getText()));
-        financialModel.setFinancialDate(mf.getSQLDate(new Date()));
-        financialModel.setFinancialMonth(convertMonth(months));
-        financialModel.setFinancialComment(view.getTxtComment().getText());
-        financialModel.setAuthenUserID(userAuthen.getUserID());
-        financialModel.setDiscount((int) mf.unFormatMoney(view.getTxtDiscount().getText()));
-        financialModel.setOvertimePay((int) mf.unFormatMoney(view.getTxtOverPay().getText()));
-        financialModel.setFoodMoney((int) mf.unFormatMoney(view.getTxtFood().getText()));
-        financialModel.setUserID(GlobalDataModel.userModel.getUserID());
+                view.getFoodMoney(),
+                true);
     }
 
     private void showEdit() {
@@ -340,10 +403,12 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
             months.clear();
         }
         // ດຶງຂໍ້ມູນການຈ່າຍເງິນ
+        view.setButtonTextState("ແກ້ໄຂການຈ່າຍຄ້າຮຽນ");
         FinancialService financialService = new FinancialService();
         financialModel = financialService.getFinancialById(view.getTb_data().getIntValue(1));
         // =================== ສະແດງຂໍ້ມູນການລົງທະບຽນເພື່ອແກ້ໄຂໄປທີ view =================
         view.showFinacial(financialModel);
+        view.setButtonState();
         fileTranferModel = new FileTransferService().getFileTranferByFinancialID(financialModel.getFinancialIID()); //ດຶງຂໍ້ມູນເອກະສານການໂອນ
         // ສະແດງການເລືອກເດືອນ
         String monstr = financialModel.getFinancialMonth();
@@ -439,6 +504,26 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
 
     private String Charchecked(boolean isCheck) {
         return isCheck ? "☑" : "☐";
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        JoHookEvent event = new JoHookEvent(e.getSource());
+        if (event.isEvent(view.getTxtMoney())) {
+            view.setButtonState();
+        } else if (event.isEvent(view.getTxtTransferMoney())) {
+            view.setButtonState();
+        }
     }
 
 }

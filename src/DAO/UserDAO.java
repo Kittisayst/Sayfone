@@ -7,7 +7,6 @@ import Log.JoLoger;
 import Model.TeacherModel;
 import java.util.List;
 import Tools.JoAlert;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import Model.UserModel;
@@ -224,6 +223,24 @@ public class UserDAO implements DAOInterface.UserFn {
             connect.close();
         }
         return model;
+    }
+
+    @Override
+    public boolean CheckAuthen(String authenText) {
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
+        try {
+            PreparedStatement pre = sql.getSelectCustom("authenKey=?");
+            pre.setString(1, authenText);
+            ResultSet rs = pre.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+            return false;
+        } finally {
+            connect.close();
+        }
     }
 
 }

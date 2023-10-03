@@ -12,6 +12,8 @@ public interface UserFn {
     public int UpdateUserLogTime(UserModel userModel);
 
     public int DeleteUser(UserModel userModel);
+    
+    public boolean CheckAuthen(String authenText);
 
     public List<UserModel> getUserAll();
 

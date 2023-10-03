@@ -463,7 +463,7 @@ public class HomeView extends javax.swing.JFrame {
 
         btnWithdraw.setText("ລາຍງານການຖອນເງິນຄືນ");
         btnWithdraw.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnWithdraw.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.DIRECTIONS);
+        btnWithdraw.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.ROTATE_90_DEGREES_CCW);
 
         btnFood.setText("ລາຍງານຄ່າອາຫານ");
         btnFood.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);

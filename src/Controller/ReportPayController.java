@@ -29,7 +29,6 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.swing.SwingUtilities;
 
 public class ReportPayController implements JoMVC, ActionListener, ItemListener, MouseListener {
 
@@ -54,6 +53,7 @@ public class ReportPayController implements JoMVC, ActionListener, ItemListener,
         view.showYear(new YearService().getYearAll());
         view.getCbYear().setSelectedIndex(new YearService().getYearAll().size() - 1);
         view.showClassRoom(new RegisterService().getRegisterAllByYearID(view.getCbYear().getKeyInt()));
+        view.ExportEnable();
     }
 
     @Override
@@ -94,6 +94,7 @@ public class ReportPayController implements JoMVC, ActionListener, ItemListener,
             FinancialService financialService = new FinancialService();
             view.showReportPay(financialService.getStudentRegistered(view.getCbClassRoom().getKeyInt()));
             createListExport(financialService.getStudentRegistered(view.getCbClassRoom().getKeyInt()));
+            view.ExportEnable();
         } else if (event.isEvent(view.getBtnExport())) {
             ExportData();
         }

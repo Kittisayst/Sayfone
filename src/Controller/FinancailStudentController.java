@@ -170,9 +170,11 @@ public class FinancailStudentController implements JoMVC, ActionListener, MouseL
         FinancialService financialService = new FinancialService();
         List<StudentModel> studentList = new ArrayList<>();
         List<FinancialModel> models = financialService.getStudentRegistered(registerModel.getRegisterID());
+
         models.forEach(data -> {
             studentList.add(studentService.getStudentById(data.getStudentID()));
         });
+
         buttonState = true;
         view.setButtonState(buttonState);
         view.ClearDataTable();

@@ -1,8 +1,10 @@
 package Model;
 
+import Main.JoHttp;
 import Main.JoUploadFile;
 import Tools.JoCreateImage;
 import java.io.File;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Blob;
 import java.sql.Date;
@@ -85,13 +87,24 @@ public class FileTranferModel {
             if (FileName == null) {
                 return new ImageIcon(getClass().getResource("/Source/empty.jpg"));
             } else {
-                URL url = new URL("http://sayfoneapi/imageAPI.php?fileName=" + FileName);
-                return new ImageIcon(url);
+                JoHttp johttp = new JoHttp("http://sayfoneapi/imageAPI.php?fileName=" + FileName);
+                johttp.Open();
+                if (johttp.getResponseContent().equals("Image not found.")) {
+                   return new ImageIcon(getClass().getResource("/Source/empty.jpg"));
+                } else {
+                    URL url = new URL("http://sayfoneapi/imageAPI.php?fileName=" + FileName);
+                    return new ImageIcon(url);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
             return new ImageIcon(getClass().getResource("/Source/empty.png"));
         }
+    }
+
+    public boolean checkURLImage() {
+        JoHttp http = new JoHttp("http://sayfoneapi/imageAPI.php?fileName=" + FileName);
+        return http.Open();
     }
 
     @Override

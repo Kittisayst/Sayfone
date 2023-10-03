@@ -31,7 +31,6 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.swing.SwingUtilities;
 import jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons;
 import theme.MyColor;
 
@@ -63,6 +62,7 @@ public class ReportUserFinancialController implements JoMVC, ActionListener, Mou
         view.showYear(new YearService().getYearAll());
         view.showUser(new UserService().getUserAll());
         view.setDateNow();
+        view.ExportEnable();
     }
 
     @Override
@@ -157,6 +157,7 @@ public class ReportUserFinancialController implements JoMVC, ActionListener, Mou
         String dateEnd = view.getDtEnd().getDateSQL();
         view.showUserFinancial(service.getReportUserFinancial(yearID, UserID, dateStart, dateEnd));
         createListExport(service.getReportUserFinancial(yearID, UserID, dateStart, dateEnd));
+        view.ExportEnable();
     }
 
     int amountMoney = 0;
@@ -221,7 +222,7 @@ public class ReportUserFinancialController implements JoMVC, ActionListener, Mou
                     loading.StartProgress(listFinancials.size(), 100);
                 });
                 sheet.getCreateSheet();
-                 fileSystem.OpenFile(csvFile);
+                fileSystem.OpenFile(csvFile);
             } catch (Exception e) {
                 e.printStackTrace();
                 JoAlert.Error(e, this);

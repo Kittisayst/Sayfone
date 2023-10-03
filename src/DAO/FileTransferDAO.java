@@ -43,7 +43,6 @@ public class FileTransferDAO implements FileTransferFn {
             } else {
                 return 0;
             }
-
         } catch (SQLException e) {
             JoAlert.Error(e, this);
             JoLoger.saveLog(e, this);
@@ -66,7 +65,6 @@ public class FileTransferDAO implements FileTransferFn {
                         model.getFileTranferDate(),
                         model.getTransferTime(),
                         model.getFileTranferID());
-                System.out.println(pre);
                 return pre.executeUpdate();
             }
         } catch (SQLException e) {

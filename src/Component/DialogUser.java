@@ -9,6 +9,7 @@ import Tools.JoAlert;
 public class DialogUser extends javax.swing.JDialog {
 
     private UserModel model;
+    private UserService service = new UserService();
 
     public DialogUser(java.awt.Frame parent, boolean ss, UserModel model) {
         super(parent, ss);
@@ -107,25 +108,36 @@ public class DialogUser extends javax.swing.JDialog {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         if (txtUser.TextEmpty() && txtConfirm.TextEmpty() && txtPassword.TextEmpty()) {
             JoAlert alert = new JoAlert();
-            UserService service = new UserService();
             model.setUserName(txtUser.getText());
             model.setAuthenKey(txtConfirm.getText());
             model.setPassword(txtPassword.getText());
             model.setTeacherID(cbTeacher.getKeyInt());
             if (model.getUserID() == 0) {
-                if (alert.JoSubmit(service.CreateUser(model), JoAlert.INSERT)) {
-                    new AppUser().Open();
-                    this.dispose();
+                if (!checkAuthenPassword()) {
+                    if (alert.JoSubmit(service.CreateUser(model), JoAlert.INSERT)) {
+                        new AppUser().Open();
+                        this.dispose();
+                    } else {
+                        alert.messages("ກວດສອບລະຫັດ", "ລະຫັດຢືນຢັນການເງິນນີ້ມີຢູ່ແລ້ວ", JoAlert.Icons.info);
+                    }
                 }
+
             } else {
-                if (alert.JoSubmit(service.UpdateUser(model), JoAlert.UPDATE)) {
-                    new AppUser().Open();
-                    this.dispose();
+                if (!checkAuthenPassword()) {
+                    if (alert.JoSubmit(service.UpdateUser(model), JoAlert.UPDATE)) {
+                        new AppUser().Open();
+                        this.dispose();
+                    }
+                } else {
+                    alert.messages("ກວດສອບລະຫັດ", "ລະຫັດຢືນຢັນການເງິນນີ້ມີຢູ່ແລ້ວ", JoAlert.Icons.info);
                 }
             }
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 
+    private boolean checkAuthenPassword() {
+        return service.CheckAuthen(new String(txtConfirm.getPassword()));
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Components.JoButtonIconfont btnCancel;

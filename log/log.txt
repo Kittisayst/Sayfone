@@ -204,3 +204,9 @@
 27/09/2023: DAO.PermissionDAO@1f81d976 Errorjava.sql.SQLException: Statement parameter 1 not set.
 27/09/2023: DAO.PermissionDAO@1f81d976 Errorjava.sql.SQLException: Statement parameter 1 not set.
 27/09/2023: DAO.PermissionDAO@1f81d976 Errorjava.sql.SQLException: Statement parameter 1 not set.
+03/10/2023: DAO.FileTransferDAO@6905000a Errorjava.lang.ClassCastException: class javax.swing.ImageIcon cannot be cast to class java.io.File (javax.swing.ImageIcon is in module java.desktop of loader 'bootstrap'; java.io.File is in module java.base of loader 'bootstrap')
+03/10/2023: DAO.FileTransferDAO@4b3b3 Errorjava.lang.ClassCastException: class javax.swing.ImageIcon cannot be cast to class java.io.File (javax.swing.ImageIcon is in module java.desktop of loader 'bootstrap'; java.io.File is in module java.base of loader 'bootstrap')
+03/10/2023: Controller.FinancialController@4e231ddc Errorjava.nio.file.InvalidPathException: Illegal char <?> at index 42: D:\Java Project\SayFoneSchool\imageAPI.php?fileName=459-01-08-03.png
+03/10/2023: DAO.WithdrawDAO@291ce996 Errorjava.sql.SQLException: Statement parameter 1 not set.
+03/10/2023: DAO.WithdrawDAO@4eb7ef76 Errorjava.sql.SQLException: Statement parameter 7 not set.
+03/10/2023: DAO.WithdrawDAO@62a5172 Errorjava.sql.SQLException: Statement parameter 8 not set.

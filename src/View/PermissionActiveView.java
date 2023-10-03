@@ -80,6 +80,7 @@ public class PermissionActiveView extends javax.swing.JPanel {
         joCheckBox19 = new Components.JoCheckBox();
         joCheckBox20 = new Components.JoCheckBox();
         joCheckBox21 = new Components.JoCheckBox();
+        joCheckBox22 = new Components.JoCheckBox();
         lblPermission = new Components.JoLable();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -310,6 +311,15 @@ public class PermissionActiveView extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 100, 5, 0);
         pnLayout.add(joCheckBox21, gridBagConstraints);
 
+        joCheckBox22.setText("22. ຜູ້ອານຸມັດ");
+        joCheckBox22.setName("22"); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 11;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 100, 5, 0);
+        pnLayout.add(joCheckBox22, gridBagConstraints);
+
         lblPermission.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblPermission.setText("ກຳນົດສິດທີການໃຊ້ງານ");
         lblPermission.setFont(new java.awt.Font("Phetsarath OT", 1, 24)); // NOI18N
@@ -499,6 +509,7 @@ public class PermissionActiveView extends javax.swing.JPanel {
     private Components.JoCheckBox joCheckBox2;
     private Components.JoCheckBox joCheckBox20;
     private Components.JoCheckBox joCheckBox21;
+    private Components.JoCheckBox joCheckBox22;
     private Components.JoCheckBox joCheckBox3;
     private Components.JoCheckBox joCheckBox4;
     private Components.JoCheckBox joCheckBox5;

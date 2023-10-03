@@ -2,7 +2,6 @@ package Component;
 
 import Database.JoProperties;
 import Model.FileTranferModel;
-import Tools.JoFileSystem;
 import Tools.JoFilechooser;
 import Utility.JoQRcode;
 import java.time.LocalTime;
@@ -23,6 +22,7 @@ public class DialogFinancialTransfer extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.tranferModel = tranferModel;
+        System.out.println(""+tranferModel);
         filechooser.addFilter("JPG", "jpg");
         filechooser.addFilter("JPEG", "jpeg");
         filechooser.addFilter("PNG", "png");
@@ -34,10 +34,11 @@ public class DialogFinancialTransfer extends javax.swing.JDialog {
         int minute = currentTime.getMinute();
         Timer.setTime(hour, minute);
         if (tranferModel.getFileTranferID() == 0) {
-            btnOpenCarmera.setEnabled(false);
+            btnQRCode.setEnabled(false);
             btnAddImage.doClick();
+            lblImage.setIcon(new ImageIcon(filechooser.getSelectedFile().getAbsolutePath()));
         } else {
-            btnOpenCarmera.setEnabled(true);
+            btnQRCode.setEnabled(true);
             dtDate.setDateData(tranferModel.getFileTranferDate());
             String[] parts = tranferModel.getTransferTime().split(":");
             String strhour = parts[0]; // "15"
@@ -45,7 +46,6 @@ public class DialogFinancialTransfer extends javax.swing.JDialog {
             Timer.setTime(Integer.parseInt(strhour), Integer.parseInt(strminute));
             lblImage.setIcon(tranferModel.getImageIcon());
         }
-
     }
 
     public FileTranferModel getTranferModel() {
@@ -73,7 +73,7 @@ public class DialogFinancialTransfer extends javax.swing.JDialog {
         joLable1 = new Components.JoLable();
         txtPath = new Components.JoTextField();
         btnAddImage = new Components.JoButtonIconfont();
-        btnOpenCarmera = new Components.JoButtonIconfont();
+        btnQRCode = new Components.JoButtonIconfont();
         jPanel1 = new javax.swing.JPanel();
         lblImage = new Components.JoLabelImage();
 
@@ -88,8 +88,8 @@ public class DialogFinancialTransfer extends javax.swing.JDialog {
         });
 
         btnSave.setBackground(new java.awt.Color(0, 153, 102));
-        btnSave.setText("ບັນທຶກ");
-        btnSave.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.SAVE);
+        btnSave.setText("ນຳໃຊ້ຮຸບການໂອນ");
+        btnSave.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.CHECK);
         btnSave.setJocolorHover(new java.awt.Color(3, 112, 76));
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,12 +120,12 @@ public class DialogFinancialTransfer extends javax.swing.JDialog {
             }
         });
 
-        btnOpenCarmera.setBackground(new java.awt.Color(0, 153, 204));
-        btnOpenCarmera.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.IMPORTANT_DEVICES);
-        btnOpenCarmera.setJocolorHover(new java.awt.Color(0, 111, 149));
-        btnOpenCarmera.addActionListener(new java.awt.event.ActionListener() {
+        btnQRCode.setBackground(new java.awt.Color(0, 153, 204));
+        btnQRCode.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.IMPORTANT_DEVICES);
+        btnQRCode.setJocolorHover(new java.awt.Color(0, 111, 149));
+        btnQRCode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOpenCarmeraActionPerformed(evt);
+                btnQRCodeActionPerformed(evt);
             }
         });
 
@@ -163,7 +163,7 @@ public class DialogFinancialTransfer extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnAddImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnOpenCarmera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnQRCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(joLable1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -197,7 +197,7 @@ public class DialogFinancialTransfer extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnOpenCarmera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnQRCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnAddImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(7, 7, 7)
@@ -213,11 +213,11 @@ public class DialogFinancialTransfer extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnOpenCarmeraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpenCarmeraActionPerformed
+    private void btnQRCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQRCodeActionPerformed
         String url = "http://" + server + "/sayfone/mobiletransfer.php?transferID=" + tranferModel.getFileTranferID() + "&financialID=" + tranferModel.getFinancialID();
         JoQRcode qRcode = new JoQRcode(url);
         lblImage.setIcon(qRcode.getCreateQRcode());
-    }//GEN-LAST:event_btnOpenCarmeraActionPerformed
+    }//GEN-LAST:event_btnQRCodeActionPerformed
 
     private void btnAddImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddImageActionPerformed
         openFile = filechooser.showOpenDialog(null);
@@ -257,7 +257,7 @@ public class DialogFinancialTransfer extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Component.TimeSelector Timer;
     private Components.JoButtonIconfont btnAddImage;
-    private Components.JoButtonIconfont btnOpenCarmera;
+    private Components.JoButtonIconfont btnQRCode;
     private Components.JoButtonIconfont btnSave;
     private Components.JoDateChooser dtDate;
     private javax.swing.JPanel jPanel1;

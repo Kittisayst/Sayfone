@@ -8,9 +8,12 @@ import Components.JoTable;
 import Components.JoTextArea;
 import Components.JoTextField;
 import DAOSevervice.UserService;
+import DAOSevervice.WithdrawService;
 import Model.FinancialModel;
 import Model.StudentHistoryModel;
 import Model.UserModel;
+import Model.WithdrawModel;
+import Tools.JoAlert;
 import Tools.JoIconFont;
 import Utility.MyFormat;
 import java.awt.Color;
@@ -78,17 +81,20 @@ public class FinancialView extends javax.swing.JPanel {
     }
 
     public void showFinancial(List<FinancialModel> models) {
+        tb_data.JoClearModel();
         MyFormat format = new MyFormat();
         UserService userService = new UserService();
         models.forEach(data -> {
             setSelectMonth(data);
             UserModel um = userService.getUserById(data.getUserID());
+            String money = format.formatMoney(data.getMoney());
+            String transfer = format.formatMoney(data.getTransferMoney());
             tb_data.AddJoModel(new Object[]{
                 tb_data.autoNumber(),
                 data.getFinancialIID(),
                 format.getDate(data.getFinancialDate()),
-                format.formatMoney(data.getMoney()),
-                format.formatMoney(data.getTransferMoney()),
+                money,
+                transfer,
                 toMonthString(data.getFinancialMonth()),
                 data.getFinancialComment(),
                 um.getFullName()
@@ -161,6 +167,64 @@ public class FinancialView extends javax.swing.JPanel {
         }
     }
 
+    public void setButtonState() {
+        btnSave.setEnabled(!txtMoney.getText().isBlank() || !txtTransferMoney.getText().isBlank());
+        btnAddTransfer.setEnabled(!txtTransferMoney.getText().isBlank() && !txtTransferMoney.getText().equals("0"));
+        btnRefresh.setEnabled(btnAddTransfer.isEnabled());
+    }
+
+    public void setButtonTextState(String text) {
+        btnSave.setText(text);
+    }
+
+    public void Message(String Title, String message, JoAlert.Icons icons) {
+        new JoAlert().messages(Title, message, icons);
+    }
+
+    public boolean MoneyEmpty() {
+        return txtMoney.getText().isEmpty();
+    }
+
+    public boolean TransferMoneyEmpty() {
+        return txtTransferMoney.getText().isEmpty() || txtTransferMoney.getText().equals("0");
+    }
+
+    public int getMoney() {
+        return (int) new MyFormat().unFormatMoney(txtMoney.getText());
+    }
+
+    public int getTransferMoney() {
+        return (int) new MyFormat().unFormatMoney(txtTransferMoney.getText());
+    }
+
+    public boolean getTransferMoneyZero() {
+        return txtTransferMoney.getText().equals("0");
+    }
+
+    public int getDiscount() {
+        return (int) new MyFormat().unFormatMoney(txtDiscount.getText());
+    }
+
+    public int getOverPay() {
+        return (int) new MyFormat().unFormatMoney(txtOverPay.getText());
+    }
+
+    public int getFoodMoney() {
+        return (int) new MyFormat().unFormatMoney(txtFood.getText());
+    }
+
+    public String getComment() {
+        return txtComment.getText();
+    }
+
+    public boolean TransferMoneyIsNull() {
+        return txtTransferMoney.TextEmpty();
+    }
+
+    public boolean MoneyIsnull() {
+        return txtMoney.TextEmpty();
+    }
+
     public JoButtonIconfont getBtn_back() {
         return btn_back;
     }
@@ -183,6 +247,10 @@ public class FinancialView extends javax.swing.JPanel {
 
     public JoButton getBtnAddTransfer() {
         return btnAddTransfer;
+    }
+
+    public JoButtonIconfont getBtnRefresh() {
+        return btnRefresh;
     }
 
     public JoButtonIconfont getBtnSave() {
@@ -552,9 +620,10 @@ public class FinancialView extends javax.swing.JPanel {
         joLable5.setText("ຈຳນວນເງິນໂອນ");
         joPanel4.add(joLable5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 155, 270, 20));
 
-        btnSave.setText("ບັນທຶກ");
+        btnSave.setBackground(new java.awt.Color(0, 153, 102));
+        btnSave.setText("ບັນທຶກການຈ່າຍຄ້າຮຽນ");
         btnSave.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.SAVE);
-        joPanel4.add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 270, -1));
+        joPanel4.add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 270, -1));
 
         pnSelectMonths.setBackground(new java.awt.Color(51, 51, 51));
         pnSelectMonths.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 204)));
@@ -580,11 +649,6 @@ public class FinancialView extends javax.swing.JPanel {
         joPanel4.add(btnAddTransfer, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, 50, 40));
 
         btnRefresh.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.REFRESH);
-        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRefreshActionPerformed(evt);
-            }
-        });
         joPanel4.add(btnRefresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(245, 179, 45, -1));
 
         jPanel1.add(joPanel4);
@@ -670,12 +734,6 @@ public class FinancialView extends javax.swing.JPanel {
     private void txtFoodKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFoodKeyReleased
         txtFood.setText(new MyFormat().formatMoney(txtFood.getText()));
     }//GEN-LAST:event_txtFoodKeyReleased
-
-    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
-        if (txtTransferMoney.getText().equals("0")) {
-            txtTransferMoney.setText("");
-        }
-    }//GEN-LAST:event_btnRefreshActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

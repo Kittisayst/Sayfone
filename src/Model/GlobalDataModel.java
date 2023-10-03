@@ -3,6 +3,7 @@ package Model;
 import View.DasboardView;
 import View.HomeView;
 import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 public class GlobalDataModel {
 
@@ -13,6 +14,7 @@ public class GlobalDataModel {
     public static List<ClassModel> classModels;
     public static List<StudentModel> studentAll;
     public static List<FinancialModel> financialAll;
+    public static DefaultTableModel TableStudentRegistered;
     //========= Variable ========
     public static boolean printerBillState;
     public static boolean printerReportState;
