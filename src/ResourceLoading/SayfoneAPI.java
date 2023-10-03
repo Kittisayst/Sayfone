@@ -12,7 +12,11 @@ public class SayfoneAPI {
         try {
             JoHttp http = new JoHttp("http://" + server + "/sayfone");
             http.Open();
-            return http.getResponseCode() == 200;
+            String html = http.getResponseContent();
+            html = html.trim();
+            String text = html.replaceAll("<[^>]*>", "");
+            String respon = text.replaceAll("\\r?\\n", "").trim();
+            return respon.equals("Sayfone school API");
         } catch (Exception e) {
             System.out.println("null");
             return false;
