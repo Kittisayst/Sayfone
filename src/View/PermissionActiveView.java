@@ -1,22 +1,28 @@
 package View;
 
+import Component.PermissionThemeDialog;
 import Components.JoCheckBox;
 import DAOSevervice.PermissionService;
+import Database.JoProperties;
 import Model.GlobalDataModel;
 import Model.PermissionModel;
 import Model.UserModel;
+import Utility.JoJson;
 
 public class PermissionActiveView extends javax.swing.JPanel {
 
     private UserModel userModel;
     private PermissionView view;
     private PermissionService service = new PermissionService();
+    private JoProperties property = new JoProperties("/Info/permission.properties");
+    private JoJson json = new JoJson();
 
     public PermissionActiveView(String Title, PermissionView view, UserModel userModel) {
         initComponents();
         lbl_title.setText(Title);
         this.view = view;
         this.userModel = userModel;
+        showThemeName();
         lblPermission.setText("ກຳນົດສິດທີການໃຊ້ງານ ( " + userModel.getFullName() + " )");
         for (int i = 0; i < pnLayout.getComponentCount(); i++) {
             if (pnLayout.getComponent(i) instanceof JoCheckBox) {
@@ -76,6 +82,12 @@ public class PermissionActiveView extends javax.swing.JPanel {
         joCheckBox21 = new Components.JoCheckBox();
         lblPermission = new Components.JoLable();
         jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        btnSelectAll = new Components.JoButtonIconfont();
+        cbName = new Components.JoCombobox();
+        btnCreate = new Components.JoButtonIconfont();
+        joLable1 = new Components.JoLable();
+        btnUse = new Components.JoButtonIconfont();
 
         Pn_Navigation.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
         Pn_Navigation.setLayout(new java.awt.GridLayout(1, 0));
@@ -109,106 +121,106 @@ public class PermissionActiveView extends javax.swing.JPanel {
         pnLayout.setMaximumSize(new java.awt.Dimension(500, 500));
         pnLayout.setLayout(new java.awt.GridBagLayout());
 
-        joCheckBox1.setText("ຈັດການຂໍ້ມູນອາຈານ");
+        joCheckBox1.setText("1. ຈັດການຂໍ້ມູນອາຈານ");
         joCheckBox1.setName("1"); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        gridBagConstraints.insets = new java.awt.Insets(5, 82, 5, 0);
         pnLayout.add(joCheckBox1, gridBagConstraints);
 
-        joCheckBox3.setText("ຈັດການຂໍ້ມູນນັກຮຽນ");
+        joCheckBox3.setText("2. ຈັດການຂໍ້ມູນນັກຮຽນ");
         joCheckBox3.setName("2"); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        gridBagConstraints.insets = new java.awt.Insets(5, 82, 5, 0);
         pnLayout.add(joCheckBox3, gridBagConstraints);
 
-        joCheckBox4.setText("ຈັດການວິຊາ-ຄຸສອນ");
+        joCheckBox4.setText("4. ຈັດການວິຊາ-ຄຸສອນ");
         joCheckBox4.setName("4"); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        gridBagConstraints.insets = new java.awt.Insets(5, 82, 5, 0);
         pnLayout.add(joCheckBox4, gridBagConstraints);
 
-        joCheckBox5.setText("ຈັດການລາຍວິຊາ");
+        joCheckBox5.setText("3. ຈັດການລາຍວິຊາ");
         joCheckBox5.setName("3"); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        gridBagConstraints.insets = new java.awt.Insets(5, 82, 5, 0);
         pnLayout.add(joCheckBox5, gridBagConstraints);
 
-        joCheckBox6.setText("ຂໍ້ມູນຂະແໜງ");
+        joCheckBox6.setText("5. ຂໍ້ມູນຂະແໜງ");
         joCheckBox6.setName("5"); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        gridBagConstraints.insets = new java.awt.Insets(5, 82, 5, 0);
         pnLayout.add(joCheckBox6, gridBagConstraints);
 
-        joCheckBox7.setText("ຈັດການຂໍ້ມູນຜູ້ໃຊ້ງານ");
+        joCheckBox7.setText("6. ຈັດການຂໍ້ມູນຜູ້ໃຊ້ງານ");
         joCheckBox7.setName("6"); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        gridBagConstraints.insets = new java.awt.Insets(5, 82, 5, 0);
         pnLayout.add(joCheckBox7, gridBagConstraints);
 
-        joCheckBox8.setText("ເປີດການລົງທະບຽນຮຽນ");
+        joCheckBox8.setText("8. ເປີດການລົງທະບຽນຮຽນ");
         joCheckBox8.setName("8"); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 8;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        gridBagConstraints.insets = new java.awt.Insets(5, 82, 5, 0);
         pnLayout.add(joCheckBox8, gridBagConstraints);
 
-        joCheckBox9.setText("ຈັດການຂໍ້ມູນສິດທິ");
+        joCheckBox9.setText("7. ຈັດການຂໍ້ມູນສິດທິ");
         joCheckBox9.setName("7"); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 7;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        gridBagConstraints.insets = new java.awt.Insets(5, 82, 5, 0);
         pnLayout.add(joCheckBox9, gridBagConstraints);
 
-        joCheckBox10.setText("ຈ່າຍຄ່າຮຽນ");
+        joCheckBox10.setText("9. ຈ່າຍຄ່າຮຽນ");
         joCheckBox10.setName("9"); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 9;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        gridBagConstraints.insets = new java.awt.Insets(5, 82, 5, 0);
         pnLayout.add(joCheckBox10, gridBagConstraints);
 
-        joCheckBox11.setText("ຈັດອັນດັບຄູ");
+        joCheckBox11.setText("10. ຈັດອັນດັບຄູ");
         joCheckBox11.setName("10"); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 10;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        gridBagConstraints.insets = new java.awt.Insets(5, 82, 5, 0);
         pnLayout.add(joCheckBox11, gridBagConstraints);
 
-        joCheckBox12.setText("ບັນທຶກການຂາດຮຽນ");
+        joCheckBox12.setText("11. ບັນທຶກການຂາດຮຽນ");
         joCheckBox12.setName("11"); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 11;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        gridBagConstraints.insets = new java.awt.Insets(5, 82, 5, 0);
         pnLayout.add(joCheckBox12, gridBagConstraints);
 
-        joCheckBox2.setText("ລາຍງານການຈ່າຍຄ່າຮຽນ");
+        joCheckBox2.setText("12. ລາຍງານການຈ່າຍຄ່າຮຽນ");
         joCheckBox2.setName("12"); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -217,7 +229,7 @@ public class PermissionActiveView extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 100, 5, 0);
         pnLayout.add(joCheckBox2, gridBagConstraints);
 
-        joCheckBox13.setText("ລາຍງານການຈ່າຍຄ່າຮຽນຕາມຜູ້ໃຊ່ງານ");
+        joCheckBox13.setText("13. ລາຍງານການຈ່າຍຄ່າຮຽນຕາມຜູ້ໃຊ່ງານ");
         joCheckBox13.setName("13"); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -226,7 +238,7 @@ public class PermissionActiveView extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 100, 5, 0);
         pnLayout.add(joCheckBox13, gridBagConstraints);
 
-        joCheckBox15.setText("ລາຍງານຜູ້ຄ້າງຄ່າຮຽນ");
+        joCheckBox15.setText("14. ລາຍງານຜູ້ຄ້າງຄ່າຮຽນ");
         joCheckBox15.setName("14"); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -235,7 +247,7 @@ public class PermissionActiveView extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 100, 5, 0);
         pnLayout.add(joCheckBox15, gridBagConstraints);
 
-        joCheckBox14.setText("ລາຍງານຄ່າອາຫານ");
+        joCheckBox14.setText("15. ລາຍງານຄ່າອາຫານ");
         joCheckBox14.setName("15"); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -244,7 +256,7 @@ public class PermissionActiveView extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 100, 5, 0);
         pnLayout.add(joCheckBox14, gridBagConstraints);
 
-        joCheckBox16.setText("ລາຍງານສ່ວນຫຼຸດ");
+        joCheckBox16.setText("16. ລາຍງານສ່ວນຫຼຸດ");
         joCheckBox16.setName("16"); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -253,7 +265,7 @@ public class PermissionActiveView extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 100, 5, 0);
         pnLayout.add(joCheckBox16, gridBagConstraints);
 
-        joCheckBox18.setText("ລາຍງານການຖອນເງິນຄືນ");
+        joCheckBox18.setText("17. ລາຍງານການຖອນເງິນຄືນ");
         joCheckBox18.setName("17"); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -262,7 +274,7 @@ public class PermissionActiveView extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 100, 5, 0);
         pnLayout.add(joCheckBox18, gridBagConstraints);
 
-        joCheckBox17.setText("ລາຍງານສະຖິຕິຄູ");
+        joCheckBox17.setText("18. ລາຍງານສະຖິຕິຄູ");
         joCheckBox17.setName("18"); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -271,7 +283,7 @@ public class PermissionActiveView extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 100, 5, 0);
         pnLayout.add(joCheckBox17, gridBagConstraints);
 
-        joCheckBox19.setText("ຂໍ້ມູນໂຮງຮຽນສາຍຝົນ");
+        joCheckBox19.setText("20. ຂໍ້ມູນໂຮງຮຽນສາຍຝົນ");
         joCheckBox19.setName("20"); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -280,7 +292,7 @@ public class PermissionActiveView extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 100, 5, 0);
         pnLayout.add(joCheckBox19, gridBagConstraints);
 
-        joCheckBox20.setText("ລາຍງານຂໍ້ມູນນັກຮຽນ");
+        joCheckBox20.setText("19. ລາຍງານຂໍ້ມູນນັກຮຽນ");
         joCheckBox20.setName("19"); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -289,7 +301,7 @@ public class PermissionActiveView extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 100, 5, 0);
         pnLayout.add(joCheckBox20, gridBagConstraints);
 
-        joCheckBox21.setText("ຂໍ້ມູນປີ້ນເຕີ");
+        joCheckBox21.setText("21. ຂໍ້ມູນປີ້ນເຕີ");
         joCheckBox21.setName("21"); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -307,7 +319,7 @@ public class PermissionActiveView extends javax.swing.JPanel {
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
-        gridBagConstraints.insets = new java.awt.Insets(50, 0, 30, 0);
+        gridBagConstraints.insets = new java.awt.Insets(30, 0, 30, 0);
         pnLayout.add(lblPermission, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -316,6 +328,84 @@ public class PermissionActiveView extends javax.swing.JPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weighty = 0.1;
         pnLayout.add(jLabel1, gridBagConstraints);
+
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel1.setOpaque(false);
+        jPanel1.setPreferredSize(new java.awt.Dimension(600, 50));
+        jPanel1.setLayout(new java.awt.GridBagLayout());
+
+        btnSelectAll.setText("ເລືອກທັງໝົດ");
+        btnSelectAll.setJoIconSize(25);
+        btnSelectAll.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.DONE_ALL);
+        btnSelectAll.setMargin(new java.awt.Insets(2, 8, 2, 8));
+        btnSelectAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSelectAllActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        gridBagConstraints.weighty = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(7, 0, 7, 0);
+        jPanel1.add(btnSelectAll, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(7, 0, 7, 0);
+        jPanel1.add(cbName, gridBagConstraints);
+
+        btnCreate.setBackground(new java.awt.Color(204, 102, 0));
+        btnCreate.setText("ສຳເນົາຮູບແບບສິດທິ");
+        btnCreate.setJoIconSize(25);
+        btnCreate.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.CONTENT_COPY);
+        btnCreate.setMargin(new java.awt.Insets(2, 8, 2, 8));
+        btnCreate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        gridBagConstraints.insets = new java.awt.Insets(7, 50, 7, 0);
+        jPanel1.add(btnCreate, gridBagConstraints);
+
+        joLable1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        joLable1.setText("ຮູບແບບສິດທິ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(7, 0, 7, 10);
+        jPanel1.add(joLable1, gridBagConstraints);
+
+        btnUse.setBackground(new java.awt.Color(0, 153, 153));
+        btnUse.setText("ນຳໃຊ້");
+        btnUse.setJoIconSize(25);
+        btnUse.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.VERIFIED_USER);
+        btnUse.setMargin(new java.awt.Insets(2, 8, 2, 8));
+        btnUse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUseActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        gridBagConstraints.insets = new java.awt.Insets(7, 10, 7, 0);
+        jPanel1.add(btnUse, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 13;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(15, 0, 30, 0);
+        pnLayout.add(jPanel1, gridBagConstraints);
 
         pn_Datatable.add(pnLayout, java.awt.BorderLayout.CENTER);
 
@@ -331,7 +421,7 @@ public class PermissionActiveView extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(Pn_Navigation, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pn_Datatable, javax.swing.GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE))
+                .addComponent(pn_Datatable, javax.swing.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -339,11 +429,59 @@ public class PermissionActiveView extends javax.swing.JPanel {
         GlobalDataModel.rootView.setView(view);
     }//GEN-LAST:event_btn_backActionPerformed
 
+    private void btnSelectAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelectAllActionPerformed
+        for (int i = 0; i < pnLayout.getComponentCount(); i++) {
+            if (pnLayout.getComponent(i) instanceof JoCheckBox) {
+                JoCheckBox checkBox = (JoCheckBox) pnLayout.getComponent(i);
+                int type = Integer.parseInt(checkBox.getName());
+                PermissionModel model = service.getRole(userModel.getUserID(), type);
+                checkBox.setSelected(model.isState());
+                checkBox.setSelected(!checkBox.isSelected());
+                Save(model, checkBox);
+            }
+        }
+    }//GEN-LAST:event_btnSelectAllActionPerformed
+
+    private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
+        for (int i = 0; i < pnLayout.getComponentCount(); i++) {
+            if (pnLayout.getComponent(i) instanceof JoCheckBox) {
+                JoCheckBox checkBox = (JoCheckBox) pnLayout.getComponent(i);
+                json.setValue(checkBox.getName(), checkBox.isSelected() ? "1" : "0");
+            }
+        }
+        PermissionThemeDialog themeDialog = new PermissionThemeDialog(GlobalDataModel.rootView, true, json.getJsonString(), this);
+        themeDialog.setVisible(true);
+    }//GEN-LAST:event_btnCreateActionPerformed
+
+    private void btnUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUseActionPerformed
+        JoJson joJson = new JoJson(property.getValueAt(cbName.getValue()));
+        for (int i = 0; i < pnLayout.getComponentCount(); i++) {
+            if (pnLayout.getComponent(i) instanceof JoCheckBox) {
+                JoCheckBox checkBox = (JoCheckBox) pnLayout.getComponent(i);
+                 boolean state = joJson.getInt(checkBox.getName()) == 1;
+                 checkBox.setSelected(state);
+            }
+        }
+    }//GEN-LAST:event_btnUseActionPerformed
+
+    public void showThemeName() {
+        int i = 0;
+        for (String key : property.get().stringPropertyNames()) {
+            cbName.JoAddIntModel(i, key);
+            i++;
+        }
+
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Pn_Navigation;
+    private Components.JoButtonIconfont btnCreate;
+    private Components.JoButtonIconfont btnSelectAll;
+    private Components.JoButtonIconfont btnUse;
     private Components.JoButtonIconfont btn_back;
+    private Components.JoCombobox cbName;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
@@ -368,6 +506,7 @@ public class PermissionActiveView extends javax.swing.JPanel {
     private Components.JoCheckBox joCheckBox7;
     private Components.JoCheckBox joCheckBox8;
     private Components.JoCheckBox joCheckBox9;
+    private Components.JoLable joLable1;
     private Components.JoLable lblPermission;
     private Components.JoLable lbl_title;
     private javax.swing.JPanel pnLayout;

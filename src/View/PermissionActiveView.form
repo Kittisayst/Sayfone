@@ -25,7 +25,7 @@
           <Group type="102" alignment="0" attributes="0">
               <Component id="Pn_Navigation" min="-2" pref="51" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="pn_Datatable" pref="565" max="32767" attributes="0"/>
+              <Component id="pn_Datatable" pref="584" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -108,128 +108,128 @@
           <SubComponents>
             <Component class="Components.JoCheckBox" name="joCheckBox1">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&#xe88;&#xeb1;&#xe94;&#xe81;&#xeb2;&#xe99;&#xe82;&#xecd;&#xec9;&#xea1;&#xeb9;&#xe99;&#xead;&#xeb2;&#xe88;&#xeb2;&#xe99;"/>
+                <Property name="text" type="java.lang.String" value="1. &#xe88;&#xeb1;&#xe94;&#xe81;&#xeb2;&#xe99;&#xe82;&#xecd;&#xec9;&#xea1;&#xeb9;&#xe99;&#xead;&#xeb2;&#xe88;&#xeb2;&#xe99;"/>
                 <Property name="name" type="java.lang.String" value="1" noResource="true"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-                  <GridBagConstraints gridX="0" gridY="1" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="5" insetsLeft="0" insetsBottom="5" insetsRight="0" anchor="21" weightX="0.0" weightY="0.0"/>
+                  <GridBagConstraints gridX="0" gridY="1" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="5" insetsLeft="82" insetsBottom="5" insetsRight="0" anchor="21" weightX="0.0" weightY="0.0"/>
                 </Constraint>
               </Constraints>
             </Component>
             <Component class="Components.JoCheckBox" name="joCheckBox3">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&#xe88;&#xeb1;&#xe94;&#xe81;&#xeb2;&#xe99;&#xe82;&#xecd;&#xec9;&#xea1;&#xeb9;&#xe99;&#xe99;&#xeb1;&#xe81;&#xeae;&#xebd;&#xe99;"/>
+                <Property name="text" type="java.lang.String" value="2. &#xe88;&#xeb1;&#xe94;&#xe81;&#xeb2;&#xe99;&#xe82;&#xecd;&#xec9;&#xea1;&#xeb9;&#xe99;&#xe99;&#xeb1;&#xe81;&#xeae;&#xebd;&#xe99;"/>
                 <Property name="name" type="java.lang.String" value="2" noResource="true"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-                  <GridBagConstraints gridX="0" gridY="2" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="5" insetsLeft="0" insetsBottom="5" insetsRight="0" anchor="21" weightX="0.0" weightY="0.0"/>
+                  <GridBagConstraints gridX="0" gridY="2" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="5" insetsLeft="82" insetsBottom="5" insetsRight="0" anchor="21" weightX="0.0" weightY="0.0"/>
                 </Constraint>
               </Constraints>
             </Component>
             <Component class="Components.JoCheckBox" name="joCheckBox4">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&#xe88;&#xeb1;&#xe94;&#xe81;&#xeb2;&#xe99;&#xea7;&#xeb4;&#xe8a;&#xeb2;-&#xe84;&#xeb8;&#xeaa;&#xead;&#xe99;"/>
+                <Property name="text" type="java.lang.String" value="4. &#xe88;&#xeb1;&#xe94;&#xe81;&#xeb2;&#xe99;&#xea7;&#xeb4;&#xe8a;&#xeb2;-&#xe84;&#xeb8;&#xeaa;&#xead;&#xe99;"/>
                 <Property name="name" type="java.lang.String" value="4" noResource="true"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-                  <GridBagConstraints gridX="0" gridY="4" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="5" insetsLeft="0" insetsBottom="5" insetsRight="0" anchor="21" weightX="0.0" weightY="0.0"/>
+                  <GridBagConstraints gridX="0" gridY="4" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="5" insetsLeft="82" insetsBottom="5" insetsRight="0" anchor="21" weightX="0.0" weightY="0.0"/>
                 </Constraint>
               </Constraints>
             </Component>
             <Component class="Components.JoCheckBox" name="joCheckBox5">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&#xe88;&#xeb1;&#xe94;&#xe81;&#xeb2;&#xe99;&#xea5;&#xeb2;&#xe8d;&#xea7;&#xeb4;&#xe8a;&#xeb2;"/>
+                <Property name="text" type="java.lang.String" value="3. &#xe88;&#xeb1;&#xe94;&#xe81;&#xeb2;&#xe99;&#xea5;&#xeb2;&#xe8d;&#xea7;&#xeb4;&#xe8a;&#xeb2;"/>
                 <Property name="name" type="java.lang.String" value="3" noResource="true"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-                  <GridBagConstraints gridX="0" gridY="3" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="5" insetsLeft="0" insetsBottom="5" insetsRight="0" anchor="21" weightX="0.0" weightY="0.0"/>
+                  <GridBagConstraints gridX="0" gridY="3" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="5" insetsLeft="82" insetsBottom="5" insetsRight="0" anchor="21" weightX="0.0" weightY="0.0"/>
                 </Constraint>
               </Constraints>
             </Component>
             <Component class="Components.JoCheckBox" name="joCheckBox6">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&#xe82;&#xecd;&#xec9;&#xea1;&#xeb9;&#xe99;&#xe82;&#xeb0;&#xec1;&#xedc;&#xe87;"/>
+                <Property name="text" type="java.lang.String" value="5. &#xe82;&#xecd;&#xec9;&#xea1;&#xeb9;&#xe99;&#xe82;&#xeb0;&#xec1;&#xedc;&#xe87;"/>
                 <Property name="name" type="java.lang.String" value="5" noResource="true"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-                  <GridBagConstraints gridX="0" gridY="5" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="5" insetsLeft="0" insetsBottom="5" insetsRight="0" anchor="21" weightX="0.0" weightY="0.0"/>
+                  <GridBagConstraints gridX="0" gridY="5" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="5" insetsLeft="82" insetsBottom="5" insetsRight="0" anchor="21" weightX="0.0" weightY="0.0"/>
                 </Constraint>
               </Constraints>
             </Component>
             <Component class="Components.JoCheckBox" name="joCheckBox7">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&#xe88;&#xeb1;&#xe94;&#xe81;&#xeb2;&#xe99;&#xe82;&#xecd;&#xec9;&#xea1;&#xeb9;&#xe99;&#xe9c;&#xeb9;&#xec9;&#xec3;&#xe8a;&#xec9;&#xe87;&#xeb2;&#xe99;"/>
+                <Property name="text" type="java.lang.String" value="6. &#xe88;&#xeb1;&#xe94;&#xe81;&#xeb2;&#xe99;&#xe82;&#xecd;&#xec9;&#xea1;&#xeb9;&#xe99;&#xe9c;&#xeb9;&#xec9;&#xec3;&#xe8a;&#xec9;&#xe87;&#xeb2;&#xe99;"/>
                 <Property name="name" type="java.lang.String" value="6" noResource="true"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-                  <GridBagConstraints gridX="0" gridY="6" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="5" insetsLeft="0" insetsBottom="5" insetsRight="0" anchor="21" weightX="0.0" weightY="0.0"/>
+                  <GridBagConstraints gridX="0" gridY="6" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="5" insetsLeft="82" insetsBottom="5" insetsRight="0" anchor="21" weightX="0.0" weightY="0.0"/>
                 </Constraint>
               </Constraints>
             </Component>
             <Component class="Components.JoCheckBox" name="joCheckBox8">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&#xec0;&#xe9b;&#xeb5;&#xe94;&#xe81;&#xeb2;&#xe99;&#xea5;&#xebb;&#xe87;&#xe97;&#xeb0;&#xe9a;&#xebd;&#xe99;&#xeae;&#xebd;&#xe99;"/>
+                <Property name="text" type="java.lang.String" value="8. &#xec0;&#xe9b;&#xeb5;&#xe94;&#xe81;&#xeb2;&#xe99;&#xea5;&#xebb;&#xe87;&#xe97;&#xeb0;&#xe9a;&#xebd;&#xe99;&#xeae;&#xebd;&#xe99;"/>
                 <Property name="name" type="java.lang.String" value="8" noResource="true"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-                  <GridBagConstraints gridX="0" gridY="8" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="5" insetsLeft="0" insetsBottom="5" insetsRight="0" anchor="21" weightX="0.0" weightY="0.0"/>
+                  <GridBagConstraints gridX="0" gridY="8" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="5" insetsLeft="82" insetsBottom="5" insetsRight="0" anchor="21" weightX="0.0" weightY="0.0"/>
                 </Constraint>
               </Constraints>
             </Component>
             <Component class="Components.JoCheckBox" name="joCheckBox9">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&#xe88;&#xeb1;&#xe94;&#xe81;&#xeb2;&#xe99;&#xe82;&#xecd;&#xec9;&#xea1;&#xeb9;&#xe99;&#xeaa;&#xeb4;&#xe94;&#xe97;&#xeb4;"/>
+                <Property name="text" type="java.lang.String" value="7. &#xe88;&#xeb1;&#xe94;&#xe81;&#xeb2;&#xe99;&#xe82;&#xecd;&#xec9;&#xea1;&#xeb9;&#xe99;&#xeaa;&#xeb4;&#xe94;&#xe97;&#xeb4;"/>
                 <Property name="name" type="java.lang.String" value="7" noResource="true"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-                  <GridBagConstraints gridX="0" gridY="7" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="5" insetsLeft="0" insetsBottom="5" insetsRight="0" anchor="21" weightX="0.0" weightY="0.0"/>
+                  <GridBagConstraints gridX="0" gridY="7" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="5" insetsLeft="82" insetsBottom="5" insetsRight="0" anchor="21" weightX="0.0" weightY="0.0"/>
                 </Constraint>
               </Constraints>
             </Component>
             <Component class="Components.JoCheckBox" name="joCheckBox10">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&#xe88;&#xec8;&#xeb2;&#xe8d;&#xe84;&#xec8;&#xeb2;&#xeae;&#xebd;&#xe99;"/>
+                <Property name="text" type="java.lang.String" value="9. &#xe88;&#xec8;&#xeb2;&#xe8d;&#xe84;&#xec8;&#xeb2;&#xeae;&#xebd;&#xe99;"/>
                 <Property name="name" type="java.lang.String" value="9" noResource="true"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-                  <GridBagConstraints gridX="0" gridY="9" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="5" insetsLeft="0" insetsBottom="5" insetsRight="0" anchor="21" weightX="0.0" weightY="0.0"/>
+                  <GridBagConstraints gridX="0" gridY="9" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="5" insetsLeft="82" insetsBottom="5" insetsRight="0" anchor="21" weightX="0.0" weightY="0.0"/>
                 </Constraint>
               </Constraints>
             </Component>
             <Component class="Components.JoCheckBox" name="joCheckBox11">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&#xe88;&#xeb1;&#xe94;&#xead;&#xeb1;&#xe99;&#xe94;&#xeb1;&#xe9a;&#xe84;&#xeb9;"/>
+                <Property name="text" type="java.lang.String" value="10. &#xe88;&#xeb1;&#xe94;&#xead;&#xeb1;&#xe99;&#xe94;&#xeb1;&#xe9a;&#xe84;&#xeb9;"/>
                 <Property name="name" type="java.lang.String" value="10" noResource="true"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-                  <GridBagConstraints gridX="0" gridY="10" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="5" insetsLeft="0" insetsBottom="5" insetsRight="0" anchor="21" weightX="0.0" weightY="0.0"/>
+                  <GridBagConstraints gridX="0" gridY="10" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="5" insetsLeft="82" insetsBottom="5" insetsRight="0" anchor="21" weightX="0.0" weightY="0.0"/>
                 </Constraint>
               </Constraints>
             </Component>
             <Component class="Components.JoCheckBox" name="joCheckBox12">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&#xe9a;&#xeb1;&#xe99;&#xe97;&#xeb6;&#xe81;&#xe81;&#xeb2;&#xe99;&#xe82;&#xeb2;&#xe94;&#xeae;&#xebd;&#xe99;"/>
+                <Property name="text" type="java.lang.String" value="11. &#xe9a;&#xeb1;&#xe99;&#xe97;&#xeb6;&#xe81;&#xe81;&#xeb2;&#xe99;&#xe82;&#xeb2;&#xe94;&#xeae;&#xebd;&#xe99;"/>
                 <Property name="name" type="java.lang.String" value="11" noResource="true"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-                  <GridBagConstraints gridX="0" gridY="11" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="5" insetsLeft="0" insetsBottom="5" insetsRight="0" anchor="21" weightX="0.0" weightY="0.0"/>
+                  <GridBagConstraints gridX="0" gridY="11" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="5" insetsLeft="82" insetsBottom="5" insetsRight="0" anchor="21" weightX="0.0" weightY="0.0"/>
                 </Constraint>
               </Constraints>
             </Component>
             <Component class="Components.JoCheckBox" name="joCheckBox2">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&#xea5;&#xeb2;&#xe8d;&#xe87;&#xeb2;&#xe99;&#xe81;&#xeb2;&#xe99;&#xe88;&#xec8;&#xeb2;&#xe8d;&#xe84;&#xec8;&#xeb2;&#xeae;&#xebd;&#xe99;"/>
+                <Property name="text" type="java.lang.String" value="12. &#xea5;&#xeb2;&#xe8d;&#xe87;&#xeb2;&#xe99;&#xe81;&#xeb2;&#xe99;&#xe88;&#xec8;&#xeb2;&#xe8d;&#xe84;&#xec8;&#xeb2;&#xeae;&#xebd;&#xe99;"/>
                 <Property name="name" type="java.lang.String" value="12" noResource="true"/>
               </Properties>
               <Constraints>
@@ -240,7 +240,7 @@
             </Component>
             <Component class="Components.JoCheckBox" name="joCheckBox13">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&#xea5;&#xeb2;&#xe8d;&#xe87;&#xeb2;&#xe99;&#xe81;&#xeb2;&#xe99;&#xe88;&#xec8;&#xeb2;&#xe8d;&#xe84;&#xec8;&#xeb2;&#xeae;&#xebd;&#xe99;&#xe95;&#xeb2;&#xea1;&#xe9c;&#xeb9;&#xec9;&#xec3;&#xe8a;&#xec8;&#xe87;&#xeb2;&#xe99;"/>
+                <Property name="text" type="java.lang.String" value="13. &#xea5;&#xeb2;&#xe8d;&#xe87;&#xeb2;&#xe99;&#xe81;&#xeb2;&#xe99;&#xe88;&#xec8;&#xeb2;&#xe8d;&#xe84;&#xec8;&#xeb2;&#xeae;&#xebd;&#xe99;&#xe95;&#xeb2;&#xea1;&#xe9c;&#xeb9;&#xec9;&#xec3;&#xe8a;&#xec8;&#xe87;&#xeb2;&#xe99;"/>
                 <Property name="name" type="java.lang.String" value="13" noResource="true"/>
               </Properties>
               <Constraints>
@@ -251,7 +251,7 @@
             </Component>
             <Component class="Components.JoCheckBox" name="joCheckBox15">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&#xea5;&#xeb2;&#xe8d;&#xe87;&#xeb2;&#xe99;&#xe9c;&#xeb9;&#xec9;&#xe84;&#xec9;&#xeb2;&#xe87;&#xe84;&#xec8;&#xeb2;&#xeae;&#xebd;&#xe99;"/>
+                <Property name="text" type="java.lang.String" value="14. &#xea5;&#xeb2;&#xe8d;&#xe87;&#xeb2;&#xe99;&#xe9c;&#xeb9;&#xec9;&#xe84;&#xec9;&#xeb2;&#xe87;&#xe84;&#xec8;&#xeb2;&#xeae;&#xebd;&#xe99;"/>
                 <Property name="name" type="java.lang.String" value="14" noResource="true"/>
               </Properties>
               <Constraints>
@@ -262,7 +262,7 @@
             </Component>
             <Component class="Components.JoCheckBox" name="joCheckBox14">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&#xea5;&#xeb2;&#xe8d;&#xe87;&#xeb2;&#xe99;&#xe84;&#xec8;&#xeb2;&#xead;&#xeb2;&#xeab;&#xeb2;&#xe99;"/>
+                <Property name="text" type="java.lang.String" value="15. &#xea5;&#xeb2;&#xe8d;&#xe87;&#xeb2;&#xe99;&#xe84;&#xec8;&#xeb2;&#xead;&#xeb2;&#xeab;&#xeb2;&#xe99;"/>
                 <Property name="name" type="java.lang.String" value="15" noResource="true"/>
               </Properties>
               <Constraints>
@@ -273,7 +273,7 @@
             </Component>
             <Component class="Components.JoCheckBox" name="joCheckBox16">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&#xea5;&#xeb2;&#xe8d;&#xe87;&#xeb2;&#xe99;&#xeaa;&#xec8;&#xea7;&#xe99;&#xeab;&#xebc;&#xeb8;&#xe94;"/>
+                <Property name="text" type="java.lang.String" value="16. &#xea5;&#xeb2;&#xe8d;&#xe87;&#xeb2;&#xe99;&#xeaa;&#xec8;&#xea7;&#xe99;&#xeab;&#xebc;&#xeb8;&#xe94;"/>
                 <Property name="name" type="java.lang.String" value="16" noResource="true"/>
               </Properties>
               <Constraints>
@@ -284,7 +284,7 @@
             </Component>
             <Component class="Components.JoCheckBox" name="joCheckBox18">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&#xea5;&#xeb2;&#xe8d;&#xe87;&#xeb2;&#xe99;&#xe81;&#xeb2;&#xe99;&#xe96;&#xead;&#xe99;&#xec0;&#xe87;&#xeb4;&#xe99;&#xe84;&#xeb7;&#xe99;"/>
+                <Property name="text" type="java.lang.String" value="17. &#xea5;&#xeb2;&#xe8d;&#xe87;&#xeb2;&#xe99;&#xe81;&#xeb2;&#xe99;&#xe96;&#xead;&#xe99;&#xec0;&#xe87;&#xeb4;&#xe99;&#xe84;&#xeb7;&#xe99;"/>
                 <Property name="name" type="java.lang.String" value="17" noResource="true"/>
               </Properties>
               <Constraints>
@@ -295,7 +295,7 @@
             </Component>
             <Component class="Components.JoCheckBox" name="joCheckBox17">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&#xea5;&#xeb2;&#xe8d;&#xe87;&#xeb2;&#xe99;&#xeaa;&#xeb0;&#xe96;&#xeb4;&#xe95;&#xeb4;&#xe84;&#xeb9;"/>
+                <Property name="text" type="java.lang.String" value="18. &#xea5;&#xeb2;&#xe8d;&#xe87;&#xeb2;&#xe99;&#xeaa;&#xeb0;&#xe96;&#xeb4;&#xe95;&#xeb4;&#xe84;&#xeb9;"/>
                 <Property name="name" type="java.lang.String" value="18" noResource="true"/>
               </Properties>
               <Constraints>
@@ -306,7 +306,7 @@
             </Component>
             <Component class="Components.JoCheckBox" name="joCheckBox19">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&#xe82;&#xecd;&#xec9;&#xea1;&#xeb9;&#xe99;&#xec2;&#xeae;&#xe87;&#xeae;&#xebd;&#xe99;&#xeaa;&#xeb2;&#xe8d;&#xe9d;&#xebb;&#xe99;"/>
+                <Property name="text" type="java.lang.String" value="20. &#xe82;&#xecd;&#xec9;&#xea1;&#xeb9;&#xe99;&#xec2;&#xeae;&#xe87;&#xeae;&#xebd;&#xe99;&#xeaa;&#xeb2;&#xe8d;&#xe9d;&#xebb;&#xe99;"/>
                 <Property name="name" type="java.lang.String" value="20" noResource="true"/>
               </Properties>
               <Constraints>
@@ -317,7 +317,7 @@
             </Component>
             <Component class="Components.JoCheckBox" name="joCheckBox20">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&#xea5;&#xeb2;&#xe8d;&#xe87;&#xeb2;&#xe99;&#xe82;&#xecd;&#xec9;&#xea1;&#xeb9;&#xe99;&#xe99;&#xeb1;&#xe81;&#xeae;&#xebd;&#xe99;"/>
+                <Property name="text" type="java.lang.String" value="19. &#xea5;&#xeb2;&#xe8d;&#xe87;&#xeb2;&#xe99;&#xe82;&#xecd;&#xec9;&#xea1;&#xeb9;&#xe99;&#xe99;&#xeb1;&#xe81;&#xeae;&#xebd;&#xe99;"/>
                 <Property name="name" type="java.lang.String" value="19" noResource="true"/>
               </Properties>
               <Constraints>
@@ -328,7 +328,7 @@
             </Component>
             <Component class="Components.JoCheckBox" name="joCheckBox21">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&#xe82;&#xecd;&#xec9;&#xea1;&#xeb9;&#xe99;&#xe9b;&#xeb5;&#xec9;&#xe99;&#xec0;&#xe95;&#xeb5;"/>
+                <Property name="text" type="java.lang.String" value="21. &#xe82;&#xecd;&#xec9;&#xea1;&#xeb9;&#xe99;&#xe9b;&#xeb5;&#xec9;&#xe99;&#xec0;&#xe95;&#xeb5;"/>
                 <Property name="name" type="java.lang.String" value="21" noResource="true"/>
               </Properties>
               <Constraints>
@@ -347,7 +347,7 @@
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-                  <GridBagConstraints gridX="0" gridY="0" gridWidth="2" gridHeight="1" fill="2" ipadX="0" ipadY="0" insetsTop="50" insetsLeft="0" insetsBottom="30" insetsRight="0" anchor="19" weightX="0.0" weightY="0.0"/>
+                  <GridBagConstraints gridX="0" gridY="0" gridWidth="2" gridHeight="1" fill="2" ipadX="0" ipadY="0" insetsTop="30" insetsLeft="0" insetsBottom="30" insetsRight="0" anchor="19" weightX="0.0" weightY="0.0"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -358,6 +358,110 @@
                 </Constraint>
               </Constraints>
             </Component>
+            <Container class="javax.swing.JPanel" name="jPanel1">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="cc" green="cc" red="cc" type="rgb"/>
+                </Property>
+                <Property name="opaque" type="boolean" value="false"/>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[600, 50]"/>
+                </Property>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                  <GridBagConstraints gridX="0" gridY="13" gridWidth="2" gridHeight="1" fill="2" ipadX="0" ipadY="0" insetsTop="15" insetsLeft="0" insetsBottom="30" insetsRight="0" anchor="10" weightX="0.0" weightY="0.0"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout"/>
+              <SubComponents>
+                <Component class="Components.JoButtonIconfont" name="btnSelectAll">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="&#xec0;&#xea5;&#xeb7;&#xead;&#xe81;&#xe97;&#xeb1;&#xe87;&#xedd;&#xebb;&#xe94;"/>
+                    <Property name="joIconSize" type="int" value="25"/>
+                    <Property name="joIcons" type="jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons" editor="org.netbeans.modules.form.editors.EnumEditor">
+                      <Value id="DONE_ALL"/>
+                    </Property>
+                    <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+                      <Insets value="[2, 8, 2, 8]"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSelectAllActionPerformed"/>
+                  </Events>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                      <GridBagConstraints gridX="-1" gridY="-1" gridWidth="1" gridHeight="1" fill="3" ipadX="0" ipadY="0" insetsTop="7" insetsLeft="0" insetsBottom="7" insetsRight="0" anchor="10" weightX="0.0" weightY="0.1"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="Components.JoCombobox" name="cbName">
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                      <GridBagConstraints gridX="2" gridY="0" gridWidth="1" gridHeight="1" fill="1" ipadX="0" ipadY="0" insetsTop="7" insetsLeft="0" insetsBottom="7" insetsRight="0" anchor="10" weightX="0.0" weightY="0.0"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="Components.JoButtonIconfont" name="btnCreate">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="0" green="66" red="cc" type="rgb"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="&#xeaa;&#xeb3;&#xec0;&#xe99;&#xebb;&#xeb2;&#xeae;&#xeb9;&#xe9a;&#xec1;&#xe9a;&#xe9a;&#xeaa;&#xeb4;&#xe94;&#xe97;&#xeb4;"/>
+                    <Property name="joIconSize" type="int" value="25"/>
+                    <Property name="joIcons" type="jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons" editor="org.netbeans.modules.form.editors.EnumEditor">
+                      <Value id="CONTENT_COPY"/>
+                    </Property>
+                    <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+                      <Insets value="[2, 8, 2, 8]"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCreateActionPerformed"/>
+                  </Events>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                      <GridBagConstraints gridX="4" gridY="0" gridWidth="1" gridHeight="1" fill="3" ipadX="0" ipadY="0" insetsTop="7" insetsLeft="50" insetsBottom="7" insetsRight="0" anchor="10" weightX="0.0" weightY="0.0"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="Components.JoLable" name="joLable1">
+                  <Properties>
+                    <Property name="horizontalAlignment" type="int" value="4"/>
+                    <Property name="text" type="java.lang.String" value="&#xeae;&#xeb9;&#xe9a;&#xec1;&#xe9a;&#xe9a;&#xeaa;&#xeb4;&#xe94;&#xe97;&#xeb4;"/>
+                  </Properties>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                      <GridBagConstraints gridX="1" gridY="0" gridWidth="1" gridHeight="1" fill="1" ipadX="0" ipadY="0" insetsTop="7" insetsLeft="0" insetsBottom="7" insetsRight="10" anchor="10" weightX="0.1" weightY="0.0"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="Components.JoButtonIconfont" name="btnUse">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="99" green="99" red="0" type="rgb"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="&#xe99;&#xeb3;&#xec3;&#xe8a;&#xec9;"/>
+                    <Property name="joIconSize" type="int" value="25"/>
+                    <Property name="joIcons" type="jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons" editor="org.netbeans.modules.form.editors.EnumEditor">
+                      <Value id="VERIFIED_USER"/>
+                    </Property>
+                    <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+                      <Insets value="[2, 8, 2, 8]"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUseActionPerformed"/>
+                  </Events>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                      <GridBagConstraints gridX="3" gridY="0" gridWidth="1" gridHeight="1" fill="3" ipadX="0" ipadY="0" insetsTop="7" insetsLeft="10" insetsBottom="7" insetsRight="0" anchor="10" weightX="0.0" weightY="0.0"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+              </SubComponents>
+            </Container>
           </SubComponents>
         </Container>
       </SubComponents>

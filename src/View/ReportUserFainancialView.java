@@ -251,7 +251,7 @@ public class ReportUserFainancialView extends javax.swing.JPanel {
         jPanel2.add(lblAmountTransfer);
 
         btnExport.setBackground(new java.awt.Color(0, 153, 102));
-        btnExport.setText("Export Excel");
+        btnExport.setText("Excel");
         btnExport.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.GRID_ON);
         jPanel2.add(btnExport);
 

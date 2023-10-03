@@ -2,7 +2,6 @@ package Controller;
 
 import App.AppFinancial;
 import App.AppFinancialRoom;
-import App.AppHome;
 import Component.DialogChangeClassRoom;
 import DAOSevervice.FinancialService;
 import DAOSevervice.StudentService;
@@ -16,6 +15,8 @@ import Utility.MyPopup;
 import View.FinancailStudentView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ import java.util.List;
 import jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons;
 import theme.MyColor;
 
-public class FinancailStudentController implements JoMVC, ActionListener, MouseListener {
+public class FinancailStudentController implements JoMVC, ActionListener, MouseListener, KeyListener {
 
     private FinancailStudentView view;
     private RegisterModel registerModel;
@@ -49,6 +50,8 @@ public class FinancailStudentController implements JoMVC, ActionListener, MouseL
         view.getBtn_Add().setEnabled(false);
         //ສະແດງນັກສຶກສາທັງໝົດ
         totalPages = studentService.getTotalPages();
+        int pages = (int) Math.ceil((double) studentService.getTotalPages() / 25);
+        view.showCurrentPage(currentPage, pages);
         showFilterStudentRegistered();
     }
 
@@ -62,6 +65,7 @@ public class FinancailStudentController implements JoMVC, ActionListener, MouseL
         view.getBtnPrevious().addActionListener(this);
         view.getBtnNext().addActionListener(this);
         view.getBtnSearch().addActionListener(this);
+        view.getTxtCurrentPage().addKeyListener(this);
         popup.addActionListener(this);
     }
 
@@ -179,9 +183,20 @@ public class FinancailStudentController implements JoMVC, ActionListener, MouseL
         if (!buttonState) {
             if (currentPage > 1) {
                 currentPage--;
+                view.showCurrentPage(currentPage, totalPages);
                 List<StudentModel> models = studentService.getSutdentNotRegister(registerModel.getYearID(), currentPage, 25);
                 view.showStudentAll(models);
             }
+        }
+    }
+
+    private void currentText() {
+        totalPages = studentService.getTotalPages();
+        currentPage = view.getTxtCurrentPage().getNumber();
+        if (currentPage <= totalPages && currentPage >= 1) {
+            view.showCurrentPage(currentPage, totalPages);
+            List<StudentModel> models = studentService.getSutdentNotRegister(registerModel.getYearID(), currentPage, 25);
+            view.showStudentAll(models);
         }
     }
 
@@ -190,6 +205,7 @@ public class FinancailStudentController implements JoMVC, ActionListener, MouseL
             totalPages = studentService.getTotalPages();
             if (currentPage < totalPages) {
                 currentPage++;
+                view.showCurrentPage(currentPage, totalPages);
                 List<StudentModel> models = studentService.getSutdentNotRegister(registerModel.getYearID(), currentPage, 25);
                 view.showStudentAll(models);
             }
@@ -197,10 +213,11 @@ public class FinancailStudentController implements JoMVC, ActionListener, MouseL
     }
 
     private void searchStudent() {
-        String searchTerm = view.getTxtSearch().getText().trim();
+        String searchTerm = view.getTxtSearch().getText();
         if (buttonState) {
             if (!searchTerm.isEmpty()) {
                 searchRegistered(searchTerm);
+                System.out.println("ss");
             } else {
                 showFilterStudentRegistered();
             }
@@ -225,12 +242,34 @@ public class FinancailStudentController implements JoMVC, ActionListener, MouseL
         List<StudentModel> studentList = new ArrayList<>();
         List<FinancialModel> models = financialService.getSearchStudentRegistered(registerModel.getRegisterID(), search);
         models.forEach(data -> {
-            studentList.add(studentService.getStudentById(data.getStudentID()));
+            if (data.getMoney() > 0 || data.getTransferMoney() > 0) {
+                studentList.add(studentService.getStudentById(data.getStudentID()));
+            }
         });
         buttonState = true;
         view.setButtonState(buttonState);
         view.ClearDataTable();
         view.showStudentAll(studentList);
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        JoHookEvent event = new JoHookEvent(e.getSource());
+        if (event.isEvent(view.getTxtCurrentPage())) {
+            if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                currentText();
+            }
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
     }
 
 }

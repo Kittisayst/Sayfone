@@ -213,7 +213,7 @@ public class ReportDiscountView extends javax.swing.JPanel {
         jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 10, 10));
 
         btnExport.setBackground(new java.awt.Color(0, 153, 102));
-        btnExport.setText("Export Excel");
+        btnExport.setText("Excel");
         btnExport.setEnabled(false);
         btnExport.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.GRID_ON);
         jPanel2.add(btnExport);

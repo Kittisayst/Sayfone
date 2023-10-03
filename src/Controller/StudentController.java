@@ -19,10 +19,12 @@ import Tools.JoPopup;
 import View.StudentView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class StudentController implements JoMVC, ActionListener, MouseListener {
+public class StudentController implements JoMVC, ActionListener, MouseListener, KeyListener {
 
     private final StudentView view;
     private final StudentService service;
@@ -40,6 +42,8 @@ public class StudentController implements JoMVC, ActionListener, MouseListener {
     public final void Start() {
         GlobalDataModel.rootView.setView(view);
         totalPages = service.getTotalPages();
+        int pages = (int) Math.ceil((double) service.getStudentCount() / 25);
+        view.showCurrentPage(currentPage, pages);
         view.showStudent(service.getStudentPagination(currentPage, 25));
     }
 
@@ -51,6 +55,7 @@ public class StudentController implements JoMVC, ActionListener, MouseListener {
         view.getBtnNext().addActionListener(this);
         view.getTb_data().addMouseListener(this);
         view.getBtnSeach().addActionListener(this);
+        view.getTxtCurrentPage().addKeyListener(this);
         popup.addActionListener(this);
     }
 
@@ -163,9 +168,39 @@ public class StudentController implements JoMVC, ActionListener, MouseListener {
 
     }
 
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        JoHookEvent event = new JoHookEvent(e.getSource());
+        if (event.isEvent(view.getTxtCurrentPage())) {
+            if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                currentText();
+            }
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
+    }
+
     private void navigatePrevious() {
         if (currentPage > 1) {
             currentPage--;
+            view.showCurrentPage(currentPage, totalPages);
+            view.showStudent(service.getStudentPagination(currentPage, 25));
+        }
+    }
+
+    private void currentText() {
+        totalPages = service.getTotalPages();
+        currentPage = view.getTxtCurrentPage().getNumber();
+        if (currentPage <= totalPages && currentPage >= 1) {
+            view.showCurrentPage(currentPage, totalPages);
             view.showStudent(service.getStudentPagination(currentPage, 25));
         }
     }
@@ -174,6 +209,7 @@ public class StudentController implements JoMVC, ActionListener, MouseListener {
         totalPages = service.getTotalPages();
         if (currentPage < totalPages) {
             currentPage++;
+            view.showCurrentPage(currentPage, totalPages);
             view.showStudent(service.getStudentPagination(currentPage, 25));
         }
     }

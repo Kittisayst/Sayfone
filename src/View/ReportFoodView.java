@@ -64,7 +64,8 @@ public class ReportFoodView extends javax.swing.JPanel {
                     foodMoney,
                     financialModel.getFinancialMonth(),
                     studentModel.getStudentNo(),
-                    studentModel.getFullName()
+                    studentModel.getFullName(),
+                    financialModel.getFinancialComment()
                 });
             }
         });
@@ -147,11 +148,11 @@ public class ReportFoodView extends javax.swing.JPanel {
 
             },
             new String [] {
-                "#", "FinacialID", "RegisterID", "StudentID", "ຄ່າອາຫານ", "ເດືອນ", "ລະຫັດນັກຮຽນ", "ຊື່ນັກຮຽນ"
+                "#", "FinacialID", "RegisterID", "StudentID", "ຄ່າອາຫານ", "ເດືອນ", "ລະຫັດນັກຮຽນ", "ຊື່ນັກຮຽນ", "ໝາຍເຫດ"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -183,7 +184,7 @@ public class ReportFoodView extends javax.swing.JPanel {
         jPanel2.add(lblAmount);
 
         btnExport.setBackground(new java.awt.Color(0, 153, 102));
-        btnExport.setText("Export Excel");
+        btnExport.setText("Excel");
         btnExport.setEnabled(false);
         btnExport.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.GRID_ON);
         jPanel2.add(btnExport);

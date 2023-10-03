@@ -478,14 +478,15 @@ public class FinancialDAO implements FinancialFn {
     public List<FinancialModel> getSearchStudentRegistered(int RegisterID, String search) {
         JoConnect connect = new JoConnect();
         List<FinancialModel> models = new ArrayList<>();
+        String createSearch = isNumber(search) ? "StudentNo LIKE ?" : "StudentName LIKE ?";
         try {
             String csql = "SELECT * FROM tb_financial\n"
                     + "INNER JOIN tb_student ON tb_financial.StudentID = tb_student.StudentID\n"
-                    + "WHERE RegisterID=? AND StudentNo LIKE ? OR StudentName LIKE ? GROUP BY tb_financial.StudentID";
+                    + "WHERE RegisterID=? AND " + createSearch;
             PreparedStatement pre = connect.getConnectionDefault().prepareStatement(csql);
             pre.setInt(1, RegisterID);
-            pre.setString(2, search);
-            pre.setString(3, search);
+            pre.setString(2, "%" + search + "%");
+            System.out.println(pre);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
                 models.add(resultModel(rs));
@@ -497,6 +498,10 @@ public class FinancialDAO implements FinancialFn {
             connect.close();
         }
         return models;
+    }
+
+    private boolean isNumber(String data) {
+        return data.matches("-?\\d+(\\.\\d+)?");
     }
 
     @Override

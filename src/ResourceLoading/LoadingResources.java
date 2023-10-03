@@ -31,6 +31,7 @@ public class LoadingResources extends javax.swing.JFrame {
         resourses.add(new YearLoading());
         resourses.add(new RegisterLoading());
         resourses.add(new ClassLoading());
+        resourses.add(new StudentLoading());
         resourses.add(new DashboardLoading());
     }
 
@@ -57,6 +58,14 @@ public class LoadingResources extends javax.swing.JFrame {
                         }
                     } else if (data instanceof ClassLoading) {
                         if (!classloading()) {
+                            break;
+                        }
+                    } else if (data instanceof StudentLoading) {
+                        if (!studentLoading()) {
+                            break;
+                        }
+                    } else if (data instanceof FinancialLoading) {
+                        if (!financialLoading()) {
                             break;
                         }
                     } else if (data instanceof DashboardLoading) {
@@ -146,11 +155,26 @@ public class LoadingResources extends javax.swing.JFrame {
         return state;
     }
 
+    private boolean studentLoading() {
+        loading.setTitle("ໂຫຼດຂໍ້ມູນຂໍ້ມູນນັກຮຽນ");
+        StudentLoading studentLoading = new StudentLoading();
+        GlobalDataModel.studentAll = studentLoading.createStudents();
+        setState(!GlobalDataModel.studentAll.isEmpty());
+        return state;
+    }
+
+    public boolean financialLoading() {
+        loading.setTitle("ໂຫຼດຂໍ້ມູນຂໍ້ມູນການຈ່າຍຄ່າຮຽນ");
+        FinancialLoading financialLoading = new FinancialLoading();
+        GlobalDataModel.financialAll = financialLoading.createFinancial();
+        setState(!GlobalDataModel.financialAll.isEmpty());
+        return state;
+    }
+
     private void dashboard() {
         loading.setTitle("ໂຫຼດຂໍ້ມູນ ໜ້າ Dashboard");
         DashboardLoading dashboardLoading = new DashboardLoading();
         dashboardLoading.createGlobalDashboard();
-
     }
 
     @SuppressWarnings("unchecked")

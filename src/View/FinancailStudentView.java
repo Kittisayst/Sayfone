@@ -3,8 +3,8 @@ package View;
 import Components.JoButtonIconfont;
 import Components.JoTable;
 import Components.JoTextField;
+import Model.GlobalDataModel;
 import Model.StudentModel;
-import Tools.JoDataTable;
 import java.awt.Color;
 import java.util.List;
 import theme.JoTheme;
@@ -12,10 +12,12 @@ import theme.JoTheme;
 public class FinancailStudentView extends javax.swing.JPanel {
 
     private boolean buttonState = true;
+    private PnLoading loading = new PnLoading();
 
     public FinancailStudentView(String Title) {
         initComponents();
         lbl_title.setText(Title);
+        loading.setTitle("ໂຫຼດຂໍ້ມູນນັກຮຽນ");
     }
 
     public JoButtonIconfont getBtn_back() {
@@ -42,6 +44,16 @@ public class FinancailStudentView extends javax.swing.JPanel {
         return buttonState;
     }
 
+    public JoTextField getTxtCurrentPage() {
+        return txtCurrentPage;
+    }
+
+    public void showCurrentPage(int currentNumber, int totalPages) {
+        int sum = totalPages;
+        lblCurrentPage.setText("ໜ້າ: " + currentNumber + " / " + sum);
+        txtCurrentPage.setText("" + currentNumber);
+    }
+
     public void setButtonState(boolean buttonState) {
         this.buttonState = buttonState;
         Color colregistered = buttonState ? new Color(255, 0, 51) : JoTheme.Primary;
@@ -58,17 +70,29 @@ public class FinancailStudentView extends javax.swing.JPanel {
 
     public void showStudentAll(List<StudentModel> models) {
         tb_data.JoClearModel();
-        models.forEach(data -> {
-            if (data.getStudentID() > 0) {
-                tb_data.AddJoModel(new Object[]{
-                    tb_data.autoNumber(),
-                    data.getStudentID(),
-                    data.getStudentNo(),
-                    data.getFullName(),
-                    data.getDateStart() == null ? "ວ່າງ" : data.getDateStart()
+        GlobalDataModel.rootView.setView(loading);
+        Thread thread = new Thread(() -> {
+            try {
+                models.forEach(data -> {
+                    if (data.getStudentID() > 0) {
+                        tb_data.AddJoModel(new Object[]{
+                            tb_data.autoNumber(),
+                            data.getStudentID(),
+                            data.getStudentNo(),
+                            data.getFullName(),
+                            data.getDateStart() == null ? "ວ່າງ" : data.getDateStart()
+                        });
+                        loading.StartProgress(models.size(), 20);
+                    }
                 });
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                GlobalDataModel.rootView.setView(this);
+                loading.close();
             }
         });
+        thread.start();
     }
 
     public JoButtonIconfont getBtnSearch() {
@@ -90,6 +114,7 @@ public class FinancailStudentView extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         Pn_Navigation = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -111,6 +136,8 @@ public class FinancailStudentView extends javax.swing.JPanel {
         jPanel6 = new javax.swing.JPanel();
         btnPrevious = new Components.JoButtonIconfont();
         btnNext = new Components.JoButtonIconfont();
+        txtCurrentPage = new Components.JoTextField();
+        lblCurrentPage = new Components.JoLable();
 
         Pn_Navigation.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
         Pn_Navigation.setLayout(new java.awt.GridLayout(1, 0));
@@ -192,17 +219,44 @@ public class FinancailStudentView extends javax.swing.JPanel {
         btnSearch.setLabel("ຄົ້ນຫາ");
         jPanel2.add(btnSearch);
 
-        jPanel6.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 20, 5));
+        jPanel6.setLayout(new java.awt.GridBagLayout());
 
         btnPrevious.setText("ກ່ອນໜ້າ");
         btnPrevious.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.ARROW_BACK);
         btnPrevious.setPreferredSize(new java.awt.Dimension(109, 35));
-        jPanel6.add(btnPrevious);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        jPanel6.add(btnPrevious, gridBagConstraints);
 
         btnNext.setText("ໜ້າຕໍ່ໄປ");
         btnNext.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.ARROW_FORWARD);
         btnNext.setPreferredSize(new java.awt.Dimension(109, 35));
-        jPanel6.add(btnNext);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        jPanel6.add(btnNext, gridBagConstraints);
+
+        txtCurrentPage.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtCurrentPage.setFont(new java.awt.Font("Phetsarath OT", 0, 14)); // NOI18N
+        txtCurrentPage.setNumberOnly(true);
+        txtCurrentPage.setPlaceholder("ໜ້າທີ");
+        txtCurrentPage.setPreferredSize(new java.awt.Dimension(80, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 10);
+        jPanel6.add(txtCurrentPage, gridBagConstraints);
+
+        lblCurrentPage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCurrentPage.setText("ໜ້າທີ: 1");
+        lblCurrentPage.setFont(new java.awt.Font("Phetsarath OT", 0, 14)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 10);
+        jPanel6.add(lblCurrentPage, gridBagConstraints);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -223,9 +277,10 @@ public class FinancailStudentView extends javax.swing.JPanel {
                 .addGap(2, 2, 2)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pn_Datatable, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
+                .addComponent(pn_Datatable, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -247,9 +302,11 @@ public class FinancailStudentView extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private Components.JoLable joLable1;
+    private Components.JoLable lblCurrentPage;
     private Components.JoLable lbl_title;
     private javax.swing.JPanel pn_Datatable;
     private Components.JoTable tb_data;
+    private Components.JoTextField txtCurrentPage;
     private Components.JoTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }
