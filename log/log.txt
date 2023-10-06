@@ -210,3 +210,7 @@
 03/10/2023: DAO.WithdrawDAO@291ce996 Errorjava.sql.SQLException: Statement parameter 1 not set.
 03/10/2023: DAO.WithdrawDAO@4eb7ef76 Errorjava.sql.SQLException: Statement parameter 7 not set.
 03/10/2023: DAO.WithdrawDAO@62a5172 Errorjava.sql.SQLException: Statement parameter 8 not set.
+05/10/2023: DAO.DistrictDAO@6b5e27e5 Errorjava.sql.SQLException: Column Index out of range, 4 > 3. 
+05/10/2023: DAO.DistrictDAO@6b5e27e5 Errorjava.sql.SQLException: Column Index out of range, 4 > 3. 
+05/10/2023: DAO.DistrictDAO@31724f72 Errorjava.sql.SQLException: Column Index out of range, 4 > 3. 
+05/10/2023: DAO.DistrictDAO@31724f72 Errorjava.sql.SQLException: Column Index out of range, 4 > 3. 

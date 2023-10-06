@@ -12,14 +12,19 @@ import DAOSevervice.NationalityService;
 import DAOSevervice.ProvinceService;
 import DAOSevervice.ReligionService;
 import DAOSevervice.StudentAddressService;
+import DAOSevervice.StudentFileService;
 import DAOSevervice.StudentHistoryService;
 import DAOSevervice.StudentService;
+import Main.JoHttp;
 import Model.BrotherAndSisterModel;
 import Model.GlobalDataModel;
+import Model.StudentFileModel;
 import Model.StudentModel;
 import Tools.JoAlert;
+import Tools.JoFilechooser;
 import Tools.JoHookEvent;
 import Tools.JoIconFont;
+import Utility.MyFormat;
 import Utility.MyPopup;
 import View.StudentHistoryView;
 import java.awt.Color;
@@ -29,6 +34,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons;
@@ -45,6 +51,9 @@ public class StudentHistoryController implements JoMVC, ActionListener, MouseLis
     private final StudentAddressModel addressModel;
     private final int TapIndex;
     private MyPopup popup;
+    private JoFilechooser filechooser = new JoFilechooser();
+    private boolean openFile;
+    private StudentFileModel fileModel;
 
     public StudentHistoryController(StudentHistoryView view, StudentHistoryModel model, int StudentID, int TapIndex) {
         this.view = view;
@@ -56,6 +65,7 @@ public class StudentHistoryController implements JoMVC, ActionListener, MouseLis
         districtService = new DistrictService();
         addressService = new StudentAddressService();
         addressModel = addressService.getStudentLocationByStudentID(StudentID);
+        fileModel = new StudentFileModel();
         popup = new MyPopup();
         popup.getItemshow().setText("ສະແດງຂໍ້ມູນ");
         popup.getItemEdit().setText("ເພີ່ມອ້າຍນ້ອງ");
@@ -80,6 +90,7 @@ public class StudentHistoryController implements JoMVC, ActionListener, MouseLis
             BrotherAndSisterController brotherAndSisterController = new BrotherAndSisterController(view, studentID);
             brotherAndSisterController.Start();
             brotherAndSisterController.AddEvent();
+            view.showFile(new StudentFileService().getByStudentID(studentID));
         } catch (Exception ex) {
             Logger.getLogger(StudentHistoryController.class.getName()).log(Level.SEVERE, null, ex);
             JoAlert.Error(ex, this);
@@ -94,6 +105,10 @@ public class StudentHistoryController implements JoMVC, ActionListener, MouseLis
         view.getCb_province().addItemListener(this);
         view.getCb_provinceNow().addItemListener(this);
         view.getTb_BrotherAndSister().addMouseListener(this);
+        view.getBtnUpload().addActionListener(this);
+        view.getBtnSaveFile().addActionListener(this);
+        view.getTbFile().addMouseListener(this);
+        view.getPopupFile().addActionListener(this);
         popup.addActionListener(this);
     }
 
@@ -281,7 +296,61 @@ public class StudentHistoryController implements JoMVC, ActionListener, MouseLis
                 service.DeleteBrotherAndSister(new BrotherAndSisterModel(bsID, 0, 0));
                 AppStudentHistory appStudentHistory = new AppStudentHistory(studentID, 2);
             }
+        } else if (event.isEvent(view.getBtnUpload())) {
+            openFile = filechooser.showOpenDialog(null);
+            if (openFile) {
+                view.setFileName(filechooser.getSelectedFile().getPath());
+                fileModel.setFile(filechooser.getSelectedFile());
+            }
+        } else if (event.isEvent(view.getBtnSaveFile())) {
+            if (fileModel.getFileID() == 0) {
+                SaveFile();
+            } else {
+                UpdateFile();
+            }
+        } else if (event.isEvent(view.getPopupFile().getItemshow())) {
+            OpenFile();
+        } else if (event.isEvent(view.getPopupFile().getItemEdit())) {
+            StudentFileService fileService = new StudentFileService();
+            fileModel = fileService.read(view.getFileID());
+            view.showFileData(fileModel);
+        } else if (event.isEvent(view.getPopupFile().getItemDelete())) {
+            JoAlert alert = new JoAlert();
+            if (alert.JoSubmitDelete()) {
+                StudentFileService fileService = new StudentFileService();
+                fileService.delete(view.getFileID());
+                view.showFile(fileService.getByStudentID(studentID));
+            }
         }
+    }
+
+    private void SaveFile() {
+        if (fileModel.getFile() != null) {
+            StudentFileService fileService = new StudentFileService();
+            int state = fileService.create(new StudentFileModel(0, studentID, "", new MyFormat().getSQLDate(new Date()), view.getComment(), fileModel.getFile()));
+            new JoAlert().JoSubmit(state, JoAlert.INSERT);
+            view.showFile(fileService.getByStudentID(studentID));
+            fileModel = new StudentFileModel();
+        } else {
+            new JoAlert().messages("ເລືອກເອກະສານ", "ກະລຸນາເລືອກເອກະສານ", JoAlert.Icons.info);
+        }
+    }
+
+    private void UpdateFile() {
+        StudentFileService fileService = new StudentFileService();
+        fileModel.setSaveDate(new MyFormat().getSQLDate(new Date()));
+        fileModel.setComment(view.getComment());
+        fileModel.setFile(filechooser.getSelectedFile());
+        int state = fileService.update(fileModel);
+        JoAlert alert = new JoAlert();
+        if (alert.JoSubmit(state, JoAlert.UPDATE)) {
+            view.showFile(fileService.getByStudentID(studentID));
+        }
+    }
+
+    private void OpenFile() {
+        StudentFileService fileService = new StudentFileService();
+        fileService.openFile(view.getFileID());
     }
 
     @Override
@@ -299,6 +368,8 @@ public class StudentHistoryController implements JoMVC, ActionListener, MouseLis
         JoHookEvent event = new JoHookEvent(e.getSource());
         if (event.isEvent(view.getTb_BrotherAndSister())) {
             popup.ShowPopup(e);
+        } else if (event.isEvent(view.getTbFile())) {
+            view.getPopupFile().ShowPopup(e);
         }
     }
 

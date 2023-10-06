@@ -7,8 +7,8 @@ import Log.JoLoger;
 import Model.ProvinceModel;
 import Tools.JoAlert;
 import java.util.List;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ProvinceDAO implements ProvinceFn {
@@ -52,6 +52,20 @@ public class ProvinceDAO implements ProvinceFn {
 
     @Override
     public ProvinceModel getProvinceById(int ProvinceID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
+        ProvinceModel model = new ProvinceModel();
+        try {
+            ResultSet rs = sql.getSelectById(ProvinceID);
+            if (rs.next()) {
+                model = new ProvinceModel(rs.getInt(1), rs.getString(2));
+            }
+        } catch (SQLException e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
+        }
+        return model;
     }
 }

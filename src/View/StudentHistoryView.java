@@ -13,12 +13,18 @@ import Model.StudentAddressModel;
 import DAOSevervice.DistrictService;
 import DAOSevervice.FinancialService;
 import DAOSevervice.ProvinceService;
-import DAOSevervice.StudentService;
 import Model.BrotherAndSisterModel;
+import Model.GlobalDataModel;
+import Model.StudentFileModel;
 import Tools.JoDataTable;
+import Utility.MyPopup;
+import java.awt.BorderLayout;
 import java.util.List;
 
 public class StudentHistoryView extends javax.swing.JPanel {
+
+    private PnLoading loading = new PnLoading();
+    private MyPopup popupFile = new MyPopup();
 
     public StudentHistoryView(String Title) {
         initComponents();
@@ -107,13 +113,49 @@ public class StudentHistoryView extends javax.swing.JPanel {
                 data.getStudentBSID(),
                 data.getStudentNo(),
                 data.getFullName(),
-                new FinancialService().getLastClass(data.getStudentBSID()),
-            });
+                new FinancialService().getLastClass(data.getStudentBSID()),});
         });
         JoDataTable dataTable = new JoDataTable(pnDataTable);
         dataTable.showDataTableAll();
         dataTable.setHiddenColumns(1);
         dataTable.setHiddenColumns(2);
+    }
+
+    public void showFile(List<StudentFileModel> models) {
+        tbFile.JoClearModel();
+        Thread thread = new Thread(() -> {
+            loading.setTitle("ໂຫຼດຂໍ້ມູນເອກະສານ");
+            GlobalDataModel.rootView.setView(loading);
+            try {
+                models.forEach(data -> {
+                    tbFile.AddJoModel(new Object[]{tbFile.autoNumber(), data.getFileID(), data.getStudentID(), data.getComment(), data.getSaveDate(), data.getFileName()});
+                    loading.StartProgress(models.size(), 100);
+                });
+            } catch (Exception e) {
+                System.err.println(e);
+            } finally {
+                GlobalDataModel.rootView.setView(this);
+                loading.close();
+                updateTableFile();
+            }
+        });
+        thread.start();
+    }
+
+    private void updateTableFile() {
+        pnFileData.removeAll();
+        pnFileData.add(jScrollPane2, BorderLayout.CENTER);
+        JoDataTable dataTable = new JoDataTable(pnFileData);
+        dataTable.setHiddenColumns(1);
+        dataTable.setHiddenColumns(5);
+        dataTable.showDataTableAll();
+        txtfileName.setText("");
+        txtComment.setText("");
+    }
+
+    public void showFileData(StudentFileModel model) {
+        txtfileName.setText(model.getFileName());
+        txtComment.setText(model.getComment());
     }
 
     //====== Getter =========
@@ -276,9 +318,39 @@ public class StudentHistoryView extends javax.swing.JPanel {
         return tb_BrotherAndSister;
     }
 
+    //========Uploadfile ========
+    public String getComment() {
+        return txtComment.getText();
+    }
+
+    public JoButtonIconfont getBtnSaveFile() {
+        return btnSaveFile;
+    }
+
+    public JoButtonIconfont getBtnUpload() {
+        return btnUpload;
+    }
+
+    public JoTable getTbFile() {
+        return tbFile;
+    }
+
+    public void setFileName(String path) {
+        txtfileName.setText(path);
+    }
+
+    public int getFileID() {
+        return tbFile.getIntValue(1);
+    }
+
+    public MyPopup getPopupFile() {
+        return popupFile;
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
@@ -367,6 +439,19 @@ public class StudentHistoryView extends javax.swing.JPanel {
         tb_BrotherAndSister = new Components.JoTable();
         jPanel8 = new javax.swing.JPanel();
         btnAddBS = new Components.JoButtonIconfont();
+        jPanel7 = new javax.swing.JPanel();
+        jPanel9 = new javax.swing.JPanel();
+        joLable7 = new Components.JoLable();
+        joLable30 = new Components.JoLable();
+        jPanel10 = new javax.swing.JPanel();
+        txtfileName = new Components.JoTextField();
+        btnUpload = new Components.JoButtonIconfont();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        txtComment = new Components.JoTextArea();
+        btnSaveFile = new Components.JoButtonIconfont();
+        pnFileData = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tbFile = new Components.JoTable();
 
         Pn_Navigation.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
         Pn_Navigation.setLayout(new java.awt.GridLayout(1, 0));
@@ -487,11 +572,11 @@ public class StudentHistoryView extends javax.swing.JPanel {
                                 .addGap(10, 10, 10))
                             .addGroup(joPanelTitle1Layout.createSequentialGroup()
                                 .addGroup(joPanelTitle1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txt_MotherPlace, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
+                                    .addComponent(txt_MotherPlace, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
                                     .addComponent(joLable23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addGroup(joPanelTitle1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_MotherTel, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                            .addComponent(txt_MotherTel, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
                             .addComponent(joLable21, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(joLable20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txt_MotherJob, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -702,7 +787,7 @@ public class StudentHistoryView extends javax.swing.JPanel {
                                     .addComponent(joLable13, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(joPanelTitle2Layout.createSequentialGroup()
                                 .addGroup(joPanelTitle2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txt_SiblingName, javax.swing.GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE)
+                                    .addComponent(txt_SiblingName, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
                                     .addComponent(joLable9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(joPanelTitle2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -900,14 +985,14 @@ public class StudentHistoryView extends javax.swing.JPanel {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(237, Short.MAX_VALUE)
+                .addContainerGap(236, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(joPanelTitle4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(25, 25, 25)
                         .addComponent(joPanelTitle5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(238, Short.MAX_VALUE))
+                .addContainerGap(235, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -971,6 +1056,114 @@ public class StudentHistoryView extends javax.swing.JPanel {
 
         TapHistory.addTab("ພີ່ນ້ອງ", jPanel6);
 
+        jPanel7.setLayout(new java.awt.GridBagLayout());
+
+        jPanel9.setMaximumSize(new java.awt.Dimension(800, 300));
+        jPanel9.setMinimumSize(new java.awt.Dimension(800, 300));
+        jPanel9.setPreferredSize(new java.awt.Dimension(800, 300));
+        jPanel9.setLayout(new java.awt.GridBagLayout());
+
+        joLable7.setText("ໄຟລ໌ເອກະສານ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        jPanel9.add(joLable7, gridBagConstraints);
+
+        joLable30.setText("ລາຍລະອຽດ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        jPanel9.add(joLable30, gridBagConstraints);
+
+        jPanel10.setLayout(new java.awt.GridBagLayout());
+
+        txtfileName.setEditable(false);
+        txtfileName.setMaximumSize(new java.awt.Dimension(100, 100));
+        txtfileName.setMinimumSize(new java.awt.Dimension(500, 21));
+        txtfileName.setPlaceholder("ໄຟລ໌ເອກະສານ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 5);
+        jPanel10.add(txtfileName, gridBagConstraints);
+
+        btnUpload.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.CLOUD_UPLOAD);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        jPanel10.add(btnUpload, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 100;
+        jPanel9.add(jPanel10, gridBagConstraints);
+
+        txtComment.setColumns(20);
+        txtComment.setRows(5);
+        txtComment.setMaximumSize(new java.awt.Dimension(100, 100));
+        jScrollPane4.setViewportView(txtComment);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        jPanel9.add(jScrollPane4, gridBagConstraints);
+
+        btnSaveFile.setText("ບັນທຶກ");
+        btnSaveFile.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.SAVE);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(15, 0, 15, 0);
+        jPanel9.add(btnSaveFile, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel7.add(jPanel9, gridBagConstraints);
+
+        pnFileData.setLayout(new java.awt.BorderLayout());
+
+        tbFile.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "#", "FileID", "StudentID", "ລາຍລະອຽດ", "ວັນທີ", "FileName"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tbFile.setMaximumSize(new java.awt.Dimension(800, 0));
+        jScrollPane2.setViewportView(tbFile);
+
+        pnFileData.add(jScrollPane2, java.awt.BorderLayout.CENTER);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.weighty = 0.1;
+        jPanel7.add(pnFileData, gridBagConstraints);
+
+        TapHistory.addTab("ເອກະສານນັກຮຽນ", jPanel7);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -996,6 +1189,8 @@ public class StudentHistoryView extends javax.swing.JPanel {
     private javax.swing.JPanel Pn_Navigation;
     private Components.JoTabbed TapHistory;
     private Components.JoButtonIconfont btnAddBS;
+    private Components.JoButtonIconfont btnSaveFile;
+    private Components.JoButtonIconfont btnUpload;
     private Components.JoButtonIconfont btn_back;
     private Components.JoButtonIconfont btn_saveHistory;
     private Components.JoButtonIconfont btn_saveLocation;
@@ -1006,6 +1201,7 @@ public class StudentHistoryView extends javax.swing.JPanel {
     private Components.JoCombobox cb_province;
     private Components.JoCombobox cb_provinceNow;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel14;
@@ -1014,8 +1210,12 @@ public class StudentHistoryView extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane4;
     private Components.JoLable joLable1;
     private Components.JoLable joLable10;
     private Components.JoLable joLable11;
@@ -1039,9 +1239,11 @@ public class StudentHistoryView extends javax.swing.JPanel {
     private Components.JoLable joLable28;
     private Components.JoLable joLable29;
     private Components.JoLable joLable3;
+    private Components.JoLable joLable30;
     private Components.JoLable joLable4;
     private Components.JoLable joLable5;
     private Components.JoLable joLable6;
+    private Components.JoLable joLable7;
     private Components.JoLable joLable8;
     private Components.JoLable joLable9;
     private Component.JoPanelTitle joPanelTitle1;
@@ -1050,6 +1252,7 @@ public class StudentHistoryView extends javax.swing.JPanel {
     private Component.JoPanelTitle joPanelTitle5;
     private Components.JoLable lbl_title;
     private javax.swing.JPanel pnDataTable;
+    private javax.swing.JPanel pnFileData;
     private Component.JoRadioButton rd_BloodGroupA;
     private Component.JoRadioButton rd_BloodGroupAB;
     private Component.JoRadioButton rd_BloodGroupB;
@@ -1057,7 +1260,9 @@ public class StudentHistoryView extends javax.swing.JPanel {
     private Component.JoRadioButton rd_DiverCategoryCar;
     private Component.JoRadioButton rd_DiverCategoryMotobike;
     private Component.JoRadioButton rd_DiverCategoryOther;
+    private Components.JoTable tbFile;
     private Components.JoTable tb_BrotherAndSister;
+    private Components.JoTextArea txtComment;
     private Components.JoTextField txt_FamiltyID;
     private Components.JoTextField txt_Higth;
     private Components.JoTextField txt_MotherAge;
@@ -1080,5 +1285,7 @@ public class StudentHistoryView extends javax.swing.JPanel {
     private Components.JoTextField txt_peopleID;
     private Components.JoTextField txt_village;
     private Components.JoTextField txt_villageNow;
+    private Components.JoTextField txtfileName;
     // End of variables declaration//GEN-END:variables
+
 }

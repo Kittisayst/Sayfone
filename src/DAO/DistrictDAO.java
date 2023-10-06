@@ -1,6 +1,7 @@
 package DAO;
 
 import DAOInterface.DistrictFn;
+import DAOSevervice.ProvinceService;
 import Database.JoConnect;
 import Database.JoSQL;
 import Log.JoLoger;
@@ -15,9 +16,6 @@ import java.util.ArrayList;
 public class DistrictDAO implements DistrictFn {
 
     private final String TableName = "tb_district";
-    private final String SQL_GET_ById = "SELECT did,tb_district.pid,pname,dname FROM tb_district\n"
-            + "INNER JOIN tb_province ON tb_district.pid = tb_province.pid WHERE did=?";
-    private final String SQL_GET_ByProvinceID = "SELECT * FROM tb_district WHERE pid=?";
 
     @Override
     public int CreaterDistrict(DistrictModel model) {
@@ -67,8 +65,8 @@ public class DistrictDAO implements DistrictFn {
             if (rs.next()) {
                 model.setDistrictID(rs.getInt(1));
                 model.setProvinceID(rs.getInt(2));
-                model.setProvinceName(rs.getString(3));
-                model.setDistrictName(rs.getString(4));
+                model.setProvinceName(new ProvinceService().getProvinceById(rs.getInt(2)).getProvinceName());
+                model.setDistrictName(rs.getString(3));
             }
         } catch (SQLException e) {
             JoAlert.Error(e, this);
