@@ -9,7 +9,7 @@ public interface TeacherFileFn {
 
     public int UpdateTeacherFile(TeacherFileModel model);
 
-    public void UpdateImage(TeacherFileModel model);
+    public int UpdateImage(TeacherFileModel model);
 
     public int DeleteTeacherFile(TeacherFileModel model);
 
@@ -17,5 +17,5 @@ public interface TeacherFileFn {
 
     public TeacherFileModel getTeacherFileById(int TeacherFileID);
 
-    public void CreatePDF(TeacherFileModel model);
+    public boolean CreatePDF(TeacherFileModel model);
 }

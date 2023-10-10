@@ -16,6 +16,7 @@ import DAOSevervice.TeacherExperienceService;
 import DAOSevervice.TeacherFileService;
 import DAOSevervice.TeacherHistoryService;
 import DAOSevervice.TeacherService;
+import Model.FileModel;
 import Model.GlobalDataModel;
 import Tools.JoAlert;
 import Tools.JoFilechooser;
@@ -256,11 +257,7 @@ public class TeacherHistoryController implements JoMVC, ActionListener, ChangeLi
 
     private void CreateTeacherFile() {
         fileModel = new TeacherFileModel();
-        fileModel.setTeacherFileID(0);
-        fileModel.setTeacherID(TeacherID);
-        fileModel.setFlieName(filechooser.getSelectedFile().getAbsolutePath());
-        fileModel.setLocalFile(filechooser.getSelectedFile());
-        fileModel.setComments(view.getTxt_TeacherFileName().getText());
+        fileModel = new TeacherFileModel(0, TeacherID, "", view.getTxtFileComment(), filechooser.getSelectedFile());
         int respon = fileService.CreaterTeacherFile(fileModel);
         JoAlert alert = new JoAlert();
         if (alert.JoSubmit(respon, JoAlert.INSERT)) {
@@ -369,14 +366,10 @@ public class TeacherHistoryController implements JoMVC, ActionListener, ChangeLi
     }
 
     private void UpdateFile() {
-        fileModel.setTeacherID(TeacherID);
         if (open) {
-            fileModel.setFlieName(filechooser.getSelectedFile().getAbsolutePath());
-        } else {
-            fileModel.setFlieName(fileModel.getFlieName());
+            fileModel.setFile(filechooser.getSelectedFile());
         }
-        fileModel.setLocalFile(filechooser.getSelectedFile());
-        fileModel.setComments(view.getTxt_TeacherFileName().getText());
+        fileModel.setComments(view.getTxtFileComment());
         int respon = fileService.UpdateTeacherFile(fileModel);
         JoAlert alert = new JoAlert();
         if (alert.JoSubmit(respon, JoAlert.UPDATE)) {
@@ -524,7 +517,7 @@ public class TeacherHistoryController implements JoMVC, ActionListener, ChangeLi
     private void FlieActionActionPerformed(ActionEvent e) {
         JoHookEvent event = new JoHookEvent(e.getSource());
         if (event.isEvent(view.getBtn_SaveFile())) {
-            if (fileModel.getTeacherFileID() == 0) {
+            if (fileModel.getFileID() == 0) {
                 if (EmptyFile()) {
                     CreateTeacherFile();
                 }
@@ -532,8 +525,10 @@ public class TeacherHistoryController implements JoMVC, ActionListener, ChangeLi
                 UpdateFile();
             }
         } else if (event.isEvent(view.getBtn_uploadFile())) {
-            System.out.println("OK");
             filechooser.addFilter("PDF", "pdf");
+            filechooser.addFilter("PNG", "png");
+            filechooser.addFilter("JPG", "jpg");
+            filechooser.addFilter("JPEG", "jpeg");
             open = filechooser.showOpenDialog(null);
             if (open) {
                 view.getTxt_TeacherFileName().setText(filechooser.getSelectedFile().getAbsolutePath());
@@ -545,6 +540,7 @@ public class TeacherHistoryController implements JoMVC, ActionListener, ChangeLi
         } else if (event.isEvent(FilePopup.getItemEdit())) {
             int FileID = view.getTb_TeacherFile().getIntValue(1);
             fileModel = fileService.getTeacherFileById(FileID);
+            System.out.println(fileModel);
             view.showFile(fileModel);
         } else if (event.isEvent(FilePopup.getItemDelete())) {
             DeleteFile();

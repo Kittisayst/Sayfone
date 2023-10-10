@@ -36,6 +36,8 @@ public class DialogAbsent extends javax.swing.JDialog {
         lblStudentCount.setText("ຈຳນວນທັງໝົດ: " + this.studentList.size() + " ຄົນ");
         JoScrollBar scrollBar = new JoScrollBar(jScrollPane1);
         scrollBar.setScrollSizeV(5);
+        JoScrollBar scrollBarComment = new JoScrollBar(jScrollPane2);
+        scrollBarComment.setScrollSizeV(5);
         if (absentModel.getAbsentID() > 0) {
             dtDate.setDateData(absentModel.getAbsentDate());
             JoJson json = new JoJson(absentModel.getAbsentData());
@@ -49,6 +51,7 @@ public class DialogAbsent extends javax.swing.JDialog {
     }
 
     private void showStudent() {
+        txtComment.setText(absentModel.getComment());
         pnAbsent.removeAll();
         GridBagConstraints layout;
         for (int i = 0; i < studentList.size(); i++) {
@@ -81,9 +84,15 @@ public class DialogAbsent extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         pnAbsent = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
+        btnSave = new Components.JoButtonIconfont();
+        jPanel2 = new javax.swing.JPanel();
         lblStudentCount = new Components.JoLable();
         dtDate = new Components.JoDateChooser();
-        btnSave = new Components.JoButtonIconfont();
+        btnSelectAll = new Components.JoButtonIconfont();
+        btnNotSelect = new Components.JoButtonIconfont();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtComment = new Components.JoTextArea();
+        joLable1 = new Components.JoLable();
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -120,16 +129,9 @@ public class DialogAbsent extends javax.swing.JDialog {
         getContentPane().add(jPanel4, gridBagConstraints);
 
         jPanel1.setMaximumSize(new java.awt.Dimension(80, 60));
-        jPanel1.setMinimumSize(new java.awt.Dimension(80, 60));
-        jPanel1.setPreferredSize(new java.awt.Dimension(80, 60));
-        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 10, 10));
-
-        lblStudentCount.setText("Result");
-        lblStudentCount.setFont(new java.awt.Font("Phetsarath OT", 1, 14)); // NOI18N
-        jPanel1.add(lblStudentCount);
-
-        dtDate.setPreferredSize(new java.awt.Dimension(140, 40));
-        jPanel1.add(dtDate);
+        jPanel1.setMinimumSize(new java.awt.Dimension(80, 220));
+        jPanel1.setPreferredSize(new java.awt.Dimension(80, 220));
+        jPanel1.setLayout(new java.awt.GridBagLayout());
 
         btnSave.setText("ບັນທຶກການຂາດຮຽນ");
         btnSave.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.SAVE);
@@ -138,7 +140,91 @@ public class DialogAbsent extends javax.swing.JDialog {
                 btnSaveActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSave);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 0);
+        jPanel1.add(btnSave, gridBagConstraints);
+
+        jPanel2.setPreferredSize(new java.awt.Dimension(200, 50));
+        jPanel2.setLayout(new java.awt.GridBagLayout());
+
+        lblStudentCount.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblStudentCount.setText("Result");
+        lblStudentCount.setFont(new java.awt.Font("Phetsarath OT", 1, 14)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 5);
+        jPanel2.add(lblStudentCount, gridBagConstraints);
+
+        dtDate.setMaximumSize(new java.awt.Dimension(60, 40));
+        dtDate.setMinimumSize(new java.awt.Dimension(100, 40));
+        dtDate.setPreferredSize(new java.awt.Dimension(140, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.ipadx = 40;
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 30);
+        jPanel2.add(dtDate, gridBagConstraints);
+
+        btnSelectAll.setBackground(new java.awt.Color(0, 153, 102));
+        btnSelectAll.setText("ມາທັງໝົດ");
+        btnSelectAll.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.CHECK_CIRCLE);
+        btnSelectAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSelectAllActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 5);
+        jPanel2.add(btnSelectAll, gridBagConstraints);
+
+        btnNotSelect.setBackground(new java.awt.Color(255, 153, 51));
+        btnNotSelect.setText("ຂາດທັງໝົດ");
+        btnNotSelect.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.CHECK_BOX_OUTLINE_BLANK);
+        btnNotSelect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNotSelectActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 5);
+        jPanel2.add(btnNotSelect, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.weighty = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(6, 10, 6, 10);
+        jPanel1.add(jPanel2, gridBagConstraints);
+
+        jScrollPane2.setMaximumSize(new java.awt.Dimension(200, 60));
+        jScrollPane2.setMinimumSize(new java.awt.Dimension(150, 50));
+
+        txtComment.setColumns(20);
+        txtComment.setRows(4);
+        txtComment.setMaximumSize(new java.awt.Dimension(200, 50));
+        txtComment.setMinimumSize(new java.awt.Dimension(100, 80));
+        jScrollPane2.setViewportView(txtComment);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipady = 41;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.weighty = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 10);
+        jPanel1.add(jScrollPane2, gridBagConstraints);
+
+        joLable1.setText("ໝາຍເຫດ:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 10);
+        jPanel1.add(joLable1, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -146,7 +232,7 @@ public class DialogAbsent extends javax.swing.JDialog {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         getContentPane().add(jPanel1, gridBagConstraints);
 
-        setSize(new java.awt.Dimension(528, 658));
+        setSize(new java.awt.Dimension(653, 856));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -164,13 +250,13 @@ public class DialogAbsent extends javax.swing.JDialog {
         int userID = GlobalDataModel.userModel.getUserID();
 
         if (absentModel.getAbsentID() == 0) {
-            absentModel = new AbsentModel(0, registerModel.getRegisterID(), dtDate.getSQLDate(), joJson.getJsonString(), userID);
+            absentModel = new AbsentModel(0, registerModel.getRegisterID(), dtDate.getSQLDate(), joJson.getJsonString(), userID, txtComment.getText());
             state = alert.JoSubmit(service.create(absentModel), JoAlert.INSERT);
         } else {
-            System.out.println(absentModel.getAbsentID());
             absentModel.setAbsentDate(dtDate.getSQLDate());
             absentModel.setAbsentData(joJson.getJsonString());
             absentModel.setUserID(userID);
+            absentModel.setComment(txtComment.getText());
             state = alert.JoSubmit(service.update(absentModel), JoAlert.UPDATE);
         }
 
@@ -180,15 +266,39 @@ public class DialogAbsent extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 
+    private void btnNotSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNotSelectActionPerformed
+        for (int i = 0; i < pnAbsent.getComponentCount(); i++) {
+            if (pnAbsent.getComponent(i) instanceof CheckStudent) {
+                CheckStudent checkStudent = (CheckStudent) pnAbsent.getComponent(i);
+                checkStudent.setAbsent(2);
+            }
+        }
+    }//GEN-LAST:event_btnNotSelectActionPerformed
+
+    private void btnSelectAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelectAllActionPerformed
+        for (int i = 0; i < pnAbsent.getComponentCount(); i++) {
+            if (pnAbsent.getComponent(i) instanceof CheckStudent) {
+                CheckStudent checkStudent = (CheckStudent) pnAbsent.getComponent(i);
+                checkStudent.setAbsent(0);
+            }
+        }
+    }//GEN-LAST:event_btnSelectAllActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private Components.JoButtonIconfont btnNotSelect;
     private Components.JoButtonIconfont btnSave;
+    private Components.JoButtonIconfont btnSelectAll;
     private Components.JoDateChooser dtDate;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private Components.JoLable joLable1;
     private Components.JoLable lblStudentCount;
     private javax.swing.JPanel pnAbsent;
+    private Components.JoTextArea txtComment;
     // End of variables declaration//GEN-END:variables
 }

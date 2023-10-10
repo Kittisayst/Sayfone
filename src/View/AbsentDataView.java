@@ -29,6 +29,7 @@ public class AbsentDataView extends javax.swing.JPanel {
                 caculator.getComeCount(),
                 caculator.getSickCount(),
                 caculator.getAbsentCount(),
+                data.getComment(),
                 userService.getUserById(data.getUserID()).getFullName()
             });
         });
@@ -116,11 +117,11 @@ public class AbsentDataView extends javax.swing.JPanel {
 
             },
             new String [] {
-                "#", "absentID", "ວັນທີເດືອນປີ", "ມາຮຽນ", "ຄອບ", "ຂາດ", "ຜູ້ບັນທຶກ"
+                "#", "absentID", "ວັນທີເດືອນປີ", "ມາຮຽນ", "ຄອບ", "ຂາດ", "ໝາຍເຫດ", "ຜູ້ບັນທຶກ"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

@@ -20,9 +20,9 @@ public class AbsentDAO implements DAO<AbsentModel> {
         JoConnect connect = new JoConnect();
         JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         try {
-            PreparedStatement pre = sql.setPrepared(sql.getCreate(), data.getAbsentID(), data.getRegisterID(), data.getAbsentDate(), data.getAbsentData(), data.getUserID());
+            PreparedStatement pre = sql.setPrepared(sql.getCreate(), data.getAbsentID(), data.getRegisterID(), data.getAbsentDate(), data.getAbsentData(), data.getUserID(), data.getComment());
             return pre.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             JoAlert.Error(e, this);
             JoLoger.saveLog(e, this);
             return 0;
@@ -95,7 +95,7 @@ public class AbsentDAO implements DAO<AbsentModel> {
         JoConnect connect = new JoConnect();
         JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         try {
-            PreparedStatement pre = sql.setPrepared(sql.getUpdate(), data.getRegisterID(), data.getAbsentDate(), data.getAbsentData(), data.getUserID(), data.getAbsentID());
+            PreparedStatement pre = sql.setPrepared(sql.getUpdate(), data.getRegisterID(), data.getAbsentDate(), data.getAbsentData(), data.getUserID(), data.getComment(), data.getAbsentID());
             return pre.executeUpdate();
         } catch (SQLException e) {
             JoAlert.Error(e, this);
@@ -144,6 +144,6 @@ public class AbsentDAO implements DAO<AbsentModel> {
 
     @Override
     public AbsentModel getResult(ResultSet rs) throws Exception {
-        return new AbsentModel(rs.getInt(1), rs.getInt(2), rs.getDate(3), rs.getString(4), rs.getInt(5));
+        return new AbsentModel(rs.getInt(1), rs.getInt(2), rs.getDate(3), rs.getString(4), rs.getInt(5), rs.getString(6));
     }
 }

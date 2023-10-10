@@ -9,17 +9,21 @@ public class AbsentModel {
     private Date absentDate;
     private String absentData;
     private int UserID;
+    private String Comment;
 
     public AbsentModel() {
     }
 
-    public AbsentModel(int absentID, int RegisterID, Date absentDate, String absentData, int UserID) {
+    public AbsentModel(int absentID, int RegisterID, Date absentDate, String absentData, int UserID, String Comment) {
         this.absentID = absentID;
         this.RegisterID = RegisterID;
         this.absentDate = absentDate;
         this.absentData = absentData;
         this.UserID = UserID;
+        this.Comment = Comment;
     }
+
+ 
 
     public int getAbsentID() {
         return absentID;
@@ -61,9 +65,21 @@ public class AbsentModel {
         this.UserID = UserID;
     }
 
+    public String getComment() {
+        return Comment;
+    }
+
+    public void setComment(String Comment) {
+        this.Comment = Comment;
+    }
+
     @Override
     public String toString() {
-        return "AbsentModel{" + "absentID=" + absentID + ", RegisterID=" + RegisterID + ", absentDate=" + absentDate + ", absentData=" + absentData + ", UserID=" + UserID + '}';
+        return "AbsentModel{" + "absentID=" + absentID + ", RegisterID=" + RegisterID + ", absentDate=" + absentDate + ", absentData=" + absentData + ", UserID=" + UserID + ", Comment=" + Comment + '}';
     }
+    
+    
+
+   
 
 }

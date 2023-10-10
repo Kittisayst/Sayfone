@@ -1,45 +1,40 @@
 package Model;
 
 import java.io.File;
-import java.sql.Blob;
 
 public class FileModel {
 
-    private int TeacherFileID;
-    private int TeacherID;
+    private int FileID;
+    private int ID;
     private String FlieName;
-    private Blob File;
     private String Comments;
-    private File LocalFile;
+    private File file;
 
     public FileModel() {
     }
 
-    public FileModel(int TeacherFileID) {
-        this.TeacherFileID = TeacherFileID;
-    }
-
-    public FileModel(int TeacherFileID, String FielName, Blob File, String Comments) {
-        this.TeacherFileID = TeacherFileID;
-//        this.FielName = FielName;
-        this.File = File;
+    public FileModel(int FileID, int ID, String FlieName, String Comments, File file) {
+        this.FileID = FileID;
+        this.ID = ID;
+        this.FlieName = FlieName;
         this.Comments = Comments;
+        this.file = file;
     }
 
-    public int getTeacherFileID() {
-        return TeacherFileID;
+    public int getFileID() {
+        return FileID;
     }
 
-    public void setTeacherFileID(int TeacherFileID) {
-        this.TeacherFileID = TeacherFileID;
+    public void setFileID(int FileID) {
+        this.FileID = FileID;
     }
 
-    public int getTeacherID() {
-        return TeacherID;
+    public int getID() {
+        return ID;
     }
 
-    public void setTeacherID(int TeacherID) {
-        this.TeacherID = TeacherID;
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     public String getFlieName() {
@@ -50,14 +45,6 @@ public class FileModel {
         this.FlieName = FlieName;
     }
 
-    public Blob getFile() {
-        return File;
-    }
-
-    public void setFile(Blob File) {
-        this.File = File;
-    }
-
     public String getComments() {
         return Comments;
     }
@@ -66,12 +53,17 @@ public class FileModel {
         this.Comments = Comments;
     }
 
-    public File getLocalFile() {
-        return LocalFile;
+    public File getFile() {
+        return file;
     }
 
-    public void setLocalFile(File LocalFile) {
-        this.LocalFile = LocalFile;
+    public void setFile(File file) {
+        this.file = file;
+    }
+
+    @Override
+    public String toString() {
+        return "FileModel{" + "FileID=" + FileID + ", ID=" + ID + ", FlieName=" + FlieName + ", Comments=" + Comments + ", file=" + file + '}';
     }
 
 }

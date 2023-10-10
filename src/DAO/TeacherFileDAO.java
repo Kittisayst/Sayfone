@@ -2,173 +2,194 @@ package DAO;
 
 import DAOInterface.TeacherFileFn;
 import Database.JoConnect;
+import Database.JoProperties;
+import Database.JoSQL;
+import Log.JoLoger;
+import Main.JoHttp;
+import Main.JoUploadFile;
 import Model.TeacherFileModel;
 import java.util.List;
 import Tools.JoAlert;
 import Tools.JoFileSystem;
-import Utility.JoBlobConvert;
-import Utility.SayfoneFile;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class TeacherFileDAO implements TeacherFileFn {
 
-    private final Connection c = new JoConnect().getConnectionDefault();
     private final String TableName = "tb_teacherfile";
-    private final String SQL_Create = "INSERT INTO " + TableName + " VALUES(?,?,?,?,?)";
-    private final String SQL_Update = "UPDATE " + TableName + " SET teacherFileName=?,comment=? WHERE teacherFileID=?";
-    private final String SQL_Delete = "DELETE FROM " + TableName + " WHERE teacherFileID=?";
-    private final String SQL_GET_All_ByTeacehrID = "SELECT * FROM " + TableName + " WHERE TeacherID=?";
-    private final String SQL_GET_ById = "SELECT * FROM " + TableName + " WHERE teacherFileID=?";
-    private final String SQL_UpdateImage = "UPDATE " + TableName + " SET File=? WHERE teacherFileID=?";
+    private final JoProperties property = new JoProperties("/JoConfig/config.properties");
+    private final String server = property.getValueAt("db.Server");
 
     @Override
     public int CreaterTeacherFile(TeacherFileModel model) {
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH-mm-ss");
+        String FileName = model.getID() + "-" + dateFormat.format(new java.util.Date());
+        JoUploadFile uploadFile = new JoUploadFile("http://" + server + "/sayfone/UploadFile.php", "fileToUpload", model.getFile(), FileName);
         try {
-            PreparedStatement pre = c.prepareStatement(SQL_Create);
-            pre.setString(1, null);
-            pre.setInt(2, model.getTeacherID());
-            pre.setString(3, model.getFlieName());
-            InputStream in = new JoBlobConvert(model.getLocalFile()).getFileInput();
-            pre.setBinaryStream(4, in, in.available());
-            pre.setString(5, model.getComments());
-            return pre.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
+            if (uploadFile.upload()) {
+                PreparedStatement pre = sql.setPrepared(sql.getCreate(),
+                        model.getFileID(),
+                        model.getID(),
+                        FileName + "." + uploadFile.getExtension(),
+                        model.getComments());
+                return pre.executeUpdate();
+            } else {
+                return 0;
+            }
+        } catch (SQLException e) {
             JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
             return 0;
+        } finally {
+            connect.close();
         }
     }
 
     @Override
     public int UpdateTeacherFile(TeacherFileModel model) {
+        JoConnect connect = new JoConnect();
+        String sql = "UPDATE " + TableName + " SET comment=? WHERE teacherFileID=?";
         try {
-            PreparedStatement pre = c.prepareStatement(SQL_Update);
-            pre.setString(1, model.getFlieName());
-            pre.setString(2, model.getComments());
-            pre.setInt(3, model.getTeacherFileID());
-            if (model.getLocalFile() != null) {
-                UpdateImage(model);
+            if (model.getFile() == null) {
+                PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sql);
+                pre.setString(1, model.getComments());
+                pre.setInt(2, model.getFileID());
+                return pre.executeUpdate();
+            } else {
+                return UpdateImage(model);
             }
-            return pre.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
             JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
             return 0;
+        } finally {
+            connect.close();
         }
     }
 
     @Override
-    public void UpdateImage(TeacherFileModel model) {
+    public int UpdateImage(TeacherFileModel model) {
+        JoConnect connect = new JoConnect();
         try {
-            PreparedStatement pre = c.prepareStatement(SQL_UpdateImage);
-            InputStream in = new JoBlobConvert(model.getLocalFile()).getFileInput();
-            pre.setBinaryStream(1, in, in.available());
-            pre.setInt(2, model.getTeacherFileID());
-            pre.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
-            JoAlert.Error(e, this);
+            String sql = "UPDATE " + TableName + " SET FileName=?, comment=? WHERE teacherFileID=?";
+            SimpleDateFormat dateFormat = new SimpleDateFormat("HH-mm-ss");
+            String FileName = model.getID() + "-" + dateFormat.format(new java.util.Date());
+            JoUploadFile uploadFile = new JoUploadFile("http://" + server + "/sayfone/UploadFile.php", "fileToUpload", model.getFile(), FileName);
+            if (uploadFile.upload()) {
+                PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sql);
+                pre.setString(1, FileName + "." + uploadFile.getExtension());
+                pre.setString(2, model.getComments());
+                pre.setInt(3, model.getFileID());
+                int state = pre.executeUpdate();
+                System.out.println(model);
+                deleteFile(state, "http://" + server + "/sayfone/deletefile.php?folder=UploadFile&filename=" + model.getFlieName()); // ລົບໄຟເກົ່າ
+                return state;
+            } else {
+                return 0;
+            }
+        } catch (SQLException e) {
+            System.err.println(e);
+            return 0;
+        }
+    }
+
+    private void deleteFile(int state, String url) {
+        if (state > 0) {
+            JoHttp http = new JoHttp(url);
+            http.Open();
         }
     }
 
     @Override
     public int DeleteTeacherFile(TeacherFileModel model) {
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         try {
-            PreparedStatement pre = c.prepareStatement(SQL_Delete);
-            pre.setInt(1, model.getTeacherFileID());
+            PreparedStatement pre = sql.getDelete();
+            pre.setInt(1, model.getFileID());
             return pre.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
             JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
             return 0;
+        } finally {
+            connect.close();
         }
     }
 
     @Override
     public List<TeacherFileModel> getAllTeacherFileByTeacherID(int TeacherFileID) {
-        List<TeacherFileModel> models = new ArrayList<>();
+        List<TeacherFileModel> fileModels = new ArrayList<>();
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         try {
-            PreparedStatement pre = c.prepareStatement(SQL_GET_All_ByTeacehrID);
+            PreparedStatement pre = sql.getSelectCustom("TeacherID=?");
             pre.setInt(1, TeacherFileID);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
-                TeacherFileModel model = new TeacherFileModel();
-                model.setTeacherFileID(rs.getInt(1));
-                model.setTeacherID(rs.getInt(2));
-                model.setFlieName(rs.getString(3));
-                model.setFile(rs.getBlob(4));
-                model.setComments(rs.getString(5));
-                models.add(model);
+                fileModels.add(getResult(rs));
             }
         } catch (Exception e) {
-            e.printStackTrace();
             JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
         }
-        return models;
+        return fileModels;
     }
 
     @Override
     public TeacherFileModel getTeacherFileById(int TeacherFileID) {
-        TeacherFileModel model = new TeacherFileModel();
+        TeacherFileModel fileModel = new TeacherFileModel();
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         try {
-            PreparedStatement pre = c.prepareStatement(SQL_GET_ById);
+            PreparedStatement pre = sql.getSelectCustom("TeacherID=?");
             pre.setInt(1, TeacherFileID);
             ResultSet rs = pre.executeQuery();
-            if (rs.next()) {
-                model.setTeacherFileID(rs.getInt(1));
-                model.setTeacherID(rs.getInt(2));
-                model.setFlieName(rs.getString(3));
-                model.setFile(rs.getBlob(4));
-                model.setComments(rs.getString(5));
+            while (rs.next()) {
+                fileModel = getResult(rs);
             }
         } catch (Exception e) {
-            e.printStackTrace();
             JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
         }
-        return model;
+        return fileModel;
     }
 
     @Override
-    public void CreatePDF(TeacherFileModel model) {
-        JoFileSystem fileSystem = new JoFileSystem();
-        String fileEx = fileSystem.getCurrentPath() + "/" + SayfoneFile.TeacherFolder + "/example.pdf";
-        FileOutputStream output = null;
+    public boolean CreatePDF(TeacherFileModel model) {
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         try {
-            if (model.getFile() != null) {
-                output = new FileOutputStream(fileEx);
-                byte[] buffer = new byte[1];
-                InputStream input = model.getFile().getBinaryStream();
-                while (input.read(buffer) > 0) {
-                    output.write(buffer);
+            ResultSet rs = sql.getSelectById(model.getFileID());
+            if (rs.next()) {
+                String savePath = new JoFileSystem().getUserPath() + "/Downloads/" + rs.getString(3);
+                String fileUrl = "http://" + server + "/sayfone/LoadFile.php?fileName=" + rs.getString(3);
+                boolean state = new JoHttp().DownloadFile(fileUrl, rs.getString(3), savePath);
+                if (state) {
+                    JoFileSystem fileSystem = new JoFileSystem();
+                    fileSystem.OpenFile(savePath);
                 }
-                fileSystem.OpenFile(new File(fileEx));
-            } else {
-                new JoAlert().messages("ເອກະສານ", "ພໍ່ພົບຂໍ້ມູນເອກະສານ", "warning");
             }
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(TeacherFileModel.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException | SQLException ex) {
-            Logger.getLogger(TeacherFileModel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
         } finally {
-            try {
-                if (model.getFile() != null) {
-                    output.close();
-                }
-            } catch (IOException ex) {
-                Logger.getLogger(TeacherFileModel.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            connect.close();
         }
+        return true;
+    }
+
+    public TeacherFileModel getResult(ResultSet rs) throws Exception {
+        return new TeacherFileModel(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), null);
     }
 
 }
