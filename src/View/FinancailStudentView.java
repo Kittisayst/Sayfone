@@ -5,6 +5,7 @@ import Components.JoTable;
 import Components.JoTextField;
 import Model.GlobalDataModel;
 import Model.StudentModel;
+import Utility.MyFormat;
 import java.awt.Color;
 import java.util.List;
 import theme.JoTheme;
@@ -81,7 +82,7 @@ public class FinancailStudentView extends javax.swing.JPanel {
                                 data.getStudentID(),
                                 data.getStudentNo(),
                                 data.getFullName(),
-                                data.getDateStart() == null ? "ວ່າງ" : data.getDateStart()
+                                data.getDateStart() == null ? "ວ່າງ" : new MyFormat().getDate(data.getDateStart())
                             };
                             tb_data.AddJoModel(tableData);
                             loading.StartProgress(models.size(), 10);

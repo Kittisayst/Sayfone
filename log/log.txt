@@ -214,3 +214,4 @@
 05/10/2023: DAO.DistrictDAO@6b5e27e5 Errorjava.sql.SQLException: Column Index out of range, 4 > 3. 
 05/10/2023: DAO.DistrictDAO@31724f72 Errorjava.sql.SQLException: Column Index out of range, 4 > 3. 
 05/10/2023: DAO.DistrictDAO@31724f72 Errorjava.sql.SQLException: Column Index out of range, 4 > 3. 
+10/10/2023: DAO.UserDAO@7af10f4c Errorjava.sql.SQLException: Table 'db_sayfoneschool2022.tb_user' doesn't exist

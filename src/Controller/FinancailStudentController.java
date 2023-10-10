@@ -102,6 +102,7 @@ public class FinancailStudentController implements JoMVC, ActionListener, MouseL
                 AppFinancial app = new AppFinancial(registerModel, studentModel);
             }
         } else if (event.isEvent(view.getBtnRegister())) {
+            GlobalDataModel.TableStudentRegistered = null;
             showFilterStudentRegister();
         } else if (event.isEvent(view.getBtnRegistered())) {
             showFilterStudentRegistered();
@@ -170,11 +171,9 @@ public class FinancailStudentController implements JoMVC, ActionListener, MouseL
         FinancialService financialService = new FinancialService();
         List<StudentModel> studentList = new ArrayList<>();
         List<FinancialModel> models = financialService.getStudentRegistered(registerModel.getRegisterID());
-
         models.forEach(data -> {
             studentList.add(studentService.getStudentById(data.getStudentID()));
         });
-
         buttonState = true;
         view.setButtonState(buttonState);
         view.ClearDataTable();
@@ -182,6 +181,7 @@ public class FinancailStudentController implements JoMVC, ActionListener, MouseL
     }
 
     private void navigatePrevious() {
+        GlobalDataModel.TableStudentRegistered = null;
         if (!buttonState) {
             if (currentPage > 1) {
                 currentPage--;
@@ -193,6 +193,7 @@ public class FinancailStudentController implements JoMVC, ActionListener, MouseL
     }
 
     private void currentText() {
+        GlobalDataModel.TableStudentRegistered = null;
         totalPages = studentService.getTotalPages();
         currentPage = view.getTxtCurrentPage().getNumber();
         if (currentPage <= totalPages && currentPage >= 1) {
@@ -203,6 +204,7 @@ public class FinancailStudentController implements JoMVC, ActionListener, MouseL
     }
 
     private void navigateNext() {
+        GlobalDataModel.TableStudentRegistered = null;
         if (!buttonState) {
             totalPages = studentService.getTotalPages();
             if (currentPage < totalPages) {
@@ -215,6 +217,7 @@ public class FinancailStudentController implements JoMVC, ActionListener, MouseL
     }
 
     private void searchStudent() {
+        GlobalDataModel.TableStudentRegistered = null;
         String searchTerm = view.getTxtSearch().getText();
         if (buttonState) {
             if (!searchTerm.isEmpty()) {
