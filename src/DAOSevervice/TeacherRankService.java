@@ -28,8 +28,12 @@ public class TeacherRankService {
         return dAO.getTeacherRankById(ID);
     }
 
-    public TeacherRankModel getTeacherRankByTeacherId(int ID, int YearID) {
-        return dAO.getTeacherRankByTeacherId(ID, YearID);
+    public TeacherRankModel getTeacherRankByTeacherId(int ID, int YearID, int Month) {
+        return dAO.getTeacherRankByTeacherId(ID, YearID, Month);
+    }
+
+    public int getMoney(int TeacherID) {
+        return dAO.getMoney(TeacherID);
     }
 
 }

@@ -70,8 +70,6 @@ public class StudentHistoryController implements JoMVC, ActionListener, MouseLis
         popup.getItemshow().setText("ສະແດງຂໍ້ມູນ");
         popup.getItemEdit().setText("ເພີ່ມອ້າຍນ້ອງ");
         popup.getItemEdit().setIcon(new JoIconFont().setIconFont(GoogleMaterialDesignIcons.ADD, 25, Color.BLUE));
-        Start();
-        AddEvent();
     }
 
     @Override
@@ -136,22 +134,10 @@ public class StudentHistoryController implements JoMVC, ActionListener, MouseLis
         model.setMotherJob(view.getTxt_MotherJob().getText());
         model.setMotherPlace(view.getTxt_MotherPlace().getText());
         model.setMotherTel(view.getTxt_MotherTel().getText());
-        if (view.getRd_BloodGroupA().isSelected()) {
-            model.setBloodGroup(0);
-        } else if (view.getRd_BloodGroupB().isSelected()) {
-            model.setBloodGroup(1);
-        } else if (view.getRd_BloodGroupAB().isSelected()) {
-            model.setBloodGroup(3);
-        } else {
-            model.setBloodGroup(4);
-        }
-        if (view.getRd_DiverCategoryCar().isSelected()) {
-            model.setDiverCategory(0);
-        } else if (view.getRd_DiverCategoryMotobike().isSelected()) {
-            model.setDiverCategory(1);
-        } else {
-            model.setDiverCategory(2);
-        }
+        model.setBloodGroup(view.getBloodGroup());
+        model.setDiverCategory(view.getCar());
+        model.setParent1(view.getParent1());
+        model.setParent2(view.getParent2());
         int respon = historyService.CreaterStudentHistory(model);
         JoAlert alert = new JoAlert();
         if (alert.JoSubmit(respon, JoAlert.INSERT)) {
@@ -176,6 +162,7 @@ public class StudentHistoryController implements JoMVC, ActionListener, MouseLis
     @Override
     public void Update() {
         model.setFamilyID(view.getTxt_FamiltyID().getText());
+        model.setStudentID(studentID);
         model.setPeopleID(view.getTxt_peopleID().getText());
         model.setPassportID(view.getTxt_passportID().getText());
         model.setSiblingName(view.getTxt_SiblingName().getText());
@@ -195,22 +182,10 @@ public class StudentHistoryController implements JoMVC, ActionListener, MouseLis
         model.setMotherJob(view.getTxt_MotherJob().getText());
         model.setMotherPlace(view.getTxt_MotherPlace().getText());
         model.setMotherTel(view.getTxt_MotherTel().getText());
-        if (view.getRd_BloodGroupA().isSelected()) {
-            model.setBloodGroup(0);
-        } else if (view.getRd_BloodGroupB().isSelected()) {
-            model.setBloodGroup(1);
-        } else if (view.getRd_BloodGroupAB().isSelected()) {
-            model.setBloodGroup(3);
-        } else {
-            model.setBloodGroup(4);
-        }
-        if (view.getRd_DiverCategoryCar().isSelected()) {
-            model.setDiverCategory(0);
-        } else if (view.getRd_DiverCategoryMotobike().isSelected()) {
-            model.setDiverCategory(1);
-        } else {
-            model.setDiverCategory(2);
-        }
+        model.setBloodGroup(view.getBloodGroup());
+        model.setDiverCategory(view.getCar());
+        model.setParent1(view.getParent1());
+        model.setParent2(view.getParent2());
         int respon = historyService.UpdateStudentHistory(model);
         JoAlert alert = new JoAlert();
         if (alert.JoSubmit(respon, JoAlert.UPDATE)) {
@@ -219,7 +194,6 @@ public class StudentHistoryController implements JoMVC, ActionListener, MouseLis
     }
 
     private void UpdateAddress() {
-        System.out.println(addressModel);
         addressModel.setDistrictID(view.getCb_district().getKeyInt());
         addressModel.setDistrictNowID(view.getCb_districtNow().getKeyInt());
         addressModel.setVillage(view.getTxt_village().getText());

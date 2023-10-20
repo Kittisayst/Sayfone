@@ -12,7 +12,6 @@ import Model.StudentHistoryModel;
 import Model.StudentAddressModel;
 import DAOSevervice.DistrictService;
 import DAOSevervice.FinancialService;
-import DAOSevervice.ProvinceService;
 import Model.BrotherAndSisterModel;
 import Model.GlobalDataModel;
 import Model.StudentFileModel;
@@ -35,15 +34,8 @@ public class StudentHistoryView extends javax.swing.JPanel {
         txt_FamiltyID.setText(model.getFamilyID());
         txt_peopleID.setText(model.getPeopleID());
         txt_passportID.setText(model.getPassportID());
-        rd_BloodGroupA.setSelected(model.getBloodGroup() == 0);
-        rd_BloodGroupB.setSelected(model.getBloodGroup() == 1);
-        rd_BloodGroupAB.setSelected(model.getBloodGroup() == 2);
-        rd_BloodGroupO.setSelected(model.getBloodGroup() == 3);
         txt_Higth.setText("" + model.getHigth());
         txt_Weight.setText("" + model.getWeight());
-        rd_DiverCategoryCar.setSelected(model.getDiverCategory() == 0);
-        rd_DiverCategoryMotobike.setSelected(model.getDiverCategory() == 1);
-        rd_DiverCategoryOther.setSelected(model.getDiverCategory() == 2);
         txt_SiblingName.setText(model.getSiblingName());
         txt_SiblingAge.setText("" + model.getSiblingAge());
         txt_SiblingJob.setText(model.getSiblingJob());
@@ -59,16 +51,65 @@ public class StudentHistoryView extends javax.swing.JPanel {
         txt_MotherJob.setText(model.getMotherJob());
         txt_MotherPlace.setText(model.getMotherJob());
         txt_MotherTel.setText(model.getMotherTel());
+        setBloodGroup(model.getBloodGroup());
+        setCar(model.getDiverCategory());
+        parent1.setParent(model.getParent1());
+        parent2.setParent(model.getParent2());
+    }
+
+    public int getBloodGroup() {
+        if (rd_BloodGroupA.isSelected()) {
+            return 0;
+        } else if (rd_BloodGroupB.isSelected()) {
+            return 1;
+        } else if (rd_BloodGroupAB.isSelected()) {
+            return 2;
+        } else {
+            return 3;
+        }
+    }
+
+    private void setBloodGroup(int value) {
+        rd_BloodGroupA.setSelected(value == 0);
+        rd_BloodGroupB.setSelected(value == 1);
+        rd_BloodGroupAB.setSelected(value == 2);
+        rd_BloodGroupO.setSelected(value == 3);
+    }
+
+    public int getCar() {
+        if (rd_DiverCategoryCar.isSelected()) {
+            return 0;
+        } else if (rd_DiverCategoryMotobike.isSelected()) {
+            return 1;
+        } else {
+            return 2;
+        }
+    }
+
+    private void setCar(int value) {
+        rd_DiverCategoryCar.setSelected(value == 0);
+        rd_DiverCategoryMotobike.setSelected(value == 1);
+        rd_DiverCategoryOther.setSelected(value == 2);
+    }
+
+    public String getParent1() {
+        return parent1.getParentName();
+    }
+
+    public String getParent2() {
+        return parent2.getParentName();
     }
 
     //Location
     public void showProvince(List<ProvinceModel> model) {
+        cb_province.JoClearData();
         model.forEach(data -> {
             cb_province.JoAddModel("" + data.getProvinceID(), data.getProvinceName());
         });
     }
 
     public void showProvinceNow(List<ProvinceModel> model) {
+        cb_provinceNow.JoClearData();
         model.forEach(data -> {
             cb_provinceNow.JoAddModel("" + data.getProvinceID(), data.getProvinceName());
         });
@@ -91,7 +132,6 @@ public class StudentHistoryView extends javax.swing.JPanel {
     public void showStudnetAddress(StudentAddressModel model) throws Exception {
         if (model.getAddressID() != 0) {
             DistrictService districtService = new DistrictService();
-            ProvinceService provinceService = new ProvinceService();
             int ProvinceID = districtService.getDistrictById(model.getDistrictID()).getProvinceID();
             int ProvinceNowID = districtService.getDistrictById(model.getDistrictNowID()).getProvinceID();
             cb_province.setSelectValue("" + ProvinceID);
@@ -106,6 +146,7 @@ public class StudentHistoryView extends javax.swing.JPanel {
     }
 
     public void showBorderAndSister(List<BrotherAndSisterModel> models) {
+        tb_BrotherAndSister.JoClearModel();
         models.forEach(data -> {
             tb_BrotherAndSister.AddJoModel(new Object[]{
                 tb_BrotherAndSister.autoNumber(),
@@ -354,6 +395,7 @@ public class StudentHistoryView extends javax.swing.JPanel {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
+        modelLiquid1 = new ClassUI.ModelLiquid();
         Pn_Navigation = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         btn_back = new Components.JoButtonIconfont();
@@ -383,7 +425,11 @@ public class StudentHistoryView extends javax.swing.JPanel {
         txt_MotherPlace = new Components.JoTextField();
         joLable21 = new Components.JoLable();
         txt_MotherTel = new Components.JoTextField();
-        jPanel11 = new javax.swing.JPanel();
+        joLable31 = new Components.JoLable();
+        parent1 = new Component.ParentComponent();
+        joLable32 = new Components.JoLable();
+        parent2 = new Component.ParentComponent();
+        joLable33 = new Components.JoLable();
         btn_saveHistory = new Components.JoButtonIconfont();
         joPanelTitle2 = new Component.JoPanelTitle();
         txt_FamiltyID = new Components.JoTextField();
@@ -393,19 +439,7 @@ public class StudentHistoryView extends javax.swing.JPanel {
         joLable3 = new Components.JoLable();
         txt_passportID = new Components.JoTextField();
         joLable4 = new Components.JoLable();
-        rd_BloodGroupA = new Component.JoRadioButton();
-        rd_BloodGroupB = new Component.JoRadioButton();
-        rd_BloodGroupAB = new Component.JoRadioButton();
-        rd_BloodGroupO = new Component.JoRadioButton();
-        joLable5 = new Components.JoLable();
-        joLable6 = new Components.JoLable();
-        txt_Higth = new Components.JoTextField();
-        txt_Weight = new Components.JoTextField();
-        jPanel12 = new javax.swing.JPanel();
         joLable8 = new Components.JoLable();
-        rd_DiverCategoryMotobike = new Component.JoRadioButton();
-        rd_DiverCategoryCar = new Component.JoRadioButton();
-        rd_DiverCategoryOther = new Component.JoRadioButton();
         joLable9 = new Components.JoLable();
         txt_SiblingName = new Components.JoTextField();
         joLable10 = new Components.JoLable();
@@ -416,6 +450,22 @@ public class StudentHistoryView extends javax.swing.JPanel {
         joLable12 = new Components.JoLable();
         txt_SiblingPlace = new Components.JoTextField();
         joLable13 = new Components.JoLable();
+        jPanel11 = new javax.swing.JPanel();
+        rd_BloodGroupA = new Component.JoRadioButton();
+        rd_BloodGroupB = new Component.JoRadioButton();
+        rd_BloodGroupAB = new Component.JoRadioButton();
+        rd_BloodGroupO = new Component.JoRadioButton();
+        jPanel13 = new javax.swing.JPanel();
+        rd_DiverCategoryMotobike = new Component.JoRadioButton();
+        rd_DiverCategoryCar = new Component.JoRadioButton();
+        rd_DiverCategoryOther = new Component.JoRadioButton();
+        joLable34 = new Components.JoLable();
+        jPanel12 = new javax.swing.JPanel();
+        joLable5 = new Components.JoLable();
+        txt_Higth = new Components.JoTextField();
+        joLable6 = new Components.JoLable();
+        txt_Weight = new Components.JoTextField();
+        joLable35 = new Components.JoLable();
         jPanel2 = new javax.swing.JPanel();
         joPanelTitle4 = new Component.JoPanelTitle();
         cb_province = new Components.JoCombobox();
@@ -480,389 +530,540 @@ public class StudentHistoryView extends javax.swing.JPanel {
         joPanelTitle1.setBackground(new java.awt.Color(204, 204, 204));
         joPanelTitle1.setJoTitle("ຂໍ້ມູນຄອບຄົວ");
         joPanelTitle1.setOpaque(false);
+        joPanelTitle1.setLayout(new java.awt.GridBagLayout());
 
-        joLable14.setText("ຊື່ພໍ່");
+        joLable14.setText("ປະເພດຜູ້ປົກຄອງ  ຜູ້ປົກຄອງ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(30, 0, 4, 0);
+        joPanelTitle1.add(joLable14, gridBagConstraints);
 
-        txt_fatherName.setPlaceholder("ຊື່ພໍ່");
+        txt_fatherName.setMinimumSize(new java.awt.Dimension(200, 45));
+        txt_fatherName.setPlaceholder("ຊື່ ແລະ ນາມສະກຸນ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(2, 5, 2, 5);
+        joPanelTitle1.add(txt_fatherName, gridBagConstraints);
 
         joLable15.setText("ອາຍຸ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(2, 0, 2, 0);
+        joPanelTitle1.add(joLable15, gridBagConstraints);
 
+        txt_fatherAge.setMinimumSize(new java.awt.Dimension(200, 45));
         txt_fatherAge.setNumberOnly(true);
         txt_fatherAge.setPlaceholder("ປີ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(2, 0, 2, 0);
+        joPanelTitle1.add(txt_fatherAge, gridBagConstraints);
 
+        txt_fatherJob.setMinimumSize(new java.awt.Dimension(200, 45));
         txt_fatherJob.setPlaceholder("ອາຊີບ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(2, 5, 2, 5);
+        joPanelTitle1.add(txt_fatherJob, gridBagConstraints);
 
         joLable16.setText("ອາຊີບ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 2, 0);
+        joPanelTitle1.add(joLable16, gridBagConstraints);
 
+        txt_fatherTel.setMinimumSize(new java.awt.Dimension(200, 40));
         txt_fatherTel.setNumberOnly(true);
         txt_fatherTel.setPlaceholder("ເບີໂທ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(2, 0, 2, 0);
+        joPanelTitle1.add(txt_fatherTel, gridBagConstraints);
 
         joLable17.setText("ເບີໂທ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 2, 0);
+        joPanelTitle1.add(joLable17, gridBagConstraints);
 
+        txt_fatherPlace.setMinimumSize(new java.awt.Dimension(200, 45));
         txt_fatherPlace.setPlaceholder("ປ່ອນປະຈຳການ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(2, 0, 2, 0);
+        joPanelTitle1.add(txt_fatherPlace, gridBagConstraints);
 
         joLable22.setText("ປ່ອນປະຈຳການ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 2, 0);
+        joPanelTitle1.add(joLable22, gridBagConstraints);
 
-        joLable18.setText("ຊື່ແມ່");
+        joLable18.setText("ຊື່ ແລະ ນາມສະກຸນ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(30, 0, 4, 0);
+        joPanelTitle1.add(joLable18, gridBagConstraints);
 
-        txt_MotherName.setPlaceholder("ຊື່ແມ່");
+        txt_MotherName.setMinimumSize(new java.awt.Dimension(200, 45));
+        txt_MotherName.setPlaceholder("ຊື່ ແລະ ນາມສະກຸນ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(2, 5, 2, 5);
+        joPanelTitle1.add(txt_MotherName, gridBagConstraints);
 
         joLable19.setText("ອາຍຸ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(30, 0, 4, 0);
+        joPanelTitle1.add(joLable19, gridBagConstraints);
 
+        txt_MotherAge.setMinimumSize(new java.awt.Dimension(200, 45));
         txt_MotherAge.setNumberOnly(true);
         txt_MotherAge.setPlaceholder("ປີ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(2, 0, 2, 0);
+        joPanelTitle1.add(txt_MotherAge, gridBagConstraints);
 
         joLable20.setText("ອາຊີບ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 2, 0);
+        joPanelTitle1.add(joLable20, gridBagConstraints);
 
+        txt_MotherJob.setMinimumSize(new java.awt.Dimension(200, 45));
         txt_MotherJob.setPlaceholder("ອາຊີບ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(2, 5, 2, 5);
+        joPanelTitle1.add(txt_MotherJob, gridBagConstraints);
 
         joLable23.setText("ປ່ອນປະຈຳການ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 2, 0);
+        joPanelTitle1.add(joLable23, gridBagConstraints);
 
+        txt_MotherPlace.setMinimumSize(new java.awt.Dimension(200, 45));
         txt_MotherPlace.setPlaceholder("ປ່ອນປະຈຳການ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(2, 0, 2, 0);
+        joPanelTitle1.add(txt_MotherPlace, gridBagConstraints);
 
         joLable21.setText("ເບີໂທ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 2, 0);
+        joPanelTitle1.add(joLable21, gridBagConstraints);
 
+        txt_MotherTel.setMinimumSize(new java.awt.Dimension(200, 40));
         txt_MotherTel.setNumberOnly(true);
         txt_MotherTel.setPlaceholder("ເບີໂທ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(2, 0, 2, 0);
+        joPanelTitle1.add(txt_MotherTel, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weighty = 0.1;
+        joPanelTitle1.add(joLable31, gridBagConstraints);
+
+        parent1.setMaximumSize(new java.awt.Dimension(200, 45));
+        parent1.setMinimumSize(new java.awt.Dimension(200, 45));
+        parent1.setPreferredSize(new java.awt.Dimension(200, 45));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(2, 0, 2, 0);
+        joPanelTitle1.add(parent1, gridBagConstraints);
+
+        joLable32.setText("ຊື່ ແລະ ນາມສະກຸນ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(2, 5, 2, 5);
+        joPanelTitle1.add(joLable32, gridBagConstraints);
+
+        parent2.setMinimumSize(new java.awt.Dimension(200, 40));
+        parent2.setPreferredSize(new java.awt.Dimension(200, 45));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.insets = new java.awt.Insets(2, 0, 2, 0);
+        joPanelTitle1.add(parent2, gridBagConstraints);
+
+        joLable33.setText("ປະເພດຜູ້ປົກຄອງ  ຜູ້ປົກຄອງ");
+        joLable33.setMinimumSize(new java.awt.Dimension(100, 19));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(2, 0, 2, 0);
+        joPanelTitle1.add(joLable33, gridBagConstraints);
 
         btn_saveHistory.setText("ບັກທຶກປະຫວັດຫຍໍ້");
         btn_saveHistory.setFont(new java.awt.Font("Phetsarath OT", 0, 14)); // NOI18N
         btn_saveHistory.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.SAVE);
-        jPanel11.add(btn_saveHistory);
-
-        javax.swing.GroupLayout joPanelTitle1Layout = new javax.swing.GroupLayout(joPanelTitle1);
-        joPanelTitle1.setLayout(joPanelTitle1Layout);
-        joPanelTitle1Layout.setHorizontalGroup(
-            joPanelTitle1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(joPanelTitle1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(joPanelTitle1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(joPanelTitle1Layout.createSequentialGroup()
-                        .addGroup(joPanelTitle1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(joPanelTitle1Layout.createSequentialGroup()
-                                .addGroup(joPanelTitle1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txt_fatherName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(joLable14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(10, 10, 10)
-                                .addGroup(joPanelTitle1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txt_fatherAge, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
-                                    .addComponent(joLable15, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE))
-                                .addGap(10, 10, 10))
-                            .addGroup(joPanelTitle1Layout.createSequentialGroup()
-                                .addGroup(joPanelTitle1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txt_fatherPlace, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(joLable22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                        .addGroup(joPanelTitle1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_fatherTel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(joLable17, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(joLable16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txt_fatherJob, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, joPanelTitle1Layout.createSequentialGroup()
-                        .addGroup(joPanelTitle1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(joPanelTitle1Layout.createSequentialGroup()
-                                .addGroup(joPanelTitle1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txt_MotherName, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                    .addComponent(joLable18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(10, 10, 10)
-                                .addGroup(joPanelTitle1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txt_MotherAge, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
-                                    .addComponent(joLable19, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(10, 10, 10))
-                            .addGroup(joPanelTitle1Layout.createSequentialGroup()
-                                .addGroup(joPanelTitle1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txt_MotherPlace, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                                    .addComponent(joLable23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                        .addGroup(joPanelTitle1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_MotherTel, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
-                            .addComponent(joLable21, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(joLable20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txt_MotherJob, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap())
-        );
-        joPanelTitle1Layout.setVerticalGroup(
-            joPanelTitle1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(joPanelTitle1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(joPanelTitle1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(joPanelTitle1Layout.createSequentialGroup()
-                        .addGroup(joPanelTitle1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(joLable15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(joLable16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(joPanelTitle1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txt_fatherAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_fatherJob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(joPanelTitle1Layout.createSequentialGroup()
-                        .addComponent(joLable14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_fatherName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(joPanelTitle1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(joPanelTitle1Layout.createSequentialGroup()
-                        .addComponent(joLable17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_fatherTel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(joPanelTitle1Layout.createSequentialGroup()
-                        .addComponent(joLable22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_fatherPlace, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(joPanelTitle1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(joPanelTitle1Layout.createSequentialGroup()
-                        .addGroup(joPanelTitle1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(joLable19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(joLable20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(joPanelTitle1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txt_MotherAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_MotherJob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(joPanelTitle1Layout.createSequentialGroup()
-                        .addComponent(joLable18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_MotherName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(joPanelTitle1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(joPanelTitle1Layout.createSequentialGroup()
-                        .addComponent(joLable21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_MotherTel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(joPanelTitle1Layout.createSequentialGroup()
-                        .addComponent(joLable23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_MotherPlace, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(30, 30, 30)
-                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(163, Short.MAX_VALUE))
-        );
+        btn_saveHistory.setPreferredSize(new java.awt.Dimension(400, 41));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.insets = new java.awt.Insets(40, 0, 0, 0);
+        joPanelTitle1.add(btn_saveHistory, gridBagConstraints);
 
         joPanelTitle2.setBackground(new java.awt.Color(204, 204, 204));
         joPanelTitle2.setJoTitle("ຂໍ້ມູນສ່ວນຕົວ");
         joPanelTitle2.setOpaque(false);
+        joPanelTitle2.setLayout(new java.awt.GridBagLayout());
 
+        txt_FamiltyID.setMinimumSize(new java.awt.Dimension(200, 40));
         txt_FamiltyID.setPlaceholder("ເລກສຳມະໂນຄົວ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        joPanelTitle2.add(txt_FamiltyID, gridBagConstraints);
 
         joLable1.setText("ເລກສຳມະໂນຄົວ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        joPanelTitle2.add(joLable1, gridBagConstraints);
 
         joLable2.setText("ເລກບັດປະຈຳຕົວ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
+        gridBagConstraints.insets = new java.awt.Insets(5, 8, 5, 0);
+        joPanelTitle2.add(joLable2, gridBagConstraints);
 
+        txt_peopleID.setMinimumSize(new java.awt.Dimension(100, 40));
         txt_peopleID.setPlaceholder("ເລກບັດປະຈຳຕົວ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 8, 5, 0);
+        joPanelTitle2.add(txt_peopleID, gridBagConstraints);
 
         joLable3.setText("ເລກພາດສະປອດ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 8, 5, 0);
+        joPanelTitle2.add(joLable3, gridBagConstraints);
 
+        txt_passportID.setMinimumSize(new java.awt.Dimension(100, 40));
         txt_passportID.setPlaceholder("ເລກພາດສະປອດ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 8, 5, 0);
+        joPanelTitle2.add(txt_passportID, gridBagConstraints);
 
         joLable4.setText("ກຸບເລືອດ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        joPanelTitle2.add(joLable4, gridBagConstraints);
+
+        joLable8.setText("ປະເພດຍານພາຫະນະ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 8, 5, 0);
+        joPanelTitle2.add(joLable8, gridBagConstraints);
+
+        joLable9.setText("ຊື່ ແລະ ນາມສະກຸນ ອ້າຍນ້ອງ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        joPanelTitle2.add(joLable9, gridBagConstraints);
+
+        txt_SiblingName.setMinimumSize(new java.awt.Dimension(100, 40));
+        txt_SiblingName.setPlaceholder("ຊື່ ແລະ ນາມສະກຸນ ອ້າຍນ້ອງ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        joPanelTitle2.add(txt_SiblingName, gridBagConstraints);
+
+        joLable10.setText("ອາຍຸ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 8, 5, 0);
+        joPanelTitle2.add(joLable10, gridBagConstraints);
+
+        txt_SiblingAge.setMinimumSize(new java.awt.Dimension(100, 40));
+        txt_SiblingAge.setNumberOnly(true);
+        txt_SiblingAge.setPlaceholder("ປີ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 8, 5, 0);
+        joPanelTitle2.add(txt_SiblingAge, gridBagConstraints);
+
+        joLable11.setText("ເບີໂທ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        joPanelTitle2.add(joLable11, gridBagConstraints);
+
+        txt_SiblingTel.setMinimumSize(new java.awt.Dimension(100, 40));
+        txt_SiblingTel.setNumberOnly(true);
+        txt_SiblingTel.setPlaceholder("ເບີໂທ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        joPanelTitle2.add(txt_SiblingTel, gridBagConstraints);
+
+        txt_SiblingJob.setMinimumSize(new java.awt.Dimension(100, 40));
+        txt_SiblingJob.setPlaceholder("ອາຊີບ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 9, 5, 0);
+        joPanelTitle2.add(txt_SiblingJob, gridBagConstraints);
+
+        joLable12.setText("ອາຊີບ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 9, 5, 0);
+        joPanelTitle2.add(joLable12, gridBagConstraints);
+
+        txt_SiblingPlace.setMinimumSize(new java.awt.Dimension(200, 40));
+        txt_SiblingPlace.setPlaceholder("ບ່ອນປະຈຳການ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        joPanelTitle2.add(txt_SiblingPlace, gridBagConstraints);
+
+        joLable13.setText("ບ່ອນປະຈຳການ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 11;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 9, 5, 0);
+        joPanelTitle2.add(joLable13, gridBagConstraints);
+
+        jPanel11.setOpaque(false);
+        jPanel11.setPreferredSize(new java.awt.Dimension(10, 35));
 
         buttonGroup1.add(rd_BloodGroupA);
         rd_BloodGroupA.setText("ກຸບ A");
+        jPanel11.add(rd_BloodGroupA);
 
         buttonGroup1.add(rd_BloodGroupB);
         rd_BloodGroupB.setText("ກຸບ B");
+        jPanel11.add(rd_BloodGroupB);
 
         buttonGroup1.add(rd_BloodGroupAB);
         rd_BloodGroupAB.setText("ກຸບ AB");
+        jPanel11.add(rd_BloodGroupAB);
 
         buttonGroup1.add(rd_BloodGroupO);
         rd_BloodGroupO.setText("ກຸບ O");
+        jPanel11.add(rd_BloodGroupO);
 
-        joLable5.setText("ສ່ວນສູງ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        joPanelTitle2.add(jPanel11, gridBagConstraints);
 
-        joLable6.setText("ນ້ຳໜັກ");
-
-        txt_Higth.setNumberOnly(true);
-        txt_Higth.setPlaceholder("CM");
-
-        txt_Weight.setNumberOnly(true);
-        txt_Weight.setPlaceholder("KG");
-
-        jPanel12.setOpaque(false);
-
-        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
-        jPanel12.setLayout(jPanel12Layout);
-        jPanel12Layout.setHorizontalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel12Layout.setVerticalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        joLable8.setText("ປະເພດຍານພາຫະນະ");
+        jPanel13.setOpaque(false);
+        jPanel13.setPreferredSize(new java.awt.Dimension(10, 35));
 
         buttonGroup2.add(rd_DiverCategoryMotobike);
         rd_DiverCategoryMotobike.setText("ລົດຈັກ");
+        jPanel13.add(rd_DiverCategoryMotobike);
 
         buttonGroup2.add(rd_DiverCategoryCar);
         rd_DiverCategoryCar.setText("ລົດໃຫຍ່");
+        jPanel13.add(rd_DiverCategoryCar);
 
         buttonGroup2.add(rd_DiverCategoryOther);
         rd_DiverCategoryOther.setText("ອື່່ນໆ");
+        jPanel13.add(rd_DiverCategoryOther);
 
-        joLable9.setText("ຊື່ ແລະ ນາມສະກຸນ ອ້າຍນ້ອງ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 8, 5, 0);
+        joPanelTitle2.add(jPanel13, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 13;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.weighty = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        joPanelTitle2.add(joLable34, gridBagConstraints);
 
-        txt_SiblingName.setPlaceholder("ຊື່ ແລະ ນາມສະກຸນ ຜົວ/ເມຍ");
+        jPanel12.setOpaque(false);
+        jPanel12.setLayout(new java.awt.GridBagLayout());
 
-        joLable10.setText("ອາຍຸ");
+        joLable5.setText("ສ່ວນສູງ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 5);
+        jPanel12.add(joLable5, gridBagConstraints);
 
-        txt_SiblingAge.setNumberOnly(true);
-        txt_SiblingAge.setPlaceholder("ປີ");
+        txt_Higth.setMinimumSize(new java.awt.Dimension(100, 40));
+        txt_Higth.setNumberOnly(true);
+        txt_Higth.setPlaceholder("CM");
+        txt_Higth.setPreferredSize(new java.awt.Dimension(100, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 5);
+        jPanel12.add(txt_Higth, gridBagConstraints);
 
-        joLable11.setText("ເບີໂທ");
+        joLable6.setText("ນ້ຳໜັກ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 0);
+        jPanel12.add(joLable6, gridBagConstraints);
 
-        txt_SiblingTel.setNumberOnly(true);
-        txt_SiblingTel.setPlaceholder("ເບີໂທ");
+        txt_Weight.setMinimumSize(new java.awt.Dimension(100, 40));
+        txt_Weight.setNumberOnly(true);
+        txt_Weight.setPlaceholder("KG");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = -100;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 0);
+        jPanel12.add(txt_Weight, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 0.1;
+        jPanel12.add(joLable35, gridBagConstraints);
 
-        txt_SiblingJob.setPlaceholder("ອາຊີບ");
-
-        joLable12.setText("ອາຊີບ");
-
-        txt_SiblingPlace.setPlaceholder("ບ່ອນປະຈຳການ");
-
-        joLable13.setText("ບ່ອນປະຈຳການ");
-
-        javax.swing.GroupLayout joPanelTitle2Layout = new javax.swing.GroupLayout(joPanelTitle2);
-        joPanelTitle2.setLayout(joPanelTitle2Layout);
-        joPanelTitle2Layout.setHorizontalGroup(
-            joPanelTitle2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(joPanelTitle2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(joPanelTitle2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, joPanelTitle2Layout.createSequentialGroup()
-                        .addGroup(joPanelTitle2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_FamiltyID, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(joLable1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(10, 10, 10)
-                        .addGroup(joPanelTitle2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(txt_peopleID, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(joLable2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(joPanelTitle2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(joLable3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txt_passportID, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, joPanelTitle2Layout.createSequentialGroup()
-                        .addGroup(joPanelTitle2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(joLable4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(joPanelTitle2Layout.createSequentialGroup()
-                                .addComponent(rd_BloodGroupA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(10, 10, 10)
-                                .addComponent(rd_BloodGroupB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(10, 10, 10)
-                                .addComponent(rd_BloodGroupAB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(10, 10, 10)
-                                .addComponent(rd_BloodGroupO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(10, 10, 10)
-                        .addGroup(joPanelTitle2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txt_Higth, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
-                            .addComponent(joLable5, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(joPanelTitle2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txt_Weight, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
-                            .addComponent(joLable6, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(joLable8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, joPanelTitle2Layout.createSequentialGroup()
-                        .addComponent(rd_DiverCategoryMotobike, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(rd_DiverCategoryCar, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(rd_DiverCategoryOther, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(joPanelTitle2Layout.createSequentialGroup()
-                        .addGroup(joPanelTitle2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(joPanelTitle2Layout.createSequentialGroup()
-                                .addGroup(joPanelTitle2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txt_SiblingTel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                    .addComponent(joLable11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(10, 10, 10)
-                                .addGroup(joPanelTitle2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txt_SiblingJob, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                    .addComponent(joLable12, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(10, 10, 10)
-                                .addGroup(joPanelTitle2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txt_SiblingPlace, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(joLable13, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(joPanelTitle2Layout.createSequentialGroup()
-                                .addGroup(joPanelTitle2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txt_SiblingName, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
-                                    .addComponent(joLable9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(joPanelTitle2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(joPanelTitle2Layout.createSequentialGroup()
-                                        .addGap(1, 1, 1)
-                                        .addComponent(txt_SiblingAge, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE))
-                                    .addComponent(joLable10, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(1, 1, 1)))
-                .addGap(3, 3, 3))
-        );
-        joPanelTitle2Layout.setVerticalGroup(
-            joPanelTitle2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(joPanelTitle2Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(joPanelTitle2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(joPanelTitle2Layout.createSequentialGroup()
-                        .addComponent(joLable3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_passportID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(joPanelTitle2Layout.createSequentialGroup()
-                        .addComponent(joLable2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_peopleID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(joPanelTitle2Layout.createSequentialGroup()
-                        .addComponent(joLable1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_FamiltyID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(joPanelTitle2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(joPanelTitle2Layout.createSequentialGroup()
-                        .addGroup(joPanelTitle2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(joLable4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(joLable5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(joLable6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(joPanelTitle2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(rd_BloodGroupAB, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(joPanelTitle2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(rd_BloodGroupA, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(rd_BloodGroupB, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(rd_BloodGroupO, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txt_Higth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txt_Weight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(joLable8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(joPanelTitle2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rd_DiverCategoryMotobike, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rd_DiverCategoryCar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rd_DiverCategoryOther, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(joPanelTitle2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(joLable9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(joLable10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(joPanelTitle2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_SiblingName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_SiblingAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(joPanelTitle2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(joPanelTitle2Layout.createSequentialGroup()
-                        .addComponent(joLable11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_SiblingTel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(joPanelTitle2Layout.createSequentialGroup()
-                        .addComponent(joLable12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_SiblingJob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(joPanelTitle2Layout.createSequentialGroup()
-                        .addComponent(joLable13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_SiblingPlace, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(156, Short.MAX_VALUE))
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(6, 0, 6, 0);
+        joPanelTitle2.add(jPanel12, gridBagConstraints);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -870,7 +1071,7 @@ public class StudentHistoryView extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(joPanelTitle2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(joPanelTitle2, javax.swing.GroupLayout.DEFAULT_SIZE, 597, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(joPanelTitle1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -881,7 +1082,7 @@ public class StudentHistoryView extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(joPanelTitle1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(joPanelTitle2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(joPanelTitle2, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE))
                 .addGap(21, 21, 21))
         );
 
@@ -985,14 +1186,14 @@ public class StudentHistoryView extends javax.swing.JPanel {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(236, Short.MAX_VALUE)
+                .addContainerGap(304, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(joPanelTitle4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(25, 25, 25)
                         .addComponent(joPanelTitle5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(235, Short.MAX_VALUE))
+                .addContainerGap(304, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1003,7 +1204,7 @@ public class StudentHistoryView extends javax.swing.JPanel {
                     .addComponent(joPanelTitle5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(244, Short.MAX_VALUE))
+                .addContainerGap(241, Short.MAX_VALUE))
         );
 
         TapHistory.addTab("ທີ່ຢູ່", jPanel2);
@@ -1179,8 +1380,7 @@ public class StudentHistoryView extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(Pn_Navigation, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TapHistory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(TapHistory, javax.swing.GroupLayout.DEFAULT_SIZE, 653, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -1204,6 +1404,7 @@ public class StudentHistoryView extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -1240,6 +1441,11 @@ public class StudentHistoryView extends javax.swing.JPanel {
     private Components.JoLable joLable29;
     private Components.JoLable joLable3;
     private Components.JoLable joLable30;
+    private Components.JoLable joLable31;
+    private Components.JoLable joLable32;
+    private Components.JoLable joLable33;
+    private Components.JoLable joLable34;
+    private Components.JoLable joLable35;
     private Components.JoLable joLable4;
     private Components.JoLable joLable5;
     private Components.JoLable joLable6;
@@ -1251,6 +1457,9 @@ public class StudentHistoryView extends javax.swing.JPanel {
     private Component.JoPanelTitle joPanelTitle4;
     private Component.JoPanelTitle joPanelTitle5;
     private Components.JoLable lbl_title;
+    private ClassUI.ModelLiquid modelLiquid1;
+    private Component.ParentComponent parent1;
+    private Component.ParentComponent parent2;
     private javax.swing.JPanel pnDataTable;
     private javax.swing.JPanel pnFileData;
     private Component.JoRadioButton rd_BloodGroupA;

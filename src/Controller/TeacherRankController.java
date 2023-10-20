@@ -1,5 +1,6 @@
 package Controller;
 
+import Component.DialogTeacherRank;
 import DAO.TeacherDAO;
 import DAOSevervice.TeacherService;
 import DAOSevervice.YearService;
@@ -10,8 +11,10 @@ import Tools.JoHookEvent;
 import View.TeacherRinkView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-public class TeacherRankController implements JoMVC, ActionListener {
+public class TeacherRankController implements JoMVC, ActionListener, MouseListener {
 
     private TeacherRankModel model;
     private TeacherRinkView view;
@@ -35,6 +38,8 @@ public class TeacherRankController implements JoMVC, ActionListener {
     public void AddEvent() {
         view.getBtn_back().addActionListener(this);
         view.getBtnShow().addActionListener(this);
+        view.getPopup().addActionListener(this);
+        view.TeacherEvent(this);
     }
 
     @Override
@@ -63,10 +68,51 @@ public class TeacherRankController implements JoMVC, ActionListener {
         if (event.isEvent(view.getBtn_back())) {
             GlobalDataModel.rootView.showDashbord();
         } else if (event.isEvent(view.getBtnShow())) {
-            System.out.println("ok");
             YearModel yearModel = new YearService().getYearById(view.getCbYear().getKeyInt());
             view.showTeacher(new TeacherService().getAllTeacher(), yearModel);
+        } else if (event.isEvent(view.getPopup().getItemshow())) {
+            DialogTeacherRank teacherRank = new DialogTeacherRank(
+                    GlobalDataModel.rootView,
+                    true,
+           new TeacherService().getTeacherById(view.getTeacherID()),
+                    view.getYearID(),
+                    view.getMonthID(),
+                             view
+            );
+            teacherRank.setVisible(true);
+        } else if (event.isEvent(view.getPopup().getItemEdit())) {
+
+        } else if (event.isEvent(view.getPopup().getItemDelete())) {
+
         }
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        JoHookEvent event = new JoHookEvent(e.getSource());
+        if (event.isEvent(view.getTbTeacher())) {
+            view.getPopup().ShowPopup(e);
+        }
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
     }
 
 }

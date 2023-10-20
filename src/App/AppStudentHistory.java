@@ -17,6 +17,8 @@ public class AppStudentHistory {
             StudentHistoryModel model = new StudentHistoryService().getStudentHistoryByStudentID(StudentID);
             StudentHistoryView view = new StudentHistoryView("ປະຫວັດນັກຮຽນ (" + studentModel.getFullName() + ")");
             StudentHistoryController controller = new StudentHistoryController(view, model, StudentID, TapIndex);
+            controller.Start();
+            controller.AddEvent();
         } catch (Exception e) {
             JoLoger.saveLog(e, this);
         }

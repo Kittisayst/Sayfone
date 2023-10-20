@@ -115,10 +115,14 @@ public class RegisterDAO implements RegisterFn {
             PreparedStatement pre = sql.getSelectCustom("yearID=? ORDER BY classID ASC");
             pre.setInt(1, lastYearID);
             ResultSet rs = pre.executeQuery();
+            if (!rs.next()) {
+                pre.setInt(1, lastYearID - 1);
+                rs = pre.executeQuery();
+            }
             while (rs.next()) {
                 models.add(getResult(rs));
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             JoAlert.Error(e, this);
             JoLoger.saveLog(e, this);
         } finally {

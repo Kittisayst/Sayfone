@@ -229,4 +229,11 @@ public class TeacherModel {
         }
     }
 
+    @Override
+    public String toString() {
+        return "TeacherModel{" + "TeacherID=" + TeacherID + ", NationalityID=" + NationalityID + ", EthnicID=" + EthnicID + ", ReligionID=" + ReligionID + ", ClassID=" + ClassID + ", TeacherNo=" + TeacherNo + ", Name=" + Name + ", NameENG=" + NameENG + ", NickName=" + NickName + ", Gender=" + Gender + ", DateOfBirth=" + DateOfBirth + ", Tel=" + Tel + ", Email=" + Email + ", Facebook=" + Facebook + ", DateStart=" + DateStart + ", DateStop=" + DateStop + ", Talent=" + Talent + ", Image=" + Image + ", ImageFile=" + ImageFile + ", Health=" + Health + ", Status=" + Status + '}';
+    }
+    
+    
+
 }

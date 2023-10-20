@@ -15,6 +15,31 @@ public class StudentHistoryModel extends HistoryModel {
     private int Higth;
     private int Weight;
 
+    public StudentHistoryModel() {
+    }
+
+    public StudentHistoryModel(int HistroyID, int studentID, String FamilyID, String PeopleID, String PassportID, String SiblingName, int SiblingAge, String SiblingJob, String SiblingPlace, String SiblingTel, int Higth, int Weight, String FatherName, int FatherAge, String FatherJob, String FatherPlace, String FatherTel, String MotherName, int MotherAge, String MotherJob, String MotherPlace, String MotherTel, int BloodGroup, int DiverCategory, String DiverID, String Parent1, String Parent2) {
+        super(FatherName, FatherAge, FatherJob, FatherPlace, FatherTel, MotherName, MotherAge, MotherJob, MotherPlace, MotherTel, BloodGroup, DiverCategory, DiverID, Parent1, Parent2);
+        this.HistroyID = HistroyID;
+        this.studentID = studentID;
+        this.FamilyID = FamilyID;
+        this.PeopleID = PeopleID;
+        this.PassportID = PassportID;
+        this.SiblingName = SiblingName;
+        this.SiblingAge = SiblingAge;
+        this.SiblingJob = SiblingJob;
+        this.SiblingPlace = SiblingPlace;
+        this.SiblingTel = SiblingTel;
+        this.Higth = Higth;
+        this.Weight = Weight;
+    }
+
+   
+
+    
+    
+    
+
     public int getHistroyID() {
         return HistroyID;
     }

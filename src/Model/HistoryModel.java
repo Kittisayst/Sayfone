@@ -15,12 +15,14 @@ public class HistoryModel {
     private int BloodGroup;
     private int DiverCategory;
     private String DiverID;
+    private String Parent1;
+    private String Parent2;
 
     public HistoryModel() {
 
     }
 
-    public HistoryModel(String FatherName, int FatherAge, String FatherJob, String FatherPlace, String FatherTel, String MotherName, int MotherAge, String MotherJob, String MotherPlace, String MotherTel, int BloodGroup, int DiverCategory, String DiverID) {
+    public HistoryModel(String FatherName, int FatherAge, String FatherJob, String FatherPlace, String FatherTel, String MotherName, int MotherAge, String MotherJob, String MotherPlace, String MotherTel, int BloodGroup, int DiverCategory, String DiverID, String Parent1, String Parent2) {
         this.FatherName = FatherName;
         this.FatherAge = FatherAge;
         this.FatherJob = FatherJob;
@@ -34,6 +36,8 @@ public class HistoryModel {
         this.BloodGroup = BloodGroup;
         this.DiverCategory = DiverCategory;
         this.DiverID = DiverID;
+        this.Parent1 = Parent1;
+        this.Parent2 = Parent2;
     }
 
     public String getFatherName() {
@@ -140,9 +144,25 @@ public class HistoryModel {
         this.DiverID = DiverID;
     }
 
+    public String getParent1() {
+        return Parent1;
+    }
+
+    public void setParent1(String Parent1) {
+        this.Parent1 = Parent1;
+    }
+
+    public String getParent2() {
+        return Parent2;
+    }
+
+    public void setParent2(String Parent2) {
+        this.Parent2 = Parent2;
+    }
+
     @Override
     public String toString() {
-        return "HistoryModel{" + "FatherName=" + FatherName + ", FatherAge=" + FatherAge + ", FatherJob=" + FatherJob + ", FatherPlace=" + FatherPlace + ", FatherTel=" + FatherTel + ", MotherName=" + MotherName + ", MotherAge=" + MotherAge + ", MotherJob=" + MotherJob + ", MotherPlace=" + MotherPlace + ", MotherTel=" + MotherTel + ", BloodGroup=" + BloodGroup + ", DiverCategory=" + DiverCategory + ", DiverID=" + DiverID + '}';
+        return "HistoryModel{" + "FatherName=" + FatherName + ", FatherAge=" + FatherAge + ", FatherJob=" + FatherJob + ", FatherPlace=" + FatherPlace + ", FatherTel=" + FatherTel + ", MotherName=" + MotherName + ", MotherAge=" + MotherAge + ", MotherJob=" + MotherJob + ", MotherPlace=" + MotherPlace + ", MotherTel=" + MotherTel + ", BloodGroup=" + BloodGroup + ", DiverCategory=" + DiverCategory + ", Parent1=" + Parent1 + ", Parent2=" + Parent2 + ", DiverID=" + DiverID + '}';
     }
 
 }

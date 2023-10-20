@@ -15,5 +15,7 @@ public interface TeacherRankFn {
 
     public TeacherRankModel getTeacherRankById(int ID);
 
-    public TeacherRankModel getTeacherRankByTeacherId(int TearcherID, int YearID);
+    public TeacherRankModel getTeacherRankByTeacherId(int TearcherID, int YearID, int Month);
+
+    public int getMoney(int TeacherID);
 }

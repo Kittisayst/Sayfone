@@ -216,3 +216,40 @@
 05/10/2023: DAO.DistrictDAO@31724f72 Errorjava.sql.SQLException: Column Index out of range, 4 > 3. 
 10/10/2023: DAO.UserDAO@7af10f4c Errorjava.sql.SQLException: Table 'db_sayfoneschool2022.tb_user' doesn't exist
 10/10/2023: DAO.TeacherFileDAO@7986ad4a Errorjava.sql.SQLException: Unknown column 'StudentID' in 'where clause'
+16/10/2023: DAO.StudentHistoryDAO@1947284c Errorjava.sql.SQLException: Column Index out of range, 27 > 26. 
+16/10/2023: DAO.TeacherRankDAO@1b26ac2e Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+16/10/2023: DAO.TeacherRankDAO@73c01eab Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+16/10/2023: DAO.TeacherRankDAO@353d3506 Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+16/10/2023: DAO.TeacherRankDAO@42ffaf03 Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+16/10/2023: DAO.TeacherRankDAO@45810820 Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+16/10/2023: DAO.TeacherRankDAO@255c99e1 Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+16/10/2023: DAO.TeacherRankDAO@40a22a91 Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+16/10/2023: DAO.TeacherRankDAO@77660ba8 Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+16/10/2023: DAO.TeacherRankDAO@4340e7c0 Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+16/10/2023: DAO.TeacherRankDAO@7b6f279c Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+16/10/2023: DAO.TeacherRankDAO@2324dbcc Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+16/10/2023: DAO.TeacherRankDAO@68f011dc Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+16/10/2023: DAO.TeacherRankDAO@207d34ff Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+16/10/2023: DAO.TeacherRankDAO@3171416b Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+16/10/2023: DAO.TeacherRankDAO@2aac98b6 Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+16/10/2023: DAO.TeacherRankDAO@207a651f Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+16/10/2023: DAO.TeacherRankDAO@77555450 Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+16/10/2023: DAO.TeacherRankDAO@1836b266 Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+16/10/2023: DAO.TeacherRankDAO@1ef1ea3f Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+16/10/2023: DAO.TeacherRankDAO@56b94f15 Errorjava.sql.SQLException: Unknown type '246 in column 1 of 2 in binary-encoded result set.
+16/10/2023: DAO.TeacherRankDAO@1669073f Errorjava.sql.SQLException: Unknown type '246 in column 1 of 2 in binary-encoded result set.
+16/10/2023: DAO.TeacherRankDAO@3e320e8d Errorjava.sql.SQLException: Unknown type '246 in column 1 of 2 in binary-encoded result set.
+16/10/2023: DAO.TeacherRankDAO@7fdd2a8c Errorjava.sql.SQLException: Unknown type '246 in column 1 of 2 in binary-encoded result set.
+16/10/2023: DAO.TeacherRankDAO@4eaabbf8 Errorjava.sql.SQLException: Unknown type '246 in column 1 of 2 in binary-encoded result set.
+16/10/2023: DAO.TeacherRankDAO@6b301c3f Errorjava.sql.SQLException: Unknown type '246 in column 1 of 2 in binary-encoded result set.
+16/10/2023: DAO.TeacherRankDAO@5f8b4870 Errorjava.sql.SQLException: Unknown type '246 in column 1 of 2 in binary-encoded result set.
+16/10/2023: DAO.TeacherRankDAO@367a9cc8 Errorjava.sql.SQLException: Unknown type '246 in column 1 of 2 in binary-encoded result set.
+16/10/2023: DAO.TeacherRankDAO@6012190d Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+16/10/2023: DAO.TeacherRankDAO@f6b5197 Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+16/10/2023: DAO.TeacherRankDAO@598c5d08 Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+16/10/2023: DAO.TeacherRankDAO@72827d99 Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+16/10/2023: DAO.TeacherRankDAO@5797faf Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+16/10/2023: DAO.TeacherRankDAO@162ead3f Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+16/10/2023: DAO.TeacherRankDAO@75245aa7 Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+16/10/2023: DAO.TeacherRankDAO@19a9798f Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+16/10/2023: DAO.TeacherRankDAO@4c3ded07 Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
