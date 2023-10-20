@@ -6,7 +6,6 @@ import Model.GlobalDataModel;
 public class About {
 
     private final JoProperties joProperties;
-
     public About() {
         joProperties = new JoProperties("/Info/About.properties");
         joProperties.addValue("Bulid", "Sayfoneschool Buld");

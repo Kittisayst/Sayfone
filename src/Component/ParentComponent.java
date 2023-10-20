@@ -11,12 +11,16 @@ public class ParentComponent extends javax.swing.JPanel {
     }
 
     public void setParent(String value) {
+        value = value == null ? "" : value;
         switch (value) {
             case "ພໍ່":
                 cbParent.setSelectedIndex(0);
                 break;
             case "ແມ່":
                 cbParent.setSelectedIndex(1);
+                break;
+            case "":
+                cbParent.setSelectedIndex(2);
                 break;
             default:
                 cbParent.setSelectedIndex(2);
