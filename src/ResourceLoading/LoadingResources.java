@@ -33,6 +33,7 @@ public class LoadingResources extends javax.swing.JFrame {
         resourses.add(new ClassLoading());
         resourses.add(new StudentLoading());
         resourses.add(new DashboardLoading());
+        resourses.add(new CleanCashFile());
     }
 
     public void startLoading() {
@@ -70,6 +71,8 @@ public class LoadingResources extends javax.swing.JFrame {
                         }
                     } else if (data instanceof DashboardLoading) {
                         dashboard();
+                    }else if (data instanceof CleanCashFile) {
+                        cleanCashFile();
                     }
                     loading.StartProgress(resourses.size(), 100);
                 }
@@ -163,11 +166,18 @@ public class LoadingResources extends javax.swing.JFrame {
         return state;
     }
 
-    public boolean financialLoading() {
+    private boolean financialLoading() {
         loading.setTitle("ໂຫຼດຂໍ້ມູນຂໍ້ມູນການຈ່າຍຄ່າຮຽນ");
         FinancialLoading financialLoading = new FinancialLoading();
         GlobalDataModel.financialAll = financialLoading.createFinancial();
         setState(!GlobalDataModel.financialAll.isEmpty());
+        return state;
+    }
+
+    private boolean cleanCashFile() {
+        loading.setTitle("ໂຫຼດໄຟລ໌ເອກະສານ");
+        CleanCashFile cashFile = new CleanCashFile();
+        setState(cashFile.clearFile());
         return state;
     }
 

@@ -107,17 +107,23 @@
             <Component class="Components.JoTable" name="tbTeacher">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="6" rowCount="0">
+                  <Table columnCount="7" rowCount="0">
                     <Column editable="false" title="#" type="java.lang.Object"/>
                     <Column editable="false" title="TeacherID" type="java.lang.Object"/>
                     <Column editable="false" title="&#xe8a;&#xeb7;&#xec8; &#xec1;&#xea5;&#xeb0; &#xe99;&#xeb2;&#xea1;&#xeaa;&#xeb0;&#xe81;&#xeb8;&#xe99;" type="java.lang.Object"/>
                     <Column editable="false" title="&#xe88;&#xeb1;&#xe94;&#xead;&#xeb1;&#xe99;&#xe94;&#xeb1;&#xe9a;" type="java.lang.Object"/>
                     <Column editable="false" title="&#xec0;&#xe94;&#xeb7;&#xead;&#xe99;" type="java.lang.Object"/>
+                    <Column editable="false" title="&#xeaa;&#xebb;&#xe81;&#xeae;&#xebd;&#xe99;" type="java.lang.Object"/>
                     <Column editable="false" title="&#xe88;&#xeb3;&#xe99;&#xea7;&#xe99;&#xec0;&#xe87;&#xeb4;&#xe99;&#xeaa;&#xeb0;&#xeaa;&#xebb;&#xea1;" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                       <Title/>
                       <Editor/>

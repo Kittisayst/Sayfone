@@ -1,6 +1,7 @@
 package View;
 
-import App.AppHome;
+import Chart.PieChartUI;
+import Chart.PieChartUIModel;
 import Component.JoDashboardItem;
 import Components.JoButtonIconfont;
 import Components.JoScrollBar;
@@ -11,6 +12,7 @@ import Model.RegisterModel;
 import Model.StudentModel;
 import Utility.WrapLayout;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.util.List;
@@ -82,16 +84,14 @@ public class DasboardView extends javax.swing.JPanel {
         ds_Teacher = new Component.JoDashboardItem();
         ds_ClassRoom = new Component.JoDashboardItem();
         ds_Financail = new Component.JoDashboardItem();
-        joLable2 = new Components.JoLable();
         pnClassRoom = new javax.swing.JPanel();
-        joLable1 = new Components.JoLable();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         txtSearch = new Components.JoTextField();
         btnSearch = new Components.JoButtonIconfont();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbData = new Components.JoTable();
-        jPanel5 = new javax.swing.JPanel();
+        pnChart = new javax.swing.JPanel();
         lblKindergarten = new Components.JoLable();
         lblElementary = new Components.JoLable();
         lblJuniorHighSchool = new Components.JoLable();
@@ -175,18 +175,7 @@ public class DasboardView extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(15, 0, 0, 0);
         jPanel4.add(jPanel1, gridBagConstraints);
 
-        joLable2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        joLable2.setText("ຫ້ອງຮຽນທັງໝົດ");
-        joLable2.setFont(new java.awt.Font("Phetsarath OT", 0, 18)); // NOI18N
-        joLable2.setPreferredSize(new java.awt.Dimension(106, 40));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
-        jPanel4.add(joLable2, gridBagConstraints);
-
+        pnClassRoom.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(2, 0, 0, 0, new java.awt.Color(204, 204, 204)), "ຫ້ອງຮຽນທັງໝົດ", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Phetsarath OT", 0, 14))); // NOI18N
         pnClassRoom.setMaximumSize(new java.awt.Dimension(0, 0));
         pnClassRoom.setPreferredSize(new java.awt.Dimension(0, 200));
         pnClassRoom.setLayout(new java.awt.BorderLayout());
@@ -196,22 +185,10 @@ public class DasboardView extends javax.swing.JPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 0.1;
-        gridBagConstraints.insets = new java.awt.Insets(0, 15, 0, 15);
+        gridBagConstraints.insets = new java.awt.Insets(15, 15, 0, 15);
         jPanel4.add(pnClassRoom, gridBagConstraints);
 
-        joLable1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        joLable1.setText("ຂໍ້ມູນນັກຮຽນຈ່າຍຄ່າຮຽນ");
-        joLable1.setFont(new java.awt.Font("Phetsarath OT", 0, 18)); // NOI18N
-        joLable1.setPreferredSize(new java.awt.Dimension(161, 35));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 0);
-        jPanel4.add(joLable1, gridBagConstraints);
-
-        jPanel2.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 0, 0, 0, new java.awt.Color(0, 0, 0)));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(2, 0, 0, 0, new java.awt.Color(204, 204, 204)), "ຂໍ້ມູນນັກຮຽນຈ່າຍຄ່າຮຽນ", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Phetsarath OT", 0, 14))); // NOI18N
         jPanel2.setMaximumSize(new java.awt.Dimension(618, 168));
         jPanel2.setPreferredSize(new java.awt.Dimension(618, 168));
         jPanel2.setLayout(new java.awt.GridBagLayout());
@@ -237,6 +214,8 @@ public class DasboardView extends javax.swing.JPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         jPanel2.add(jPanel3, gridBagConstraints);
+
+        jScrollPane1.setMinimumSize(new java.awt.Dimension(452, 402));
 
         tbData.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -272,40 +251,45 @@ public class DasboardView extends javax.swing.JPanel {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipady = 100;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.weighty = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
         jPanel4.add(jPanel2, gridBagConstraints);
 
-        jPanel5.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 40, 5));
+        pnChart.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(2, 0, 0, 0, new java.awt.Color(204, 204, 204)), "ຈຳນວນນັກຮຽນ", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Phetsarath OT", 0, 14))); // NOI18N
+        pnChart.setMinimumSize(new java.awt.Dimension(171, 300));
+        pnChart.setPreferredSize(new java.awt.Dimension(171, 300));
+        pnChart.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 40, 5));
 
         lblKindergarten.setForeground(new java.awt.Color(255, 82, 73));
         lblKindergarten.setText("ອານຸບານ");
         lblKindergarten.setFont(new java.awt.Font("Phetsarath OT", 1, 18)); // NOI18N
-        jPanel5.add(lblKindergarten);
+        pnChart.add(lblKindergarten);
 
         lblElementary.setForeground(new java.awt.Color(214, 187, 122));
         lblElementary.setText("ປະຖົມ");
         lblElementary.setFont(new java.awt.Font("Phetsarath OT", 1, 18)); // NOI18N
-        jPanel5.add(lblElementary);
+        pnChart.add(lblElementary);
 
         lblJuniorHighSchool.setForeground(new java.awt.Color(19, 208, 201));
         lblJuniorHighSchool.setText("ມັດທະຍົມ");
         lblJuniorHighSchool.setFont(new java.awt.Font("Phetsarath OT", 1, 18)); // NOI18N
-        jPanel5.add(lblJuniorHighSchool);
+        pnChart.add(lblJuniorHighSchool);
 
         lblHighSchool.setForeground(new java.awt.Color(79, 128, 220));
         lblHighSchool.setText("ມັດທະຍົມປາຍ");
         lblHighSchool.setFont(new java.awt.Font("Phetsarath OT", 1, 18)); // NOI18N
-        jPanel5.add(lblHighSchool);
+        pnChart.add(lblHighSchool);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel4.add(jPanel5, gridBagConstraints);
+        jPanel4.add(pnChart, gridBagConstraints);
 
         scrollDashbord.setViewportView(jPanel4);
 
@@ -323,14 +307,12 @@ public class DasboardView extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private Components.JoLable joLable1;
-    private Components.JoLable joLable2;
     private Components.JoLable lblElementary;
     private Components.JoLable lblHighSchool;
     private Components.JoLable lblJuniorHighSchool;
     private Components.JoLable lblKindergarten;
+    private javax.swing.JPanel pnChart;
     private javax.swing.JPanel pnClassRoom;
     private javax.swing.JScrollPane scrollDashbord;
     private Components.JoTable tbData;
@@ -346,15 +328,18 @@ public class DasboardView extends javax.swing.JPanel {
         classRoomLayout.setSize(200, 200);
         models.forEach(data -> {
             JLabel btnClass = new JLabel();
-            btnClass.setFont(new Font("Phetsarath OT", 0, 12));
+            btnClass.setFont(new Font("Phetsarath OT", 1, 12));
             btnClass.setPreferredSize(new Dimension(140, 30));
             btnClass.setFocusable(false);
             int CountStudent = financialService.getStudentRegistered(data.getRegisterID()).size();
             btnClass.setText(data.getClassRoomName() + " : ( " + CountStudent + " )");
+            //ສີຕົວໜັງສື
+            btnClass.setForeground(getColorClass(data.getClassID()));
             classRoomLayout.add(btnClass);
             CoutClass(data.getClassID(), CountStudent); //ສະແດງຈຳນວນລວມນັກຮຽນ
         });
         pnClassRoom.add(classRoomLayout, BorderLayout.CENTER);
+        showChart();
     }
 
     int Kindergarten = 0;
@@ -422,11 +407,6 @@ public class DasboardView extends javax.swing.JPanel {
             default:
                 break;
         }
-
-        lblKindergarten.setText("ອານຸບານ: " + Kindergarten + " ຄົນ");
-        lblElementary.setText("ປະຖົມ: " + Elementary + " ຄົນ");
-        lblJuniorHighSchool.setText("ມັດທະຍົມຕົ້ນ: " + JuniorHighSchool + " ຄົນ");
-        lblHighSchool.setText("ມັດທະຍົມປາຍ: " + HighSchool + " ຄົນ");
     }
 
     public void showTableData(List<StudentModel> models) {
@@ -434,6 +414,41 @@ public class DasboardView extends javax.swing.JPanel {
         models.forEach(data -> {
             tbData.AddJoModel(new Object[]{tbData.autoNumber(), data.getStudentID(), data.getStudentNo(), data.getFullName()});
         });
+    }
+
+    private void showChart() {
+        pnChart.removeAll();
+        PieChartUI chartUI = new PieChartUI();
+        chartUI.addData(new PieChartUIModel("ອານຸບານ", Kindergarten, new Color(255, 82, 73)));
+        chartUI.addData(new PieChartUIModel("ປະຖົມ", Elementary, new Color(214, 187, 122)));
+        chartUI.addData(new PieChartUIModel("ມັດທະຍົມຕົ້ນ", JuniorHighSchool, new Color(19, 208, 201)));
+        chartUI.addData(new PieChartUIModel("ມັດທະຍົມປາຍ", HighSchool, new Color(79, 128, 220)));
+        chartUI.setPreferredSize(new Dimension(270, 270));
+        lblKindergarten.setText("ອານຸບານ: " + Kindergarten + " ຄົນ");
+        lblElementary.setText("ປະຖົມ: " + Elementary + " ຄົນ");
+        lblJuniorHighSchool.setText("ມັດທະຍົມຕົ້ນ: " + JuniorHighSchool + " ຄົນ");
+        lblHighSchool.setText("ມັດທະຍົມປາຍ: " + HighSchool + " ຄົນ");
+        pnChart.add(chartUI);
+        pnChart.add(lblKindergarten);
+        pnChart.add(lblElementary);
+        pnChart.add(lblJuniorHighSchool);
+        pnChart.add(lblHighSchool);
+        pnChart.repaint();
+        pnChart.revalidate();
+    }
+
+    private Color getColorClass(int classID) {
+        if (classID <= 20) {
+            return new Color(255, 82, 73);
+        } else if (classID <= 25) {
+            return new Color(214, 187, 122);
+        } else if (classID <= 29) {
+            return new Color(19, 208, 201);
+        } else if (classID <= 32) {
+            return new Color(79, 128, 220);
+        } else {
+            return Color.BLACK;
+        }
     }
 
 }

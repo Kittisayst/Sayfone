@@ -1,12 +1,16 @@
 package Controller;
 
+import Component.DialogTeacherMoney;
 import Component.DialogTeacherRank;
 import DAO.TeacherDAO;
+import DAOSevervice.TeacherMoneyService;
 import DAOSevervice.TeacherService;
 import DAOSevervice.YearService;
 import Model.GlobalDataModel;
+import Model.TeacherMoneyModel;
 import Model.TeacherRankModel;
 import Model.YearModel;
+import Tools.JoAlert;
 import Tools.JoHookEvent;
 import View.TeacherRinkView;
 import java.awt.event.ActionEvent;
@@ -74,16 +78,45 @@ public class TeacherRankController implements JoMVC, ActionListener, MouseListen
             DialogTeacherRank teacherRank = new DialogTeacherRank(
                     GlobalDataModel.rootView,
                     true,
-           new TeacherService().getTeacherById(view.getTeacherID()),
+                    new TeacherService().getTeacherById(view.getTeacherID()),
                     view.getYearID(),
                     view.getMonthID(),
-                             view
+                    view
             );
             teacherRank.setVisible(true);
         } else if (event.isEvent(view.getPopup().getItemEdit())) {
-
+            DialogTeacherMoney teacherMoney = new DialogTeacherMoney(
+                    GlobalDataModel.rootView,
+                    true,
+                    new TeacherService().getTeacherById(view.getTeacherID()),
+                    new YearService().getYearById(view.getYearID()),
+                    new TeacherMoneyService().readTeacherID(view.getTeacherID()),
+                    view
+            );
+            String text = view.getPopup().getItemEdit().getText();
+            teacherMoney.setTitle(text);
+            teacherMoney.setButtonText("ບັນທຶກ " + text);
+            teacherMoney.setMoneystate(true);
+            teacherMoney.setVisible(true);
         } else if (event.isEvent(view.getPopup().getItemDelete())) {
-
+            TeacherMoneyModel moneyModel = new TeacherMoneyService().readTeacherID(view.getTeacherID());
+            if (moneyModel.getTeacherMoneyID() != 0) {
+                DialogTeacherMoney teacherMoney = new DialogTeacherMoney(
+                        GlobalDataModel.rootView,
+                        true,
+                        new TeacherService().getTeacherById(view.getTeacherID()),
+                        new YearService().getYearById(view.getYearID()),
+                        moneyModel,
+                        view
+                );
+                String text = view.getPopup().getItemDelete().getText();
+                teacherMoney.setTitle(text);
+                teacherMoney.setButtonText("ບັນທຶກ " + text);
+                teacherMoney.setMoneystate(false);
+                teacherMoney.setVisible(true);
+            } else {
+                new JoAlert().messages("ການເງິນຄູ", "ຍັງບໍ່ມີຂໍ້ມູນການເງິນຄູ!", JoAlert.Icons.warning);
+            }
         }
     }
 

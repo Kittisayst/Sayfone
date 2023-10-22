@@ -1,15 +1,9 @@
 package Model;
 
 import Main.JoHttp;
-import Main.JoUploadFile;
-import Tools.JoCreateImage;
+import Tools.JoFileSystem;
 import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.sql.Blob;
 import java.sql.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
@@ -87,13 +81,16 @@ public class FileTranferModel {
             if (FileName == null) {
                 return new ImageIcon(getClass().getResource("/Source/empty.jpg"));
             } else {
-                JoHttp johttp = new JoHttp("http://sayfoneapi/imageAPI.php?fileName=" + FileName);
+                JoFileSystem fileSystem = new JoFileSystem();
+                String utl = "http://sayfoneapi/imageAPI.php?fileName=" + FileName;
+                String savepath = fileSystem.getCurrentPath() + "/ResizeImage/" + FileName;
+                JoHttp johttp = new JoHttp(utl);
                 johttp.Open();
                 if (johttp.getResponseContent().equals("Image not found.")) {
-                   return new ImageIcon(getClass().getResource("/Source/empty.jpg"));
+                    return new ImageIcon(getClass().getResource("/Source/empty.jpg"));
                 } else {
-                    URL url = new URL("http://sayfoneapi/imageAPI.php?fileName=" + FileName);
-                    return new ImageIcon(url);
+                    johttp.DownloadFile(utl, FileName, savepath);
+                    return new ImageIcon(savepath);
                 }
             }
         } catch (Exception e) {

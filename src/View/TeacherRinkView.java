@@ -10,11 +10,10 @@ import Model.TeacherModel;
 import Model.TeacherMoneyModel;
 import Model.TeacherRankModel;
 import Model.YearModel;
+import Tools.JoDataTable;
 import Tools.JoIconFont;
 import Utility.MyFormat;
 import Utility.MyPopup;
-import java.awt.Color;
-import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
 import jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons;
@@ -87,8 +86,9 @@ public class TeacherRinkView extends javax.swing.JPanel {
                         tbTeacher.autoNumber(),
                         data.getTeacherID(),
                         data.getFullName(),
-                        rankModel.getRank() == 0 ? "ຍັງບໍ່ຈັດອັນດັບ" : "ອັນດັບທີ " + rankModel.getRank(),
+                        rankModel.getRank() == 0 ? "ບໍ່ມີອັນດັບ" : "ອັນດັບ " + rankModel.getRank(),
                         rankModel.getMonth(),
+                        yearModel.getYear(),
                         new MyFormat().formatMoney(moneyModel.getMoney())
                     });
                     loading.StartProgress(models.size(), 100);
@@ -98,6 +98,11 @@ public class TeacherRinkView extends javax.swing.JPanel {
             } finally {
                 loading.close();
                 GlobalDataModel.rootView.setView(this);
+                pn_Datatable.removeAll();
+                pn_Datatable.add(jScrollPane2);
+                JoDataTable dataTable = new JoDataTable(pn_Datatable);
+                dataTable.setHiddenColumns(1);
+                dataTable.showDataTableAll();
             }
         });
         thread.start();
@@ -160,11 +165,11 @@ public class TeacherRinkView extends javax.swing.JPanel {
 
             },
             new String [] {
-                "#", "TeacherID", "ຊື່ ແລະ ນາມສະກຸນ", "ຈັດອັນດັບ", "ເດືອນ", "ຈຳນວນເງິນສະສົມ"
+                "#", "TeacherID", "ຊື່ ແລະ ນາມສະກຸນ", "ຈັດອັນດັບ", "ເດືອນ", "ສົກຮຽນ", "ຈຳນວນເງິນສະສົມ"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
