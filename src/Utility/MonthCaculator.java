@@ -46,7 +46,7 @@ public class MonthCaculator {
         } else {
             List<Integer> missingNumbers = new ArrayList<>();
             // Convert the string values to arrays of integers
-            int[] numbers = parseMonth(value);
+            int[] numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
             int[] missingNumbersArray = parseMonth(missingValue);
             // Create a HashSet to store the missing numbers
             HashSet<Integer> missingSet = new HashSet<>();
@@ -64,17 +64,15 @@ public class MonthCaculator {
         }
     }
 
-    public int[] parseMonth(String value) {
-        String[] numberStrings = value.substring(1, value.length() - 1).split(", ");
-        // Convert the string values to integers
-        int[] numbers = new int[numberStrings.length];
-        for (int i = 0; i < numberStrings.length; i++) {
-            Pattern pattern = Pattern.compile("\\d+");
-            Matcher matcher = pattern.matcher(numberStrings[i]);
-            matcher.find();
-            String number = matcher.group();
-            numbers[i] = Integer.parseInt(number.trim());
+    public int[] parseMonth(String missingMonth) {
+        String cleanedString = missingMonth.replaceAll("\\[|\\]|\\s", "");
+        // Split the cleaned string by comma
+        String[] stringArray = cleanedString.split(",");
+        // Convert the string array to an integer array
+        int[] intArray = new int[stringArray.length];
+        for (int i = 0; i < stringArray.length; i++) {
+            intArray[i] = Integer.parseInt(stringArray[i]);
         }
-        return numbers;
+        return intArray;
     }
 }

@@ -253,3 +253,7 @@
 16/10/2023: DAO.TeacherRankDAO@75245aa7 Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
 16/10/2023: DAO.TeacherRankDAO@19a9798f Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
 16/10/2023: DAO.TeacherRankDAO@4c3ded07 Errorjava.sql.SQLException: Unknown type '246 in column 0 of 1 in binary-encoded result set.
+23/10/2023: View.ReportPayView[,0,0,1645x958,invalid,layout=javax.swing.GroupLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=] Errorjava.lang.ArrayIndexOutOfBoundsException: Index 1 out of bounds for length 1
+23/10/2023: View.ReportPayView[,0,0,1645x958,invalid,layout=javax.swing.GroupLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=] Errorjava.lang.IllegalStateException: No match found
+23/10/2023: View.ReportPayView[,0,0,1645x958,invalid,layout=javax.swing.GroupLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=] Errorjava.lang.NumberFormatException: For input string: " 9"
+23/10/2023: View.ReportPayView[,0,0,1645x958,invalid,layout=javax.swing.GroupLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=] Errorjava.lang.NumberFormatException: For input string: " 9"
