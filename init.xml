@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch4jConfig>
+  <dontWrapJar>false</dontWrapJar>
+  <headerType>gui</headerType>
+  <jar>D:\Java Project\dist\SayFoneSchool.jar</jar>
+  <outfile>D:\Java Project\dist\sayfone school.exe</outfile>
+  <errTitle>ເກີດຂໍ້ຜິດພາດ</errTitle>
+  <cmdLine></cmdLine>
+  <chdir></chdir>
+  <priority>normal</priority>
+  <downloadUrl></downloadUrl>
+  <supportUrl></supportUrl>
+  <stayAlive>false</stayAlive>
+  <restartOnCrash>false</restartOnCrash>
+  <manifest></manifest>
+  <icon>D:\Java Project\dist\Icon\sfsc.ico</icon>
+  <jre>
+    <path>%JAVA_HOME%;%PATH%</path>
+    <requiresJdk>false</requiresJdk>
+    <requires64Bit>false</requires64Bit>
+    <minVersion>1.8.0</minVersion>
+    <maxVersion></maxVersion>
+  </jre>
+  <versionInfo>
+    <fileVersion>2.10.1.0</fileVersion>
+    <txtFileVersion>2.10.1.0</txtFileVersion>
+    <fileDescription>Sayfone school system</fileDescription>
+    <copyright>Copyright © 2016-2022 Codingsabay Co., Ltd. All Rights Reserved.</copyright>
+    <productVersion>2.10.1.0</productVersion>
+    <txtProductVersion>2.10.1.0</txtProductVersion>
+    <productName>Sayfone school system</productName>
+    <companyName>Codingsabay</companyName>
+    <internalName>Kittisay</internalName>
+    <originalFilename>Sayfone school.exe</originalFilename>
+    <trademarks></trademarks>
+    <language>ENGLISH_US</language>
+  </versionInfo>
+</launch4jConfig>
