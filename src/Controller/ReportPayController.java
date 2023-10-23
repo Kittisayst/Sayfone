@@ -164,7 +164,7 @@ public class ReportPayController implements JoMVC, ActionListener, ItemListener,
                     "ສ່ວນຫຼຸດ",
                     "ຈ່າຍຊ້າ",
                     "ຄ່າອາຫານ",
-                    "ເດືອນ",
+                    "ຄ້າງເດືອນ",
                     "ວັນທີລົງບັນຊີ",
                     "ໝາຍເຫດ",
                     "ຜູ້ລົງບັນຊີ"
