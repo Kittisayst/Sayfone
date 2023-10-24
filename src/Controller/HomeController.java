@@ -49,7 +49,7 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
     @Override
     public final void Start() {
         view.setVisible(true);
-        view.getLblVersion().setText(new About().getVersion());
+        view.setLblVersion(new About().getVersion());
         JoFileSystem fileSystem = new JoFileSystem();
         String logo = fileSystem.getCurrentPath() + "/Icon/sfsc.png";
         view.showBandLogo(new ImageIcon(logo));

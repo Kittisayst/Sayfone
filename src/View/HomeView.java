@@ -4,11 +4,11 @@ import Component.JoPanelMenu;
 import Components.JoButtonIconfont;
 import Components.JoLable;
 import Components.JoLableIcon;
-import Components.JoRouter;
 import Components.JoScrollBar;
 import Model.GlobalDataModel;
 import Model.TeacherModel;
 import Tools.JoFrameDesign;
+import java.time.LocalDate;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -26,6 +26,8 @@ public class HomeView extends javax.swing.JFrame {
         menu.SetJoPanelMenu(btn_Service, pn_School);
         menu.SetJoPanelMenu(btn_report, pn_report);
         menu.SetJoPanelMenu(btn_Setting, pnSetting);
+        int currentYear = LocalDate.now().getYear();
+        lblCredit.setText("Copyright © 2020 - " + currentYear + " Codingsabay. All rights reserved.");
     }
 
     public void showUserName(TeacherModel model) {
@@ -125,8 +127,8 @@ public class HomeView extends javax.swing.JFrame {
         return btn_Setting;
     }
 
-    public JoLable getLblVersion() {
-        return lblVersion;
+    public void setLblVersion(String version) {
+        lblVersion.setText("version: "+version);
     }
 
     public JoButtonIconfont getBtnInfo() {
@@ -178,8 +180,6 @@ public class HomeView extends javax.swing.JFrame {
         lbl_user = new Components.JoLableIcon();
         joLable2 = new Components.JoLable();
         lblTutorial = new Components.JoLableIcon();
-        lblVersion = new Components.JoLable();
-        MyRouter = new Components.JoRouter();
         Pn_Menu = new javax.swing.JPanel();
         pn_DrawerHeader = new javax.swing.JPanel();
         lblLogo = new Components.JoLabelImage();
@@ -219,11 +219,17 @@ public class HomeView extends javax.swing.JFrame {
         pnSetting = new javax.swing.JPanel();
         btnInfo = new Components.JoButtonIconfont();
         btnPrinter = new Components.JoButtonIconfont();
+        pnContent = new javax.swing.JPanel();
+        MyRouter = new Components.JoRouter();
+        pnFooter = new javax.swing.JPanel();
+        lblCredit = new Components.JoLable();
+        lblVersion = new Components.JoLable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sayfone School");
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel1.setLayout(new java.awt.GridBagLayout());
 
         Pn_Navbar.setBackground(new java.awt.Color(25, 118, 210));
         Pn_Navbar.setLayout(new java.awt.GridLayout(1, 0));
@@ -271,13 +277,14 @@ public class HomeView extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 30, 0, 15);
         Nav_Left.add(lblTutorial, gridBagConstraints);
 
-        lblVersion.setForeground(new java.awt.Color(255, 255, 255));
-        lblVersion.setText("version 1.0.5");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 10);
-        Nav_Left.add(lblVersion, gridBagConstraints);
-
         Pn_Navbar.add(Nav_Left);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        jPanel1.add(Pn_Navbar, gridBagConstraints);
 
         pn_DrawerHeader.setBackground(new java.awt.Color(10, 49, 89));
         pn_DrawerHeader.setPreferredSize(new java.awt.Dimension(249, 50));
@@ -318,6 +325,9 @@ public class HomeView extends javax.swing.JFrame {
         scrollMenu.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
         pnSideBar.setBackground(new java.awt.Color(15, 77, 140));
+        pnSideBar.setMaximumSize(new java.awt.Dimension(250, 1375));
+        pnSideBar.setMinimumSize(new java.awt.Dimension(250, 1375));
+        pnSideBar.setPreferredSize(new java.awt.Dimension(250, 1375));
 
         btn_home.setBackground(new java.awt.Color(10, 49, 89));
         btn_home.setText("Home");
@@ -367,7 +377,7 @@ public class HomeView extends javax.swing.JFrame {
                 .addGap(2, 2, 2)
                 .addGroup(PN_ManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_teacher, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_Student, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)))
+                    .addComponent(btn_Student, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
             .addComponent(btnSubject, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnSubjectTeacher, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnUser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -419,7 +429,7 @@ public class HomeView extends javax.swing.JFrame {
         pn_SchoolLayout.setHorizontalGroup(
             pn_SchoolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(joButtonIconfont6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btn_Register, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
+            .addComponent(btn_Register, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnTeacherRank, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnFinancial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnAbsent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -481,7 +491,7 @@ public class HomeView extends javax.swing.JFrame {
         pn_reportLayout.setHorizontalGroup(
             pn_reportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(joButtonIconfont10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnReportFinancial, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
+            .addComponent(btnReportFinancial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnReportStudent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnReportPay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnReportTeacher, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -612,8 +622,8 @@ public class HomeView extends javax.swing.JFrame {
         Pn_Menu.setLayout(Pn_MenuLayout);
         Pn_MenuLayout.setHorizontalGroup(
             Pn_MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pn_DrawerHeader, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pn_DrawerHeader, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
         );
         Pn_MenuLayout.setVerticalGroup(
             Pn_MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -623,25 +633,63 @@ public class HomeView extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(Pn_Menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(MyRouter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Pn_Navbar, javax.swing.GroupLayout.DEFAULT_SIZE, 1089, Short.MAX_VALUE)))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(Pn_Navbar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(MyRouter, javax.swing.GroupLayout.DEFAULT_SIZE, 717, Short.MAX_VALUE))
-            .addComponent(Pn_Menu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        jPanel1.add(Pn_Menu, gridBagConstraints);
+
+        pnContent.setLayout(new java.awt.GridBagLayout());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.weighty = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 2, 0, 2);
+        pnContent.add(MyRouter, gridBagConstraints);
+
+        pnFooter.setBackground(new java.awt.Color(25, 118, 210));
+        pnFooter.setMinimumSize(new java.awt.Dimension(0, 40));
+        pnFooter.setPreferredSize(new java.awt.Dimension(0, 40));
+        pnFooter.setLayout(new java.awt.GridBagLayout());
+
+        lblCredit.setForeground(new java.awt.Color(255, 255, 255));
+        lblCredit.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCredit.setText("credit");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.weighty = 0.1;
+        pnFooter.add(lblCredit, gridBagConstraints);
+
+        lblVersion.setForeground(new java.awt.Color(255, 255, 255));
+        lblVersion.setText("version 1.0.5");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 15);
+        pnFooter.add(lblVersion, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        pnContent.add(pnFooter, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.weighty = 0.1;
+        jPanel1.add(pnContent, gridBagConstraints);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
@@ -690,10 +738,13 @@ public class HomeView extends javax.swing.JFrame {
     private Components.JoButtonIconfont joButtonIconfont6;
     private Components.JoLable joLable1;
     private Components.JoLable joLable2;
+    private Components.JoLable lblCredit;
     private Components.JoLabelImage lblLogo;
     private Components.JoLableIcon lblTutorial;
     private Components.JoLable lblVersion;
     private Components.JoLableIcon lbl_user;
+    private javax.swing.JPanel pnContent;
+    private javax.swing.JPanel pnFooter;
     private javax.swing.JPanel pnSetting;
     private javax.swing.JPanel pnSideBar;
     private javax.swing.JPanel pn_DrawerHeader;
