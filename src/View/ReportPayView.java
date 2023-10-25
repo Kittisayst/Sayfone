@@ -8,6 +8,7 @@ import DAOSevervice.RegisterService;
 import DAOSevervice.StudentService;
 import Log.JoLoger;
 import Model.FinancialModel;
+import Model.GlobalDataModel;
 import Model.RegisterModel;
 import Model.StudentModel;
 import Model.YearModel;
@@ -18,12 +19,16 @@ import java.util.List;
 
 public class ReportPayView extends javax.swing.JPanel {
 
+    private final PnLoading loading = new PnLoading();
+
     public ReportPayView(String Title) {
         initComponents();
         lbl_title.setText(Title);
+        loading.setTitle("ກຳລັງໂຫຼດຂໍ້ມູນ");
     }
 
     public void showYear(List<YearModel> models) {
+        cbYear.JoClearData();
         models.forEach(data -> {
             cbYear.JoAddIntModel(data.getYearID(), data.getYear());
         });
@@ -37,37 +42,46 @@ public class ReportPayView extends javax.swing.JPanel {
     }
 
     public void showReportPay(List<FinancialModel> models) {
-        updateTable();
+        tb_data.JoClearModel();
         FinancialService financialService = new FinancialService();
         RegisterService registerService = new RegisterService();
         StudentService studentService = new StudentService();
         MonthCaculator mc = new MonthCaculator();
-        try {
-            models.forEach(data -> {
-                FinancialModel fm = financialService.getFinancialCalculator(data.getRegisterID(), data.getStudentID());
-                RegisterModel rm = registerService.getRegisterById(fm.getRegisterID());
-                StudentModel sm = studentService.getStudentById(data.getStudentID());
-                String findMissingMonth = mc.getMissingMonth(fm.getFinancialMonth());
-                tb_data.AddJoModel(new Object[]{
-                    tb_data.autoNumber(),
-                    data.getFinancialIID(),
-                    rm.getYearModel().getYear(),
-                    data.getStudentID(),
-                    sm.getStudentNo(),
-                    sm.getFullName(),
-                    rm.getClassRoomName(),
-                    findMissingMonth});
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
-            JoAlert.Error(e, this);
-            JoLoger.saveLog(e, this);
-        } finally {
-            JoDataTable dataTable = new JoDataTable(pn_Datatable);
-            dataTable.setHiddenColumns(1);
-            dataTable.setHiddenColumns(2);
-            dataTable.showDataTableAll();
-        }
+        Thread thread = new Thread(() -> {
+            GlobalDataModel.rootView.setView(loading);
+            try {
+                models.forEach(data -> {
+                    FinancialModel fm = financialService.getFinancialCalculator(data.getRegisterID(), data.getStudentID());
+                    RegisterModel rm = registerService.getRegisterById(fm.getRegisterID());
+                    StudentModel sm = studentService.getStudentById(data.getStudentID());
+                    String findMissingMonth = mc.getMissingMonth(fm.getFinancialMonth());
+                    tb_data.AddJoModel(new Object[]{
+                        tb_data.autoNumber(),
+                        data.getFinancialIID(),
+                        rm.getYearModel().getYear(),
+                        data.getStudentID(),
+                        sm.getStudentNo(),
+                        sm.getFullName(),
+                        rm.getClassRoomName(),
+                        findMissingMonth});
+                    loading.StartProgress(models.size(), 100);
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+                JoAlert.Error(e, this);
+                JoLoger.saveLog(e, this);
+            } finally {
+                loading.close();
+                pn_Datatable.removeAll();
+                pn_Datatable.add(jScrollPane1);
+                JoDataTable dataTable = new JoDataTable(pn_Datatable);
+                dataTable.setHiddenColumns(1);
+                dataTable.setHiddenColumns(2);
+                dataTable.showDataTableAll();
+                GlobalDataModel.rootView.setView(this);
+            }
+        });
+        thread.start();
     }
 
     public JoButtonIconfont getBtn_back() {
@@ -92,13 +106,6 @@ public class ReportPayView extends javax.swing.JPanel {
 
     public JoButtonIconfont getBtnExport() {
         return btnExport;
-    }
-
-    private void updateTable() {
-        tb_data.JoClearModel();
-        pn_Datatable.removeAll();
-        pn_Datatable.add(jScrollPane1);
-        pn_Datatable.repaint();
     }
 
     @SuppressWarnings("unchecked")
@@ -233,7 +240,7 @@ public class ReportPayView extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(Pn_Navigation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pn_Datatable, javax.swing.GroupLayout.DEFAULT_SIZE, 1125, Short.MAX_VALUE)
+            .addComponent(pn_Datatable, javax.swing.GroupLayout.DEFAULT_SIZE, 1234, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -279,8 +286,8 @@ public class ReportPayView extends javax.swing.JPanel {
     public void ExportEnable() {
         btnExport.setEnabled(tb_data.getJoModel().getRowCount() > 0);
     }
-    
-    public String getClassName(){
+
+    public String getClassName() {
         return cbClassRoom.getValue();
     }
 

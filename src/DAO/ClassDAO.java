@@ -70,26 +70,17 @@ public class ClassDAO implements DAOInterface.ClassFn {
 
     @Override
     public List<ClassModel> getAllClass() {
+        List<ClassModel> models = new ArrayList<>();
         JoConnect connect = new JoConnect();
         JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
-        List<ClassModel> models = new ArrayList<>();
-        models.clear();
-        ResultSet rs;
         try {
-            rs = sql.getSelectAll();
+            ResultSet rs = sql.getSelectAll();
             while (rs.next()) {
-                ClassModel model = new ClassModel();
-                model.setClassID(rs.getInt(1));
-                model.setClassName(rs.getString(2));
-                models.add(model);
+                models.add(getResult(rs));
             }
-            rs.close();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             JoAlert.Error(e, this);
             JoLoger.saveLog(e, this);
-        } catch (Exception ex) {
-            JoAlert.Error(ex, this);
-            JoLoger.saveLog(ex, this);
         } finally {
             connect.close();
         }
@@ -114,6 +105,10 @@ public class ClassDAO implements DAOInterface.ClassFn {
             connect.close();
         }
         return classModel;
+    }
+
+    private ClassModel getResult(ResultSet rs) throws Exception {
+        return new ClassModel(rs.getInt(1), rs.getString(2));
     }
 
 }

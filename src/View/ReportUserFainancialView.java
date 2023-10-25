@@ -4,8 +4,10 @@ import Components.JoButtonIconfont;
 import Components.JoCombobox;
 import Components.JoDateChooser;
 import Components.JoTable;
+import DAOSevervice.RegisterService;
 import DAOSevervice.StudentService;
 import Model.FinancialModel;
+import Model.GlobalDataModel;
 import Model.StudentModel;
 import Model.UserModel;
 import Model.YearModel;
@@ -16,9 +18,12 @@ import java.util.List;
 
 public class ReportUserFainancialView extends javax.swing.JPanel {
 
+    private PnLoading loading = new PnLoading();
+
     public ReportUserFainancialView(String Title) {
         initComponents();
         lbl_title.setText(Title);
+        loading.setTitle("ກຳລັງໂຫຼດຂໍ້ມູນ");
     }
 
     public JoButtonIconfont getBtn_back() {
@@ -47,23 +52,38 @@ public class ReportUserFainancialView extends javax.swing.JPanel {
         tb_data.JoClearModel();
         StudentService service = new StudentService();
         MyFormat format = new MyFormat();
-        models.forEach(data -> {
-            if (data.getMoney() > 0 || data.getTransferMoney() > 0) {
-                StudentModel model = service.getStudentById(data.getStudentID());
-                tb_data.AddJoModel(new Object[]{
-                    tb_data.autoNumber(),
-                    data.getFinancialIID(),
-                    model.getStudentNo().equals("0") ? data.getFinancialIID() : model.getStudentNo(),
-                    model.getFullName(),
-                    data.getFinancialMonth(),
-                    format.getDate(data.getFinancialDate()),
-                    format.formatMoney(data.getMoney()),
-                    format.formatMoney(data.getTransferMoney()),
-                    data.getFinancialComment().equals("") ? "ບໍ່ມີ" : data.getFinancialComment()
+        RegisterService registerService = new RegisterService();
+        GlobalDataModel.rootView.setView(loading);
+        Thread thread = new Thread(() -> {
+            try {
+                models.forEach(data -> {
+                    if (data.getMoney() > 0 || data.getTransferMoney() > 0) {
+                        StudentModel model = service.getStudentById(data.getStudentID());
+                        tb_data.AddJoModel(new Object[]{
+                            tb_data.autoNumber(),
+                            registerService.getRegisterById(data.getRegisterID()).getClassRoomName(),
+                            data.getFinancialIID(),
+                            model.getStudentNo().equals("0") ? data.getFinancialIID() : model.getStudentNo(),
+                            model.getFullName(),
+                            data.getFinancialMonth(),
+                            format.getDate(data.getFinancialDate()),
+                            format.formatMoney(data.getMoney()),
+                            format.formatMoney(data.getTransferMoney()),
+                            data.getFinancialComment().equals("") ? "ບໍ່ມີ" : data.getFinancialComment()
+                        });
+                        loading.StartProgress(models.size(), 100);
+                    }
                 });
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                GlobalDataModel.rootView.setView(this);
+                updateTable();
+                loading.close();
+                ExportEnable();
             }
         });
-        updateTable();
+        thread.start();
     }
 
     private void updateTable() {
@@ -71,7 +91,7 @@ public class ReportUserFainancialView extends javax.swing.JPanel {
         pn_Datatable.add(jScrollPane1);
         JoDataTable dataTable = new JoDataTable(pn_Datatable);
         dataTable.showDataTableAll();
-//        dataTable.setHiddenColumns(1);
+        dataTable.setHiddenColumns(1);
     }
 
     public void setDateNow() {
@@ -174,11 +194,11 @@ public class ReportUserFainancialView extends javax.swing.JPanel {
 
             },
             new String [] {
-                "#", "FinancailID", "ລະຫັດນັກຮຽນ", "ຊື່ ແລະ ນາມສະກຸນ", "ຈ່າຍເດືອນ", "ວັນທີເດືອນປີ", "ເງິນສົດ", "ເງິນໂອນ", "ໝາຍເຫດ"
+                "#", "ເລກທີບິນ", "ຫ້ອງຮຽນ", "ລະຫັດນັກຮຽນ", "ຊື່ ແລະ ນາມສະກຸນ", "ຈ່າຍເດືອນ", "ວັນທີເດືອນປີ", "ເງິນສົດ", "ເງິນໂອນ", "ໝາຍເຫດ"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -193,18 +213,18 @@ public class ReportUserFainancialView extends javax.swing.JPanel {
             tb_data.getColumnModel().getColumn(1).setMinWidth(80);
             tb_data.getColumnModel().getColumn(1).setPreferredWidth(80);
             tb_data.getColumnModel().getColumn(1).setMaxWidth(80);
-            tb_data.getColumnModel().getColumn(3).setMinWidth(200);
-            tb_data.getColumnModel().getColumn(3).setPreferredWidth(200);
-            tb_data.getColumnModel().getColumn(3).setMaxWidth(200);
-            tb_data.getColumnModel().getColumn(5).setMinWidth(100);
-            tb_data.getColumnModel().getColumn(5).setPreferredWidth(100);
-            tb_data.getColumnModel().getColumn(5).setMaxWidth(100);
+            tb_data.getColumnModel().getColumn(4).setMinWidth(200);
+            tb_data.getColumnModel().getColumn(4).setPreferredWidth(200);
+            tb_data.getColumnModel().getColumn(4).setMaxWidth(200);
             tb_data.getColumnModel().getColumn(6).setMinWidth(100);
             tb_data.getColumnModel().getColumn(6).setPreferredWidth(100);
             tb_data.getColumnModel().getColumn(6).setMaxWidth(100);
             tb_data.getColumnModel().getColumn(7).setMinWidth(100);
             tb_data.getColumnModel().getColumn(7).setPreferredWidth(100);
             tb_data.getColumnModel().getColumn(7).setMaxWidth(100);
+            tb_data.getColumnModel().getColumn(8).setMinWidth(100);
+            tb_data.getColumnModel().getColumn(8).setPreferredWidth(100);
+            tb_data.getColumnModel().getColumn(8).setMaxWidth(100);
         }
 
         pn_Datatable.add(jScrollPane1, java.awt.BorderLayout.CENTER);
@@ -260,7 +280,7 @@ public class ReportUserFainancialView extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(Pn_Navigation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pn_Datatable, javax.swing.GroupLayout.DEFAULT_SIZE, 1125, Short.MAX_VALUE)
+            .addComponent(pn_Datatable, javax.swing.GroupLayout.DEFAULT_SIZE, 1235, Short.MAX_VALUE)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );

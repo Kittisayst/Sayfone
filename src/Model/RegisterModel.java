@@ -85,7 +85,9 @@ public class RegisterModel {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "RegisterModel{" + "registerID=" + registerID + ", ClassRoomName=" + ClassRoomName + ", YearID=" + YearID + ", ClassID=" + ClassID + ", registerDate=" + registerDate + '}';
     }
+
+
 
 }

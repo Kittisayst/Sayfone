@@ -31,7 +31,7 @@ import java.util.Date;
 import java.util.List;
 
 public class ReportPayController implements JoMVC, ActionListener, ItemListener, MouseListener {
-
+    
     private final ReportPayView view;
     private final FinancialModel model;
     private List<FinancialModel> listFinancials = new ArrayList<>();
@@ -39,14 +39,14 @@ public class ReportPayController implements JoMVC, ActionListener, ItemListener,
     private UserService userService = new UserService();
     private StudentService studentService = new StudentService();
     private MyFormat format = new MyFormat();
-    MonthCaculator monthCaculator = new MonthCaculator();
+    private FinancialService financialService = new FinancialService();
     private int row = 1;
-
+    
     public ReportPayController(ReportPayView view, FinancialModel model) {
         this.view = view;
         this.model = model;
     }
-
+    
     @Override
     public void Start() {
         GlobalDataModel.rootView.setView(view);
@@ -54,8 +54,9 @@ public class ReportPayController implements JoMVC, ActionListener, ItemListener,
         view.getCbYear().setSelectedIndex(new YearService().getYearAll().size() - 1);
         view.showClassRoom(new RegisterService().getRegisterAllByYearID(view.getCbYear().getKeyInt()));
         view.ExportEnable();
+        loading.setTitle("ກຳລັງສ້າງ Excel ການຄ້າງຄ່າຮຽນຫ້ອງ: " + view.getClassName());
     }
-
+    
     @Override
     public void AddEvent() {
         view.getBtn_back().addActionListener(this);
@@ -64,42 +65,42 @@ public class ReportPayController implements JoMVC, ActionListener, ItemListener,
         view.getTb_data().addMouseListener(this);
         view.getBtnExport().addActionListener(this);
     }
-
+    
     @Override
     public void Create() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    
     @Override
     public void Update() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    
     @Override
     public void Delete() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    
     @Override
     public boolean emptyData() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         JoHookEvent event = new JoHookEvent(e.getSource());
         if (event.isEvent(view.getBtn_back())) {
             GlobalDataModel.rootView.showDashbord();
         } else if (event.isEvent(view.getBtnShow())) {
-            FinancialService financialService = new FinancialService();
-            view.showReportPay(financialService.getStudentRegistered(view.getCbClassRoom().getKeyInt()));
-            createListExport(financialService.getStudentRegistered(view.getCbClassRoom().getKeyInt()));
+            listFinancials.clear();
+            listFinancials = financialService.getStudentRegistered(view.getCbClassRoom().getKeyInt());
+            view.showReportPay(listFinancials);
             view.ExportEnable();
         } else if (event.isEvent(view.getBtnExport())) {
             ExportData();
         }
     }
-
+    
     @Override
     public void itemStateChanged(ItemEvent e) {
         JoHookEvent event = new JoHookEvent(e.getSource());
@@ -107,12 +108,12 @@ public class ReportPayController implements JoMVC, ActionListener, ItemListener,
             view.showClassRoom(new RegisterService().getRegisterAllByYearID(view.getCbYear().getKeyInt()));
         }
     }
-
+    
     @Override
     public void mouseClicked(MouseEvent e) {
-
+        
     }
-
+    
     @Override
     public void mousePressed(MouseEvent e) {
         JoHookEvent event = new JoHookEvent(e.getSource());
@@ -124,30 +125,22 @@ public class ReportPayController implements JoMVC, ActionListener, ItemListener,
             }
         }
     }
-
+    
     @Override
     public void mouseReleased(MouseEvent e) {
-
+        
     }
-
+    
     @Override
     public void mouseEntered(MouseEvent e) {
-
+        
     }
-
+    
     @Override
     public void mouseExited(MouseEvent e) {
-
+        
     }
-
-    private void createListExport(List<FinancialModel> reportUserFinancial) {
-        listFinancials.clear();
-        reportUserFinancial.forEach(data -> {
-            listFinancials.add(data);
-        });
-        view.ExportEnable();
-    }
-
+    
     private void ExportData() {
         Thread thread = new Thread(() -> {
             try {
@@ -171,9 +164,12 @@ public class ReportPayController implements JoMVC, ActionListener, ItemListener,
                 };
                 JoSheet sheet = new JoSheet(csvFile, view.getExportName(), columns);
                 GlobalDataModel.rootView.setView(loading);
+                MonthCaculator mc = new MonthCaculator();
                 listFinancials.forEach(data -> {
                     UserModel userModel = userService.getUserById(data.getUserID());
                     StudentModel studentModel = studentService.getStudentById(data.getStudentID());
+                    FinancialModel fm = financialService.getFinancialCalculator(data.getRegisterID(), data.getStudentID());
+                    String findMissingMonth = mc.getMissingMonth(fm.getFinancialMonth());
                     sheet.addRow(row++,
                             row - 1,
                             data.getFinancialIID(),
@@ -184,7 +180,7 @@ public class ReportPayController implements JoMVC, ActionListener, ItemListener,
                             format.formatMoney(data.getDiscount()),
                             format.formatMoney(data.getOvertimePay()),
                             format.formatMoney(data.getFoodMoney()),
-                            monthCaculator.getMissingMonth(data.getFinancialMonth()),
+                            findMissingMonth,
                             format.getDate(data.getFinancialDate()),
                             data.getFinancialComment(),
                             userModel.getFullName()
@@ -205,5 +201,5 @@ public class ReportPayController implements JoMVC, ActionListener, ItemListener,
         });
         thread.start();
     }
-
+    
 }

@@ -118,6 +118,8 @@ public class RegisterDAO implements RegisterFn {
             if (!rs.next()) {
                 pre.setInt(1, lastYearID - 1);
                 rs = pre.executeQuery();
+            }else{
+                rs.beforeFirst();
             }
             while (rs.next()) {
                 models.add(getResult(rs));
