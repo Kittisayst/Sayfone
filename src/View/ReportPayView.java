@@ -79,6 +79,7 @@ public class ReportPayView extends javax.swing.JPanel {
                 dataTable.setHiddenColumns(2);
                 dataTable.showDataTableAll();
                 GlobalDataModel.rootView.setView(this);
+                ExportEnable();
             }
         });
         thread.start();
