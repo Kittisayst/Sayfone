@@ -61,8 +61,8 @@ public class ReportUserFainancialView extends javax.swing.JPanel {
                         StudentModel model = service.getStudentById(data.getStudentID());
                         tb_data.AddJoModel(new Object[]{
                             tb_data.autoNumber(),
-                            registerService.getRegisterById(data.getRegisterID()).getClassRoomName(),
                             data.getFinancialIID(),
+                            registerService.getRegisterById(data.getRegisterID()).getClassRoomName(),
                             model.getStudentNo().equals("0") ? data.getFinancialIID() : model.getStudentNo(),
                             model.getFullName(),
                             data.getFinancialMonth(),

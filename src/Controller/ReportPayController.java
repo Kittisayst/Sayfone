@@ -31,7 +31,7 @@ import java.util.Date;
 import java.util.List;
 
 public class ReportPayController implements JoMVC, ActionListener, ItemListener, MouseListener {
-    
+
     private final ReportPayView view;
     private final FinancialModel model;
     private List<FinancialModel> listFinancials = new ArrayList<>();
@@ -41,12 +41,12 @@ public class ReportPayController implements JoMVC, ActionListener, ItemListener,
     private MyFormat format = new MyFormat();
     private FinancialService financialService = new FinancialService();
     private int row = 1;
-    
+
     public ReportPayController(ReportPayView view, FinancialModel model) {
         this.view = view;
         this.model = model;
     }
-    
+
     @Override
     public void Start() {
         GlobalDataModel.rootView.setView(view);
@@ -54,9 +54,8 @@ public class ReportPayController implements JoMVC, ActionListener, ItemListener,
         view.getCbYear().setSelectedIndex(new YearService().getYearAll().size() - 1);
         view.showClassRoom(new RegisterService().getRegisterAllByYearID(view.getCbYear().getKeyInt()));
         view.ExportEnable();
-        loading.setTitle("ກຳລັງສ້າງ Excel ການຄ້າງຄ່າຮຽນຫ້ອງ: " + view.getClassName());
     }
-    
+
     @Override
     public void AddEvent() {
         view.getBtn_back().addActionListener(this);
@@ -65,27 +64,27 @@ public class ReportPayController implements JoMVC, ActionListener, ItemListener,
         view.getTb_data().addMouseListener(this);
         view.getBtnExport().addActionListener(this);
     }
-    
+
     @Override
     public void Create() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     @Override
     public void Update() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     @Override
     public void Delete() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     @Override
     public boolean emptyData() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
         JoHookEvent event = new JoHookEvent(e.getSource());
@@ -100,7 +99,7 @@ public class ReportPayController implements JoMVC, ActionListener, ItemListener,
             ExportData();
         }
     }
-    
+
     @Override
     public void itemStateChanged(ItemEvent e) {
         JoHookEvent event = new JoHookEvent(e.getSource());
@@ -108,12 +107,12 @@ public class ReportPayController implements JoMVC, ActionListener, ItemListener,
             view.showClassRoom(new RegisterService().getRegisterAllByYearID(view.getCbYear().getKeyInt()));
         }
     }
-    
+
     @Override
     public void mouseClicked(MouseEvent e) {
-        
+
     }
-    
+
     @Override
     public void mousePressed(MouseEvent e) {
         JoHookEvent event = new JoHookEvent(e.getSource());
@@ -125,23 +124,24 @@ public class ReportPayController implements JoMVC, ActionListener, ItemListener,
             }
         }
     }
-    
+
     @Override
     public void mouseReleased(MouseEvent e) {
-        
+
     }
-    
+
     @Override
     public void mouseEntered(MouseEvent e) {
-        
+
     }
-    
+
     @Override
     public void mouseExited(MouseEvent e) {
-        
+
     }
-    
+
     private void ExportData() {
+        loading.setTitle("ກຳລັງສ້າງ Excel ການຄ້າງຄ່າຮຽນຫ້ອງ: " + view.getClassName());
         Thread thread = new Thread(() -> {
             try {
                 JoFileSystem fileSystem = new JoFileSystem();
@@ -201,5 +201,5 @@ public class ReportPayController implements JoMVC, ActionListener, ItemListener,
         });
         thread.start();
     }
-    
+
 }
