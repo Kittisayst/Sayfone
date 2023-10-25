@@ -1,5 +1,6 @@
 package Model;
 
+import Database.JoProperties;
 import Main.JoHttp;
 import Tools.JoFileSystem;
 import java.io.File;
@@ -15,6 +16,8 @@ public class FileTranferModel {
     private String TransferTime;
     private File File;
     private String FileName;
+    private JoProperties property = new JoProperties("/JoConfig/config.properties");
+    private String server = property.getValueAt("db.Server");
 
     public FileTranferModel() {
     }
@@ -82,7 +85,7 @@ public class FileTranferModel {
                 return new ImageIcon(getClass().getResource("/Source/empty.jpg"));
             } else {
                 JoFileSystem fileSystem = new JoFileSystem();
-                String utl = "http://sayfoneapi/imageAPI.php?fileName=" + FileName;
+                String utl = "http://" + server + "/imageAPI.php?fileName=" + FileName;
                 String savepath = fileSystem.getCurrentPath() + "/ResizeImage/" + FileName;
                 JoHttp johttp = new JoHttp(utl);
                 johttp.Open();
@@ -100,7 +103,7 @@ public class FileTranferModel {
     }
 
     public boolean checkURLImage() {
-        JoHttp http = new JoHttp("http://sayfoneapi/imageAPI.php?fileName=" + FileName);
+        JoHttp http = new JoHttp("http://" + server + "/imageAPI.php?fileName=" + FileName);
         return http.Open();
     }
 

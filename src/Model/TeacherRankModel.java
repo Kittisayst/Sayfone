@@ -7,6 +7,8 @@ public class TeacherRankModel {
     private int TeacherID;
     private int Rank;
     private int Month;
+    private String Comment;
+    private int UserID;
 
     public TeacherRankModel() {
     }

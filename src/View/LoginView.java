@@ -94,11 +94,12 @@ public class LoginView extends javax.swing.JFrame {
         joLabelImage1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/sfsc.png"))); // NOI18N
         joLabelImage1.setMaximumSize(new java.awt.Dimension(100, 250));
         joLabelImage1.setMinimumSize(new java.awt.Dimension(100, 250));
-        joLabelImage1.setPreferredSize(new java.awt.Dimension(100, 250));
+        joLabelImage1.setPreferredSize(new java.awt.Dimension(50, 260));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipady = 14;
         jPanel2.add(joLabelImage1, gridBagConstraints);
 
         joLable4.setForeground(new java.awt.Color(255, 255, 255));

@@ -40,6 +40,11 @@ public class DialogTeacherMoney extends javax.swing.JDialog {
         txtMoney = new Components.JoTextField();
         btnSave = new Components.JoButtonIconfont();
         lblTeacher = new Components.JoLable();
+        dtDate = new Components.JoDateChooser();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtComment = new Components.JoTextArea();
+        joLable1 = new Components.JoLable();
+        joLable2 = new Components.JoLable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new java.awt.GridBagLayout());
@@ -54,7 +59,7 @@ public class DialogTeacherMoney extends javax.swing.JDialog {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 60;
+        gridBagConstraints.ipadx = 100;
         gridBagConstraints.ipady = 8;
         getContentPane().add(lblMoney, gridBagConstraints);
 
@@ -69,7 +74,7 @@ public class DialogTeacherMoney extends javax.swing.JDialog {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.ipadx = 60;
+        gridBagConstraints.ipadx = 100;
         gridBagConstraints.insets = new java.awt.Insets(7, 0, 7, 0);
         getContentPane().add(txtMoney, gridBagConstraints);
 
@@ -82,9 +87,9 @@ public class DialogTeacherMoney extends javax.swing.JDialog {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 7;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 60;
+        gridBagConstraints.ipadx = 100;
         gridBagConstraints.insets = new java.awt.Insets(7, 0, 0, 0);
         getContentPane().add(btnSave, gridBagConstraints);
 
@@ -93,11 +98,47 @@ public class DialogTeacherMoney extends javax.swing.JDialog {
         lblTeacher.setFont(new java.awt.Font("Phetsarath OT", 0, 14)); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 60;
+        gridBagConstraints.ipadx = 100;
         gridBagConstraints.insets = new java.awt.Insets(9, 0, 9, 0);
         getContentPane().add(lblTeacher, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 40;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        getContentPane().add(dtDate, gridBagConstraints);
 
-        setSize(new java.awt.Dimension(418, 240));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(52, 80));
+
+        txtComment.setColumns(3);
+        txtComment.setRows(2);
+        jScrollPane1.setViewportView(txtComment);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 40;
+        getContentPane().add(jScrollPane1, gridBagConstraints);
+
+        joLable1.setText("ວັນທີເດືອນປີ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(3, 0, 3, 0);
+        getContentPane().add(joLable1, gridBagConstraints);
+
+        joLable2.setText("ໝາຍເຫດ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(3, 0, 3, 0);
+        getContentPane().add(joLable2, gridBagConstraints);
+
+        setSize(new java.awt.Dimension(513, 436));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -162,8 +203,13 @@ public class DialogTeacherMoney extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Components.JoButtonIconfont btnSave;
+    private Components.JoDateChooser dtDate;
+    private javax.swing.JScrollPane jScrollPane1;
+    private Components.JoLable joLable1;
+    private Components.JoLable joLable2;
     private Components.JoLable lblMoney;
     private Components.JoLable lblTeacher;
+    private Components.JoTextArea txtComment;
     private Components.JoTextField txtMoney;
     // End of variables declaration//GEN-END:variables
 
