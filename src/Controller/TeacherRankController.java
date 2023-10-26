@@ -17,6 +17,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.time.LocalDate;
+import java.time.Month;
 
 public class TeacherRankController implements JoMVC, ActionListener, MouseListener {
 
@@ -36,6 +38,14 @@ public class TeacherRankController implements JoMVC, ActionListener, MouseListen
         YearModel yearModel = yearService.getLastYear();
         view.showTeacher(new TeacherDAO().getAllTeacher(), yearModel);
         view.getCbYear().setSelectedIndex(yearService.getYearAll().size() - 1);
+        LocalDate currentDate = LocalDate.now();
+
+        // Get the month from the current date
+        Month currentMonth = currentDate.getMonth();
+
+        // Get the month value (1-12)
+        int monthValue = currentMonth.getValue();
+        view.setSelectMonth(monthValue - 1);
     }
 
     @Override
@@ -88,6 +98,7 @@ public class TeacherRankController implements JoMVC, ActionListener, MouseListen
             DialogTeacherMoney teacherMoney = new DialogTeacherMoney(
                     GlobalDataModel.rootView,
                     true,
+                    "TRF",
                     new TeacherService().getTeacherById(view.getTeacherID()),
                     new YearService().getYearById(view.getYearID()),
                     new TeacherMoneyService().readTeacherID(view.getTeacherID()),
@@ -95,8 +106,6 @@ public class TeacherRankController implements JoMVC, ActionListener, MouseListen
             );
             String text = view.getPopup().getItemEdit().getText();
             teacherMoney.setTitle(text);
-            teacherMoney.setButtonText("ບັນທຶກ " + text);
-            teacherMoney.setMoneystate(true);
             teacherMoney.setVisible(true);
         } else if (event.isEvent(view.getPopup().getItemDelete())) {
             TeacherMoneyModel moneyModel = new TeacherMoneyService().readTeacherID(view.getTeacherID());
@@ -104,6 +113,7 @@ public class TeacherRankController implements JoMVC, ActionListener, MouseListen
                 DialogTeacherMoney teacherMoney = new DialogTeacherMoney(
                         GlobalDataModel.rootView,
                         true,
+                        "FEE",
                         new TeacherService().getTeacherById(view.getTeacherID()),
                         new YearService().getYearById(view.getYearID()),
                         moneyModel,
@@ -111,8 +121,6 @@ public class TeacherRankController implements JoMVC, ActionListener, MouseListen
                 );
                 String text = view.getPopup().getItemDelete().getText();
                 teacherMoney.setTitle(text);
-                teacherMoney.setButtonText("ບັນທຶກ " + text);
-                teacherMoney.setMoneystate(false);
                 teacherMoney.setVisible(true);
             } else {
                 new JoAlert().messages("ການເງິນຄູ", "ຍັງບໍ່ມີຂໍ້ມູນການເງິນຄູ!", JoAlert.Icons.warning);

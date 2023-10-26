@@ -65,7 +65,8 @@ public class MonthCaculator {
     }
 
     public int[] parseMonth(String missingMonth) {
-        String cleanedString = missingMonth.replaceAll("\\[|\\]|\\s", "");
+        String nullMonth = missingMonth.replaceAll("\\[],", "");
+        String cleanedString = nullMonth.replaceAll("\\[|\\]|\\s", "");
         // Split the cleaned string by comma
         String[] stringArray = cleanedString.split(",");
         // Convert the string array to an integer array

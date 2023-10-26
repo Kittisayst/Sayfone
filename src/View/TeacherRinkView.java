@@ -38,6 +38,10 @@ public class TeacherRinkView extends javax.swing.JPanel {
         popup.getItemDelete().setIcon(new JoIconFont().setIconFont(GoogleMaterialDesignIcons.REMOVE_CIRCLE, 20, MyColor.red700));
     }
 
+    public void setSelectMonth(int index) {
+       cbMonth.setSelectedIndex(index);
+    }
+
     public JoButtonIconfont getBtn_back() {
         return btn_back;
     }
@@ -82,6 +86,7 @@ public class TeacherRinkView extends javax.swing.JPanel {
                 models.forEach(data -> {
                     TeacherRankModel rankModel = rankService.getTeacherRankByTeacherId(data.getTeacherID(), yearModel.getYearID(), Integer.parseInt(cbMonth.getValue()));
                     TeacherMoneyModel moneyModel = moneyService.readTeacherID(data.getTeacherID());
+                    int balance = moneyService.getTeacherBalance(data.getTeacherID()).getBalance();
                     tbTeacher.AddJoModel(new Object[]{
                         tbTeacher.autoNumber(),
                         data.getTeacherID(),
@@ -89,7 +94,7 @@ public class TeacherRinkView extends javax.swing.JPanel {
                         rankModel.getRank() == 0 ? "ບໍ່ມີອັນດັບ" : "ອັນດັບ " + rankModel.getRank(),
                         rankModel.getMonth(),
                         yearModel.getYear(),
-                        new MyFormat().formatMoney(moneyModel.getMoney())
+                        new MyFormat().formatMoney(balance)
                     });
                     loading.StartProgress(models.size(), 100);
                 });

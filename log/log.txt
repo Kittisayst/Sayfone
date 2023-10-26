@@ -258,3 +258,12 @@
 23/10/2023: View.ReportPayView[,0,0,1645x958,invalid,layout=javax.swing.GroupLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=] Errorjava.lang.NumberFormatException: For input string: " 9"
 23/10/2023: View.ReportPayView[,0,0,1645x958,invalid,layout=javax.swing.GroupLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=] Errorjava.lang.NumberFormatException: For input string: " 9"
 25/10/2023: DAO.RegisterDAO@405814b8 Errorjava.sql.SQLException: Illegal operation on empty result set.
+26/10/2023: View.ReportPayView[,0,0,1662x918,invalid,layout=javax.swing.GroupLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=] Errorjava.lang.NumberFormatException: For input string: ""
+26/10/2023: View.ReportPayView[,0,0,1662x918,invalid,layout=javax.swing.GroupLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=] Errorjava.lang.NumberFormatException: For input string: ""
+26/10/2023: View.ReportPayView[,0,0,1662x918,invalid,layout=javax.swing.GroupLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=] Errorjava.lang.NumberFormatException: For input string: ""
+26/10/2023: View.ReportPayView[,0,0,1662x918,invalid,layout=javax.swing.GroupLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=] Errorjava.lang.NumberFormatException: For input string: ""
+26/10/2023: View.ReportPayView[,0,0,1662x918,invalid,layout=javax.swing.GroupLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=] Errorjava.lang.NumberFormatException: For input string: ""
+26/10/2023: View.ReportPayView[,0,0,1662x918,invalid,layout=javax.swing.GroupLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=] Errorjava.lang.NumberFormatException: For input string: ""
+26/10/2023: DAO.TeacherMoneyDAO@40f47e5b Errorjava.sql.SQLException: Column Index out of range, 9 > 8. 
+26/10/2023: DAO.TeacherMoneyDAO@40f47e5b Errorjava.sql.SQLException: Column Index out of range, 9 > 8. 
+26/10/2023: DAO.TeacherMoneyDAO@19ac5efa Errorjava.sql.SQLException: Duplicate entry '4' for key 'PRIMARY'

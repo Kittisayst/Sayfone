@@ -10,6 +10,7 @@ import App.AppReportDiscount;
 import App.AppReportFinacial;
 import App.AppReportFood;
 import App.AppReportStudent;
+import App.AppReportTeacherMoney;
 import App.AppReportUserFinancial;
 import App.AppSetting;
 import App.AppStudent;
@@ -84,6 +85,7 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
         view.getBtnReportUserFinancial().addActionListener(this);
         view.getBtnReportStudent().addActionListener(this);
         view.getBtnReportDiscount().addActionListener(this);
+        view.getBtnReportTeacherMoney().addActionListener(this);
         view.getBtnPermission().addActionListener(this);
     }
 
@@ -160,7 +162,10 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
         } else if (event.isEvent(view.getBtnReportDiscount())) {
             AppReportDiscount reportDiscount = new AppReportDiscount();
             reportDiscount.Open();
-        } else if (event.isEvent(view.getBtnInfo())) {   // ============ ຕັ້ງຄ່າ
+        }else if (event.isEvent(view.getBtnReportTeacherMoney())) {
+            AppReportTeacherMoney reportTeacherMoney = new AppReportTeacherMoney();
+            reportTeacherMoney.Open();
+        }  else if (event.isEvent(view.getBtnInfo())) {   // ============ ຕັ້ງຄ່າ
             AppSetting app = new AppSetting();
             app.Open();
         } else if (event.isEvent(view.getBtnPrinter())) {

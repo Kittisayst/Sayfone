@@ -2,7 +2,6 @@ package View;
 
 import Component.JoPanelMenu;
 import Components.JoButtonIconfont;
-import Components.JoLable;
 import Components.JoLableIcon;
 import Components.JoScrollBar;
 import Model.GlobalDataModel;
@@ -128,7 +127,7 @@ public class HomeView extends javax.swing.JFrame {
     }
 
     public void setLblVersion(String version) {
-        lblVersion.setText("version: "+version);
+        lblVersion.setText("version: " + version);
     }
 
     public JoButtonIconfont getBtnInfo() {
@@ -161,6 +160,10 @@ public class HomeView extends javax.swing.JFrame {
 
     public JoButtonIconfont getBtnReportTeacher() {
         return btnReportTeacher;
+    }
+
+    public JoButtonIconfont getBtnReportTeacherMoney() {
+        return btnReportTeacherMoney;
     }
 
     public JoButtonIconfont getBtnPermission() {
@@ -213,6 +216,7 @@ public class HomeView extends javax.swing.JFrame {
         btnFood = new Components.JoButtonIconfont();
         btnReportUserFinancial = new Components.JoButtonIconfont();
         btnReportDiscount = new Components.JoButtonIconfont();
+        btnReportTeacherMoney = new Components.JoButtonIconfont();
         btn_Service = new Components.JoButtonIconfont();
         btn_report = new Components.JoButtonIconfont();
         btn_Setting = new Components.JoButtonIconfont();
@@ -486,6 +490,10 @@ public class HomeView extends javax.swing.JFrame {
         btnReportDiscount.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnReportDiscount.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.LOCAL_ATM);
 
+        btnReportTeacherMoney.setText("ລາຍງານການເງິນຄູ");
+        btnReportTeacherMoney.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnReportTeacherMoney.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.SWAP_VERTICAL_CIRCLE);
+
         javax.swing.GroupLayout pn_reportLayout = new javax.swing.GroupLayout(pn_report);
         pn_report.setLayout(pn_reportLayout);
         pn_reportLayout.setHorizontalGroup(
@@ -499,6 +507,7 @@ public class HomeView extends javax.swing.JFrame {
             .addComponent(btnFood, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnReportUserFinancial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnReportDiscount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnReportTeacherMoney, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pn_reportLayout.setVerticalGroup(
             pn_reportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -517,6 +526,8 @@ public class HomeView extends javax.swing.JFrame {
                 .addComponent(btnWithdraw, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnReportTeacher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnReportTeacherMoney, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnReportStudent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -611,7 +622,7 @@ public class HomeView extends javax.swing.JFrame {
                 .addComponent(btn_Setting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnSetting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         scrollMenu.setViewportView(pnSideBar);
@@ -717,6 +728,7 @@ public class HomeView extends javax.swing.JFrame {
     private Components.JoButtonIconfont btnReportPay;
     private Components.JoButtonIconfont btnReportStudent;
     private Components.JoButtonIconfont btnReportTeacher;
+    private Components.JoButtonIconfont btnReportTeacherMoney;
     private Components.JoButtonIconfont btnReportUserFinancial;
     private Components.JoButtonIconfont btnSubject;
     private Components.JoButtonIconfont btnSubjectTeacher;

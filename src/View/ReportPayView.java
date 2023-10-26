@@ -58,12 +58,13 @@ public class ReportPayView extends javax.swing.JPanel {
                     tb_data.AddJoModel(new Object[]{
                         tb_data.autoNumber(),
                         data.getFinancialIID(),
-                        rm.getYearModel().getYear(),
                         data.getStudentID(),
                         sm.getStudentNo(),
                         sm.getFullName(),
                         rm.getClassRoomName(),
-                        findMissingMonth});
+                        findMissingMonth,
+                        fm.getFinancialComment()
+                    });
                     loading.StartProgress(models.size(), 100);
                 });
             } catch (Exception e) {
@@ -161,7 +162,7 @@ public class ReportPayView extends javax.swing.JPanel {
 
             },
             new String [] {
-                "#", "ID", "StudentID", "ສົກຮຽນ", "ລະຫັດນັກຮຽນ", "ຊື່ ແລະ ນາມສະກຸນ", "ຫ້ອງຮຽນ", "ຄ້າງເດືອນ"
+                "#", "ID", "StudentID", "ລະຫັດນັກຮຽນ", "ຊື່ ແລະ ນາມສະກຸນ", "ຫ້ອງຮຽນ", "ຄ້າງເດືອນ", "ໝາຍເຫດ"
             }
         ) {
             boolean[] canEdit = new boolean [] {

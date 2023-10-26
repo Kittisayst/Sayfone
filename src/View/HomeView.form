@@ -311,7 +311,7 @@
                                   <Component id="btn_Setting" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="pnSetting" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="53" max="32767" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -546,6 +546,7 @@
                                   <Component id="btnFood" alignment="0" max="32767" attributes="0"/>
                                   <Component id="btnReportUserFinancial" alignment="0" max="32767" attributes="0"/>
                                   <Component id="btnReportDiscount" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="btnReportTeacherMoney" alignment="0" max="32767" attributes="0"/>
                               </Group>
                             </DimensionLayout>
                             <DimensionLayout dim="1">
@@ -565,6 +566,8 @@
                                       <Component id="btnWithdraw" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" max="-2" attributes="0"/>
                                       <Component id="btnReportTeacher" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="btnReportTeacherMoney" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
                                       <Component id="btnReportStudent" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -653,6 +656,15 @@
                                 <Property name="horizontalAlignment" type="int" value="2"/>
                                 <Property name="joIcons" type="jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons" editor="org.netbeans.modules.form.editors.EnumEditor">
                                   <Value id="LOCAL_ATM"/>
+                                </Property>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoButtonIconfont" name="btnReportTeacherMoney">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="&#xea5;&#xeb2;&#xe8d;&#xe87;&#xeb2;&#xe99;&#xe81;&#xeb2;&#xe99;&#xec0;&#xe87;&#xeb4;&#xe99;&#xe84;&#xeb9;"/>
+                                <Property name="horizontalAlignment" type="int" value="2"/>
+                                <Property name="joIcons" type="jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons" editor="org.netbeans.modules.form.editors.EnumEditor">
+                                  <Value id="SWAP_VERTICAL_CIRCLE"/>
                                 </Property>
                               </Properties>
                             </Component>
