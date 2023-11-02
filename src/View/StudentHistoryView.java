@@ -30,6 +30,15 @@ public class StudentHistoryView extends javax.swing.JPanel {
         lbl_title.setText(Title);
     }
 
+    public void setProvinDistrictDefault() {
+        cb_province.setSelectValue("" + 10);
+        cb_provinceNow.setSelectValue("" + 10);
+        showDistrict(new DistrictService().getProvinceById(10));
+        showDistrictNow(new DistrictService().getProvinceById(10));
+        cb_district.setSelectValue("" + 86);
+        cb_districtNow.setSelectValue("" + 86);
+    }
+
     public void showHistory(StudentHistoryModel model) {
         txt_FamiltyID.setText(model.getFamilyID());
         txt_peopleID.setText(model.getPeopleID());

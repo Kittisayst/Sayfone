@@ -179,10 +179,14 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
     public void Update() {
         view.getBtnSave().setEnabled(false);
         try {
-            if (!view.getTransferMoneyZero()) {
-                UpdateTransfer();
+            if (userAuthen.getUserID() > 0) {
+                if (!view.getTransferMoneyZero()) {
+                    UpdateTransfer();
+                } else {
+                    UpdateMoney();
+                }
             } else {
-                UpdateMoney();
+                new JoAlert().messages("ຜູ້ອານຸມັດ", "ບໍ່ມີຂໍ້ມູນຜູ້ອານຸມັດ", JoAlert.Icons.info);
             }
         } catch (Exception e) {
             System.err.println(e);
@@ -474,6 +478,7 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
         UserService userService = new UserService();
         UserModel userModel = userService.getUserById(financialModel.getAuthenUserID());
         String authName = userModel.getUserID() == 0 ? "" : userModel.getUserName();
+        System.out.println(authName);
         //ດຶງຂໍ້ມູນຜູ້ປີ້ນ
         String teacherLogin = GlobalDataModel.userModel.getFullName().toString();
         try {

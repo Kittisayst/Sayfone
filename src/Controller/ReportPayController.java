@@ -182,7 +182,7 @@ public class ReportPayController implements JoMVC, ActionListener, ItemListener,
                             format.formatMoney(data.getFoodMoney()),
                             findMissingMonth,
                             format.getDate(data.getFinancialDate()),
-                            data.getFinancialComment(),
+                            fm.getFinancialComment(),
                             userModel.getFullName()
                     );
                     loading.StartProgress(listFinancials.size(), 100);

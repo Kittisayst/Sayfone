@@ -207,15 +207,24 @@ public class ReportUserFainancialView extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tb_data);
         if (tb_data.getColumnModel().getColumnCount() > 0) {
-            tb_data.getColumnModel().getColumn(0).setMinWidth(80);
-            tb_data.getColumnModel().getColumn(0).setPreferredWidth(80);
-            tb_data.getColumnModel().getColumn(0).setMaxWidth(80);
+            tb_data.getColumnModel().getColumn(0).setMinWidth(50);
+            tb_data.getColumnModel().getColumn(0).setPreferredWidth(50);
+            tb_data.getColumnModel().getColumn(0).setMaxWidth(50);
             tb_data.getColumnModel().getColumn(1).setMinWidth(80);
             tb_data.getColumnModel().getColumn(1).setPreferredWidth(80);
             tb_data.getColumnModel().getColumn(1).setMaxWidth(80);
+            tb_data.getColumnModel().getColumn(2).setMinWidth(100);
+            tb_data.getColumnModel().getColumn(2).setPreferredWidth(100);
+            tb_data.getColumnModel().getColumn(2).setMaxWidth(100);
+            tb_data.getColumnModel().getColumn(3).setMinWidth(100);
+            tb_data.getColumnModel().getColumn(3).setPreferredWidth(100);
+            tb_data.getColumnModel().getColumn(3).setMaxWidth(100);
             tb_data.getColumnModel().getColumn(4).setMinWidth(200);
             tb_data.getColumnModel().getColumn(4).setPreferredWidth(200);
             tb_data.getColumnModel().getColumn(4).setMaxWidth(200);
+            tb_data.getColumnModel().getColumn(5).setMinWidth(150);
+            tb_data.getColumnModel().getColumn(5).setPreferredWidth(150);
+            tb_data.getColumnModel().getColumn(5).setMaxWidth(150);
             tb_data.getColumnModel().getColumn(6).setMinWidth(100);
             tb_data.getColumnModel().getColumn(6).setPreferredWidth(100);
             tb_data.getColumnModel().getColumn(6).setMaxWidth(100);

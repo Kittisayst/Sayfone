@@ -15,7 +15,6 @@ import DAOSevervice.StudentAddressService;
 import DAOSevervice.StudentFileService;
 import DAOSevervice.StudentHistoryService;
 import DAOSevervice.StudentService;
-import Main.JoHttp;
 import Model.BrotherAndSisterModel;
 import Model.GlobalDataModel;
 import Model.StudentFileModel;
@@ -89,6 +88,9 @@ public class StudentHistoryController implements JoMVC, ActionListener, MouseLis
             brotherAndSisterController.Start();
             brotherAndSisterController.AddEvent();
             view.showFile(new StudentFileService().getByStudentID(studentID));
+            if (addressModel.getAddressID() == 0) {
+                view.setProvinDistrictDefault();
+            }
         } catch (Exception ex) {
             Logger.getLogger(StudentHistoryController.class.getName()).log(Level.SEVERE, null, ex);
             JoAlert.Error(ex, this);
