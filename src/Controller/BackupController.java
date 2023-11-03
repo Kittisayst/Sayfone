@@ -132,7 +132,7 @@ public class BackupController implements JoMVC, ActionListener {
 
     private void copyData() {
         Path source = Path.of("C:/wamp64/www/sayfone");
-        Path destination = Path.of("D:/sayfone backup/API "+new MyFormat().getDateCustom(new Date(), "dd-MM-yyyy"));
+        Path destination = Path.of(location+"/API "+new MyFormat().getDateCustom(new Date(), "dd-MM-yyyy"));
         try {
             // Copy the source folder to the destination folder
             totalFiles = countFiles(source);
