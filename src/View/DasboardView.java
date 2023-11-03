@@ -210,12 +210,12 @@ public class DasboardView extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         jPanel2.add(jPanel3, gridBagConstraints);
 
-        jScrollPane1.setMinimumSize(new java.awt.Dimension(452, 402));
+        jScrollPane1.setMinimumSize(new java.awt.Dimension(16, 500));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(462, 500));
 
         tbData.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -253,8 +253,7 @@ public class DasboardView extends javax.swing.JPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipady = 100;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.ipady = 300;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.weighty = 0.1;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
