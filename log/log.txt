@@ -267,3 +267,5 @@
 26/10/2023: DAO.TeacherMoneyDAO@40f47e5b Errorjava.sql.SQLException: Column Index out of range, 9 > 8. 
 26/10/2023: DAO.TeacherMoneyDAO@40f47e5b Errorjava.sql.SQLException: Column Index out of range, 9 > 8. 
 26/10/2023: DAO.TeacherMoneyDAO@19ac5efa Errorjava.sql.SQLException: Duplicate entry '4' for key 'PRIMARY'
+02/11/2023: Controller.BackupController@5e0b55ee Errorjava.sql.SQLException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'mysqldump -u root -p  db_sayfoneschool2022 > D:/sayfone backup/backup.sql' at line 1
+02/11/2023: Controller.BackupController@479d27c2 Errorjava.sql.SQLException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'mysqldump -u root -p  db_sayfoneschool2022 > D:/sayfone backup/backup.sql' at line 1

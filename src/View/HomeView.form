@@ -728,6 +728,7 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="btnInfo" max="32767" attributes="0"/>
                                   <Component id="btnPrinter" max="32767" attributes="0"/>
+                                  <Component id="btnBackup" alignment="0" max="32767" attributes="0"/>
                               </Group>
                             </DimensionLayout>
                             <DimensionLayout dim="1">
@@ -737,6 +738,8 @@
                                       <Component id="btnInfo" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="btnPrinter" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="btnBackup" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
                                   </Group>
                               </Group>
@@ -758,6 +761,15 @@
                                 <Property name="horizontalAlignment" type="int" value="2"/>
                                 <Property name="joIcons" type="jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons" editor="org.netbeans.modules.form.editors.EnumEditor">
                                   <Value id="PRINT"/>
+                                </Property>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoButtonIconfont" name="btnBackup">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="&#xeaa;&#xeb3;&#xeae;&#xead;&#xe87;&#xe82;&#xecd;&#xec9;&#xea1;&#xeb9;&#xe99;"/>
+                                <Property name="horizontalAlignment" type="int" value="2"/>
+                                <Property name="joIcons" type="jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons" editor="org.netbeans.modules.form.editors.EnumEditor">
+                                  <Value id="BACKUP"/>
                                 </Property>
                               </Properties>
                             </Component>

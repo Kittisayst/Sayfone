@@ -2,6 +2,7 @@ package Controller;
 
 import App.About;
 import App.AppAbsent;
+import App.AppBackup;
 import App.AppClass;
 import App.AppFinancialRoom;
 import App.AppPermission;
@@ -87,6 +88,7 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
         view.getBtnReportDiscount().addActionListener(this);
         view.getBtnReportTeacherMoney().addActionListener(this);
         view.getBtnPermission().addActionListener(this);
+        view.getBtnBackup().addActionListener(this);
     }
 
     @Override
@@ -162,14 +164,17 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
         } else if (event.isEvent(view.getBtnReportDiscount())) {
             AppReportDiscount reportDiscount = new AppReportDiscount();
             reportDiscount.Open();
-        }else if (event.isEvent(view.getBtnReportTeacherMoney())) {
+        } else if (event.isEvent(view.getBtnReportTeacherMoney())) {
             AppReportTeacherMoney reportTeacherMoney = new AppReportTeacherMoney();
             reportTeacherMoney.Open();
-        }  else if (event.isEvent(view.getBtnInfo())) {   // ============ ຕັ້ງຄ່າ
+        } else if (event.isEvent(view.getBtnInfo())) {   // ============ ຕັ້ງຄ່າ
             AppSetting app = new AppSetting();
             app.Open();
         } else if (event.isEvent(view.getBtnPrinter())) {
             GlobalDataModel.rootView.setView(new PrinterView("ຕັ້ງຄ່າປີ້ນເຕີ"));
+        } else if (event.isEvent(view.getBtnBackup())) {
+            AppBackup backup = new AppBackup();
+            backup.Open();
         }
     }
 

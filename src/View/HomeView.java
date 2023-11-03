@@ -170,6 +170,10 @@ public class HomeView extends javax.swing.JFrame {
         return btnPermission;
     }
 
+    public JoButtonIconfont getBtnBackup() {
+        return btnBackup;
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -223,6 +227,7 @@ public class HomeView extends javax.swing.JFrame {
         pnSetting = new javax.swing.JPanel();
         btnInfo = new Components.JoButtonIconfont();
         btnPrinter = new Components.JoButtonIconfont();
+        btnBackup = new Components.JoButtonIconfont();
         pnContent = new javax.swing.JPanel();
         MyRouter = new Components.JoRouter();
         pnFooter = new javax.swing.JPanel();
@@ -563,12 +568,17 @@ public class HomeView extends javax.swing.JFrame {
         btnPrinter.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnPrinter.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.PRINT);
 
+        btnBackup.setText("ສຳຮອງຂໍ້ມູນ");
+        btnBackup.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnBackup.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.BACKUP);
+
         javax.swing.GroupLayout pnSettingLayout = new javax.swing.GroupLayout(pnSetting);
         pnSetting.setLayout(pnSettingLayout);
         pnSettingLayout.setHorizontalGroup(
             pnSettingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btnInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
             .addComponent(btnPrinter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnBackup, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pnSettingLayout.setVerticalGroup(
             pnSettingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -577,6 +587,8 @@ public class HomeView extends javax.swing.JFrame {
                 .addComponent(btnInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnPrinter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnBackup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -717,6 +729,7 @@ public class HomeView extends javax.swing.JFrame {
     private javax.swing.JPanel Pn_Menu;
     private javax.swing.JPanel Pn_Navbar;
     private Components.JoButtonIconfont btnAbsent;
+    private Components.JoButtonIconfont btnBackup;
     private Components.JoButtonIconfont btnClass;
     private Components.JoButtonIconfont btnFinancial;
     private Components.JoButtonIconfont btnFood;

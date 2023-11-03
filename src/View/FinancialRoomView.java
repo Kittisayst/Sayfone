@@ -90,6 +90,7 @@ public class FinancialRoomView extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tb_data.setJoeffectHover(true);
         jScrollPane1.setViewportView(tb_data);
 
         pn_Datatable.add(jScrollPane1, java.awt.BorderLayout.CENTER);
