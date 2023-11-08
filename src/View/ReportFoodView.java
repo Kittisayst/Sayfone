@@ -6,6 +6,7 @@ import Components.JoTable;
 import DAOSevervice.FinancialService;
 import DAOSevervice.StudentService;
 import Model.FinancialModel;
+import Model.GlobalDataModel;
 import Model.RegisterModel;
 import Model.StudentModel;
 import Model.YearModel;
@@ -15,10 +16,13 @@ import java.util.List;
 
 public class ReportFoodView extends javax.swing.JPanel {
 
+    private PnLoading loading;
+
     public ReportFoodView(String Title) {
         initComponents();
         lbl_title.setText(Title);
-        clearData();
+        loading = new PnLoading();
+        loading.setTitle("ກຳລັງໂຫຼດຂໍ້ມູນ");
     }
 
     public JoButtonIconfont getBtn_back() {
@@ -49,27 +53,39 @@ public class ReportFoodView extends javax.swing.JPanel {
 
     public void showFood(List<FinancialModel> models) {
         tb_data.JoClearModel();
-        StudentService service = new StudentService();
-        FinancialService financialService = new FinancialService();
-        models.forEach(data -> {
-            if (data.getFoodMoney() > 0) {
-                StudentModel studentModel = service.getStudentById(data.getStudentID());
-                FinancialModel financialModel = financialService.getFinancialCalculator(data.getRegisterID(), data.getStudentID());
-                String foodMoney = new MyFormat().formatMoney(financialModel.getFoodMoney());
-                tb_data.AddJoModel(new Object[]{
-                    tb_data.autoNumber(),
-                    data.getFinancialIID(),
-                    data.getRegisterID(),
-                    data.getStudentID(),
-                    foodMoney,
-                    financialModel.getFinancialMonth(),
-                    studentModel.getStudentNo(),
-                    studentModel.getFullName(),
-                    financialModel.getFinancialComment()
+        GlobalDataModel.rootView.setView(loading);
+        Thread thread = new Thread(() -> {
+            try {
+                StudentService service = new StudentService();
+                FinancialService financialService = new FinancialService();
+                models.forEach(data -> {
+                    StudentModel studentModel = service.getStudentById(data.getStudentID());
+                    FinancialModel financialModel = financialService.getFinancialCalculator(data.getRegisterID(), data.getStudentID());
+                    String foodMoney = new MyFormat().formatMoney(financialModel.getFoodMoney());
+                    if (financialModel.getFoodMoney() > 0) {
+                        tb_data.AddJoModel(new Object[]{
+                            tb_data.autoNumber(),
+                            data.getFinancialIID(),
+                            data.getRegisterID(),
+                            data.getStudentID(),
+                            foodMoney,
+                            financialModel.getFinancialMonth(),
+                            studentModel.getStudentNo(),
+                            studentModel.getFullName(),
+                            financialModel.getFinancialComment()
+                        });
+                    }
+                    loading.StartProgress(models.size(), 100);
                 });
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                clearData();
+                GlobalDataModel.rootView.setView(this);
+                loading.close();
             }
         });
-        clearData();
+        thread.start();
     }
 
     private void clearData() {
@@ -160,6 +176,23 @@ public class ReportFoodView extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(tb_data);
+        if (tb_data.getColumnModel().getColumnCount() > 0) {
+            tb_data.getColumnModel().getColumn(0).setMinWidth(80);
+            tb_data.getColumnModel().getColumn(0).setPreferredWidth(80);
+            tb_data.getColumnModel().getColumn(0).setMaxWidth(80);
+            tb_data.getColumnModel().getColumn(4).setMinWidth(100);
+            tb_data.getColumnModel().getColumn(4).setPreferredWidth(100);
+            tb_data.getColumnModel().getColumn(4).setMaxWidth(100);
+            tb_data.getColumnModel().getColumn(5).setMinWidth(200);
+            tb_data.getColumnModel().getColumn(5).setPreferredWidth(200);
+            tb_data.getColumnModel().getColumn(5).setMaxWidth(200);
+            tb_data.getColumnModel().getColumn(6).setMinWidth(80);
+            tb_data.getColumnModel().getColumn(6).setPreferredWidth(80);
+            tb_data.getColumnModel().getColumn(6).setMaxWidth(80);
+            tb_data.getColumnModel().getColumn(7).setMinWidth(150);
+            tb_data.getColumnModel().getColumn(7).setPreferredWidth(150);
+            tb_data.getColumnModel().getColumn(7).setMaxWidth(150);
+        }
 
         pn_Datatable.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 

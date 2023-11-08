@@ -222,11 +222,11 @@ public class DasboardView extends javax.swing.JPanel {
 
             },
             new String [] {
-                "#", "studentID", "ລະຫັດນັກຮຽນ", "ຊື່ ແລະ ນາມສະກຸນ"
+                "#", "studentID", "ລະຫັດນັກຮຽນ", "ຊື່ ແລະ ນາມສະກຸນ", "ຫ້ອງຮຽນ"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -410,8 +410,10 @@ public class DasboardView extends javax.swing.JPanel {
 
     public void showTableData(List<StudentModel> models) {
         tbData.JoClearModel();
+        FinancialService financialService = new FinancialService();
         models.forEach(data -> {
-            tbData.AddJoModel(new Object[]{tbData.autoNumber(), data.getStudentID(), data.getStudentNo(), data.getFullName()});
+            String lastClass = financialService.getLastClass(data.getStudentID());
+            tbData.AddJoModel(new Object[]{tbData.autoNumber(), data.getStudentID(), data.getStudentNo(), data.getFullName(), lastClass});
         });
     }
 

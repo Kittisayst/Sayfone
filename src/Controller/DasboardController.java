@@ -18,10 +18,12 @@ import Tools.JoHookEvent;
 import View.DasboardView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class DasboardController implements JoMVC, MouseListener, ActionListener {
+public class DasboardController implements JoMVC, MouseListener, ActionListener, KeyListener {
 
     private final DasboardView view;
     private final StudentService studentService;
@@ -49,6 +51,7 @@ public class DasboardController implements JoMVC, MouseListener, ActionListener 
         view.showClassRoom(GlobalDataModel.registerModels);
         view.getTbData().addMouseListener(this);
         view.getBtnSearch().addActionListener(this);
+        view.getTxtSearch().addKeyListener(this);
     }
 
     @Override
@@ -65,8 +68,8 @@ public class DasboardController implements JoMVC, MouseListener, ActionListener 
         view.ShowTeacherCount(teacherService.getTeacherCount());
         view.showFinalcailCount(financialService.getCountFinancial());
         view.showRegisterCount(registerService.getCountRegister());
-         view.showClassRoom(GlobalDataModel.registerModels);
-        
+        view.showClassRoom(GlobalDataModel.registerModels);
+
         view.getTbData().addMouseListener(this);
         view.getBtnSearch().addActionListener(this);
         view.getDs_Student().getLbl_more().addMouseListener(this);
@@ -163,8 +166,29 @@ public class DasboardController implements JoMVC, MouseListener, ActionListener 
         }
     }
 
-    private void showStudentAll() {
-        view.showTableData(new StudentService().getAllStudent(25));
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        JoHookEvent event = new JoHookEvent(e.getSource());
+        if (event.isEvent(view.getTxtSearch())) {
+            if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                if (view.getTxtSearch().getText().equals("")) {
+                    view.getTbData().JoClearModel();
+                } else {
+                    view.showTableData(new StudentService().getSearchStudent(view.getTxtSearch().getText()));
+                }
+                view.getTxtSearch().requestFocus();
+            }
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
     }
 
 }

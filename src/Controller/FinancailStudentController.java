@@ -162,7 +162,6 @@ public class FinancailStudentController implements JoMVC, ActionListener, MouseL
     private void showFilterStudentRegister() { // ສະແດງນັກສຶກສາຍັງບໍ່ຈ່າຍຄ່າຮຽນ
         buttonState = false;
         view.setButtonState(buttonState);
-        view.ClearDataTable();
         List<StudentModel> models = studentService.getSutdentNotRegister(registerModel.getYearID(), currentPage, 25);
         view.showStudentAll(models);
     }
@@ -176,7 +175,6 @@ public class FinancailStudentController implements JoMVC, ActionListener, MouseL
         });
         buttonState = true;
         view.setButtonState(buttonState);
-        view.ClearDataTable();
         view.showStudentAll(studentList);
     }
 
@@ -237,7 +235,6 @@ public class FinancailStudentController implements JoMVC, ActionListener, MouseL
     }
 
     private void searchNotRegister(String search) {
-        view.ClearDataTable();
         List<StudentModel> models = studentService.getSearchSutdentNotRegister(registerModel.getYearID(), search);
         view.showStudentAll(models);
     }
@@ -253,7 +250,6 @@ public class FinancailStudentController implements JoMVC, ActionListener, MouseL
         });
         buttonState = true;
         view.setButtonState(buttonState);
-        view.ClearDataTable();
         view.showStudentAll(studentList);
     }
 

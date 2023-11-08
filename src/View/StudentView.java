@@ -1,7 +1,6 @@
 package View;
 
 import Components.JoButtonIconfont;
-import Components.JoLable;
 import Components.JoTable;
 import Components.JoTextField;
 import DAOSevervice.FinancialService;

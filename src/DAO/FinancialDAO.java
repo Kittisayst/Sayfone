@@ -485,8 +485,9 @@ public class FinancialDAO implements FinancialFn {
         try {
             String csql = "SELECT * FROM tb_financial\n"
                     + "INNER JOIN tb_student ON tb_financial.StudentID = tb_student.StudentID\n"
-                    + "WHERE RegisterID=? AND " + createSearch;
+                    + "WHERE RegisterID=? AND " + createSearch+" GROUP BY tb_financial.StudentID";
             PreparedStatement pre = connect.getConnectionDefault().prepareStatement(csql);
+            System.out.println(pre);
             pre.setInt(1, RegisterID);
             pre.setString(2, "%" + search + "%");
             System.out.println(pre);

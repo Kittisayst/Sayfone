@@ -29,7 +29,6 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.swing.SwingUtilities;
 
 public class ReportFoodController implements JoMVC, ActionListener, ItemListener, MouseListener {
 
@@ -90,6 +89,7 @@ public class ReportFoodController implements JoMVC, ActionListener, ItemListener
         } else if (event.isEvent(view.getBtnShow())) {
             FinancialService service = new FinancialService();
             int registerID = view.getCbClassRoom().getKeyInt();
+
             view.showFood(service.getStudentRegistered(registerID));
             createListExport(service.getStudentRegistered(registerID));
         } else if (event.isEvent(view.getBtnExport())) {
@@ -150,7 +150,12 @@ public class ReportFoodController implements JoMVC, ActionListener, ItemListener
     private void createListExport(List<FinancialModel> reportUserFinancial) {
         listFinancials.clear();
         amount = 0;
+        FinancialService financialService = new FinancialService();
         reportUserFinancial.forEach(data -> {
+            FinancialModel financialModel = financialService.getFinancialCalculator(data.getRegisterID(), data.getStudentID());
+            data.setFoodMoney(financialModel.getFoodMoney());
+            data.setFinancialMonth(financialModel.getFinancialMonth());
+            data.setFinancialComment(financialModel.getFinancialComment());
             listFinancials.add(data);
             amount += data.getFoodMoney();
         });

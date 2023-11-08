@@ -63,12 +63,6 @@ public class FinancailStudentView extends javax.swing.JPanel {
         btnRegistered.setBackground(colregistered);
     }
 
-    public void ClearDataTable() {
-        pn_Datatable.removeAll();
-        tb_data.JoClearModel();
-        pn_Datatable.add(jScrollPane1, java.awt.BorderLayout.CENTER);
-    }
-
     public void showStudentAll(List<StudentModel> models) {
         tb_data.JoClearModel();
         GlobalDataModel.rootView.setView(loading);
@@ -97,6 +91,10 @@ public class FinancailStudentView extends javax.swing.JPanel {
             } finally {
                 GlobalDataModel.rootView.setView(this);
                 loading.close();
+//                pn_Datatable.removeAll();
+//                pn_Datatable.add(jScrollPane1);
+//                JoDataTable dataTable = new JoDataTable(pn_Datatable);
+//                dataTable.showDataTableAll();
             }
         });
         thread.start();
