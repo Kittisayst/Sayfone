@@ -353,6 +353,7 @@ public class StudentDataView extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
         PNStudent1.add(joLable2, gridBagConstraints);
 
+        dt_dfb.setMinimumSize(new java.awt.Dimension(240, 40));
         dt_dfb.setPlaceholder("ວັນເດືອນປີເກີດ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
