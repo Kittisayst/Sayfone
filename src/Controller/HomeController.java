@@ -12,6 +12,7 @@ import App.AppReportFinacial;
 import App.AppReportFood;
 import App.AppReportStudent;
 import App.AppReportTeacherMoney;
+import App.AppReportUserClassMoney;
 import App.AppReportUserFinancial;
 import App.AppSetting;
 import App.AppStudent;
@@ -75,6 +76,7 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
         view.getBtn_Register().addActionListener(this);
         view.getBtnFinancial().addActionListener(this);
         view.getBtnReportFinancial().addActionListener(this);
+        view.getBtnReportUserClassMoney().addActionListener(this);
         view.getLblTutorial().addMouseListener(this);
         view.getBtnTeacherRank().addActionListener(this);
         view.getBtnReportPay().addActionListener(this);
@@ -144,7 +146,10 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
             absent.Open();
         } else if (event.isEvent(view.getBtnReportFinancial())) { // ===== ລາຍງານຂໍ້ມູນ
             AppReportFinacial appReportFinacial = new AppReportFinacial();
-        } else if (event.isEvent(view.getBtnReportUserFinancial())) {
+        }else if (event.isEvent(view.getBtnReportUserClassMoney())) {
+            AppReportUserClassMoney classMoney = new AppReportUserClassMoney();
+            classMoney.Open();
+        }  else if (event.isEvent(view.getBtnReportUserFinancial())) {
             AppReportUserFinancial userFinancial = new AppReportUserFinancial();
             userFinancial.OPen();
         } else if (event.isEvent(view.getBtnFood())) {

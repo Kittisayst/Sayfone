@@ -7,7 +7,6 @@ import DAOSevervice.StudentService;
 import DAOSevervice.UserService;
 import Model.RegisterModel;
 import Model.FinancialModel;
-import Model.GlobalDataModel;
 import Model.StudentModel;
 import Utility.MyFormat;
 import java.awt.Color;
@@ -324,7 +323,7 @@ public class ReportFinacialView extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(Pn_Navigation, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 649, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents

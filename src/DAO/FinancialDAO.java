@@ -185,10 +185,10 @@ public class FinancialDAO implements FinancialFn {
         JoConnect connect = new JoConnect();
         List<FinancialModel> models = new ArrayList<>();
         try {
-            String csql = "SELECT FinancialID,RegisterID,fs.StudentID,Money,TransferMoney,SaveDate,FinancialMonth,FinancialComment,AuthenUserID,Discount,OvertimePay,UserID,foodMoney,state\n" +
-                               "FROM tb_financial AS fs\n" +
-                               "INNER JOIN tb_student AS st ON fs.StudentID=st.StudentID\n" +
-                               "WHERE RegisterID=? AND st.Status=0  GROUP BY fs.StudentID";
+            String csql = "SELECT FinancialID,RegisterID,fs.StudentID,Money,TransferMoney,SaveDate,FinancialMonth,FinancialComment,AuthenUserID,Discount,OvertimePay,UserID,foodMoney,state\n"
+                    + "FROM tb_financial AS fs\n"
+                    + "INNER JOIN tb_student AS st ON fs.StudentID=st.StudentID\n"
+                    + "WHERE RegisterID=? AND st.Status=0  GROUP BY fs.StudentID";
             PreparedStatement pre = connect.getConnectionDefault().prepareStatement(csql);
             pre.setInt(1, RegisterID);
             ResultSet rs = pre.executeQuery();
@@ -485,7 +485,7 @@ public class FinancialDAO implements FinancialFn {
         try {
             String csql = "SELECT * FROM tb_financial\n"
                     + "INNER JOIN tb_student ON tb_financial.StudentID = tb_student.StudentID\n"
-                    + "WHERE RegisterID=? AND " + createSearch+" GROUP BY tb_financial.StudentID";
+                    + "WHERE RegisterID=? AND " + createSearch + " GROUP BY tb_financial.StudentID";
             PreparedStatement pre = connect.getConnectionDefault().prepareStatement(csql);
             System.out.println(pre);
             pre.setInt(1, RegisterID);
@@ -628,6 +628,28 @@ public class FinancialDAO implements FinancialFn {
             pre.setInt(2, UserID);
             pre.setString(3, dateStart);
             pre.setString(4, dateEnd);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                models.add(resultModel(rs));
+            }
+        } catch (Exception e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
+        }
+        return models;
+    }
+
+    @Override
+    public List<FinancialModel> getReportUserClassMoney(int registerID, int UserID) {
+        List<FinancialModel> models = new ArrayList<>();
+        JoConnect connect = new JoConnect();
+        String sql = "SELECT * FROM tb_financial WHERE RegisterID=? AND UserID=?";
+        try {
+            PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sql);
+            pre.setInt(1, registerID);
+            pre.setInt(2, UserID);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
                 models.add(resultModel(rs));

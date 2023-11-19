@@ -112,4 +112,8 @@ public class FinancialService {
         return aO.getReportUserFinancial(YearID, UserID, dateStart, dateEnd);
     }
 
+    public List<FinancialModel> getReportUserClassMoney(int registerID, int UserID) {
+        return aO.getReportUserClassMoney(registerID, UserID);
+    }
+
 }
