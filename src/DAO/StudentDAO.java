@@ -180,7 +180,7 @@ public class StudentDAO implements StudentFn {
         List<StudentModel> models = new ArrayList<>();
         models.clear();
         JoConnect connect = new JoConnect();
-        String sql  = "SELECT * FROM tb_student ORDER BY StudentID DESC LIMIT ?";
+        String sql = "SELECT * FROM tb_student ORDER BY StudentID DESC LIMIT ?";
         try {
             PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sql);
             pre.setInt(1, max);
@@ -259,9 +259,15 @@ public class StudentDAO implements StudentFn {
     public int getStudentCount() {
         int Count = 0;
         JoConnect connect = new JoConnect();
-        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
+        String sql = "SELECT COUNT(StudentID) AS scount FROM tb_student WHERE Status=0";
         try {
-            return sql.getCount();
+            ResultSet rs = connect.getConnectionDefault().createStatement().executeQuery(sql);
+            if (rs.next()) {
+                return rs.getInt(1);
+            } else {
+                return 0;
+            }
+
         } catch (Exception e) {
             JoAlert.Error(e, this);
             JoLoger.saveLog(e, this);

@@ -5,6 +5,8 @@ import DAOSevervice.YearService;
 import Database.JoConnect;
 import Database.JoSQL;
 import Log.JoLoger;
+import Log.querylog;
+import Model.GlobalDataModel;
 import Model.RegisterModel;
 import java.util.List;
 import Tools.JoAlert;
@@ -37,6 +39,7 @@ public class RegisterDAO implements RegisterFn {
             JoLoger.saveLog(e, this);
             return 0;
         } finally {
+            GlobalDataModel.registerModels = getRegisterLastYearAll();
             connect.close();
         }
     }
@@ -60,6 +63,7 @@ public class RegisterDAO implements RegisterFn {
             JoLoger.saveLog(e, this);
             return 0;
         } finally {
+            GlobalDataModel.registerModels = getRegisterLastYearAll();
             connect.close();
         }
     }
@@ -71,6 +75,7 @@ public class RegisterDAO implements RegisterFn {
         try {
             try (PreparedStatement pre = sql.getDelete()) {
                 pre.setInt(1, ID);
+                querylog.saveQueryLog(pre.toString(), this);
                 return pre.executeUpdate();
             }
         } catch (SQLException e) {
@@ -78,6 +83,7 @@ public class RegisterDAO implements RegisterFn {
             JoLoger.saveLog(e, this);
             return 0;
         } finally {
+            GlobalDataModel.registerModels = getRegisterLastYearAll();
             connect.close();
         }
     }
@@ -118,7 +124,7 @@ public class RegisterDAO implements RegisterFn {
             if (!rs.next()) {
                 pre.setInt(1, lastYearID - 1);
                 rs = pre.executeQuery();
-            }else{
+            } else {
                 rs.beforeFirst();
             }
             while (rs.next()) {

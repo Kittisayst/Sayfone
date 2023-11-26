@@ -9,6 +9,8 @@ import java.util.regex.Pattern;
 
 public class MonthCaculator {
 
+    private List<Integer> toArray = new ArrayList<>();
+
     public String getSumMonth(String input) { //ລວມເດືອນ
         Pattern pattern = Pattern.compile("\\d+");
         Matcher matcher = pattern.matcher(input);
@@ -59,9 +61,15 @@ public class MonthCaculator {
                     missingNumbers.add(num);
                 }
             }
+            toArray.clear();
+            toArray = missingNumbers;
             String payFull = missingNumbers.toString();
             return payFull.equals("[]") ? "ຈ່າຍຄົບຖ້ວນ" : payFull;
         }
+    }
+
+    public List<Integer> getToArray() {
+        return toArray;
     }
 
     public int[] parseMonth(String missingMonth) {

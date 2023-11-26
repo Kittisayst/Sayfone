@@ -1,0 +1,8 @@
+26/11/2023: DAO.RegisterDAO@4644408 SQL com.mysql.jdbc.ServerPreparedStatement[4] - DELETE FROM tb_register WHERE registerID=31
+26/11/2023: DAO.RegisterDAO@5d4acf6 SQL com.mysql.jdbc.ServerPreparedStatement[4] - DELETE FROM tb_register WHERE registerID=23
+26/11/2023: DAO.RegisterDAO@384f0c16 SQL com.mysql.jdbc.ServerPreparedStatement[4] - DELETE FROM tb_register WHERE registerID=27
+26/11/2023: DAO.RegisterDAO@56311f39 SQL com.mysql.jdbc.ServerPreparedStatement[4] - DELETE FROM tb_register WHERE registerID=29
+26/11/2023: DAO.RegisterDAO@10aaba3d SQL com.mysql.jdbc.ServerPreparedStatement[4] - DELETE FROM tb_register WHERE registerID=35
+26/11/2023: DAO.RegisterDAO@5a38ea4e SQL com.mysql.jdbc.ServerPreparedStatement[4] - DELETE FROM tb_register WHERE registerID=35
+26/11/2023: DAO.RegisterDAO@3ee86b31 SQL com.mysql.jdbc.ServerPreparedStatement[4] - DELETE FROM tb_register WHERE registerID=37
+26/11/2023: DAO.RegisterDAO@6950c21b SQL com.mysql.jdbc.ServerPreparedStatement[4] - DELETE FROM tb_register WHERE registerID=36

@@ -1,12 +1,16 @@
 package Controller;
 
 import App.AppCreateRegister;
+import App.AppDashboard;
+import App.AppRegister;
 import DAOSevervice.RegisterService;
 import Model.GlobalDataModel;
 import Model.RegisterModel;
+import Tools.JoAlert;
 import Tools.JoHookEvent;
 import Utility.MyPopup;
 import View.CreateRoomView;
+import View.DasboardView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -72,9 +76,16 @@ public class CreateRoomController implements JoMVC, ActionListener, MouseListene
         } else if (event.isEvent(popup.getItemEdit())) {
             RegisterService registerService = new RegisterService();
             AppCreateRegister appRegisterData = new AppCreateRegister();
-            appRegisterData.showRegisterData(registerService.getRegisterById(view.getTb_data().getIntValue(1)));
+            appRegisterData.showRegisterData(registerService.getRegisterById(view.getRegisterID()));
         } else if (event.isEvent(popup.getItemDelete())) {
-            System.out.println("delete");
+            JoAlert alert = new JoAlert();
+            if (alert.JoSubmitDelete()) {
+                RegisterService registerService = new RegisterService();
+                registerService.Delete(view.getRegisterID());
+                new AppDashboard().Open();
+                AppRegister appRegister = new AppRegister();
+                appRegister.OpenRegister();
+            }
         }
     }
 

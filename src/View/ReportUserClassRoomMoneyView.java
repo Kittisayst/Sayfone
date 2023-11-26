@@ -75,6 +75,7 @@ public class ReportUserClassRoomMoneyView extends javax.swing.JPanel {
                             format.formatMoney(data.getMoney()),
                             format.formatMoney(data.getTransferMoney()),
                             format.formatMoney(data.getFoodMoney()),
+                            format.formatMoney(data.getDiscount()),
                             data.getFinancialMonth(),
                             data.getFinancialComment()
                         });
@@ -191,11 +192,11 @@ public class ReportUserClassRoomMoneyView extends javax.swing.JPanel {
 
             },
             new String [] {
-                "#", "ລະຫັດນັກສຶກສາ", "ຊື່ ແລະ ນາມສະກຸນ", "ວັນທີ່ເດີອນປີ", "ຈຳນວນເງິນ", "ເງິນໂອນ", "ອາຫານ", "ເດືອນ", "ໝາຍເຫດ"
+                "#", "ລະຫັດນັກສຶກສາ", "ຊື່ ແລະ ນາມສະກຸນ", "ວັນທີ່ເດີອນປີ", "ເງິນສົດ", "ເງິນໂອນ", "ອາຫານ", "ສ່ວນຫຼຸດ", "ເດືອນ", "ໝາຍເຫດ"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -204,9 +205,9 @@ public class ReportUserClassRoomMoneyView extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tb_data);
         if (tb_data.getColumnModel().getColumnCount() > 0) {
-            tb_data.getColumnModel().getColumn(0).setMinWidth(80);
-            tb_data.getColumnModel().getColumn(0).setPreferredWidth(80);
-            tb_data.getColumnModel().getColumn(0).setMaxWidth(80);
+            tb_data.getColumnModel().getColumn(0).setMinWidth(50);
+            tb_data.getColumnModel().getColumn(0).setPreferredWidth(50);
+            tb_data.getColumnModel().getColumn(0).setMaxWidth(50);
             tb_data.getColumnModel().getColumn(1).setMinWidth(90);
             tb_data.getColumnModel().getColumn(1).setPreferredWidth(90);
             tb_data.getColumnModel().getColumn(1).setMaxWidth(90);
@@ -225,6 +226,9 @@ public class ReportUserClassRoomMoneyView extends javax.swing.JPanel {
             tb_data.getColumnModel().getColumn(6).setMinWidth(100);
             tb_data.getColumnModel().getColumn(6).setPreferredWidth(100);
             tb_data.getColumnModel().getColumn(6).setMaxWidth(100);
+            tb_data.getColumnModel().getColumn(7).setMinWidth(100);
+            tb_data.getColumnModel().getColumn(7).setPreferredWidth(100);
+            tb_data.getColumnModel().getColumn(7).setMaxWidth(100);
         }
 
         pn_Datatable.add(jScrollPane1, java.awt.BorderLayout.CENTER);

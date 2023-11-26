@@ -170,21 +170,43 @@ public class ReportPayController implements JoMVC, ActionListener, ItemListener,
                     StudentModel studentModel = studentService.getStudentById(data.getStudentID());
                     FinancialModel fm = financialService.getFinancialCalculator(data.getRegisterID(), data.getStudentID());
                     String findMissingMonth = mc.getMissingMonth(fm.getFinancialMonth());
-                    sheet.addRow(row++,
-                            row - 1,
-                            data.getFinancialIID(),
-                            view.getClassName(),
-                            studentModel.getFullName(),
-                            format.formatMoney(data.getMoney()),
-                            format.formatMoney(data.getTransferMoney()),
-                            format.formatMoney(data.getDiscount()),
-                            format.formatMoney(data.getOvertimePay()),
-                            format.formatMoney(data.getFoodMoney()),
-                            findMissingMonth,
-                            format.getDate(data.getFinancialDate()),
-                            fm.getFinancialComment(),
-                            userModel.getFullName()
-                    );
+                    List<Integer> months = mc.getToArray();
+                    if (view.getMonth() == 0) {
+                        sheet.addRow(row++,
+                                row - 1,
+                                data.getFinancialIID(),
+                                view.getClassName(),
+                                studentModel.getFullName(),
+                                format.formatMoney(data.getMoney()),
+                                format.formatMoney(data.getTransferMoney()),
+                                format.formatMoney(data.getDiscount()),
+                                format.formatMoney(data.getOvertimePay()),
+                                format.formatMoney(data.getFoodMoney()),
+                                findMissingMonth,
+                                format.getDate(data.getFinancialDate()),
+                                fm.getFinancialComment(),
+                                userModel.getFullName()
+                        );
+                    } else {
+                        boolean isMonth = months.contains(view.getMonth());
+                        if (isMonth) {
+                            sheet.addRow(row++,
+                                    row - 1,
+                                    data.getFinancialIID(),
+                                    view.getClassName(),
+                                    studentModel.getFullName(),
+                                    format.formatMoney(data.getMoney()),
+                                    format.formatMoney(data.getTransferMoney()),
+                                    format.formatMoney(data.getDiscount()),
+                                    format.formatMoney(data.getOvertimePay()),
+                                    format.formatMoney(data.getFoodMoney()),
+                                    view.getMonth(),
+                                    format.getDate(data.getFinancialDate()),
+                                    fm.getFinancialComment(),
+                                    userModel.getFullName()
+                            );
+                        }
+                    }
                     loading.StartProgress(listFinancials.size(), 100);
                 });
                 sheet.getCreateSheet();

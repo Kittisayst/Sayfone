@@ -57,6 +57,10 @@ public class CreateRoomView extends javax.swing.JPanel {
     public JoTable getTb_data() {
         return tb_data;
     }
+    
+    public int getRegisterID(){
+        return tb_data.getIntValue(1);
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

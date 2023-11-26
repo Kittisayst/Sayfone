@@ -23,9 +23,6 @@ import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.SwingUtilities;
 
 public class ReportStudentController implements JoMVC, ActionListener, ItemListener {
 
@@ -139,7 +136,7 @@ public class ReportStudentController implements JoMVC, ActionListener, ItemListe
                     sheet.addRow(row++,
                             row - 1,
                             data.getStudentNo(),
-                            data.getStudentName(),
+                            data.getFullName(),
                             data.getStudentENG(),
                             data.getNickName(),
                             data.getGender() == 0 ? "ຍິງ" : "ຊາຍ",

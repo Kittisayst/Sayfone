@@ -345,12 +345,14 @@ public class DasboardView extends javax.swing.JPanel {
     int Elementary = 0;
     int JuniorHighSchool = 0;
     int HighSchool = 0;
+    int studentCount = 0;
 
     private void resetCount() {
         Kindergarten = 0;
         Elementary = 0;
         JuniorHighSchool = 0;
         HighSchool = 0;
+        studentCount = 0;
     }
 
     private void CoutClass(int classID, int count) {
@@ -429,6 +431,8 @@ public class DasboardView extends javax.swing.JPanel {
         lblElementary.setText("ປະຖົມ: " + Elementary + " ຄົນ");
         lblJuniorHighSchool.setText("ມັດທະຍົມຕົ້ນ: " + JuniorHighSchool + " ຄົນ");
         lblHighSchool.setText("ມັດທະຍົມປາຍ: " + HighSchool + " ຄົນ");
+        studentCount += Kindergarten + Elementary + JuniorHighSchool + HighSchool;
+        ShowStudentCount(studentCount);
         pnChart.add(chartUI);
         pnChart.add(lblKindergarten);
         pnChart.add(lblElementary);
