@@ -12,7 +12,7 @@ public interface StudentFn {
     public int DeleteStudent(StudentModel model);
 
     public List<StudentModel> getAllStudent();
-    
+
     public List<StudentModel> getAllStudent(int max);
 
     public StudentModel getStudentById(int StudentID);
@@ -34,9 +34,11 @@ public interface StudentFn {
     public List<StudentModel> getStudentBrotherSister(int StudentID);
 
     public List<StudentModel> getStudentPagination(int page, int rowsPerPage);
-    
-     public List<StudentModel> getSearchStudent(String search);
-     
-      public List<StudentModel> getSearchSutdentNotRegister(int YearID,String search);
+
+    public List<StudentModel> getSearchStudent(String search);
+
+    public List<StudentModel> getSearchSutdentNotRegister(int YearID, String search);
+
+    public List<StudentModel> getStudentByState(int State);
 
 }

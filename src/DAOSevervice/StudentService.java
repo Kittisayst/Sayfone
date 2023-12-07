@@ -72,4 +72,8 @@ public class StudentService {
         return aO.getSearchSutdentNotRegister(YearID, search);
     }
 
+    public List<StudentModel> getStudentByState(int State) {
+        return aO.getStudentByState(State);
+    }
+
 }

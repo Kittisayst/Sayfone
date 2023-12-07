@@ -548,6 +548,7 @@
                                   <Component id="btnReportDiscount" alignment="0" max="32767" attributes="0"/>
                                   <Component id="btnReportTeacherMoney" alignment="0" max="32767" attributes="0"/>
                                   <Component id="btnReportUserClassMoney" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="btnReportStudentState" alignment="0" max="32767" attributes="0"/>
                               </Group>
                             </DimensionLayout>
                             <DimensionLayout dim="1">
@@ -574,6 +575,8 @@
                                       <EmptySpace max="32767" attributes="0"/>
                                       <Component id="btnReportStudent" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnReportStudentState" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
                                       <Component id="joButtonIconfont10" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                                   </Group>
@@ -677,6 +680,15 @@
                                 <Property name="horizontalAlignment" type="int" value="2"/>
                                 <Property name="joIcons" type="jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons" editor="org.netbeans.modules.form.editors.EnumEditor">
                                   <Value id="LOCAL_ATM"/>
+                                </Property>
+                              </Properties>
+                            </Component>
+                            <Component class="Components.JoButtonIconfont" name="btnReportStudentState">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="&#xea5;&#xeb2;&#xe8d;&#xe87;&#xeb2;&#xe99;&#xe82;&#xecd;&#xec9;&#xea1;&#xeb9;&#xe99;&#xe99;&#xeb1;&#xe81;&#xeae;&#xebd;&#xe99;&#xe97;&#xeb1;&#xe87;&#xedd;&#xebb;&#xe94;"/>
+                                <Property name="horizontalAlignment" type="int" value="2"/>
+                                <Property name="joIcons" type="jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons" editor="org.netbeans.modules.form.editors.EnumEditor">
+                                  <Value id="PEOPLE"/>
                                 </Property>
                               </Properties>
                             </Component>

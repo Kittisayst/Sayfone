@@ -92,7 +92,7 @@ public class StudentDataController implements JoMVC, ActionListener, MouseListen
             model.setLocationFile(filechooser.getSelectedFile());
         }
         model.setGoHome(view.getCk_GoHomeYes().isSelected() ? 1 : 0);
-        model.setStatus(view.getRd_Studying().isSelected() ? 0 : 1);
+        model.setStatus(view.getStudentState());
         model.setNationalityID(view.getCb_nationality().getKeyInt());
         model.setEthnicID(view.getCb_ethnic().getKeyInt());
         model.setReligionID(view.getCb_religion().getKeyInt());
@@ -125,7 +125,7 @@ public class StudentDataController implements JoMVC, ActionListener, MouseListen
             model.setLocationFile(filechooser.getSelectedFile());
         }
         model.setGoHome(view.getCk_GoHomeYes().isSelected() ? 1 : 0);
-        model.setStatus(view.getRd_Studying().isSelected() ? 0 : 1);
+        model.setStatus(view.getStudentState());
         model.setNationalityID(view.getCb_nationality().getKeyInt());
         model.setEthnicID(view.getCb_ethnic().getKeyInt());
         model.setReligionID(view.getCb_religion().getKeyInt());

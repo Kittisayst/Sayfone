@@ -215,6 +215,7 @@ public class DialogFinancialTransfer extends javax.swing.JDialog {
 
     private void btnQRCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQRCodeActionPerformed
         String url = "http://" + server + "/sayfone/mobiletransfer.php?transferID=" + tranferModel.getFileTranferID() + "&financialID=" + tranferModel.getFinancialID();
+        System.out.println(url);
         JoQRcode qRcode = new JoQRcode(url);
         lblImage.setIcon(qRcode.getCreateQRcode());
     }//GEN-LAST:event_btnQRCodeActionPerformed

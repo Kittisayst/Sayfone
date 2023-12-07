@@ -217,6 +217,18 @@ public class StudentDataView extends javax.swing.JPanel {
         return btn_BrotherSister;
     }
 
+    public int getStudentState() {
+        if (rd_Studying.isSelected()) {
+            return 0;
+        } else if (rd_StudyDrop.isSelected()) {
+            return 1;
+        } else if (rd_StudyStop.isSelected()) {
+            return 2;
+        } else {
+            return -1;
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

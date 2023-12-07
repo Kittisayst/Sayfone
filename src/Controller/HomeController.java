@@ -11,6 +11,7 @@ import App.AppReportDiscount;
 import App.AppReportFinacial;
 import App.AppReportFood;
 import App.AppReportStudent;
+import App.AppReportStudentState;
 import App.AppReportTeacherMoney;
 import App.AppReportUserClassMoney;
 import App.AppReportUserFinancial;
@@ -91,6 +92,7 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
         view.getBtnReportTeacherMoney().addActionListener(this);
         view.getBtnPermission().addActionListener(this);
         view.getBtnBackup().addActionListener(this);
+        view.getBtnReportStudentState().addActionListener(this);
     }
 
     @Override
@@ -146,10 +148,10 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
             absent.Open();
         } else if (event.isEvent(view.getBtnReportFinancial())) { // ===== ລາຍງານຂໍ້ມູນ
             AppReportFinacial appReportFinacial = new AppReportFinacial();
-        }else if (event.isEvent(view.getBtnReportUserClassMoney())) {
+        } else if (event.isEvent(view.getBtnReportUserClassMoney())) {
             AppReportUserClassMoney classMoney = new AppReportUserClassMoney();
             classMoney.Open();
-        }  else if (event.isEvent(view.getBtnReportUserFinancial())) {
+        } else if (event.isEvent(view.getBtnReportUserFinancial())) {
             AppReportUserFinancial userFinancial = new AppReportUserFinancial();
             userFinancial.OPen();
         } else if (event.isEvent(view.getBtnFood())) {
@@ -172,6 +174,9 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
         } else if (event.isEvent(view.getBtnReportTeacherMoney())) {
             AppReportTeacherMoney reportTeacherMoney = new AppReportTeacherMoney();
             reportTeacherMoney.Open();
+        } else if (true) {
+            AppReportStudentState studentState = new AppReportStudentState();
+            studentState.Open();
         } else if (event.isEvent(view.getBtnInfo())) {   // ============ ຕັ້ງຄ່າ
             AppSetting app = new AppSetting();
             app.Open();

@@ -62,6 +62,7 @@ public class StudentDAO implements StudentFn {
             pre.setInt(i++, model.getEthnicID());
             pre.setInt(i++, model.getReligionID());
             pre.setInt(i++, GlobalDataModel.userModel.getUserID());
+            System.out.println(pre);
             return pre.executeUpdate();
         } catch (Exception e) {
             JoAlert.Error(e, this);
@@ -101,6 +102,7 @@ public class StudentDAO implements StudentFn {
             pre.setInt(i++, model.getEthnicID());
             pre.setInt(i++, model.getReligionID());
             pre.setInt(i++, model.getStudentID());
+            System.out.println(pre);
             return pre.executeUpdate();
         } catch (SQLException e) {
             JoAlert.Error(e, this);
@@ -526,6 +528,27 @@ public class StudentDAO implements StudentFn {
         model.setReligionID(rs.getInt(i++));
         model.setUserCreate(rs.getInt(i++));
         return model;
+    }
+
+    @Override
+    public List<StudentModel> getStudentByState(int State) {
+        List<StudentModel> list = new ArrayList<>();
+        JoConnect connect = new JoConnect();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
+        try {
+            PreparedStatement pre = sql.getSelectCustom("Status=?");
+            pre.setInt(1, State);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                list.add(getResult(rs));
+            }
+        } catch (SQLException e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
+        }
+        return list;
     }
 
 }
