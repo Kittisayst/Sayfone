@@ -3,16 +3,23 @@ package View;
 import Components.JoButtonIconfont;
 import Components.JoCombobox;
 import Components.JoTable;
+import DAOSevervice.StudentHistoryService;
+import Model.GlobalDataModel;
 import Model.RegisterModel;
+import Model.StudentHistoryModel;
 import Model.StudentModel;
 import Model.YearModel;
+import Tools.JoDataTable;
 import java.util.List;
 
 public class ReportStudentView extends javax.swing.JPanel {
 
+    private PnLoading loading = new PnLoading();
+
     public ReportStudentView(String Title) {
         initComponents();
         lbl_title.setText(Title);
+        loading.setTitle("ກຳລັງໂຫຼດຂໍ້ມູນນັກຮຽນ");
     }
 
     public JoButtonIconfont getBtn_back() {
@@ -39,11 +46,33 @@ public class ReportStudentView extends javax.swing.JPanel {
 
     public void showStudent(List<StudentModel> models) {
         tb_data.JoClearModel();
-        models.forEach(data -> {
-            if (data.getStudentID() > 0) {
-                tb_data.AddJoModel(new Object[]{tb_data.autoNumber(), data.getStudentID(), data.getStudentNo(), data.getFullName()});
+        Thread thread = new Thread(() -> {
+            try {
+                GlobalDataModel.rootView.setView(loading);
+                models.forEach(data -> {
+                    if (data.getStudentID() > 0) {
+                        StudentHistoryModel historyModel = new StudentHistoryService().getStudentHistoryByStudentID(data.getStudentID());
+                        System.out.println();
+                        String father = historyModel.getFatherName() != null ? historyModel.getFatherName() : "null";
+                        String tel = historyModel.getFatherTel() != null ? historyModel.getFatherTel() : "null";
+                        tb_data.AddJoModel(new Object[]{tb_data.autoNumber(), data.getStudentID(), data.getStudentNo(), data.getFullName(), father, tel});
+                    }
+                    loading.StartProgress(models.size(), 50);
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                pn_Datatable.removeAll();
+                pn_Datatable.add(jScrollPane1);
+                JoDataTable dataTable = new JoDataTable(pn_Datatable);
+                dataTable.showDataTableAll();
+                dataTable.setHiddenColumns(1);
+                GlobalDataModel.rootView.setView(this);
+                loading.close();
+                setExportState();
             }
         });
+        thread.start();
     }
 
     public void setExportState() {
@@ -126,11 +155,11 @@ public class ReportStudentView extends javax.swing.JPanel {
 
             },
             new String [] {
-                "#", "StudentID", "ລະຫັດນັກຮຽນ", "ຊື່ ແລະ ນາມສະກຸນນັກຮຽນ"
+                "#", "StudentID", "ລະຫັດນັກຮຽນ", "ຊື່ ແລະ ນາມສະກຸນນັກຮຽນ", "ຜູ້ປົກຄອງ", "ເບີໂທຜູ້ປົກຄອງ"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

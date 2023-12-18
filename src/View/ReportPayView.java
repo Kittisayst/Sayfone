@@ -128,7 +128,7 @@ public class ReportPayView extends javax.swing.JPanel {
     }
 
     public int getMonth() {
-        return cbMonth.getSelectedIndex() == 12 ? 0 : cbMonth.getSelectedIndex() + 1;
+        return cbMonth.getSelectedIndex();
     }
 
     @SuppressWarnings("unchecked")
@@ -253,7 +253,7 @@ public class ReportPayView extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(2, 10, 2, 10);
         jPanel1.add(btnShow, gridBagConstraints);
 
-        cbMonth.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "ທັງໝົດ" }));
+        cbMonth.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ທັງໝົດ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
         cbMonth.setFont(new java.awt.Font("Phetsarath OT", 0, 14)); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 10;

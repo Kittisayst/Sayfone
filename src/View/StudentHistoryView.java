@@ -58,7 +58,7 @@ public class StudentHistoryView extends javax.swing.JPanel {
         txt_MotherName.setText(model.getMotherName());
         txt_MotherAge.setText("" + model.getMotherAge());
         txt_MotherJob.setText(model.getMotherJob());
-        txt_MotherPlace.setText(model.getMotherJob());
+        txt_MotherPlace.setText(model.getMotherPlace());
         txt_MotherTel.setText(model.getMotherTel());
         setBloodGroup(model.getBloodGroup());
         setCar(model.getDiverCategory());

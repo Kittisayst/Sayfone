@@ -7,6 +7,7 @@ import Components.JoCombobox;
 import Components.JoDateChooser;
 import Components.JoImageAvatar;
 import Components.JoLableIcon;
+import Components.JoScrollBar;
 import Components.JoTextField;
 import Model.EthnicModel;
 import Model.NationalityModel;
@@ -23,6 +24,8 @@ public class StudentDataView extends javax.swing.JPanel {
         initComponents();
         lbl_title.setText(Title);
         JoIconTransparent joIconTransparent = new JoIconTransparent(lbl_AddImage, new Color(153, 153, 153));
+        JoScrollBar scrollBar = new JoScrollBar(jScrollPane1);
+        scrollBar.setScrollSizeV(4);
     }
 
     public void showAvatar(ImageIcon icon) {
@@ -245,6 +248,8 @@ public class StudentDataView extends javax.swing.JPanel {
         jPanel4 = new javax.swing.JPanel();
         lbl_title = new Components.JoLable();
         jPanel5 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jPanel9 = new javax.swing.JPanel();
         PNStudent1 = new Components.JoPanel();
         joLable1 = new Components.JoLable();
         joLable2 = new Components.JoLable();
@@ -335,10 +340,14 @@ public class StudentDataView extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         add(Pn_Navigation, gridBagConstraints);
+
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        jPanel9.setLayout(new java.awt.GridBagLayout());
 
         PNStudent1.setJoPrimaryColor(new java.awt.Color(249, 249, 249));
         PNStudent1.setJoSecondaryColor(new java.awt.Color(249, 249, 249));
@@ -510,7 +519,7 @@ public class StudentDataView extends javax.swing.JPanel {
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 240, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -526,13 +535,16 @@ public class StudentDataView extends javax.swing.JPanel {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        add(PNStudent1, gridBagConstraints);
+        jPanel9.add(PNStudent1, gridBagConstraints);
 
         PNStudent2.setJoPrimaryColor(new java.awt.Color(249, 249, 249));
         PNStudent2.setJoSecondaryColor(new java.awt.Color(249, 249, 249));
+        PNStudent2.setMaximumSize(new java.awt.Dimension(1000, 768));
+        PNStudent2.setMinimumSize(new java.awt.Dimension(600, 800));
+        PNStudent2.setPreferredSize(new java.awt.Dimension(600, 800));
         PNStudent2.setLayout(new java.awt.GridBagLayout());
 
         joPanelTitle1.setJoTitle("ຂໍ້ມູນພື້ນຖານ");
@@ -588,12 +600,12 @@ public class StudentDataView extends javax.swing.JPanel {
                             .addComponent(txt_Sibling, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(joPanelTitle1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_Preschool, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
+                            .addComponent(txt_Preschool, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
                             .addComponent(joLable8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(joPanelTitle1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(joLable9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txt_Talent, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE))))
+                            .addComponent(txt_Talent, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         joPanelTitle1Layout.setVerticalGroup(
@@ -739,7 +751,7 @@ public class StudentDataView extends javax.swing.JPanel {
                             .addComponent(joLable19, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(joPanelTitle2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(joLable18, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
+                            .addComponent(joLable18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txt_Disabled, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
                 .addContainerGap())
         );
@@ -800,15 +812,15 @@ public class StudentDataView extends javax.swing.JPanel {
                 .addGap(20, 20, 20)
                 .addGroup(joPanelTitle3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(joLable15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cb_nationality, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE))
+                    .addComponent(cb_nationality, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(joPanelTitle3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(joLable16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cb_religion, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE))
+                    .addComponent(cb_religion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(joPanelTitle3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(joLable17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cb_ethnic, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE))
+                    .addComponent(cb_ethnic, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         joPanelTitle3Layout.setVerticalGroup(
@@ -865,12 +877,22 @@ public class StudentDataView extends javax.swing.JPanel {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.weighty = 0.1;
-        add(PNStudent2, gridBagConstraints);
+        jPanel9.add(PNStudent2, gridBagConstraints);
+
+        jScrollPane1.setViewportView(jPanel9);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.weighty = 0.1;
+        add(jScrollPane1, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
 
@@ -906,6 +928,8 @@ public class StudentDataView extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
+    private javax.swing.JScrollPane jScrollPane1;
     private Components.JoLable joLable1;
     private Components.JoLable joLable11;
     private Components.JoLable joLable12;
