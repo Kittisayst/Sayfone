@@ -44,6 +44,7 @@ import java.util.List;
 import java.util.Map;
 import javax.swing.JCheckBox;
 import jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons;
+import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.view.JasperViewer;
@@ -79,6 +80,7 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
     @Override
     public void Start() {
         GlobalDataModel.rootView.setView(view);
+        financialModel = new FinancialModel();
         view.showCurentMonth(); //ສະແດງເດືອນປະຈຸບັນ
         StudentHistoryModel historyModel = new StudentHistoryService().getStudentHistoryByStudentID(studentModel.getStudentID()); //ດຶງປະຫວັດນັກຮຽນ
         view.showParent(historyModel); //ສະແດງປະຫວັດນັກຮຽນ
@@ -263,8 +265,6 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
     public void Delete() {
         JoAlert alert = new JoAlert();
         if (alert.JoSubmitDelete()) {
-            FinancialService service = new FinancialService();
-            FileTransferService transferService = new FileTransferService();
             service.Delete(financialModel);
             if (fileTranferModel.getFileTranferID() != 0) {
                 transferService.Delete(fileTranferModel);
@@ -296,7 +296,7 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
                 view.getCkDiscount().setSelected(false);
                 view.EnableDisCount(userAuthen);
             }
-        } else if (event.isEvent(view.getBtnAddTransfer())) { // ກົດປຸ່ມເພີ່ມເອກະສານການໂອນ
+        } else if (event.isEvent(view.getBtnAddTransfer())) { // ກົດປຸ່ມເພີ່ມຮູບການໂອນ
             DialogFinancialTransfer dialog = new DialogFinancialTransfer(GlobalDataModel.rootView, true, fileTranferModel);
             dialog.setVisible(true);
             fileTranferModel = dialog.getTranferModel();
@@ -337,27 +337,8 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
                 showEdit();
                 Delete();
             }
-        } else if (event.isEvent(popup.getMenuItem(3))) { // ຂໍ້ມູນການໂອນຍ້ອນຫຼັງ
-            FinancialService financialService = new FinancialService();
-            financialModel = financialService.getFinancialById(view.getTb_data().getIntValue(1));
-            fileTranferModel = new FileTransferService().getFileTranferByFinancialID(financialModel.getFinancialIID()); //ດຶງຂໍ້ມູນເອກະສານການໂອນ
-            DialogFinancialTransfer dialog = new DialogFinancialTransfer(GlobalDataModel.rootView, true, fileTranferModel);
-            dialog.setVisible(true);
-            fileTranferModel = dialog.getTranferModel();
-            FileTransferService transferService = new FileTransferService();
-            JoAlert alert = new JoAlert();
-            if (dialog.isSubmit()) { // ຫວດສອບວ່າມີການກົດບັນທຶກຫຼືບໍ່
-                if (fileTranferModel.getFileTranferID() == 0) { // ກວດສອບມີການບັນທຶກເອກະສານເງິນໂອນຫຼືບໍ່
-                    // ບັນທຶກຂໍ້ມູນການໂອນໃໝ່
-                    fileTranferModel.setFinancialID(financialModel.getFinancialIID());
-                    alert.JoSubmit(transferService.Creater(fileTranferModel), JoAlert.INSERT);
-                } else {
-                    // ແກ້ໄຂຂໍ້ມູນການໂອນໃໝ່
-                    if (fileTranferModel.getFileTranferID() != 0) {
-                        alert.JoSubmit(transferService.Update(fileTranferModel), JoAlert.UPDATE);
-                    }
-                }
-            }
+        } else if (event.isEvent(popup.getMenuItem(3))) { // ຂໍ້ມູນການໂອນ
+            DialogTransfer();
         } else if (event.isEvent(popup.getMenuItem(4))) {// ຖອນເງິນ
             AuthenPopUp popUp = new AuthenPopUp(GlobalDataModel.rootView, true);
             popUp.setVisible(true);
@@ -369,16 +350,7 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
                 dialogWithdraw.setVisible(true);
             }
         } else if (event.isEvent(popup.getMenuItem(5))) {
-            FileTransferService fileTransferService = new FileTransferService();
-            FileTranferModel ftm = fileTransferService.getFileTranferByFinancialID(view.getTb_data().getIntValue(1));
-            JoAlert alert = new JoAlert();
-            if (ftm.getFileTranferID() == 0) {
-                alert.messages("ຮູບບິນການໂອນ", "ບໍ່ມີຮູບການໂອນ", JoAlert.Icons.warning);
-            } else {
-                DialogTransferImage dialog = new DialogTransferImage(GlobalDataModel.rootView, true, ftm.getImageIcon());
-                dialog.setVisible(true);
-            }
-            System.out.println(ftm);
+            showTransferImage();
         }
     }
 
@@ -472,8 +444,8 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
         FinancialService financialService = new FinancialService();
         financialModel = financialService.getFinancialById(view.getTb_data().getIntValue(1));
         //ດຶງຂໍ້ມູນໂຮງຮຽນ
-        SayfoneService service = new SayfoneService();
-        SayfoneModel model = service.getById(1);
+        SayfoneService sayfoneService = new SayfoneService();
+        SayfoneModel model = sayfoneService.getById(1);
         //ດຶງຂໍ້ມູນຜູ້ໃຊ້ງານ
         UserService userService = new UserService();
         UserModel userModel = userService.getUserById(financialModel.getAuthenUserID());
@@ -501,14 +473,12 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
                     showReport.setVisible(true);
                 }
             }
-        } catch (Exception err) {
+        } catch (JRException err) {
             err.printStackTrace();
             JoLoger.saveLog(err, logo);
+        } finally {
+            financialModel = new FinancialModel();
         }
-    }
-
-    private String Charchecked(boolean isCheck) {
-        return isCheck ? "☑" : "☐";
     }
 
     @Override
@@ -528,6 +498,53 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
             view.setButtonState();
         } else if (event.isEvent(view.getTxtTransferMoney())) {
             view.setButtonState();
+        }
+    }
+
+    private void showTransferImage() {
+        try {
+            FileTransferService fileTransferService = new FileTransferService();
+            FileTranferModel ftm = fileTransferService.getFileTranferByFinancialID(view.getTb_data().getIntValue(1));
+            JoAlert alert = new JoAlert();
+            if (ftm.getFileTranferID() == 0) {
+                alert.messages("ຮູບບິນການໂອນ", "ບໍ່ມີຮູບການໂອນ", JoAlert.Icons.warning);
+            } else {
+                DialogTransferImage dialog = new DialogTransferImage(GlobalDataModel.rootView, true, ftm.getImageIcon());
+                dialog.setVisible(true);
+            }
+            System.out.println(ftm);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void DialogTransfer() {
+        try {
+            FinancialService financialService = new FinancialService();
+            financialModel = financialService.getFinancialById(view.getTb_data().getIntValue(1));
+            fileTranferModel = new FileTransferService().getFileTranferByFinancialID(financialModel.getFinancialIID()); //ດຶງຂໍ້ມູນເອກະສານການໂອນ
+            DialogFinancialTransfer dialog = new DialogFinancialTransfer(GlobalDataModel.rootView, true, fileTranferModel);
+            dialog.setVisible(true);
+            fileTranferModel = dialog.getTranferModel();
+            transferService = new FileTransferService();
+            JoAlert alert = new JoAlert();
+            if (dialog.isSubmit()) { // ກວດສອບວ່າມີການກົດບັນທຶກຫຼືບໍ່
+                if (fileTranferModel.getFileTranferID() == 0) { // ກວດສອບມີການບັນທຶກເອກະສານເງິນໂອນຫຼືບໍ່
+                    // ບັນທຶກຂໍ້ມູນການໂອນໃໝ່
+                    fileTranferModel.setFinancialID(financialModel.getFinancialIID());
+                    alert.JoSubmit(transferService.Creater(fileTranferModel), JoAlert.INSERT);
+                } else {
+                    // ແກ້ໄຂຂໍ້ມູນການໂອນໃໝ່
+                    if (fileTranferModel.getFileTranferID() != 0) {
+                        alert.JoSubmit(transferService.Update(fileTranferModel), JoAlert.UPDATE);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally{
+            financialModel = new FinancialModel();
+            fileTranferModel = new FileTranferModel();
         }
     }
 

@@ -58,5 +58,7 @@ public interface FinancialFn {
     public List<FinancialModel> getReportUserFinancial(int YearID, int UserID, String dateStart, String dateEnd);
 
     public List<FinancialModel> getReportUserClassMoney(int registerID, int UserID);
+    
+    public List<FinancialModel> getReportFood(int RegisterID);
 
 }

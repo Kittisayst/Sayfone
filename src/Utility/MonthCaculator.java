@@ -84,4 +84,19 @@ public class MonthCaculator {
         }
         return intArray;
     }
+
+    public List<Integer> StringToArray(String str) {
+        List<Integer> arr = new ArrayList<>();
+        if (str.equals("[]")) {
+            arr.add(0);
+            return arr;
+        } else {
+            String[] numbersArray = str.replaceAll("[\\[\\]]", "").split(",");
+            for (String numbersArray1 : numbersArray) {
+                arr.add(Integer.valueOf(numbersArray1.trim()));
+            }
+            return arr;
+        }
+    }
+
 }

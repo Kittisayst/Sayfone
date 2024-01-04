@@ -11,7 +11,9 @@ import Model.RegisterModel;
 import Model.StudentModel;
 import Model.YearModel;
 import Tools.JoDataTable;
+import Utility.MonthCaculator;
 import Utility.MyFormat;
+import java.util.Arrays;
 import java.util.List;
 
 public class ReportFoodView extends javax.swing.JPanel {
@@ -54,26 +56,47 @@ public class ReportFoodView extends javax.swing.JPanel {
     public void showFood(List<FinancialModel> models) {
         tb_data.JoClearModel();
         GlobalDataModel.rootView.setView(loading);
+        MonthCaculator mc = new MonthCaculator();
         Thread thread = new Thread(() -> {
             try {
                 StudentService service = new StudentService();
                 FinancialService financialService = new FinancialService();
                 models.forEach(data -> {
                     StudentModel studentModel = service.getStudentById(data.getStudentID());
-                    FinancialModel financialModel = financialService.getFinancialCalculator(data.getRegisterID(), data.getStudentID());
-                    String foodMoney = new MyFormat().formatMoney(financialModel.getFoodMoney());
-                    if (financialModel.getFoodMoney() > 0) {
-                        tb_data.AddJoModel(new Object[]{
-                            tb_data.autoNumber(),
-                            data.getFinancialIID(),
-                            data.getRegisterID(),
-                            data.getStudentID(),
-                            foodMoney,
-                            financialModel.getFinancialMonth(),
-                            studentModel.getStudentNo(),
-                            studentModel.getFullName(),
-                            financialModel.getFinancialComment()
-                        });
+                    if (getMonth() == 0) {  // ເລືອກທັງໝົດ
+                        FinancialModel financialModel = financialService.getFinancialCalculator(data.getRegisterID(), data.getStudentID());
+                        String foodMoney = new MyFormat().formatMoney(financialModel.getFoodMoney());
+                        String findMissingMonth = mc.getMissingMonth(financialModel.getFinancialMonth());
+                        if (financialModel.getFoodMoney() > 0) {
+                            tb_data.AddJoModel(new Object[]{
+                                tb_data.autoNumber(),
+                                data.getFinancialIID(),
+                                data.getRegisterID(),
+                                data.getStudentID(),
+                                foodMoney,
+                                findMissingMonth,
+                                studentModel.getStudentNo(),
+                                studentModel.getFullName(),
+                                financialModel.getFinancialComment()
+                            });
+                        }
+                    } else {  // ເລືອກສະເພາະເດືອນ
+                        List<Integer> months = mc.StringToArray(data.getFinancialMonth());
+                        int numMonth = getMonth() == 13 ? 0 : getMonth();  // ກວດສອບບໍ່ເລືອກເດືອນ index = 13
+                        boolean isMonth = months.contains(numMonth); 
+                        if (isMonth) {
+                            tb_data.AddJoModel(new Object[]{
+                                tb_data.autoNumber(),
+                                data.getFinancialIID(),
+                                data.getRegisterID(),
+                                data.getStudentID(),
+                                new MyFormat().formatMoney(data.getFoodMoney()),
+                                numMonth,
+                                studentModel.getStudentNo(),
+                                studentModel.getFullName(),
+                                data.getFinancialComment()
+                            });
+                        }
                     }
                     loading.StartProgress(models.size(), 100);
                 });
@@ -83,6 +106,7 @@ public class ReportFoodView extends javax.swing.JPanel {
                 clearData();
                 GlobalDataModel.rootView.setView(this);
                 loading.close();
+                ExportEnable();
             }
         });
         thread.start();
@@ -100,6 +124,10 @@ public class ReportFoodView extends javax.swing.JPanel {
 
     public void setAmount(int amount) {
         lblAmount.setText("ລວມເງິນທັງໝົດ: " + new MyFormat().formatMoney(amount) + " ກີບ");
+    }
+
+    public int getMonth() {
+        return cbMonth.getSelectedIndex();
     }
 
     public JoCombobox getCbClassRoom() {
@@ -128,8 +156,12 @@ public class ReportFoodView extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_data = new Components.JoTable();
         jPanel1 = new javax.swing.JPanel();
+        joLable1 = new Components.JoLable();
         cbYear = new Components.JoCombobox();
+        joLable2 = new Components.JoLable();
         cbClassRoom = new Components.JoCombobox();
+        joLable3 = new Components.JoLable();
+        cbMonth = new Components.JoCombobox();
         btnShow = new Components.JoButtonIconfont();
         jPanel2 = new javax.swing.JPanel();
         lblAmount = new Components.JoLable();
@@ -198,11 +230,27 @@ public class ReportFoodView extends javax.swing.JPanel {
 
         jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 10, 5));
 
+        joLable1.setText("ສົກຮຽນ");
+        joLable1.setFont(new java.awt.Font("Phetsarath OT", 0, 14)); // NOI18N
+        jPanel1.add(joLable1);
+
         cbYear.setPreferredSize(new java.awt.Dimension(100, 35));
         jPanel1.add(cbYear);
 
+        joLable2.setText("ຫ້ອງຮຽນ");
+        joLable2.setFont(new java.awt.Font("Phetsarath OT", 0, 14)); // NOI18N
+        jPanel1.add(joLable2);
+
         cbClassRoom.setPreferredSize(new java.awt.Dimension(100, 35));
         jPanel1.add(cbClassRoom);
+
+        joLable3.setText("ເດືອນ");
+        joLable3.setFont(new java.awt.Font("Phetsarath OT", 0, 14)); // NOI18N
+        jPanel1.add(joLable3);
+
+        cbMonth.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ທັງໝົດ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "ບໍ່ເລືອກເດືອນ" }));
+        cbMonth.setPreferredSize(new java.awt.Dimension(100, 35));
+        jPanel1.add(cbMonth);
 
         btnShow.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.SEARCH);
         btnShow.setLabel("ສະແດງ");
@@ -252,6 +300,7 @@ public class ReportFoodView extends javax.swing.JPanel {
     private Components.JoButtonIconfont btnShow;
     private Components.JoButtonIconfont btn_back;
     private Components.JoCombobox cbClassRoom;
+    private Components.JoCombobox cbMonth;
     private Components.JoCombobox cbYear;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -259,6 +308,9 @@ public class ReportFoodView extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private Components.JoLable joLable1;
+    private Components.JoLable joLable2;
+    private Components.JoLable joLable3;
     private Components.JoLable lblAmount;
     private Components.JoLable lbl_title;
     private javax.swing.JPanel pn_Datatable;

@@ -87,11 +87,17 @@ public class ReportFoodController implements JoMVC, ActionListener, ItemListener
         if (event.isEvent(view.getBtn_back())) {
             GlobalDataModel.rootView.showDashbord();
         } else if (event.isEvent(view.getBtnShow())) {
-            FinancialService service = new FinancialService();
+            FinancialService financialService = new FinancialService();
             int registerID = view.getCbClassRoom().getKeyInt();
-
-            view.showFood(service.getStudentRegistered(registerID));
-            createListExport(service.getStudentRegistered(registerID));
+            if (view.getMonth() == 0) {
+                List<FinancialModel> Datas = financialService.getStudentRegistered(registerID);
+                view.showFood(Datas);
+                createListExport(Datas);
+            } else {
+                List<FinancialModel> Datas = financialService.getReportFood(registerID);
+                view.showFood(Datas);
+                createListExport(Datas);
+            }
         } else if (event.isEvent(view.getBtnExport())) {
             ExportData();
         }
@@ -148,19 +154,47 @@ public class ReportFoodController implements JoMVC, ActionListener, ItemListener
     int amount = 0;
 
     private void createListExport(List<FinancialModel> reportUserFinancial) {
+        FinancialService financialService = new FinancialService();
         listFinancials.clear();
         amount = 0;
-        FinancialService financialService = new FinancialService();
-        reportUserFinancial.forEach(data -> {
-            FinancialModel financialModel = financialService.getFinancialCalculator(data.getRegisterID(), data.getStudentID());
-            data.setFoodMoney(financialModel.getFoodMoney());
-            data.setFinancialMonth(financialModel.getFinancialMonth());
-            data.setFinancialComment(financialModel.getFinancialComment());
-            listFinancials.add(data);
-            amount += data.getFoodMoney();
-        });
-        view.ExportEnable();
-        view.setAmount(amount);
+        switch (view.getMonth()) {
+            case 0:
+                reportUserFinancial.forEach(data -> {
+                    FinancialModel financialModel = financialService.getFinancialCalculator(data.getRegisterID(), data.getStudentID());
+                    if (financialModel.getFoodMoney() > 0) {
+                        addReportFood(financialModel);
+                    }
+                });
+                System.out.println(listFinancials);
+                view.setAmount(amount);
+                break;
+            case 13:
+                reportUserFinancial.forEach(data -> {
+                    List<Integer> months = monthCaculator.StringToArray(data.getFinancialMonth());
+                    boolean isMonth = months.contains(0); // 0 ແມ່ນບໍ່ເລືອກເດືອນໃດເລີຍ StringToArray ຖ້າບໍ່ເດືອນເປັນ [] ຈະສົ່ງຄ່າເປັນ 0
+                    if (isMonth) {
+                        addReportFood(data);
+                    }
+                });
+                view.setAmount(amount);
+                break;
+            default:
+                reportUserFinancial.forEach(data -> {
+                    List<Integer> months = monthCaculator.StringToArray(data.getFinancialMonth());
+                    boolean isMonth = months.contains(view.getMonth());
+                    if (isMonth) {
+                        addReportFood(data);
+                    }
+                });
+                view.setAmount(amount);
+                break;
+        }
+
+    }
+
+    private void addReportFood(FinancialModel model) {
+        listFinancials.add(model);
+        amount += model.getFoodMoney();
     }
 
     private void ExportData() {
@@ -185,15 +219,27 @@ public class ReportFoodController implements JoMVC, ActionListener, ItemListener
                     if (data.getFoodMoney() > 0) {
                         UserModel userModel = userService.getUserById(data.getUserID());
                         StudentModel studentModel = studentService.getStudentById(data.getStudentID());
-                        sheet.addRow(row++,
-                                row - 1,
-                                view.getClassName(),
-                                studentModel.getStudentNo(),
-                                studentModel.getFullName(),
-                                format.formatMoney(data.getFoodMoney()),
-                                data.getFinancialMonth(),
-                                userModel.getFullName()
-                        );
+                        if (view.getMonth() == 0) {
+                            sheet.addRow(row++,
+                                    row - 1,
+                                    view.getClassName(),
+                                    studentModel.getStudentNo(),
+                                    studentModel.getFullName(),
+                                    format.formatMoney(data.getFoodMoney()),
+                                    data.getFinancialMonth(),
+                                    userModel.getFullName()
+                            );
+                        } else {
+                            sheet.addRow(row++,
+                                    row - 1,
+                                    view.getClassName(),
+                                    studentModel.getStudentNo(),
+                                    studentModel.getFullName(),
+                                    format.formatMoney(data.getFoodMoney()),
+                                    view.getMonth() == 13 ? 0 : view.getMonth(),
+                                    userModel.getFullName()
+                            );
+                        }
                         loading.StartProgress(listFinancials.size(), 100);
                     }
                 });

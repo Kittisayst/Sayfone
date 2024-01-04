@@ -116,4 +116,8 @@ public class FinancialService {
         return aO.getReportUserClassMoney(registerID, UserID);
     }
 
+    public List<FinancialModel> getReportFood(int RegisterID) {
+        return aO.getReportFood(RegisterID);
+    }
+
 }
