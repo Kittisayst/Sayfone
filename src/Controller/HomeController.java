@@ -174,7 +174,7 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
         } else if (event.isEvent(view.getBtnReportTeacherMoney())) {
             AppReportTeacherMoney reportTeacherMoney = new AppReportTeacherMoney();
             reportTeacherMoney.Open();
-        } else if (true) {
+        } else if (event.isEvent(view.getBtnReportStudentState())) {
             AppReportStudentState studentState = new AppReportStudentState();
             studentState.Open();
         } else if (event.isEvent(view.getBtnInfo())) {   // ============ ຕັ້ງຄ່າ
