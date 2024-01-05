@@ -182,6 +182,10 @@ public class HomeView extends javax.swing.JFrame {
         return btnReportStudentState;
     }
 
+    public JoButtonIconfont getBtnReportPayment() {
+        return btnReportPayment;
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -231,6 +235,7 @@ public class HomeView extends javax.swing.JFrame {
         btnReportTeacherMoney = new Components.JoButtonIconfont();
         btnReportUserClassMoney = new Components.JoButtonIconfont();
         btnReportStudentState = new Components.JoButtonIconfont();
+        btnReportPayment = new Components.JoButtonIconfont();
         btn_Service = new Components.JoButtonIconfont();
         btn_report = new Components.JoButtonIconfont();
         btn_Setting = new Components.JoButtonIconfont();
@@ -517,6 +522,10 @@ public class HomeView extends javax.swing.JFrame {
         btnReportStudentState.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnReportStudentState.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.PEOPLE);
 
+        btnReportPayment.setText("ລາຍງານການຈ່າຍຄ່າຮຽນປະຈຳເດືອນ");
+        btnReportPayment.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnReportPayment.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.EVENT);
+
         javax.swing.GroupLayout pn_reportLayout = new javax.swing.GroupLayout(pn_report);
         pn_report.setLayout(pn_reportLayout);
         pn_reportLayout.setHorizontalGroup(
@@ -533,12 +542,15 @@ public class HomeView extends javax.swing.JFrame {
             .addComponent(btnReportTeacherMoney, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnReportUserClassMoney, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnReportStudentState, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnReportPayment, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pn_reportLayout.setVerticalGroup(
             pn_reportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_reportLayout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addComponent(btnReportFinancial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnReportPayment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnReportUserFinancial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -763,6 +775,7 @@ public class HomeView extends javax.swing.JFrame {
     private Components.JoButtonIconfont btnReportDiscount;
     private Components.JoButtonIconfont btnReportFinancial;
     private Components.JoButtonIconfont btnReportPay;
+    private Components.JoButtonIconfont btnReportPayment;
     private Components.JoButtonIconfont btnReportStudent;
     private Components.JoButtonIconfont btnReportStudentState;
     private Components.JoButtonIconfont btnReportTeacher;

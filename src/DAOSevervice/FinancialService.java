@@ -120,4 +120,8 @@ public class FinancialService {
         return aO.getReportFood(RegisterID);
     }
 
+    public List<FinancialModel> getReportFinancialByRegisterID(int RegisterID) {
+        return aO.getReportFinancialByRegisterID(RegisterID);
+    }
+
 }

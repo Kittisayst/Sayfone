@@ -60,5 +60,7 @@ public interface FinancialFn {
     public List<FinancialModel> getReportUserClassMoney(int registerID, int UserID);
     
     public List<FinancialModel> getReportFood(int RegisterID);
+    
+    public List<FinancialModel> getReportFinancialByRegisterID(int RegisterID);
 
 }

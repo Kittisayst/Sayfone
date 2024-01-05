@@ -684,4 +684,25 @@ public class FinancialDAO implements FinancialFn {
         return models;
     }
 
+    @Override
+    public List<FinancialModel> getReportFinancialByRegisterID(int RegisterID) {
+        List<FinancialModel> models = new ArrayList<>();
+        JoConnect connect = new JoConnect();
+        String sql = "SELECT * FROM tb_financial WHERE RegisterID=?";
+        try {
+            PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sql);
+            pre.setInt(1, RegisterID);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                models.add(resultModel(rs));
+            }
+        } catch (Exception e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
+        }
+        return models;
+    }
+
 }
