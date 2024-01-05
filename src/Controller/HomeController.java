@@ -83,7 +83,6 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
         view.getBtnReportPay().addActionListener(this);
         view.getBtnUser().addActionListener(this);
         view.getBtnInfo().addActionListener(this);
-        view.getBtnPrinter().addActionListener(this);
         view.getBtnWithdraw().addActionListener(this);
         view.getBtnFood().addActionListener(this);
         view.getBtnReportUserFinancial().addActionListener(this);
@@ -91,6 +90,7 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
         view.getBtnReportDiscount().addActionListener(this);
         view.getBtnReportTeacherMoney().addActionListener(this);
         view.getBtnPermission().addActionListener(this);
+        view.getBtnPrinter().addActionListener(this);
         view.getBtnBackup().addActionListener(this);
         view.getBtnReportStudentState().addActionListener(this);
     }

@@ -269,3 +269,5 @@
 26/10/2023: DAO.TeacherMoneyDAO@19ac5efa Errorjava.sql.SQLException: Duplicate entry '4' for key 'PRIMARY'
 02/11/2023: Controller.BackupController@5e0b55ee Errorjava.sql.SQLException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'mysqldump -u root -p  db_sayfoneschool2022 > D:/sayfone backup/backup.sql' at line 1
 02/11/2023: Controller.BackupController@479d27c2 Errorjava.sql.SQLException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'mysqldump -u root -p  db_sayfoneschool2022 > D:/sayfone backup/backup.sql' at line 1
+04/01/2024: Controller.FinancialController@e5a92a9 Errorjava.lang.NumberFormatException: For input string: "text"
+04/01/2024: Controller.FinancialController@1776c201 Errorjava.lang.NumberFormatException: For input string: "3000000 ₭"

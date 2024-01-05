@@ -8,16 +8,13 @@ import Components.JoTable;
 import Components.JoTextArea;
 import Components.JoTextField;
 import DAOSevervice.UserService;
-import DAOSevervice.WithdrawService;
 import Model.FinancialModel;
 import Model.StudentHistoryModel;
 import Model.UserModel;
-import Model.WithdrawModel;
 import Tools.JoAlert;
 import Tools.JoIconFont;
 import Utility.MyFormat;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -37,9 +34,6 @@ public class FinancialView extends javax.swing.JPanel {
         lblUserAuth.setVisible(false);
         lblfood.setIcon(new JoIconFont().setIconFont(GoogleMaterialDesignIcons.LOCAL_DINING, 20));
         lblslow.setIcon(new JoIconFont().setIconFont(GoogleMaterialDesignIcons.SLOW_MOTION_VIDEO, 20));
-        Dimension ss = new Dimension(50, 50);
-//        setMaximumSize(ss);
-//        setMinimumSize(ss);
         repaint();
         revalidate();
     }

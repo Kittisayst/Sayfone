@@ -132,9 +132,15 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
         view.getBtnSave().setEnabled(false);
         try {
             if (!view.TransferMoneyEmpty()) {
-                SaveTransferMoney();
+                int conf = getAlertSave("ບັນທຶກຂໍ້ມູນ");
+                if (conf == 0) {
+                    SaveTransferMoney();
+                }
             } else {
-                SaveMoney();
+                int conf = getAlertSave("ບັນທຶກຂໍ້ມູນ");
+                if (conf == 0) {
+                    SaveMoney();
+                }
             }
         } catch (Exception e) {
             System.err.println(e);
@@ -183,9 +189,15 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
         try {
             if (userAuthen.getUserID() > 0) {
                 if (!view.getTransferMoneyZero()) {
-                    UpdateTransfer();
+                    int conf = getAlertSave("ແກ້ໄຂຂໍ້ມູນ");
+                    if (conf == 0) {
+                        UpdateTransfer();
+                    }
                 } else {
-                    UpdateMoney();
+                    int conf = getAlertSave("ແກ້ໄຂຂໍ້ມູນ");
+                    if (conf == 0) {
+                        UpdateMoney();
+                    }
                 }
             } else {
                 new JoAlert().messages("ຜູ້ອານຸມັດ", "ບໍ່ມີຂໍ້ມູນຜູ້ອານຸມັດ", JoAlert.Icons.info);
@@ -542,10 +554,27 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }finally{
+        } finally {
             financialModel = new FinancialModel();
             fileTranferModel = new FileTranferModel();
         }
+    }
+
+    private int getAlertSave(String title) {
+        JoAlert alert = new JoAlert();
+        String[] buttontext = {title, "ຍົກເລີກ"};
+        alert.setButtonOption(buttontext);
+        FinancialModel fm = FinancialViewData(0);
+        MyFormat format = new MyFormat();
+        String[] message = {
+            "ເດືອນ: " + fm.getFinancialMonth(),
+            "ເງິນສົດ: " + format.formatMoney(fm.getMoney()) + " ₭",
+            "ເງິນໂອນ: " + format.formatMoney(fm.getTransferMoney()) + " ₭",
+            "ຄ່າອາຫານ: " + format.formatMoney(fm.getFoodMoney()) + " ₭",
+            "ສ່ວນຫຼຸບ: " + format.formatMoney(fm.getDiscount()) + " ₭",
+            "ຄ່າຈ່າຍຊ້າ: " + format.formatMoney(fm.getOvertimePay()) + " ₭",
+            "ໝາຍເຫດ: " + fm.getFinancialComment()};
+        return alert.messages(title, message, JoAlert.Icons.info);
     }
 
 }
