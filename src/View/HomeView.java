@@ -186,6 +186,14 @@ public class HomeView extends javax.swing.JFrame {
         return btnReportPayment;
     }
 
+    public JoButtonIconfont getBtnTiming() {
+        return btnTiming;
+    }
+    
+    
+    
+    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -243,6 +251,7 @@ public class HomeView extends javax.swing.JFrame {
         btnInfo = new Components.JoButtonIconfont();
         btnPrinter = new Components.JoButtonIconfont();
         btnBackup = new Components.JoButtonIconfont();
+        btnTiming = new Components.JoButtonIconfont();
         pnContent = new javax.swing.JPanel();
         MyRouter = new Components.JoRouter();
         pnFooter = new javax.swing.JPanel();
@@ -608,6 +617,10 @@ public class HomeView extends javax.swing.JFrame {
         btnBackup.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnBackup.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.BACKUP);
 
+        btnTiming.setText("ຕັ້ງເວລາຈາຍຄ່າຮຽນ");
+        btnTiming.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnTiming.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.ACCESS_ALARMS);
+
         javax.swing.GroupLayout pnSettingLayout = new javax.swing.GroupLayout(pnSetting);
         pnSetting.setLayout(pnSettingLayout);
         pnSettingLayout.setHorizontalGroup(
@@ -615,11 +628,14 @@ public class HomeView extends javax.swing.JFrame {
             .addComponent(btnInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnPrinter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnBackup, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnTiming, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pnSettingLayout.setVerticalGroup(
             pnSettingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnSettingLayout.createSequentialGroup()
                 .addGap(0, 0, 0)
+                .addComponent(btnTiming, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnPrinter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -785,6 +801,7 @@ public class HomeView extends javax.swing.JFrame {
     private Components.JoButtonIconfont btnSubject;
     private Components.JoButtonIconfont btnSubjectTeacher;
     private Components.JoButtonIconfont btnTeacherRank;
+    private Components.JoButtonIconfont btnTiming;
     private Components.JoButtonIconfont btnUser;
     private Components.JoButtonIconfont btnWithdraw;
     private Components.JoButtonIconfont btn_Manage;

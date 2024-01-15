@@ -188,7 +188,7 @@ public class FinancialDAO implements FinancialFn {
             String csql = "SELECT FinancialID,RegisterID,fs.StudentID,Money,TransferMoney,SaveDate,FinancialMonth,FinancialComment,AuthenUserID,Discount,OvertimePay,UserID,foodMoney,state\n"
                     + "FROM tb_financial AS fs\n"
                     + "INNER JOIN tb_student AS st ON fs.StudentID=st.StudentID\n"
-                    + "WHERE RegisterID=? AND st.Status=0  GROUP BY fs.StudentID";
+                    + "WHERE RegisterID=? AND st.Status=0  GROUP BY fs.StudentID ORDER BY fs.StudentID ASC";
             PreparedStatement pre = connect.getConnectionDefault().prepareStatement(csql);
             pre.setInt(1, RegisterID);
             ResultSet rs = pre.executeQuery();
@@ -688,7 +688,7 @@ public class FinancialDAO implements FinancialFn {
     public List<FinancialModel> getReportFinancialByRegisterID(int RegisterID) {
         List<FinancialModel> models = new ArrayList<>();
         JoConnect connect = new JoConnect();
-        String sql = "SELECT * FROM tb_financial WHERE RegisterID=?";
+        String sql = "SELECT * FROM tb_financial WHERE RegisterID=? ORDER BY StudentID ASC";
         try {
             PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sql);
             pre.setInt(1, RegisterID);

@@ -91,6 +91,7 @@ public class PermissionActiveView extends javax.swing.JPanel {
         btnUse = new Components.JoButtonIconfont();
         joCheckBox23 = new Components.JoCheckBox();
         joCheckBox24 = new Components.JoCheckBox();
+        joCheckBox25 = new Components.JoCheckBox();
 
         Pn_Navigation.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
         Pn_Navigation.setLayout(new java.awt.GridLayout(1, 0));
@@ -313,12 +314,11 @@ public class PermissionActiveView extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 100, 5, 82);
         pnLayout.add(joCheckBox21, gridBagConstraints);
 
-        joCheckBox22.setText("24. ສຳຮອງຂໍ້ມູນ");
-        joCheckBox22.setName("24"); // NOI18N
+        joCheckBox22.setText("25. ເວລາເປີດປິດການຈ່າຍເງິນ");
+        joCheckBox22.setName("25"); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 82);
         pnLayout.add(joCheckBox22, gridBagConstraints);
@@ -438,6 +438,16 @@ public class PermissionActiveView extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 82);
         pnLayout.add(joCheckBox24, gridBagConstraints);
 
+        joCheckBox25.setText("24. ສຳຮອງຂໍ້ມູນ");
+        joCheckBox25.setName("24"); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 82);
+        pnLayout.add(joCheckBox25, gridBagConstraints);
+
         pn_Datatable.add(pnLayout, java.awt.BorderLayout.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -533,6 +543,7 @@ public class PermissionActiveView extends javax.swing.JPanel {
     private Components.JoCheckBox joCheckBox22;
     private Components.JoCheckBox joCheckBox23;
     private Components.JoCheckBox joCheckBox24;
+    private Components.JoCheckBox joCheckBox25;
     private Components.JoCheckBox joCheckBox3;
     private Components.JoCheckBox joCheckBox4;
     private Components.JoCheckBox joCheckBox5;

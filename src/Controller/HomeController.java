@@ -33,6 +33,7 @@ import Tools.JoFileSystem;
 import Tools.JoHookEvent;
 import View.HomeView;
 import View.PrinterView;
+import View.TimingView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -95,6 +96,7 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
         view.getBtnBackup().addActionListener(this);
         view.getBtnReportStudentState().addActionListener(this);
         view.getBtnReportPayment().addActionListener(this);
+        view.getBtnTiming().addActionListener(this);
     }
 
     @Override
@@ -190,6 +192,9 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
         } else if (event.isEvent(view.getBtnBackup())) {
             AppBackup backup = new AppBackup();
             backup.Open();
+        }else if (event.isEvent(view.getBtnTiming())) {
+            TimingView timingView = new TimingView("ຕັ້ງເວລາເປີດປິດຈ່າຍຄ່າຮຽນ");
+            GlobalDataModel.rootView.setView(timingView);
         }
     }
 

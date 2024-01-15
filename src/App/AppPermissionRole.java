@@ -37,6 +37,7 @@ public class AppPermissionRole {
         view.getBtnPrinter().setVisible(isState(21));
         view.getBtnReportTeacherMoney().setVisible(isState(23));
         view.getBtnBackup().setVisible(isState(24));
+        view.getBtnTiming().setVisible(isState(25));
     }
 
     private boolean isState(int type) {

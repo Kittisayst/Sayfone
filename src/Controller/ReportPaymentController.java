@@ -219,14 +219,13 @@ public class ReportPaymentController implements JoMVC, ActionListener, ItemListe
                     "ສ່ວນຫຼຸດ",
                     "ຈ່າຍຊ້າ",
                     "ຄ່າອາຫານ",
-                    "ຄ້າງເດືອນ",
+                    "ຈ່າຍເດືອນ",
                     "ວັນທີລົງບັນຊີ",
                     "ໝາຍເຫດ",
                     "ຜູ້ລົງບັນຊີ"
                 };
                 JoSheet sheet = new JoSheet(csvFile, view.getCbClassRoom().getSelectedItem().toString(), columns);
                 GlobalDataModel.rootView.setView(view.getLoading());
-                MonthCaculator mc = new MonthCaculator();
                 reportData.forEach(data -> {
                     UserModel userModel = userService.getUserById(data.getUserID());
                     StudentModel studentModel = studentService.getStudentById(data.getStudentID());

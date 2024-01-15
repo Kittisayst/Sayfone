@@ -165,7 +165,6 @@ public class ReportFoodController implements JoMVC, ActionListener, ItemListener
                         addReportFood(financialModel);
                     }
                 });
-                System.out.println(listFinancials);
                 view.setAmount(amount);
                 break;
             case 13:
@@ -211,7 +210,8 @@ public class ReportFoodController implements JoMVC, ActionListener, ItemListener
                     "ຊື່ ແລະ ນາມສະກຸນນັກຮຽນ",
                     "ຄ່າອາຫານ",
                     "ເດືອນ",
-                    "ຜູ້ລົງບັນຊີ"
+                    "ຜູ້ລົງບັນຊີ",
+                    "ໝາຍເຫດ"
                 };
                 JoSheet sheet = new JoSheet(csvFile, view.getExportName(), columns);
                 GlobalDataModel.rootView.setView(loading);
@@ -227,7 +227,8 @@ public class ReportFoodController implements JoMVC, ActionListener, ItemListener
                                     studentModel.getFullName(),
                                     format.formatMoney(data.getFoodMoney()),
                                     data.getFinancialMonth(),
-                                    userModel.getFullName()
+                                    userModel.getFullName(),
+                                    data.getFinancialComment()
                             );
                         } else {
                             sheet.addRow(row++,
@@ -237,7 +238,8 @@ public class ReportFoodController implements JoMVC, ActionListener, ItemListener
                                     studentModel.getFullName(),
                                     format.formatMoney(data.getFoodMoney()),
                                     view.getMonth() == 13 ? 0 : view.getMonth(),
-                                    userModel.getFullName()
+                                    userModel.getFullName(),
+                                    data.getFinancialComment()
                             );
                         }
                         loading.StartProgress(listFinancials.size(), 100);
