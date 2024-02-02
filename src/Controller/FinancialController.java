@@ -27,7 +27,10 @@ import Utility.JoJasperPrinter;
 import Utility.MyFormat;
 import Utility.MyPopup;
 import Component.AuthenPopUp;
+import Component.DialogFoodPay;
+import Component.DialogShowFoodPay;
 import Component.DialogTransferImage;
+import Model.FoodPaymentModel;
 import View.FinancialView;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -99,6 +102,8 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
         view.getTb_data().addMouseListener(this);
         view.getTxtMoney().addKeyListener(this);
         view.getTxtTransferMoney().addKeyListener(this);
+        view.getBtnFoodPay().addActionListener(this);
+        view.getBtnShowFoodAll().addActionListener(this);
         popup.addActionListener(this);
         //ເຫດການຂອງເດືອນ
         Component[] components = view.getPnShowMonth().getComponents();
@@ -363,6 +368,12 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
             }
         } else if (event.isEvent(popup.getMenuItem(5))) {
             showTransferImage();
+        } else if (event.isEvent(view.getBtnFoodPay())) {
+            DialogFoodPay foodPay = new DialogFoodPay(GlobalDataModel.rootView, true, registerModel, studentModel, new FoodPaymentModel());
+            foodPay.setVisible(true);
+        } else if (event.isEvent(view.getBtnShowFoodAll())) {
+            DialogShowFoodPay showFoodPay = new DialogShowFoodPay(GlobalDataModel.rootView, true, registerModel, studentModel);
+            showFoodPay.setVisible(true);
         }
     }
 

@@ -1,5 +1,7 @@
 package Utility;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -97,6 +99,30 @@ public class MonthCaculator {
             }
             return arr;
         }
+    }
+
+    public List<Integer> ToArrayMonth(String months) {
+        // Remove "[" and "]" characters
+        String cleanedInput = months.replaceAll("\\[|\\]", "");
+
+        // Split the cleaned string into individual elements
+        String[] elements = cleanedInput.split(",\\s*");
+
+        // Create an int array to store the result
+        List<Integer> result = new ArrayList<>();
+
+        // Convert each element to int and store in the result array
+        for (int i = 0; i < elements.length; i++) {
+            if (elements[i].trim().equalsIgnoreCase("null")) {
+                // Use a special value or handle as needed for null
+                result.add(0);
+            } else {
+                int data = Integer.parseInt(elements[i].trim());
+                result.add(data);
+            }
+        }
+
+        return result;
     }
 
 }

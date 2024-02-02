@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SayfoneBill" language="groovy" pageWidth="220" pageHeight="360" columnWidth="210" leftMargin="5" rightMargin="5" topMargin="5" bottomMargin="5" uuid="57154301-a25b-4480-9e2b-6ffdf54accdc">
+	<property name="ireport.zoom" value="2.8531167061100082"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="281"/>
+	<parameter name="LogoPath" class="java.lang.String"/>
+	<parameter name="School" class="java.lang.String"/>
+	<parameter name="English" class="java.lang.String"/>
+	<parameter name="Contact" class="java.lang.String"/>
+	<parameter name="Detail" class="java.lang.String"/>
+	<parameter name="UserPrint" class="java.lang.String"/>
+	<parameter name="foodpayID" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT foodpayID,StudentNo,Gender,StudentName,ClassRoomName,tb_year.Year,months,price,comment,saveDate FROM tb_foodpayment
+INNER JOIN tb_student ON tb_foodpayment.StudentID = tb_student.StudentID
+INNER JOIN tb_register ON tb_foodpayment.registerID = tb_register.registerID
+INNER JOIN tb_year ON tb_register.yearID = tb_year.yearID
+WHERE foodpayID=$P{foodpayID}]]>
+	</queryString>
+	<field name="foodpayID" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="StudentNo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Gender" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="StudentName" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ClassRoomName" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Year" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="months" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="price" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="comment" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="saveDate" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="118" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="89" width="207" height="29" uuid="26048721-1410-4125-a627-9e65f546ca24"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Phetsarath OT" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ໃບຮັບເງິນຄ່າອາຫານ (Food Receipt)]]></text>
+			</staticText>
+			<image scaleImage="RealHeight" hAlign="Center" vAlign="Middle">
+				<reportElement stretchType="RelativeToTallestObject" x="81" y="0" width="50" height="50" uuid="3902bfa4-ded6-493e-8869-d50b6ba44b2b"/>
+				<imageExpression><![CDATA[$P{LogoPath}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="0" y="59" width="207" height="18" uuid="22970059-d2ec-415a-9bee-e8bebc9d0790"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None">
+					<font fontName="Phetsarath OT" size="9" isBold="true"/>
+					<paragraph lineSpacing="AtLeast"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{School}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="-1" y="77" width="207" height="12" uuid="cb7010f4-9ce9-46c1-87c6-92e5d53b52f1"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Phetsarath OT" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{English}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="196" splitType="Stretch">
+			<staticText>
+				<reportElement x="148" y="5" width="25" height="17" uuid="3f152fab-2f08-457b-9007-7d637a16efb5"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Phetsarath OT" size="9"/>
+				</textElement>
+				<text><![CDATA[ເລກທີ:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="5" width="50" height="17" uuid="5c20e7ab-9d7c-401e-8fa8-c1be3dcb3a2d"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Phetsarath OT" size="9"/>
+				</textElement>
+				<text><![CDATA[ລະຫັດນັກຮຽນ:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="23" width="63" height="16" uuid="a071880b-96d8-4f88-bc8c-3e8312549e47"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Phetsarath OT" size="9"/>
+				</textElement>
+				<text><![CDATA[ຊື່ ແລະ ນາມສະກຸນ:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="41" width="35" height="16" uuid="809bdd0c-3734-42e8-bd4f-46d148741231"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Phetsarath OT" size="9"/>
+				</textElement>
+				<text><![CDATA[ຫ້ອງຮຽນ:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="57" width="57" height="16" uuid="bae9b1e4-d12a-4e6f-a2f0-5f6a06401e4e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Phetsarath OT" size="9"/>
+				</textElement>
+				<text><![CDATA[ຊຳລະປະຈໍາເດືອນ: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="119" y="41" width="30" height="16" uuid="fd9c3213-d683-4a5d-94e2-b9f5db0c279a"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Phetsarath OT" size="9"/>
+				</textElement>
+				<text><![CDATA[ສົກຮຽນ:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="112" y="127" width="35" height="16" uuid="d07e8a3a-3a24-4c28-9c95-136ed93101f6"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Phetsarath OT" size="9"/>
+				</textElement>
+				<text><![CDATA[ວັນເດືອນປີ:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="112" y="143" width="95" height="16" uuid="70bd5db2-065d-469f-b060-2d33422ec5e0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Phetsarath OT" size="9" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[ພະນັກງານຮັບເງິນ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="49" y="5" width="98" height="17" uuid="0cde3564-3ce4-4e1d-9dfa-e0d24da248d1"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Phetsarath OT" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{StudentNo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="64" y="23" width="143" height="16" uuid="595e2346-3de5-41af-b3f7-71788e8057ba"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Phetsarath OT" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{Gender} == 1 ? "ທ. " : "ນ. ") + $F{StudentName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="35" y="41" width="84" height="16" uuid="05a28a75-38f8-4c39-a5c9-6dca0add9ec5"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Phetsarath OT" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ClassRoomName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="149" y="41" width="58" height="16" uuid="6e313822-6c83-4802-a59a-c5570b21fcd7"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Phetsarath OT" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Year}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="112" y="183" width="95" height="13" uuid="ce729527-8a6c-4304-b8bd-6ba2fd8bfcb8"/>
+				<box rightPadding="4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Phetsarath OT" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{UserPrint}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="89" width="35" height="16" uuid="cbd3e018-5e7e-447d-b766-6713b9e700df"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Phetsarath OT" size="9"/>
+				</textElement>
+				<text><![CDATA[ໝາຍເຫດ:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="73" width="36" height="16" uuid="f419f263-e149-4bbb-8033-724cfdddcb6b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Phetsarath OT" size="9"/>
+				</textElement>
+				<text><![CDATA[ຄ່າອາຫານ:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="143" width="64" height="16" uuid="6df314c0-4817-46db-95d5-1c71af6f7ba5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Phetsarath OT" size="9" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[ຜູ້ຊຳລະຄ່າຮຽນ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="173" y="5" width="33" height="17" uuid="e7021407-d893-41b2-af6f-8c62199e75a9"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Phetsarath OT" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{foodpayID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="57" y="57" width="149" height="16" uuid="199ff72a-1183-453a-a740-ff86099114f7"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Phetsarath OT" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{months}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,### ກີບ">
+				<reportElement x="36" y="73" width="170" height="16" uuid="b1a250a3-1705-4945-9640-d4ff8ec8261b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Phetsarath OT" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{price}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="105" width="210" height="20" uuid="8b03b016-5e8a-49a2-aeb6-90f7b64a7acf"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Phetsarath OT" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{comment}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="148" y="127" width="59" height="16" uuid="26086e36-495a-4feb-afc9-ffea3aa31635"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Phetsarath OT"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{saveDate}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<pageFooter>
+		<band height="36">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="0" y="27" width="207" height="9" uuid="a2d77a8f-aa64-4184-9572-94d25b16c555"/>
+				<textElement textAlignment="Center">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="-1" y="0" width="207" height="27" uuid="36de6f6c-6824-4342-80e5-127390e08640"/>
+				<box leftPadding="3"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Phetsarath OT" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Contact}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

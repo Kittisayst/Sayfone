@@ -10,6 +10,7 @@ import App.AppRegister;
 import App.AppReportDiscount;
 import App.AppReportFinacial;
 import App.AppReportFood;
+import App.AppReportFoodPayment;
 import App.AppReportPayment;
 import App.AppReportStudent;
 import App.AppReportStudentState;
@@ -97,6 +98,7 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
         view.getBtnReportStudentState().addActionListener(this);
         view.getBtnReportPayment().addActionListener(this);
         view.getBtnTiming().addActionListener(this);
+        view.getBtnFoodPayment().addActionListener(this);
     }
 
     @Override
@@ -164,6 +166,9 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
         } else if (event.isEvent(view.getBtnFood())) {
             AppReportFood reportFood = new AppReportFood();
             reportFood.open();
+        } else if (event.isEvent(view.getBtnFoodPayment())) {
+            AppReportFoodPayment foodPayment = new AppReportFoodPayment();
+            foodPayment.Open();
         } else if (event.isEvent(view.getBtnTeacherRank())) {
             AppTeacherRank appTeacherRank = new AppTeacherRank();
         } else if (event.isEvent(view.getBtnReportPay())) {
@@ -192,7 +197,7 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
         } else if (event.isEvent(view.getBtnBackup())) {
             AppBackup backup = new AppBackup();
             backup.Open();
-        }else if (event.isEvent(view.getBtnTiming())) {
+        } else if (event.isEvent(view.getBtnTiming())) {
             TimingView timingView = new TimingView("ຕັ້ງເວລາເປີດປິດຈ່າຍຄ່າຮຽນ");
             GlobalDataModel.rootView.setView(timingView);
         }

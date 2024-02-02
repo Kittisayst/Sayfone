@@ -36,6 +36,7 @@ public class FinancialView extends javax.swing.JPanel {
         lblslow.setIcon(new JoIconFont().setIconFont(GoogleMaterialDesignIcons.SLOW_MOTION_VIDEO, 20));
         repaint();
         revalidate();
+        txtFood.setVisible(false);
     }
 
     public void showParent(StudentHistoryModel historyModel) {
@@ -275,6 +276,14 @@ public class FinancialView extends javax.swing.JPanel {
         return txtTransferMoney;
     }
 
+    public JoButtonIconfont getBtnFoodPay() {
+        return btnFoodPay;
+    }
+
+    public JoButtonIconfont getBtnShowFoodAll() {
+        return btnShowFoodAll;
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -312,8 +321,11 @@ public class FinancialView extends javax.swing.JPanel {
         ckDiscount = new Components.JoCheckBox();
         lblUserAuth = new Components.JoLable();
         lblslow = new Components.JoLable();
-        txtFood = new Components.JoTextField();
         lblshowDate = new Components.JoLable();
+        pnFoodPay = new javax.swing.JPanel();
+        txtFood = new Components.JoTextField();
+        btnFoodPay = new Components.JoButtonIconfont();
+        btnShowFoodAll = new Components.JoButtonIconfont();
         joPanel4 = new Components.JoPanel();
         joLable6 = new Components.JoLable();
         txtMoney = new Components.JoTextField();
@@ -448,7 +460,7 @@ public class FinancialView extends javax.swing.JPanel {
         joPanel3.setMinimumSize(new java.awt.Dimension(360, 280));
         joPanel3.setPreferredSize(new java.awt.Dimension(330, 300));
         java.awt.GridBagLayout joPanel3Layout = new java.awt.GridBagLayout();
-        joPanel3Layout.columnWidths = new int[] {0, 5, 0, 5, 0};
+        joPanel3Layout.columnWidths = new int[] {0, 5, 0, 5, 0, 5, 0};
         joPanel3Layout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
         joPanel3.setLayout(joPanel3Layout);
 
@@ -558,22 +570,6 @@ public class FinancialView extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(0, 3, 0, 3);
         joPanel3.add(lblslow, gridBagConstraints);
 
-        txtFood.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        txtFood.setPlaceholder("ອາຫານ");
-        txtFood.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtFoodKeyReleased(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipady = 20;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 3, 0, 3);
-        joPanel3.add(txtFood, gridBagConstraints);
-
         lblshowDate.setForeground(new java.awt.Color(25, 118, 210));
         lblshowDate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblshowDate.setText("ວັນທີ");
@@ -588,6 +584,55 @@ public class FinancialView extends javax.swing.JPanel {
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new java.awt.Insets(0, 3, 0, 3);
         joPanel3.add(lblshowDate, gridBagConstraints);
+
+        pnFoodPay.setMaximumSize(new java.awt.Dimension(100, 40));
+        pnFoodPay.setMinimumSize(new java.awt.Dimension(50, 20));
+        pnFoodPay.setPreferredSize(new java.awt.Dimension(50, 20));
+        pnFoodPay.setLayout(new java.awt.GridBagLayout());
+
+        txtFood.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtFood.setPlaceholder("ອາຫານ");
+        txtFood.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtFoodKeyReleased(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        pnFoodPay.add(txtFood, gridBagConstraints);
+
+        btnFoodPay.setBackground(new java.awt.Color(255, 153, 0));
+        btnFoodPay.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.LOCAL_DINING);
+        btnFoodPay.setMinimumSize(new java.awt.Dimension(50, 41));
+        btnFoodPay.setPreferredSize(new java.awt.Dimension(50, 41));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 2);
+        pnFoodPay.add(btnFoodPay, gridBagConstraints);
+
+        btnShowFoodAll.setBackground(new java.awt.Color(153, 153, 153));
+        btnShowFoodAll.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.RECEIPT);
+        btnShowFoodAll.setMinimumSize(new java.awt.Dimension(50, 41));
+        btnShowFoodAll.setPreferredSize(new java.awt.Dimension(50, 41));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 2, 0, 0);
+        pnFoodPay.add(btnShowFoodAll, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        joPanel3.add(pnFoodPay, gridBagConstraints);
 
         jPanel1.add(joPanel3);
 
@@ -733,8 +778,10 @@ public class FinancialView extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Pn_Navigation;
     private Components.JoButton btnAddTransfer;
+    private Components.JoButtonIconfont btnFoodPay;
     private Components.JoButtonIconfont btnRefresh;
     private Components.JoButtonIconfont btnSave;
+    private Components.JoButtonIconfont btnShowFoodAll;
     private Components.JoButtonIconfont btn_back;
     private Components.JoCheckBox ckDiscount;
     private javax.swing.JPanel jPanel1;
@@ -768,6 +815,7 @@ public class FinancialView extends javax.swing.JPanel {
     private Components.JoLable lblfood;
     private Components.JoLable lblshowDate;
     private Components.JoLable lblslow;
+    private javax.swing.JPanel pnFoodPay;
     private javax.swing.JPanel pnSelectMonths;
     private javax.swing.JPanel pnShowMonth;
     private javax.swing.JPanel pn_Datatable;
