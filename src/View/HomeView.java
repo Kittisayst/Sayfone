@@ -27,6 +27,8 @@ public class HomeView extends javax.swing.JFrame {
         menu.SetJoPanelMenu(btn_Setting, pnSetting);
         int currentYear = LocalDate.now().getYear();
         lblCredit.setText("Copyright © 2020 - " + currentYear + " Codingsabay. All rights reserved.");
+        btnFoodPayment.setVisible(false);
+
     }
 
     public void showUserName(TeacherModel model) {

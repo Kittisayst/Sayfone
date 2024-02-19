@@ -36,7 +36,7 @@ public class FinancialView extends javax.swing.JPanel {
         lblslow.setIcon(new JoIconFont().setIconFont(GoogleMaterialDesignIcons.SLOW_MOTION_VIDEO, 20));
         repaint();
         revalidate();
-        txtFood.setVisible(false);
+//        txtFood.setVisible(false);
     }
 
     public void showParent(StudentHistoryModel historyModel) {
@@ -276,13 +276,13 @@ public class FinancialView extends javax.swing.JPanel {
         return txtTransferMoney;
     }
 
-    public JoButtonIconfont getBtnFoodPay() {
-        return btnFoodPay;
-    }
-
-    public JoButtonIconfont getBtnShowFoodAll() {
-        return btnShowFoodAll;
-    }
+//    public JoButtonIconfont getBtnFoodPay() {
+//        return btnFoodPay;
+//    }
+//
+//    public JoButtonIconfont getBtnShowFoodAll() {
+//        return btnShowFoodAll;
+//    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -324,8 +324,6 @@ public class FinancialView extends javax.swing.JPanel {
         lblshowDate = new Components.JoLable();
         pnFoodPay = new javax.swing.JPanel();
         txtFood = new Components.JoTextField();
-        btnFoodPay = new Components.JoButtonIconfont();
-        btnShowFoodAll = new Components.JoButtonIconfont();
         joPanel4 = new Components.JoPanel();
         joLable6 = new Components.JoLable();
         txtMoney = new Components.JoTextField();
@@ -588,7 +586,7 @@ public class FinancialView extends javax.swing.JPanel {
         pnFoodPay.setMaximumSize(new java.awt.Dimension(100, 40));
         pnFoodPay.setMinimumSize(new java.awt.Dimension(50, 20));
         pnFoodPay.setPreferredSize(new java.awt.Dimension(50, 20));
-        pnFoodPay.setLayout(new java.awt.GridBagLayout());
+        pnFoodPay.setLayout(new javax.swing.BoxLayout(pnFoodPay, javax.swing.BoxLayout.LINE_AXIS));
 
         txtFood.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtFood.setPlaceholder("ອາຫານ");
@@ -597,36 +595,7 @@ public class FinancialView extends javax.swing.JPanel {
                 txtFoodKeyReleased(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        pnFoodPay.add(txtFood, gridBagConstraints);
-
-        btnFoodPay.setBackground(new java.awt.Color(255, 153, 0));
-        btnFoodPay.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.LOCAL_DINING);
-        btnFoodPay.setMinimumSize(new java.awt.Dimension(50, 41));
-        btnFoodPay.setPreferredSize(new java.awt.Dimension(50, 41));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 0.1;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 2);
-        pnFoodPay.add(btnFoodPay, gridBagConstraints);
-
-        btnShowFoodAll.setBackground(new java.awt.Color(153, 153, 153));
-        btnShowFoodAll.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.RECEIPT);
-        btnShowFoodAll.setMinimumSize(new java.awt.Dimension(50, 41));
-        btnShowFoodAll.setPreferredSize(new java.awt.Dimension(50, 41));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 0.1;
-        gridBagConstraints.insets = new java.awt.Insets(0, 2, 0, 0);
-        pnFoodPay.add(btnShowFoodAll, gridBagConstraints);
+        pnFoodPay.add(txtFood);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
@@ -778,10 +747,8 @@ public class FinancialView extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Pn_Navigation;
     private Components.JoButton btnAddTransfer;
-    private Components.JoButtonIconfont btnFoodPay;
     private Components.JoButtonIconfont btnRefresh;
     private Components.JoButtonIconfont btnSave;
-    private Components.JoButtonIconfont btnShowFoodAll;
     private Components.JoButtonIconfont btn_back;
     private Components.JoCheckBox ckDiscount;
     private javax.swing.JPanel jPanel1;

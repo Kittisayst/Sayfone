@@ -102,8 +102,8 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
         view.getTb_data().addMouseListener(this);
         view.getTxtMoney().addKeyListener(this);
         view.getTxtTransferMoney().addKeyListener(this);
-        view.getBtnFoodPay().addActionListener(this);
-        view.getBtnShowFoodAll().addActionListener(this);
+//        view.getBtnFoodPay().addActionListener(this);
+//        view.getBtnShowFoodAll().addActionListener(this);
         popup.addActionListener(this);
         //ເຫດການຂອງເດືອນ
         Component[] components = view.getPnShowMonth().getComponents();
@@ -368,13 +368,15 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
             }
         } else if (event.isEvent(popup.getMenuItem(5))) {
             showTransferImage();
-        } else if (event.isEvent(view.getBtnFoodPay())) {
-            DialogFoodPay foodPay = new DialogFoodPay(GlobalDataModel.rootView, true, registerModel, studentModel, new FoodPaymentModel());
-            foodPay.setVisible(true);
-        } else if (event.isEvent(view.getBtnShowFoodAll())) {
-            DialogShowFoodPay showFoodPay = new DialogShowFoodPay(GlobalDataModel.rootView, true, registerModel, studentModel);
-            showFoodPay.setVisible(true);
-        }
+        } 
+        
+//        else if (event.isEvent(view.getBtnFoodPay())) {
+//            DialogFoodPay foodPay = new DialogFoodPay(GlobalDataModel.rootView, true, registerModel, studentModel, new FoodPaymentModel());
+//            foodPay.setVisible(true);
+//        } else if (event.isEvent(view.getBtnShowFoodAll())) {
+//            DialogShowFoodPay showFoodPay = new DialogShowFoodPay(GlobalDataModel.rootView, true, registerModel, studentModel);
+//            showFoodPay.setVisible(true);
+//        }
     }
 
     private FinancialModel FinancialViewData(int ID) {
