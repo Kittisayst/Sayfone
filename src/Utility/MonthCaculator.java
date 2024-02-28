@@ -73,6 +73,7 @@ public class MonthCaculator {
     }
 
     public int[] parseMonth(String missingMonth) {
+        missingMonth = missingMonth.equals("[]") ? "" : missingMonth;
         String strmonth = missingMonth.equals("")?",":missingMonth;
         String nullMonth = strmonth.replaceAll("\\[],", "");
         String cleanedString = nullMonth.replaceAll("\\[|\\]|\\s", "");
