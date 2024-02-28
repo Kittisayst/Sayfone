@@ -43,6 +43,7 @@ public class CheckboxMonths extends javax.swing.JPanel {
     }
 
     public void setSelectMonth(String data) {
+        data = data.equals("") ? "[]" : data;
         boolean isMonth = !data.equals("[]");
         if (isMonth) {
             String[] arr = data.substring(1, data.length() - 1).split(", ");
@@ -60,6 +61,7 @@ public class CheckboxMonths extends javax.swing.JPanel {
     }
 
     public void setEditSelectMonth(String data) {
+        data = data.equals("") ? "[]" : data;
         boolean isMonth = !data.equals("[]");
         if (isMonth) {
             String[] arr = data.substring(1, data.length() - 1).split(", ");
@@ -82,7 +84,7 @@ public class CheckboxMonths extends javax.swing.JPanel {
     }
 
     public void clearMonths() {
-         setSelectMonth(getMonths());
+        setSelectMonth(getMonths());
         months.clear();
     }
 
