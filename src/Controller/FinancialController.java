@@ -27,12 +27,8 @@ import Utility.JoJasperPrinter;
 import Utility.MyFormat;
 import Utility.MyPopup;
 import Component.AuthenPopUp;
-import Component.DialogFoodPay;
-import Component.DialogShowFoodPay;
 import Component.DialogTransferImage;
-import Model.FoodPaymentModel;
 import View.FinancialView;
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -45,7 +41,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.swing.JCheckBox;
 import jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -84,7 +79,8 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
     public void Start() {
         GlobalDataModel.rootView.setView(view);
         financialModel = new FinancialModel();
-        view.showCurentMonth(); //ສະແດງເດືອນປະຈຸບັນ
+        view.getFinancialMonths().setSelectCurentMonth(); //ສະແດງເດືອນປະຈຸບັນ
+        view.getFoodMonths().setSelectCurentMonth();
         StudentHistoryModel historyModel = new StudentHistoryService().getStudentHistoryByStudentID(studentModel.getStudentID()); //ດຶງປະຫວັດນັກຮຽນ
         view.showParent(historyModel); //ສະແດງປະຫວັດນັກຮຽນ
         List<FinancialModel> models = new FinancialService().getFinancialByStudentID(registerModel.getRegisterID(), studentModel.getStudentID()); //ດຶງຂໍ້ມູນການລົງທະບຽນ
@@ -105,24 +101,6 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
 //        view.getBtnFoodPay().addActionListener(this);
 //        view.getBtnShowFoodAll().addActionListener(this);
         popup.addActionListener(this);
-        //ເຫດການຂອງເດືອນ
-        Component[] components = view.getPnShowMonth().getComponents();
-        for (int i = 0; i < components.length; i++) {
-            JCheckBox ck = (JCheckBox) components[i];
-            final int key = i;
-            ck.addActionListener((ActionEvent e) -> {
-                if (ck.isSelected()) {
-                    months.put(key, key + 1 + "");
-                } else {
-                    months.remove(key);
-                }
-                view.showSelectMonth(months);
-            });
-        }
-    }
-
-    private JCheckBox getCheckbox(int index) {
-        return (JCheckBox) view.getPnShowMonth().getComponent(index);
     }
 
     private String convertMonth(HashMap<Integer, String> months) {
@@ -323,14 +301,22 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
                     view.Message("ກວດສອບຂໍ້ມູນ", "ຂໍ້ມູນບໍຄົບຖວນກະລຸນາກວດສອບ", JoAlert.Icons.warning);
                     view.getTxtMoney().requestFocus();
                 } else {
-                    Create();
+                    if (view.FoodMoney()) {
+                        view.Message("ກວດສອບຂໍ້ມູນ", "ກະລຸນາເລືອກເດືອນໃນການຈາຍຄ່າອາຫານ", JoAlert.Icons.warning);
+                    } else {
+                        Create();
+                    }
                 }
             } else {
                 if (view.MoneyEmpty() && view.TransferMoneyEmpty()) {
                     view.Message("ກວດສອບຂໍ້ມູນ", "ຂໍ້ມູນບໍຄົບຖວນກະລຸນາກວດສອບ", JoAlert.Icons.warning);
                     view.getTxtMoney().requestFocus();
                 } else {
-                    Update();
+                    if (view.FoodMoney()) {
+                        view.Message("ກວດສອບຂໍ້ມູນ", "ກະລຸນາເລືອກເດືອນໃນການຈາຍຄ່າອາຫານ", JoAlert.Icons.warning);
+                    } else {
+                        Update();
+                    }
                 }
             }
         } else if (event.isEvent(popup.getItemshow())) { //ເມນູສະແດງ
@@ -368,8 +354,8 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
             }
         } else if (event.isEvent(popup.getMenuItem(5))) {
             showTransferImage();
-        } 
-        
+        }
+
 //        else if (event.isEvent(view.getBtnFoodPay())) {
 //            DialogFoodPay foodPay = new DialogFoodPay(GlobalDataModel.rootView, true, registerModel, studentModel, new FoodPaymentModel());
 //            foodPay.setVisible(true);
@@ -388,6 +374,7 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
                 view.getTransferMoney(),
                 mf.getSQLDate(new Date()),
                 convertMonth(months),
+                view.getFoodMonths().getMonths(),
                 view.getComment(),
                 userAuthen.getUserID(),
                 view.getDiscount(),
@@ -398,10 +385,10 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
     }
 
     private void showEdit() {
-        //ລ້າງຂໍ້ມູນຂອງເດືອນເກົ່າທີ່ແກ້ໄຂ
+        //ລາງຂໍ້ມູນເມື່ອເລືອກການແກ້ໄຂຫຼາຍຄັ້ງ
         if (financialModel.getFinancialIID() != 0) {
-            view.setSelectMonth(financialModel);
-            months.clear();
+            view.getFinancialMonths().clearMonths();
+            view.getFoodMonths().clearMonths();
         }
         // ດຶງຂໍ້ມູນການຈ່າຍເງິນ
         view.setButtonTextState("ແກ້ໄຂການຈ່າຍຄ້າຮຽນ");
@@ -412,17 +399,8 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
         view.setButtonState();
         fileTranferModel = new FileTransferService().getFileTranferByFinancialID(financialModel.getFinancialIID()); //ດຶງຂໍ້ມູນເອກະສານການໂອນ
         // ສະແດງການເລືອກເດືອນ
-        String monstr = financialModel.getFinancialMonth();
-        boolean isMonth = !monstr.equals("[]");
-        String[] arr = monstr.substring(1, monstr.length() - 1).split(", ");
-        if (isMonth) {
-            if (arr.length > 0) {
-                for (String mon : arr) {
-                    getCheckbox(Integer.parseInt(mon) - 1).setSelected(false);
-                    getCheckbox(Integer.parseInt(mon) - 1).doClick();
-                }
-            }
-        }
+        view.getFinancialMonths().setEditSelectMonth(financialModel.getFinancialMonth());
+        view.getFoodMonths().setEditSelectMonth(financialModel.getFoodMonth());
     }
 
     @Override
@@ -580,7 +558,8 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
         FinancialModel fm = FinancialViewData(0);
         MyFormat format = new MyFormat();
         String[] message = {
-            "ເດືອນ: " + fm.getFinancialMonth(),
+            "ເດືອນຄ່າຮຽນ: " + fm.getFinancialMonth(),
+             "ເດືອນຄ່າອາຫານ: " + fm.getFoodMonth(),
             "ເງິນສົດ: " + format.formatMoney(fm.getMoney()) + " ₭",
             "ເງິນໂອນ: " + format.formatMoney(fm.getTransferMoney()) + " ₭",
             "ຄ່າອາຫານ: " + format.formatMoney(fm.getFoodMoney()) + " ₭",

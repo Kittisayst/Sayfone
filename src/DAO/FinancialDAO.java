@@ -36,6 +36,7 @@ public class FinancialDAO implements FinancialFn {
                     model.getTransferMoney(),
                     model.getFinancialDate(),
                     model.getFinancialMonth(),
+                    model.getFoodMonth(),
                     model.getFinancialComment(),
                     model.getAuthenUserID(),
                     model.getDiscount(),
@@ -60,10 +61,11 @@ public class FinancialDAO implements FinancialFn {
         JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         try {
             PreparedStatement pre = new JoPrepared().setAutoPrepared(sql.getUpdateByColumns(
-                    new String[]{"Money", "TransferMoney", "FinancialMonth", "FinancialComment", "AuthenUserID", "Discount", "OvertimePay", "foodMoney"}),
+                    new String[]{"Money", "TransferMoney", "FinancialMonth", "foodMonth", "FinancialComment", "AuthenUserID", "Discount", "OvertimePay", "foodMoney"}),
                     model.getMoney(),
                     model.getTransferMoney(),
                     model.getFinancialMonth(),
+                    model.getFoodMonth(),
                     model.getFinancialComment(),
                     model.getAuthenUserID(),
                     model.getDiscount(),
@@ -133,6 +135,7 @@ public class FinancialDAO implements FinancialFn {
         } catch (Exception e) {
             JoAlert.Error(e, this);
             JoLoger.saveLog(e, this);
+            e.printStackTrace();
         } finally {
             connect.close();
         }
@@ -152,6 +155,7 @@ public class FinancialDAO implements FinancialFn {
         } catch (Exception e) {
             JoAlert.Error(e, this);
             JoLoger.saveLog(e, this);
+            e.printStackTrace();
         } finally {
             connect.close();
         }
@@ -174,6 +178,7 @@ public class FinancialDAO implements FinancialFn {
         } catch (Exception e) {
             JoAlert.Error(e, this);
             JoLoger.saveLog(e, this);
+            e.printStackTrace();
         } finally {
             connect.close();
         }
@@ -185,7 +190,7 @@ public class FinancialDAO implements FinancialFn {
         JoConnect connect = new JoConnect();
         List<FinancialModel> models = new ArrayList<>();
         try {
-            String csql = "SELECT FinancialID,RegisterID,fs.StudentID,Money,TransferMoney,SaveDate,FinancialMonth,FinancialComment,AuthenUserID,Discount,OvertimePay,UserID,foodMoney,state\n"
+            String csql = "SELECT FinancialID,RegisterID,fs.StudentID,Money,TransferMoney,SaveDate,FinancialMonth,foodMonth,FinancialComment,AuthenUserID,Discount,OvertimePay,UserID,foodMoney,state\n"
                     + "FROM tb_financial AS fs\n"
                     + "INNER JOIN tb_student AS st ON fs.StudentID=st.StudentID\n"
                     + "WHERE RegisterID=? AND st.Status=0  GROUP BY fs.StudentID ORDER BY fs.StudentID ASC";
@@ -198,6 +203,7 @@ public class FinancialDAO implements FinancialFn {
         } catch (Exception e) {
             JoAlert.Error(e, this);
             JoLoger.saveLog(e, this);
+            e.printStackTrace();
         } finally {
             connect.close();
         }
@@ -217,6 +223,7 @@ public class FinancialDAO implements FinancialFn {
         } catch (Exception e) {
             JoAlert.Error(e, this);
             JoLoger.saveLog(e, this);
+            e.printStackTrace();
         } finally {
             connect.close();
         }
@@ -239,6 +246,7 @@ public class FinancialDAO implements FinancialFn {
         } catch (Exception e) {
             JoAlert.Error(e, this);
             JoLoger.saveLog(e, this);
+            e.printStackTrace();
         } finally {
             connect.close();
         }
@@ -262,6 +270,7 @@ public class FinancialDAO implements FinancialFn {
         } catch (Exception e) {
             JoAlert.Error(e, this);
             JoLoger.saveLog(e, this);
+            e.printStackTrace();
         } finally {
             connect.close();
         }
@@ -285,6 +294,7 @@ public class FinancialDAO implements FinancialFn {
         } catch (Exception e) {
             JoAlert.Error(e, this);
             JoLoger.saveLog(e, this);
+            e.printStackTrace();
         } finally {
             connect.close();
         }
@@ -307,6 +317,7 @@ public class FinancialDAO implements FinancialFn {
         } catch (Exception e) {
             JoAlert.Error(e, this);
             JoLoger.saveLog(e, this);
+            e.printStackTrace();
         } finally {
             connect.close();
         }
@@ -330,6 +341,7 @@ public class FinancialDAO implements FinancialFn {
         } catch (Exception e) {
             JoAlert.Error(e, this);
             JoLoger.saveLog(e, this);
+            e.printStackTrace();
         } finally {
             connect.close();
         }
@@ -353,6 +365,7 @@ public class FinancialDAO implements FinancialFn {
         } catch (Exception e) {
             JoAlert.Error(e, this);
             JoLoger.saveLog(e, this);
+            e.printStackTrace();
         } finally {
             connect.close();
         }
@@ -380,6 +393,7 @@ public class FinancialDAO implements FinancialFn {
         } catch (SQLException e) {
             JoAlert.Error(e, this);
             JoLoger.saveLog(e, this);
+            e.printStackTrace();
             return "ຜິດພາດຂໍ້ມູນ";
         } finally {
             connect.close();
@@ -401,6 +415,7 @@ public class FinancialDAO implements FinancialFn {
         } catch (Exception e) {
             JoAlert.Error(e, this);
             JoLoger.saveLog(e, this);
+            e.printStackTrace();
         } finally {
             connect.close();
         }
@@ -422,12 +437,13 @@ public class FinancialDAO implements FinancialFn {
                 rs.getDate(6),
                 rs.getString(7),
                 rs.getString(8),
-                rs.getInt(9),
+                rs.getString(9),
                 rs.getInt(10),
                 rs.getInt(11),
                 rs.getInt(12),
                 rs.getInt(13),
-                rs.getBoolean(14)
+                rs.getInt(14),
+                rs.getBoolean(15)
         );
     }
 
@@ -448,6 +464,7 @@ public class FinancialDAO implements FinancialFn {
         } catch (Exception e) {
             JoLoger.saveLog(e, this);
             JoAlert.Error(e, this);
+            e.printStackTrace();
         } finally {
             connect.close();
         }
@@ -471,6 +488,7 @@ public class FinancialDAO implements FinancialFn {
         } catch (Exception e) {
             JoAlert.Error(e, this);
             JoLoger.saveLog(e, this);
+            e.printStackTrace();
         } finally {
             connect.close();
         }
@@ -498,6 +516,7 @@ public class FinancialDAO implements FinancialFn {
         } catch (Exception e) {
             JoAlert.Error(e, this);
             JoLoger.saveLog(e, this);
+            e.printStackTrace();
         } finally {
             connect.close();
         }
@@ -520,6 +539,7 @@ public class FinancialDAO implements FinancialFn {
         } catch (SQLException e) {
             JoAlert.Error(e, this);
             JoLoger.saveLog(e, this);
+            e.printStackTrace();
             return 0;
         } finally {
             connect.close();
@@ -538,6 +558,7 @@ public class FinancialDAO implements FinancialFn {
         } catch (SQLException e) {
             JoAlert.Error(e, this);
             JoLoger.saveLog(e, this);
+            e.printStackTrace();
             return false;
         } finally {
             connect.close();
@@ -552,6 +573,7 @@ public class FinancialDAO implements FinancialFn {
             String sql = "SELECT FinancialID,RegisterID,StudentID,SUM(Money) AS totalMoney,\n"
                     + "SUM(TransferMoney) AS totalTransferMoney,SaveDate,\n"
                     + "REPLACE(GROUP_CONCAT(FinancialMonth),',[]', '') AS month,\n"
+                    + "REPLACE(GROUP_CONCAT(foodMonth),',[]', '') AS fmonth,\n"
                     + "GROUP_CONCAT(FinancialComment) AS comments,AuthenUserID,SUM(Discount) AS disSUM,OvertimePay,UserID,SUM(foodMoney) AS TotalFoodMoney,state \n"
                     + "FROM tb_financial WHERE RegisterID=" + RegisterID + " AND StudentID = " + StudentID;
             ResultSet rs = connect.getConnectionDefault().createStatement().executeQuery(sql);
@@ -561,6 +583,7 @@ public class FinancialDAO implements FinancialFn {
         } catch (Exception e) {
             JoAlert.Error(e, this);
             JoLoger.saveLog(e, this);
+            e.printStackTrace();
         } finally {
             connect.close();
         }
@@ -601,13 +624,15 @@ public class FinancialDAO implements FinancialFn {
                         rs.getString(10),
                         rs.getString(11),
                         rs.getString(12),
-                        rs.getString(13)
+                        rs.getString(13),
+                        rs.getString(14)
                 );
             }
             joSheet.getCreateSheet();
         } catch (Exception e) {
             JoAlert.Error(e, this);
             JoLoger.saveLog(e, this);
+            e.printStackTrace();
         } finally {
             connect.close();
             alert.messages("ສົ່ງອອກ Excel ສຳເລັດ!");
@@ -635,6 +660,7 @@ public class FinancialDAO implements FinancialFn {
         } catch (Exception e) {
             JoAlert.Error(e, this);
             JoLoger.saveLog(e, this);
+            e.printStackTrace();
         } finally {
             connect.close();
         }
@@ -657,6 +683,7 @@ public class FinancialDAO implements FinancialFn {
         } catch (Exception e) {
             JoAlert.Error(e, this);
             JoLoger.saveLog(e, this);
+            e.printStackTrace();
         } finally {
             connect.close();
         }
@@ -678,6 +705,7 @@ public class FinancialDAO implements FinancialFn {
         } catch (Exception e) {
             JoAlert.Error(e, this);
             JoLoger.saveLog(e, this);
+            e.printStackTrace();
         } finally {
             connect.close();
         }
@@ -699,6 +727,7 @@ public class FinancialDAO implements FinancialFn {
         } catch (Exception e) {
             JoAlert.Error(e, this);
             JoLoger.saveLog(e, this);
+            e.printStackTrace();
         } finally {
             connect.close();
         }

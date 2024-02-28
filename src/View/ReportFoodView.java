@@ -13,6 +13,7 @@ import Model.YearModel;
 import Tools.JoDataTable;
 import Utility.MonthCaculator;
 import Utility.MyFormat;
+import java.util.Arrays;
 import java.util.List;
 
 public class ReportFoodView extends javax.swing.JPanel {
@@ -65,7 +66,8 @@ public class ReportFoodView extends javax.swing.JPanel {
                     if (getMonth() == 0) {  // ເລືອກທັງໝົດ
                         FinancialModel financialModel = financialService.getFinancialCalculator(data.getRegisterID(), data.getStudentID());
                         String foodMoney = new MyFormat().formatMoney(financialModel.getFoodMoney());
-                        String findMissingMonth = mc.getMissingMonth(financialModel.getFinancialMonth());
+                        int[] findMissingMonth = mc.parseMonth(financialModel.getFoodMonth());
+                        String strmonth = Arrays.toString(findMissingMonth);
                         if (financialModel.getFoodMoney() > 0) {
                             tb_data.AddJoModel(new Object[]{
                                 tb_data.autoNumber(),
@@ -73,16 +75,16 @@ public class ReportFoodView extends javax.swing.JPanel {
                                 data.getRegisterID(),
                                 data.getStudentID(),
                                 foodMoney,
-                                findMissingMonth,
+                                mc.getArrangeMonth(strmonth),
                                 studentModel.getStudentNo(),
                                 studentModel.getFullName(),
                                 financialModel.getFinancialComment()
                             });
                         }
                     } else {  // ເລືອກສະເພາະເດືອນ
-                        List<Integer> months = mc.StringToArray(data.getFinancialMonth());
+                        List<Integer> months = mc.StringToArray(data.getFoodMonth());
                         int numMonth = getMonth() == 13 ? 0 : getMonth();  // ກວດສອບບໍ່ເລືອກເດືອນ index = 13
-                        boolean isMonth = months.contains(numMonth); 
+                        boolean isMonth = months.contains(numMonth);
                         if (isMonth) {
                             tb_data.AddJoModel(new Object[]{
                                 tb_data.autoNumber(),
@@ -195,7 +197,7 @@ public class ReportFoodView extends javax.swing.JPanel {
 
             },
             new String [] {
-                "#", "FinacialID", "RegisterID", "StudentID", "ຄ່າອາຫານ", "ເດືອນ", "ລະຫັດນັກຮຽນ", "ຊື່ນັກຮຽນ", "ໝາຍເຫດ"
+                "#", "FinacialID", "RegisterID", "StudentID", "ຄ່າອາຫານ", "ຈ່າຍເດືອນ", "ລະຫັດນັກຮຽນ", "ຊື່ນັກຮຽນ", "ໝາຍເຫດ"
             }
         ) {
             boolean[] canEdit = new boolean [] {

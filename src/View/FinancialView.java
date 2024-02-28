@@ -1,5 +1,6 @@
 package View;
 
+import Component.CheckboxMonths;
 import Components.JoButton;
 import Components.JoButtonIconfont;
 import Components.JoCheckBox;
@@ -16,13 +17,9 @@ import Tools.JoIconFont;
 import Utility.MyFormat;
 import java.awt.Color;
 import java.awt.Font;
-import java.time.LocalDate;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import javax.swing.JCheckBox;
-import javax.swing.JComponent;
 import javax.swing.JPanel;
 import jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons;
 
@@ -36,19 +33,10 @@ public class FinancialView extends javax.swing.JPanel {
         lblslow.setIcon(new JoIconFont().setIconFont(GoogleMaterialDesignIcons.SLOW_MOTION_VIDEO, 20));
         repaint();
         revalidate();
-//        txtFood.setVisible(false);
     }
 
     public void showParent(StudentHistoryModel historyModel) {
         lbl_parents.setText("ຜູ້ປົກຄອງ: " + historyModel.getFatherName() + " ເບີໂທ: " + historyModel.getFatherTel());
-    }
-
-    public void showCurentMonth() {
-        LocalDate currentDate = LocalDate.now();
-        // Get the current month
-        lblshowDate.setText(new MyFormat().getDate(new Date()));
-        JComponent ckmonth = (JComponent) pnShowMonth.getComponent(currentDate.getMonthValue() - 1);
-        ckmonth.setForeground(new Color(25, 118, 210));
     }
 
     public void EnableDisCount(UserModel model) { // ສະແດງຂໍ້ມູນຜູ້ອານຸມັດ
@@ -63,24 +51,23 @@ public class FinancialView extends javax.swing.JPanel {
         }
     }
 
-    public void showSelectMonth(HashMap<Integer, String> months) {
-        pnSelectMonths.removeAll();
-        months.forEach((key, data) -> {
-            JoLable lable = new JoLable();
-            lable.setText(data);
-            lable.setFont(new Font("Phetsarath OT", 0, 18));
-            lable.setForeground(new Color(153, 255, 204));
-            pnSelectMonths.add(lable);
-            pnShowMonth.revalidate();
-        });
-    }
-
+//    public void showSelectMonth(HashMap<Integer, String> months) {
+//        pnSelectMonths.removeAll();
+//        months.forEach((key, data) -> {
+//            JoLable lable = new JoLable();
+//            lable.setText(data);
+//            lable.setFont(new Font("Phetsarath OT", 0, 18));
+//            lable.setForeground(new Color(153, 255, 204));
+//            pnSelectMonths.add(lable);
+//        });
+//    }
     public void showFinancial(List<FinancialModel> models) {
         tb_data.JoClearModel();
         MyFormat format = new MyFormat();
         UserService userService = new UserService();
         models.forEach(data -> {
-            setSelectMonth(data);
+            FinancialMonths.setSelectMonth(data.getFinancialMonth());
+            foodMonths.setSelectMonth(data.getFoodMonth());
             UserModel um = userService.getUserById(data.getUserID());
             String money = format.formatMoney(data.getMoney());
             String transfer = format.formatMoney(data.getTransferMoney());
@@ -91,46 +78,15 @@ public class FinancialView extends javax.swing.JPanel {
                 money,
                 transfer,
                 toMonthString(data.getFinancialMonth()),
+                data.getFoodMonth(),
                 data.getFinancialComment(),
                 um.getFullName()
             });
         });
     }
 
-    public void setSelectMonth(FinancialModel model) {
-        boolean isMonth = !model.getFinancialMonth().equals("[]");
-        if (isMonth) {
-            String[] arr = model.getFinancialMonth().substring(1, model.getFinancialMonth().length() - 1).split(", ");
-            if (arr.length > 0) {
-                for (String str : arr) {
-                    JCheckBox checkBox = (JCheckBox) pnShowMonth.getComponent(Integer.parseInt(str) - 1);
-                    checkBox.setFont(new Font("phetsarath ot", 0, 14));
-                    checkBox.setSelected(true);
-                    checkBox.setEnabled(false);
-                }
-            }
-        }
-    }
-
-    public void setSelectMonthEnnable(FinancialModel model) {
-        boolean isMonth = !model.getFinancialMonth().equals("[]");
-        if (isMonth) {
-            String[] arr = model.getFinancialMonth().substring(1, model.getFinancialMonth().length() - 1).split(", ");
-            if (arr.length > 0) {
-                for (String str : arr) {
-                    JCheckBox checkBox = (JCheckBox) pnShowMonth.getComponent(Integer.parseInt(str) - 1);
-                    checkBox.setFont(new Font("phetsarath ot", 0, 14));
-                    checkBox.setSelected(true);
-                    checkBox.setEnabled(true);
-                }
-            }
-        }
-
-    }
-
     public void showFinacial(FinancialModel financialModel) {
         MyFormat format = new MyFormat();
-        setSelectMonthEnnable(financialModel);
         txtDiscount.setText(format.formatMoney(financialModel.getDiscount()));
         if (financialModel.getAuthenUserID() != 0) {
             ckDiscount.setSelected(true);
@@ -184,6 +140,10 @@ public class FinancialView extends javax.swing.JPanel {
         return txtTransferMoney.getText().isEmpty() || txtTransferMoney.getText().equals("0");
     }
 
+    public boolean FoodMoney() {
+        return  (int) new MyFormat().unFormatMoney(txtFood.getText()) > 0 && foodMonths.isEmptySelect();
+    }
+
     public int getMoney() {
         return (int) new MyFormat().unFormatMoney(txtMoney.getText());
     }
@@ -232,10 +192,6 @@ public class FinancialView extends javax.swing.JPanel {
         return pnSelectMonths;
     }
 
-    public JPanel getPnShowMonth() {
-        return pnShowMonth;
-    }
-
     public JoCheckBox getCkDiscount() {
         return ckDiscount;
     }
@@ -276,13 +232,13 @@ public class FinancialView extends javax.swing.JPanel {
         return txtTransferMoney;
     }
 
-//    public JoButtonIconfont getBtnFoodPay() {
-//        return btnFoodPay;
-//    }
-//
-//    public JoButtonIconfont getBtnShowFoodAll() {
-//        return btnShowFoodAll;
-//    }
+    public CheckboxMonths getFoodMonths() {
+        return foodMonths;
+    }
+
+    public CheckboxMonths getFinancialMonths() {
+        return FinancialMonths;
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -298,19 +254,10 @@ public class FinancialView extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         joPanel2 = new Components.JoPanel();
         joLable1 = new Components.JoLable();
-        pnShowMonth = new javax.swing.JPanel();
-        joCheckBoxUI2 = new Components.JoCheckBoxUI();
-        joCheckBoxUI1 = new Components.JoCheckBoxUI();
-        joCheckBoxUI3 = new Components.JoCheckBoxUI();
-        joCheckBoxUI4 = new Components.JoCheckBoxUI();
-        joCheckBoxUI5 = new Components.JoCheckBoxUI();
-        joCheckBoxUI6 = new Components.JoCheckBoxUI();
-        joCheckBoxUI7 = new Components.JoCheckBoxUI();
-        joCheckBoxUI8 = new Components.JoCheckBoxUI();
-        joCheckBoxUI9 = new Components.JoCheckBoxUI();
-        joCheckBoxUI10 = new Components.JoCheckBoxUI();
-        joCheckBoxUI11 = new Components.JoCheckBoxUI();
-        joCheckBoxUI12 = new Components.JoCheckBoxUI();
+        joLable2 = new Components.JoLable();
+        foodMonths = new Component.CheckboxMonths();
+        jSeparator1 = new javax.swing.JSeparator();
+        FinancialMonths = new Component.CheckboxMonths();
         joPanel3 = new Components.JoPanel();
         joLable7 = new Components.JoLable();
         txtDiscount = new Components.JoTextField();
@@ -390,66 +337,54 @@ public class FinancialView extends javax.swing.JPanel {
         add(lbl_parents, gridBagConstraints);
 
         joPanel2.setPreferredSize(new java.awt.Dimension(330, 300));
-        joPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 10, 10));
+        joPanel2.setLayout(new java.awt.GridBagLayout());
 
+        joLable1.setForeground(new java.awt.Color(0, 0, 204));
         joLable1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        joLable1.setText("ເດືອນທີ່ຈ່າຍຄ່າຮຽນແລ້ວ");
-        joLable1.setFont(new java.awt.Font("Phetsarath OT", 0, 18)); // NOI18N
-        joPanel2.add(joLable1);
+        joLable1.setText("ຈ່າຍຄ່າຮຽນເດືອນ");
+        joLable1.setFont(new java.awt.Font("Phetsarath OT", 1, 18)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(20, 20, 20, 20);
+        joPanel2.add(joLable1, gridBagConstraints);
 
-        pnShowMonth.setOpaque(false);
-        pnShowMonth.setPreferredSize(new java.awt.Dimension(250, 200));
-        pnShowMonth.setLayout(new java.awt.GridLayout(4, 3, 5, 5));
+        joLable2.setForeground(new java.awt.Color(204, 153, 0));
+        joLable2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        joLable2.setText("ຈ່າຍຄ່າອາຫານເດືອນ");
+        joLable2.setFont(new java.awt.Font("Phetsarath OT", 1, 18)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(20, 20, 20, 20);
+        joPanel2.add(joLable2, gridBagConstraints);
 
-        joCheckBoxUI2.setText("ເດືອນ 1");
-        joCheckBoxUI2.setName("1"); // NOI18N
-        pnShowMonth.add(joCheckBoxUI2);
+        foodMonths.setBackground(new java.awt.Color(255, 255, 153));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(0, 20, 20, 20);
+        joPanel2.add(foodMonths, gridBagConstraints);
 
-        joCheckBoxUI1.setText("ເດືອນ 2");
-        joCheckBoxUI1.setName("2"); // NOI18N
-        pnShowMonth.add(joCheckBoxUI1);
+        jSeparator1.setBackground(new java.awt.Color(255, 0, 0));
+        jSeparator1.setForeground(new java.awt.Color(204, 204, 204));
+        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        joPanel2.add(jSeparator1, gridBagConstraints);
 
-        joCheckBoxUI3.setText("ເດືອນ 3");
-        joCheckBoxUI3.setName("3"); // NOI18N
-        pnShowMonth.add(joCheckBoxUI3);
-
-        joCheckBoxUI4.setText("ເດືອນ 4");
-        joCheckBoxUI4.setName("4"); // NOI18N
-        pnShowMonth.add(joCheckBoxUI4);
-
-        joCheckBoxUI5.setText("ເດືອນ 5");
-        joCheckBoxUI5.setName("5"); // NOI18N
-        pnShowMonth.add(joCheckBoxUI5);
-
-        joCheckBoxUI6.setText("ເດືອນ 6");
-        joCheckBoxUI6.setName("6"); // NOI18N
-        pnShowMonth.add(joCheckBoxUI6);
-
-        joCheckBoxUI7.setText("ເດືອນ 7");
-        joCheckBoxUI7.setName("7"); // NOI18N
-        pnShowMonth.add(joCheckBoxUI7);
-
-        joCheckBoxUI8.setText("ເດືອນ 8");
-        joCheckBoxUI8.setName("8"); // NOI18N
-        pnShowMonth.add(joCheckBoxUI8);
-
-        joCheckBoxUI9.setText("ເດືອນ 9");
-        joCheckBoxUI9.setName("9"); // NOI18N
-        pnShowMonth.add(joCheckBoxUI9);
-
-        joCheckBoxUI10.setText("ເດືອນ 10");
-        joCheckBoxUI10.setName("10"); // NOI18N
-        pnShowMonth.add(joCheckBoxUI10);
-
-        joCheckBoxUI11.setText("ເດືອນ 11");
-        joCheckBoxUI11.setName("11"); // NOI18N
-        pnShowMonth.add(joCheckBoxUI11);
-
-        joCheckBoxUI12.setText("ເດືອນ 12");
-        joCheckBoxUI12.setName("12"); // NOI18N
-        pnShowMonth.add(joCheckBoxUI12);
-
-        joPanel2.add(pnShowMonth);
+        FinancialMonths.setBackground(new java.awt.Color(153, 204, 255));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(0, 20, 20, 20);
+        joPanel2.add(FinancialMonths, gridBagConstraints);
 
         jPanel1.add(joPanel2);
 
@@ -542,6 +477,11 @@ public class FinancialView extends javax.swing.JPanel {
         lblUserAuth.setMinimumSize(new java.awt.Dimension(0, 40));
         lblUserAuth.setOpaque(true);
         lblUserAuth.setPreferredSize(new java.awt.Dimension(0, 40));
+        lblUserAuth.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblUserAuthMouseClicked(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -582,7 +522,6 @@ public class FinancialView extends javax.swing.JPanel {
         pnFoodPay.setPreferredSize(new java.awt.Dimension(50, 20));
         pnFoodPay.setLayout(new java.awt.GridBagLayout());
 
-        txtFood.setEditable(false);
         txtFood.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtFood.setPlaceholder("ອາຫານ");
         txtFood.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -677,11 +616,11 @@ public class FinancialView extends javax.swing.JPanel {
 
             },
             new String [] {
-                "#", "ເລກທີບິນ", "ວດປ", "ຈຳນວນເງິນສົດ", "ຈຳນວນເງິນໂອນ", "ເດືອນ", "ໝາຍເຫດ", "ຜູ້ລົງບັນຊີ"
+                "#", "ເລກທີບິນ", "ວດປ", "ຈຳນວນເງິນສົດ", "ຈຳນວນເງິນໂອນ", "ເດືອນຄ່າຮຽນ", "ເດືອນອາຫານ", "ໝາຍເຫດ", "ຜູ້ລົງບັນຊີ"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, true
+                false, false, false, false, false, false, true, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -705,9 +644,9 @@ public class FinancialView extends javax.swing.JPanel {
             tb_data.getColumnModel().getColumn(4).setMinWidth(120);
             tb_data.getColumnModel().getColumn(4).setPreferredWidth(120);
             tb_data.getColumnModel().getColumn(4).setMaxWidth(120);
-            tb_data.getColumnModel().getColumn(7).setMinWidth(150);
-            tb_data.getColumnModel().getColumn(7).setPreferredWidth(150);
-            tb_data.getColumnModel().getColumn(7).setMaxWidth(150);
+            tb_data.getColumnModel().getColumn(8).setMinWidth(150);
+            tb_data.getColumnModel().getColumn(8).setPreferredWidth(150);
+            tb_data.getColumnModel().getColumn(8).setMaxWidth(150);
         }
 
         pn_Datatable.add(jScrollPane1, java.awt.BorderLayout.CENTER);
@@ -744,32 +683,28 @@ public class FinancialView extends javax.swing.JPanel {
         txtFood.setText(new MyFormat().formatMoney(txtFood.getText()));
     }//GEN-LAST:event_txtFoodKeyReleased
 
+    private void lblUserAuthMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblUserAuthMouseClicked
+        System.out.println(FinancialMonths.getMonths());
+    }//GEN-LAST:event_lblUserAuthMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private Component.CheckboxMonths FinancialMonths;
     private javax.swing.JPanel Pn_Navigation;
     private Components.JoButton btnAddTransfer;
     private Components.JoButtonIconfont btnRefresh;
     private Components.JoButtonIconfont btnSave;
     private Components.JoButtonIconfont btn_back;
     private Components.JoCheckBox ckDiscount;
+    private Component.CheckboxMonths foodMonths;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private Components.JoCheckBoxUI joCheckBoxUI1;
-    private Components.JoCheckBoxUI joCheckBoxUI10;
-    private Components.JoCheckBoxUI joCheckBoxUI11;
-    private Components.JoCheckBoxUI joCheckBoxUI12;
-    private Components.JoCheckBoxUI joCheckBoxUI2;
-    private Components.JoCheckBoxUI joCheckBoxUI3;
-    private Components.JoCheckBoxUI joCheckBoxUI4;
-    private Components.JoCheckBoxUI joCheckBoxUI5;
-    private Components.JoCheckBoxUI joCheckBoxUI6;
-    private Components.JoCheckBoxUI joCheckBoxUI7;
-    private Components.JoCheckBoxUI joCheckBoxUI8;
-    private Components.JoCheckBoxUI joCheckBoxUI9;
+    private javax.swing.JSeparator jSeparator1;
     private Components.JoLable joLable1;
+    private Components.JoLable joLable2;
     private Components.JoLable joLable5;
     private Components.JoLable joLable6;
     private Components.JoLable joLable7;
@@ -785,7 +720,6 @@ public class FinancialView extends javax.swing.JPanel {
     private Components.JoLable lblslow;
     private javax.swing.JPanel pnFoodPay;
     private javax.swing.JPanel pnSelectMonths;
-    private javax.swing.JPanel pnShowMonth;
     private javax.swing.JPanel pn_Datatable;
     private Components.JoTable tb_data;
     private Components.JoTextArea txtComment;

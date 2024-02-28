@@ -27,6 +27,7 @@ import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -162,6 +163,9 @@ public class ReportFoodController implements JoMVC, ActionListener, ItemListener
                 reportUserFinancial.forEach(data -> {
                     FinancialModel financialModel = financialService.getFinancialCalculator(data.getRegisterID(), data.getStudentID());
                     if (financialModel.getFoodMoney() > 0) {
+                        int[] findMissingMonth = monthCaculator.parseMonth(financialModel.getFoodMonth());
+                        String strmonth = Arrays.toString(findMissingMonth);
+                        financialModel.setFoodMonth(monthCaculator.getArrangeMonth(strmonth));
                         addReportFood(financialModel);
                     }
                 });
@@ -169,7 +173,7 @@ public class ReportFoodController implements JoMVC, ActionListener, ItemListener
                 break;
             case 13:
                 reportUserFinancial.forEach(data -> {
-                    List<Integer> months = monthCaculator.StringToArray(data.getFinancialMonth());
+                    List<Integer> months = monthCaculator.StringToArray(data.getFoodMonth());
                     boolean isMonth = months.contains(0); // 0 ແມ່ນບໍ່ເລືອກເດືອນໃດເລີຍ StringToArray ຖ້າບໍ່ເດືອນເປັນ [] ຈະສົ່ງຄ່າເປັນ 0
                     if (isMonth) {
                         addReportFood(data);
@@ -179,7 +183,8 @@ public class ReportFoodController implements JoMVC, ActionListener, ItemListener
                 break;
             default:
                 reportUserFinancial.forEach(data -> {
-                    List<Integer> months = monthCaculator.StringToArray(data.getFinancialMonth());
+                    System.out.println(data.getFoodMonth());
+                    List<Integer> months = monthCaculator.StringToArray(data.getFoodMonth());
                     boolean isMonth = months.contains(view.getMonth());
                     if (isMonth) {
                         addReportFood(data);
@@ -209,7 +214,7 @@ public class ReportFoodController implements JoMVC, ActionListener, ItemListener
                     "ລະຫັດນັກຮຽນ",
                     "ຊື່ ແລະ ນາມສະກຸນນັກຮຽນ",
                     "ຄ່າອາຫານ",
-                    "ເດືອນ",
+                    "ຈ່າຍເດືອນ",
                     "ຜູ້ລົງບັນຊີ",
                     "ໝາຍເຫດ"
                 };
@@ -226,7 +231,7 @@ public class ReportFoodController implements JoMVC, ActionListener, ItemListener
                                     studentModel.getStudentNo(),
                                     studentModel.getFullName(),
                                     format.formatMoney(data.getFoodMoney()),
-                                    data.getFinancialMonth(),
+                                    data.getFoodMonth(),
                                     userModel.getFullName(),
                                     data.getFinancialComment()
                             );

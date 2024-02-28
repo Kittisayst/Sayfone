@@ -31,6 +31,7 @@ public class LoadingResources extends javax.swing.JFrame {
         resourses.add(new YearLoading());
         resourses.add(new RegisterLoading());
         resourses.add(new ClassLoading());
+        resourses.add(new FinancialLoading());
         resourses.add(new StudentLoading());
         resourses.add(new DashboardLoading());
         resourses.add(new CleanCashFile());

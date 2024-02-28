@@ -1,7 +1,5 @@
 package Utility;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -75,7 +73,8 @@ public class MonthCaculator {
     }
 
     public int[] parseMonth(String missingMonth) {
-        String nullMonth = missingMonth.replaceAll("\\[],", "");
+        String strmonth = missingMonth.equals("")?",":missingMonth;
+        String nullMonth = strmonth.replaceAll("\\[],", "");
         String cleanedString = nullMonth.replaceAll("\\[|\\]|\\s", "");
         // Split the cleaned string by comma
         String[] stringArray = cleanedString.split(",");

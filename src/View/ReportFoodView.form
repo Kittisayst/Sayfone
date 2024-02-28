@@ -117,7 +117,7 @@
                     <Column editable="false" title="RegisterID" type="java.lang.Object"/>
                     <Column editable="false" title="StudentID" type="java.lang.Object"/>
                     <Column editable="false" title="&#xe84;&#xec8;&#xeb2;&#xead;&#xeb2;&#xeab;&#xeb2;&#xe99;" type="java.lang.Object"/>
-                    <Column editable="false" title="&#xec0;&#xe94;&#xeb7;&#xead;&#xe99;" type="java.lang.Object"/>
+                    <Column editable="false" title="&#xe88;&#xec8;&#xeb2;&#xe8d;&#xec0;&#xe94;&#xeb7;&#xead;&#xe99;" type="java.lang.Object"/>
                     <Column editable="false" title="&#xea5;&#xeb0;&#xeab;&#xeb1;&#xe94;&#xe99;&#xeb1;&#xe81;&#xeae;&#xebd;&#xe99;" type="java.lang.Object"/>
                     <Column editable="false" title="&#xe8a;&#xeb7;&#xec8;&#xe99;&#xeb1;&#xe81;&#xeae;&#xebd;&#xe99;" type="java.lang.Object"/>
                     <Column editable="false" title="&#xedd;&#xeb2;&#xe8d;&#xec0;&#xeab;&#xe94;" type="java.lang.Object"/>

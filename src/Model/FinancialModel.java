@@ -11,6 +11,7 @@ public class FinancialModel {
     private int TransferMoney;
     private Date FinancialDate;
     private String FinancialMonth;
+    private String FoodMonth;
     private String FinancialComment;
     private int AuthenUserID;
     private int Discount;
@@ -22,7 +23,7 @@ public class FinancialModel {
     public FinancialModel() {
     }
 
-    public FinancialModel(int FinancialIID, int RegisterID, int StudentID, int Money, int TransferMoney, Date FinancialDate, String FinancialMonth, String FinancialComment, int AuthenUserID, int Discount, int OvertimePay, int UserID, int foodMoney, boolean state) {
+    public FinancialModel(int FinancialIID, int RegisterID, int StudentID, int Money, int TransferMoney, Date FinancialDate, String FinancialMonth, String FoodMonth, String FinancialComment, int AuthenUserID, int Discount, int OvertimePay, int UserID, int foodMoney, boolean state) {
         this.FinancialIID = FinancialIID;
         this.RegisterID = RegisterID;
         this.StudentID = StudentID;
@@ -30,6 +31,7 @@ public class FinancialModel {
         this.TransferMoney = TransferMoney;
         this.FinancialDate = FinancialDate;
         this.FinancialMonth = FinancialMonth;
+        this.FoodMonth = FoodMonth;
         this.FinancialComment = FinancialComment;
         this.AuthenUserID = AuthenUserID;
         this.Discount = Discount;
@@ -93,6 +95,14 @@ public class FinancialModel {
 
     public void setFinancialMonth(String FinancialMonth) {
         this.FinancialMonth = FinancialMonth;
+    }
+
+    public String getFoodMonth() {
+        return FoodMonth;
+    }
+
+    public void setFoodMonth(String FoodMonth) {
+        this.FoodMonth = FoodMonth;
     }
 
     public String getFinancialComment() {
