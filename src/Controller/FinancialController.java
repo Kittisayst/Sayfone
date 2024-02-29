@@ -373,7 +373,7 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
                 view.getMoney(),
                 view.getTransferMoney(),
                 mf.getSQLDate(new Date()),
-                convertMonth(months),
+                view.getFinancialMonths().getMonths(),
                 view.getFoodMonths().getMonths(),
                 view.getComment(),
                 userAuthen.getUserID(),
