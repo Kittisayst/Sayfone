@@ -526,3 +526,5 @@
 27/02/2024: DAO.FinancialDAO@bcfca66 Errorjava.sql.SQLException: Column Index out of range, 15 > 14. 
 27/02/2024: DAO.FinancialDAO@bcfca66 Errorjava.sql.SQLException: Column Index out of range, 15 > 14. 
 27/02/2024: DAO.FinancialDAO@bcfca66 Errorjava.sql.SQLException: Column Index out of range, 15 > 14. 
+29/02/2024: DAO.FinancialDAO@763090df Errorjava.lang.ArrayIndexOutOfBoundsException: Index 14 out of bounds for length 14
+29/02/2024: DAO.FinancialDAO@763090df Errorjava.lang.ArrayIndexOutOfBoundsException: Index 14 out of bounds for length 14

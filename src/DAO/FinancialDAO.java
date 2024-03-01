@@ -643,7 +643,7 @@ public class FinancialDAO implements FinancialFn {
     public List<FinancialModel> getReportUserFinancial(int YearID, int UserID, String dateStart, String dateEnd) {
         List<FinancialModel> models = new ArrayList<>();
         JoConnect connect = new JoConnect();
-        String sql = "SELECT FinancialID,fn.RegisterID,StudentID,Money,TransferMoney,SaveDate,FinancialMonth,FinancialComment,AuthenUserID,Discount,OvertimePay,UserID,foodMoney,state \n"
+        String sql = "SELECT FinancialID,fn.RegisterID,StudentID,Money,TransferMoney,SaveDate,FinancialMonth,foodMonth,FinancialComment,AuthenUserID,Discount,OvertimePay,UserID,foodMoney,state \n"
                 + "FROM tb_financial AS fn\n"
                 + "INNER JOIN tb_register AS rs ON fn.RegisterID=rs.registerID\n"
                 + "WHERE rs.yearID=? AND UserID=? AND SaveDate BETWEEN ? AND ? ORDER BY FinancialID DESC";
