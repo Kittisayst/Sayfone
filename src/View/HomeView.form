@@ -459,7 +459,7 @@
                           <Layout>
                             <DimensionLayout dim="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="joButtonIconfont6" max="32767" attributes="0"/>
+                                  <Component id="btnDocument" max="32767" attributes="0"/>
                                   <Component id="btn_Register" alignment="0" max="32767" attributes="0"/>
                                   <Component id="btnTeacherRank" alignment="0" max="32767" attributes="0"/>
                                   <Component id="btnFinancial" alignment="0" max="32767" attributes="0"/>
@@ -478,19 +478,19 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="btnAbsent" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                                      <Component id="joButtonIconfont6" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnDocument" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
                           </Layout>
                           <SubComponents>
-                            <Component class="Components.JoButtonIconfont" name="joButtonIconfont6">
+                            <Component class="Components.JoButtonIconfont" name="btnDocument">
                               <Properties>
-                                <Property name="text" type="java.lang.String" value="menu"/>
+                                <Property name="text" type="java.lang.String" value="&#xec0;&#xead;&#xe81;&#xeb0;&#xeaa;&#xeb2;&#xe99;"/>
                                 <Property name="horizontalAlignment" type="int" value="2"/>
                                 <Property name="joIcons" type="jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons" editor="org.netbeans.modules.form.editors.EnumEditor">
-                                  <Value id="NFC"/>
+                                  <Value id="LIBRARY_BOOKS"/>
                                 </Property>
                               </Properties>
                             </Component>

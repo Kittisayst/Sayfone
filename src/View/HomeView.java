@@ -88,6 +88,10 @@ public class HomeView extends javax.swing.JFrame {
         return btn_Service;
     }
 
+    public JoButtonIconfont getBtnDocument() {
+        return btnDocument;
+    }
+
     public JoButtonIconfont getBtn_report() {
         return btn_report;
     }
@@ -227,7 +231,7 @@ public class HomeView extends javax.swing.JFrame {
         btnClass = new Components.JoButtonIconfont();
         btnPermission = new Components.JoButtonIconfont();
         pn_School = new javax.swing.JPanel();
-        joButtonIconfont6 = new Components.JoButtonIconfont();
+        btnDocument = new Components.JoButtonIconfont();
         btn_Register = new Components.JoButtonIconfont();
         btnTeacherRank = new Components.JoButtonIconfont();
         btnFinancial = new Components.JoButtonIconfont();
@@ -440,9 +444,9 @@ public class HomeView extends javax.swing.JFrame {
                 .addGap(0, 0, 0))
         );
 
-        joButtonIconfont6.setText("menu");
-        joButtonIconfont6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        joButtonIconfont6.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.NFC);
+        btnDocument.setText("ເອກະສານ");
+        btnDocument.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnDocument.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.LIBRARY_BOOKS);
 
         btn_Register.setText("ເປີດການລົງທະບຽນຮຽນ");
         btn_Register.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -464,7 +468,7 @@ public class HomeView extends javax.swing.JFrame {
         pn_School.setLayout(pn_SchoolLayout);
         pn_SchoolLayout.setHorizontalGroup(
             pn_SchoolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(joButtonIconfont6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnDocument, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_Register, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnTeacherRank, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnFinancial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -482,7 +486,7 @@ public class HomeView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnAbsent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(joButtonIconfont6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnDocument, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -793,6 +797,7 @@ public class HomeView extends javax.swing.JFrame {
     private Components.JoButtonIconfont btnAbsent;
     private Components.JoButtonIconfont btnBackup;
     private Components.JoButtonIconfont btnClass;
+    private Components.JoButtonIconfont btnDocument;
     private Components.JoButtonIconfont btnFinancial;
     private Components.JoButtonIconfont btnFood;
     private Components.JoButtonIconfont btnFoodPayment;
@@ -827,7 +832,6 @@ public class HomeView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private Components.JoButtonIconfont joButtonIconfont10;
-    private Components.JoButtonIconfont joButtonIconfont6;
     private Components.JoLable joLable1;
     private Components.JoLable joLable2;
     private Components.JoLable lblCredit;

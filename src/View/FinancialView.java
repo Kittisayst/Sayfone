@@ -379,6 +379,7 @@ public class FinancialView extends javax.swing.JPanel {
         joPanel2.add(jSeparator1, gridBagConstraints);
 
         FinancialMonths.setBackground(new java.awt.Color(153, 204, 255));
+        FinancialMonths.setMinimumSize(new java.awt.Dimension(200, 174));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;

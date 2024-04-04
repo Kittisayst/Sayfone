@@ -2,7 +2,8 @@ package Component;
 
 import Components.JoLabelImage;
 import java.awt.BorderLayout;
-import java.io.File;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import javax.swing.Icon;
 
 public class DialogTransferImage extends javax.swing.JDialog {
@@ -10,6 +11,9 @@ public class DialogTransferImage extends javax.swing.JDialog {
     public DialogTransferImage(java.awt.Frame parent, boolean modal, Icon icon) {
         super(parent, modal);
         initComponents();
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        setSize(screenSize);
+        setLocationRelativeTo(null);
         JoLabelImage labelImage = new JoLabelImage();
         labelImage.setIcon(icon);
         add(labelImage, BorderLayout.CENTER);
@@ -21,7 +25,7 @@ public class DialogTransferImage extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        setSize(new java.awt.Dimension(516, 558));
+        setSize(new java.awt.Dimension(785, 561));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

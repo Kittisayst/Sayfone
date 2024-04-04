@@ -4,6 +4,7 @@ import App.About;
 import App.AppAbsent;
 import App.AppBackup;
 import App.AppClass;
+import App.AppDocument;
 import App.AppFinancialRoom;
 import App.AppPermission;
 import App.AppRegister;
@@ -99,6 +100,7 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
         view.getBtnReportPayment().addActionListener(this);
         view.getBtnTiming().addActionListener(this);
         view.getBtnFoodPayment().addActionListener(this);
+        view.getBtnDocument().addActionListener(this);
     }
 
     @Override
@@ -152,7 +154,10 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
         } else if (event.isEvent(view.getBtnAbsent())) {
             AppAbsent absent = new AppAbsent();
             absent.Open();
-        } else if (event.isEvent(view.getBtnReportFinancial())) { // ===== ລາຍງານຂໍ້ມູນ
+        }else if (event.isEvent(view.getBtnDocument())) {
+            AppDocument doc = new AppDocument();
+            doc.Open();
+        }  else if (event.isEvent(view.getBtnReportFinancial())) { // ===== ລາຍງານຂໍ້ມູນ
             AppReportFinacial appReportFinacial = new AppReportFinacial();
         } else if (event.isEvent(view.getBtnReportPayment())) {
             AppReportPayment appReportPayment = new AppReportPayment();
