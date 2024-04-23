@@ -4,7 +4,6 @@ import Component.CheckboxMonths;
 import Components.JoButton;
 import Components.JoButtonIconfont;
 import Components.JoCheckBox;
-import Components.JoLable;
 import Components.JoTable;
 import Components.JoTextArea;
 import Components.JoTextField;
@@ -15,15 +14,14 @@ import Model.UserModel;
 import Tools.JoAlert;
 import Tools.JoIconFont;
 import Utility.MyFormat;
-import java.awt.Color;
-import java.awt.Font;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import javax.swing.JPanel;
 import jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons;
 
 public class FinancialView extends javax.swing.JPanel {
+
+    MyFormat format = new MyFormat();
 
     public FinancialView(String Title) {
         initComponents();
@@ -51,19 +49,12 @@ public class FinancialView extends javax.swing.JPanel {
         }
     }
 
-//    public void showSelectMonth(HashMap<Integer, String> months) {
-//        pnSelectMonths.removeAll();
-//        months.forEach((key, data) -> {
-//            JoLable lable = new JoLable();
-//            lable.setText(data);
-//            lable.setFont(new Font("Phetsarath OT", 0, 18));
-//            lable.setForeground(new Color(153, 255, 204));
-//            pnSelectMonths.add(lable);
-//        });
-//    }
+    int sumMoney = 0;
+    int sumMoneyTransfer = 0;
+    int sumMoneyFood = 0;
+
     public void showFinancial(List<FinancialModel> models) {
         tb_data.JoClearModel();
-        MyFormat format = new MyFormat();
         UserService userService = new UserService();
         models.forEach(data -> {
             FinancialMonths.setSelectMonth(data.getFinancialMonth());
@@ -71,6 +62,9 @@ public class FinancialView extends javax.swing.JPanel {
             UserModel um = userService.getUserById(data.getUserID());
             String money = format.formatMoney(data.getMoney());
             String transfer = format.formatMoney(data.getTransferMoney());
+            sumMoney += data.getMoney();
+            sumMoneyTransfer += data.getTransferMoney();
+            sumMoneyFood += data.getFoodMoney();
             tb_data.AddJoModel(new Object[]{
                 tb_data.autoNumber(),
                 data.getFinancialIID(),
@@ -78,11 +72,19 @@ public class FinancialView extends javax.swing.JPanel {
                 money,
                 transfer,
                 toMonthString(data.getFinancialMonth()),
+                format.formatMoney(data.getFoodMoney()),
                 data.getFoodMonth(),
                 data.getFinancialComment(),
                 um.getFullName()
             });
         });
+        showSumMoney();
+    }
+
+    private void showSumMoney() {
+        int sum = sumMoney + sumMoneyTransfer;
+        lblMoney.setText(format.formatMoney(sum));
+        lblFoodMoney.setText(format.formatMoney(sumMoneyFood));
     }
 
     public void showFinacial(FinancialModel financialModel) {
@@ -141,7 +143,7 @@ public class FinancialView extends javax.swing.JPanel {
     }
 
     public boolean FoodMoney() {
-        return  (int) new MyFormat().unFormatMoney(txtFood.getText()) > 0 && foodMonths.isEmptySelect();
+        return (int) new MyFormat().unFormatMoney(txtFood.getText()) > 0 && foodMonths.isEmptySelect();
     }
 
     public int getMoney() {
@@ -240,6 +242,14 @@ public class FinancialView extends javax.swing.JPanel {
         return FinancialMonths;
     }
 
+    public JoButtonIconfont getBtnExport() {
+        return btnExport;
+    }
+
+    public String getExportName() {
+        return lbl_title.getText();
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -284,6 +294,12 @@ public class FinancialView extends javax.swing.JPanel {
         pn_Datatable = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_data = new Components.JoTable();
+        jPanel2 = new javax.swing.JPanel();
+        joLable10 = new Components.JoLable();
+        lblMoney = new Components.JoLable();
+        joLable4 = new Components.JoLable();
+        lblFoodMoney = new Components.JoLable();
+        btnExport = new Components.JoButtonIconfont();
 
         setMaximumSize(new java.awt.Dimension(0, 0));
         setMinimumSize(new java.awt.Dimension(0, 0));
@@ -319,8 +335,6 @@ public class FinancialView extends javax.swing.JPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 520;
-        gridBagConstraints.ipady = -3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         add(Pn_Navigation, gridBagConstraints);
 
@@ -331,7 +345,6 @@ public class FinancialView extends javax.swing.JPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 812;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         add(lbl_parents, gridBagConstraints);
@@ -606,7 +619,6 @@ public class FinancialView extends javax.swing.JPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipady = 40;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         add(jPanel1, gridBagConstraints);
 
@@ -617,11 +629,11 @@ public class FinancialView extends javax.swing.JPanel {
 
             },
             new String [] {
-                "#", "ເລກທີບິນ", "ວດປ", "ຈຳນວນເງິນສົດ", "ຈຳນວນເງິນໂອນ", "ເດືອນຄ່າຮຽນ", "ເດືອນອາຫານ", "ໝາຍເຫດ", "ຜູ້ລົງບັນຊີ"
+                "#", "ເລກທີບິນ", "ວດປ", "ຈຳນວນເງິນສົດ", "ຈຳນວນເງິນໂອນ", "ເດືອນຄ່າຮຽນ", "ເງິນຄ່າອາຫານ", "ເດືອນອາຫານ", "ໝາຍເຫດ", "ຜູ້ລົງບັນຊີ"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, true, false, true
+                false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -645,9 +657,12 @@ public class FinancialView extends javax.swing.JPanel {
             tb_data.getColumnModel().getColumn(4).setMinWidth(120);
             tb_data.getColumnModel().getColumn(4).setPreferredWidth(120);
             tb_data.getColumnModel().getColumn(4).setMaxWidth(120);
-            tb_data.getColumnModel().getColumn(8).setMinWidth(150);
-            tb_data.getColumnModel().getColumn(8).setPreferredWidth(150);
-            tb_data.getColumnModel().getColumn(8).setMaxWidth(150);
+            tb_data.getColumnModel().getColumn(6).setMinWidth(120);
+            tb_data.getColumnModel().getColumn(6).setPreferredWidth(120);
+            tb_data.getColumnModel().getColumn(6).setMaxWidth(120);
+            tb_data.getColumnModel().getColumn(9).setMinWidth(150);
+            tb_data.getColumnModel().getColumn(9).setPreferredWidth(150);
+            tb_data.getColumnModel().getColumn(9).setMaxWidth(150);
         }
 
         pn_Datatable.add(jScrollPane1, java.awt.BorderLayout.CENTER);
@@ -656,12 +671,40 @@ public class FinancialView extends javax.swing.JPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 834;
-        gridBagConstraints.ipady = 140;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.weighty = 0.1;
         add(pn_Datatable, gridBagConstraints);
+
+        jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 10, 5));
+
+        joLable10.setText("ຈ່າຍຄ່າຮຽນທັງໝົດ:");
+        joLable10.setFont(new java.awt.Font("Phetsarath OT", 1, 14)); // NOI18N
+        jPanel2.add(joLable10);
+
+        lblMoney.setText("0");
+        lblMoney.setFont(new java.awt.Font("Phetsarath OT", 1, 14)); // NOI18N
+        jPanel2.add(lblMoney);
+
+        joLable4.setText("ຈ່າຍຄ່າອາຫານ:");
+        joLable4.setFont(new java.awt.Font("Phetsarath OT", 1, 14)); // NOI18N
+        jPanel2.add(joLable4);
+
+        lblFoodMoney.setText("0");
+        lblFoodMoney.setFont(new java.awt.Font("Phetsarath OT", 1, 14)); // NOI18N
+        jPanel2.add(lblFoodMoney);
+
+        btnExport.setBackground(new java.awt.Color(0, 153, 102));
+        btnExport.setText("Excel");
+        btnExport.setJoIconSize(25);
+        btnExport.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.GRID_ON);
+        jPanel2.add(btnExport);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        add(jPanel2, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtOverPayKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtOverPayKeyReleased
@@ -693,19 +736,23 @@ public class FinancialView extends javax.swing.JPanel {
     private Component.CheckboxMonths FinancialMonths;
     private javax.swing.JPanel Pn_Navigation;
     private Components.JoButton btnAddTransfer;
+    private Components.JoButtonIconfont btnExport;
     private Components.JoButtonIconfont btnRefresh;
     private Components.JoButtonIconfont btnSave;
     private Components.JoButtonIconfont btn_back;
     private Components.JoCheckBox ckDiscount;
     private Component.CheckboxMonths foodMonths;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private Components.JoLable joLable1;
+    private Components.JoLable joLable10;
     private Components.JoLable joLable2;
+    private Components.JoLable joLable4;
     private Components.JoLable joLable5;
     private Components.JoLable joLable6;
     private Components.JoLable joLable7;
@@ -713,6 +760,8 @@ public class FinancialView extends javax.swing.JPanel {
     private Components.JoPanel joPanel2;
     private Components.JoPanel joPanel3;
     private Components.JoPanel joPanel4;
+    private Components.JoLable lblFoodMoney;
+    private Components.JoLable lblMoney;
     private Components.JoLable lblUserAuth;
     private Components.JoLable lbl_parents;
     private Components.JoLable lbl_title;

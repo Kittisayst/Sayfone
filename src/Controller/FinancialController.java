@@ -28,7 +28,9 @@ import Utility.MyFormat;
 import Utility.MyPopup;
 import Component.AuthenPopUp;
 import Component.DialogTransferImage;
+import Utility.JoSheet;
 import View.FinancialView;
+import View.PnLoading;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -62,6 +64,8 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
     private final MyFormat mf = new MyFormat();
     FinancialService service = new FinancialService();
     FileTransferService transferService = new FileTransferService();
+    private PnLoading loading = new PnLoading();
+    MyFormat format = new MyFormat();
 
     public FinancialController(FinancialView view, StudentModel studentModel, RegisterModel registerModel) {
         this.view = view;
@@ -86,6 +90,7 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
         List<FinancialModel> models = new FinancialService().getFinancialByStudentID(registerModel.getRegisterID(), studentModel.getStudentID()); //ດຶງຂໍ້ມູນການລົງທະບຽນ
         view.showFinancial(models); // ສະແດງຂໍ້ມູນລົງທະບຽນ
         view.setButtonState();
+
     }
 
     @Override
@@ -98,8 +103,7 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
         view.getTb_data().addMouseListener(this);
         view.getTxtMoney().addKeyListener(this);
         view.getTxtTransferMoney().addKeyListener(this);
-//        view.getBtnFoodPay().addActionListener(this);
-//        view.getBtnShowFoodAll().addActionListener(this);
+        view.getBtnExport().addActionListener(this);
         popup.addActionListener(this);
     }
 
@@ -315,6 +319,9 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
                     if (view.FoodMoney()) {
                         view.Message("ກວດສອບຂໍ້ມູນ", "ກະລຸນາເລືອກເດືອນໃນການຈາຍຄ່າອາຫານ", JoAlert.Icons.warning);
                     } else {
+                        JoAlert alert = new JoAlert();
+                        boolean isUserSaved = financialModel.getUserID() == GlobalDataModel.userModel.getUserID();
+                        System.out.println(isUserSaved);
                         Update();
                     }
                 }
@@ -354,6 +361,9 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
             }
         } else if (event.isEvent(popup.getMenuItem(5))) {
             showTransferImage();
+        } else if (event.isEvent(view.getBtnExport())) {
+            List<FinancialModel> models = new FinancialService().getFinancialByStudentID(registerModel.getRegisterID(), studentModel.getStudentID()); //ດຶງຂໍ້ມູນການລົງທະບຽນ
+            Export(models);
         }
 
 //        else if (event.isEvent(view.getBtnFoodPay())) {
@@ -559,7 +569,7 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
         MyFormat format = new MyFormat();
         String[] message = {
             "ເດືອນຄ່າຮຽນ: " + fm.getFinancialMonth(),
-             "ເດືອນຄ່າອາຫານ: " + fm.getFoodMonth(),
+            "ເດືອນຄ່າອາຫານ: " + fm.getFoodMonth(),
             "ເງິນສົດ: " + format.formatMoney(fm.getMoney()) + " ₭",
             "ເງິນໂອນ: " + format.formatMoney(fm.getTransferMoney()) + " ₭",
             "ຄ່າອາຫານ: " + format.formatMoney(fm.getFoodMoney()) + " ₭",
@@ -567,6 +577,94 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
             "ຄ່າຈ່າຍຊ້າ: " + format.formatMoney(fm.getOvertimePay()) + " ₭",
             "ໝາຍເຫດ: " + fm.getFinancialComment()};
         return alert.messages(title, message, JoAlert.Icons.info);
+    }
+
+    int row = 1;
+    int sumMoney = 0;
+    int sumMoneyTransfer = 0;
+    int sumMoneyFood = 0;
+    int sumDiscount = 0;
+    int sumOverplay = 0;
+
+    private void Export(List<FinancialModel> models) {
+        view.getBtnExport().setEnabled(false);
+        loading.setTitle("ສົ່ງອອກ ການຈ່າຍຄ່າຮຽນ " + studentModel.getFullName());
+        Thread thread = new Thread(() -> {
+            try {
+                JoFileSystem fileSystem = new JoFileSystem();
+                String genfileName = "Export ຈ່າຍຄ່າຮຽນ" + studentModel.getFullName() + new MyFormat().getTime(new Date(), "-HH-mm-ss") + ".xls";
+                String csvFile = fileSystem.getUserPath() + "/Downloads/" + genfileName;
+                String[] columns = {
+                    "ລຳດັບ",
+                    "ເລກທີບິນ",
+                    "ວັນທີເດືອນປີ",
+                    "ຈຳນວນເງິນສົດ",
+                    "ຈຳນວນເງິນໂອນ",
+                    "ເດືອນຄ່າຮຽນ",
+                    "ເງິນຄ່າອາຫານ",
+                    "ເດືອນຄ່າອາຫານ",
+                    "ສ່ວນຫຼຸດ",
+                    "ຈ່າຍຊ້າ",
+                    "ໝາຍເຫດ",
+                    "ຜູ້ລົງບັນຊີ"
+                };
+                JoSheet sheet = new JoSheet(csvFile, studentModel.getFullName().toString(), columns);
+                GlobalDataModel.rootView.setView(loading);
+                UserService userService = new UserService();
+                models.forEach(data -> {
+                    UserModel um = userService.getUserById(data.getUserID());
+                    String money = format.formatMoney(data.getMoney());
+                    String transfer = format.formatMoney(data.getTransferMoney());
+                    sumMoney += data.getMoney();
+                    sumMoneyTransfer += data.getTransferMoney();
+                    sumMoneyFood += data.getFoodMoney();
+                    sumDiscount += data.getDiscount();
+                    sumOverplay += data.getOvertimePay();
+                    sheet.addRow(
+                            row++,
+                            row - 1,
+                            data.getFinancialIID(),
+                            format.getDate(data.getFinancialDate()),
+                            money,
+                            transfer,
+                            data.getFinancialMonth(),
+                            format.formatMoney(data.getFoodMoney()),
+                            data.getFoodMonth(),
+                            data.getDiscount(),
+                            data.getOvertimePay(),
+                            data.getFinancialComment(),
+                            um.getFullName()
+                    );
+                    loading.StartProgress(models.size(), 100);
+                });
+                sheet.addRow(
+                        row++,
+                        "",
+                        "",
+                        "",
+                        format.formatMoney(sumMoney),
+                        format.formatMoney(sumMoneyTransfer),
+                        "",
+                        format.formatMoney(sumMoneyFood),
+                        "",
+                        format.formatMoney(sumDiscount),
+                        format.formatMoney(sumOverplay),
+                        "",
+                        ""
+                );
+                sheet.getCreateSheet();
+                fileSystem.OpenFile(csvFile);
+            } catch (Exception e) {
+                e.printStackTrace();
+                JoAlert.Error(e, this);
+                JoLoger.saveLog(e, this);
+            } finally {
+                loading.close();
+                row = 1;
+                GlobalDataModel.rootView.setView(view);
+            }
+        });
+        thread.start();
     }
 
 }
