@@ -149,7 +149,7 @@ public class TeacherFileDAO implements TeacherFileFn {
         JoConnect connect = new JoConnect();
         JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         try {
-            PreparedStatement pre = sql.getSelectCustom("TeacherID=?");
+            PreparedStatement pre = sql.getSelectCustom("teacherFileID=?");
             pre.setInt(1, TeacherFileID);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {

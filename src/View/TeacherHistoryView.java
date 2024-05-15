@@ -169,7 +169,7 @@ public class TeacherHistoryView extends javax.swing.JPanel {
     public void showFiles(List<TeacherFileModel> models) {
         tb_TeacherFile.JoClearModel();
         models.forEach(data -> {
-            tb_TeacherFile.AddJoModel(new Object[]{tb_TeacherFile.autoNumber(), data.getID(), data.getFlieName(), data.getComments()});
+            tb_TeacherFile.AddJoModel(new Object[]{tb_TeacherFile.autoNumber(), data.getFileID(), data.getFlieName(), data.getComments()});
         });
         JoDataTable dataTable = new JoDataTable(pn_dataFile);
         dataTable.setHiddenColumns(1);
@@ -180,6 +180,10 @@ public class TeacherHistoryView extends javax.swing.JPanel {
     public void showFile(TeacherFileModel model) {
         txt_TeacherFileName.setText(model.getFlieName());
         txtFileComment.setText(model.getComments());
+    }
+
+    public void clearSelect() {
+        tb_TeacherFile.clearSelection();
     }
 
     //Location
@@ -431,8 +435,6 @@ public class TeacherHistoryView extends javax.swing.JPanel {
     public String getTxtFileComment() {
         return txtFileComment.getText();
     }
-    
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

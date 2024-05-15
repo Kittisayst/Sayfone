@@ -16,7 +16,6 @@ import DAOSevervice.TeacherExperienceService;
 import DAOSevervice.TeacherFileService;
 import DAOSevervice.TeacherHistoryService;
 import DAOSevervice.TeacherService;
-import Model.FileModel;
 import Model.GlobalDataModel;
 import Tools.JoAlert;
 import Tools.JoFilechooser;
@@ -534,9 +533,7 @@ public class TeacherHistoryController implements JoMVC, ActionListener, ChangeLi
                 view.getTxt_TeacherFileName().setText(filechooser.getSelectedFile().getAbsolutePath());
             }
         } else if (event.isEvent(FilePopup.getItemshow())) {
-            int FileID = view.getTb_TeacherFile().getIntValue(1);
-            fileModel = fileService.getTeacherFileById(FileID);
-            fileService.CreatePDF(fileModel);
+            openFile();
         } else if (event.isEvent(FilePopup.getItemEdit())) {
             int FileID = view.getTb_TeacherFile().getIntValue(1);
             fileModel = fileService.getTeacherFileById(FileID);
@@ -652,6 +649,19 @@ public class TeacherHistoryController implements JoMVC, ActionListener, ChangeLi
         JoHookEvent event = new JoHookEvent(e.getSource());
         if (event.isEvent(view.getTb_TeacherFile())) {
             FilePopup.ShowPopup(e);
+        }
+    }
+
+    private void openFile() {
+        try {
+            int FileID = view.getTb_TeacherFile().getIntValue(1);
+            fileModel = fileService.getTeacherFileById(FileID);
+            fileService.CreatePDF(fileModel);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            fileModel = new TeacherFileModel();
+            view.clearSelect();
         }
     }
 
