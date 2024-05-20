@@ -162,8 +162,30 @@ public class FinancialModel {
     }
 
     @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 97 * hash + this.StudentID;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final FinancialModel other = (FinancialModel) obj;
+        return this.StudentID == other.StudentID;
+    }
+
+    @Override
     public String toString() {
-        return "FinancialModel{" + "FinancialIID=" + FinancialIID + ", RegisterID=" + RegisterID + ", StudentID=" + StudentID + ", Money=" + Money + ", TransferMoney=" + TransferMoney + ", FinancialDate=" + FinancialDate + ", FinancialMonth=" + FinancialMonth + ", FinancialComment=" + FinancialComment + ", AuthenUserID=" + AuthenUserID + ", Discount=" + Discount + ", OvertimePay=" + OvertimePay + ", UserID=" + UserID + ", foodMoney=" + foodMoney + ", state=" + state + '}';
+        return "FinancialModel{" + "FinancialIID=" + FinancialIID + ", RegisterID=" + RegisterID + ", StudentID=" + StudentID + ", Money=" + Money + ", TransferMoney=" + TransferMoney + ", FinancialDate=" + FinancialDate + ", FinancialMonth=" + FinancialMonth + ", FoodMonth=" + FoodMonth + ", FinancialComment=" + FinancialComment + ", AuthenUserID=" + AuthenUserID + ", Discount=" + Discount + ", OvertimePay=" + OvertimePay + ", UserID=" + UserID + ", foodMoney=" + foodMoney + ", state=" + state + '}';
     }
 
 }

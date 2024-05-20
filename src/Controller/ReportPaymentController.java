@@ -165,10 +165,15 @@ public class ReportPaymentController implements JoMVC, ActionListener, ItemListe
                 List<FinancialModel> models = financialService.getReportFinancialByRegisterID(registerID);
                 models.forEach(data -> {
                     List<Integer> months = mc.StringToArray(data.getFinancialMonth());
+                    List<Integer> Foodmonths = mc.StringToArray(data.getFoodMonth());
                     boolean isMonth = months.contains(view.getMonth());
+                    boolean isFoodMonth = Foodmonths.contains(view.getMonth());
                     if (isMonth) {
                         reportData.add(data);
                         sumMoney(data.getMoney(), data.getTransferMoney(), data.getFoodMoney(), data.getDiscount(), data.getOvertimePay());
+                    }
+                    if (isFoodMonth) {
+                        updateFoodMoney(data);
                     }
                 });
                 view.showReport(reportData);
@@ -220,6 +225,7 @@ public class ReportPaymentController implements JoMVC, ActionListener, ItemListe
                     "ຈ່າຍຊ້າ",
                     "ຄ່າອາຫານ",
                     "ຈ່າຍເດືອນ",
+                    "ເດືອນອາຫານ",
                     "ວັນທີລົງບັນຊີ",
                     "ໝາຍເຫດ",
                     "ຜູ້ລົງບັນຊີ"
@@ -240,6 +246,7 @@ public class ReportPaymentController implements JoMVC, ActionListener, ItemListe
                             format.formatMoney(data.getOvertimePay()),
                             format.formatMoney(data.getFoodMoney()),
                             data.getFinancialMonth(),
+                            data.getFoodMonth(),
                             format.getDate(data.getFinancialDate()),
                             data.getFinancialComment(),
                             userModel.getFullName()
@@ -259,6 +266,15 @@ public class ReportPaymentController implements JoMVC, ActionListener, ItemListe
             }
         });
         thread.start();
+    }
+
+    private void updateFoodMoney(FinancialModel financialModel) {
+        for (FinancialModel item : reportData) {
+            if (item.equals(financialModel)) {
+                item.setFoodMoney(financialModel.getFoodMoney());
+                item.setFoodMonth(financialModel.getFoodMonth());
+            }
+        }
     }
 
 }
