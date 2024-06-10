@@ -200,6 +200,10 @@ public class HomeView extends javax.swing.JFrame {
         return btnFoodPayment;
     }
 
+    public JoButtonIconfont getBtnPaymentSetting() {
+        return btnPaymentSetting;
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -217,7 +221,7 @@ public class HomeView extends javax.swing.JFrame {
         pn_DrawerHeader = new javax.swing.JPanel();
         lblLogo = new Components.JoLabelImage();
         joLable1 = new Components.JoLable();
-        jPanel2 = new javax.swing.JPanel();
+        pnMainSidebar = new javax.swing.JPanel();
         scrollMenu = new javax.swing.JScrollPane();
         pnSideBar = new javax.swing.JPanel();
         btn_home = new Components.JoButtonIconfont();
@@ -241,7 +245,6 @@ public class HomeView extends javax.swing.JFrame {
         btnReportPay = new Components.JoButtonIconfont();
         btnReportTeacher = new Components.JoButtonIconfont();
         btnReportStudent = new Components.JoButtonIconfont();
-        joButtonIconfont10 = new Components.JoButtonIconfont();
         btnWithdraw = new Components.JoButtonIconfont();
         btnFood = new Components.JoButtonIconfont();
         btnReportUserFinancial = new Components.JoButtonIconfont();
@@ -259,6 +262,8 @@ public class HomeView extends javax.swing.JFrame {
         btnPrinter = new Components.JoButtonIconfont();
         btnBackup = new Components.JoButtonIconfont();
         btnTiming = new Components.JoButtonIconfont();
+        btnPaymentSetting = new Components.JoButtonIconfont();
+        jPanel3 = new javax.swing.JPanel();
         pnContent = new javax.swing.JPanel();
         MyRouter = new Components.JoRouter();
         pnFooter = new javax.swing.JPanel();
@@ -323,91 +328,143 @@ public class HomeView extends javax.swing.JFrame {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         jPanel1.add(Pn_Navbar, gridBagConstraints);
 
+        Pn_Menu.setMaximumSize(new java.awt.Dimension(0, 0));
+        Pn_Menu.setMinimumSize(new java.awt.Dimension(280, 104));
+        Pn_Menu.setLayout(new java.awt.GridBagLayout());
+
         pn_DrawerHeader.setBackground(new java.awt.Color(10, 49, 89));
-        pn_DrawerHeader.setPreferredSize(new java.awt.Dimension(249, 50));
+        pn_DrawerHeader.setMaximumSize(new java.awt.Dimension(0, 0));
+        pn_DrawerHeader.setMinimumSize(new java.awt.Dimension(320, 50));
+        pn_DrawerHeader.setLayout(new java.awt.GridBagLayout());
 
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/bcel.png"))); // NOI18N
+        lblLogo.setMinimumSize(new java.awt.Dimension(50, 50));
+        lblLogo.setPreferredSize(new java.awt.Dimension(50, 50));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        pn_DrawerHeader.add(lblLogo, gridBagConstraints);
 
         joLable1.setForeground(new java.awt.Color(255, 255, 255));
         joLable1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         joLable1.setText("Sayfone School");
         joLable1.setFont(new java.awt.Font("Phetsarath OT", 1, 20)); // NOI18N
         joLable1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        joLable1.setMaximumSize(new java.awt.Dimension(0, 0));
+        joLable1.setMinimumSize(new java.awt.Dimension(0, 0));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.weighty = 0.1;
+        pn_DrawerHeader.add(joLable1, gridBagConstraints);
 
-        javax.swing.GroupLayout pn_DrawerHeaderLayout = new javax.swing.GroupLayout(pn_DrawerHeader);
-        pn_DrawerHeader.setLayout(pn_DrawerHeaderLayout);
-        pn_DrawerHeaderLayout.setHorizontalGroup(
-            pn_DrawerHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pn_DrawerHeaderLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(joLable1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        pn_DrawerHeaderLayout.setVerticalGroup(
-            pn_DrawerHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_DrawerHeaderLayout.createSequentialGroup()
-                .addGap(2, 2, 2)
-                .addGroup(pn_DrawerHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(joLable1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(2, 2, 2))
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 0.1;
+        Pn_Menu.add(pn_DrawerHeader, gridBagConstraints);
 
-        jPanel2.setLayout(new java.awt.BorderLayout());
+        pnMainSidebar.setLayout(new java.awt.GridBagLayout());
 
         scrollMenu.setBorder(null);
         scrollMenu.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scrollMenu.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        scrollMenu.setMaximumSize(new java.awt.Dimension(0, 0));
 
         pnSideBar.setBackground(new java.awt.Color(15, 77, 140));
-        pnSideBar.setMaximumSize(new java.awt.Dimension(250, 1375));
-        pnSideBar.setMinimumSize(new java.awt.Dimension(250, 1375));
-        pnSideBar.setPreferredSize(new java.awt.Dimension(250, 1375));
+        pnSideBar.setMaximumSize(new java.awt.Dimension(0, 2147483647));
+        pnSideBar.setMinimumSize(new java.awt.Dimension(0, 1298));
+        pnSideBar.setLayout(new java.awt.GridBagLayout());
 
         btn_home.setBackground(new java.awt.Color(10, 49, 89));
         btn_home.setText("Home");
         btn_home.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btn_home.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.HOME);
         btn_home.setJocolorHover(new java.awt.Color(6, 32, 58));
+        btn_home.setMaximumSize(new java.awt.Dimension(270, 40));
+        btn_home.setMinimumSize(new java.awt.Dimension(270, 40));
+        btn_home.setPreferredSize(new java.awt.Dimension(270, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        pnSideBar.add(btn_home, gridBagConstraints);
 
         btn_Manage.setBackground(new java.awt.Color(10, 49, 89));
         btn_Manage.setText("ຈັດການຂໍ້ມູນ");
         btn_Manage.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btn_Manage.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.WIDGETS);
         btn_Manage.setJocolorHover(new java.awt.Color(6, 32, 58));
+        btn_Manage.setMaximumSize(new java.awt.Dimension(270, 40));
+        btn_Manage.setMinimumSize(new java.awt.Dimension(270, 40));
+        btn_Manage.setPreferredSize(new java.awt.Dimension(270, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
+        pnSideBar.add(btn_Manage, gridBagConstraints);
 
         btn_teacher.setText("ຈັດການຂໍ້ມູນອາຈານ");
         btn_teacher.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btn_teacher.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.ASSIGNMENT_IND);
+        btn_teacher.setMaximumSize(new java.awt.Dimension(270, 40));
+        btn_teacher.setMinimumSize(new java.awt.Dimension(270, 40));
+        btn_teacher.setPreferredSize(new java.awt.Dimension(270, 40));
 
         btn_Student.setText("ຈັດການຂໍ້ມູນນັກຮຽນ");
         btn_Student.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btn_Student.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.PEOPLE);
+        btn_Student.setMaximumSize(new java.awt.Dimension(270, 40));
+        btn_Student.setMinimumSize(new java.awt.Dimension(270, 40));
+        btn_Student.setPreferredSize(new java.awt.Dimension(270, 40));
 
         btnSubject.setText("ຈັດການລາຍວິຊາ");
         btnSubject.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnSubject.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.CLASS);
+        btnSubject.setMaximumSize(new java.awt.Dimension(270, 40));
+        btnSubject.setMinimumSize(new java.awt.Dimension(270, 40));
+        btnSubject.setPreferredSize(new java.awt.Dimension(270, 40));
 
         btnSubjectTeacher.setText("ຈັດການວິຊາ-ຄຸສອນ");
         btnSubjectTeacher.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnSubjectTeacher.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.LOCAL_LIBRARY);
+        btnSubjectTeacher.setMaximumSize(new java.awt.Dimension(270, 40));
+        btnSubjectTeacher.setMinimumSize(new java.awt.Dimension(270, 40));
+        btnSubjectTeacher.setPreferredSize(new java.awt.Dimension(270, 40));
 
         btnUser.setText("ຈັດການຂໍ້ມູນຜູ້ໃຊ້ງານ");
         btnUser.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnUser.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.ACCOUNT_CIRCLE);
+        btnUser.setMaximumSize(new java.awt.Dimension(270, 40));
+        btnUser.setMinimumSize(new java.awt.Dimension(270, 40));
+        btnUser.setPreferredSize(new java.awt.Dimension(270, 40));
 
         btnClass.setText("ຂໍ້ມູນຂະແໜງ");
         btnClass.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnClass.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.SCHOOL);
+        btnClass.setMaximumSize(new java.awt.Dimension(270, 40));
+        btnClass.setMinimumSize(new java.awt.Dimension(270, 40));
+        btnClass.setPreferredSize(new java.awt.Dimension(270, 40));
 
         btnPermission.setText("ຈັດການຂໍ້ມູນສິດທິ");
         btnPermission.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnPermission.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.ASSIGNMENT_IND);
+        btnPermission.setMaximumSize(new java.awt.Dimension(270, 40));
+        btnPermission.setMinimumSize(new java.awt.Dimension(270, 40));
+        btnPermission.setPreferredSize(new java.awt.Dimension(270, 40));
 
         javax.swing.GroupLayout PN_ManageLayout = new javax.swing.GroupLayout(PN_Manage);
         PN_Manage.setLayout(PN_ManageLayout);
@@ -444,290 +501,448 @@ public class HomeView extends javax.swing.JFrame {
                 .addGap(0, 0, 0))
         );
 
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
+        pnSideBar.add(PN_Manage, gridBagConstraints);
+
+        pn_School.setLayout(new java.awt.GridBagLayout());
+
         btnDocument.setText("ເອກະສານ");
         btnDocument.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnDocument.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.LIBRARY_BOOKS);
+        btnDocument.setMaximumSize(new java.awt.Dimension(270, 40));
+        btnDocument.setMinimumSize(new java.awt.Dimension(270, 40));
+        btnDocument.setPreferredSize(new java.awt.Dimension(270, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 0.1;
+        pn_School.add(btnDocument, gridBagConstraints);
 
         btn_Register.setText("ເປີດການລົງທະບຽນຮຽນ");
         btn_Register.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btn_Register.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.EVENT_AVAILABLE);
+        btn_Register.setMaximumSize(new java.awt.Dimension(270, 40));
+        btn_Register.setMinimumSize(new java.awt.Dimension(270, 40));
+        btn_Register.setPreferredSize(new java.awt.Dimension(270, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 0.2;
+        pn_School.add(btn_Register, gridBagConstraints);
 
         btnTeacherRank.setText("ຈັດອັນດັບຄູ");
         btnTeacherRank.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnTeacherRank.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.LOCAL_PLAY);
+        btnTeacherRank.setMaximumSize(new java.awt.Dimension(270, 40));
+        btnTeacherRank.setMinimumSize(new java.awt.Dimension(270, 40));
+        btnTeacherRank.setPreferredSize(new java.awt.Dimension(270, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        pn_School.add(btnTeacherRank, gridBagConstraints);
 
         btnFinancial.setText("ຈ່າຍຄ່າຮຽນ");
         btnFinancial.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnFinancial.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.MONETIZATION_ON);
+        btnFinancial.setMaximumSize(new java.awt.Dimension(270, 40));
+        btnFinancial.setMinimumSize(new java.awt.Dimension(270, 40));
+        btnFinancial.setPreferredSize(new java.awt.Dimension(270, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        pn_School.add(btnFinancial, gridBagConstraints);
 
         btnAbsent.setText("ບັນທຶກການຂາດຮຽນ");
         btnAbsent.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnAbsent.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.ASSIGNMENT_TURNED_IN);
+        btnAbsent.setMaximumSize(new java.awt.Dimension(270, 40));
+        btnAbsent.setMinimumSize(new java.awt.Dimension(270, 40));
+        btnAbsent.setPreferredSize(new java.awt.Dimension(270, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        pn_School.add(btnAbsent, gridBagConstraints);
 
-        javax.swing.GroupLayout pn_SchoolLayout = new javax.swing.GroupLayout(pn_School);
-        pn_School.setLayout(pn_SchoolLayout);
-        pn_SchoolLayout.setHorizontalGroup(
-            pn_SchoolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btnDocument, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btn_Register, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnTeacherRank, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnFinancial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnAbsent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        pn_SchoolLayout.setVerticalGroup(
-            pn_SchoolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pn_SchoolLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(btn_Register, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnFinancial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnTeacherRank, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAbsent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnDocument, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
+        pnSideBar.add(pn_School, gridBagConstraints);
+
+        pn_report.setMaximumSize(new java.awt.Dimension(0, 0));
+        pn_report.setMinimumSize(new java.awt.Dimension(250, 0));
+        pn_report.setLayout(new java.awt.GridBagLayout());
 
         btnReportFinancial.setText("ລາຍງານການຈ່າຍຄ່າຮຽນ");
         btnReportFinancial.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnReportFinancial.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.MONETIZATION_ON);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        pn_report.add(btnReportFinancial, gridBagConstraints);
 
         btnReportPay.setText("ລາຍງານຜູ້ຄ້າງຄ່າຮຽນ");
         btnReportPay.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnReportPay.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.EVENT_BUSY);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        pn_report.add(btnReportPay, gridBagConstraints);
 
         btnReportTeacher.setText("ລາຍງານສະຖິຕິຄູ");
         btnReportTeacher.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnReportTeacher.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.ASSIGNMENT_IND);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        pn_report.add(btnReportTeacher, gridBagConstraints);
 
         btnReportStudent.setText("ລາຍງານຂໍ້ມູນນັກຮຽນ");
         btnReportStudent.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnReportStudent.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.RECENT_ACTORS);
-
-        joButtonIconfont10.setText("menu");
-        joButtonIconfont10.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        joButtonIconfont10.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.NFC);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 11;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        pn_report.add(btnReportStudent, gridBagConstraints);
 
         btnWithdraw.setText("ລາຍງານການຖອນເງິນຄືນ");
         btnWithdraw.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnWithdraw.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.ROTATE_90_DEGREES_CCW);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        pn_report.add(btnWithdraw, gridBagConstraints);
 
         btnFood.setText("ລາຍງານຄ່າອາຫານ");
         btnFood.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnFood.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.LOCAL_DINING);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        pn_report.add(btnFood, gridBagConstraints);
 
         btnReportUserFinancial.setText("ລາຍງານການຈ່າຍຄ່າຮຽນຕາມຜູ້ໃຊ່ງານ");
         btnReportUserFinancial.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnReportUserFinancial.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.FOLDER_SHARED);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        pn_report.add(btnReportUserFinancial, gridBagConstraints);
 
         btnReportDiscount.setText("ລາຍງານສ່ວນຫຼຸດ");
         btnReportDiscount.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnReportDiscount.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.LOCAL_ATM);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        pn_report.add(btnReportDiscount, gridBagConstraints);
 
         btnReportTeacherMoney.setText("ລາຍງານການເງິນຄູ");
         btnReportTeacherMoney.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnReportTeacherMoney.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.SWAP_VERTICAL_CIRCLE);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        pn_report.add(btnReportTeacherMoney, gridBagConstraints);
 
         btnReportUserClassMoney.setText("ລາຍງານການຈ່າຍຄ່າຮຽນຕາມຫ້ອງຮຽນ");
         btnReportUserClassMoney.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnReportUserClassMoney.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.LOCAL_ATM);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        pn_report.add(btnReportUserClassMoney, gridBagConstraints);
 
         btnReportStudentState.setText("ລາຍງານຂໍ້ມູນນັກຮຽນທັງໝົດ");
         btnReportStudentState.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnReportStudentState.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.PEOPLE);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        pn_report.add(btnReportStudentState, gridBagConstraints);
 
         btnReportPayment.setText("ລາຍງານການຈ່າຍຄ່າຮຽນປະຈຳເດືອນ");
         btnReportPayment.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnReportPayment.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.EVENT);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        pn_report.add(btnReportPayment, gridBagConstraints);
 
         btnFoodPayment.setText("ລາຍງານຄ່າອາຫານ V2");
         btnFoodPayment.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnFoodPayment.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.LOCAL_DINING);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        pn_report.add(btnFoodPayment, gridBagConstraints);
 
-        javax.swing.GroupLayout pn_reportLayout = new javax.swing.GroupLayout(pn_report);
-        pn_report.setLayout(pn_reportLayout);
-        pn_reportLayout.setHorizontalGroup(
-            pn_reportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(joButtonIconfont10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnReportFinancial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnReportStudent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnReportPay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnReportTeacher, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnWithdraw, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnFood, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnReportUserFinancial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnReportDiscount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnReportTeacherMoney, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnReportUserClassMoney, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnReportStudentState, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnReportPayment, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnFoodPayment, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        pn_reportLayout.setVerticalGroup(
-            pn_reportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pn_reportLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(btnReportFinancial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnReportPayment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnReportUserFinancial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnReportUserClassMoney, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnReportPay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnFood, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnFoodPayment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnReportDiscount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnWithdraw, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnReportTeacher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnReportTeacherMoney, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnReportStudent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnReportStudentState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(joButtonIconfont10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
+        pnSideBar.add(pn_report, gridBagConstraints);
 
         btn_Service.setBackground(new java.awt.Color(10, 49, 89));
         btn_Service.setText("ການຮຽນການສອນ");
         btn_Service.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btn_Service.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.ACCOUNT_BALANCE);
         btn_Service.setJocolorHover(new java.awt.Color(6, 32, 58));
-        btn_Service.setMaximumSize(new java.awt.Dimension(125, 41));
-        btn_Service.setPreferredSize(new java.awt.Dimension(125, 41));
+        btn_Service.setMaximumSize(new java.awt.Dimension(270, 40));
+        btn_Service.setMinimumSize(new java.awt.Dimension(270, 40));
+        btn_Service.setPreferredSize(new java.awt.Dimension(270, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
+        pnSideBar.add(btn_Service, gridBagConstraints);
 
         btn_report.setBackground(new java.awt.Color(10, 49, 89));
         btn_report.setText("ລາຍງານ");
         btn_report.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btn_report.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.INSERT_CHART);
         btn_report.setJocolorHover(new java.awt.Color(6, 32, 58));
+        btn_report.setMaximumSize(new java.awt.Dimension(270, 40));
+        btn_report.setMinimumSize(new java.awt.Dimension(270, 40));
+        btn_report.setPreferredSize(new java.awt.Dimension(270, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
+        pnSideBar.add(btn_report, gridBagConstraints);
 
         btn_Setting.setBackground(new java.awt.Color(10, 49, 89));
         btn_Setting.setText("ຕັ້ງຄ່າ");
         btn_Setting.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btn_Setting.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.SETTINGS);
         btn_Setting.setJocolorHover(new java.awt.Color(6, 32, 58));
+        btn_Setting.setMaximumSize(new java.awt.Dimension(270, 40));
+        btn_Setting.setMinimumSize(new java.awt.Dimension(270, 40));
+        btn_Setting.setPreferredSize(new java.awt.Dimension(270, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
+        pnSideBar.add(btn_Setting, gridBagConstraints);
+
+        pnSetting.setMaximumSize(new java.awt.Dimension(272, 2147483647));
+        pnSetting.setMinimumSize(new java.awt.Dimension(272, 225));
+        pnSetting.setPreferredSize(new java.awt.Dimension(272, 225));
+        pnSetting.setLayout(new java.awt.GridBagLayout());
 
         btnInfo.setText("ຂໍ້ມູນໂຮງຮຽນສາຍຝົນ");
         btnInfo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnInfo.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.INFO);
+        btnInfo.setMaximumSize(new java.awt.Dimension(270, 40));
+        btnInfo.setMinimumSize(new java.awt.Dimension(270, 40));
+        btnInfo.setPreferredSize(new java.awt.Dimension(270, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
+        pnSetting.add(btnInfo, gridBagConstraints);
 
         btnPrinter.setText("ຂໍ້ມູນປີ້ນເຕີ");
         btnPrinter.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnPrinter.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.PRINT);
+        btnPrinter.setMaximumSize(new java.awt.Dimension(270, 40));
+        btnPrinter.setMinimumSize(new java.awt.Dimension(270, 40));
+        btnPrinter.setPreferredSize(new java.awt.Dimension(270, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
+        pnSetting.add(btnPrinter, gridBagConstraints);
 
         btnBackup.setText("ສຳຮອງຂໍ້ມູນ");
         btnBackup.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnBackup.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.BACKUP);
+        btnBackup.setMaximumSize(new java.awt.Dimension(270, 40));
+        btnBackup.setMinimumSize(new java.awt.Dimension(270, 40));
+        btnBackup.setPreferredSize(new java.awt.Dimension(270, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
+        pnSetting.add(btnBackup, gridBagConstraints);
 
         btnTiming.setText("ຕັ້ງເວລາຈາຍຄ່າຮຽນ");
         btnTiming.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnTiming.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.ACCESS_ALARMS);
+        btnTiming.setMaximumSize(new java.awt.Dimension(270, 40));
+        btnTiming.setMinimumSize(new java.awt.Dimension(270, 40));
+        btnTiming.setPreferredSize(new java.awt.Dimension(270, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.weightx = 0.1;
+        pnSetting.add(btnTiming, gridBagConstraints);
 
-        javax.swing.GroupLayout pnSettingLayout = new javax.swing.GroupLayout(pnSetting);
-        pnSetting.setLayout(pnSettingLayout);
-        pnSettingLayout.setHorizontalGroup(
-            pnSettingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btnInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnPrinter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnBackup, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnTiming, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        pnSettingLayout.setVerticalGroup(
-            pnSettingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnSettingLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(btnTiming, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnPrinter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnBackup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        btnPaymentSetting.setText("ຕັ້ງຄ່າການຈ່າຍຄ່າຮຽນ");
+        btnPaymentSetting.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnPaymentSetting.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.MONETIZATION_ON);
+        btnPaymentSetting.setMaximumSize(new java.awt.Dimension(270, 40));
+        btnPaymentSetting.setMinimumSize(new java.awt.Dimension(270, 40));
+        btnPaymentSetting.setPreferredSize(new java.awt.Dimension(270, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
+        pnSetting.add(btnPaymentSetting, gridBagConstraints);
 
-        javax.swing.GroupLayout pnSideBarLayout = new javax.swing.GroupLayout(pnSideBar);
-        pnSideBar.setLayout(pnSideBarLayout);
-        pnSideBarLayout.setHorizontalGroup(
-            pnSideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnSideBarLayout.createSequentialGroup()
-                .addGap(3, 3, 3)
-                .addGroup(pnSideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_home, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_Manage, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(PN_Manage, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_Service, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pn_School, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_report, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pn_report, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_Setting, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(3, 3, 3))
-            .addGroup(pnSideBarLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pnSetting, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        pnSideBarLayout.setVerticalGroup(
-            pnSideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnSideBarLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btn_home, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_Manage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(PN_Manage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_Service, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pn_School, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_report, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pn_report, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_Setting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnSetting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 5);
+        pnSideBar.add(pnSetting, gridBagConstraints);
 
-        scrollMenu.setViewportView(pnSideBar);
+        jPanel3.setMaximumSize(new java.awt.Dimension(0, 0));
+        jPanel3.setMinimumSize(new java.awt.Dimension(250, 0));
+        jPanel3.setOpaque(false);
 
-        jPanel2.add(scrollMenu, java.awt.BorderLayout.CENTER);
-
-        javax.swing.GroupLayout Pn_MenuLayout = new javax.swing.GroupLayout(Pn_Menu);
-        Pn_Menu.setLayout(Pn_MenuLayout);
-        Pn_MenuLayout.setHorizontalGroup(
-            Pn_MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pn_DrawerHeader, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
-        Pn_MenuLayout.setVerticalGroup(
-            Pn_MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Pn_MenuLayout.createSequentialGroup()
-                .addComponent(pn_DrawerHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.weighty = 0.1;
+        pnSideBar.add(jPanel3, gridBagConstraints);
+
+        scrollMenu.setViewportView(pnSideBar);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.weighty = 0.1;
+        pnMainSidebar.add(scrollMenu, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weighty = 0.1;
+        Pn_Menu.add(pnMainSidebar, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         jPanel1.add(Pn_Menu, gridBagConstraints);
 
         pnContent.setLayout(new java.awt.GridBagLayout());
@@ -775,7 +990,7 @@ public class HomeView extends javax.swing.JFrame {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.weighty = 0.1;
         jPanel1.add(pnContent, gridBagConstraints);
@@ -802,6 +1017,7 @@ public class HomeView extends javax.swing.JFrame {
     private Components.JoButtonIconfont btnFood;
     private Components.JoButtonIconfont btnFoodPayment;
     private Components.JoButtonIconfont btnInfo;
+    private Components.JoButtonIconfont btnPaymentSetting;
     private Components.JoButtonIconfont btnPermission;
     private Components.JoButtonIconfont btnPrinter;
     private Components.JoButtonIconfont btnReportDiscount;
@@ -830,8 +1046,7 @@ public class HomeView extends javax.swing.JFrame {
     private Components.JoButtonIconfont btn_report;
     private Components.JoButtonIconfont btn_teacher;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private Components.JoButtonIconfont joButtonIconfont10;
+    private javax.swing.JPanel jPanel3;
     private Components.JoLable joLable1;
     private Components.JoLable joLable2;
     private Components.JoLable lblCredit;
@@ -841,6 +1056,7 @@ public class HomeView extends javax.swing.JFrame {
     private Components.JoLableIcon lbl_user;
     private javax.swing.JPanel pnContent;
     private javax.swing.JPanel pnFooter;
+    private javax.swing.JPanel pnMainSidebar;
     private javax.swing.JPanel pnSetting;
     private javax.swing.JPanel pnSideBar;
     private javax.swing.JPanel pn_DrawerHeader;

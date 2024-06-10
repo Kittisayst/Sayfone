@@ -21,5 +21,7 @@ public class GlobalDataModel {
     //=========== View ==============
     public static HomeView rootView;
     public static DasboardView dasboardView;
+    //setting
+    public static SettingModel settingModel;
 
 }

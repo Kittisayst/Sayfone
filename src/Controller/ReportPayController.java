@@ -149,61 +149,38 @@ public class ReportPayController implements JoMVC, ActionListener, ItemListener,
                 String csvFile = fileSystem.getUserPath() + "/Downloads/" + genfileName;
                 String[] columns = {
                     "ລຳດັບ",
-                    "ເລກທີບິນ",
                     "ຫ້ອງຮຽນ",
                     "ຊື່ ແລະ ນາມສະກຸນນັກຮຽນ",
-                    "ເງິນສົດ",
-                    "ເງິນໂອນ",
-                    "ສ່ວນຫຼຸດ",
-                    "ຈ່າຍຊ້າ",
-                    "ຄ່າອາຫານ",
                     "ຄ້າງເດືອນ",
-                    "ວັນທີລົງບັນຊີ",
-                    "ໝາຍເຫດ",
-                    "ຜູ້ລົງບັນຊີ"
-                };
+                    "ຄ່າອາຫານຄ້າງເດືອນ",};
                 JoSheet sheet = new JoSheet(csvFile, view.getExportName(), columns);
                 GlobalDataModel.rootView.setView(loading);
                 MonthCaculator mc = new MonthCaculator();
                 listFinancials.forEach(data -> {
-                    UserModel userModel = userService.getUserById(data.getUserID());
                     StudentModel studentModel = studentService.getStudentById(data.getStudentID());
                     FinancialModel fm = financialService.getFinancialCalculator(data.getRegisterID(), data.getStudentID());
                     String findMissingMonth = mc.getMissingMonth(fm.getFinancialMonth());
                     List<Integer> months = mc.getToArray();
+                    mc.getMissingMonth(fm.getFoodMonth());
+                    List<Integer> foodmonths = mc.getToArray();
                     if (view.getMonth() == 0) {
                         sheet.addRow(row++,
                                 row - 1,
-                                data.getFinancialIID(),
                                 view.getClassName(),
                                 studentModel.getFullName(),
-                                format.formatMoney(data.getMoney()),
-                                format.formatMoney(data.getTransferMoney()),
-                                format.formatMoney(data.getDiscount()),
-                                format.formatMoney(data.getOvertimePay()),
-                                format.formatMoney(data.getFoodMoney()),
                                 findMissingMonth,
-                                format.getDate(data.getFinancialDate()),
-                                fm.getFinancialComment(),
-                                userModel.getFullName()
+                                foodmonths.toString()
                         );
                     } else {
-                        boolean isMonth = months.contains(view.getMonth());
-                        if (isMonth) {
+                        List<Integer> disPayMonths = view.filterMonths(months, view.getMonth());
+                        List<Integer> disPayFoodMonths = view.filterMonths(foodmonths, view.getMonth());
+                        if (!disPayMonths.isEmpty()) {
                             sheet.addRow(row++,
                                     row - 1,
-                                    data.getFinancialIID(),
                                     view.getClassName(),
                                     studentModel.getFullName(),
-                                    format.formatMoney(data.getMoney()),
-                                    format.formatMoney(data.getTransferMoney()),
-                                    format.formatMoney(data.getDiscount()),
-                                    format.formatMoney(data.getOvertimePay()),
-                                    format.formatMoney(data.getFoodMoney()),
-                                    view.getMonth(),
-                                    format.getDate(data.getFinancialDate()),
-                                    fm.getFinancialComment(),
-                                    userModel.getFullName()
+                                    disPayMonths.toString(),
+                                    disPayFoodMonths.toString()
                             );
                         }
                     }

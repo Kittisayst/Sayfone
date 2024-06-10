@@ -28,6 +28,7 @@ import Utility.MyFormat;
 import Utility.MyPopup;
 import Component.AuthenPopUp;
 import Component.DialogTransferImage;
+import Model.settingPaymentModel;
 import Utility.JoSheet;
 import View.FinancialView;
 import View.PnLoading;
@@ -37,6 +38,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
@@ -170,6 +173,17 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
         }
     }
 
+    //ແກ້ໄຂໄດ້ສະເພາະຜູ້ລົງບັນຊີ
+    private boolean isUserUpdate(int UserID) {
+        if (GlobalDataModel.userModel.getUserID() == UserID) {
+            return true;
+        } else {
+            JoAlert alert = new JoAlert();
+            alert.messages("ແກ້ໄຂ", "ແກ້ໄຂສະເພາະຜູ້ລົງບັນຊີ", JoAlert.Icons.warning);
+            return false;
+        }
+    }
+
     @Override
     public void Update() {
         view.getBtnSave().setEnabled(false);
@@ -285,15 +299,21 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
         } else if (event.isEvent(view.getBtnRefresh())) {
             view.getTxtTransferMoney().setText("");
         } else if (event.isEvent(view.getCkDiscount())) { //ເລືອກສ່ວນຫຼຸດ
-            AuthenPopUp popUp = new AuthenPopUp(GlobalDataModel.rootView, true);
-            popUp.setVisible(true);
-            userAuthen = popUp.getUserModel();
-            if (userAuthen.getUserID() != 0) {
-                view.getCkDiscount().setSelected(true);
-                view.EnableDisCount(userAuthen);
+            settingPaymentModel pm = settingPaymentModel.toAttay(GlobalDataModel.settingModel.getValue());
+            if (pm.isDiscount()) {
+                view.getTxtDiscount().setEnabled(view.getCkDiscount().isSelected());
+                view.getTxtDiscount().requestFocus();
             } else {
-                view.getCkDiscount().setSelected(false);
-                view.EnableDisCount(userAuthen);
+                AuthenPopUp popUp = new AuthenPopUp(GlobalDataModel.rootView, true);
+                popUp.setVisible(true);
+                userAuthen = popUp.getUserModel();
+                if (userAuthen.getUserID() != 0) {
+                    view.getCkDiscount().setSelected(true);
+                    view.EnableDisCount(userAuthen);
+                } else {
+                    view.getCkDiscount().setSelected(false);
+                    view.EnableDisCount(userAuthen);
+                }
             }
         } else if (event.isEvent(view.getBtnAddTransfer())) { // ກົດປຸ່ມເພີ່ມຮູບການໂອນ
             DialogFinancialTransfer dialog = new DialogFinancialTransfer(GlobalDataModel.rootView, true, fileTranferModel);
@@ -308,7 +328,25 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
                     if (view.FoodMoney()) {
                         view.Message("ກວດສອບຂໍ້ມູນ", "ກະລຸນາເລືອກເດືອນໃນການຈາຍຄ່າອາຫານ", JoAlert.Icons.warning);
                     } else {
-                        Create();
+                        settingPaymentModel pm = settingPaymentModel.toAttay(GlobalDataModel.settingModel.getValue());
+                        //ເປີດວົງເງິນສ່ວນຫຼຸດ
+                        if (pm.isDiscount()) {
+                            if (new MyFormat().unFormatMoney(view.getTxtDiscount().getText()) > pm.getMoney()) {
+                                AuthenPopUp popUp = new AuthenPopUp(GlobalDataModel.rootView, true);
+                                popUp.setVisible(true);
+                                userAuthen = popUp.getUserModel();
+                                if (userAuthen.getUserID() != 0) { //ລະຫັດຖືກ
+                                    chekPaymentSettingOverpay(); //ກວດສອບຈ່າຍຊ້າ - ບັນທຶກ
+                                } else { //ລະຫັດຜິດ
+                                    view.getCkDiscount().setSelected(false);
+                                    view.EnableDisCount(userAuthen);
+                                }
+                            } else {
+                                chekPaymentSettingOverpay();
+                            }
+                        } else { //ເປີດຈ່າຍຊ້າ
+                            chekPaymentSettingOverpay();
+                        }
                     }
                 }
             } else {
@@ -319,10 +357,9 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
                     if (view.FoodMoney()) {
                         view.Message("ກວດສອບຂໍ້ມູນ", "ກະລຸນາເລືອກເດືອນໃນການຈາຍຄ່າອາຫານ", JoAlert.Icons.warning);
                     } else {
-                        JoAlert alert = new JoAlert();
-                        boolean isUserSaved = financialModel.getUserID() == GlobalDataModel.userModel.getUserID();
-                        System.out.println(isUserSaved);
-                        Update();
+                        if (isUserUpdate(financialModel.getUserID())) {
+                            Update();
+                        }
                     }
                 }
             }
@@ -365,14 +402,17 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
             List<FinancialModel> models = new FinancialService().getFinancialByStudentID(registerModel.getRegisterID(), studentModel.getStudentID()); //ດຶງຂໍ້ມູນການລົງທະບຽນ
             Export(models);
         }
+    }
 
-//        else if (event.isEvent(view.getBtnFoodPay())) {
-//            DialogFoodPay foodPay = new DialogFoodPay(GlobalDataModel.rootView, true, registerModel, studentModel, new FoodPaymentModel());
-//            foodPay.setVisible(true);
-//        } else if (event.isEvent(view.getBtnShowFoodAll())) {
-//            DialogShowFoodPay showFoodPay = new DialogShowFoodPay(GlobalDataModel.rootView, true, registerModel, studentModel);
-//            showFoodPay.setVisible(true);
-//        }
+    private void chekPaymentSettingOverpay() {
+        settingPaymentModel pm = settingPaymentModel.toAttay(GlobalDataModel.settingModel.getValue());
+        if (pm.isOverpary()) {
+            if (view.getTxtOverPay().TextEmpty()) {
+                Create();
+            }
+        } else {
+            Create();
+        }
     }
 
     private FinancialModel FinancialViewData(int ID) {
@@ -665,6 +705,31 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
             }
         });
         thread.start();
+    }
+
+    private boolean repayCheck(String months) {
+        if (months.equals("[]")) {
+            return false;
+        } else {
+            LocalDate currentDate = LocalDate.now();
+            int monthNow = currentDate.getMonthValue();
+            for (Integer month : setMonth(months)) {
+                if (month < monthNow) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+
+    private List<Integer> setMonth(String strmonth) {
+        List<Integer> listMonth = new ArrayList<>();
+        String convert = strmonth.substring(1, strmonth.length() - 1);
+        String[] strArray = convert.split(", ");
+        for (String strArray1 : strArray) {
+            listMonth.add(Integer.valueOf(strArray1));
+        }
+        return listMonth;
     }
 
 }

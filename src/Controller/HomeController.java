@@ -27,6 +27,7 @@ import App.AppTutorial;
 import App.AppUser;
 import App.AppWithdraw;
 import App.ReportPayApp;
+import Component.DialogSettingPayment;
 import Model.UserModel;
 import DAOSevervice.TeacherService;
 import DAOSevervice.UserService;
@@ -101,6 +102,7 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
         view.getBtnTiming().addActionListener(this);
         view.getBtnFoodPayment().addActionListener(this);
         view.getBtnDocument().addActionListener(this);
+        view.getBtnPaymentSetting().addActionListener(this);
     }
 
     @Override
@@ -205,6 +207,9 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
         } else if (event.isEvent(view.getBtnTiming())) {
             TimingView timingView = new TimingView("ຕັ້ງເວລາເປີດປິດຈ່າຍຄ່າຮຽນ");
             GlobalDataModel.rootView.setView(timingView);
+        }else if (event.isEvent(view.getBtnPaymentSetting())) {
+            DialogSettingPayment payment = new DialogSettingPayment(view, true);
+            payment.setVisible(true);
         }
     }
 

@@ -3,6 +3,7 @@ package ResourceLoading;
 import Controller.LoginController;
 import DAOSevervice.UserService;
 import Model.GlobalDataModel;
+import Model.SettingModel;
 import Tools.JoAlert;
 import Tools.JoFrameDesign;
 import Utility.SayfoneFile;
@@ -35,6 +36,7 @@ public class LoadingResources extends javax.swing.JFrame {
         resourses.add(new StudentLoading());
         resourses.add(new DashboardLoading());
         resourses.add(new CleanCashFile());
+        resourses.add(new SettingPaymentLoading());
     }
 
     public void startLoading() {
@@ -72,8 +74,12 @@ public class LoadingResources extends javax.swing.JFrame {
                         }
                     } else if (data instanceof DashboardLoading) {
                         dashboard();
-                    }else if (data instanceof CleanCashFile) {
+                    } else if (data instanceof CleanCashFile) {
                         cleanCashFile();
+                    } else if (data instanceof SettingPaymentLoading) {
+                        if (!loadSettingPayment()) {
+                            break;
+                        }
                     }
                     loading.StartProgress(resourses.size(), 100);
                 }
@@ -186,6 +192,19 @@ public class LoadingResources extends javax.swing.JFrame {
         loading.setTitle("ໂຫຼດຂໍ້ມູນ ໜ້າ Dashboard");
         DashboardLoading dashboardLoading = new DashboardLoading();
         dashboardLoading.createGlobalDashboard();
+    }
+
+    private boolean loadSettingPayment() {
+        loading.setTitle("ໂຫຼດຂໍ້ມູນ ຊັບພະຍາກອນ");
+        SettingPaymentLoading paymentLoading = new SettingPaymentLoading();
+        SettingModel model = paymentLoading.getSettingModel();
+        if (model.equals(new SettingModel())) {
+            setState(false);
+        } else {
+            GlobalDataModel.settingModel = model;
+            setState(true);
+        }
+        return state;
     }
 
     @SuppressWarnings("unchecked")

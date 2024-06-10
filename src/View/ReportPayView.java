@@ -15,6 +15,7 @@ import Model.YearModel;
 import Tools.JoAlert;
 import Tools.JoDataTable;
 import Utility.MonthCaculator;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ReportPayView extends javax.swing.JPanel {
@@ -56,6 +57,8 @@ public class ReportPayView extends javax.swing.JPanel {
                     StudentModel sm = studentService.getStudentById(data.getStudentID());
                     String findMissingMonth = mc.getMissingMonth(fm.getFinancialMonth());
                     List<Integer> months = mc.getToArray();
+                    mc.getMissingMonth(fm.getFoodMonth());
+                    List<Integer> foodmonths = mc.getToArray();
                     if (getMonth() == 0) {
                         tb_data.AddJoModel(new Object[]{
                             tb_data.autoNumber(),
@@ -65,11 +68,13 @@ public class ReportPayView extends javax.swing.JPanel {
                             sm.getFullName(),
                             rm.getClassRoomName(),
                             findMissingMonth,
+                            foodmonths.toString(),
                             fm.getFinancialComment()
                         });
                     } else {
-                        boolean isMonth = months.contains(getMonth());
-                        if (isMonth) {
+                        List<Integer> disPayMonths = filterMonths(months, getMonth());
+                        List<Integer> disPayFoodMonths = filterMonths(foodmonths, getMonth());
+                        if (!disPayMonths.isEmpty()) {
                             tb_data.AddJoModel(new Object[]{
                                 tb_data.autoNumber(),
                                 data.getFinancialIID(),
@@ -77,7 +82,8 @@ public class ReportPayView extends javax.swing.JPanel {
                                 sm.getStudentNo(),
                                 sm.getFullName(),
                                 rm.getClassRoomName(),
-                                getMonth(),
+                                disPayMonths.toString(),
+                                disPayFoodMonths.toString(),
                                 fm.getFinancialComment()
                             });
                         }
@@ -101,6 +107,16 @@ public class ReportPayView extends javax.swing.JPanel {
             }
         });
         thread.start();
+    }
+
+    public List<Integer> filterMonths(List<Integer> months, int numMonth) {
+        List<Integer> filMonths = new ArrayList<>();
+        for (Integer month : months) {
+            if (month <= numMonth) {
+                filMonths.add(month);
+            }
+        }
+        return filMonths;
     }
 
     public JoButtonIconfont getBtn_back() {
@@ -185,11 +201,11 @@ public class ReportPayView extends javax.swing.JPanel {
 
             },
             new String [] {
-                "#", "ID", "StudentID", "ລະຫັດນັກຮຽນ", "ຊື່ ແລະ ນາມສະກຸນ", "ຫ້ອງຮຽນ", "ຄ້າງເດືອນ", "ໝາຍເຫດ"
+                "#", "ID", "StudentID", "ລະຫັດນັກຮຽນ", "ຊື່ ແລະ ນາມສະກຸນ", "ຫ້ອງຮຽນ", "ຄ້າງເດືອນ", "ອາຫານຄ້າງເດືອນ", "ໝາຍເຫດ"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
