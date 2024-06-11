@@ -407,7 +407,11 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
     private void chekPaymentSettingOverpay() {
         settingPaymentModel pm = settingPaymentModel.toAttay(GlobalDataModel.settingModel.getValue());
         if (pm.isOverpary()) {
-            if (view.getTxtOverPay().TextEmpty()) {
+            if (repayCheck(view.getFinancialMonths().getMonths())) {
+                if (view.getTxtOverPay().TextEmpty()) {
+                    Create();
+                }
+            } else {
                 Create();
             }
         } else {
