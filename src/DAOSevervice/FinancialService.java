@@ -124,4 +124,28 @@ public class FinancialService {
         return aO.getReportFinancialByRegisterID(RegisterID);
     }
 
+    public List<FinancialModel> getReportPaymentWithMonth(int registerID, String Month) {
+        return aO.getReportPaymentWithMonth(registerID, Month);
+    }
+
+    public FinancialModel getReportPaymentWithAllMonth(int registerID, int studentID) {
+        return aO.getReportPaymentWithAllMonth(registerID, studentID);
+    }
+
+    public FinancialModel getReportFoodPaymentWithAllMonth(int registerID, int studentID) {
+        return aO.getReportFoodPaymentWithAllMonth(registerID, studentID);
+    }
+
+    public List<FinancialModel> getReportFoodPaymentWithMonth(int registerID, String Month) {
+        return aO.getReportFoodPaymentWithMonth(registerID, Month);
+    }
+
+    public String getDebtPaymentMonth(int registerID, int studentID) {
+        return aO.getDebtPaymentMonth(registerID, studentID);
+    }
+
+    public String getDebtFoodMonth(int registerID, int studentID) {
+        return aO.getDebtFoodMonth(registerID, studentID);
+    }
+
 }

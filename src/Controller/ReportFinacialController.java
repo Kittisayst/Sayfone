@@ -21,6 +21,7 @@ import net.sf.jasperreports.view.JasperViewer;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import net.sf.jasperreports.engine.JRException;
 
 public class ReportFinacialController implements JoMVC, ActionListener {
 
@@ -289,7 +290,7 @@ public class ReportFinacialController implements JoMVC, ActionListener {
             parameter.put("UserID", UserLogin);
             JasperPrint print = JasperFillManager.fillReport("ReportTransferDay.jasper", parameter, new JoConnect().getConnectionDefault());
             setPrintState(print, "ReportTransferDay");
-        } catch (Exception e) {
+        } catch (JRException e) {
             e.printStackTrace();
             JoLoger.saveLog(e, this);
             JoAlert.Error(e, this);

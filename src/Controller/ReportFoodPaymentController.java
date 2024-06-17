@@ -79,10 +79,15 @@ public class ReportFoodPaymentController implements JoMVC, ActionListener, ItemL
         if (event.isEvent(view.getBtn_back())) {
             GlobalDataModel.rootView.showDashbord();
         } else if (event.isEvent(view.getBtnShow())) {
+            if (view.getMonth()==0) {
+                
+            }else{
+                
+            }
             int registerID = view.getCbClassRoom().getKeyInt();
             FoodPaymentService paymentService = new FoodPaymentService();
             List<FoodPaymentModel> models = paymentService.getByRegisterID(registerID);
-            view.showFood(models);
+//            view.showFood(models);
         } else if (event.isEvent(view.getBtnExport())) {
             int registerID = view.getCbClassRoom().getKeyInt();
             FoodPaymentService paymentService = new FoodPaymentService();

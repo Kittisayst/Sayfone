@@ -511,6 +511,7 @@ public class StudentHistoryView extends javax.swing.JPanel {
         pnFileData = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbFile = new Components.JoTable();
+        jPanel15 = new javax.swing.JPanel();
 
         Pn_Navigation.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
         Pn_Navigation.setLayout(new java.awt.GridLayout(1, 0));
@@ -1374,6 +1375,19 @@ public class StudentHistoryView extends javax.swing.JPanel {
 
         TapHistory.addTab("ເອກະສານນັກຮຽນ", jPanel7);
 
+        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
+        jPanel15.setLayout(jPanel15Layout);
+        jPanel15Layout.setHorizontalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1233, Short.MAX_VALUE)
+        );
+        jPanel15Layout.setVerticalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 604, Short.MAX_VALUE)
+        );
+
+        TapHistory.addTab("ຮູ້ຈັກໂຮງຮຽນສາຍຝົນ", jPanel15);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -1415,6 +1429,7 @@ public class StudentHistoryView extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;

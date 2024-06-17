@@ -11,7 +11,6 @@ import Model.FinancialModel;
 import Model.GlobalDataModel;
 import Model.RegisterModel;
 import Model.StudentModel;
-import Model.UserModel;
 import Tools.JoAlert;
 import Tools.JoFileSystem;
 import Tools.JoHookEvent;
@@ -19,7 +18,7 @@ import Utility.JoSheet;
 import Utility.MonthCaculator;
 import Utility.MyFormat;
 import View.PnLoading;
-import View.ReportPayView;
+import View.ReportPayLateView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -30,9 +29,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class ReportPayController implements JoMVC, ActionListener, ItemListener, MouseListener {
+public class ReportPayLateController implements JoMVC, ActionListener, ItemListener, MouseListener {
 
-    private final ReportPayView view;
+    private final ReportPayLateView view;
     private final FinancialModel model;
     private List<FinancialModel> listFinancials = new ArrayList<>();
     private PnLoading loading = new PnLoading();
@@ -42,7 +41,7 @@ public class ReportPayController implements JoMVC, ActionListener, ItemListener,
     private FinancialService financialService = new FinancialService();
     private int row = 1;
 
-    public ReportPayController(ReportPayView view, FinancialModel model) {
+    public ReportPayLateController(ReportPayLateView view, FinancialModel model) {
         this.view = view;
         this.model = model;
     }
@@ -88,13 +87,41 @@ public class ReportPayController implements JoMVC, ActionListener, ItemListener,
     @Override
     public void actionPerformed(ActionEvent e) {
         JoHookEvent event = new JoHookEvent(e.getSource());
+        MonthCaculator mc = new MonthCaculator();
         if (event.isEvent(view.getBtn_back())) {
             GlobalDataModel.rootView.showDashbord();
         } else if (event.isEvent(view.getBtnShow())) {
             listFinancials.clear();
-            listFinancials = financialService.getStudentRegistered(view.getCbClassRoom().getKeyInt());
-            view.showReportPay(listFinancials);
-            view.ExportEnable();
+            int registerID = view.getCbClassRoom().getKeyInt();
+            listFinancials = financialService.getStudentRegistered(registerID);
+            for (FinancialModel student : listFinancials) {
+                String months = financialService.getDebtPaymentMonth(registerID, student.getStudentID());
+                String formatMonth = mc.getFormatAllMonthToArray(months).toString();
+                String sortMonths = mc.getArrangeMonth(formatMonth);
+                String findMissingMonth = mc.getMissingMonth(sortMonths);
+                student.setFinancialMonth(findMissingMonth);
+            }
+            if (view.getMonth() == 0) {
+                view.showReportPay(listFinancials);
+                view.ExportEnable();
+            } else {
+                List<FinancialModel> findingMonth = new ArrayList<>();
+                for (FinancialModel student : listFinancials) {
+                    if (student.getFinancialMonth().equals("ຈ່າຍຄົບຖ້ວນ")) {
+
+                    } else {
+                        List<Integer> listMonths = mc.StringToArray(student.getFinancialMonth());
+                        listMonths.removeIf(month -> month > view.getMonth());
+                        if (!listMonths.isEmpty()) {
+                            student.setFinancialMonth(listMonths.toString());
+                            findingMonth.add(student);
+                        }
+                    }
+                }
+                listFinancials = findingMonth;
+                view.showReportPay(listFinancials);
+                view.ExportEnable();
+            }
         } else if (event.isEvent(view.getBtnExport())) {
             ExportData();
         }
@@ -151,39 +178,17 @@ public class ReportPayController implements JoMVC, ActionListener, ItemListener,
                     "ລຳດັບ",
                     "ຫ້ອງຮຽນ",
                     "ຊື່ ແລະ ນາມສະກຸນນັກຮຽນ",
-                    "ຄ້າງເດືອນ",
-                    "ຄ່າອາຫານຄ້າງເດືອນ",};
+                    "ຄ້າງເດືອນ",};
                 JoSheet sheet = new JoSheet(csvFile, view.getExportName(), columns);
                 GlobalDataModel.rootView.setView(loading);
-                MonthCaculator mc = new MonthCaculator();
                 listFinancials.forEach(data -> {
                     StudentModel studentModel = studentService.getStudentById(data.getStudentID());
-                    FinancialModel fm = financialService.getFinancialCalculator(data.getRegisterID(), data.getStudentID());
-                    String findMissingMonth = mc.getMissingMonth(fm.getFinancialMonth());
-                    List<Integer> months = mc.getToArray();
-                    mc.getMissingMonth(fm.getFoodMonth());
-                    List<Integer> foodmonths = mc.getToArray();
-                    if (view.getMonth() == 0) {
-                        sheet.addRow(row++,
-                                row - 1,
-                                view.getClassName(),
-                                studentModel.getFullName(),
-                                findMissingMonth,
-                                foodmonths.toString()
-                        );
-                    } else {
-                        List<Integer> disPayMonths = view.filterMonths(months, view.getMonth());
-                        List<Integer> disPayFoodMonths = view.filterMonths(foodmonths, view.getMonth());
-                        if (!disPayMonths.isEmpty()) {
-                            sheet.addRow(row++,
-                                    row - 1,
-                                    view.getClassName(),
-                                    studentModel.getFullName(),
-                                    disPayMonths.toString(),
-                                    disPayFoodMonths.toString()
-                            );
-                        }
-                    }
+                    sheet.addRow(row++,
+                            row - 1,
+                            view.getClassName(),
+                            studentModel.getFullName(),
+                            data.getFinancialMonth()
+                    );
                     loading.StartProgress(listFinancials.size(), 100);
                 });
                 sheet.getCreateSheet();

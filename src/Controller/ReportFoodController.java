@@ -90,14 +90,23 @@ public class ReportFoodController implements JoMVC, ActionListener, ItemListener
         } else if (event.isEvent(view.getBtnShow())) {
             FinancialService financialService = new FinancialService();
             int registerID = view.getCbClassRoom().getKeyInt();
+            List<FinancialModel> students = financialService.getStudentRegistered(registerID);
             if (view.getMonth() == 0) {
-                List<FinancialModel> Datas = financialService.getStudentRegistered(registerID);
-                view.showFood(Datas);
-                createListExport(Datas);
+                List<FinancialModel> foodpayments = new ArrayList<>();
+                for (FinancialModel student : students) {
+                    FinancialModel data = financialService.getReportFoodPaymentWithAllMonth(registerID, student.getStudentID());
+                    String parsemonth = monthCaculator.getFormatAllMonthToArray(data.getFoodMonth()).toString();
+                    if (!parsemonth.equals("[]")) {
+                        data.setFoodMonth(monthCaculator.getArrangeMonth(parsemonth));
+                        foodpayments.add(data);
+                    }
+                }
+                view.showFood(foodpayments);
+                createListExport(foodpayments);
             } else {
-                List<FinancialModel> Datas = financialService.getReportFood(registerID);
-                view.showFood(Datas);
-                createListExport(Datas);
+                List<FinancialModel> foodpayments = financialService.getReportFoodPaymentWithMonth(registerID, view.getMonth() + "");
+                view.showFood(foodpayments);
+                createListExport(foodpayments);
             }
         } else if (event.isEvent(view.getBtnExport())) {
             ExportData();

@@ -11,7 +11,7 @@ import App.AppRegister;
 import App.AppReportDiscount;
 import App.AppReportFinacial;
 import App.AppReportFood;
-import App.AppReportFoodPayment;
+import App.AppReportParentJob;
 import App.AppReportPayment;
 import App.AppReportStudent;
 import App.AppReportStudentState;
@@ -26,7 +26,8 @@ import App.AppTeacherRank;
 import App.AppTutorial;
 import App.AppUser;
 import App.AppWithdraw;
-import App.ReportPayApp;
+import App.AppReportPayLateApp;
+import App.AppReportPayLateFoodApp;
 import Component.DialogSettingPayment;
 import Model.UserModel;
 import DAOSevervice.TeacherService;
@@ -53,6 +54,7 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
         this.userModel = userModel;
         Start();
         AddEvent();
+        view.getBtnFoodPayment().setVisible(false);
     }
 
     @Override
@@ -103,6 +105,8 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
         view.getBtnFoodPayment().addActionListener(this);
         view.getBtnDocument().addActionListener(this);
         view.getBtnPaymentSetting().addActionListener(this);
+        view.getBtnPayRateFood().addActionListener(this);
+        view.getBtnReportParentJob().addActionListener(this);
     }
 
     @Override
@@ -174,14 +178,17 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
             AppReportFood reportFood = new AppReportFood();
             reportFood.open();
         } else if (event.isEvent(view.getBtnFoodPayment())) {
-            AppReportFoodPayment foodPayment = new AppReportFoodPayment();
-            foodPayment.Open();
+//            AppReportFoodPayment foodPayment = new AppReportFoodPayment();
+//            foodPayment.Open();
         } else if (event.isEvent(view.getBtnTeacherRank())) {
             AppTeacherRank appTeacherRank = new AppTeacherRank();
         } else if (event.isEvent(view.getBtnReportPay())) {
-            ReportPayApp reportPayApp = new ReportPayApp();
+            AppReportPayLateApp reportPayApp = new AppReportPayLateApp();
             reportPayApp.Running();
-        } else if (event.isEvent(view.getBtnWithdraw())) {
+        }else if (event.isEvent(view.getBtnPayRateFood())) {
+            AppReportPayLateFoodApp app = new AppReportPayLateFoodApp();
+            app.Running();
+        }  else if (event.isEvent(view.getBtnWithdraw())) {
             AppWithdraw appWithdraw = new AppWithdraw();
             appWithdraw.Open();
         } else if (event.isEvent(view.getBtnReportStudent())) {
@@ -193,7 +200,10 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
         } else if (event.isEvent(view.getBtnReportTeacherMoney())) {
             AppReportTeacherMoney reportTeacherMoney = new AppReportTeacherMoney();
             reportTeacherMoney.Open();
-        } else if (event.isEvent(view.getBtnReportStudentState())) {
+        }else if (event.isEvent(view.getBtnReportParentJob())) {
+            AppReportParentJob job = new AppReportParentJob();
+            job.Open();
+        }  else if (event.isEvent(view.getBtnReportStudentState())) {
             AppReportStudentState studentState = new AppReportStudentState();
             studentState.Open();
         } else if (event.isEvent(view.getBtnInfo())) {   // ============ ຕັ້ງຄ່າ

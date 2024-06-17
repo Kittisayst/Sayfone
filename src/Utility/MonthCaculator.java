@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class MonthCaculator {
 
@@ -74,7 +75,7 @@ public class MonthCaculator {
 
     public int[] parseMonth(String missingMonth) {
         missingMonth = missingMonth.equals("[]") ? "" : missingMonth;
-        String strmonth = missingMonth.equals("")?",":missingMonth;
+        String strmonth = missingMonth.equals("") ? "," : missingMonth;
         String nullMonth = strmonth.replaceAll("\\[],", "");
         String cleanedString = nullMonth.replaceAll("\\[|\\]|\\s", "");
         // Split the cleaned string by comma
@@ -89,11 +90,12 @@ public class MonthCaculator {
 
     public List<Integer> StringToArray(String str) {
         List<Integer> arr = new ArrayList<>();
-        if (str.equals("[]")) {
+        String result = str.replaceAll("\\[\\],\\s*", "").trim();
+        if (result.equals("[]")) {
             arr.add(0);
             return arr;
         } else {
-            String[] numbersArray = str.replaceAll("[\\[\\]]", "").split(",");
+            String[] numbersArray = result.replaceAll("[\\[\\]]", "").split(",");
             for (String numbersArray1 : numbersArray) {
                 arr.add(Integer.valueOf(numbersArray1.trim()));
             }
@@ -103,26 +105,43 @@ public class MonthCaculator {
 
     public List<Integer> ToArrayMonth(String months) {
         // Remove "[" and "]" characters
-        String cleanedInput = months.replaceAll("\\[|\\]", "");
-
+        String cleanedInput = months.replaceAll("\\[\\],\\s*", "").trim();
         // Split the cleaned string into individual elements
-        String[] elements = cleanedInput.split(",\\s*");
+        if (!cleanedInput.equals("[]")) {
+            String[] elements = cleanedInput.split(",\\s*");
 
-        // Create an int array to store the result
-        List<Integer> result = new ArrayList<>();
+            // Create an int array to store the result
+            List<Integer> result = new ArrayList<>();
 
-        // Convert each element to int and store in the result array
-        for (int i = 0; i < elements.length; i++) {
-            if (elements[i].trim().equalsIgnoreCase("null")) {
-                // Use a special value or handle as needed for null
-                result.add(0);
-            } else {
-                int data = Integer.parseInt(elements[i].trim());
-                result.add(data);
+            // Convert each element to int and store in the result array
+            for (String element : elements) {
+                if (element.trim().equalsIgnoreCase("null")) {
+                    // Use a special value or handle as needed for null
+                    result.add(0);
+                } else {
+                    int data = Integer.parseInt(element.trim());
+                    result.add(data);
+                }
             }
+            return result;
+        } else {
+            return null;
         }
+    }
 
-        return result;
+    public List<Integer> getFormatAllMonthToArray(String months) {
+        if (!months.isEmpty() && !months.isBlank()) {
+            String[] parts = months.replaceAll("[\\[\\]]", "").split(",\\s*");
+            // Filter out empty strings and convert to integers
+            List<Integer> result = Arrays.stream(parts)
+                    .filter(s -> !s.isEmpty())
+                    .map(Integer::parseInt)
+                    .collect(Collectors.toList());
+            return result;
+        } else {
+            List<Integer> result = new ArrayList<>();
+            return result;
+        }
     }
 
 }

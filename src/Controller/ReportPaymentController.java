@@ -134,47 +134,25 @@ public class ReportPaymentController implements JoMVC, ActionListener, ItemListe
         reportData = new ArrayList<>();
         resetMoney();
         FinancialService financialService = new FinancialService();
-        int registerID = view.getCbClassRoom().getKeyInt();
         MonthCaculator mc = new MonthCaculator();
+        int registerID = view.getCbClassRoom().getKeyInt();
         switch (view.getMonth()) {
             case 0:
                 List<FinancialModel> financialModels = financialService.getStudentRegistered(registerID);
-                financialModels.forEach(data -> {
-                    FinancialModel model = financialService.getFinancialCalculator(registerID, data.getStudentID());
-                    String margeMonth = mc.getSumMonth(model.getFinancialMonth());
-                    String ListMon = mc.getArrangeMonth(margeMonth);
-                    model.setFinancialMonth(ListMon);
-                    reportData.add(model);
-                    sumMoney(model.getMoney(), model.getTransferMoney(), model.getFoodMoney(), model.getDiscount(), model.getOvertimePay());
-                });
-                view.showReport(reportData);
-                break;
-            case 13:
-                List<FinancialModel> datas = financialService.getReportFinancialByRegisterID(registerID);
-                datas.forEach(data -> {
-                    List<Integer> months = mc.StringToArray(data.getFinancialMonth());
-                    boolean isMonth = months.contains(0);
-                    if (isMonth) {
-                        reportData.add(data);
-                        sumMoney(data.getMoney(), data.getTransferMoney(), data.getFoodMoney(), data.getDiscount(), data.getOvertimePay());
-                    }
-                });
+                for (FinancialModel financialModel : financialModels) {
+                     FinancialModel data = financialService.getReportPaymentWithAllMonth(registerID, financialModel.getStudentID());
+                     String parsemonth = mc.ToArrayMonth(data.getFinancialMonth()).toString();
+                     data.setFinancialMonth(mc.getArrangeMonth(parsemonth));
+                     reportData.add(data);
+                     sumMoney(data.getMoney(), data.getTransferMoney(), data.getFoodMoney(), data.getDiscount(), data.getOvertimePay());
+                }
                 view.showReport(reportData);
                 break;
             default:
-                List<FinancialModel> models = financialService.getReportFinancialByRegisterID(registerID);
+                List<FinancialModel> models = financialService.getReportPaymentWithMonth(registerID, view.getMonth() + "");
                 models.forEach(data -> {
-                    List<Integer> months = mc.StringToArray(data.getFinancialMonth());
-                    List<Integer> Foodmonths = mc.StringToArray(data.getFoodMonth());
-                    boolean isMonth = months.contains(view.getMonth());
-                    boolean isFoodMonth = Foodmonths.contains(view.getMonth());
-                    if (isMonth) {
-                        reportData.add(data);
-                        sumMoney(data.getMoney(), data.getTransferMoney(), data.getFoodMoney(), data.getDiscount(), data.getOvertimePay());
-                    }
-                    if (isFoodMonth) {
-                        updateFoodMoney(data);
-                    }
+                    reportData.add(data);
+                    sumMoney(data.getMoney(), data.getTransferMoney(), data.getFoodMoney(), data.getDiscount(), data.getOvertimePay());
                 });
                 view.showReport(reportData);
                 break;

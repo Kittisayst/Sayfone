@@ -2,6 +2,7 @@
 package DAOSevervice;
 
 import DAO.StudentHistoryDAO;
+import Model.ChartParentJobModel;
 import Model.StudentHistoryModel;
 import java.util.List;
 
@@ -28,5 +29,11 @@ public class StudentHistoryService {
     public StudentHistoryModel getStudentHistoryByStudentID(int StudentHistoryID) {
         return aO.getStudentHistoryByStudentID(StudentHistoryID);
     }
+
+    public List<ChartParentJobModel> getChartJobs(String parentCol) {
+        return aO.getChartJobs(parentCol);
+    }
+    
+    
     
 }

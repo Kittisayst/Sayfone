@@ -4,6 +4,7 @@ import DAOInterface.StudentHistoryFn;
 import Database.JoConnect;
 import Database.JoSQL;
 import Log.JoLoger;
+import Model.ChartParentJobModel;
 import Model.StudentHistoryModel;
 import java.util.List;
 import Tools.JoAlert;
@@ -189,6 +190,26 @@ public class StudentHistoryDAO implements StudentHistoryFn {
                 rs.getString(25),
                 rs.getString(25),
                 rs.getString(26));
+    }
+
+    public List<ChartParentJobModel> getChartJobs(String parentCol) {
+        List<ChartParentJobModel> jobModels = new ArrayList<>();
+        JoConnect connect = new JoConnect();
+        try {
+            String sql = "SELECT "+parentCol+", COUNT(*)as jobcount FROM tb_studenthistory GROUP BY "+parentCol;
+            PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sql);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                jobModels.add(new ChartParentJobModel(rs.getString(1), rs.getInt(2)));
+            }
+        } catch (SQLException e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+            e.printStackTrace();
+        } finally {
+            connect.close();
+        }
+        return jobModels;
     }
 
 }

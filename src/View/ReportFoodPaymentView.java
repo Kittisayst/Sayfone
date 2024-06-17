@@ -4,6 +4,7 @@ import Components.JoButtonIconfont;
 import Components.JoCombobox;
 import Components.JoTable;
 import DAOSevervice.StudentService;
+import Model.FinancialModel;
 import Model.FoodPaymentModel;
 import Model.GlobalDataModel;
 import Model.RegisterModel;
@@ -53,58 +54,39 @@ public class ReportFoodPaymentView extends javax.swing.JPanel {
         });
     }
 
-    public void showFood(List<FoodPaymentModel> models) {
-        tb_data.JoClearModel();
-        amount = 0;
-        GlobalDataModel.rootView.setView(loading);
-        MonthCaculator mc = new MonthCaculator();
-        StudentService service = new StudentService();
-        Thread thread = new Thread(() -> {
-            try {
-                models.forEach(data -> {
-                    StudentModel studentModel = service.getStudentById(data.getStudentID());
-                    if (getMonth() == 0) {
-                        tb_data.AddJoModel(new Object[]{
-                            tb_data.autoNumber(),
-                            data.getFoodPaymentID(),
-                            data.getRegisterID(),
-                            data.getStudentID(),
-                            new MyFormat().formatMoney(data.getPrice()),
-                            data.getMonths(),
-                            studentModel.getStudentNo(),
-                            studentModel.getFullName(),
-                            data.getComment()});
-                        amount += data.getPrice();
-                    } else {
-                        List<Integer> months = mc.StringToArray(data.getMonths());
-                        boolean isMonth = months.contains(getMonth());
-                        if (isMonth) {
-                            tb_data.AddJoModel(new Object[]{
-                                tb_data.autoNumber(),
-                                data.getFoodPaymentID(),
-                                data.getRegisterID(),
-                                data.getStudentID(),
-                                new MyFormat().formatMoney(data.getPrice()),
-                                data.getMonths(),
-                                studentModel.getStudentNo(),
-                                studentModel.getFullName(),
-                                data.getComment()});
-                            amount += data.getPrice();
-                        }
-                    }
-                    loading.StartProgress(models.size(), 100);
-                });
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                clearData();
-                GlobalDataModel.rootView.setView(this);
-                loading.close();
-                ExportEnable();
-                setAmount(amount);
-            }
-        });
-        thread.start();
+    public void showFood(List<FinancialModel> models) {
+//        tb_data.JoClearModel();
+//        amount = 0;
+//        GlobalDataModel.rootView.setView(loading);
+//        StudentService service = new StudentService();
+//        Thread thread = new Thread(() -> {
+//            try {
+//                models.forEach(data -> {
+//                    StudentModel studentModel = service.getStudentById(data.getStudentID());
+//                        tb_data.AddJoModel(new Object[]{
+//                            tb_data.autoNumber(),
+//                            data.getFoodPaymentID(),
+//                            data.getRegisterID(),
+//                            data.getStudentID(),
+//                            new MyFormat().formatMoney(data.getPrice()),
+//                            data.getMonths(),
+//                            studentModel.getStudentNo(),
+//                            studentModel.getFullName(),
+//                            data.getComment()});
+//                        amount += data.getPrice();
+//                    loading.StartProgress(models.size(), 100);
+//                });
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            } finally {
+//                clearData();
+//                GlobalDataModel.rootView.setView(this);
+//                loading.close();
+//                ExportEnable();
+//                setAmount(amount);
+//            }
+//        });
+//        thread.start();
     }
 
     private void clearData() {

@@ -530,3 +530,33 @@
 29/02/2024: DAO.FinancialDAO@763090df Errorjava.lang.ArrayIndexOutOfBoundsException: Index 14 out of bounds for length 14
 23/04/2024: Controller.FinancialController@1a5eee85 Errorjava.lang.IllegalArgumentException: Invalid char (:) found at index (10) in sheet name 'ຈ່າຍຄ່າຮຽນ: ກຽມ ອະນຸບານ ,  ຫ້ອງ'
 07/06/2024: DAO.SettingDAO@52e5784 Errorjava.sql.SQLException: Statement parameter 2 not set.
+12/06/2024: Controller.ReportFinacialController@1823f8ed Errornet.sf.jasperreports.engine.JRException: Unable to get value for result set field "transferDate" of class java.sql.Date.
+12/06/2024: Controller.ReportFinacialController@6e88074d Errornet.sf.jasperreports.engine.JRException: Unable to get value for result set field "transferDate" of class java.sql.Date.
+12/06/2024: DAO.FinancialDAO@46ce1dff Errorjava.sql.SQLException: Parameter index out of bounds. 2 is not between valid values of 1 and 1
+12/06/2024: DAO.FinancialDAO@2891523f Errorjava.sql.SQLException: Parameter index out of bounds. 2 is not between valid values of 1 and 1
+12/06/2024: DAO.FinancialDAO@6d867ba4 Errorjava.sql.SQLException: Parameter index out of bounds. 2 is not between valid values of 1 and 1
+12/06/2024: DAO.FinancialDAO@24583014 Errorjava.sql.SQLException: Parameter index out of bounds. 2 is not between valid values of 1 and 1
+13/06/2024: DAO.FinancialDAO@4b51679 Errorjava.sql.SQLException: Unknown type '246 in column 3 of 10 in binary-encoded result set.
+13/06/2024: DAO.FinancialDAO@3ae825b Errorjava.sql.SQLException: Unknown type '246 in column 3 of 10 in binary-encoded result set.
+13/06/2024: DAO.FinancialDAO@b79f46b Errorjava.sql.SQLException: Unknown type '246 in column 3 of 10 in binary-encoded result set.
+13/06/2024: DAO.FinancialDAO@6a0e2d76 Errorjava.sql.SQLException: Column '' not found.
+16/06/2024: DAO.FinancialDAO@303d477b Errorjava.sql.SQLException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'FROM tb_financial
+WHERE RegisterID=1 AND StudentID = 357' at line 3
+16/06/2024: DAO.FinancialDAO@303d477b Errorjava.sql.SQLException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'FROM tb_financial
+WHERE RegisterID=1 AND StudentID = 816' at line 3
+16/06/2024: DAO.FinancialDAO@303d477b Errorjava.sql.SQLException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'FROM tb_financial
+WHERE RegisterID=1 AND StudentID = 863' at line 3
+16/06/2024: DAO.FinancialDAO@303d477b Errorjava.sql.SQLException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'FROM tb_financial
+WHERE RegisterID=1 AND StudentID = 870' at line 3
+16/06/2024: DAO.FinancialDAO@303d477b Errorjava.sql.SQLException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'FROM tb_financial
+WHERE RegisterID=1 AND StudentID = 878' at line 3
+16/06/2024: DAO.FinancialDAO@303d477b Errorjava.sql.SQLException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'FROM tb_financial
+WHERE RegisterID=1 AND StudentID = 880' at line 3
+16/06/2024: DAO.FinancialDAO@303d477b Errorjava.sql.SQLException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'FROM tb_financial
+WHERE RegisterID=1 AND StudentID = 882' at line 3
+16/06/2024: DAO.FinancialDAO@303d477b Errorjava.sql.SQLException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'FROM tb_financial
+WHERE RegisterID=1 AND StudentID = 884' at line 3
+16/06/2024: DAO.FinancialDAO@303d477b Errorjava.sql.SQLException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'FROM tb_financial
+WHERE RegisterID=1 AND StudentID = 885' at line 3
+16/06/2024: DAO.FinancialDAO@1d78471e Errorjava.sql.SQLException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'FROM tb_financial
+ WHERE RegisterID=1 AND StudentID = 357' at line 3

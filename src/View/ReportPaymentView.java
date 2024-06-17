@@ -67,7 +67,6 @@ public class ReportPaymentView extends javax.swing.JPanel {
         MyFormat mf = new MyFormat();
         lblMoney.setText("ເງິນສົດ: " + mf.formatMoney(money) + " ກີບ");
         lblTransfer.setText("ເງິນໂອນ: " + mf.formatMoney(transfer) + " ກີບ");
-        lblfood.setText("ອາຫານ: " + mf.formatMoney(food) + " ກີບ");
         lbldiscount.setText("ສ່ວນຫຼຸດ: " + mf.formatMoney(discount) + " ກີບ");
         lbloverpay.setText("ຈ່າຍຊ້າ: " + mf.formatMoney(overpay) + " ກີບ");
         lblAmount.setText("ລວມເງິນທັງໝົດ: " + mf.formatMoney(amount) + " ກີບ");
@@ -111,7 +110,8 @@ public class ReportPaymentView extends javax.swing.JPanel {
                         data.getFinancialMonth(),
                         mf.formatMoney(data.getMoney()),
                         mf.formatMoney(data.getTransferMoney()),
-                        mf.formatMoney(data.getFoodMoney()),
+                        mf.formatMoney(data.getOvertimePay()),
+                        mf.formatMoney(data.getDiscount()),
                         data.getFinancialComment().equals("") ? "null" : data.getFinancialComment()
                     });
                     loading.StartProgress(reportData.size(), 50);
@@ -152,7 +152,6 @@ public class ReportPaymentView extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         lblMoney = new Components.JoLable();
         lblTransfer = new Components.JoLable();
-        lblfood = new Components.JoLable();
         lbldiscount = new Components.JoLable();
         lbloverpay = new Components.JoLable();
         lblAmount = new Components.JoLable();
@@ -187,11 +186,11 @@ public class ReportPaymentView extends javax.swing.JPanel {
 
             },
             new String [] {
-                "#", "ຊື່ ແລະ ນາມສະກຸນ", "ຈ່າຍເດືອນ", "ເງິນສົດ", "ເງິນໂອນ", "ຄ່າອາຫານ", "ໝາຍເຫດ"
+                "#", "ຊື່ ແລະ ນາມສະກຸນ", "ຈ່າຍເດືອນ", "ເງິນສົດ", "ເງິນໂອນ", "ຈ່າຍຊ້າ", "ສ່ວນຫຼຸດ", "ໝາຍເຫດ"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -215,6 +214,9 @@ public class ReportPaymentView extends javax.swing.JPanel {
             tb_data.getColumnModel().getColumn(5).setMinWidth(150);
             tb_data.getColumnModel().getColumn(5).setPreferredWidth(150);
             tb_data.getColumnModel().getColumn(5).setMaxWidth(150);
+            tb_data.getColumnModel().getColumn(6).setMinWidth(150);
+            tb_data.getColumnModel().getColumn(6).setPreferredWidth(150);
+            tb_data.getColumnModel().getColumn(6).setMaxWidth(150);
         }
 
         pn_Datatable.add(jScrollPane1, java.awt.BorderLayout.CENTER);
@@ -239,7 +241,7 @@ public class ReportPaymentView extends javax.swing.JPanel {
         joLable3.setFont(new java.awt.Font("Phetsarath OT", 0, 14)); // NOI18N
         jPanel1.add(joLable3);
 
-        cbMonth.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ທັງໝົດ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "ບໍ່ເລືອກເດືອນ" }));
+        cbMonth.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ທັງໝົດ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
         cbMonth.setPreferredSize(new java.awt.Dimension(100, 35));
         jPanel1.add(cbMonth);
 
@@ -258,10 +260,6 @@ public class ReportPaymentView extends javax.swing.JPanel {
         lblTransfer.setText("ເງິນໂອນ");
         lblTransfer.setFont(new java.awt.Font("Phetsarath OT", 0, 14)); // NOI18N
         jPanel2.add(lblTransfer);
-
-        lblfood.setText("ຄ່າອາຫານ");
-        lblfood.setFont(new java.awt.Font("Phetsarath OT", 0, 14)); // NOI18N
-        jPanel2.add(lblfood);
 
         lbldiscount.setText("ສ່ວນຫຼຸດ");
         lbldiscount.setFont(new java.awt.Font("Phetsarath OT", 0, 14)); // NOI18N
@@ -327,7 +325,6 @@ public class ReportPaymentView extends javax.swing.JPanel {
     private Components.JoLable lblTransfer;
     private Components.JoLable lbl_title;
     private Components.JoLable lbldiscount;
-    private Components.JoLable lblfood;
     private Components.JoLable lbloverpay;
     private javax.swing.JPanel pn_Datatable;
     private Components.JoTable tb_data;

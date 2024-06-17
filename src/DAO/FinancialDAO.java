@@ -734,4 +734,196 @@ public class FinancialDAO implements FinancialFn {
         return models;
     }
 
+    public List<FinancialModel> getReportPaymentWithMonth(int registerID, String Month) {
+        List<FinancialModel> models = new ArrayList<>();
+        JoConnect connect = new JoConnect();
+        try {
+            String sql = "SELECT FinancialID,RegisterID,tb_financial.StudentID,Money,TransferMoney,SaveDate,FinancialMonth,foodMonth,FinancialComment,"
+                    + "AuthenUserID,Discount,OvertimePay,UserID,foodMoney,state \n"
+                    + "FROM tb_financial\n"
+                    + "INNER JOIN tb_student ON tb_financial.StudentID = tb_student.StudentID\n"
+                    + "WHERE RegisterID=? "
+                    + "AND FIND_IN_SET(?, REPLACE(REPLACE(FinancialMonth, '[', ''), ']', '')) > 0";
+            PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sql);
+            pre.setInt(1, registerID);
+            pre.setString(2, Month);
+            System.out.println(pre);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                FinancialModel model = resultModel(rs);
+                models.add(model);
+            }
+        } catch (Exception e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+            e.printStackTrace();
+        } finally {
+            connect.close();
+        }
+        return models;
+    }
+
+    public FinancialModel getReportPaymentWithAllMonth(int registerID, int studentID) {
+        FinancialModel fm = new FinancialModel();
+        JoConnect connect = new JoConnect();
+        try {
+            String sql = "SELECT\n"
+                    + "FinancialID,\n"
+                    + "RegisterID,\n"
+                    + "StudentID,\n"
+                    + "SUM(Money) AS total_money,\n"
+                    + "SUM(TransferMoney) AS total_transfer,\n"
+                    + "GROUP_CONCAT(FinancialMonth SEPARATOR ', ') AS converted_month,\n"
+                    + "SUM(foodMoney) AS total_food_money,\n"
+                    + "SUM(Discount) AS total_discount,\n"
+                    + "SUM(OvertimePay) AS total_overpay,\n"
+                    + "GROUP_CONCAT(FinancialComment SEPARATOR ', ') AS tota_FinancialComment \n"
+                    + "FROM tb_financial\n"
+                    + "WHERE RegisterID=" + registerID + " AND StudentID = " + studentID + "";
+            ResultSet rs = connect.getConnectionDefault().createStatement().executeQuery(sql);
+            if (rs.next()) {
+                fm = new FinancialModel(
+                        rs.getInt("FinancialID"),
+                        rs.getInt("RegisterID"),
+                        rs.getInt("StudentID"),
+                        rs.getInt("total_money"),
+                        rs.getInt("total_transfer"),
+                        null,
+                        rs.getString("converted_month"),
+                        "",
+                        rs.getString("tota_FinancialComment"),
+                        0,
+                        rs.getInt("total_discount"),
+                        rs.getInt("total_overpay"),
+                        0,
+                        rs.getInt("total_food_money"),
+                        true);
+            }
+        } catch (SQLException e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+            e.printStackTrace();
+        } finally {
+            connect.close();
+        }
+        return fm;
+    }
+
+    public FinancialModel getReportFoodPaymentWithAllMonth(int registerID, int studentID) {
+        FinancialModel fm = new FinancialModel();
+        JoConnect connect = new JoConnect();
+        try {
+            String sql = "SELECT\n"
+                    + "FinancialID,\n"
+                    + "RegisterID,\n"
+                    + "StudentID,\n"
+                    + "SUM(foodMoney) AS total_food_money,\n"
+                    + "GROUP_CONCAT(foodMonth SEPARATOR ', ') AS converted_fmonth,\n"
+                    + "SUM(Discount) AS total_discount,\n"
+                    + "SUM(OvertimePay) AS total_overpay,\n"
+                    + "GROUP_CONCAT(FinancialComment SEPARATOR ', ') AS tota_FinancialComment \n"
+                    + "FROM tb_financial\n"
+                    + "WHERE RegisterID=" + registerID + " AND StudentID = " + studentID + "";
+            ResultSet rs = connect.getConnectionDefault().createStatement().executeQuery(sql);
+            if (rs.next()) {
+                fm = new FinancialModel(
+                        rs.getInt("FinancialID"),
+                        rs.getInt("RegisterID"),
+                        rs.getInt("StudentID"),
+                        0,
+                        0,
+                        null,
+                        "",
+                        rs.getString("converted_fmonth"),
+                        rs.getString("tota_FinancialComment"),
+                        0,
+                        0,
+                        0,
+                        0,
+                        rs.getInt("total_food_money"),
+                        true);
+            }
+        } catch (SQLException e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+            e.printStackTrace();
+        } finally {
+            connect.close();
+        }
+        return fm;
+    }
+
+    public List<FinancialModel> getReportFoodPaymentWithMonth(int registerID, String Month) {
+        List<FinancialModel> models = new ArrayList<>();
+        JoConnect connect = new JoConnect();
+        try {
+            String sql = "SELECT FinancialID,RegisterID,tb_financial.StudentID,Money,TransferMoney,SaveDate,FinancialMonth,foodMonth,FinancialComment,"
+                    + "AuthenUserID,Discount,OvertimePay,UserID,foodMoney,state \n"
+                    + "FROM tb_financial\n"
+                    + "INNER JOIN tb_student ON tb_financial.StudentID = tb_student.StudentID\n"
+                    + "WHERE RegisterID=? "
+                    + "AND FIND_IN_SET(?, REPLACE(REPLACE(foodMonth, '[', ''), ']', '')) > 0";
+            PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sql);
+            pre.setInt(1, registerID);
+            pre.setString(2, Month);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                models.add(resultModel(rs));
+            }
+        } catch (Exception e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+            e.printStackTrace();
+        } finally {
+            connect.close();
+        }
+        return models;
+    }
+
+    public String getDebtPaymentMonth(int registerID, int studentID) {
+        JoConnect connect = new JoConnect();
+        try {
+            String sql = "SELECT\n"
+                    + "GROUP_CONCAT(FinancialMonth SEPARATOR ', ') AS converted_month\n"
+                    + "FROM tb_financial\n"
+                    + " WHERE RegisterID=" + registerID + " AND StudentID = " + studentID + "";
+            ResultSet rs = connect.getConnectionDefault().createStatement().executeQuery(sql);
+            if (rs.next()) {
+                return rs.getString("converted_month");
+            }else{
+                return "[]";
+            }
+        } catch (SQLException e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+            e.printStackTrace();
+        } finally {
+            connect.close();
+        }
+        return "[]";
+    }
+    
+     public String getDebtFoodMonth(int registerID, int studentID) {
+        JoConnect connect = new JoConnect();
+        try {
+            String sql = "SELECT\n"
+                    + "GROUP_CONCAT(foodMonth SEPARATOR ', ') AS converted_fmonth\n"
+                    + "FROM tb_financial\n"
+                    + " WHERE RegisterID=" + registerID + " AND StudentID = " + studentID + "";
+            ResultSet rs = connect.getConnectionDefault().createStatement().executeQuery(sql);
+            if (rs.next()) {
+                return rs.getString("converted_fmonth");
+            }else{
+                return "[]";
+            }
+        } catch (SQLException e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+            e.printStackTrace();
+        } finally {
+            connect.close();
+        }
+        return "[]";
+    }
+
 }

@@ -204,6 +204,14 @@ public class HomeView extends javax.swing.JFrame {
         return btnPaymentSetting;
     }
 
+    public JoButtonIconfont getBtnPayRateFood() {
+        return btnPayRateFood;
+    }
+
+    public JoButtonIconfont getBtnReportParentJob() {
+        return btnReportParentJob;
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -254,6 +262,8 @@ public class HomeView extends javax.swing.JFrame {
         btnReportStudentState = new Components.JoButtonIconfont();
         btnReportPayment = new Components.JoButtonIconfont();
         btnFoodPayment = new Components.JoButtonIconfont();
+        btnPayRateFood = new Components.JoButtonIconfont();
+        btnReportParentJob = new Components.JoButtonIconfont();
         btn_Service = new Components.JoButtonIconfont();
         btn_report = new Components.JoButtonIconfont();
         btn_Setting = new Components.JoButtonIconfont();
@@ -613,7 +623,7 @@ public class HomeView extends javax.swing.JFrame {
         btnReportPay.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.EVENT_BUSY);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 0.1;
@@ -625,7 +635,7 @@ public class HomeView extends javax.swing.JFrame {
         btnReportTeacher.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.ASSIGNMENT_IND);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 9;
+        gridBagConstraints.gridy = 10;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 0.1;
@@ -637,7 +647,7 @@ public class HomeView extends javax.swing.JFrame {
         btnReportStudent.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.RECENT_ACTORS);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 11;
+        gridBagConstraints.gridy = 12;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 0.1;
@@ -649,7 +659,7 @@ public class HomeView extends javax.swing.JFrame {
         btnWithdraw.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.ROTATE_90_DEGREES_CCW);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridy = 9;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 0.1;
@@ -661,7 +671,7 @@ public class HomeView extends javax.swing.JFrame {
         btnFood.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.LOCAL_DINING);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 0.1;
@@ -685,7 +695,7 @@ public class HomeView extends javax.swing.JFrame {
         btnReportDiscount.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.LOCAL_ATM);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridy = 8;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 0.1;
@@ -697,7 +707,7 @@ public class HomeView extends javax.swing.JFrame {
         btnReportTeacherMoney.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.SWAP_VERTICAL_CIRCLE);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 10;
+        gridBagConstraints.gridy = 11;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 0.1;
@@ -721,7 +731,7 @@ public class HomeView extends javax.swing.JFrame {
         btnReportStudentState.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.PEOPLE);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 12;
+        gridBagConstraints.gridy = 14;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 0.1;
@@ -745,12 +755,36 @@ public class HomeView extends javax.swing.JFrame {
         btnFoodPayment.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.LOCAL_DINING);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 7;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
         pn_report.add(btnFoodPayment, gridBagConstraints);
+
+        btnPayRateFood.setText("ລາຍງານຜູ້ຄ້າງຄ່າອາຫານ");
+        btnPayRateFood.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnPayRateFood.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.LOCAL_DINING);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        pn_report.add(btnPayRateFood, gridBagConstraints);
+
+        btnReportParentJob.setText("ລາຍງານຂໍ້ມູນອາຊີບຜູ້ປົກຄອງ");
+        btnReportParentJob.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnReportParentJob.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.PEOPLE);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 13;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        pn_report.add(btnReportParentJob, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -1017,11 +1051,13 @@ public class HomeView extends javax.swing.JFrame {
     private Components.JoButtonIconfont btnFood;
     private Components.JoButtonIconfont btnFoodPayment;
     private Components.JoButtonIconfont btnInfo;
+    private Components.JoButtonIconfont btnPayRateFood;
     private Components.JoButtonIconfont btnPaymentSetting;
     private Components.JoButtonIconfont btnPermission;
     private Components.JoButtonIconfont btnPrinter;
     private Components.JoButtonIconfont btnReportDiscount;
     private Components.JoButtonIconfont btnReportFinancial;
+    private Components.JoButtonIconfont btnReportParentJob;
     private Components.JoButtonIconfont btnReportPay;
     private Components.JoButtonIconfont btnReportPayment;
     private Components.JoButtonIconfont btnReportStudent;

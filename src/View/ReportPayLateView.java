@@ -4,39 +4,27 @@ import Components.JoButtonIconfont;
 import Components.JoCombobox;
 import Components.JoTable;
 import DAOSevervice.FinancialService;
+import DAOSevervice.RegisterService;
 import DAOSevervice.StudentService;
+import Log.JoLoger;
 import Model.FinancialModel;
 import Model.GlobalDataModel;
 import Model.RegisterModel;
 import Model.StudentModel;
 import Model.YearModel;
+import Tools.JoAlert;
 import Tools.JoDataTable;
-import Utility.MonthCaculator;
-import Utility.MyFormat;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
-public class ReportFoodView extends javax.swing.JPanel {
+public class ReportPayLateView extends javax.swing.JPanel {
 
-    private PnLoading loading;
+    private final PnLoading loading = new PnLoading();
 
-    public ReportFoodView(String Title) {
+    public ReportPayLateView(String Title) {
         initComponents();
         lbl_title.setText(Title);
-        loading = new PnLoading();
         loading.setTitle("ກຳລັງໂຫຼດຂໍ້ມູນ");
-    }
-
-    public JoButtonIconfont getBtn_back() {
-        return btn_back;
-    }
-
-    public JoTable getTb_data() {
-        return tb_data;
-    }
-
-    public JoButtonIconfont getBtnExport() {
-        return btnExport;
     }
 
     public void showYear(List<YearModel> models) {
@@ -53,74 +41,88 @@ public class ReportFoodView extends javax.swing.JPanel {
         });
     }
 
-    public void showFood(List<FinancialModel> models) {
+    public void showReportPay(List<FinancialModel> models) {
         tb_data.JoClearModel();
-        GlobalDataModel.rootView.setView(loading);
+        RegisterService registerService = new RegisterService();
+        StudentService studentService = new StudentService();
         Thread thread = new Thread(() -> {
+            GlobalDataModel.rootView.setView(loading);
             try {
-                StudentService service = new StudentService();
                 models.forEach(data -> {
-                    StudentModel studentModel = service.getStudentById(data.getStudentID());
-                        if (data.getFoodMoney() > 0) {
-                            tb_data.AddJoModel(new Object[]{
-                                tb_data.autoNumber(),
-                                data.getFinancialIID(),
-                                data.getRegisterID(),
-                                data.getStudentID(),
-                                new MyFormat().formatMoney(data.getFoodMoney()),
-                                data.getFoodMonth(),
-                                studentModel.getStudentNo(),
-                                studentModel.getFullName(),
-                                data.getFinancialComment()
-                            });
-                        }
-                    loading.StartProgress(models.size(), 100);
+                    RegisterModel rm = registerService.getRegisterById(data.getRegisterID());
+                    StudentModel sm = studentService.getStudentById(data.getStudentID());
+                    tb_data.AddJoModel(new Object[]{
+                        tb_data.autoNumber(),
+                        data.getFinancialIID(),
+                        data.getStudentID(),
+                        sm.getStudentNo(),
+                        sm.getFullName(),
+                        rm.getClassRoomName(),
+                        data.getFinancialMonth(),
+                    });
+                    loading.StartProgress(models.size(), 50);
                 });
             } catch (Exception e) {
                 e.printStackTrace();
+                JoAlert.Error(e, this);
+                JoLoger.saveLog(e, this);
             } finally {
-                clearData();
-                GlobalDataModel.rootView.setView(this);
                 loading.close();
+                pn_Datatable.removeAll();
+                pn_Datatable.add(jScrollPane1);
+                JoDataTable dataTable = new JoDataTable(pn_Datatable);
+                dataTable.setHiddenColumns(1);
+                dataTable.setHiddenColumns(2);
+                dataTable.showDataTableAll();
+                GlobalDataModel.rootView.setView(this);
                 ExportEnable();
             }
         });
         thread.start();
     }
 
-    private void clearData() {
-        pn_Datatable.removeAll();
-        pn_Datatable.add(jScrollPane1);
-        JoDataTable dataTable = new JoDataTable(pn_Datatable);
-        dataTable.setHiddenColumns(1);
-        dataTable.setHiddenColumns(2);
-        dataTable.setHiddenColumns(3);
-        dataTable.showDataTableAll();
+    public List<Integer> filterMonths(List<Integer> months, int numMonth) {
+        List<Integer> filMonths = new ArrayList<>();
+        for (Integer month : months) {
+            if (month <= numMonth) {
+                filMonths.add(month);
+            }
+        }
+        return filMonths;
     }
 
-    public void setAmount(int amount) {
-        lblAmount.setText("ລວມເງິນທັງໝົດ: " + new MyFormat().formatMoney(amount) + " ກີບ");
+    public JoButtonIconfont getBtn_back() {
+        return btn_back;
     }
 
-    public int getMonth() {
-        return cbMonth.getSelectedIndex();
-    }
-
-    public JoCombobox getCbClassRoom() {
-        return cbClassRoom;
-    }
-
-    public JoCombobox getCbYear() {
-        return cbYear;
+    public JoTable getTb_data() {
+        return tb_data;
     }
 
     public JoButtonIconfont getBtnShow() {
         return btnShow;
     }
 
+    public JoCombobox getCbYear() {
+        return cbYear;
+    }
+
+    public JoCombobox getCbClassRoom() {
+        return cbClassRoom;
+    }
+
+    public JoButtonIconfont getBtnExport() {
+        return btnExport;
+    }
+
+    public int getMonth() {
+        return cbMonth.getSelectedIndex();
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         Pn_Navigation = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -136,11 +138,10 @@ public class ReportFoodView extends javax.swing.JPanel {
         cbYear = new Components.JoCombobox();
         joLable2 = new Components.JoLable();
         cbClassRoom = new Components.JoCombobox();
-        joLable3 = new Components.JoLable();
-        cbMonth = new Components.JoCombobox();
         btnShow = new Components.JoButtonIconfont();
+        cbMonth = new Components.JoCombobox();
+        joLable3 = new Components.JoLable();
         jPanel2 = new javax.swing.JPanel();
-        lblAmount = new Components.JoLable();
         btnExport = new Components.JoButtonIconfont();
 
         Pn_Navigation.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
@@ -172,11 +173,11 @@ public class ReportFoodView extends javax.swing.JPanel {
 
             },
             new String [] {
-                "#", "FinacialID", "RegisterID", "StudentID", "ຄ່າອາຫານ", "ຈ່າຍເດືອນ", "ລະຫັດນັກຮຽນ", "ຊື່ນັກຮຽນ", "ໝາຍເຫດ"
+                "#", "ID", "StudentID", "ລະຫັດນັກຮຽນ", "ຊື່ ແລະ ນາມສະກຸນ", "ຫ້ອງຮຽນ", "ຄ້າງເດືອນ"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -188,61 +189,78 @@ public class ReportFoodView extends javax.swing.JPanel {
             tb_data.getColumnModel().getColumn(0).setMinWidth(80);
             tb_data.getColumnModel().getColumn(0).setPreferredWidth(80);
             tb_data.getColumnModel().getColumn(0).setMaxWidth(80);
-            tb_data.getColumnModel().getColumn(4).setMinWidth(100);
-            tb_data.getColumnModel().getColumn(4).setPreferredWidth(100);
-            tb_data.getColumnModel().getColumn(4).setMaxWidth(100);
-            tb_data.getColumnModel().getColumn(5).setMinWidth(200);
-            tb_data.getColumnModel().getColumn(5).setPreferredWidth(200);
-            tb_data.getColumnModel().getColumn(5).setMaxWidth(200);
-            tb_data.getColumnModel().getColumn(6).setMinWidth(80);
-            tb_data.getColumnModel().getColumn(6).setPreferredWidth(80);
-            tb_data.getColumnModel().getColumn(6).setMaxWidth(80);
-            tb_data.getColumnModel().getColumn(7).setMinWidth(150);
-            tb_data.getColumnModel().getColumn(7).setPreferredWidth(150);
-            tb_data.getColumnModel().getColumn(7).setMaxWidth(150);
         }
 
         pn_Datatable.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
-        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 10, 5));
+        java.awt.GridBagLayout jPanel1Layout = new java.awt.GridBagLayout();
+        jPanel1Layout.columnWidths = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
+        jPanel1Layout.rowHeights = new int[] {0, 5, 0};
+        jPanel1.setLayout(jPanel1Layout);
 
-        joLable1.setText("ສົກຮຽນ");
-        joLable1.setFont(new java.awt.Font("Phetsarath OT", 0, 14)); // NOI18N
-        jPanel1.add(joLable1);
+        joLable1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        joLable1.setText("ສົກປີຮຽນ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.weighty = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        jPanel1.add(joLable1, gridBagConstraints);
 
-        cbYear.setPreferredSize(new java.awt.Dimension(100, 35));
-        jPanel1.add(cbYear);
+        cbYear.setPreferredSize(new java.awt.Dimension(100, 25));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        gridBagConstraints.weighty = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(2, 10, 2, 2);
+        jPanel1.add(cbYear, gridBagConstraints);
 
         joLable2.setText("ຫ້ອງຮຽນ");
-        joLable2.setFont(new java.awt.Font("Phetsarath OT", 0, 14)); // NOI18N
-        jPanel1.add(joLable2);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 0;
+        jPanel1.add(joLable2, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 39;
+        gridBagConstraints.insets = new java.awt.Insets(2, 9, 2, 2);
+        jPanel1.add(cbClassRoom, gridBagConstraints);
 
-        cbClassRoom.setPreferredSize(new java.awt.Dimension(100, 35));
-        jPanel1.add(cbClassRoom);
-
-        joLable3.setText("ເດືອນ");
-        joLable3.setFont(new java.awt.Font("Phetsarath OT", 0, 14)); // NOI18N
-        jPanel1.add(joLable3);
+        btnShow.setText("ສະແດງ");
+        btnShow.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.SEARCH);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 12;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        gridBagConstraints.weighty = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(2, 10, 2, 10);
+        jPanel1.add(btnShow, gridBagConstraints);
 
         cbMonth.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ທັງໝົດ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
-        cbMonth.setPreferredSize(new java.awt.Dimension(100, 35));
-        jPanel1.add(cbMonth);
+        cbMonth.setFont(new java.awt.Font("Phetsarath OT", 0, 14)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 10;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(2, 9, 2, 2);
+        jPanel1.add(cbMonth, gridBagConstraints);
 
-        btnShow.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.SEARCH);
-        btnShow.setLabel("ສະແດງ");
-        btnShow.setMargin(new java.awt.Insets(2, 5, 2, 10));
-        btnShow.setPreferredSize(new java.awt.Dimension(89, 36));
-        jPanel1.add(btnShow);
+        joLable3.setText("ເດືອນ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel1.add(joLable3, gridBagConstraints);
 
-        jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 10, 10));
-
-        lblAmount.setText("ລວມເງິນ");
-        lblAmount.setFont(new java.awt.Font("Phetsarath OT", 0, 18)); // NOI18N
-        jPanel2.add(lblAmount);
+        jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
         btnExport.setBackground(new java.awt.Color(0, 153, 102));
         btnExport.setText("Excel");
-        btnExport.setEnabled(false);
         btnExport.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.GRID_ON);
         jPanel2.add(btnExport);
 
@@ -251,21 +269,25 @@ public class ReportFoodView extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(Pn_Navigation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pn_Datatable, javax.swing.GroupLayout.DEFAULT_SIZE, 1128, Short.MAX_VALUE)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pn_Datatable, javax.swing.GroupLayout.DEFAULT_SIZE, 1234, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(Pn_Navigation, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pn_Datatable, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE)
+                .addGap(21, 21, 21)
+                .addComponent(pn_Datatable, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -287,7 +309,6 @@ public class ReportFoodView extends javax.swing.JPanel {
     private Components.JoLable joLable1;
     private Components.JoLable joLable2;
     private Components.JoLable joLable3;
-    private Components.JoLable lblAmount;
     private Components.JoLable lbl_title;
     private javax.swing.JPanel pn_Datatable;
     private Components.JoTable tb_data;
@@ -304,5 +325,4 @@ public class ReportFoodView extends javax.swing.JPanel {
     public String getExportName() {
         return cbYear.getValue() + "-" + cbClassRoom.getValue();
     }
-
 }
