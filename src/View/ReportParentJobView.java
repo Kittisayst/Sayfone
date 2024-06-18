@@ -16,7 +16,7 @@ public class ReportParentJobView extends javax.swing.JPanel {
         lbl_title.setText(Title);
     }
 
-    public void updateStateSwitchParent1() {
+    public void updateButtonStateSwitchParent1() {
         switchParent1 = !switchParent1;
         if (switchParent1) {
             btnPiechart1.setBackground(Color.red);
@@ -27,7 +27,7 @@ public class ReportParentJobView extends javax.swing.JPanel {
         }
     }
 
-    public void updateStateSwitchParent2() {
+    public void updateButtonStateSwitchParent2() {
         switchParent2 = !switchParent2;
         if (switchParent2) {
             btnPiechart2.setBackground(Color.red);
@@ -42,6 +42,8 @@ public class ReportParentJobView extends javax.swing.JPanel {
         pnParent1.removeAll();
         pnParent1.add(pieChartUI, BorderLayout.CENTER);
     }
+    
+    
 
     public void setPiechartParent2(PieChartUI pieChartUI) {
         pnParent2.removeAll();
@@ -192,7 +194,7 @@ public class ReportParentJobView extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(Pn_Navigation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1042, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -26,8 +26,8 @@ public class ReportParentJobController implements JoMVC, ActionListener, ChangeL
     @Override
     public void Start() {
         GlobalDataModel.rootView.setView(view);
-        view.updateStateSwitchParent1();
-        view.updateStateSwitchParent2();
+        view.updateButtonStateSwitchParent1();
+        view.updateButtonStateSwitchParent2();
         PiechartParent1();
         PiechartParent2();
     }
@@ -68,13 +68,13 @@ public class ReportParentJobController implements JoMVC, ActionListener, ChangeL
         if (event.isEvent(view.getBtn_back())) {
             GlobalDataModel.rootView.showDashbord();
         } else if (event.isEvent(view.getBtnPiechart1())) {
-            view.updateStateSwitchParent1();
+            view.updateButtonStateSwitchParent1();
         } else if (event.isEvent(view.getBtnBarchart1())) {
-            view.updateStateSwitchParent1();
+            view.updateButtonStateSwitchParent1();
         } else if (event.isEvent(view.getBtnPiechart2())) {
-            view.updateStateSwitchParent2();
+            view.updateButtonStateSwitchParent2();
         } else if (event.isEvent(view.getBtnBarchart2())) {
-            view.updateStateSwitchParent2();
+            view.updateButtonStateSwitchParent2();
         }
     }
 
@@ -122,6 +122,12 @@ public class ReportParentJobController implements JoMVC, ActionListener, ChangeL
             }
         }
         view.setPiechartParent2(chartUI);
+    }
+    
+    
+    
+    private void BarcharParent1(){
+        
     }
 
 }

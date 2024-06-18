@@ -105,17 +105,16 @@ public class MonthCaculator {
 
     public List<Integer> ToArrayMonth(String months) {
         // Remove "[" and "]" characters
-        String cleanedInput = months.replaceAll("\\[\\],\\s*", "").trim();
+        String cleanedInput = months.replaceAll("\\[", "").replaceAll("\\]", "");
         // Split the cleaned string into individual elements
         if (!cleanedInput.equals("[]")) {
             String[] elements = cleanedInput.split(",\\s*");
-
-            // Create an int array to store the result
+            // Create an int array to store the resul
             List<Integer> result = new ArrayList<>();
-
             // Convert each element to int and store in the result array
             for (String element : elements) {
-                if (element.trim().equalsIgnoreCase("null")) {
+                System.out.println(element);
+                if (element.trim().equalsIgnoreCase("null") || element.equals("")) {
                     // Use a special value or handle as needed for null
                     result.add(0);
                 } else {
@@ -123,6 +122,7 @@ public class MonthCaculator {
                     result.add(data);
                 }
             }
+            result.removeIf(item -> item == 0);
             return result;
         } else {
             return null;

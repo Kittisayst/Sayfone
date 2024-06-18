@@ -743,7 +743,7 @@ public class FinancialDAO implements FinancialFn {
                     + "FROM tb_financial\n"
                     + "INNER JOIN tb_student ON tb_financial.StudentID = tb_student.StudentID\n"
                     + "WHERE RegisterID=? "
-                    + "AND FIND_IN_SET(?, REPLACE(REPLACE(FinancialMonth, '[', ''), ']', '')) > 0";
+                    + "AND JSON_CONTAINS(FinancialMonth, ?, '$')";
             PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sql);
             pre.setInt(1, registerID);
             pre.setString(2, Month);
@@ -826,6 +826,7 @@ public class FinancialDAO implements FinancialFn {
                     + "WHERE RegisterID=" + registerID + " AND StudentID = " + studentID + "";
             ResultSet rs = connect.getConnectionDefault().createStatement().executeQuery(sql);
             if (rs.next()) {
+                        System.out.println(sql);
                 fm = new FinancialModel(
                         rs.getInt("FinancialID"),
                         rs.getInt("RegisterID"),
@@ -862,12 +863,13 @@ public class FinancialDAO implements FinancialFn {
                     + "FROM tb_financial\n"
                     + "INNER JOIN tb_student ON tb_financial.StudentID = tb_student.StudentID\n"
                     + "WHERE RegisterID=? "
-                    + "AND FIND_IN_SET(?, REPLACE(REPLACE(foodMonth, '[', ''), ']', '')) > 0";
+                    + "AND JSON_CONTAINS(foodMonth, ?, '$')";
             PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sql);
             pre.setInt(1, registerID);
             pre.setString(2, Month);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
+                System.out.println(rs.getString("foodMonth"));
                 models.add(resultModel(rs));
             }
         } catch (Exception e) {
