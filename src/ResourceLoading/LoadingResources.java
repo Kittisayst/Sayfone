@@ -2,8 +2,10 @@ package ResourceLoading;
 
 import Controller.LoginController;
 import DAOSevervice.UserService;
+import DAOSevervice.YearService;
 import Model.GlobalDataModel;
 import Model.SettingModel;
+import Model.YearModel;
 import Tools.JoAlert;
 import Tools.JoFrameDesign;
 import Utility.SayfoneFile;
@@ -11,7 +13,11 @@ import View.LoginView;
 import View.PnLoading;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.Year;
 import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.ImageIcon;
 
 public class LoadingResources extends javax.swing.JFrame {
@@ -145,6 +151,23 @@ public class LoadingResources extends javax.swing.JFrame {
         loading.setTitle("ໂຫຼດຂໍ້ມູນສົກປີ");
         YearLoading yearLoading = new YearLoading();
         GlobalDataModel.yearModels = yearLoading.createGlobalYear();
+        LocalDate currentDate = LocalDate.now();
+        Month currentMonth = currentDate.getMonth();
+        int monthValue = currentMonth.getValue(); // 1 to 12
+        int currentYear = currentDate.getYear();
+        if (!GlobalDataModel.yearModels.isEmpty()) {
+            if (monthValue == 6) {
+                YearModel model = new YearService().getLastYear();
+                String lastYear = model.getYear().split(" - ")[1];
+                int yearInt = Integer.parseInt(lastYear);
+                if (currentYear == yearInt) {
+                    int nextYear = currentYear + 1;
+                    String createYear = currentYear + " - " + nextYear;
+                    System.out.println("create New Year"+createYear);
+                    new YearService().Creater(new YearModel(0, createYear));
+                }
+            }
+        }
         setState(!GlobalDataModel.yearModels.isEmpty());
         return state;
     }

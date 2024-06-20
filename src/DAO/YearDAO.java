@@ -8,7 +8,6 @@ import Log.JoLoger;
 import Model.YearModel;
 import java.util.List;
 import Tools.JoAlert;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

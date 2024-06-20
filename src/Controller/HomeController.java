@@ -28,6 +28,7 @@ import App.AppUser;
 import App.AppWithdraw;
 import App.AppReportPayLateApp;
 import App.AppReportPayLateFoodApp;
+import App.AppReportStudentAddreess;
 import Component.DialogSettingPayment;
 import Model.UserModel;
 import DAOSevervice.TeacherService;
@@ -107,6 +108,7 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
         view.getBtnPaymentSetting().addActionListener(this);
         view.getBtnPayRateFood().addActionListener(this);
         view.getBtnReportParentJob().addActionListener(this);
+        view.getBtnReportStudentAddress().addActionListener(this);
     }
 
     @Override
@@ -203,7 +205,10 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
         }else if (event.isEvent(view.getBtnReportParentJob())) {
             AppReportParentJob job = new AppReportParentJob();
             job.Open();
-        }  else if (event.isEvent(view.getBtnReportStudentState())) {
+        }else if (event.isEvent(view.getBtnReportStudentAddress())) {
+            AppReportStudentAddreess app = new AppReportStudentAddreess();
+            app.Open();
+        }   else if (event.isEvent(view.getBtnReportStudentState())) {
             AppReportStudentState studentState = new AppReportStudentState();
             studentState.Open();
         } else if (event.isEvent(view.getBtnInfo())) {   // ============ ຕັ້ງຄ່າ

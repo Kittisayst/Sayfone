@@ -2,12 +2,15 @@ package DAO;
 
 import DAOInterface.StudentAddressFn;
 import Database.JoConnect;
+import Log.JoLoger;
+import Model.ChartStudentAddree;
 import Model.StudentAddressModel;
 import java.util.List;
 import Tools.JoAlert;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class StudentAddressDAO implements StudentAddressFn {
@@ -31,7 +34,7 @@ public class StudentAddressDAO implements StudentAddressFn {
             pre.setString(5, model.getVillage());
             pre.setString(6, model.getVillageNow());
             return pre.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
             JoAlert.Error(e, this);
             return 0;
@@ -48,7 +51,7 @@ public class StudentAddressDAO implements StudentAddressFn {
             pre.setString(4, model.getVillageNow());
             pre.setInt(5, model.getAddressID());
             return pre.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
             JoAlert.Error(e, this);
             return 0;
@@ -61,7 +64,7 @@ public class StudentAddressDAO implements StudentAddressFn {
             PreparedStatement pre = c.prepareStatement(SQL_Delete);
             pre.setInt(1, model.getAddressID());
             return pre.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
             JoAlert.Error(e, this);
             return 0;
@@ -84,7 +87,7 @@ public class StudentAddressDAO implements StudentAddressFn {
                 model.setVillageNow(rs.getString(6));
                 models.add(model);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
             JoAlert.Error(e, this);
         }
@@ -106,10 +109,54 @@ public class StudentAddressDAO implements StudentAddressFn {
                 model.setVillage(rs.getString(5));
                 model.setVillageNow(rs.getString(6));
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
             JoAlert.Error(e, this);
         }
         return model;
     }
+
+    public List<ChartStudentAddree> getChartStudentAddressDistrict(boolean isDistrictNow) {
+        String disID = isDistrictNow ? "lc.didNow" : "lc.did";
+        List<ChartStudentAddree> models = new ArrayList<>();
+        JoConnect connect = new JoConnect();
+        try {
+            String sql = "SELECT ds.dname,COUNT(*)AS discount FROM tb_studentlocation AS lc\n"
+                    + "INNER JOIN tb_district AS ds ON " + disID + " = ds.did\n"
+                    + "GROUP BY " + disID;
+            ResultSet rs = connect.getConnectionDefault().createStatement().executeQuery(sql);
+            while (rs.next()) {
+                models.add(new ChartStudentAddree(rs.getString(1), rs.getInt(2)));
+            }
+        } catch (SQLException e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
+        }
+        return models;
+    }
+
+    public List<ChartStudentAddree> getChartStudentProvince(boolean isDistrictNow) {
+        String disID = isDistrictNow ? "lc.didNow" : "lc.did";
+        List<ChartStudentAddree> models = new ArrayList<>();
+        JoConnect connect = new JoConnect();
+        try {
+            String sql = "SELECT pv.pname,COUNT(StudentID)AS pvcount FROM tb_studentlocation AS lc\n"
+                    + "INNER JOIN tb_district AS ds ON " + disID + " = ds.did\n"
+                    + "INNER JOIN tb_province AS pv ON ds.pid = pv.pid\n"
+                    + "GROUP BY pv.pname";
+            ResultSet rs = connect.getConnectionDefault().createStatement().executeQuery(sql);
+            while (rs.next()) {
+                models.add(new ChartStudentAddree(rs.getString(1), rs.getInt(2)));
+            }
+        } catch (SQLException e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
+        }
+        return models;
+    }
+
 }

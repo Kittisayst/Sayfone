@@ -17,16 +17,16 @@ public class Test extends javax.swing.JFrame {
      */
     public Test() {
         initComponents();
-                chart.addLegend("Income", new Color(245, 189, 135));
+        chart.addLegend("Income", new Color(245, 189, 135));
         chart.addLegend("Expense", new Color(135, 189, 245));
         chart.addLegend("Profit", new Color(189, 135, 245));
         chart.addLegend("Cost", new Color(139, 229, 222));
-        chart.addData(new ModelChart("January", new double[]{500, 200, 80,89}));
-        chart.addData(new ModelChart("February", new double[]{600, 750, 90,150}));
-        chart.addData(new ModelChart("March", new double[]{200, 350, 460,900}));
-        chart.addData(new ModelChart("April", new double[]{480, 150, 750,700}));
-        chart.addData(new ModelChart("May", new double[]{350, 540, 300,150}));
-        chart.addData(new ModelChart("June", new double[]{190, 280, 81,200}));
+        chart.addData(new ModelChart("January", new double[]{500, 200, 80, 89}));
+        chart.addData(new ModelChart("February", new double[]{600, 750, 90, 150}));
+        chart.addData(new ModelChart("March", new double[]{200, 350, 460, 900}));
+        chart.addData(new ModelChart("April", new double[]{480, 150, 750, 700}));
+        chart.addData(new ModelChart("May", new double[]{350, 540, 300, 150}));
+        chart.addData(new ModelChart("June", new double[]{190, 280, 81, 200}));
     }
 
     /**

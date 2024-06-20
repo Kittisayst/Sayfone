@@ -212,6 +212,12 @@ public class HomeView extends javax.swing.JFrame {
         return btnReportParentJob;
     }
 
+    public JoButtonIconfont getBtnReportStudentAddress() {
+        return btnReportStudentAddress;
+    }
+    
+    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -264,6 +270,7 @@ public class HomeView extends javax.swing.JFrame {
         btnFoodPayment = new Components.JoButtonIconfont();
         btnPayRateFood = new Components.JoButtonIconfont();
         btnReportParentJob = new Components.JoButtonIconfont();
+        btnReportStudentAddress = new Components.JoButtonIconfont();
         btn_Service = new Components.JoButtonIconfont();
         btn_report = new Components.JoButtonIconfont();
         btn_Setting = new Components.JoButtonIconfont();
@@ -731,7 +738,7 @@ public class HomeView extends javax.swing.JFrame {
         btnReportStudentState.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.PEOPLE);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 14;
+        gridBagConstraints.gridy = 15;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 0.1;
@@ -774,7 +781,7 @@ public class HomeView extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
         pn_report.add(btnPayRateFood, gridBagConstraints);
 
-        btnReportParentJob.setText("ລາຍງານຂໍ້ມູນອາຊີບຜູ້ປົກຄອງ");
+        btnReportParentJob.setText("ລາຍງານຂໍ້ມູນສະຖິຕິອາຊີບຜູ້ປົກຄອງ");
         btnReportParentJob.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnReportParentJob.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.PEOPLE);
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -785,6 +792,18 @@ public class HomeView extends javax.swing.JFrame {
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
         pn_report.add(btnReportParentJob, gridBagConstraints);
+
+        btnReportStudentAddress.setText("ລາຍງານຂໍ້ມູນສະຖິຕິທີ່ຢູ່ນັກຮຽນ");
+        btnReportStudentAddress.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnReportStudentAddress.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.PEOPLE);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 14;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        pn_report.add(btnReportStudentAddress, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -1061,6 +1080,7 @@ public class HomeView extends javax.swing.JFrame {
     private Components.JoButtonIconfont btnReportPay;
     private Components.JoButtonIconfont btnReportPayment;
     private Components.JoButtonIconfont btnReportStudent;
+    private Components.JoButtonIconfont btnReportStudentAddress;
     private Components.JoButtonIconfont btnReportStudentState;
     private Components.JoButtonIconfont btnReportTeacher;
     private Components.JoButtonIconfont btnReportTeacherMoney;

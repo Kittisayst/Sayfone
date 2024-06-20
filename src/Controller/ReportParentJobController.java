@@ -2,12 +2,15 @@ package Controller;
 
 import Chart.PieChartUI;
 import Chart.PieChartUIModel;
+import Component.BarChart;
 import DAOSevervice.StudentHistoryService;
 import Model.ChartParentJobModel;
 import Model.GlobalDataModel;
 import Tools.JoHookEvent;
+import Utility.chart.ModelChart;
 import View.ReportParentJobView;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
@@ -68,12 +71,16 @@ public class ReportParentJobController implements JoMVC, ActionListener, ChangeL
         if (event.isEvent(view.getBtn_back())) {
             GlobalDataModel.rootView.showDashbord();
         } else if (event.isEvent(view.getBtnPiechart1())) {
+            PiechartParent1();
             view.updateButtonStateSwitchParent1();
         } else if (event.isEvent(view.getBtnBarchart1())) {
+            BarcharParent1();
             view.updateButtonStateSwitchParent1();
         } else if (event.isEvent(view.getBtnPiechart2())) {
+            PiechartParent2();
             view.updateButtonStateSwitchParent2();
         } else if (event.isEvent(view.getBtnBarchart2())) {
+            BarcharParent2();
             view.updateButtonStateSwitchParent2();
         }
     }
@@ -123,11 +130,33 @@ public class ReportParentJobController implements JoMVC, ActionListener, ChangeL
         }
         view.setPiechartParent2(chartUI);
     }
+
+    private void BarcharParent1() {
+        List<ChartParentJobModel> models = new StudentHistoryService().getChartJobs("FatherJob");
+        BarChart barChart = new BarChart();
+        barChart.setFont(new Font("Phetsarath OT", 0, 12));
+        barChart.addLegend("ອາຊີບຜູ້ປົກຄອງ ຜູ້ທີ1", new Color(25, 118, 210));
+        for (ChartParentJobModel model : models) {
+            if (model.getCount() > 2) {
+                String name = model.getName().equals("") ? "ວ່າງເບົ່າ" : model.getName();
+                barChart.addData(new ModelChart(name, new double[]{model.getCount()}));
+            }
+        }
+        view.setBarchatParent1(barChart);
+    }
     
-    
-    
-    private void BarcharParent1(){
-        
+        private void BarcharParent2() {
+        List<ChartParentJobModel> models = new StudentHistoryService().getChartJobs("MotherJob");
+        BarChart barChart = new BarChart();
+        barChart.setFont(new Font("Phetsarath OT", 0, 12));
+        barChart.addLegend("ອາຊີບຜູ້ປົກຄອງ ຜູ້ທີ2", new Color(25, 118, 210));
+        for (ChartParentJobModel model : models) {
+            if (model.getCount() > 2) {
+                String name = model.getName().equals("") ? "ວ່າງເບົ່າ" : model.getName();
+                barChart.addData(new ModelChart(name, new double[]{model.getCount()}));
+            }
+        }
+        view.setBarchatParent2(barChart);
     }
 
 }

@@ -19,6 +19,7 @@ public class LegendItem extends javax.swing.JPanel {
 
         setLayout(new java.awt.GridBagLayout());
 
+        lbName.setFont(new java.awt.Font("Phetsarath OT", 0, 12)); // NOI18N
         lbName.setForeground(new java.awt.Color(100, 100, 100));
         lbName.setText("Name");
         gridBagConstraints = new java.awt.GridBagConstraints();

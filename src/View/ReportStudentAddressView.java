@@ -3,16 +3,17 @@ package View;
 import Chart.PieChartUI;
 import Component.BarChart;
 import Components.JoButtonIconfont;
+import Components.JoCheckBox;
 import Components.JoTabbed;
 import java.awt.BorderLayout;
 import java.awt.Color;
 
-public class ReportParentJobView extends javax.swing.JPanel {
+public class ReportStudentAddressView extends javax.swing.JPanel {
 
     private boolean switchParent1 = false;
     private boolean switchParent2 = false;
 
-    public ReportParentJobView(String Title) {
+    public ReportStudentAddressView(String Title) {
         initComponents();
         lbl_title.setText(Title);
     }
@@ -83,6 +84,14 @@ public class ReportParentJobView extends javax.swing.JPanel {
         return btnPiechart2;
     }
 
+    public JoCheckBox getCkProvince1() {
+        return ckProvince1;
+    }
+
+    public JoCheckBox getCkProvince2() {
+        return ckProvince2;
+    }
+
     public JoTabbed getTabab() {
         return Tabab;
     }
@@ -103,11 +112,13 @@ public class ReportParentJobView extends javax.swing.JPanel {
         Tabab = new Components.JoTabbed();
         jPanel6 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
+        ckProvince1 = new Components.JoCheckBox();
         btnPiechart1 = new Components.JoButtonIconfont();
         btnBarchart1 = new Components.JoButtonIconfont();
         pnParent1 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
+        ckProvince2 = new Components.JoCheckBox();
         btnPiechart2 = new Components.JoButtonIconfont();
         btnBarchart2 = new Components.JoButtonIconfont();
         pnParent2 = new javax.swing.JPanel();
@@ -144,6 +155,10 @@ public class ReportParentJobView extends javax.swing.JPanel {
         jPanel6.setLayout(new java.awt.GridBagLayout());
 
         jPanel9.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
+        jPanel9.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 10, 5));
+
+        ckProvince1.setText("ສະແດງຕາມແຂວງ");
+        jPanel9.add(ckProvince1);
 
         btnPiechart1.setText("Pie Chart");
         btnPiechart1.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.PIE_CHART);
@@ -166,11 +181,15 @@ public class ReportParentJobView extends javax.swing.JPanel {
         gridBagConstraints.weighty = 0.1;
         jPanel6.add(pnParent1, gridBagConstraints);
 
-        Tabab.addTab("ຜູ້ປົກຄອງ 1", jPanel6);
+        Tabab.addTab("ສະຖານທີ່ປະຈຸບັນ", jPanel6);
 
         jPanel7.setLayout(new java.awt.GridBagLayout());
 
         jPanel10.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
+        jPanel10.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 10, 5));
+
+        ckProvince2.setText("ສະແດງຕາມແຂວງ");
+        jPanel10.add(ckProvince2);
 
         btnPiechart2.setText("Pie Chart");
         btnPiechart2.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.PIE_CHART);
@@ -196,7 +215,7 @@ public class ReportParentJobView extends javax.swing.JPanel {
         gridBagConstraints.weighty = 0.1;
         jPanel7.add(pnParent2, gridBagConstraints);
 
-        Tabab.addTab("ຜູ້ປົກຄອງ 2", jPanel7);
+        Tabab.addTab("ສະຖານທີ່ເກີດ", jPanel7);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
@@ -231,6 +250,8 @@ public class ReportParentJobView extends javax.swing.JPanel {
     private Components.JoButtonIconfont btnPiechart1;
     private Components.JoButtonIconfont btnPiechart2;
     private Components.JoButtonIconfont btn_back;
+    private Components.JoCheckBox ckProvince1;
+    private Components.JoCheckBox ckProvince2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;

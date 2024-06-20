@@ -122,8 +122,8 @@
                 <Container class="javax.swing.JPanel" name="jPanel6">
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                      <JTabbedPaneConstraints tabName="&#xe9c;&#xeb9;&#xec9;&#xe9b;&#xebb;&#xe81;&#xe84;&#xead;&#xe87; 1">
-                        <Property name="tabTitle" type="java.lang.String" value="&#xe9c;&#xeb9;&#xec9;&#xe9b;&#xebb;&#xe81;&#xe84;&#xead;&#xe87; 1"/>
+                      <JTabbedPaneConstraints tabName="&#xeaa;&#xeb0;&#xe96;&#xeb2;&#xe99;&#xe97;&#xeb5;&#xec8;&#xe9b;&#xeb0;&#xe88;&#xeb8;&#xe9a;&#xeb1;&#xe99;">
+                        <Property name="tabTitle" type="java.lang.String" value="&#xeaa;&#xeb0;&#xe96;&#xeb2;&#xe99;&#xe97;&#xeb5;&#xec8;&#xe9b;&#xeb0;&#xe88;&#xeb8;&#xe9a;&#xeb1;&#xe99;"/>
                       </JTabbedPaneConstraints>
                     </Constraint>
                   </Constraints>
@@ -144,8 +144,15 @@
                         </Constraint>
                       </Constraints>
 
-                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
+                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
+                        <Property name="horizontalGap" type="int" value="10"/>
+                      </Layout>
                       <SubComponents>
+                        <Component class="Components.JoCheckBox" name="ckProvince1">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="&#xeaa;&#xeb0;&#xec1;&#xe94;&#xe87;&#xe95;&#xeb2;&#xea1;&#xec1;&#xe82;&#xea7;&#xe87;"/>
+                          </Properties>
+                        </Component>
                         <Component class="Components.JoButtonIconfont" name="btnPiechart1">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Pie Chart"/>
@@ -178,8 +185,8 @@
                 <Container class="javax.swing.JPanel" name="jPanel7">
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                      <JTabbedPaneConstraints tabName="&#xe9c;&#xeb9;&#xec9;&#xe9b;&#xebb;&#xe81;&#xe84;&#xead;&#xe87; 2">
-                        <Property name="tabTitle" type="java.lang.String" value="&#xe9c;&#xeb9;&#xec9;&#xe9b;&#xebb;&#xe81;&#xe84;&#xead;&#xe87; 2"/>
+                      <JTabbedPaneConstraints tabName="&#xeaa;&#xeb0;&#xe96;&#xeb2;&#xe99;&#xe97;&#xeb5;&#xec8;&#xec0;&#xe81;&#xeb5;&#xe94;">
+                        <Property name="tabTitle" type="java.lang.String" value="&#xeaa;&#xeb0;&#xe96;&#xeb2;&#xe99;&#xe97;&#xeb5;&#xec8;&#xec0;&#xe81;&#xeb5;&#xe94;"/>
                       </JTabbedPaneConstraints>
                     </Constraint>
                   </Constraints>
@@ -200,8 +207,15 @@
                         </Constraint>
                       </Constraints>
 
-                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
+                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
+                        <Property name="horizontalGap" type="int" value="10"/>
+                      </Layout>
                       <SubComponents>
+                        <Component class="Components.JoCheckBox" name="ckProvince2">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="&#xeaa;&#xeb0;&#xec1;&#xe94;&#xe87;&#xe95;&#xeb2;&#xea1;&#xec1;&#xe82;&#xea7;&#xe87;"/>
+                          </Properties>
+                        </Component>
                         <Component class="Components.JoButtonIconfont" name="btnPiechart2">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Pie Chart"/>

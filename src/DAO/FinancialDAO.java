@@ -826,7 +826,6 @@ public class FinancialDAO implements FinancialFn {
                     + "WHERE RegisterID=" + registerID + " AND StudentID = " + studentID + "";
             ResultSet rs = connect.getConnectionDefault().createStatement().executeQuery(sql);
             if (rs.next()) {
-                        System.out.println(sql);
                 fm = new FinancialModel(
                         rs.getInt("FinancialID"),
                         rs.getInt("RegisterID"),
@@ -869,7 +868,7 @@ public class FinancialDAO implements FinancialFn {
             pre.setString(2, Month);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
-                System.out.println(rs.getString("foodMonth"));
+                System.out.println(pre);
                 models.add(resultModel(rs));
             }
         } catch (Exception e) {

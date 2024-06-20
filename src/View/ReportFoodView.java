@@ -61,7 +61,6 @@ public class ReportFoodView extends javax.swing.JPanel {
                 StudentService service = new StudentService();
                 models.forEach(data -> {
                     StudentModel studentModel = service.getStudentById(data.getStudentID());
-                        if (data.getFoodMoney() > 0) {
                             tb_data.AddJoModel(new Object[]{
                                 tb_data.autoNumber(),
                                 data.getFinancialIID(),
@@ -73,7 +72,6 @@ public class ReportFoodView extends javax.swing.JPanel {
                                 studentModel.getFullName(),
                                 data.getFinancialComment()
                             });
-                        }
                     loading.StartProgress(models.size(), 100);
                 });
             } catch (Exception e) {
