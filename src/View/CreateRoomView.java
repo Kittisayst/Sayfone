@@ -1,9 +1,11 @@
 package View;
 
 import Components.JoButtonIconfont;
+import Components.JoCombobox;
 import Components.JoTable;
 import Model.GlobalDataModel;
 import Model.RegisterModel;
+import Model.YearModel;
 import Tools.JoDataTable;
 import Utility.MyFormat;
 import java.util.List;
@@ -46,6 +48,13 @@ public class CreateRoomView extends javax.swing.JPanel {
         thread.start();
     }
 
+    public void showYear(List<YearModel> years) {
+        cbYear.JoClearData();
+        years.forEach(data -> {
+            cbYear.JoAddIntModel(data.getYearID(), data.getYear());
+        });
+    }
+
     public JoButtonIconfont getBtn_back() {
         return btn_back;
     }
@@ -57,9 +66,13 @@ public class CreateRoomView extends javax.swing.JPanel {
     public JoTable getTb_data() {
         return tb_data;
     }
-    
-    public int getRegisterID(){
+
+    public int getRegisterID() {
         return tb_data.getIntValue(1);
+    }
+
+    public JoCombobox getCbYear() {
+        return cbYear;
     }
 
     @SuppressWarnings("unchecked")
@@ -76,6 +89,9 @@ public class CreateRoomView extends javax.swing.JPanel {
         pn_Datatable = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_data = new Components.JoTable();
+        jPanel1 = new javax.swing.JPanel();
+        joLable1 = new Components.JoLable();
+        cbYear = new Components.JoCombobox();
 
         Pn_Navigation.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
         Pn_Navigation.setLayout(new java.awt.GridLayout(1, 0));
@@ -126,19 +142,30 @@ public class CreateRoomView extends javax.swing.JPanel {
 
         pn_Datatable.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
+        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 10, 5));
+
+        joLable1.setText("ສົກຮຽນ");
+        jPanel1.add(joLable1);
+
+        cbYear.setPreferredSize(new java.awt.Dimension(100, 30));
+        jPanel1.add(cbYear);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(Pn_Navigation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pn_Datatable, javax.swing.GroupLayout.DEFAULT_SIZE, 1125, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(Pn_Navigation, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pn_Datatable, javax.swing.GroupLayout.DEFAULT_SIZE, 655, Short.MAX_VALUE))
+                .addGap(8, 8, 8)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pn_Datatable, javax.swing.GroupLayout.DEFAULT_SIZE, 613, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -147,10 +174,13 @@ public class CreateRoomView extends javax.swing.JPanel {
     private javax.swing.JPanel Pn_Navigation;
     private Components.JoButtonIconfont btn_add;
     private Components.JoButtonIconfont btn_back;
+    private Components.JoCombobox cbYear;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private Components.JoLable joLable1;
     private Components.JoLable lbl_title;
     private javax.swing.JPanel pn_Datatable;
     private Components.JoTable tb_data;

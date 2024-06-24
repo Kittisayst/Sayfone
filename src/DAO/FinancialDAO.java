@@ -891,7 +891,7 @@ public class FinancialDAO implements FinancialFn {
             ResultSet rs = connect.getConnectionDefault().createStatement().executeQuery(sql);
             if (rs.next()) {
                 return rs.getString("converted_month");
-            }else{
+            } else {
                 return "[]";
             }
         } catch (SQLException e) {
@@ -903,8 +903,8 @@ public class FinancialDAO implements FinancialFn {
         }
         return "[]";
     }
-    
-     public String getDebtFoodMonth(int registerID, int studentID) {
+
+    public String getDebtFoodMonth(int registerID, int studentID) {
         JoConnect connect = new JoConnect();
         try {
             String sql = "SELECT\n"
@@ -914,7 +914,7 @@ public class FinancialDAO implements FinancialFn {
             ResultSet rs = connect.getConnectionDefault().createStatement().executeQuery(sql);
             if (rs.next()) {
                 return rs.getString("converted_fmonth");
-            }else{
+            } else {
                 return "[]";
             }
         } catch (SQLException e) {
@@ -925,6 +925,118 @@ public class FinancialDAO implements FinancialFn {
             connect.close();
         }
         return "[]";
+    }
+
+    public List<StudentModel> getStudentOldClass(int yearID, int classID) {
+        List<StudentModel> models = new ArrayList<>();
+        StudentService service = new StudentService();
+        JoConnect connect = new JoConnect();
+        try {
+            String sql = "SELECT fc.StudentID FROM tb_financial AS fc\n"
+                    + "INNER JOIN tb_register AS rs ON fc.RegisterID = rs.registerID\n"
+                    + "INNER JOIN tb_student AS st ON fc.StudentID = st.StudentID\n"
+                    + "WHERE rs.yearID=? AND rs.classID=? AND st.Status ='0'\n"
+                    + "GROUP BY StudentID";
+            PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sql);
+            pre.setInt(1, yearID);
+            pre.setInt(2, classID);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                models.add(service.getStudentById(rs.getInt(1)));
+            }
+        } catch (SQLException e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+            System.out.println(e.getMessage());
+        } finally {
+            connect.close();
+        }
+        return models;
+    }
+
+    public List<StudentModel> getStudentNew() {
+        List<StudentModel> models = new ArrayList<>();
+        StudentService service = new StudentService();
+        JoConnect connect = new JoConnect();
+        try {
+            String sql = "SELECT st.StudentID \n"
+                    + "FROM tb_student AS st\n"
+                    + "LEFT JOIN tb_financial AS tf ON st.StudentID = tf.StudentID\n"
+                    + "WHERE tf.StudentID IS NULL AND  st.Status=0";
+            PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sql);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                models.add(service.getStudentById(rs.getInt(1)));
+            }
+        } catch (SQLException e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+            System.out.println(e.getMessage());
+        } finally {
+            connect.close();
+        }
+        return models;
+    }
+
+    public boolean isOldStudentRegistered(int registerID, int studentID) {
+        JoConnect connect = new JoConnect();
+        try {
+            String sql = "SELECT StudentID FROM tb_financial WHERE RegisterID=? AND StudentID = ?";
+            PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sql);
+            pre.setInt(1, registerID);
+            pre.setInt(2, studentID);
+            ResultSet rs = pre.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+            System.out.println(e.getMessage());
+            return false;
+        } finally {
+            connect.close();
+        }
+    }
+
+    public int getCountOldStudent() {
+        JoConnect connect = new JoConnect();
+        int count = 0;
+        try {
+            String sql = "SELECT COUNT(DISTINCT st.StudentID)AS stCount FROM tb_student AS st\n"
+                    + "INNER JOIN tb_financial AS tf ON st.StudentID = tf.StudentID\n"
+                    + "WHERE  st.Status=0";
+            PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sql);
+            ResultSet rs = pre.executeQuery();
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
+        }
+        return count;
+    }
+
+    public int getCountStudentNew() {
+        JoConnect connect = new JoConnect();
+        int count = 0;
+        try {
+            String sql = "SELECT COUNT(st.StudentID)AS stCount FROM tb_student AS st\n"
+                    + "LEFT JOIN tb_financial AS tf ON st.StudentID = tf.StudentID\n"
+                    + "WHERE tf.StudentID IS NULL AND  st.Status=0";
+            PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sql);
+            ResultSet rs = pre.executeQuery();
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
+        }
+        return count;
     }
 
 }

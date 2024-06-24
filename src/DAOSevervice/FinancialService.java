@@ -2,6 +2,7 @@ package DAOSevervice;
 
 import DAO.FinancialDAO;
 import Model.FinancialModel;
+import Model.StudentModel;
 import java.util.List;
 
 public class FinancialService {
@@ -146,6 +147,26 @@ public class FinancialService {
 
     public String getDebtFoodMonth(int registerID, int studentID) {
         return aO.getDebtFoodMonth(registerID, studentID);
+    }
+
+    public List<StudentModel> getStudentOldClass(int yearID, int classID) {
+        return aO.getStudentOldClass(yearID, classID);
+    }
+
+    public boolean isOldStudentRegistered(int registerID, int studentID) {
+        return aO.isOldStudentRegistered(registerID, studentID);
+    }
+
+    public List<StudentModel> getStudentNew() {
+        return aO.getStudentNew();
+    }
+
+    public int getCountOldStudent() {
+        return aO.getCountOldStudent();
+    }
+
+    public int getCountStudentNew() {
+        return aO.getCountStudentNew();
     }
 
 }

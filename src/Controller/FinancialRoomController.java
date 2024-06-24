@@ -23,12 +23,14 @@ public class FinancialRoomController implements JoMVC, ActionListener, MouseList
         GlobalDataModel.rootView.setView(view);
         GlobalDataModel.TableStudentRegistered = null;
         view.showRegister(GlobalDataModel.registerModels);
+        view.showYears();
     }
 
     @Override
     public void AddEvent() {
         view.getBtn_back().addActionListener(this);
         view.getTb_data().addMouseListener(this);
+        view.getBtnSearch().addActionListener(this);
     }
 
     @Override
@@ -56,6 +58,8 @@ public class FinancialRoomController implements JoMVC, ActionListener, MouseList
         JoHookEvent event = new JoHookEvent(e.getSource());
         if (event.isEvent(view.getBtn_back())) {
             GlobalDataModel.rootView.showDashbord();
+        }else if (event.isEvent(view.getBtnSearch())) {
+            view.showRegister(new RegisterService().getRegisterAllByYearID(view.getYearID()));
         }
     }
 

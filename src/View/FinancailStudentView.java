@@ -19,6 +19,8 @@ public class FinancailStudentView extends javax.swing.JPanel {
         initComponents();
         lbl_title.setText(Title);
         loading.setTitle("ໂຫຼດຂໍ້ມູນນັກຮຽນ");
+        jPanel2.setVisible(false);
+        jPanel6.setVisible(false);
     }
 
     public JoButtonIconfont getBtn_back() {
@@ -91,10 +93,6 @@ public class FinancailStudentView extends javax.swing.JPanel {
             } finally {
                 GlobalDataModel.rootView.setView(this);
                 loading.close();
-//                pn_Datatable.removeAll();
-//                pn_Datatable.add(jScrollPane1);
-//                JoDataTable dataTable = new JoDataTable(pn_Datatable);
-//                dataTable.showDataTableAll();
             }
         });
         thread.start();

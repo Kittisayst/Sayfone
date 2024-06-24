@@ -3,6 +3,7 @@ package Controller;
 import App.AppFinancial;
 import App.AppFinancialRoom;
 import Component.DialogChangeClassRoom;
+import Component.DialogStudentsRegister;
 import DAOSevervice.FinancialService;
 import DAOSevervice.StudentService;
 import Model.FinancialModel;
@@ -53,6 +54,7 @@ public class FinancailStudentController implements JoMVC, ActionListener, MouseL
         int pages = (int) Math.ceil((double) studentService.getTotalPages() / 25);
         view.showCurrentPage(currentPage, pages);
         showFilterStudentRegistered();
+        getStudents();
     }
 
     @Override
@@ -96,14 +98,14 @@ public class FinancailStudentController implements JoMVC, ActionListener, MouseL
             AppFinancialRoom app = new AppFinancialRoom();
             app.open();
         } else if (event.isEvent(view.getBtn_Add())) {
-            StudentService studentService = new StudentService();
             StudentModel studentModel = studentService.getStudentById(view.getTb_data().getIntValue(1));
             if (studentModel.getStudentID() != 0) {
                 AppFinancial app = new AppFinancial(registerModel, studentModel);
             }
         } else if (event.isEvent(view.getBtnRegister())) {
             GlobalDataModel.TableStudentRegistered = null;
-            showFilterStudentRegister();
+            DialogStudentsRegister register = new DialogStudentsRegister(GlobalDataModel.rootView, true, getStudents(), registerModel);
+            register.setVisible(true);
         } else if (event.isEvent(view.getBtnRegistered())) {
             showFilterStudentRegistered();
         } else if (event.isEvent(view.getBtnPrevious())) {
@@ -273,4 +275,27 @@ public class FinancailStudentController implements JoMVC, ActionListener, MouseL
 
     }
 
+    private List<StudentModel> getStudents() {
+        //ໄອດີຂະແໜງ 1 = ອານູບານ 1, 18 = ອານຸບານ 2 => 32 = ມັດທະຍົມ 7
+        List<StudentModel> studentModels = new ArrayList<>();
+        FinancialService financialService = new FinancialService();
+        int clssID = registerModel.getClassModel().getClassID();
+        int yearID = registerModel.getYearID();
+        int calYear = yearID - 1;
+        int calClass = clssID - 1;
+        System.out.println(clssID + " - " + yearID);
+        //ກວດສອບປີທຳອິດ
+        if (calYear > 0) {  //ດຶງຂໍ້ມູນນັກຮຽນສົກຮຽນທີ່ຜ່ານມາ
+            if (calClass > 0) { //ດຶງຂໍ້ມູນນັກຮຽນອານຸບານ 1 ຂື້ນໄປ ສົກຮຽນທີ່ຜ່ານມາ
+                int readClassID = calClass == 17 ? 1 : calClass;
+                System.out.println("old student" + readClassID);
+                studentModels = financialService.getStudentOldClass(calYear, readClassID);
+            } else { //ຂໍ້ມູນນັກຮຽນໃໝ່ ອານຸບານເຂົ້າໃໝ່
+                System.out.println("new student" + calClass);
+            }
+        } else { //ດຶງຂໍ້ມູນນັກຮຽນໃໝ່
+            System.out.println("col new");
+        }
+        return studentModels;
+    }
 }

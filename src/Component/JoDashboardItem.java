@@ -1,5 +1,6 @@
 package Component;
 
+import Components.JoLable;
 import Components.JoLableIcon;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -134,6 +135,16 @@ public class JoDashboardItem extends javax.swing.JPanel {
     public JoLableIcon getLbl_more() {
         return lbl_more;
     }
+
+    public JoLable getLbl_Title() {
+        return lbl_Title;
+    }
+
+    public JoLable getLbl_detail() {
+        return lbl_detail;
+    }
+    
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

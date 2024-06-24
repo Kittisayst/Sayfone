@@ -4,13 +4,13 @@ import App.AppCreateRegister;
 import App.AppDashboard;
 import App.AppRegister;
 import DAOSevervice.RegisterService;
+import DAOSevervice.YearService;
 import Model.GlobalDataModel;
 import Model.RegisterModel;
 import Tools.JoAlert;
 import Tools.JoHookEvent;
 import Utility.MyPopup;
 import View.CreateRoomView;
-import View.DasboardView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -33,6 +33,7 @@ public class CreateRoomController implements JoMVC, ActionListener, MouseListene
     public void Start() {
         GlobalDataModel.rootView.setView(view);
         view.showRegister(GlobalDataModel.registerModels);
+        view.showYear(new YearService().getYearAll());
     }
 
     @Override

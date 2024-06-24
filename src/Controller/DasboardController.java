@@ -44,7 +44,7 @@ public class DasboardController implements JoMVC, MouseListener, ActionListener,
     @Override
     public final void Start() {
 //        GlobalDataModel.rootView.setView(view);
-        view.ShowStudentCount(studentService.getStudentCount());
+        view.ShowStudentCount(financialService.getCountStudentNew(), financialService.getCountOldStudent());
         view.ShowTeacherCount(teacherService.getTeacherCount());
         view.showFinalcailCount(financialService.getCountFinancial());
         view.showRegisterCount(registerService.getCountRegister());
@@ -64,7 +64,7 @@ public class DasboardController implements JoMVC, MouseListener, ActionListener,
     }
 
     public void UpdateView() {
-        view.ShowStudentCount(studentService.getStudentCount());
+        view.ShowStudentCount(financialService.getCountStudentNew(), financialService.getCountOldStudent());
         view.ShowTeacherCount(teacherService.getTeacherCount());
         view.showFinalcailCount(financialService.getCountFinancial());
         view.showRegisterCount(registerService.getCountRegister());
