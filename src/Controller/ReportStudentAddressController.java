@@ -2,12 +2,15 @@ package Controller;
 
 import Chart.PieChartUI;
 import Chart.PieChartUIModel;
+import Component.BarChart;
 import DAOSevervice.StudentAddressService;
 import Model.ChartStudentAddree;
 import Model.GlobalDataModel;
 import Tools.JoHookEvent;
+import Utility.chart.ModelChart;
 import View.ReportStudentAddressView;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -82,8 +85,10 @@ public class ReportStudentAddressController implements JoMVC, ActionListener {
             showPieChartAddress2();
         } else if (event.isEvent(view.getBtnBarchart1())) {
             view.updateButtonStateSwitchParent1();
+            showBarcharAddress1();
         } else if (event.isEvent(view.getBtnBarchart2())) {
             view.updateButtonStateSwitchParent2();
+            showBarcharAddress2();
         }
     }
 
@@ -109,6 +114,43 @@ public class ReportStudentAddressController implements JoMVC, ActionListener {
             PieChartUI chartUI = createPieChart(datas);
             view.setPiechartParent2(chartUI);
         }
+    }
+
+    private void showBarcharAddress1() {
+        if (provinceState1) {
+            List<ChartStudentAddree> datas = new StudentAddressService().getChartStudentProvince(true);
+            BarChart barChart = createBarchart(datas, "ແຂວງ");
+            view.setBarchatParent1(barChart);
+        } else {
+            List<ChartStudentAddree> datas = new StudentAddressService().getChartStudentAddressDistrict(true);
+            BarChart barChart = createBarchart(datas, "ເມືອງ");
+            view.setBarchatParent1(barChart);
+        }
+    }
+
+    private void showBarcharAddress2() {
+        if (provinceState2) {
+            List<ChartStudentAddree> datas = new StudentAddressService().getChartStudentProvince(false);
+            BarChart barChart = createBarchart(datas, "ແຂວງ");
+            view.setBarchatParent2(barChart);
+        } else {
+            List<ChartStudentAddree> datas = new StudentAddressService().getChartStudentAddressDistrict(false);
+            BarChart barChart = createBarchart(datas, "ເມືອງ");
+            view.setBarchatParent2(barChart);
+        }
+    }
+
+    private BarChart createBarchart(List<ChartStudentAddree> datas, String text) {
+        BarChart barChart = new BarChart();
+        barChart.setFont(new Font("Phetsarath OT", 0, 12));
+        barChart.addLegend(text, new Color(25, 118, 210));
+        for (ChartStudentAddree data : datas) {
+            if (data.getCount() > 2) {
+                String name = data.getName().equals("") ? "ວ່າງເບົ່າ" : data.getName();
+                barChart.addData(new ModelChart(name, new double[]{data.getCount()}));
+            }
+        }
+        return barChart;
     }
 
     private PieChartUI createPieChart(List<ChartStudentAddree> datas) {

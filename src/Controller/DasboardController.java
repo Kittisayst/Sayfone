@@ -52,6 +52,7 @@ public class DasboardController implements JoMVC, MouseListener, ActionListener,
         view.getTbData().addMouseListener(this);
         view.getBtnSearch().addActionListener(this);
         view.getTxtSearch().addKeyListener(this);
+        view.showYear();
     }
 
     @Override
@@ -120,7 +121,8 @@ public class DasboardController implements JoMVC, MouseListener, ActionListener,
         } else if (event.isEvent(view.getTbData())) {
             if (e.getClickCount() == 2) {
                 int studentID = view.getTbData().getIntValue(1);
-                FinancialModel financialModel = financialService.getLastRegister(studentID);
+                int yearID = view.getYear();
+                FinancialModel financialModel = financialService.getSearchStudentInDash(yearID, studentID);
                 if (financialModel.getFinancialIID() == 0) {
                     JoAlert alert = new JoAlert();
                     alert.setButtonOption(new String[]{"ເລືອນຫ້ອງຮຽນ", "ຍົກເລີກ"});

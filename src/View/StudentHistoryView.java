@@ -405,6 +405,7 @@ public class StudentHistoryView extends javax.swing.JPanel {
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
         modelLiquid1 = new ClassUI.ModelLiquid();
+        GroupKnow = new javax.swing.ButtonGroup();
         Pn_Navigation = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         btn_back = new Components.JoButtonIconfont();
@@ -512,6 +513,12 @@ public class StudentHistoryView extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         tbFile = new Components.JoTable();
         jPanel15 = new javax.swing.JPanel();
+        joPanelTitle3 = new Components.JoPanelTitle();
+        joRadioButton1 = new Component.JoRadioButton();
+        joRadioButton2 = new Component.JoRadioButton();
+        joRadioButton3 = new Component.JoRadioButton();
+        joRadioButton4 = new Component.JoRadioButton();
+        joRadioButton5 = new Component.JoRadioButton();
 
         Pn_Navigation.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
         Pn_Navigation.setLayout(new java.awt.GridLayout(1, 0));
@@ -1375,16 +1382,51 @@ public class StudentHistoryView extends javax.swing.JPanel {
 
         TapHistory.addTab("ເອກະສານນັກຮຽນ", jPanel7);
 
-        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
-        jPanel15.setLayout(jPanel15Layout);
-        jPanel15Layout.setHorizontalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1233, Short.MAX_VALUE)
-        );
-        jPanel15Layout.setVerticalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 604, Short.MAX_VALUE)
-        );
+        jPanel15.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        joPanelTitle3.setJoTitle("ຊ່ອງທາງຮູ້ຂັກໂຮງຮຽນສາຍຝົນ");
+        joPanelTitle3.setJoTitleBorderSize(1);
+        joPanelTitle3.setLayout(new java.awt.GridBagLayout());
+
+        joRadioButton1.setText("joRadioButton1");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        joPanelTitle3.add(joRadioButton1, gridBagConstraints);
+
+        joRadioButton2.setText("joRadioButton2");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        joPanelTitle3.add(joRadioButton2, gridBagConstraints);
+
+        joRadioButton3.setText("joRadioButton3");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        joPanelTitle3.add(joRadioButton3, gridBagConstraints);
+
+        joRadioButton4.setText("joRadioButton4");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        joPanelTitle3.add(joRadioButton4, gridBagConstraints);
+
+        joRadioButton5.setText("joRadioButton5");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        joPanelTitle3.add(joRadioButton5, gridBagConstraints);
+
+        jPanel15.add(joPanelTitle3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 40, 470, 460));
 
         TapHistory.addTab("ຮູ້ຈັກໂຮງຮຽນສາຍຝົນ", jPanel15);
 
@@ -1409,6 +1451,7 @@ public class StudentHistoryView extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup GroupKnow;
     private javax.swing.JPanel Pn_Navigation;
     private Components.JoTabbed TapHistory;
     private Components.JoButtonIconfont btnAddBS;
@@ -1478,8 +1521,14 @@ public class StudentHistoryView extends javax.swing.JPanel {
     private Components.JoLable joLable9;
     private Component.JoPanelTitle joPanelTitle1;
     private Component.JoPanelTitle joPanelTitle2;
+    private Components.JoPanelTitle joPanelTitle3;
     private Component.JoPanelTitle joPanelTitle4;
     private Component.JoPanelTitle joPanelTitle5;
+    private Component.JoRadioButton joRadioButton1;
+    private Component.JoRadioButton joRadioButton2;
+    private Component.JoRadioButton joRadioButton3;
+    private Component.JoRadioButton joRadioButton4;
+    private Component.JoRadioButton joRadioButton5;
     private Components.JoLable lbl_title;
     private ClassUI.ModelLiquid modelLiquid1;
     private Component.ParentComponent parent1;

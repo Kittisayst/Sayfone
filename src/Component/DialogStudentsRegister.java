@@ -7,6 +7,8 @@ import Model.RegisterModel;
 import Model.StudentModel;
 import Tools.JoDataTable;
 import Utility.MyFormat;
+import View.PnLoading;
+import java.awt.BorderLayout;
 import java.util.List;
 
 public class DialogStudentsRegister extends javax.swing.JDialog {
@@ -15,65 +17,81 @@ public class DialogStudentsRegister extends javax.swing.JDialog {
     RegisterModel registerModel;
     StudentService studentService = new StudentService();
     FinancialService financialService = new FinancialService();
+    PnLoading loading = new PnLoading();
 
     public DialogStudentsRegister(java.awt.Frame parent, boolean modal, List<StudentModel> studentModels, RegisterModel registerModel) {
         super(parent, modal);
         this.studentModels = studentModels;
         this.registerModel = registerModel;
         initComponents();
+        loading.setTitle("ໂຫຼດຂໍ້ມູນນັກຮຽນ");
         showStudent();
     }
 
     private void showStudent() {
-        try {
-            tb_student.JoClearModel();
-            studentModels.forEach(student -> {
-                boolean isRegister = financialService.isOldStudentRegistered(registerModel.getRegisterID(), student.getStudentID()); // ກວດສອບວ່າໄດ້ລົງທະບຽນແລ້ວບໍ່
-                if (!isRegister) {
+        Thread thread = new Thread(() -> {
+            try {
+                tb_student.JoClearModel();
+                pnStudent.removeAll();
+                pnStudent.add(loading, BorderLayout.CENTER);
+                studentModels.forEach(student -> {
+                    boolean isRegister = financialService.isOldStudentRegistered(registerModel.getRegisterID(), student.getStudentID()); // ກວດສອບວ່າໄດ້ລົງທະບຽນແລ້ວບໍ່
+                    if (!isRegister) {
+                        Object[] tableData = new Object[]{
+                            tb_student.autoNumber(),
+                            student.getStudentID(),
+                            student.getStudentNo(),
+                            student.getFullName(),
+                            student.getDateStart() == null ? "ວ່າງ" : new MyFormat().getDate(student.getDateStart())
+                        };
+                        tb_student.AddJoModel(tableData);
+                    }
+                    loading.StartProgress(studentModels.size(), 20);
+                });
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            } finally {
+                pnStudent.removeAll();
+                pnStudent.add(scrollStudent);
+                JoDataTable dataTable = new JoDataTable(pnStudent);
+                dataTable.setHiddenColumns(1);
+                dataTable.showDataTableAll();
+                loading.close();
+            }
+        });
+        thread.start();
+    }
+
+    private void showStudentNew() {
+        Thread thread = new Thread(() -> {
+            try {
+                pnStudentNew.removeAll();
+                pnStudentNew.add(loading, BorderLayout.CENTER);
+                tb_studentNew.JoClearModel();
+                List<StudentModel> studentnewModels = new FinancialService().getStudentNew();
+                studentnewModels.forEach(student -> {
                     Object[] tableData = new Object[]{
-                        tb_student.autoNumber(),
+                        tb_studentNew.autoNumber(),
                         student.getStudentID(),
                         student.getStudentNo(),
                         student.getFullName(),
                         student.getDateStart() == null ? "ວ່າງ" : new MyFormat().getDate(student.getDateStart())
                     };
-                    tb_student.AddJoModel(tableData);
-                }
-            });
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        } finally {
-            pnStudent.removeAll();
-            pnStudent.add(scrollStudent);
-            JoDataTable dataTable = new JoDataTable(pnStudent);
-            dataTable.setHiddenColumns(1);
-            dataTable.showDataTableAll();
-        }
-    }
-
-    private void showStudentNew() {
-        try {
-            tb_studentNew.JoClearModel();
-            List<StudentModel> studentnewModels = new FinancialService().getStudentNew();
-            studentnewModels.forEach(student -> {
-                Object[] tableData = new Object[]{
-                    tb_studentNew.autoNumber(),
-                    student.getStudentID(),
-                    student.getStudentNo(),
-                    student.getFullName(),
-                    student.getDateStart() == null ? "ວ່າງ" : new MyFormat().getDate(student.getDateStart())
-                };
-                tb_studentNew.AddJoModel(tableData);
-            });
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        } finally {
-            pnStudentNew.removeAll();
-            pnStudentNew.add(ScrollStudentNew);
-            JoDataTable dataTable = new JoDataTable(pnStudentNew);
-            dataTable.setHiddenColumns(1);
-            dataTable.showDataTableAll();
-        }
+                    tb_studentNew.AddJoModel(tableData);
+                    loading.StartProgress(studentnewModels.size(), 20);
+                });
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            } finally {
+                pnStudentNew.removeAll();
+                pnStudentNew.add(ScrollStudentNew);
+                JoDataTable dataTable = new JoDataTable(pnStudentNew);
+                dataTable.setHiddenColumns(1);
+                dataTable.showDataTableAll();
+                loading.close();
+            }
+        });
+        thread.start();
     }
 
     @SuppressWarnings("unchecked")

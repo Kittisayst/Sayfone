@@ -1039,4 +1039,27 @@ public class FinancialDAO implements FinancialFn {
         return count;
     }
 
+    public FinancialModel getSearchStudentInDash(int YearID, int StudentID) {
+        FinancialModel financialModel = new FinancialModel();
+        JoConnect connect = new JoConnect();
+        try {
+            String sql = "SELECT * FROM tb_financial AS fc\n"
+                    + "INNER JOIN tb_register AS rg ON fc.RegisterID = rg.registerID\n"
+                    + "WHERE rg.yearID = ? AND fc.StudentID=?";
+            PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sql);
+            pre.setInt(1, YearID);
+            pre.setInt(2, StudentID);
+            ResultSet rs = pre.executeQuery();
+            if (rs.next()) {
+                financialModel = resultModel(rs);
+            }
+        } catch (Exception e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
+        }
+        return financialModel;
+    }
+
 }

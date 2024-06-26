@@ -15,4 +15,8 @@ public class comboboxYear extends JoCombobox {
         });
     }
 
+    public int getYearID() {
+        return getKeyInt();
+    }
+
 }

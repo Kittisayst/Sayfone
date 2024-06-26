@@ -169,4 +169,8 @@ public class FinancialService {
         return aO.getCountStudentNew();
     }
 
+    public FinancialModel getSearchStudentInDash(int YearID, int StudentID) {
+        return aO.getSearchStudentInDash(YearID, StudentID);
+    }
+
 }

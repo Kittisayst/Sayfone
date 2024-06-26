@@ -22,10 +22,12 @@ import javax.swing.JPanel;
 public class DasboardView extends javax.swing.JPanel {
 
     private JoScrollBar scrollBar;
+    private PnLoading loading = new PnLoading();
 
     public DasboardView() {
         initComponents();
         scrollBar = new JoScrollBar(scrollDashbord);
+        loading.setTitle("ໂຫຼດຂໍ້ມູນນັກຮຽນ");
     }
 
     public void ShowStudentCount(int newCount, int Count) {
@@ -74,6 +76,14 @@ public class DasboardView extends javax.swing.JPanel {
         return txtSearch;
     }
 
+    public void showYear() {
+        comboboxYear1.showYears();
+    }
+
+    public int getYear() {
+        return comboboxYear1.getYearID();
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -91,15 +101,17 @@ public class DasboardView extends javax.swing.JPanel {
         pnClassRoom = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
+        comboboxYear1 = new Component.comboboxYear();
         txtSearch = new Components.JoTextField();
         btnSearch = new Components.JoButtonIconfont();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tbData = new Components.JoTable();
         pnChart = new javax.swing.JPanel();
         lblKindergarten = new Components.JoLable();
         lblElementary = new Components.JoLable();
         lblJuniorHighSchool = new Components.JoLable();
         lblHighSchool = new Components.JoLable();
+        pnTable = new javax.swing.JPanel();
+        scollTable = new javax.swing.JScrollPane();
+        tbData = new Components.JoTable();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -203,7 +215,7 @@ public class DasboardView extends javax.swing.JPanel {
             pnClassRoom.setLayout(new java.awt.BorderLayout());
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 2;
+            gridBagConstraints.gridy = 1;
             gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
             gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
             gridBagConstraints.weightx = 0.1;
@@ -212,13 +224,17 @@ public class DasboardView extends javax.swing.JPanel {
 
             jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(2, 0, 0, 0, new java.awt.Color(204, 204, 204)), "ຂໍ້ມູນນັກຮຽນຈ່າຍຄ່າຮຽນ", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Phetsarath OT", 0, 14))); // NOI18N
             jPanel2.setMaximumSize(new java.awt.Dimension(618, 168));
-            jPanel2.setPreferredSize(new java.awt.Dimension(618, 168));
+            jPanel2.setPreferredSize(new java.awt.Dimension(18, 100));
             jPanel2.setLayout(new java.awt.GridBagLayout());
 
             jPanel3.setMaximumSize(new java.awt.Dimension(100, 50));
             jPanel3.setMinimumSize(new java.awt.Dimension(100, 50));
             jPanel3.setPreferredSize(new java.awt.Dimension(100, 50));
             jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 10, 5));
+
+            comboboxYear1.setMinimumSize(new java.awt.Dimension(72, 30));
+            comboboxYear1.setPreferredSize(new java.awt.Dimension(150, 40));
+            jPanel3.add(comboboxYear1);
 
             txtSearch.setPlaceholder("ຄົ້ນຫານັກຮຽນ");
             jPanel3.add(txtSearch);
@@ -234,51 +250,14 @@ public class DasboardView extends javax.swing.JPanel {
             gridBagConstraints.gridy = 0;
             gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
             gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+            gridBagConstraints.weightx = 0.1;
             jPanel2.add(jPanel3, gridBagConstraints);
 
-            jScrollPane1.setMinimumSize(new java.awt.Dimension(16, 500));
-            jScrollPane1.setPreferredSize(new java.awt.Dimension(462, 500));
-
-            tbData.setModel(new javax.swing.table.DefaultTableModel(
-                new Object [][] {
-
-                },
-                new String [] {
-                    "#", "studentID", "ລະຫັດນັກຮຽນ", "ຊື່ ແລະ ນາມສະກຸນ", "ຫ້ອງຮຽນ"
-                }
-            ) {
-                boolean[] canEdit = new boolean [] {
-                    false, false, false, false, false
-                };
-
-                public boolean isCellEditable(int rowIndex, int columnIndex) {
-                    return canEdit [columnIndex];
-                }
-            });
-            jScrollPane1.setViewportView(tbData);
-            if (tbData.getColumnModel().getColumnCount() > 0) {
-                tbData.getColumnModel().getColumn(1).setMinWidth(0);
-                tbData.getColumnModel().getColumn(1).setPreferredWidth(0);
-                tbData.getColumnModel().getColumn(1).setMaxWidth(0);
-            }
-
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 1;
-            gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-            gridBagConstraints.weightx = 1.1;
-            gridBagConstraints.weighty = 1.1;
-            jPanel2.add(jScrollPane1, gridBagConstraints);
-
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 4;
-            gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-            gridBagConstraints.ipady = 300;
+            gridBagConstraints.gridy = 3;
+            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
             gridBagConstraints.weightx = 0.1;
-            gridBagConstraints.weighty = 0.1;
-            gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
             jPanel4.add(jPanel2, gridBagConstraints);
 
             pnChart.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(2, 0, 0, 0, new java.awt.Color(204, 204, 204)), "ຈຳນວນນັກຮຽນ", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Phetsarath OT", 0, 14))); // NOI18N
@@ -308,9 +287,44 @@ public class DasboardView extends javax.swing.JPanel {
 
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 3;
+            gridBagConstraints.gridy = 2;
             gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
             jPanel4.add(pnChart, gridBagConstraints);
+
+            pnTable.setLayout(new java.awt.BorderLayout());
+
+            tbData.setModel(new javax.swing.table.DefaultTableModel(
+                new Object [][] {
+
+                },
+                new String [] {
+                    "#", "studentID", "ລະຫັດນັກຮຽນ", "ຊື່ ແລະ ນາມສະກຸນ", "ຫ້ອງຮຽນ"
+                }
+            ) {
+                boolean[] canEdit = new boolean [] {
+                    false, false, false, false, false
+                };
+
+                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                    return canEdit [columnIndex];
+                }
+            });
+            scollTable.setViewportView(tbData);
+            if (tbData.getColumnModel().getColumnCount() > 0) {
+                tbData.getColumnModel().getColumn(1).setMinWidth(0);
+                tbData.getColumnModel().getColumn(1).setPreferredWidth(0);
+                tbData.getColumnModel().getColumn(1).setMaxWidth(0);
+            }
+
+            pnTable.add(scollTable, java.awt.BorderLayout.CENTER);
+
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 0;
+            gridBagConstraints.gridy = 4;
+            gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+            gridBagConstraints.weightx = 0.1;
+            gridBagConstraints.weighty = 0.1;
+            jPanel4.add(pnTable, gridBagConstraints);
 
             scrollDashbord.setViewportView(jPanel4);
 
@@ -320,6 +334,7 @@ public class DasboardView extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Components.JoButtonIconfont btnSearch;
+    private Component.comboboxYear comboboxYear1;
     private Component.JoDashboardItem ds_ClassRoom;
     private Component.JoDashboardItem ds_Financail;
     private Component.JoDashboardItem ds_Student;
@@ -330,13 +345,14 @@ public class DasboardView extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane1;
     private Components.JoLable lblElementary;
     private Components.JoLable lblHighSchool;
     private Components.JoLable lblJuniorHighSchool;
     private Components.JoLable lblKindergarten;
     private javax.swing.JPanel pnChart;
     private javax.swing.JPanel pnClassRoom;
+    private javax.swing.JPanel pnTable;
+    private javax.swing.JScrollPane scollTable;
     private javax.swing.JScrollPane scrollDashbord;
     private Components.JoTable tbData;
     private Components.JoTextField txtSearch;
@@ -435,12 +451,28 @@ public class DasboardView extends javax.swing.JPanel {
     }
 
     public void showTableData(List<StudentModel> models) {
-        tbData.JoClearModel();
-        FinancialService financialService = new FinancialService();
-        models.forEach(data -> {
-            String lastClass = financialService.getLastClass(data.getStudentID());
-            tbData.AddJoModel(new Object[]{tbData.autoNumber(), data.getStudentID(), data.getStudentNo(), data.getFullName(), lastClass});
+        Thread thread = new Thread(() -> {
+            try {
+                pnTable.removeAll();
+                tbData.JoClearModel();
+                pnTable.add(loading, BorderLayout.CENTER);
+                pnTable.revalidate();
+                FinancialService financialService = new FinancialService();
+                models.forEach(data -> {
+                    String lastClass = financialService.getLastClass(data.getStudentID());
+                    tbData.AddJoModel(new Object[]{tbData.autoNumber(), data.getStudentID(), data.getStudentNo(), data.getFullName(), lastClass});
+                    loading.StartProgress(models.size() + 10, 20);
+                });
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            } finally {
+                pnTable.removeAll();
+                pnTable.add(scollTable, BorderLayout.CENTER);
+                loading.close();
+                pnTable.revalidate();
+            }
         });
+        thread.start();
     }
 
     private void showChart() {
