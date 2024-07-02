@@ -38,6 +38,7 @@ public class UserDAO implements DAOInterface.UserFn {
         } catch (SQLException e) {
             JoAlert.Error(e, this);
             JoLoger.saveLog(e, this);
+            System.out.println(e.getMessage());
             return 0;
         } finally {
             connect.close();
@@ -215,7 +216,6 @@ public class UserDAO implements DAOInterface.UserFn {
                 model.setTeacherID(rs.getInt(2));
                 model.setName(new TeacherService().getTeacherById(rs.getInt(2)).getName());
             }
-
         } catch (SQLException e) {
             JoLoger.saveLog(e, this);
             JoAlert.Error(e, this);
@@ -237,6 +237,7 @@ public class UserDAO implements DAOInterface.UserFn {
         } catch (SQLException e) {
             JoAlert.Error(e, this);
             JoLoger.saveLog(e, this);
+            System.out.println(e.getMessage());
             return false;
         } finally {
             connect.close();

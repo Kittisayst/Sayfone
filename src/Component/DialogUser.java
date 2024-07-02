@@ -15,8 +15,8 @@ public class DialogUser extends javax.swing.JDialog {
         super(parent, ss);
         initComponents();
         this.model = model;
-        TeacherService service = new TeacherService();
-        service.getAllTeacher().forEach(data -> {
+        TeacherService teacherService = new TeacherService();
+        teacherService.getAllTeacher().forEach(data -> {
             cbTeacher.JoAddIntModel(data.getTeacherID(), data.getFullName().toString());
         });
         if (model.getUserID() != 0) {
@@ -121,7 +121,6 @@ public class DialogUser extends javax.swing.JDialog {
                         alert.messages("ກວດສອບລະຫັດ", "ລະຫັດຢືນຢັນການເງິນນີ້ມີຢູ່ແລ້ວ", JoAlert.Icons.info);
                     }
                 }
-
             } else {
                 if (!checkAuthenPassword()) {
                     if (alert.JoSubmit(service.UpdateUser(model), JoAlert.UPDATE)) {

@@ -215,8 +215,10 @@ public class HomeView extends javax.swing.JFrame {
     public JoButtonIconfont getBtnReportStudentAddress() {
         return btnReportStudentAddress;
     }
-    
-    
+
+    public JoButtonIconfont getBtnNkow() {
+        return btnNkow;
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -248,6 +250,7 @@ public class HomeView extends javax.swing.JFrame {
         btnUser = new Components.JoButtonIconfont();
         btnClass = new Components.JoButtonIconfont();
         btnPermission = new Components.JoButtonIconfont();
+        btnNkow = new Components.JoButtonIconfont();
         pn_School = new javax.swing.JPanel();
         btnDocument = new Components.JoButtonIconfont();
         btn_Register = new Components.JoButtonIconfont();
@@ -483,6 +486,13 @@ public class HomeView extends javax.swing.JFrame {
         btnPermission.setMinimumSize(new java.awt.Dimension(270, 40));
         btnPermission.setPreferredSize(new java.awt.Dimension(270, 40));
 
+        btnNkow.setText("ຊ່ອງທາງຮູ້ຈັກໂຮງຮຽນ");
+        btnNkow.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnNkow.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.THUMB_UP);
+        btnNkow.setMaximumSize(new java.awt.Dimension(270, 40));
+        btnNkow.setMinimumSize(new java.awt.Dimension(270, 40));
+        btnNkow.setPreferredSize(new java.awt.Dimension(270, 40));
+
         javax.swing.GroupLayout PN_ManageLayout = new javax.swing.GroupLayout(PN_Manage);
         PN_Manage.setLayout(PN_ManageLayout);
         PN_ManageLayout.setHorizontalGroup(
@@ -490,13 +500,14 @@ public class HomeView extends javax.swing.JFrame {
             .addGroup(PN_ManageLayout.createSequentialGroup()
                 .addGap(2, 2, 2)
                 .addGroup(PN_ManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_teacher, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_teacher, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
                     .addComponent(btn_Student, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
             .addComponent(btnSubject, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnSubjectTeacher, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnUser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnClass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnPermission, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnNkow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         PN_ManageLayout.setVerticalGroup(
             PN_ManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -513,6 +524,8 @@ public class HomeView extends javax.swing.JFrame {
                 .addComponent(btnClass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnNkow, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnPermission, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
@@ -1070,6 +1083,7 @@ public class HomeView extends javax.swing.JFrame {
     private Components.JoButtonIconfont btnFood;
     private Components.JoButtonIconfont btnFoodPayment;
     private Components.JoButtonIconfont btnInfo;
+    private Components.JoButtonIconfont btnNkow;
     private Components.JoButtonIconfont btnPayRateFood;
     private Components.JoButtonIconfont btnPaymentSetting;
     private Components.JoButtonIconfont btnPermission;

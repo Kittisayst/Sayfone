@@ -977,6 +977,30 @@ public class FinancialDAO implements FinancialFn {
         }
         return models;
     }
+    
+       public List<StudentModel> getStudentRepeat(int YearID) {
+        List<StudentModel> models = new ArrayList<>();
+        StudentService service = new StudentService();
+        JoConnect connect = new JoConnect();
+        try {
+            String sql = "SELECT st.StudentID \n"
+                    + "FROM tb_student AS st\n"
+                    + "LEFT JOIN tb_financial AS tf ON st.StudentID = tf.StudentID\n"
+                    + "WHERE tf.StudentID IS NULL AND  st.Status=0";
+            PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sql);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                models.add(service.getStudentById(rs.getInt(1)));
+            }
+        } catch (SQLException e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+            System.out.println(e.getMessage());
+        } finally {
+            connect.close();
+        }
+        return models;
+    }
 
     public boolean isOldStudentRegistered(int registerID, int studentID) {
         JoConnect connect = new JoConnect();

@@ -62,6 +62,44 @@ public class DialogStudentsRegister extends javax.swing.JDialog {
         thread.start();
     }
 
+    private void showStudentRepeat() {
+        Thread thread = new Thread(() -> {
+            try {
+                pnStudentRepeat.removeAll();
+                pnStudentRepeat.add(loading, BorderLayout.CENTER);
+                tb_studentRepeat.JoClearModel();
+                int YearID = registerModel.getYearID();
+                int classID = registerModel.getClassID();
+                int colYear = YearID == 1 ? 1 : YearID - 1;
+                List<StudentModel> studentnewModels = new FinancialService().getStudentOldClass(colYear, classID);
+                studentnewModels.forEach(student -> {
+                    boolean isRegister = financialService.isOldStudentRegistered(registerModel.getRegisterID(), student.getStudentID()); // ກວດສອບວ່າໄດ້ລົງທະບຽນແລ້ວບໍ່
+                    if (!isRegister) {
+                        Object[] tableData = new Object[]{
+                            tb_studentRepeat.autoNumber(),
+                            student.getStudentID(),
+                            student.getStudentNo(),
+                            student.getFullName(),
+                            student.getDateStart() == null ? "ວ່າງ" : new MyFormat().getDate(student.getDateStart())
+                        };
+                        tb_studentRepeat.AddJoModel(tableData);
+                    }
+                    loading.StartProgress(studentnewModels.size(), 20);
+                });
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            } finally {
+                pnStudentRepeat.removeAll();
+                pnStudentRepeat.add(scrollStudentRepeat);
+                JoDataTable dataTable = new JoDataTable(pnStudentRepeat);
+                dataTable.setHiddenColumns(1);
+                dataTable.showDataTableAll();
+                loading.close();
+            }
+        });
+        thread.start();
+    }
+
     private void showStudentNew() {
         Thread thread = new Thread(() -> {
             try {
@@ -102,6 +140,9 @@ public class DialogStudentsRegister extends javax.swing.JDialog {
         pnStudent = new javax.swing.JPanel();
         scrollStudent = new javax.swing.JScrollPane();
         tb_student = new Components.JoTable();
+        pnStudentRepeat = new javax.swing.JPanel();
+        scrollStudentRepeat = new javax.swing.JScrollPane();
+        tb_studentRepeat = new Components.JoTable();
         pnStudentNew = new javax.swing.JPanel();
         ScrollStudentNew = new javax.swing.JScrollPane();
         tb_studentNew = new Components.JoTable();
@@ -144,6 +185,36 @@ public class DialogStudentsRegister extends javax.swing.JDialog {
 
         joTabbed1.addTab("ນັກຮຽນເລື່ອນຊັ້ນ", pnStudent);
 
+        pnStudentRepeat.setLayout(new java.awt.BorderLayout());
+
+        tb_studentRepeat.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "#", "ID", "ລະຫັດນັກຮຽນ", "ຊື່ ແລະ ນາມສະກຸນ", "ວັນທີ່ເຂົ້າຮຽນ"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tb_studentRepeat.setJoBackgoundHead(new java.awt.Color(255, 102, 0));
+        tb_studentRepeat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tb_studentRepeatMousePressed(evt);
+            }
+        });
+        scrollStudentRepeat.setViewportView(tb_studentRepeat);
+
+        pnStudentRepeat.add(scrollStudentRepeat, java.awt.BorderLayout.CENTER);
+
+        joTabbed1.addTab("ນັກຮຽນເຊ້ຳຊັ້ນ", pnStudentRepeat);
+
         pnStudentNew.setLayout(new java.awt.BorderLayout());
 
         tb_studentNew.setModel(new javax.swing.table.DefaultTableModel(
@@ -181,8 +252,10 @@ public class DialogStudentsRegister extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void joTabbed1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_joTabbed1StateChanged
-        if (joTabbed1.getSelectedIndex() == 1) {
+        if (joTabbed1.getSelectedIndex() == 2) {
             showStudentNew();
+        } else if (joTabbed1.getSelectedIndex() == 1) {
+            showStudentRepeat();
         }
     }//GEN-LAST:event_joTabbed1StateChanged
 
@@ -198,15 +271,24 @@ public class DialogStudentsRegister extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_tb_studentNewMousePressed
 
+    private void tb_studentRepeatMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_studentRepeatMousePressed
+        if (evt.getClickCount() == 2) {
+            OpenPayment(studentService.getStudentById(tb_studentRepeat.getIntValue(1)));
+        }
+    }//GEN-LAST:event_tb_studentRepeatMousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane ScrollStudentNew;
     private Components.JoTabbed joTabbed1;
     private javax.swing.JPanel pnStudent;
     private javax.swing.JPanel pnStudentNew;
+    private javax.swing.JPanel pnStudentRepeat;
     private javax.swing.JScrollPane scrollStudent;
+    private javax.swing.JScrollPane scrollStudentRepeat;
     private Components.JoTable tb_student;
     private Components.JoTable tb_studentNew;
+    private Components.JoTable tb_studentRepeat;
     // End of variables declaration//GEN-END:variables
 
     private void OpenPayment(StudentModel studentModel) {

@@ -21,6 +21,7 @@ public class FinancailStudentView extends javax.swing.JPanel {
         loading.setTitle("ໂຫຼດຂໍ້ມູນນັກຮຽນ");
         jPanel2.setVisible(false);
         jPanel6.setVisible(false);
+        btnRegistered.setVisible(false);
     }
 
     public JoButtonIconfont getBtn_back() {

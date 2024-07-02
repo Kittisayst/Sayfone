@@ -29,6 +29,7 @@ import App.AppWithdraw;
 import App.AppReportPayLateApp;
 import App.AppReportPayLateFoodApp;
 import App.AppReportStudentAddreess;
+import App.AppStudentNkow;
 import Component.DialogSettingPayment;
 import Model.UserModel;
 import DAOSevervice.TeacherService;
@@ -109,6 +110,7 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
         view.getBtnPayRateFood().addActionListener(this);
         view.getBtnReportParentJob().addActionListener(this);
         view.getBtnReportStudentAddress().addActionListener(this);
+        view.getBtnNkow().addActionListener(this);
     }
 
     @Override
@@ -142,7 +144,10 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
             view.getPn_Menu().setVisible(!view.getPn_Menu().isVisible());
         } else if (event.isEvent(view.getBtn_Student())) {
             AppStudent appStudent = new AppStudent();
-        } else if (event.isEvent(view.getBtnSubject())) {
+        }else if (event.isEvent(view.getBtnNkow())) {
+            AppStudentNkow app = new AppStudentNkow();
+            app.Open();
+        }  else if (event.isEvent(view.getBtnSubject())) {
             AppSubject appSubject = new AppSubject();
         } else if (event.isEvent(view.getBtnUser())) {
             AppUser user = new AppUser();
