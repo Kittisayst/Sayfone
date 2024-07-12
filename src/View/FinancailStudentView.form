@@ -193,6 +193,7 @@
         <Component class="Components.JoButtonIconfont" name="btnRegistered">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#xea5;&#xeb2;&#xe8d;&#xe8a;&#xeb7;&#xec8;&#xe97;&#xeb5;&#xec8;&#xea5;&#xebb;&#xe87;&#xe97;&#xeb0;&#xe9a;&#xebd;&#xe99;&#xec1;&#xea5;&#xec9;&#xea7;"/>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="joIcons" type="jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons" editor="org.netbeans.modules.form.editors.EnumEditor">
               <Value id="RECENT_ACTORS"/>
             </Property>

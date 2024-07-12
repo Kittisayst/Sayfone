@@ -4,6 +4,7 @@ import App.About;
 import App.AppAbsent;
 import App.AppBackup;
 import App.AppClass;
+import App.AppDBPing;
 import App.AppDocument;
 import App.AppFinancialRoom;
 import App.AppPermission;
@@ -44,12 +45,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 import javax.swing.ImageIcon;
+import javax.swing.SwingUtilities;
 
 public class HomeController implements JoMVC, ActionListener, MouseListener {
 
     private final HomeView view;
     private final UserModel userModel;
+    private Timer timer;
+    private static final int PING_INTERVAL_MS = 30 * 1000; // 5 minutes
 
     public HomeController(UserService userService, HomeView view, UserModel userModel) {
         this.view = view;
@@ -72,6 +79,7 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
         //============ Hind Module ===================
         view.getBtnSubject().setVisible(false);
         view.getBtnSubjectTeacher().setVisible(false);
+        StartPing();
     }
 
     @Override
@@ -144,10 +152,10 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
             view.getPn_Menu().setVisible(!view.getPn_Menu().isVisible());
         } else if (event.isEvent(view.getBtn_Student())) {
             AppStudent appStudent = new AppStudent();
-        }else if (event.isEvent(view.getBtnNkow())) {
+        } else if (event.isEvent(view.getBtnNkow())) {
             AppStudentNkow app = new AppStudentNkow();
             app.Open();
-        }  else if (event.isEvent(view.getBtnSubject())) {
+        } else if (event.isEvent(view.getBtnSubject())) {
             AppSubject appSubject = new AppSubject();
         } else if (event.isEvent(view.getBtnUser())) {
             AppUser user = new AppUser();
@@ -167,10 +175,10 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
         } else if (event.isEvent(view.getBtnAbsent())) {
             AppAbsent absent = new AppAbsent();
             absent.Open();
-        }else if (event.isEvent(view.getBtnDocument())) {
+        } else if (event.isEvent(view.getBtnDocument())) {
             AppDocument doc = new AppDocument();
             doc.Open();
-        }  else if (event.isEvent(view.getBtnReportFinancial())) { // ===== ລາຍງານຂໍ້ມູນ
+        } else if (event.isEvent(view.getBtnReportFinancial())) { // ===== ລາຍງານຂໍ້ມູນ
             AppReportFinacial appReportFinacial = new AppReportFinacial();
         } else if (event.isEvent(view.getBtnReportPayment())) {
             AppReportPayment appReportPayment = new AppReportPayment();
@@ -192,10 +200,10 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
         } else if (event.isEvent(view.getBtnReportPay())) {
             AppReportPayLateApp reportPayApp = new AppReportPayLateApp();
             reportPayApp.Running();
-        }else if (event.isEvent(view.getBtnPayRateFood())) {
+        } else if (event.isEvent(view.getBtnPayRateFood())) {
             AppReportPayLateFoodApp app = new AppReportPayLateFoodApp();
             app.Running();
-        }  else if (event.isEvent(view.getBtnWithdraw())) {
+        } else if (event.isEvent(view.getBtnWithdraw())) {
             AppWithdraw appWithdraw = new AppWithdraw();
             appWithdraw.Open();
         } else if (event.isEvent(view.getBtnReportStudent())) {
@@ -207,13 +215,13 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
         } else if (event.isEvent(view.getBtnReportTeacherMoney())) {
             AppReportTeacherMoney reportTeacherMoney = new AppReportTeacherMoney();
             reportTeacherMoney.Open();
-        }else if (event.isEvent(view.getBtnReportParentJob())) {
+        } else if (event.isEvent(view.getBtnReportParentJob())) {
             AppReportParentJob job = new AppReportParentJob();
             job.Open();
-        }else if (event.isEvent(view.getBtnReportStudentAddress())) {
+        } else if (event.isEvent(view.getBtnReportStudentAddress())) {
             AppReportStudentAddreess app = new AppReportStudentAddreess();
             app.Open();
-        }   else if (event.isEvent(view.getBtnReportStudentState())) {
+        } else if (event.isEvent(view.getBtnReportStudentState())) {
             AppReportStudentState studentState = new AppReportStudentState();
             studentState.Open();
         } else if (event.isEvent(view.getBtnInfo())) {   // ============ ຕັ້ງຄ່າ
@@ -227,7 +235,7 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
         } else if (event.isEvent(view.getBtnTiming())) {
             TimingView timingView = new TimingView("ຕັ້ງເວລາເປີດປິດຈ່າຍຄ່າຮຽນ");
             GlobalDataModel.rootView.setView(timingView);
-        }else if (event.isEvent(view.getBtnPaymentSetting())) {
+        } else if (event.isEvent(view.getBtnPaymentSetting())) {
             DialogSettingPayment payment = new DialogSettingPayment(view, true);
             payment.setVisible(true);
         }
@@ -260,6 +268,26 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
     @Override
     public void mouseExited(MouseEvent e) {
 
+    }
+
+    private void StartPing() {
+        AppDBPing ping = new AppDBPing();
+        if (timer != null) {
+            timer.cancel();
+        }
+        timer = new Timer(true);
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                try {
+                    long pingTime = ping.pingDatabase();
+                    long connectionTime = ping.measureConnectionTime();
+                    SwingUtilities.invokeLater(() -> view.setPing("Server: " + pingTime + " ms\n Database: " + connectionTime + " ms"));
+                } catch (IOException ex) {
+                    SwingUtilities.invokeLater(() -> view.setPing("Error: " + ex.getMessage()));
+                }
+            }
+        }, 0, PING_INTERVAL_MS);
     }
 
 }

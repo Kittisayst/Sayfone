@@ -219,6 +219,10 @@ public class HomeView extends javax.swing.JFrame {
     public JoButtonIconfont getBtnNkow() {
         return btnNkow;
     }
+    
+    public void setPing(String text){
+        lblPing.setText(text);
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -289,6 +293,7 @@ public class HomeView extends javax.swing.JFrame {
         pnFooter = new javax.swing.JPanel();
         lblCredit = new Components.JoLable();
         lblVersion = new Components.JoLable();
+        lblPing = new Components.JoLable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sayfone School");
@@ -1042,9 +1047,23 @@ public class HomeView extends javax.swing.JFrame {
         lblVersion.setForeground(new java.awt.Color(255, 255, 255));
         lblVersion.setText("version 1.0.5");
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 15);
         pnFooter.add(lblVersion, gridBagConstraints);
+
+        lblPing.setForeground(new java.awt.Color(255, 255, 255));
+        lblPing.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblPing.setText("Ping");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weighty = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 5);
+        pnFooter.add(lblPing, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -1121,6 +1140,7 @@ public class HomeView extends javax.swing.JFrame {
     private Components.JoLable joLable2;
     private Components.JoLable lblCredit;
     private Components.JoLabelImage lblLogo;
+    private Components.JoLable lblPing;
     private Components.JoLableIcon lblTutorial;
     private Components.JoLable lblVersion;
     private Components.JoLableIcon lbl_user;

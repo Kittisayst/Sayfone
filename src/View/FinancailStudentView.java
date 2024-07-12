@@ -206,6 +206,7 @@ public class FinancailStudentView extends javax.swing.JPanel {
         jPanel1.add(btnRegister);
 
         btnRegistered.setText("ລາຍຊື່ທີ່ລົງທະບຽນແລ້ວ");
+        btnRegistered.setEnabled(false);
         btnRegistered.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.RECENT_ACTORS);
         jPanel1.add(btnRegistered);
 

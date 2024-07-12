@@ -1,12 +1,11 @@
-
 package DAOSevervice;
 
 import DAO.SayfoneDao;
 import Model.SayfoneModel;
 import java.util.List;
 
-
 public class SayfoneService {
+
     private SayfoneDao dao = new SayfoneDao();
 
     public int Creater(SayfoneModel model) {
@@ -28,5 +27,9 @@ public class SayfoneService {
     public SayfoneModel getById(int ID) {
         return dao.getById(ID);
     }
-    
+
+    public int updateStudentNkow(String value) {
+        return dao.updateStudentNkow(value);
+    }
+
 }

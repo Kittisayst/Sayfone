@@ -2,34 +2,60 @@ package View;
 
 import Component.ListItem;
 import Components.JoButtonIconfont;
-import Utility.ListComponetnRenderer;
-import java.awt.Component;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
+import DAOSevervice.SayfoneService;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.ListSelectionModel;
+import java.util.List;
 
 public class StudentNkowView extends javax.swing.JPanel {
-
-    DefaultListModel<JPanel> listModel = new DefaultListModel<>();
-    JScrollPane scrollPane = new javax.swing.JScrollPane();
 
     public StudentNkowView(String Title) {
         initComponents();
         lbl_title.setText(Title);
-    
     }
 
-    private void showss() {
-        System.out.println("okoko");
+    public void showList(List<String> items) {
+        for (int index = 0; index < items.size(); index++) {
+            String item = items.get(index);
+            ListItem list = new ListItem();
+            list.setTextItem(item);
+            final int finalIndex = index;
+            list.addHandelDelete(e -> deleteItem(finalIndex));
+            myList1.AddList(list);
+        }
+    }
+
+    public void addList(String text) {
+        ListItem list = new ListItem();
+        list.setTextItem(text);
+        list.addHandelDelete(e -> deleteItem(myList1.getCount() - 1));
+        myList1.AddList(list);
+        txtname.setText("");
+        txtname.requestFocus();
+    }
+
+    public void handelAdd(ActionListener evt) {
+        btnAdd.addActionListener(evt);
+    }
+
+    public String getText() {
+        return txtname.getText();
+    }
+
+    public boolean isText() {
+        return txtname.TextEmpty();
+    }
+
+    private void deleteItem(int index) {
+        myList1.removeItem(index);
+        new SayfoneService().updateStudentNkow(myList1.getData());
+    }
+
+    public void handelBack(ActionListener evt) {
+        btn_back.addActionListener(evt);
+    }
+
+    public String getData() {
+        return myList1.getData();
     }
 
     public JoButtonIconfont getBtn_back() {
@@ -43,6 +69,7 @@ public class StudentNkowView extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         Pn_Navigation = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -52,8 +79,10 @@ public class StudentNkowView extends javax.swing.JPanel {
         jPanel5 = new javax.swing.JPanel();
         btn_add = new Components.JoButtonIconfont();
         pn_Datatable = new javax.swing.JPanel();
+        myList1 = new Component.MyList();
+        jPanel1 = new javax.swing.JPanel();
+        txtname = new Components.JoTextField();
         btnAdd = new Components.JoButtonIconfont();
-        joTextField1 = new Components.JoTextField();
 
         Pn_Navigation.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
         Pn_Navigation.setLayout(new java.awt.GridLayout(1, 0));
@@ -82,11 +111,36 @@ public class StudentNkowView extends javax.swing.JPanel {
 
         Pn_Navigation.add(jPanel5);
 
-        pn_Datatable.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pn_Datatable.setLayout(new java.awt.GridBagLayout());
 
-        btnAdd.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.SAVE);
-        pn_Datatable.add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 40, -1, -1));
-        pn_Datatable.add(joTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 40, 330, -1));
+        myList1.setMinimumSize(new java.awt.Dimension(500, 0));
+        myList1.setPreferredSize(new java.awt.Dimension(500, 100));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weighty = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 0);
+        pn_Datatable.add(myList1, gridBagConstraints);
+
+        jPanel1.setLayout(new java.awt.GridBagLayout());
+
+        txtname.setPlaceholder("ຊື່ຊ່ອງທາງ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 5);
+        jPanel1.add(txtname, gridBagConstraints);
+
+        btnAdd.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.ADD_CIRCLE);
+        jPanel1.add(btnAdd, new java.awt.GridBagConstraints());
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 0);
+        pn_Datatable.add(jPanel1, gridBagConstraints);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -110,11 +164,13 @@ public class StudentNkowView extends javax.swing.JPanel {
     private Components.JoButtonIconfont btnAdd;
     private Components.JoButtonIconfont btn_add;
     private Components.JoButtonIconfont btn_back;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private Components.JoTextField joTextField1;
     private Components.JoLable lbl_title;
+    private Component.MyList myList1;
     private javax.swing.JPanel pn_Datatable;
+    private Components.JoTextField txtname;
     // End of variables declaration//GEN-END:variables
 }

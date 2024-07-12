@@ -14,13 +14,13 @@ public class MyList extends javax.swing.JPanel {
         initComponents();
     }
 
-    public void Add(JPanel panel) {
+    public void AddList(JPanel panel) {
         models.add(panel);
         updateList();
     }
 
     private void updateList() {
-        removeAll();
+        pnView.removeAll();
         GridBagConstraints gridBagConstraints;
         int row = 0;
         for (JPanel model : models) {
@@ -29,7 +29,7 @@ public class MyList extends javax.swing.JPanel {
             gridBagConstraints.gridy = row;
             gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
             gridBagConstraints.weightx = 0.1;
-            add(model, gridBagConstraints);
+            pnView.add(model, gridBagConstraints);
             row++;
         }
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -37,8 +37,9 @@ public class MyList extends javax.swing.JPanel {
         gridBagConstraints.gridy = row;
         gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
         gridBagConstraints.weighty = 0.1;
-        add(new JLabel(), gridBagConstraints);
-        revalidate();
+        pnView.add(new JLabel(), gridBagConstraints);
+        pnView.repaint();
+        pnView.revalidate();
     }
 
     public void removeItem(int index) {
@@ -46,42 +47,37 @@ public class MyList extends javax.swing.JPanel {
         updateList();
     }
 
+    public int getCount() {
+        return models.size();
+    }
+    
+    public String getData(){
+        List<String> texts = new ArrayList<>();
+        for (JPanel model : models) {
+            ListItem item = (ListItem) model;
+            texts.add(item.getText());
+        }
+        return texts.toString();
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
-        listItem1 = new Component.ListItem();
-        listItem2 = new Component.ListItem();
-        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        pnView = new javax.swing.JPanel();
 
-        setLayout(new java.awt.GridBagLayout());
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 0.1;
-        add(listItem1, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 0.1;
-        add(listItem2, gridBagConstraints);
+        setLayout(new java.awt.BorderLayout());
 
-        jLabel1.setText("jLabel1");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
-        gridBagConstraints.weighty = 0.1;
-        add(jLabel1, gridBagConstraints);
+        pnView.setLayout(new java.awt.GridBagLayout());
+        jScrollPane1.setViewportView(pnView);
+
+        add(jScrollPane1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private Component.ListItem listItem1;
-    private Component.ListItem listItem2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel pnView;
     // End of variables declaration//GEN-END:variables
 }

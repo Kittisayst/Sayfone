@@ -298,11 +298,11 @@ public class DasboardView extends javax.swing.JPanel {
 
                 },
                 new String [] {
-                    "#", "studentID", "ລະຫັດນັກຮຽນ", "ຊື່ ແລະ ນາມສະກຸນ", "ຫ້ອງຮຽນ"
+                    "#", "studentID", "ລະຫັດນັກຮຽນ", "ຊື່ ແລະ ນາມສະກຸນ", "ຫ້ອງຮຽນ", "ສະຖານະນັກຮຽນ"
                 }
             ) {
                 boolean[] canEdit = new boolean [] {
-                    false, false, false, false, false
+                    false, false, false, false, false, false
                 };
 
                 public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -460,7 +460,7 @@ public class DasboardView extends javax.swing.JPanel {
                 FinancialService financialService = new FinancialService();
                 models.forEach(data -> {
                     String lastClass = financialService.getLastClass(data.getStudentID());
-                    tbData.AddJoModel(new Object[]{tbData.autoNumber(), data.getStudentID(), data.getStudentNo(), data.getFullName(), lastClass});
+                    tbData.AddJoModel(new Object[]{tbData.autoNumber(), data.getStudentID(), data.getStudentNo(), data.getFullName(), lastClass, data.getStatusName()});
                     loading.StartProgress(models.size() + 10, 20);
                 });
             } catch (Exception e) {

@@ -72,6 +72,24 @@ public class SayfoneDao implements SayFoneFn {
             connect.close();
         }
     }
+    
+    public int updateStudentNkow(String value){
+        JoConnect connect = new JoConnect();
+        try {
+            String sql = "UPDATE tb_sayfone SET english=? WHERE id=?";
+            PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sql);
+            pre.setString(1, value);
+            pre.setInt(2, 2);
+            return pre.executeUpdate();
+        } catch (SQLException e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+            System.out.println(e.getMessage());
+            return 0;
+        } finally {
+            connect.close();
+        }
+    }
 
     private SayfoneModel getResult(ResultSet rs) throws Exception {
         return new SayfoneModel(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));

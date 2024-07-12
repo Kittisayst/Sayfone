@@ -1,5 +1,6 @@
 package Component;
 
+import java.awt.Color;
 import java.awt.event.ActionListener;
 
 public class ListItem extends javax.swing.JPanel {
@@ -19,8 +20,12 @@ public class ListItem extends javax.swing.JPanel {
         lblText.setText(textItem);
     }
 
-    public void setHandelDelete(ActionListener evt) {
+    public void addHandelDelete(ActionListener evt) {
         btnDelete.addActionListener(evt);
+    }
+
+    public String getText() {
+        return lblText.getText();
     }
 
     @SuppressWarnings("unchecked")
@@ -31,6 +36,15 @@ public class ListItem extends javax.swing.JPanel {
         lblText = new Components.JoLable();
         btnDelete = new Components.JoButtonIconfont();
 
+        setOpaque(false);
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                formMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                formMouseExited(evt);
+            }
+        });
         setLayout(new java.awt.GridBagLayout());
 
         lblText.setText("Item");
@@ -45,11 +59,21 @@ public class ListItem extends javax.swing.JPanel {
         btnDelete.setJoIconSize(25);
         btnDelete.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.DELETE);
         btnDelete.setMaximumSize(new java.awt.Dimension(30, 30));
+        btnDelete.setMinimumSize(new java.awt.Dimension(40, 35));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         add(btnDelete, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
+        setBackground(new Color(153, 204, 255));
+        setOpaque(true);
+    }//GEN-LAST:event_formMouseEntered
+
+    private void formMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseExited
+        setBackground(null);
+    }//GEN-LAST:event_formMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

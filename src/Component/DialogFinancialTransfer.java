@@ -1,7 +1,10 @@
 package Component;
 
+import DAOSevervice.FinancialService;
 import Database.JoProperties;
 import Model.FileTranferModel;
+import Model.FinancialModel;
+import Model.GlobalDataModel;
 import Tools.JoFilechooser;
 import Utility.JoQRcode;
 import java.time.LocalTime;
@@ -11,6 +14,7 @@ import javax.swing.ImageIcon;
 public class DialogFinancialTransfer extends javax.swing.JDialog {
 
     private FileTranferModel tranferModel = new FileTranferModel();
+    private FinancialService financialService = new FinancialService();
 
     private boolean openFile;
     private boolean submit = false;
@@ -22,7 +26,8 @@ public class DialogFinancialTransfer extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.tranferModel = tranferModel;
-        System.out.println(""+tranferModel);
+
+        System.out.println("" + tranferModel);
         filechooser.addFilter("JPG", "jpg");
         filechooser.addFilter("JPEG", "jpeg");
         filechooser.addFilter("PNG", "png");
@@ -45,6 +50,9 @@ public class DialogFinancialTransfer extends javax.swing.JDialog {
             String strminute = parts[1]; // "50"
             Timer.setTime(Integer.parseInt(strhour), Integer.parseInt(strminute));
             lblImage.setIcon(tranferModel.getImageIcon());
+            FinancialModel fm = financialService.getFinancialById(tranferModel.getFinancialID());
+            boolean isEdit = fm.getUserID() == GlobalDataModel.userModel.getUserID();
+            btnSave.setEnabled(isEdit);
         }
     }
 

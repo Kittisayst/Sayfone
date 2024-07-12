@@ -386,12 +386,13 @@
                     <Component class="Components.JoTable" name="tbData">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="5" rowCount="0">
+                          <Table columnCount="6" rowCount="0">
                             <Column editable="false" title="#" type="java.lang.Object"/>
                             <Column editable="false" title="studentID" type="java.lang.Object"/>
                             <Column editable="false" title="&#xea5;&#xeb0;&#xeab;&#xeb1;&#xe94;&#xe99;&#xeb1;&#xe81;&#xeae;&#xebd;&#xe99;" type="java.lang.Object"/>
                             <Column editable="false" title="&#xe8a;&#xeb7;&#xec8; &#xec1;&#xea5;&#xeb0; &#xe99;&#xeb2;&#xea1;&#xeaa;&#xeb0;&#xe81;&#xeb8;&#xe99;" type="java.lang.Object"/>
                             <Column editable="false" title="&#xeab;&#xec9;&#xead;&#xe87;&#xeae;&#xebd;&#xe99;" type="java.lang.Object"/>
+                            <Column editable="false" title="&#xeaa;&#xeb0;&#xe96;&#xeb2;&#xe99;&#xeb0;&#xe99;&#xeb1;&#xe81;&#xeae;&#xebd;&#xe99;" type="java.lang.Object"/>
                           </Table>
                         </Property>
                         <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -402,6 +403,11 @@
                               <Renderer/>
                             </Column>
                             <Column maxWidth="0" minWidth="0" prefWidth="0" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                               <Title/>
                               <Editor/>
                               <Renderer/>

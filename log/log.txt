@@ -560,3 +560,4 @@ WHERE RegisterID=1 AND StudentID = 884' at line 3
 WHERE RegisterID=1 AND StudentID = 885' at line 3
 16/06/2024: DAO.FinancialDAO@1d78471e Errorjava.sql.SQLException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'FROM tb_financial
  WHERE RegisterID=1 AND StudentID = 357' at line 3
+04/07/2024: DAO.SayfoneDao@7d6c97f1 Errorjava.sql.SQLException: Statement parameter 2 not set.
