@@ -16,10 +16,10 @@ import java.util.ArrayList;
 
 //import java.sql.Statement;
 public class UserDAO implements DAOInterface.UserFn {
-
+    
     private final String SQL_Login_User = "SELECT * FROM tb_user WHERE username=? AND password=?";
     private String TableName = "tb_user";
-
+    
     @Override
     public int CreateUser(UserModel userModel) {
         JoConnect connect = new JoConnect();
@@ -44,7 +44,7 @@ public class UserDAO implements DAOInterface.UserFn {
             connect.close();
         }
     }
-
+    
     @Override
     public int UpdateUser(UserModel userModel) {
         JoConnect connect = new JoConnect();
@@ -59,7 +59,7 @@ public class UserDAO implements DAOInterface.UserFn {
                     userModel.getDate(),
                     userModel.getAuthenKey(),
                     userModel.getUserID());
-            System.out.println(pre);
+//            System.out.println(pre);
             return pre.executeUpdate();
         } catch (SQLException e) {
             JoAlert.Error(e, this);
@@ -69,7 +69,7 @@ public class UserDAO implements DAOInterface.UserFn {
             connect.close();
         }
     }
-
+    
     @Override
     public int DeleteUser(UserModel userModel) {
         JoConnect connect = new JoConnect();
@@ -86,7 +86,7 @@ public class UserDAO implements DAOInterface.UserFn {
             connect.close();
         }
     }
-
+    
     @Override
     public List<UserModel> getUserAll() {
         JoConnect connect = new JoConnect();
@@ -107,7 +107,9 @@ public class UserDAO implements DAOInterface.UserFn {
                 TeacherModel teacherModel = teacherService.getTeacherById(rs.getInt(2));
                 model.setName(teacherModel.getName());
                 model.setGender(teacherModel.getGender());
-                models.add(model);
+                if (teacherModel.getStatus() < 2) {
+                     models.add(model);
+                }
             }
         } catch (Exception e) {
             JoAlert.Error(e, this);
@@ -117,7 +119,7 @@ public class UserDAO implements DAOInterface.UserFn {
         }
         return models;
     }
-
+    
     @Override
     public UserModel getUserById(int UserID) {
         JoConnect connect = new JoConnect();
@@ -147,7 +149,7 @@ public class UserDAO implements DAOInterface.UserFn {
         }
         return model;
     }
-
+    
     @Override
     public UserModel UserLogin(String User, String Password) {
         JoConnect connect = new JoConnect();
@@ -178,7 +180,7 @@ public class UserDAO implements DAOInterface.UserFn {
         }
         return model;
     }
-
+    
     @Override
     public int UpdateUserLogTime(UserModel userModel) {
         JoConnect connect = new JoConnect();
@@ -197,7 +199,7 @@ public class UserDAO implements DAOInterface.UserFn {
             connect.close();
         }
     }
-
+    
     @Override
     public UserModel getUserByAuthenKey(String authenKey) {
         JoConnect connect = new JoConnect();
@@ -224,7 +226,7 @@ public class UserDAO implements DAOInterface.UserFn {
         }
         return model;
     }
-
+    
     @Override
     public boolean CheckAuthen(String authenText) {
         JoConnect connect = new JoConnect();
@@ -243,5 +245,26 @@ public class UserDAO implements DAOInterface.UserFn {
             connect.close();
         }
     }
-
+    
+    public UserModel getCheckAuthen(String authenText) {
+        JoConnect connect = new JoConnect();
+        UserModel model = new UserModel();
+        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
+        try {
+            PreparedStatement pre = sql.getSelectCustom("authenKey=?");
+            pre.setString(1, authenText);
+            ResultSet rs = pre.executeQuery();
+            if (rs.next()) {
+                model = new UserModel(rs.getInt(1), rs.getString(3), rs.getString(4), rs.getString(5), rs.getDate(6), rs.getString(7));
+            }
+        } catch (SQLException e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+            System.out.println(e.getMessage());
+        } finally {
+            connect.close();
+        }
+        return model;
+    }
+    
 }

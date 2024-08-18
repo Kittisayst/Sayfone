@@ -112,30 +112,46 @@ public class DialogUser extends javax.swing.JDialog {
             model.setAuthenKey(txtConfirm.getText());
             model.setPassword(txtPassword.getText());
             model.setTeacherID(cbTeacher.getKeyInt());
+            UserModel checkUser = getcheckAuthenPassword();
             if (model.getUserID() == 0) {
-                if (!checkAuthenPassword()) {
+                System.out.println("start");
+                if (checkUser.getUserID() == 0) {
                     if (alert.JoSubmit(service.CreateUser(model), JoAlert.INSERT)) {
                         new AppUser().Open();
                         this.dispose();
                     } else {
                         alert.messages("ກວດສອບລະຫັດ", "ລະຫັດຢືນຢັນການເງິນນີ້ມີຢູ່ແລ້ວ", JoAlert.Icons.info);
                     }
+                } else {
+                    alert.messages("ກວດສອບລະຫັດ", "ລະຫັດຢຶນຢັນການເງິນ: " + new String(txtConfirm.getPassword()) + " ຊ້ຳກັນກັບ " + checkUser.getUserName(), JoAlert.Icons.info);
                 }
             } else {
-                if (!checkAuthenPassword()) {
+                String oldauthen = new UserService().getUserById(model.getUserID()).getAuthenKey();
+                System.out.println(oldauthen + " " + new String(txtConfirm.getPassword()));
+                if (oldauthen.equals(new String(txtConfirm.getPassword()))) {
                     if (alert.JoSubmit(service.UpdateUser(model), JoAlert.UPDATE)) {
                         new AppUser().Open();
                         this.dispose();
                     }
                 } else {
-                    alert.messages("ກວດສອບລະຫັດ", "ລະຫັດຢືນຢັນການເງິນນີ້ມີຢູ່ແລ້ວ", JoAlert.Icons.info);
+                    if (checkUser.getUserID() == 0) {
+                        if (alert.JoSubmit(service.UpdateUser(model), JoAlert.UPDATE)) {
+                            new AppUser().Open();
+                            this.dispose();
+                        }
+                    } else {
+                        alert.messages("ກວດສອບລະຫັດ", "ລະຫັດຢຶນຢັນການເງິນ: " + new String(txtConfirm.getPassword()) + " ຊ້ຳກັນກັບ " + checkUser.getUserName(), JoAlert.Icons.info);
+                    }
                 }
             }
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 
-    private boolean checkAuthenPassword() {
-        return service.CheckAuthen(new String(txtConfirm.getPassword()));
+//    private boolean checkAuthenPassword() {
+//        return service.CheckAuthen(new String(txtConfirm.getPassword()));
+//    }
+    private UserModel getcheckAuthenPassword() {
+        return service.getCheckAuthen(new String(txtConfirm.getPassword()));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

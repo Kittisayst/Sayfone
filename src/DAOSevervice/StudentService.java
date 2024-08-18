@@ -1,6 +1,7 @@
 package DAOSevervice;
 
 import DAO.StudentDAO;
+import Model.StudentDashboradModel;
 import Model.StudentModel;
 import java.util.List;
 
@@ -66,6 +67,10 @@ public class StudentService {
 
     public List<StudentModel> getSearchStudent(String search) {
         return aO.getSearchStudent(search);
+    }
+
+    public List<StudentDashboradModel> getSearchStudentDashboard(String text) {
+        return aO.getSearchStudentDashboard(text);
     }
 
     public List<StudentModel> getSearchSutdentNotRegister(int YearID, String search) {

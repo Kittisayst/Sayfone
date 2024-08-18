@@ -8,8 +8,9 @@ import Components.JoScrollBar;
 import Components.JoTable;
 import Components.JoTextField;
 import DAOSevervice.FinancialService;
+import Model.GlobalDataModel;
 import Model.RegisterModel;
-import Model.StudentModel;
+import Model.StudentDashboradModel;
 import Utility.WrapLayout;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -76,14 +77,13 @@ public class DasboardView extends javax.swing.JPanel {
         return txtSearch;
     }
 
-    public void showYear() {
-        comboboxYear1.showYears();
-    }
-
-    public int getYear() {
-        return comboboxYear1.getYearID();
-    }
-
+//    public void showYear() {
+//        comboboxYear1.showYears();
+//    }
+//
+//    public int getYear() {
+//        return comboboxYear1.getYearID();
+//    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -101,7 +101,6 @@ public class DasboardView extends javax.swing.JPanel {
         pnClassRoom = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        comboboxYear1 = new Component.comboboxYear();
         txtSearch = new Components.JoTextField();
         btnSearch = new Components.JoButtonIconfont();
         pnChart = new javax.swing.JPanel();
@@ -232,10 +231,6 @@ public class DasboardView extends javax.swing.JPanel {
             jPanel3.setPreferredSize(new java.awt.Dimension(100, 50));
             jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 10, 5));
 
-            comboboxYear1.setMinimumSize(new java.awt.Dimension(72, 30));
-            comboboxYear1.setPreferredSize(new java.awt.Dimension(150, 40));
-            jPanel3.add(comboboxYear1);
-
             txtSearch.setPlaceholder("ຄົ້ນຫານັກຮຽນ");
             jPanel3.add(txtSearch);
 
@@ -334,7 +329,6 @@ public class DasboardView extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Components.JoButtonIconfont btnSearch;
-    private Component.comboboxYear comboboxYear1;
     private Component.JoDashboardItem ds_ClassRoom;
     private Component.JoDashboardItem ds_Financail;
     private Component.JoDashboardItem ds_Student;
@@ -450,17 +444,14 @@ public class DasboardView extends javax.swing.JPanel {
         }
     }
 
-    public void showTableData(List<StudentModel> models) {
+    public void showTableData(List<StudentDashboradModel> models) {
+//        System.out.println(models);
         Thread thread = new Thread(() -> {
+            tbData.JoClearModel();
             try {
-                pnTable.removeAll();
-                tbData.JoClearModel();
-                pnTable.add(loading, BorderLayout.CENTER);
-                pnTable.revalidate();
-                FinancialService financialService = new FinancialService();
+                GlobalDataModel.rootView.setView(loading);
                 models.forEach(data -> {
-                    String lastClass = financialService.getLastClass(data.getStudentID());
-                    tbData.AddJoModel(new Object[]{tbData.autoNumber(), data.getStudentID(), data.getStudentNo(), data.getFullName(), lastClass, data.getStatusName()});
+                    tbData.AddJoModel(new Object[]{tbData.autoNumber(), data.getStudentID(), data.getStudentNo(), data.getFullName(), data.getClassName(), data.getStatusName()});
                     loading.StartProgress(models.size() + 10, 20);
                 });
             } catch (Exception e) {
@@ -469,6 +460,7 @@ public class DasboardView extends javax.swing.JPanel {
                 pnTable.removeAll();
                 pnTable.add(scollTable, BorderLayout.CENTER);
                 loading.close();
+                GlobalDataModel.rootView.setView(this);
                 pnTable.revalidate();
             }
         });

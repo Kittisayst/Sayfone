@@ -44,4 +44,10 @@ public class UserService {
         return userDAO.CheckAuthen(authenText);
     }
 
+    public UserModel getCheckAuthen(String authenText) {
+        return userDAO.getCheckAuthen(authenText);
+    }
+    
+    
+
 }

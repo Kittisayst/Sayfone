@@ -148,11 +148,13 @@ public class StudentDataController implements JoMVC, ActionListener, MouseListen
         });
         JoAlert alert = new JoAlert();
         if (alert.JoSubmitDelete()) {
-            service.DeleteStudent(model);
-            historyService.DeleteStudentHistory(historyModel);
-            addressService.DeleteStudentLocation(addressModel);
-            alert.messages("ລົບຂໍ້ມູນ", "ລົບຂໍ້ມູນນັກສຶກສາສຳເລັດ!", JoAlert.Icons.success);
-            AppStudent student = new AppStudent();
+            int isdelete = service.DeleteStudent(model);
+            if (isdelete == 1) {
+                alert.messages("ລົບຂໍ້ມູນ", "ລົບຂໍ້ມູນນັກຮຽນສຳເລັດ!", JoAlert.Icons.success);
+                historyService.DeleteStudentHistory(historyModel);
+                addressService.DeleteStudentLocation(addressModel);
+                AppStudent appStudent = new AppStudent();
+            }
         }
     }
 

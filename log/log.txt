@@ -561,3 +561,7 @@ WHERE RegisterID=1 AND StudentID = 885' at line 3
 16/06/2024: DAO.FinancialDAO@1d78471e Errorjava.sql.SQLException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'FROM tb_financial
  WHERE RegisterID=1 AND StudentID = 357' at line 3
 04/07/2024: DAO.SayfoneDao@7d6c97f1 Errorjava.sql.SQLException: Statement parameter 2 not set.
+18/08/2024: DAO.StudentDAO@88bc258 Errorjava.sql.SQLException: Invalid value for getInt() - 'ສັນລະເສີນ ພັດສະລິນ' in column 4
+18/08/2024: DAO.StudentDAO@32d43b5b Errorjava.sql.SQLException: Invalid value for getInt() - 'ສັນລະເສີນ ພັດສະລິນ' in column 4
+18/08/2024: DAO.StudentDAO@3c05951c Errorjava.sql.SQLException: Invalid value for getInt() - 'ສັນລະເສີນ ພັດສະລິນ' in column 4
+18/08/2024: DAO.StudentDAO@17199fb Errorjava.sql.SQLException: Invalid value for getInt() - 'ສັນລະເສີນ ພັດສະລິນ' in column 4

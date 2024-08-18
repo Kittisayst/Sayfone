@@ -6,6 +6,7 @@ import Database.JoConnect;
 import Database.JoSQL;
 import Log.JoLoger;
 import Model.GlobalDataModel;
+import Model.StudentDashboradModel;
 import Model.StudentModel;
 import java.util.List;
 import Tools.JoAlert;
@@ -120,23 +121,9 @@ public class StudentDAO implements StudentFn {
         FinancialService service = new FinancialService();
         if (service.getStudentIsReister(model.getStudentID())) {
             JoAlert alert = new JoAlert();
-            alert.setButtonOption(JoAlert.Option.LAOS_YES_NO);
-            int conff = alert.messages("ຢືນຢັນການລືບ", "ນັກສຶກສານີ້ໄດ້ມີການລົງທະບຽນຮຽນ ຖ້າລົບນັກສຶກສາຂໍ້ມູນການລົງທະບຽນຈະຫາຍ", JoAlert.Icons.warning);
-            if (conff == 0) {
-                try {
-                    PreparedStatement pre = sql.getDelete();
-                    pre.setInt(1, model.getStudentID());
-                    return pre.executeUpdate();
-                } catch (SQLException e) {
-                    JoAlert.Error(e, this);
-                    JoLoger.saveLog(e, this);
-                    return 0;
-                } finally {
-                    connect.close();
-                }
-            } else {
-                return 0;
-            }
+             alert.messages("ລົບຂໍ້ມູນ", "ນັກສຶກສານິ້ຍັງໄດ້ນຳໃຊ້ຂໍ້ມູນການຈ່າຍຄ່າຮຽນ", JoAlert.Icons.warning);
+             System.out.println("0");
+            return 0;
         } else {
             try {
                 PreparedStatement pre = sql.getDelete();
@@ -439,6 +426,51 @@ public class StudentDAO implements StudentFn {
             connect.close();
         }
         return models;
+    }
+
+    public List<StudentDashboradModel> getSearchStudentDashboard(String text) {
+//        System.out.println(text);
+        List<StudentDashboradModel> models = new ArrayList<>();
+        JoConnect connect = new JoConnect();
+        try {
+            String sql = "SELECT \n"
+                    + "s.StudentID, \n"
+                    + "s.StudentNo, \n"
+                    + "s.Gender, \n"
+                    + "s.StudentName,\n"
+                    + "s.Status,\n"
+                    + "COALESCE(MAX(f.FinancialID), 0) AS maxFinancial\n"
+                    + "FROM tb_student s\n"
+                    + "LEFT JOIN tb_financial f ON s.StudentID = f.StudentID\n";
+            if (isNumeric(text)) {
+                sql += "WHERE s.StudentNo LIKE ? GROUP BY s.StudentID, s.StudentNo, s.Gender, s.StudentName, s.Status";
+            } else {
+                sql += "WHERE s.StudentName LIKE ? GROUP BY s.StudentID, s.StudentNo, s.Gender, s.StudentName, s.Status";
+            }
+            PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sql);
+//            System.out.println(pre);
+            pre.setString(1, "%" + text + "%");
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                models.add(new StudentDashboradModel(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(4),
+                        rs.getInt(3),
+                        rs.getInt(6),
+                        rs.getInt(5)));
+            }
+        } catch (SQLException e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
+        }
+        return models;
+    }
+
+    private boolean isNumeric(String str) {
+        return str != null && str.matches("\\d+"); // Checks if the string contains only digits
     }
 
     @Override
