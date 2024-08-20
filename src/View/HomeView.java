@@ -442,7 +442,7 @@ public class HomeView extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
         pnSideBar.add(btn_Manage, gridBagConstraints);
 
-        btn_teacher.setText("ຈັດການຂໍ້ມູນອາຈານ");
+        btn_teacher.setText("ຈັດການຂໍ້ມູນຄຸ");
         btn_teacher.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btn_teacher.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.ASSIGNMENT_IND);
         btn_teacher.setMaximumSize(new java.awt.Dimension(270, 40));

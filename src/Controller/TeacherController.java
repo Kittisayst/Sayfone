@@ -76,38 +76,43 @@ public class TeacherController implements JoMVC, ActionListener, MouseListener {
         TeacherFileService fileService = new TeacherFileService();
         JoAlert alert = new JoAlert();
         if (alert.JoSubmitDelete()) {
-            //===================== Delete History ===================
-            TeacherHistoryModel historyModel = historyService.getTeacherHistoryByTeacherId(TeacherID);
-            historyService.DeleteTeacherHistory(historyModel);
-            //===================== Delete Address =================
-            TeacherAddressModel addressModel = addressService.getTeacherAddressById(TeacherID);
-            addressService.DeleteTeacherAddress(addressModel);
-            //===================== Delete Education ================
-            educationService.getALLByTeacherID(TeacherID).forEach(educationModel -> {
-                educationService.DeleteTeacherEducation(educationModel);
-            });
-            //================== Dlete Experience ================
-            experienceService.getAllExperienceByTeacherID(TeacherID).forEach(experienceModel -> {
-                experienceService.DeleteExperience(experienceModel);
-            });
-            //================= Delete File ===================
-            fileService.getAllTeacherFileByTeacherID(TeacherID).forEach(fileModel -> {
-                fileService.DeleteTeacherFile(fileModel);
-            });
+            System.out.println(service.getTeacherinFinancial(TeacherID));
+            if (!service.getTeacherinFinancial(TeacherID)) {
+                //===================== Delete History ===================
+                TeacherHistoryModel historyModel = historyService.getTeacherHistoryByTeacherId(TeacherID);
+                historyService.DeleteTeacherHistory(historyModel);
+                //===================== Delete Address =================
+                TeacherAddressModel addressModel = addressService.getTeacherAddressById(TeacherID);
+                addressService.DeleteTeacherAddress(addressModel);
+                //===================== Delete Education ================
+                educationService.getALLByTeacherID(TeacherID).forEach(educationModel -> {
+                    educationService.DeleteTeacherEducation(educationModel);
+                });
+                //================== Dlete Experience ================
+                experienceService.getAllExperienceByTeacherID(TeacherID).forEach(experienceModel -> {
+                    experienceService.DeleteExperience(experienceModel);
+                });
+                //================= Delete File ===================
+                fileService.getAllTeacherFileByTeacherID(TeacherID).forEach(fileModel -> {
+                    fileService.DeleteTeacherFile(fileModel);
+                });
 
-            //=============== Deletet OutStanding ================
-            outStandingService.getAllByTeacherID(TeacherID).forEach(outstanding -> {
-                outStandingService.DeleteTeacherOutstanding(outstanding);
-            });
-            //=============== Delete Vaccince ================
-            vaccinService.getTeacherVaccinAllByTeacherID(TeacherID).forEach(vaccince -> {
-                vaccinService.DeleteTeacherVaccin(vaccince);
-            });
-            //============ Delete Teacher Data =================
-            TeacherModel model = teacherService.getTeacherById(TeacherID);
-            int respon = service.DeleteTeacher(model);
-            alert.messages("ລົບຂໍ້", "ລົບຂໍ້ມູນອຈານສຳເລັດ", JoAlert.Icons.success);
-            AppTeacher appTeacher = new AppTeacher();
+                //=============== Deletet OutStanding ================
+                outStandingService.getAllByTeacherID(TeacherID).forEach(outstanding -> {
+                    outStandingService.DeleteTeacherOutstanding(outstanding);
+                });
+                //=============== Delete Vaccince ================
+                vaccinService.getTeacherVaccinAllByTeacherID(TeacherID).forEach(vaccince -> {
+                    vaccinService.DeleteTeacherVaccin(vaccince);
+                });
+                //============ Delete Teacher Data =================
+                TeacherModel model = teacherService.getTeacherById(TeacherID);
+                int respon = service.DeleteTeacher(model);
+                alert.messages("ລົບຂໍ້", "ລົບຂໍ້ມູນອຈານສຳເລັດ", JoAlert.Icons.success);
+                AppTeacher appTeacher = new AppTeacher();
+            } else {
+                alert.messages("ກວດສອບ", "ຂໍ້ມູນຄູນີ້ຍັງຖືກນຳໃຊ້ໃນຂໍ້ມູນການຈ່າຍຄ່າຮຽນຢູ່", JoAlert.Icons.warning);
+            }
         }
     }
 

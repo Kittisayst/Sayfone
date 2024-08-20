@@ -12,13 +12,17 @@ import Model.StudentHistoryModel;
 import Model.StudentAddressModel;
 import DAOSevervice.DistrictService;
 import DAOSevervice.FinancialService;
+import DAOSevervice.StudentKnowService;
 import Model.BrotherAndSisterModel;
 import Model.GlobalDataModel;
 import Model.StudentFileModel;
+import Model.StudentKnowModel;
 import Tools.JoDataTable;
 import Utility.MyPopup;
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
 import java.util.List;
+import javax.swing.ButtonGroup;
 
 public class StudentHistoryView extends javax.swing.JPanel {
 
@@ -206,6 +210,28 @@ public class StudentHistoryView extends javax.swing.JPanel {
     public void showFileData(StudentFileModel model) {
         txtfileName.setText(model.getFileName());
         txtComment.setText(model.getComment());
+    }
+
+    //================== show student Know ===========================
+    public void showStudentKnow(List<String> items, int studentID) {
+        StudentKnowService sks = new StudentKnowService();
+        StudentKnowModel knowModel = sks.read(studentID);
+        ButtonGroup group = new ButtonGroup();
+        for (int index = 0; index < items.size(); index++) {
+            String item = items.get(index);
+            JoRadioButton button = new JoRadioButton();
+            button.setText(item);
+            group.add(button);
+            final int i = index;
+            if (knowModel.getKnowID() != 0) {
+                button.setSelected(knowModel.getKnowIndex() == index);
+            }
+            button.addActionListener((ActionEvent e) -> {
+                StudentKnowModel model = new StudentKnowModel(0, studentID, i);
+                sks.create_update(model);
+            });
+            pn_StudentKow.add(button);
+        }
     }
 
     //====== Getter =========
@@ -513,12 +539,7 @@ public class StudentHistoryView extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         tbFile = new Components.JoTable();
         jPanel15 = new javax.swing.JPanel();
-        joPanelTitle3 = new Components.JoPanelTitle();
-        joRadioButton1 = new Component.JoRadioButton();
-        joRadioButton2 = new Component.JoRadioButton();
-        joRadioButton3 = new Component.JoRadioButton();
-        joRadioButton4 = new Component.JoRadioButton();
-        joRadioButton5 = new Component.JoRadioButton();
+        pn_StudentKow = new Components.JoPanelTitle();
 
         Pn_Navigation.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
         Pn_Navigation.setLayout(new java.awt.GridLayout(1, 0));
@@ -1384,49 +1405,9 @@ public class StudentHistoryView extends javax.swing.JPanel {
 
         jPanel15.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        joPanelTitle3.setJoTitle("ຊ່ອງທາງຮູ້ຂັກໂຮງຮຽນສາຍຝົນ");
-        joPanelTitle3.setJoTitleBorderSize(1);
-        joPanelTitle3.setLayout(new java.awt.GridBagLayout());
-
-        joRadioButton1.setText("joRadioButton1");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
-        joPanelTitle3.add(joRadioButton1, gridBagConstraints);
-
-        joRadioButton2.setText("joRadioButton2");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
-        joPanelTitle3.add(joRadioButton2, gridBagConstraints);
-
-        joRadioButton3.setText("joRadioButton3");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
-        joPanelTitle3.add(joRadioButton3, gridBagConstraints);
-
-        joRadioButton4.setText("joRadioButton4");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
-        joPanelTitle3.add(joRadioButton4, gridBagConstraints);
-
-        joRadioButton5.setText("joRadioButton5");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
-        joPanelTitle3.add(joRadioButton5, gridBagConstraints);
-
-        jPanel15.add(joPanelTitle3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 40, 470, 460));
+        pn_StudentKow.setJoTitle("ຊ່ອງທາງຮູ້ຂັກໂຮງຮຽນສາຍຝົນ");
+        pn_StudentKow.setJoTitleBorderSize(1);
+        jPanel15.add(pn_StudentKow, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 40, 470, 460));
 
         TapHistory.addTab("ຮູ້ຈັກໂຮງຮຽນສາຍຝົນ", jPanel15);
 
@@ -1521,20 +1502,15 @@ public class StudentHistoryView extends javax.swing.JPanel {
     private Components.JoLable joLable9;
     private Component.JoPanelTitle joPanelTitle1;
     private Component.JoPanelTitle joPanelTitle2;
-    private Components.JoPanelTitle joPanelTitle3;
     private Component.JoPanelTitle joPanelTitle4;
     private Component.JoPanelTitle joPanelTitle5;
-    private Component.JoRadioButton joRadioButton1;
-    private Component.JoRadioButton joRadioButton2;
-    private Component.JoRadioButton joRadioButton3;
-    private Component.JoRadioButton joRadioButton4;
-    private Component.JoRadioButton joRadioButton5;
     private Components.JoLable lbl_title;
     private ClassUI.ModelLiquid modelLiquid1;
     private Component.ParentComponent parent1;
     private Component.ParentComponent parent2;
     private javax.swing.JPanel pnDataTable;
     private javax.swing.JPanel pnFileData;
+    private Components.JoPanelTitle pn_StudentKow;
     private Component.JoRadioButton rd_BloodGroupA;
     private Component.JoRadioButton rd_BloodGroupAB;
     private Component.JoRadioButton rd_BloodGroupB;

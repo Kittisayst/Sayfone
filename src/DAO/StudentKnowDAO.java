@@ -33,6 +33,22 @@ public class StudentKnowDAO implements DAO<StudentKnowModel> {
         }
     }
 
+    public int create_update(StudentKnowModel data) {
+        try {
+            int isUpdate = update(data);
+            if (isUpdate == 0) {
+                return create(data);
+            } else {
+                return isUpdate; 
+            }
+        } catch (Exception e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+            System.out.println(e.getMessage());
+            return 0;
+        }
+    }
+
     @Override
     public StudentKnowModel read(int id) {
         JoConnect connect = new JoConnect();
@@ -55,9 +71,11 @@ public class StudentKnowDAO implements DAO<StudentKnowModel> {
     @Override
     public int update(StudentKnowModel data) {
         JoConnect connect = new JoConnect();
-        JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         try {
-            PreparedStatement pre = sql.setPrepared(sql.getUpdate(), data.getStudentID(), data.getKnowIndex(), data.getKnowID());
+            String sql = "UPDATE tb_studentknow SET KnowIndex=? WHERE studentID=?";
+            PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sql);
+            pre.setInt(1, data.getKnowIndex());
+            pre.setInt(2, data.getStudentID());
             return pre.executeUpdate();
         } catch (SQLException e) {
             JoAlert.Error(e, this);

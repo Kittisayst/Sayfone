@@ -13,6 +13,10 @@ public class StudentKnowService {
         return dAO.create(data);
     }
 
+    public int create_update(StudentKnowModel data) {
+        return dAO.create_update(data);
+    }
+
     public StudentKnowModel read(int id) {
         return dAO.read(id);
     }

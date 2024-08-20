@@ -565,3 +565,4 @@ WHERE RegisterID=1 AND StudentID = 885' at line 3
 18/08/2024: DAO.StudentDAO@32d43b5b Errorjava.sql.SQLException: Invalid value for getInt() - 'ສັນລະເສີນ ພັດສະລິນ' in column 4
 18/08/2024: DAO.StudentDAO@3c05951c Errorjava.sql.SQLException: Invalid value for getInt() - 'ສັນລະເສີນ ພັດສະລິນ' in column 4
 18/08/2024: DAO.StudentDAO@17199fb Errorjava.sql.SQLException: Invalid value for getInt() - 'ສັນລະເສີນ ພັດສະລິນ' in column 4
+20/08/2024: DAO.StudentKnowDAO@47059247 Errorjava.sql.SQLException: Parameter index out of bounds. 3 is not between valid values of 1 and 2

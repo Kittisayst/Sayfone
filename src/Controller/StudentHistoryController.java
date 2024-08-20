@@ -11,12 +11,14 @@ import DAOSevervice.EthnicService;
 import DAOSevervice.NationalityService;
 import DAOSevervice.ProvinceService;
 import DAOSevervice.ReligionService;
+import DAOSevervice.SayfoneService;
 import DAOSevervice.StudentAddressService;
 import DAOSevervice.StudentFileService;
 import DAOSevervice.StudentHistoryService;
 import DAOSevervice.StudentService;
 import Model.BrotherAndSisterModel;
 import Model.GlobalDataModel;
+import Model.SayfoneModel;
 import Model.StudentFileModel;
 import Model.StudentModel;
 import Tools.JoAlert;
@@ -33,9 +35,12 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons;
 
 public class StudentHistoryController implements JoMVC, ActionListener, MouseListener, ItemListener {
@@ -91,6 +96,14 @@ public class StudentHistoryController implements JoMVC, ActionListener, MouseLis
             if (addressModel.getAddressID() == 0) {
                 view.setProvinDistrictDefault();
             }
+            //==============showstudentKnow =====================
+            SayfoneService service = new SayfoneService();
+            String str = service.getById(2).getEnglish();
+            String[] array = str.substring(1, str.length() - 1).split(", ");
+            List<String> result = Arrays.stream(array)
+                    .map(s -> s.replaceAll("\"", ""))
+                    .collect(Collectors.toList());
+            view.showStudentKnow(result, studentID);
         } catch (Exception ex) {
             Logger.getLogger(StudentHistoryController.class.getName()).log(Level.SEVERE, null, ex);
             JoAlert.Error(ex, this);

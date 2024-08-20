@@ -40,4 +40,8 @@ public class TeacherService {
         return teacherDAO.getTeacherCount();
     }
 
+    public boolean getTeacherinFinancial(int teacherID) {
+        return teacherDAO.getTeacherinFinancial(teacherID);
+    }
+
 }

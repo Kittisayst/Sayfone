@@ -270,4 +270,26 @@ public class TeacherDAO implements DAOInterface.TeacherFn {
         return Count;
     }
 
+    public boolean getTeacherinFinancial(int teacherID) {
+        JoConnect connect = new JoConnect();
+        try {
+            String sql = "SELECT UserID FROM tb_financial AS f\n"
+                    + "INNER JOIN tb_user AS u ON f.UserID = u.uid\n"
+                    + "INNER JOIN tb_teacher AS t ON u.tid = t.TeacherID\n"
+                    + "WHERE u.tid=? LIMIT 1";
+            PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sql);
+            pre.setInt(1, teacherID);
+//            System.out.println(pre);
+            ResultSet rs = pre.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+            System.out.println(e.getMessage());
+            return false;
+        } finally {
+            connect.close();
+        }
+    }
+
 }

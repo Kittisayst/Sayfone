@@ -121,8 +121,8 @@ public class StudentDAO implements StudentFn {
         FinancialService service = new FinancialService();
         if (service.getStudentIsReister(model.getStudentID())) {
             JoAlert alert = new JoAlert();
-             alert.messages("ລົບຂໍ້ມູນ", "ນັກສຶກສານິ້ຍັງໄດ້ນຳໃຊ້ຂໍ້ມູນການຈ່າຍຄ່າຮຽນ", JoAlert.Icons.warning);
-             System.out.println("0");
+            alert.messages("ລົບຂໍ້ມູນ", "ນັກສຶກສານິ້ຍັງໄດ້ນຳໃຊ້ຂໍ້ມູນການຈ່າຍຄ່າຮຽນ", JoAlert.Icons.warning);
+            System.out.println("0");
             return 0;
         } else {
             try {
