@@ -32,4 +32,9 @@ public class SayfoneService {
         return dao.updateStudentNkow(value);
     }
 
+    public int updateParentJob(String value) {
+        return dao.updateParentJob(value);
+    }
+    
+    
 }

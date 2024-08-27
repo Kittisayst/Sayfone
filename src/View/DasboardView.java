@@ -101,6 +101,7 @@ public class DasboardView extends javax.swing.JPanel {
         pnClassRoom = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
+        comboboxYear1 = new Component.comboboxYear();
         txtSearch = new Components.JoTextField();
         btnSearch = new Components.JoButtonIconfont();
         pnChart = new javax.swing.JPanel();
@@ -231,6 +232,9 @@ public class DasboardView extends javax.swing.JPanel {
             jPanel3.setPreferredSize(new java.awt.Dimension(100, 50));
             jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 10, 5));
 
+            comboboxYear1.setPreferredSize(new java.awt.Dimension(150, 40));
+            jPanel3.add(comboboxYear1);
+
             txtSearch.setPlaceholder("ຄົ້ນຫານັກຮຽນ");
             jPanel3.add(txtSearch);
 
@@ -293,11 +297,11 @@ public class DasboardView extends javax.swing.JPanel {
 
                 },
                 new String [] {
-                    "#", "studentID", "ລະຫັດນັກຮຽນ", "ຊື່ ແລະ ນາມສະກຸນ", "ຫ້ອງຮຽນ", "ສະຖານະນັກຮຽນ"
+                    "#", "studentID", "ລະຫັດນັກຮຽນ", "ຊື່ ແລະ ນາມສະກຸນ", "ຫ້ອງຮຽນ", "ສະຖານະນັກຮຽນ", "FinancialID"
                 }
             ) {
                 boolean[] canEdit = new boolean [] {
-                    false, false, false, false, false, false
+                    false, false, false, false, false, false, false
                 };
 
                 public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -309,6 +313,9 @@ public class DasboardView extends javax.swing.JPanel {
                 tbData.getColumnModel().getColumn(1).setMinWidth(0);
                 tbData.getColumnModel().getColumn(1).setPreferredWidth(0);
                 tbData.getColumnModel().getColumn(1).setMaxWidth(0);
+                tbData.getColumnModel().getColumn(6).setMinWidth(0);
+                tbData.getColumnModel().getColumn(6).setPreferredWidth(0);
+                tbData.getColumnModel().getColumn(6).setMaxWidth(0);
             }
 
             pnTable.add(scollTable, java.awt.BorderLayout.CENTER);
@@ -329,6 +336,7 @@ public class DasboardView extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Components.JoButtonIconfont btnSearch;
+    private Component.comboboxYear comboboxYear1;
     private Component.JoDashboardItem ds_ClassRoom;
     private Component.JoDashboardItem ds_Financail;
     private Component.JoDashboardItem ds_Student;
@@ -451,7 +459,8 @@ public class DasboardView extends javax.swing.JPanel {
             try {
                 GlobalDataModel.rootView.setView(loading);
                 models.forEach(data -> {
-                    tbData.AddJoModel(new Object[]{tbData.autoNumber(), data.getStudentID(), data.getStudentNo(), data.getFullName(), data.getClassName(), data.getStatusName()});
+//                    System.out.println(data);
+                    tbData.AddJoModel(new Object[]{tbData.autoNumber(), data.getStudentID(), data.getStudentNo(), data.getFullName(), data.getClassName(), data.getStatusName(), data.getFinancialID()});
                     loading.StartProgress(models.size() + 10, 20);
                 });
             } catch (Exception e) {
@@ -501,6 +510,22 @@ public class DasboardView extends javax.swing.JPanel {
         } else {
             return Color.BLACK;
         }
+    }
+
+    public void showYear() {
+        comboboxYear1.showYears();
+    }
+
+    public int getYearID() {
+        return comboboxYear1.getYearID();
+    }
+
+    public String getYear() {
+        return comboboxYear1.getSelectedItem().toString();
+    }
+
+    public int getFinancialID() {
+        return tbData.getIntValue(6);
     }
 
 }

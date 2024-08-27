@@ -1,6 +1,6 @@
 package Controller;
 
-import App.AppFinancailStudent;
+import App.AppFinancial;
 import App.AppFinancialRoom;
 import App.AppRegister;
 import App.AppStudent;
@@ -12,6 +12,8 @@ import DAOSevervice.TeacherService;
 import Model.FinancialModel;
 import Model.GlobalDataModel;
 import Model.RegisterModel;
+import Model.StudentModel;
+import Tools.JoAlert;
 import Tools.JoHookEvent;
 import View.DasboardView;
 import java.awt.event.ActionEvent;
@@ -47,7 +49,7 @@ public class DasboardController implements JoMVC, MouseListener, ActionListener,
         view.showFinalcailCount(financialService.getCountFinancial());
         view.showRegisterCount(registerService.getCountRegister());
         view.showClassRoom(GlobalDataModel.registerModels);
-//        view.showYear();
+        view.showYear();
     }
 
     @Override
@@ -116,28 +118,8 @@ public class DasboardController implements JoMVC, MouseListener, ActionListener,
             appRegister.OpenRegister();
         } else if (event.isEvent(view.getTbData())) {
             if (e.getClickCount() == 2) {
-                AppFinancialRoom room = new AppFinancialRoom();
-                room.open();
+                registerStudent();
             }
-
-//            if (e.getClickCount() == 2) {
-//                int studentID = view.getTbData().getIntValue(1);
-//                int yearID = view.getYear();
-//                FinancialModel financialModel = financialService.getSearchStudentInDash(yearID, studentID);
-//                if (financialModel.getFinancialIID() == 0) {
-//                    JoAlert alert = new JoAlert();
-//                    alert.setButtonOption(new String[]{"ເລືອນຫ້ອງຮຽນ", "ຍົກເລີກ"});
-//                    int conff = alert.messages("ລົງທະບຽນ", "ນັກຮຽນຍັງບໍ່ທັນໄດ້ລົງທະບຽນ ຕ້ອງການເລືອກຫ້ອງລົງທະບຽນຫຼືບໍ່", JoAlert.Icons.warning);
-//                    if (conff == 0) {
-//                        AppFinancialRoom financialRoom = new AppFinancialRoom();
-//                        financialRoom.open();
-//                    }
-//                } else {
-//                    RegisterModel registerModel = registerService.getRegisterById(financialModel.getRegisterID());
-//                    StudentModel studentModel = studentService.getStudentById(studentID);
-//                    AppFinancial appFinancial = new AppFinancial(registerModel, studentModel);
-//                }
-//            }
         }
     }
 
@@ -182,6 +164,40 @@ public class DasboardController implements JoMVC, MouseListener, ActionListener,
     @Override
     public void keyReleased(KeyEvent e) {
 
+    }
+
+    private void registerStudent() {
+        JoAlert alert = new JoAlert();
+        int yearID = view.getYearID();
+        int financialID = view.getFinancialID();
+        if (financialID > 0) {
+            FinancialModel financialModel = financialService.getFinancialById(financialID);
+            int registerID = financialModel.getRegisterID();
+            RegisterModel registerModel = registerService.getRegisterById(registerID);
+            int regisYearID = registerModel.getYearID();
+            if (regisYearID == yearID) {
+                    StudentModel studentModel = studentService.getStudentById(financialModel.getStudentID());
+                    AppFinancial appFinancial = new AppFinancial(registerModel, studentModel);
+            } else {
+                alert.setButtonOption(new String[]{"ເລືອນຫ້ອງຮຽນ", "ຍົກເລີກ"});
+                int conff = alert.messages("ລົງທະບຽນ", "ນັກຮຽນຍັງບໍ່ທັນໄດ້ລົງທະບຽນໃນສົກຮຽນ " + view.getYear(), JoAlert.Icons.warning);
+                if (conff == 0) {
+                    AppFinancialRoom financialRoom = new AppFinancialRoom();
+                    financialRoom.open();
+                }
+            }
+        } else {
+            alert.setButtonOption(new String[]{"ເລືອນຫ້ອງຮຽນ", "ຍົກເລີກ"});
+            int conff = alert.messages("ລົງທະບຽນ", "ນັກຮຽນຍັງບໍ່ທັນໄດ້ລົງທະບຽນ ຕ້ອງການເລືອກຫ້ອງລົງທະບຽນຫຼືບໍ່", JoAlert.Icons.warning);
+            if (conff == 0) {
+                AppFinancialRoom financialRoom = new AppFinancialRoom();
+                financialRoom.open();
+            }
+        }
+//        System.out.println(yearID);
+//        System.out.println(financialID);
+//        AppFinancialRoom room = new AppFinancialRoom();
+//        room.open();
     }
 
 }

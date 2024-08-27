@@ -219,9 +219,13 @@ public class HomeView extends javax.swing.JFrame {
     public JoButtonIconfont getBtnNkow() {
         return btnNkow;
     }
-    
-    public void setPing(String text){
+
+    public void setPing(String text) {
         lblPing.setText(text);
+    }
+
+    public JoButtonIconfont getBtnjob() {
+        return btnjob;
     }
 
     @SuppressWarnings("unchecked")
@@ -255,6 +259,7 @@ public class HomeView extends javax.swing.JFrame {
         btnClass = new Components.JoButtonIconfont();
         btnPermission = new Components.JoButtonIconfont();
         btnNkow = new Components.JoButtonIconfont();
+        btnjob = new Components.JoButtonIconfont();
         pn_School = new javax.swing.JPanel();
         btnDocument = new Components.JoButtonIconfont();
         btn_Register = new Components.JoButtonIconfont();
@@ -498,6 +503,13 @@ public class HomeView extends javax.swing.JFrame {
         btnNkow.setMinimumSize(new java.awt.Dimension(270, 40));
         btnNkow.setPreferredSize(new java.awt.Dimension(270, 40));
 
+        btnjob.setText("ອາຊີບຜູ້ປົກຄອງ");
+        btnjob.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnjob.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.SUBTITLES);
+        btnjob.setMaximumSize(new java.awt.Dimension(270, 40));
+        btnjob.setMinimumSize(new java.awt.Dimension(270, 40));
+        btnjob.setPreferredSize(new java.awt.Dimension(270, 40));
+
         javax.swing.GroupLayout PN_ManageLayout = new javax.swing.GroupLayout(PN_Manage);
         PN_Manage.setLayout(PN_ManageLayout);
         PN_ManageLayout.setHorizontalGroup(
@@ -513,6 +525,7 @@ public class HomeView extends javax.swing.JFrame {
             .addComponent(btnClass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnPermission, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnNkow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnjob, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         PN_ManageLayout.setVerticalGroup(
             PN_ManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -531,6 +544,8 @@ public class HomeView extends javax.swing.JFrame {
                 .addComponent(btnUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnNkow, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(btnjob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnPermission, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
@@ -1134,6 +1149,7 @@ public class HomeView extends javax.swing.JFrame {
     private Components.JoButtonIconfont btn_home;
     private Components.JoButtonIconfont btn_report;
     private Components.JoButtonIconfont btn_teacher;
+    private Components.JoButtonIconfont btnjob;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private Components.JoLable joLable1;

@@ -7,6 +7,11 @@ import Model.FinancialModel;
 import Model.GlobalDataModel;
 import Tools.JoFilechooser;
 import Utility.JoQRcode;
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.time.LocalTime;
 import java.util.Date;
 import javax.swing.ImageIcon;
@@ -138,6 +143,11 @@ public class DialogFinancialTransfer extends javax.swing.JDialog {
         });
 
         lblImage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(25, 118, 210)));
+        lblImage.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblImageMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -261,6 +271,19 @@ public class DialogFinancialTransfer extends javax.swing.JDialog {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         submit = false;
     }//GEN-LAST:event_formWindowClosing
+
+    private void lblImageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblImageMouseClicked
+        if (evt.getClickCount() == 2) {
+            if (btnQRCode.isEnabled()) {
+                try {
+                    String url = "http://" + server + "/sayfone/mobiletransfer.php?transferID=" + tranferModel.getFileTranferID() + "&financialID=" + tranferModel.getFinancialID();
+                    Desktop.getDesktop().browse(new URI(url));
+                } catch (IOException | URISyntaxException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+        }
+    }//GEN-LAST:event_lblImageMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

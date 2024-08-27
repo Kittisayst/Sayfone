@@ -3,6 +3,8 @@ package Controller;
 import App.AppStudentData;
 import App.AppStudentHistory;
 import Component.DialogBrotherAndSister;
+import Component.DialogParentJob;
+import Components.JoTextField;
 import DAOSevervice.BroderSisterService;
 import Model.StudentHistoryModel;
 import Model.StudentAddressModel;
@@ -33,6 +35,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Arrays;
@@ -123,6 +126,8 @@ public class StudentHistoryController implements JoMVC, ActionListener, MouseLis
         view.getTbFile().addMouseListener(this);
         view.getPopupFile().addActionListener(this);
         popup.addActionListener(this);
+        view.getTxt_fatherJob().addMouseListener(this);
+        view.getTxt_MotherJob().addMouseListener(this);
     }
 
     @Override
@@ -344,7 +349,19 @@ public class StudentHistoryController implements JoMVC, ActionListener, MouseLis
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        JoHookEvent event = new JoHookEvent(e.getSource());
+        if (event.isEvent(view.getTxt_fatherJob())) {
+            showJob(e, view.getTxt_fatherJob());
+        } else if (event.isEvent(view.getTxt_MotherJob())) {
+            showJob(e, view.getTxt_MotherJob());
+        }
+    }
 
+    private void showJob(MouseEvent e, JoTextField textField) {
+        if (e.getClickCount() == 2) {
+            DialogParentJob job = new DialogParentJob(GlobalDataModel.rootView, true, textField);
+            job.setVisible(true);
+        }
     }
 
     @Override

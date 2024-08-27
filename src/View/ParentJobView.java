@@ -6,9 +6,9 @@ import DAOSevervice.SayfoneService;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-public class StudentNkowView extends javax.swing.JPanel {
+public class ParentJobView extends javax.swing.JPanel {
 
-    public StudentNkowView(String Title) {
+    public ParentJobView(String Title) {
         initComponents();
         lbl_title.setText(Title);
     }
@@ -37,6 +37,10 @@ public class StudentNkowView extends javax.swing.JPanel {
         btnAdd.addActionListener(evt);
     }
 
+    public void handelBack(ActionListener evt) {
+        btn_back.addActionListener(evt);
+    }
+
     public String getText() {
         return txtname.getText();
     }
@@ -47,11 +51,7 @@ public class StudentNkowView extends javax.swing.JPanel {
 
     private void deleteItem(int index) {
         myList1.removeItem(index);
-        new SayfoneService().updateStudentNkow(myList1.getData());
-    }
-
-    public void handelBack(ActionListener evt) {
-        btn_back.addActionListener(evt);
+        new SayfoneService().updateParentJob(myList1.getData());
     }
 
     public String getData() {
@@ -60,6 +60,10 @@ public class StudentNkowView extends javax.swing.JPanel {
 
     public JoButtonIconfont getBtn_back() {
         return btn_back;
+    }
+
+    public JoButtonIconfont getBtn_Add() {
+        return btn_add;
     }
 
     @SuppressWarnings("unchecked")
@@ -73,11 +77,14 @@ public class StudentNkowView extends javax.swing.JPanel {
         jPanel4 = new javax.swing.JPanel();
         lbl_title = new Components.JoLable();
         jPanel5 = new javax.swing.JPanel();
+        btn_add = new Components.JoButtonIconfont();
         pn_Datatable = new javax.swing.JPanel();
-        myList1 = new Component.MyList();
         jPanel1 = new javax.swing.JPanel();
         txtname = new Components.JoTextField();
         btnAdd = new Components.JoButtonIconfont();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        myList1 = new Component.MyList();
 
         Pn_Navigation.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
         Pn_Navigation.setLayout(new java.awt.GridLayout(1, 0));
@@ -99,21 +106,18 @@ public class StudentNkowView extends javax.swing.JPanel {
         Pn_Navigation.add(jPanel4);
 
         jPanel5.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+
+        btn_add.setText("ເພີ່ມຂໍ້ມູນ");
+        btn_add.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.ADD_CIRCLE);
+        jPanel5.add(btn_add);
+
         Pn_Navigation.add(jPanel5);
 
         pn_Datatable.setLayout(new java.awt.GridBagLayout());
 
-        myList1.setMinimumSize(new java.awt.Dimension(500, 0));
-        myList1.setPreferredSize(new java.awt.Dimension(500, 100));
-        myList1.setLayout(new java.awt.GridBagLayout());
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weighty = 0.1;
-        gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 0);
-        pn_Datatable.add(myList1, gridBagConstraints);
-
+        jPanel1.setMaximumSize(new java.awt.Dimension(2147483647, 50));
+        jPanel1.setMinimumSize(new java.awt.Dimension(71, 50));
+        jPanel1.setPreferredSize(new java.awt.Dimension(500, 50));
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
         txtname.setPlaceholder("ຊື່ຊ່ອງທາງ");
@@ -129,23 +133,38 @@ public class StudentNkowView extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 0);
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         pn_Datatable.add(jPanel1, gridBagConstraints);
+
+        jPanel2.setLayout(new java.awt.BorderLayout());
+
+        myList1.setMinimumSize(jScrollPane1.getMinimumSize());
+        myList1.setPreferredSize(jScrollPane1.getPreferredSize());
+        myList1.setLayout(new java.awt.GridBagLayout());
+        jScrollPane1.setViewportView(myList1);
+
+        jPanel2.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weighty = 0.1;
+        pn_Datatable.add(jPanel2, gridBagConstraints);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Pn_Navigation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pn_Datatable, javax.swing.GroupLayout.DEFAULT_SIZE, 1125, Short.MAX_VALUE)
+            .addComponent(Pn_Navigation, javax.swing.GroupLayout.DEFAULT_SIZE, 1125, Short.MAX_VALUE)
+            .addComponent(pn_Datatable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(Pn_Navigation, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pn_Datatable, javax.swing.GroupLayout.DEFAULT_SIZE, 655, Short.MAX_VALUE))
+                .addComponent(pn_Datatable, javax.swing.GroupLayout.DEFAULT_SIZE, 552, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -153,11 +172,14 @@ public class StudentNkowView extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Pn_Navigation;
     private Components.JoButtonIconfont btnAdd;
+    private Components.JoButtonIconfont btn_add;
     private Components.JoButtonIconfont btn_back;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JScrollPane jScrollPane1;
     private Components.JoLable lbl_title;
     private Component.MyList myList1;
     private javax.swing.JPanel pn_Datatable;

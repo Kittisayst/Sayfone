@@ -64,20 +64,16 @@ public class MyList extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
         pnView = new javax.swing.JPanel();
 
         setLayout(new java.awt.BorderLayout());
 
         pnView.setLayout(new java.awt.GridBagLayout());
-        jScrollPane1.setViewportView(pnView);
-
-        add(jScrollPane1, java.awt.BorderLayout.CENTER);
+        add(pnView, java.awt.BorderLayout.PAGE_START);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel pnView;
     // End of variables declaration//GEN-END:variables
 }

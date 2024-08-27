@@ -7,6 +7,7 @@ import App.AppClass;
 import App.AppDBPing;
 import App.AppDocument;
 import App.AppFinancialRoom;
+import App.AppParentJob;
 import App.AppPermission;
 import App.AppRegister;
 import App.AppReportDiscount;
@@ -119,6 +120,7 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
         view.getBtnReportParentJob().addActionListener(this);
         view.getBtnReportStudentAddress().addActionListener(this);
         view.getBtnNkow().addActionListener(this);
+        view.getBtnjob().addActionListener((e) -> AppParent());
     }
 
     @Override
@@ -288,6 +290,11 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
                 }
             }
         }, 0, PING_INTERVAL_MS);
+    }
+
+    private void AppParent() {
+        AppParentJob app = new AppParentJob();
+        app.Open();
     }
 
 }

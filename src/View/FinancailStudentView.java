@@ -5,6 +5,7 @@ import Components.JoTable;
 import Components.JoTextField;
 import Model.GlobalDataModel;
 import Model.StudentModel;
+import Tools.JoDataTable;
 import Utility.MyFormat;
 import java.awt.Color;
 import java.util.List;
@@ -93,6 +94,8 @@ public class FinancailStudentView extends javax.swing.JPanel {
                 e.printStackTrace();
             } finally {
                 GlobalDataModel.rootView.setView(this);
+                JoDataTable dataTable = new JoDataTable(pn_Datatable);
+                dataTable.showDataTableAll();
                 loading.close();
             }
         });

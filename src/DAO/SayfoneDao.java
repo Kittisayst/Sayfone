@@ -8,7 +8,6 @@ import Model.SayfoneModel;
 import java.util.List;
 import Tools.JoAlert;
 import Utility.JoPrepared;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -80,6 +79,24 @@ public class SayfoneDao implements SayFoneFn {
             PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sql);
             pre.setString(1, value);
             pre.setInt(2, 2);
+            return pre.executeUpdate();
+        } catch (SQLException e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+            System.out.println(e.getMessage());
+            return 0;
+        } finally {
+            connect.close();
+        }
+    }
+    
+     public int updateParentJob(String value){
+        JoConnect connect = new JoConnect();
+        try {
+            String sql = "UPDATE tb_sayfone SET english=? WHERE id=?";
+            PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sql);
+            pre.setString(1, value);
+            pre.setInt(2, 3);
             return pre.executeUpdate();
         } catch (SQLException e) {
             JoAlert.Error(e, this);

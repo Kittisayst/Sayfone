@@ -21,6 +21,8 @@ import Tools.JoDataTable;
 import Utility.MyPopup;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseListener;
 import java.util.List;
 import javax.swing.ButtonGroup;
 
@@ -423,6 +425,14 @@ public class StudentHistoryView extends javax.swing.JPanel {
         return popupFile;
     }
 
+    public void handelshowJob1(MouseAdapter listener) {
+        txt_fatherJob.addMouseListener(listener);
+    }
+
+    public void handelshowJob2(MouseListener listener) {
+        txt_MotherJob.addMouseListener(listener);
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -608,7 +618,7 @@ public class StudentHistoryView extends javax.swing.JPanel {
         joPanelTitle1.add(txt_fatherAge, gridBagConstraints);
 
         txt_fatherJob.setMinimumSize(new java.awt.Dimension(200, 45));
-        txt_fatherJob.setPlaceholder("ອາຊີບ");
+        txt_fatherJob.setPlaceholder("ສະແດງອາຊີບ ກົດ Double Click ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
@@ -709,7 +719,7 @@ public class StudentHistoryView extends javax.swing.JPanel {
         joPanelTitle1.add(joLable20, gridBagConstraints);
 
         txt_MotherJob.setMinimumSize(new java.awt.Dimension(200, 45));
-        txt_MotherJob.setPlaceholder("ອາຊີບ");
+        txt_MotherJob.setPlaceholder("ສະແດງອາຊີບ ກົດ Double Click ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 7;
