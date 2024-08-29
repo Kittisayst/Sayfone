@@ -39,7 +39,7 @@ public class StudentKnowDAO implements DAO<StudentKnowModel> {
             if (isUpdate == 0) {
                 return create(data);
             } else {
-                return isUpdate; 
+                return isUpdate;
             }
         } catch (Exception e) {
             JoAlert.Error(e, this);
@@ -127,6 +127,27 @@ public class StudentKnowDAO implements DAO<StudentKnowModel> {
     @Override
     public StudentKnowModel getResult(ResultSet rs) throws Exception {
         return new StudentKnowModel(rs.getInt(1), rs.getInt(2), rs.getInt(3));
+    }
+
+    public List<StudentKnowModel> getCount() {
+        List<StudentKnowModel> models = new ArrayList<>();
+        JoConnect connect = new JoConnect();
+        try {
+            String sql = "SELECT KnowIndex, COUNT(*) AS Count\n"
+                    + "FROM tb_studentknow\n"
+                    + "GROUP BY KnowIndex";
+            PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sql);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                models.add(new StudentKnowModel(1, rs.getInt(2), rs.getInt(1)));
+            }
+        } catch (SQLException e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
+        }
+        return models;
     }
 
 }

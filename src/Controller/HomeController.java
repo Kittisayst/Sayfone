@@ -31,6 +31,7 @@ import App.AppWithdraw;
 import App.AppReportPayLateApp;
 import App.AppReportPayLateFoodApp;
 import App.AppReportStudentAddreess;
+import App.AppReportStudentKnow;
 import App.AppStudentNkow;
 import Component.DialogSettingPayment;
 import Model.UserModel;
@@ -121,6 +122,7 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
         view.getBtnReportStudentAddress().addActionListener(this);
         view.getBtnNkow().addActionListener(this);
         view.getBtnjob().addActionListener((e) -> AppParent());
+        view.handelReportStudentKnow((e) -> showReportStudentKnow());
     }
 
     @Override
@@ -294,6 +296,11 @@ public class HomeController implements JoMVC, ActionListener, MouseListener {
 
     private void AppParent() {
         AppParentJob app = new AppParentJob();
+        app.Open();
+    }
+
+    private void showReportStudentKnow() {
+        AppReportStudentKnow app = new AppReportStudentKnow();
         app.Open();
     }
 

@@ -6,6 +6,7 @@ import DAOSevervice.FinancialService;
 import Model.GlobalDataModel;
 import Model.StudentModel;
 import Tools.JoDataTable;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 public class ReportStudentStateView extends javax.swing.JPanel {
@@ -59,10 +60,21 @@ public class ReportStudentStateView extends javax.swing.JPanel {
         return btnSearch;
     }
 
+    public void showYear() {
+        cbYear.showYears();
+    }
+
+    public void handelChart(ActionListener listener) {
+        btnChart.addActionListener(listener);
+    }
+
+    public int getYearID() {
+        return cbYear.getYearID();
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         Pn_Navigation = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -74,9 +86,12 @@ public class ReportStudentStateView extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_data = new Components.JoTable();
         jPanel1 = new javax.swing.JPanel();
+        joLable2 = new Components.JoLable();
+        cbYear = new Component.comboboxYear();
         joLable1 = new Components.JoLable();
         cbState = new Components.JoCombobox();
         btnSearch = new Components.JoButtonIconfont();
+        btnChart = new Components.JoButtonIconfont();
 
         Pn_Navigation.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
         Pn_Navigation.setLayout(new java.awt.GridLayout(1, 0));
@@ -122,28 +137,33 @@ public class ReportStudentStateView extends javax.swing.JPanel {
 
         pn_Datatable.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
-        jPanel1.setLayout(new java.awt.GridBagLayout());
+        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 10, 0));
+
+        joLable2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        joLable2.setText("ສົກຮຽນ");
+        joLable2.setPreferredSize(new java.awt.Dimension(70, 40));
+        jPanel1.add(joLable2);
+
+        cbYear.setPreferredSize(new java.awt.Dimension(120, 40));
+        jPanel1.add(cbYear);
 
         joLable1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         joLable1.setText("ເລືອກສະຖານະ");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 0.1;
-        gridBagConstraints.weighty = 0.1;
-        gridBagConstraints.insets = new java.awt.Insets(2, 5, 2, 5);
-        jPanel1.add(joLable1, gridBagConstraints);
+        joLable1.setPreferredSize(new java.awt.Dimension(70, 40));
+        jPanel1.add(joLable1);
 
         cbState.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ຮຽນຢູ່", "ພັກຮຽນ", "ປະລະການຮຽນ" }));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(2, 5, 2, 5);
-        jPanel1.add(cbState, gridBagConstraints);
+        cbState.setPreferredSize(new java.awt.Dimension(100, 40));
+        jPanel1.add(cbState);
 
-        btnSearch.setText("ສະແດງ");
+        btnSearch.setText("ສະແດງຂໍ້ມູນ");
         btnSearch.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.SEARCH);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.insets = new java.awt.Insets(2, 5, 2, 5);
-        jPanel1.add(btnSearch, gridBagConstraints);
+        jPanel1.add(btnSearch);
+
+        btnChart.setBackground(new java.awt.Color(0, 102, 102));
+        btnChart.setText("ສະແດງຈຳນວນ");
+        btnChart.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.PIE_CHART);
+        jPanel1.add(btnChart);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -160,22 +180,26 @@ public class ReportStudentStateView extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pn_Datatable, javax.swing.GroupLayout.DEFAULT_SIZE, 612, Short.MAX_VALUE))
+                .addComponent(pn_Datatable, javax.swing.GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Pn_Navigation;
+    private Components.JoButtonIconfont btnChart;
     private Components.JoButtonIconfont btnSearch;
     private Components.JoButtonIconfont btn_back;
     private Components.JoCombobox cbState;
+    private Component.comboboxYear cbYear;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private Components.JoLable joLable1;
+    private Components.JoLable joLable2;
     private Components.JoLable lbl_title;
     private javax.swing.JPanel pn_Datatable;
     private Components.JoTable tb_data;

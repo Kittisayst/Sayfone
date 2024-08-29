@@ -6,6 +6,7 @@ import Database.JoConnect;
 import Database.JoSQL;
 import Log.JoLoger;
 import Model.GlobalDataModel;
+import Model.StudentCountModel;
 import Model.StudentDashboradModel;
 import Model.StudentModel;
 import java.util.List;
@@ -19,7 +20,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class StudentDAO implements StudentFn {
-
+    
     private final String TableName = "tb_student";
     private final String SQL_Update = "UPDATE " + TableName + " SET StudentNo=?,Gender=?,StudentName=?,StudentENG=?,NickName=?,"
             + "DateofBirth=?,DateStart=?,DateStop=?,Preschool=?,Health=?,Talent=?,VaccinState=?,Disabled=?,Sibling=?,"
@@ -28,7 +29,7 @@ public class StudentDAO implements StudentFn {
     private final String SQL_UpdateImage = "UPDATE " + TableName + " SET Image=? WHERE StudentID=?";
     private final String SQL_GetNewStudent = "SELECT * FROM tb_student WHERE tb_student.StudentID NOT IN (SELECT tb_registerdetail.StudentID FROM tb_registerdetail)";
     private int totalPages = 0;
-
+    
     @Override
     public int CreaterStudent(StudentModel model) {
         JoConnect connect = new JoConnect();
@@ -73,7 +74,7 @@ public class StudentDAO implements StudentFn {
             connect.close();
         }
     }
-
+    
     @Override
     public int UpdateStudent(StudentModel model) {
         JoConnect connect = new JoConnect();
@@ -113,7 +114,7 @@ public class StudentDAO implements StudentFn {
             connect.close();
         }
     }
-
+    
     @Override
     public int DeleteStudent(StudentModel model) {
         JoConnect connect = new JoConnect();
@@ -137,9 +138,9 @@ public class StudentDAO implements StudentFn {
                 connect.close();
             }
         }
-
+        
     }
-
+    
     @Override
     public List<StudentModel> getAllStudent() {
         List<StudentModel> models = new ArrayList<>();
@@ -163,7 +164,7 @@ public class StudentDAO implements StudentFn {
         }
         return models;
     }
-
+    
     @Override
     public List<StudentModel> getAllStudent(int max) {
         List<StudentModel> models = new ArrayList<>();
@@ -189,7 +190,7 @@ public class StudentDAO implements StudentFn {
         }
         return models;
     }
-
+    
     @Override
     public StudentModel getStudentById(int StudentID) {
         StudentModel model = new StudentModel();
@@ -208,7 +209,7 @@ public class StudentDAO implements StudentFn {
         }
         return model;
     }
-
+    
     @Override
     public int getSudentLastID() {
         int LastID = 0;
@@ -227,7 +228,7 @@ public class StudentDAO implements StudentFn {
         }
         return LastID;
     }
-
+    
     private void UpdateImage(StudentModel model) {
         JoConnect connect = new JoConnect();
         try {
@@ -243,7 +244,7 @@ public class StudentDAO implements StudentFn {
             connect.close();
         }
     }
-
+    
     @Override
     public int getStudentCount() {
         int Count = 0;
@@ -256,7 +257,7 @@ public class StudentDAO implements StudentFn {
             } else {
                 return 0;
             }
-
+            
         } catch (Exception e) {
             JoAlert.Error(e, this);
             JoLoger.saveLog(e, this);
@@ -265,14 +266,14 @@ public class StudentDAO implements StudentFn {
         }
         return Count;
     }
-
+    
     @Override
     public int getCountClass(int ClassID) {
         JoConnect connect = new JoConnect();
         JoSQL sql = new JoSQL(connect.getConnectionDefault(), TableName);
         return sql.getCount();
     }
-
+    
     @Override
     public List<StudentModel> getNewStudent() {
         List<StudentModel> models = new ArrayList<>();
@@ -291,7 +292,7 @@ public class StudentDAO implements StudentFn {
         }
         return models;
     }
-
+    
     @Override
     public List<StudentModel> getSutdentNotRegister(int YearID, int page, int rowsPerPage) {
         List<StudentModel> models = new ArrayList<>();
@@ -320,7 +321,7 @@ public class StudentDAO implements StudentFn {
         }
         return models;
     }
-
+    
     @Override
     public String getAutoStudentID() {
         try {
@@ -335,7 +336,7 @@ public class StudentDAO implements StudentFn {
             return "0000";
         }
     }
-
+    
     @Override
     public boolean getChekStudentNo(String studentNo) {
         JoConnect connect = new JoConnect();
@@ -355,7 +356,7 @@ public class StudentDAO implements StudentFn {
             connect.close();
         }
     }
-
+    
     @Override
     public List<StudentModel> getStudentBrotherSister(int StudentID) {
         List<StudentModel> models = new ArrayList<>();
@@ -379,7 +380,7 @@ public class StudentDAO implements StudentFn {
         }
         return models;
     }
-
+    
     @Override
     public List<StudentModel> getStudentPagination(int page, int rowsPerPage) {
         JoConnect connect = new JoConnect();
@@ -405,7 +406,7 @@ public class StudentDAO implements StudentFn {
         }
         return models;
     }
-
+    
     @Override
     public List<StudentModel> getSearchStudent(String search) {
         JoConnect connect = new JoConnect();
@@ -427,7 +428,7 @@ public class StudentDAO implements StudentFn {
         }
         return models;
     }
-
+    
     public List<StudentDashboradModel> getSearchStudentDashboard(String text) {
 //        System.out.println(text);
         List<StudentDashboradModel> models = new ArrayList<>();
@@ -468,11 +469,11 @@ public class StudentDAO implements StudentFn {
         }
         return models;
     }
-
+    
     private boolean isNumeric(String str) {
         return str != null && str.matches("\\d+"); // Checks if the string contains only digits
     }
-
+    
     @Override
     public List<StudentModel> getSearchSutdentNotRegister(int YearID, String search) {
         JoConnect connect = new JoConnect();
@@ -499,7 +500,7 @@ public class StudentDAO implements StudentFn {
         }
         return models;
     }
-
+    
     private void calculateTotalPages(int rowsPerPage) throws SQLException {
         JoConnect connect = new JoConnect();
         String sql = "SELECT COUNT(*) FROM tb_student";
@@ -512,7 +513,7 @@ public class StudentDAO implements StudentFn {
             connect.close();
         }
     }
-
+    
     private void calculateTotalNotRegisterPages(int YearID, int rowsPerPage) throws SQLException {
         JoConnect connect = new JoConnect();
         String sql = "SELECT COUNT(*)\n"
@@ -529,11 +530,11 @@ public class StudentDAO implements StudentFn {
         }
         connect.close();
     }
-
+    
     public int getTotalPages() {
         return totalPages;
     }
-
+    
     private StudentModel getResult(ResultSet rs) throws SQLException {
         int i = 1;
         StudentModel model = new StudentModel();
@@ -561,7 +562,7 @@ public class StudentDAO implements StudentFn {
         model.setUserCreate(rs.getInt(i++));
         return model;
     }
-
+    
     @Override
     public List<StudentModel> getStudentByState(int State) {
         List<StudentModel> list = new ArrayList<>();
@@ -582,5 +583,40 @@ public class StudentDAO implements StudentFn {
         }
         return list;
     }
-
+    
+    public List<StudentCountModel> getStudentCounts(int YearID) {
+        JoConnect connect = new JoConnect();
+        List<StudentCountModel> models = new ArrayList<>();
+        try {
+            String sql = "SELECT \n"
+                    + "    r.ClassRoomName,\n"
+                    + "    y.Year,\n"
+                    + "    COUNT(DISTINCT s.StudentID) AS StudentCount , r.classID\n"
+                    + "FROM \n"
+                    + "    tb_student s\n"
+                    + "JOIN \n"
+                    + "    tb_financial f ON s.StudentID = f.StudentID\n"
+                    + "JOIN \n"
+                    + "    tb_register r ON f.RegisterID = r.registerID\n"
+                    + "JOIN \n"
+                    + "    tb_year y ON r.yearID = y.yearID\n"
+                    + "WHERE \n"
+                    + "    y.yearID=? AND s.Status=0\n"
+                    + "GROUP BY \n"
+                    + "    r.ClassRoomName, y.Year ORDER BY r.classID ASC";
+            PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sql);
+            pre.setInt(1, YearID);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                models.add(new StudentCountModel(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getInt(4)));
+            }
+        } catch (SQLException e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+        } finally {
+            connect.close();
+        }
+        return models;
+    }
+    
 }

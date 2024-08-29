@@ -41,4 +41,8 @@ public class StudentKnowService {
         return dAO.getKnowList();
     }
 
+    public List<StudentKnowModel> getCount() {
+        return dAO.getCount();
+    }
+
 }

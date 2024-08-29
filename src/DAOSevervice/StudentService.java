@@ -1,6 +1,7 @@
 package DAOSevervice;
 
 import DAO.StudentDAO;
+import Model.StudentCountModel;
 import Model.StudentDashboradModel;
 import Model.StudentModel;
 import java.util.List;
@@ -79,6 +80,10 @@ public class StudentService {
 
     public List<StudentModel> getStudentByState(int State) {
         return aO.getStudentByState(State);
+    }
+
+    public List<StudentCountModel> getStudentCounts(int YearID) {
+        return aO.getStudentCounts(YearID);
     }
 
 }

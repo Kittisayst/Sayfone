@@ -177,6 +177,7 @@ public class ReportPayLateController implements JoMVC, ActionListener, ItemListe
                 String[] columns = {
                     "ລຳດັບ",
                     "ຫ້ອງຮຽນ",
+                    "ລະຫັດນັກຮຽນ",
                     "ຊື່ ແລະ ນາມສະກຸນນັກຮຽນ",
                     "ຄ້າງເດືອນ",};
                 JoSheet sheet = new JoSheet(csvFile, view.getExportName(), columns);
@@ -186,6 +187,7 @@ public class ReportPayLateController implements JoMVC, ActionListener, ItemListe
                     sheet.addRow(row++,
                             row - 1,
                             view.getClassName(),
+                            studentModel.getStudentNo(),
                             studentModel.getFullName(),
                             data.getFinancialMonth()
                     );
