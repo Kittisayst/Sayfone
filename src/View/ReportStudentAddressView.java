@@ -5,8 +5,10 @@ import Component.BarChart;
 import Components.JoButtonIconfont;
 import Components.JoCheckBox;
 import Components.JoTabbed;
+import Model.CountVillageModel;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.util.List;
 
 public class ReportStudentAddressView extends javax.swing.JPanel {
 
@@ -62,6 +64,20 @@ public class ReportStudentAddressView extends javax.swing.JPanel {
         pnParent2.removeAll();
         pnParent1.revalidate();
         pnParent2.add(pieChartUI, BorderLayout.CENTER);
+    }
+
+    public void showTableVillageCurrent(List<CountVillageModel> models) {
+        tb_VillageCurrent.JoClearModel();
+        for (CountVillageModel model : models) {
+            tb_VillageCurrent.AddJoModel(new Object[]{tb_VillageCurrent.autoNumber(), model.getProvinceName(), model.getDistrictName(), model.getVillageName(), model.getCount()});
+        }
+    }
+
+    public void showTableVillageNow(List<CountVillageModel> models) {
+        tb_Village.JoClearModel();
+        for (CountVillageModel model : models) {
+            tb_Village.AddJoModel(new Object[]{tb_Village.autoNumber(), model.getProvinceName(), model.getDistrictName(), model.getVillageName(), model.getCount()});
+        }
     }
 
     public JoButtonIconfont getBtn_back() {
@@ -122,6 +138,14 @@ public class ReportStudentAddressView extends javax.swing.JPanel {
         btnPiechart2 = new Components.JoButtonIconfont();
         btnBarchart2 = new Components.JoButtonIconfont();
         pnParent2 = new javax.swing.JPanel();
+        jPanel8 = new javax.swing.JPanel();
+        jPanel13 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tb_VillageCurrent = new Components.JoTable();
+        jPanel11 = new javax.swing.JPanel();
+        jPanel15 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tb_Village = new Components.JoTable();
 
         Pn_Navigation.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
         Pn_Navigation.setLayout(new java.awt.GridLayout(1, 0));
@@ -217,6 +241,80 @@ public class ReportStudentAddressView extends javax.swing.JPanel {
 
         Tabab.addTab("ສະຖານທີ່ເກີດ", jPanel7);
 
+        jPanel13.setLayout(new java.awt.BorderLayout());
+
+        tb_VillageCurrent.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "#", "ແຂວງ", "ເມືອງ", "ບ້ານ", "ຈຳນວນ"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, true, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(tb_VillageCurrent);
+
+        jPanel13.add(jScrollPane3, java.awt.BorderLayout.CENTER);
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, 1035, Short.MAX_VALUE)
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, 604, Short.MAX_VALUE))
+        );
+
+        Tabab.addTab("ບ້ານເກີດປະຈຸບັນ", jPanel8);
+
+        jPanel15.setLayout(new java.awt.BorderLayout());
+
+        tb_Village.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "#", "ແຂວງ", "ເມືອງ", "ບ້ານ", "ຈຳນວນ"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, true, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tb_Village);
+
+        jPanel15.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, 1035, Short.MAX_VALUE)
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, 604, Short.MAX_VALUE))
+        );
+
+        Tabab.addTab("ບ້ານເກີດ", jPanel11);
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 0.1;
@@ -254,15 +352,23 @@ public class ReportStudentAddressView extends javax.swing.JPanel {
     private Components.JoCheckBox ckProvince2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane3;
     private Components.JoLable lbl_title;
     private javax.swing.JPanel pnParent1;
     private javax.swing.JPanel pnParent2;
+    private Components.JoTable tb_Village;
+    private Components.JoTable tb_VillageCurrent;
     // End of variables declaration//GEN-END:variables
 }

@@ -33,6 +33,8 @@ public class ReportStudentAddressController implements JoMVC, ActionListener {
         view.updateButtonStateSwitchParent2();
         showPieChartAddress1();
         showPieChartAddress2();
+        showVillageCountCurrent();
+        showVillageCountNow();
     }
 
     @Override
@@ -167,6 +169,16 @@ public class ReportStudentAddressController implements JoMVC, ActionListener {
             }
         }
         return chartUI;
+    }
+
+    private void showVillageCountCurrent() {
+        StudentAddressService service = new StudentAddressService();
+        view.showTableVillageCurrent(service.getCountVillageCurrent());
+    }
+
+    private void showVillageCountNow() {
+        StudentAddressService service = new StudentAddressService();
+        view.showTableVillageNow(service.getCountVillageNow());
     }
 
 }

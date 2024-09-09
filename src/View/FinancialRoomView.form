@@ -166,7 +166,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="Component.comboboxYear" name="cbYear">
+        <Component class="Component.ComboboxYear" name="cbYear">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
               <GridBagConstraints gridX="2" gridY="0" gridWidth="1" gridHeight="1" fill="3" ipadX="0" ipadY="0" insetsTop="5" insetsLeft="0" insetsBottom="5" insetsRight="0" anchor="10" weightX="0.0" weightY="0.0"/>
@@ -405,7 +405,7 @@
           </StatementProvider>
           <Parameters>
             <CodeExpression id="16_cbYear">
-              <CodeVariable name="cbYear" type="8194" declaredType="Component.comboboxYear"/>
+              <CodeVariable name="cbYear" type="8194" declaredType="Component.ComboboxYear"/>
               <ExpressionOrigin>
                 <ExpressionProvider type="ComponentRef">
                   <ComponentRef name="cbYear"/>

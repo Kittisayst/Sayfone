@@ -2,6 +2,7 @@ package DAOSevervice;
 
 import DAO.StudentAddressDAO;
 import Model.ChartStudentAddree;
+import Model.CountVillageModel;
 import Model.StudentAddressModel;
 import java.util.List;
 
@@ -36,5 +37,15 @@ public class StudentAddressService {
     public List<ChartStudentAddree> getChartStudentProvince(boolean isDistrictNow) {
         return aO.getChartStudentProvince(isDistrictNow);
     }
+
+    public List<CountVillageModel> getCountVillageCurrent() {
+        return aO.getCountVillageCurrent();
+    }
+
+    public List<CountVillageModel> getCountVillageNow() {
+        return aO.getCountVillageNow();
+    }
+    
+    
 
 }

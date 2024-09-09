@@ -568,3 +568,4 @@ WHERE RegisterID=1 AND StudentID = 885' at line 3
 20/08/2024: DAO.StudentKnowDAO@47059247 Errorjava.sql.SQLException: Parameter index out of bounds. 3 is not between valid values of 1 and 2
 28/08/2024: DAO.StudentDAO@772ec7ef Errorjava.sql.SQLException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'DESCGROUP BY 
     r.ClassRoomName, y.Year' at line 15
+08/09/2024: DAO.StudentAddressDAO@4e380c96 Errorjava.sql.SQLException: Column Index out of range, 4 > 3. 

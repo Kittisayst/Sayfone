@@ -87,7 +87,7 @@ public class ReportStudentStateView extends javax.swing.JPanel {
         tb_data = new Components.JoTable();
         jPanel1 = new javax.swing.JPanel();
         joLable2 = new Components.JoLable();
-        cbYear = new Component.comboboxYear();
+        cbYear = new Component.ComboboxYear();
         joLable1 = new Components.JoLable();
         cbState = new Components.JoCombobox();
         btnSearch = new Components.JoButtonIconfont();
@@ -192,7 +192,7 @@ public class ReportStudentStateView extends javax.swing.JPanel {
     private Components.JoButtonIconfont btnSearch;
     private Components.JoButtonIconfont btn_back;
     private Components.JoCombobox cbState;
-    private Component.comboboxYear cbYear;
+    private Component.ComboboxYear cbYear;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;

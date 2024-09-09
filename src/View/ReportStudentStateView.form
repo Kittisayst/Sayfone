@@ -177,7 +177,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="Component.comboboxYear" name="cbYear">
+        <Component class="Component.ComboboxYear" name="cbYear">
           <Properties>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[120, 40]"/>
