@@ -80,7 +80,7 @@ public class FinancialRoomView extends javax.swing.JPanel {
         tb_data = new Components.JoTable();
         jPanel1 = new javax.swing.JPanel();
         joLable1 = new Components.JoLable();
-        cbYear = new Component.ComboboxYear();
+        cbYear = new Component.ComboboxYears();
         btnSearch = new Components.JoButtonIconfont();
 
         Pn_Navigation.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
@@ -180,7 +180,7 @@ public class FinancialRoomView extends javax.swing.JPanel {
     private javax.swing.JPanel Pn_Navigation;
     private Components.JoButtonIconfont btnSearch;
     private Components.JoButtonIconfont btn_back;
-    private Component.ComboboxYear cbYear;
+    private Component.ComboboxYears cbYear;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;

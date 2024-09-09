@@ -101,7 +101,7 @@ public class DasboardView extends javax.swing.JPanel {
         pnClassRoom = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        comboboxYear1 = new Component.ComboboxYear();
+        comboboxYear1 = new Component.ComboboxYears();
         txtSearch = new Components.JoTextField();
         btnSearch = new Components.JoButtonIconfont();
         pnChart = new javax.swing.JPanel();
@@ -336,7 +336,7 @@ public class DasboardView extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Components.JoButtonIconfont btnSearch;
-    private Component.ComboboxYear comboboxYear1;
+    private Component.ComboboxYears comboboxYear1;
     private Component.JoDashboardItem ds_ClassRoom;
     private Component.JoDashboardItem ds_Financail;
     private Component.JoDashboardItem ds_Student;
