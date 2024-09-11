@@ -217,6 +217,12 @@ public class HomeView extends javax.swing.JFrame {
         return btnReportStudentAddress;
     }
 
+    public JoButtonIconfont getBtnReportStudentKnow() {
+        return btnReportStudentKnow;
+    }
+    
+    
+
     public JoButtonIconfont getBtnNkow() {
         return btnNkow;
     }

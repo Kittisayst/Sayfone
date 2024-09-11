@@ -38,6 +38,17 @@ public class AppPermissionRole {
         view.getBtnReportTeacherMoney().setVisible(isState(23));
         view.getBtnBackup().setVisible(isState(24));
         view.getBtnTiming().setVisible(isState(25));
+        view.getBtnNkow().setVisible(isState(26));
+        view.getBtnReportStudentKnow().setVisible(isState(27));
+        view.getBtnjob().setVisible(isState(28));
+        view.getBtnReportParentJob().setVisible(isState(29));
+        view.getBtnReportStudentAddress().setVisible(isState(30));
+        view.getBtnDocument().setVisible(isState(31));
+        view.getBtnPaymentSetting().setVisible(isState(32));
+        view.getBtnReportPayment().setVisible(isState(33));
+        view.getBtnReportUserClassMoney().setVisible(isState(34));
+        view.getBtnPayRateFood().setVisible(isState(35));
+        view.getBtnReportStudentState().setVisible(isState(36));
     }
 
     private boolean isState(int type) {

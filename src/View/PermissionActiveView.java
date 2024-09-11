@@ -92,6 +92,17 @@ public class PermissionActiveView extends javax.swing.JPanel {
         joCheckBox23 = new Components.JoCheckBox();
         joCheckBox24 = new Components.JoCheckBox();
         joCheckBox25 = new Components.JoCheckBox();
+        joCheckBox26 = new Components.JoCheckBox();
+        joCheckBox27 = new Components.JoCheckBox();
+        joCheckBox28 = new Components.JoCheckBox();
+        joCheckBox29 = new Components.JoCheckBox();
+        joCheckBox30 = new Components.JoCheckBox();
+        joCheckBox31 = new Components.JoCheckBox();
+        joCheckBox32 = new Components.JoCheckBox();
+        joCheckBox33 = new Components.JoCheckBox();
+        joCheckBox34 = new Components.JoCheckBox();
+        joCheckBox35 = new Components.JoCheckBox();
+        joCheckBox36 = new Components.JoCheckBox();
 
         Pn_Navigation.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
         Pn_Navigation.setLayout(new java.awt.GridLayout(1, 0));
@@ -125,202 +136,202 @@ public class PermissionActiveView extends javax.swing.JPanel {
         pnLayout.setMaximumSize(new java.awt.Dimension(500, 500));
         pnLayout.setLayout(new java.awt.GridBagLayout());
 
-        joCheckBox1.setText("1. ຈັດການຂໍ້ມູນອາຈານ");
+        joCheckBox1.setText("ຈັດການຂໍ້ມູນຄູ");
         joCheckBox1.setName("1"); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        gridBagConstraints.insets = new java.awt.Insets(5, 82, 5, 0);
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
         pnLayout.add(joCheckBox1, gridBagConstraints);
 
-        joCheckBox3.setText("2. ຈັດການຂໍ້ມູນນັກຮຽນ");
+        joCheckBox3.setText("ຈັດການຂໍ້ມູນນັກຮຽນ");
         joCheckBox3.setName("2"); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        gridBagConstraints.insets = new java.awt.Insets(5, 82, 5, 0);
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
         pnLayout.add(joCheckBox3, gridBagConstraints);
 
-        joCheckBox4.setText("4. ຈັດການວິຊາ-ຄຸສອນ");
+        joCheckBox4.setText("ຈັດການວິຊາ-ຄຸສອນ");
         joCheckBox4.setName("4"); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        gridBagConstraints.insets = new java.awt.Insets(5, 82, 5, 0);
-        pnLayout.add(joCheckBox4, gridBagConstraints);
-
-        joCheckBox5.setText("3. ຈັດການລາຍວິຊາ");
-        joCheckBox5.setName("3"); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        gridBagConstraints.insets = new java.awt.Insets(5, 82, 5, 0);
-        pnLayout.add(joCheckBox5, gridBagConstraints);
-
-        joCheckBox6.setText("5. ຂໍ້ມູນຂະແໜງ");
-        joCheckBox6.setName("5"); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        gridBagConstraints.insets = new java.awt.Insets(5, 82, 5, 0);
-        pnLayout.add(joCheckBox6, gridBagConstraints);
-
-        joCheckBox7.setText("6. ຈັດການຂໍ້ມູນຜູ້ໃຊ້ງານ");
-        joCheckBox7.setName("6"); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        gridBagConstraints.insets = new java.awt.Insets(5, 82, 5, 0);
-        pnLayout.add(joCheckBox7, gridBagConstraints);
-
-        joCheckBox8.setText("8. ເປີດການລົງທະບຽນຮຽນ");
-        joCheckBox8.setName("8"); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        gridBagConstraints.insets = new java.awt.Insets(5, 82, 5, 0);
-        pnLayout.add(joCheckBox8, gridBagConstraints);
-
-        joCheckBox9.setText("7. ຈັດການຂໍ້ມູນສິດທິ");
-        joCheckBox9.setName("7"); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        gridBagConstraints.insets = new java.awt.Insets(5, 82, 5, 0);
-        pnLayout.add(joCheckBox9, gridBagConstraints);
-
-        joCheckBox10.setText("9. ຈ່າຍຄ່າຮຽນ");
-        joCheckBox10.setName("9"); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 9;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        gridBagConstraints.insets = new java.awt.Insets(5, 82, 5, 0);
-        pnLayout.add(joCheckBox10, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        pnLayout.add(joCheckBox4, gridBagConstraints);
 
-        joCheckBox11.setText("10. ຈັດອັນດັບຄູ");
-        joCheckBox11.setName("10"); // NOI18N
+        joCheckBox5.setText("ຈັດການລາຍວິຊາ");
+        joCheckBox5.setName("3"); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 10;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        gridBagConstraints.insets = new java.awt.Insets(5, 82, 5, 0);
-        pnLayout.add(joCheckBox11, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        pnLayout.add(joCheckBox5, gridBagConstraints);
 
-        joCheckBox12.setText("11. ບັນທຶກການຂາດຮຽນ");
-        joCheckBox12.setName("11"); // NOI18N
+        joCheckBox6.setText("ຂໍ້ມູນຂະແໜງ");
+        joCheckBox6.setName("5"); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 11;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        gridBagConstraints.insets = new java.awt.Insets(5, 82, 5, 0);
-        pnLayout.add(joCheckBox12, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        pnLayout.add(joCheckBox6, gridBagConstraints);
 
-        joCheckBox2.setText("12. ລາຍງານການຈ່າຍຄ່າຮຽນ");
-        joCheckBox2.setName("12"); // NOI18N
+        joCheckBox7.setText("ຈັດການຂໍ້ມູນຜູ້ໃຊ້ງານ");
+        joCheckBox7.setName("6"); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        pnLayout.add(joCheckBox7, gridBagConstraints);
+
+        joCheckBox8.setText("ເປີດການລົງທະບຽນຮຽນ");
+        joCheckBox8.setName("8"); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        gridBagConstraints.insets = new java.awt.Insets(5, 100, 5, 82);
-        pnLayout.add(joCheckBox2, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(5, 15, 5, 15);
+        pnLayout.add(joCheckBox8, gridBagConstraints);
 
-        joCheckBox13.setText("13. ລາຍງານການຈ່າຍຄ່າຮຽນຕາມຜູ້ໃຊ່ງານ");
-        joCheckBox13.setName("13"); // NOI18N
+        joCheckBox9.setText("ຈັດການຂໍ້ມູນສິດທິ");
+        joCheckBox9.setName("7"); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        pnLayout.add(joCheckBox9, gridBagConstraints);
+
+        joCheckBox10.setText("ຈ່າຍຄ່າຮຽນ");
+        joCheckBox10.setName("9"); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        gridBagConstraints.insets = new java.awt.Insets(5, 100, 5, 82);
-        pnLayout.add(joCheckBox13, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(5, 15, 5, 15);
+        pnLayout.add(joCheckBox10, gridBagConstraints);
 
-        joCheckBox15.setText("14. ລາຍງານຜູ້ຄ້າງຄ່າຮຽນ");
-        joCheckBox15.setName("14"); // NOI18N
+        joCheckBox11.setText("ຈັດອັນດັບຄູ");
+        joCheckBox11.setName("10"); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        gridBagConstraints.insets = new java.awt.Insets(5, 100, 5, 82);
-        pnLayout.add(joCheckBox15, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(5, 15, 5, 15);
+        pnLayout.add(joCheckBox11, gridBagConstraints);
 
-        joCheckBox14.setText("15. ລາຍງານຄ່າອາຫານ");
-        joCheckBox14.setName("15"); // NOI18N
+        joCheckBox12.setText("ບັນທຶກການຂາດຮຽນ");
+        joCheckBox12.setName("11"); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        gridBagConstraints.insets = new java.awt.Insets(5, 100, 5, 82);
-        pnLayout.add(joCheckBox14, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(5, 15, 5, 15);
+        pnLayout.add(joCheckBox12, gridBagConstraints);
 
-        joCheckBox16.setText("16. ລາຍງານສ່ວນຫຼຸດ");
-        joCheckBox16.setName("16"); // NOI18N
+        joCheckBox2.setText("ລາຍງານການຈ່າຍຄ່າຮຽນ");
+        joCheckBox2.setName("12"); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        gridBagConstraints.insets = new java.awt.Insets(5, 100, 5, 82);
-        pnLayout.add(joCheckBox16, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(5, 15, 5, 15);
+        pnLayout.add(joCheckBox2, gridBagConstraints);
 
-        joCheckBox18.setText("17. ລາຍງານການຖອນເງິນຄືນ");
-        joCheckBox18.setName("17"); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        gridBagConstraints.insets = new java.awt.Insets(5, 100, 5, 82);
-        pnLayout.add(joCheckBox18, gridBagConstraints);
-
-        joCheckBox17.setText("18. ລາຍງານສະຖິຕິຄູ");
-        joCheckBox17.setName("18"); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        gridBagConstraints.insets = new java.awt.Insets(5, 100, 5, 82);
-        pnLayout.add(joCheckBox17, gridBagConstraints);
-
-        joCheckBox19.setText("20. ຂໍ້ມູນໂຮງຮຽນສາຍຝົນ");
-        joCheckBox19.setName("20"); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 9;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        gridBagConstraints.insets = new java.awt.Insets(5, 100, 5, 82);
-        pnLayout.add(joCheckBox19, gridBagConstraints);
-
-        joCheckBox20.setText("19. ລາຍງານຂໍ້ມູນນັກຮຽນ");
-        joCheckBox20.setName("19"); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        gridBagConstraints.insets = new java.awt.Insets(5, 100, 5, 82);
-        pnLayout.add(joCheckBox20, gridBagConstraints);
-
-        joCheckBox21.setText("21. ຂໍ້ມູນປີ້ນເຕີ");
-        joCheckBox21.setName("21"); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 10;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        gridBagConstraints.insets = new java.awt.Insets(5, 100, 5, 82);
-        pnLayout.add(joCheckBox21, gridBagConstraints);
-
-        joCheckBox22.setText("25. ເວລາເປີດປິດການຈ່າຍເງິນ");
-        joCheckBox22.setName("25"); // NOI18N
+        joCheckBox13.setText("ລາຍງານການຈ່າຍຄ່າຮຽນຕາມຜູ້ໃຊ່ງານ");
+        joCheckBox13.setName("13"); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 82);
+        gridBagConstraints.insets = new java.awt.Insets(5, 15, 5, 15);
+        pnLayout.add(joCheckBox13, gridBagConstraints);
+
+        joCheckBox15.setText("ລາຍງານຜູ້ຄ້າງຄ່າຮຽນ");
+        joCheckBox15.setName("14"); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 15, 5, 15);
+        pnLayout.add(joCheckBox15, gridBagConstraints);
+
+        joCheckBox14.setText("ລາຍງານຄ່າອາຫານ");
+        joCheckBox14.setName("15"); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 15, 5, 15);
+        pnLayout.add(joCheckBox14, gridBagConstraints);
+
+        joCheckBox16.setText("ລາຍງານສ່ວນຫຼຸດ");
+        joCheckBox16.setName("16"); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 15, 5, 15);
+        pnLayout.add(joCheckBox16, gridBagConstraints);
+
+        joCheckBox18.setText("ລາຍງານການຖອນເງິນຄືນ");
+        joCheckBox18.setName("17"); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 15, 5, 15);
+        pnLayout.add(joCheckBox18, gridBagConstraints);
+
+        joCheckBox17.setText("ລາຍງານສະຖິຕິຄູ");
+        joCheckBox17.setName("18"); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 15, 5, 15);
+        pnLayout.add(joCheckBox17, gridBagConstraints);
+
+        joCheckBox19.setText("ຂໍ້ມູນໂຮງຮຽນສາຍຝົນ");
+        joCheckBox19.setName("20"); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        pnLayout.add(joCheckBox19, gridBagConstraints);
+
+        joCheckBox20.setText("ລາຍງານຂໍ້ມູນນັກຮຽນ");
+        joCheckBox20.setName("19"); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 15, 5, 15);
+        pnLayout.add(joCheckBox20, gridBagConstraints);
+
+        joCheckBox21.setText("ຂໍ້ມູນປີ້ນເຕີ");
+        joCheckBox21.setName("21"); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        pnLayout.add(joCheckBox21, gridBagConstraints);
+
+        joCheckBox22.setText("ເວລາເປີດປິດການຈ່າຍເງິນ");
+        joCheckBox22.setName("25"); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
         pnLayout.add(joCheckBox22, gridBagConstraints);
 
         lblPermission.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -329,15 +340,14 @@ public class PermissionActiveView extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridwidth = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
         gridBagConstraints.insets = new java.awt.Insets(30, 0, 30, 0);
         pnLayout.add(lblPermission, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 12;
-        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 13;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weighty = 0.1;
         pnLayout.add(jLabel1, gridBagConstraints);
@@ -359,7 +369,7 @@ public class PermissionActiveView extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
         gridBagConstraints.weighty = 0.1;
-        gridBagConstraints.insets = new java.awt.Insets(7, 0, 7, 0);
+        gridBagConstraints.insets = new java.awt.Insets(7, 5, 7, 0);
         jPanel1.add(btnSelectAll, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
@@ -382,7 +392,7 @@ public class PermissionActiveView extends javax.swing.JPanel {
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
-        gridBagConstraints.insets = new java.awt.Insets(7, 50, 7, 0);
+        gridBagConstraints.insets = new java.awt.Insets(7, 50, 7, 5);
         jPanel1.add(btnCreate, gridBagConstraints);
 
         joLable1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -414,39 +424,138 @@ public class PermissionActiveView extends javax.swing.JPanel {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 13;
-        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridy = 14;
+        gridBagConstraints.gridwidth = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(15, 0, 30, 0);
         pnLayout.add(jPanel1, gridBagConstraints);
 
-        joCheckBox23.setText("22. ຜູ້ອານຸມັດ");
+        joCheckBox23.setText("ຜູ້ອານຸມັດ");
         joCheckBox23.setName("22"); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 11;
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        gridBagConstraints.insets = new java.awt.Insets(5, 100, 5, 82);
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
         pnLayout.add(joCheckBox23, gridBagConstraints);
 
-        joCheckBox24.setText("23. ລາຍງານການເງິນຄູ");
+        joCheckBox24.setText("ລາຍງານການເງິນຄູ");
         joCheckBox24.setName("23"); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 11;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 82);
+        gridBagConstraints.insets = new java.awt.Insets(5, 15, 5, 15);
         pnLayout.add(joCheckBox24, gridBagConstraints);
 
-        joCheckBox25.setText("24. ສຳຮອງຂໍ້ມູນ");
+        joCheckBox25.setText("ສຳຮອງຂໍ້ມູນ");
         joCheckBox25.setName("24"); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        pnLayout.add(joCheckBox25, gridBagConstraints);
+
+        joCheckBox26.setText("ຈັດການຂໍ້ມູນຮູ້ຈັກໂຮງຮຽນ");
+        joCheckBox26.setName("26"); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        pnLayout.add(joCheckBox26, gridBagConstraints);
+
+        joCheckBox27.setText("ລາຍງານຂໍ້ມູນຮູ້ຈັກໂຮງຮຽນ");
+        joCheckBox27.setName("27"); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        pnLayout.add(joCheckBox27, gridBagConstraints);
+
+        joCheckBox28.setText("ຈັດການຂໍ້ມູນອາຊີບຜູ້ປົກຄອງ");
+        joCheckBox28.setName("28"); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        pnLayout.add(joCheckBox28, gridBagConstraints);
+
+        joCheckBox29.setText("ລາຍງານຂໍ້ມູນອາຊີບຜູ້ປົກຄອງ");
+        joCheckBox29.setName("29"); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        pnLayout.add(joCheckBox29, gridBagConstraints);
+
+        joCheckBox30.setText("ລາຍງານທີ່ຢູ່ນັກຮຽນ");
+        joCheckBox30.setName("30"); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        pnLayout.add(joCheckBox30, gridBagConstraints);
+
+        joCheckBox31.setText("ເອກະສານໂຮງຮຽນ");
+        joCheckBox31.setName("31"); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 15, 5, 15);
+        pnLayout.add(joCheckBox31, gridBagConstraints);
+
+        joCheckBox32.setText("ຕັ້ງຄ່າການຈ່າຍຄ່າຮຽນ");
+        joCheckBox32.setName("32"); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        pnLayout.add(joCheckBox32, gridBagConstraints);
+
+        joCheckBox33.setText("ລາຍງານຈ່າຍຄ່າຮຽນປະຈຳເດືອນ");
+        joCheckBox33.setName("33"); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 82);
-        pnLayout.add(joCheckBox25, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(5, 15, 5, 15);
+        pnLayout.add(joCheckBox33, gridBagConstraints);
+
+        joCheckBox34.setText("ລາຍງານຈ່າຍຄ່າຮຽນຕາມຫ້ອງຮຽນ");
+        joCheckBox34.setName("34"); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 15, 5, 15);
+        pnLayout.add(joCheckBox34, gridBagConstraints);
+
+        joCheckBox35.setText("ລາຍງານຜູ້ຄ້າງຄ່າອາຫານ");
+        joCheckBox35.setName("35"); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 15, 5, 15);
+        pnLayout.add(joCheckBox35, gridBagConstraints);
+
+        joCheckBox36.setText("ລາຍງານຂໍ້ມູນນັກຮຽນທັງໝົດ");
+        joCheckBox36.setName("36"); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        pnLayout.add(joCheckBox36, gridBagConstraints);
 
         pn_Datatable.add(pnLayout, java.awt.BorderLayout.CENTER);
 
@@ -455,14 +564,14 @@ public class PermissionActiveView extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(Pn_Navigation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pn_Datatable, javax.swing.GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE)
+            .addComponent(pn_Datatable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(Pn_Navigation, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pn_Datatable, javax.swing.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE))
+                .addComponent(pn_Datatable, javax.swing.GroupLayout.DEFAULT_SIZE, 655, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -544,7 +653,18 @@ public class PermissionActiveView extends javax.swing.JPanel {
     private Components.JoCheckBox joCheckBox23;
     private Components.JoCheckBox joCheckBox24;
     private Components.JoCheckBox joCheckBox25;
+    private Components.JoCheckBox joCheckBox26;
+    private Components.JoCheckBox joCheckBox27;
+    private Components.JoCheckBox joCheckBox28;
+    private Components.JoCheckBox joCheckBox29;
     private Components.JoCheckBox joCheckBox3;
+    private Components.JoCheckBox joCheckBox30;
+    private Components.JoCheckBox joCheckBox31;
+    private Components.JoCheckBox joCheckBox32;
+    private Components.JoCheckBox joCheckBox33;
+    private Components.JoCheckBox joCheckBox34;
+    private Components.JoCheckBox joCheckBox35;
+    private Components.JoCheckBox joCheckBox36;
     private Components.JoCheckBox joCheckBox4;
     private Components.JoCheckBox joCheckBox5;
     private Components.JoCheckBox joCheckBox6;

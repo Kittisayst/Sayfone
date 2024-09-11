@@ -1,10 +1,12 @@
 package Controller;
 
 import App.AppDocument;
+import Component.AuthenPopUp;
 import Component.DialogDocument;
 import DAOSevervice.DocumentService;
 import Model.DocumentModel;
 import Model.GlobalDataModel;
+import Model.UserModel;
 import Tools.JoAlert;
 import Tools.JoHookEvent;
 import Utility.ActionCellEvent;
@@ -69,8 +71,13 @@ public class DocumentController implements JoMVC, ActionListener {
             DocumentService service = new DocumentService();
             JoAlert alert = new JoAlert();
             if (alert.JoSubmitDelete()) {
-                service.delete(view.getDucumentID());
-                new AppDocument().Open();
+                AuthenPopUp auth = new AuthenPopUp(GlobalDataModel.rootView, true);
+                auth.setVisible(true);
+                UserModel model = auth.getUserModel();
+                if (model.getUserID() != 0) {
+                    service.delete(view.getDucumentID());
+                    new AppDocument().Open();
+                }
             }
         };
 

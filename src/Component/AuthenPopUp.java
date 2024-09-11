@@ -3,7 +3,6 @@ package Component;
 import Components.JoPasswordField;
 import DAOSevervice.PermissionService;
 import DAOSevervice.UserService;
-import Model.GlobalDataModel;
 import Model.PermissionModel;
 import Model.UserModel;
 import Tools.JoAlert;
