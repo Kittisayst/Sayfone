@@ -5,6 +5,7 @@ import DAOSevervice.DocumentService;
 import Database.JoProperties;
 import Model.DocumentModel;
 import Model.GlobalDataModel;
+import Model.UserModel;
 import Tools.JoAlert;
 import Tools.JoFilechooser;
 import Utility.MyFormat;
@@ -307,22 +308,27 @@ public class DialogDocument extends javax.swing.JDialog {
                     LineFileColor(JoTheme.Danger);
                 }
             } else {
-                boolean isSameDoc = documentModel.getFilePath().equals(Docpath);
-                boolean isSameImage = documentModel.getImagePath().equals(ImagePath);
-                documentModel.setTitle(txtTitle.getText());
-                if (!isSameDoc) {
-                    documentModel.setFilePath(fileDoc.getSelectedFile() == null ? "" : fileDoc.getSelectedFile().getName());
+                AuthenPopUp auth = new AuthenPopUp(GlobalDataModel.rootView, true);
+                auth.setVisible(true);
+                UserModel userModel = auth.getUserModel();
+                if (userModel.getUserID() != 0) {
+                    boolean isSameDoc = documentModel.getFilePath().equals(Docpath);
+                    boolean isSameImage = documentModel.getImagePath().equals(ImagePath);
+                    documentModel.setTitle(txtTitle.getText());
+                    if (!isSameDoc) {
+                        documentModel.setFilePath(fileDoc.getSelectedFile() == null ? "" : fileDoc.getSelectedFile().getName());
+                    }
+                    if (!isSameImage) {
+                        documentModel.setImagePath(fileImage.getSelectedFile() == null ? "" : fileImage.getSelectedFile().getName());
+                    }
+                    documentModel.setFileName(fileDoc.getSelectedFile() == null ? "" : txtPath.getText());
+                    documentModel.setComment(txtComment.getText());
+                    documentModel.setUploadDate(new MyFormat().getSQLDate(new Date()));
+                    documentModel.setUserID(GlobalDataModel.userModel.getUserID());
+                    alert.JoSubmit(service.update(documentModel), JoAlert.UPDATE);
+                    new AppDocument().Open();
+                    this.dispose();
                 }
-                if (!isSameImage) {
-                    documentModel.setImagePath(fileImage.getSelectedFile() == null ? "" : fileImage.getSelectedFile().getName());
-                }
-                documentModel.setFileName(fileDoc.getSelectedFile() == null ? "" : txtPath.getText());
-                documentModel.setComment(txtComment.getText());
-                documentModel.setUploadDate(new MyFormat().getSQLDate(new Date()));
-                documentModel.setUserID(GlobalDataModel.userModel.getUserID());
-                alert.JoSubmit(service.update(documentModel), JoAlert.UPDATE);
-                new AppDocument().Open();
-                this.dispose();
             }
         }
     }//GEN-LAST:event_btnSaveActionPerformed
