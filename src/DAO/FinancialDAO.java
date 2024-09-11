@@ -378,10 +378,19 @@ public class FinancialDAO implements FinancialFn {
         PreparedStatement pre;
         ResultSet rs;
         try {
-            String sql = "SELECT MAX(FinancialID) AS MaxFinancialID,fn.RegisterID,rs.classID,className FROM tb_financial AS fn\n"
-                    + "INNER JOIN tb_register AS rs ON fn.RegisterID=rs.registerID\n"
-                    + "INNER JOIN tb_class AS cs ON rs.classID = cs.classID\n"
-                    + "WHERE StudentID =?";
+            String sql = "SELECT \n"
+                    + "    r.ClassRoomName,\n"
+                    + "    c.className\n"
+                    + "FROM \n"
+                    + "    tb_student s\n"
+                    + "JOIN \n"
+                    + "    tb_financial f ON s.StudentID = f.StudentID\n"
+                    + "JOIN \n"
+                    + "    tb_register r ON f.RegisterID = r.registerID\n"
+                    + "JOIN tb_class AS c ON r.classID = c.classID\n"
+                    + "WHERE \n"
+                    + "    r.YearID = (SELECT MAX(YearID) FROM tb_register)\n"
+                    + "    AND s.StudentID = ? GROUP BY s.StudentID";
             pre = connect.getConnectionDefault().prepareStatement(sql);
             pre.setInt(1, StudentID);
             rs = pre.executeQuery();
@@ -395,6 +404,29 @@ public class FinancialDAO implements FinancialFn {
             JoLoger.saveLog(e, this);
             e.printStackTrace();
             return "ຜິດພາດຂໍ້ມູນ";
+        } finally {
+            connect.close();
+        }
+    }
+
+    public String getLastClassByFinancialID(int FinancialID) {
+        JoConnect connect = new JoConnect();
+        try {
+            String sql = "SELECT r.ClassRoomName FROM tb_financial AS f\n"
+                    + "INNER JOIN tb_register AS r ON f.RegisterID=r.registerID\n"
+                    + "WHERE FinancialID=?";
+            PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sql);
+            pre.setInt(1, FinancialID);
+            ResultSet rs = pre.executeQuery();
+            if (rs.next()) {
+                return rs.getString(1);
+            } else {
+                return "ບໍ່ພົບຫ້ອງຮຽນ";
+            }
+        } catch (SQLException e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+            return "ຜິດພາດ";
         } finally {
             connect.close();
         }
@@ -977,8 +1009,8 @@ public class FinancialDAO implements FinancialFn {
         }
         return models;
     }
-    
-       public List<StudentModel> getStudentRepeat(int YearID) {
+
+    public List<StudentModel> getStudentRepeat(int YearID) {
         List<StudentModel> models = new ArrayList<>();
         StudentService service = new StudentService();
         JoConnect connect = new JoConnect();

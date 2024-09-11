@@ -453,7 +453,6 @@ public class DasboardView extends javax.swing.JPanel {
     }
 
     public void showTableData(List<StudentDashboradModel> models) {
-//        System.out.println(models);
         Thread thread = new Thread(() -> {
             tbData.JoClearModel();
             try {

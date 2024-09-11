@@ -7,7 +7,10 @@ import DAOSevervice.FinancialService;
 import DAOSevervice.UserService;
 import Model.GlobalDataModel;
 import Model.StudentModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemListener;
 import java.util.List;
+import javax.swing.event.ChangeListener;
 
 public class StudentView extends javax.swing.JPanel {
 
@@ -45,6 +48,38 @@ public class StudentView extends javax.swing.JPanel {
 
         });
         thread.start();
+    }
+
+    public void showYear() {
+        cbYears.showYears();
+    }
+
+    public void showClass() {
+        cbClass.showClass();
+    }
+
+    public int YearID() {
+        return cbYears.getYearID();
+    }
+
+    public int RegisterID() {
+        return cbRoom.getRegisterID();
+    }
+
+    public void showRoom() {
+        cbRoom.showClassRoomByYear_Class(cbYears.getYearID(), cbClass.getClassID());
+    }
+    
+    public void handelChangeClass(ItemListener listener) {
+        cbClass.addItemListener(listener);
+    }
+    
+    public void handelChangeYear(ItemListener listener){
+        cbYears.addItemListener(listener);
+    }
+
+    public void handelFilter(ActionListener evt) {
+        btnFilter.addActionListener(evt);
     }
 
     public JoButtonIconfont getBtn_back() {
@@ -109,6 +144,14 @@ public class StudentView extends javax.swing.JPanel {
         joLable1 = new Components.JoLable();
         txtSearch = new Components.JoTextField();
         btnSeach = new Components.JoButtonIconfont();
+        jPanel6 = new javax.swing.JPanel();
+        joLable2 = new Components.JoLable();
+        cbYears = new Component.ComboboxYears();
+        joLable3 = new Components.JoLable();
+        cbClass = new Component.ComboboxClass();
+        joLable4 = new Components.JoLable();
+        cbRoom = new Component.ComboboxClassRoom();
+        btnFilter = new Components.JoButtonIconfont();
 
         Pn_Navigation.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
         Pn_Navigation.setLayout(new java.awt.GridLayout(1, 0));
@@ -215,6 +258,32 @@ public class StudentView extends javax.swing.JPanel {
         btnSeach.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.SEARCH);
         jPanel2.add(btnSeach);
 
+        jPanel6.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 51, 153)));
+        jPanel6.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 5));
+
+        joLable2.setText("ສົກຮຽນ");
+        jPanel6.add(joLable2);
+
+        cbYears.setPreferredSize(new java.awt.Dimension(100, 40));
+        jPanel6.add(cbYears);
+
+        joLable3.setText("ຂະແໜງ");
+        jPanel6.add(joLable3);
+
+        cbClass.setPreferredSize(new java.awt.Dimension(150, 40));
+        jPanel6.add(cbClass);
+
+        joLable4.setText("ຫ້ອງຮຽນ");
+        jPanel6.add(joLable4);
+
+        cbRoom.setPreferredSize(new java.awt.Dimension(150, 40));
+        jPanel6.add(cbRoom);
+
+        btnFilter.setBackground(new java.awt.Color(0, 102, 102));
+        btnFilter.setText("ສະແດງ");
+        btnFilter.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.SEARCH);
+        jPanel6.add(btnFilter);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -223,15 +292,18 @@ public class StudentView extends javax.swing.JPanel {
             .addComponent(pn_Datatable, javax.swing.GroupLayout.DEFAULT_SIZE, 1125, Short.MAX_VALUE)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(Pn_Navigation, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(24, 24, 24)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(2, 2, 2)
-                .addComponent(pn_Datatable, javax.swing.GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
+                .addComponent(pn_Datatable, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)
                 .addGap(2, 2, 2)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25))
@@ -241,18 +313,26 @@ public class StudentView extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Pn_Navigation;
+    private Components.JoButtonIconfont btnFilter;
     private Components.JoButtonIconfont btnNext;
     private Components.JoButtonIconfont btnPrevious;
     private Components.JoButtonIconfont btnSeach;
     private Components.JoButtonIconfont btn_add;
     private Components.JoButtonIconfont btn_back;
+    private Component.ComboboxClass cbClass;
+    private Component.ComboboxClassRoom cbRoom;
+    private Component.ComboboxYears cbYears;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private Components.JoLable joLable1;
+    private Components.JoLable joLable2;
+    private Components.JoLable joLable3;
+    private Components.JoLable joLable4;
     private Components.JoLable lblCurrentPage;
     private Components.JoLable lbl_title;
     private javax.swing.JPanel pn_Datatable;

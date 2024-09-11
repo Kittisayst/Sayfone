@@ -18,6 +18,10 @@ public class StudentService {
         return aO.UpdateStudent(model);
     }
 
+    public int UpdateStudentNo(int StudentID, String StudentNo) {
+        return aO.UpdateStudentNo(StudentID, StudentNo);
+    }
+
     public int DeleteStudent(StudentModel model) {
         return aO.DeleteStudent(model);
     }

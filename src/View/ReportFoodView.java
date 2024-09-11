@@ -58,17 +58,19 @@ public class ReportFoodView extends javax.swing.JPanel {
                 StudentService service = new StudentService();
                 models.forEach(data -> {
                     StudentModel studentModel = service.getStudentById(data.getStudentID());
-                            tb_data.AddJoModel(new Object[]{
-                                tb_data.autoNumber(),
-                                data.getFinancialIID(),
-                                data.getRegisterID(),
-                                data.getStudentID(),
-                                new MyFormat().formatMoney(data.getFoodMoney()),
-                                data.getFoodMonth(),
-                                studentModel.getStudentNo(),
-                                studentModel.getFullName(),
-                                data.getFinancialComment()
-                            });
+                    if (data.getFoodMoney() > 0) {
+                        tb_data.AddJoModel(new Object[]{
+                            tb_data.autoNumber(),
+                            data.getFinancialIID(),
+                            data.getRegisterID(),
+                            data.getStudentID(),
+                            new MyFormat().formatMoney(data.getFoodMoney()),
+                            data.getFoodMonth(),
+                            studentModel.getStudentNo(),
+                            studentModel.getFullName(),
+                            data.getFinancialComment()
+                        });
+                    }
                     loading.StartProgress(models.size(), 100);
                 });
             } catch (Exception e) {

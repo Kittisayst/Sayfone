@@ -8,12 +8,11 @@ import Model.ClassModel;
 import Model.RegisterModel;
 import Model.StudentModel;
 import Model.TimingModel;
+import Model.YearModel;
 import Tools.JoAlert;
 import View.FinancialView;
 import java.time.LocalTime;
 import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class AppFinancial {
 
@@ -25,8 +24,9 @@ public class AppFinancial {
         if (hasPermission) {
             try {
                 ClassModel classModel = new ClassService().getClassById(registerModel.getClassID());
+                YearModel yearModel = registerModel.getYearModel();
                 FinancialView view = new FinancialView(
-                        "ຈ່າຍຄ່າຮຽນ: " + classModel.getClassName() + " ,  ຫ້ອງ: " + registerModel.getClassRoomName()
+                        "ຈ່າຍຄ່າຮຽນ: ສົກຮຽນ " + yearModel.getYear() + ", ຂະແໜງ " + classModel.getClassName() + " ,  ຫ້ອງ: " + registerModel.getClassRoomName()
                         + " , " + studentModel.getFullName());
                 FinancialController controller = new FinancialController(view, studentModel, registerModel);
                 controller.Start();

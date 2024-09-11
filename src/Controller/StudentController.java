@@ -2,7 +2,9 @@ package Controller;
 
 import App.AppStudent;
 import App.AppStudentData;
+import Component.DialogChangeStudentNo;
 import DAOSevervice.EthnicService;
+import DAOSevervice.FinancialService;
 import DAOSevervice.NationalityService;
 import DAOSevervice.ReligionService;
 import Model.StudentAddressModel;
@@ -12,30 +14,38 @@ import DAOSevervice.StudentAddressService;
 import DAOSevervice.StudentHistoryService;
 import DAOSevervice.StudentService;
 import DAOSevervice.StudentVaccinceService;
+import Model.FinancialModel;
 import Model.GlobalDataModel;
 import Tools.JoAlert;
 import Tools.JoHookEvent;
 import Tools.JoPopup;
+import Utility.MyPopup;
 import View.StudentView;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.List;
+import jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons;
+import theme.MyColor;
 
 public class StudentController implements JoMVC, ActionListener, MouseListener, KeyListener {
 
     private final StudentView view;
     private final StudentService service;
-    private final JoPopup popup;
+    private final MyPopup popup;
     private int currentPage = 1;
     private int totalPages;
 
     public StudentController(StudentView view) {
         this.view = view;
         service = new StudentService();
-        popup = new JoPopup();
+        popup = new MyPopup();
+        popup.addMenuItem("ປ່ຽນລະຫັດນັກຮຽນ", GoogleMaterialDesignIcons.ASSIGNMENT_IND, MyColor.Info);
     }
 
     @Override
@@ -45,6 +55,9 @@ public class StudentController implements JoMVC, ActionListener, MouseListener, 
         int pages = (int) Math.ceil((double) service.getStudentCount() / 25);
         view.showCurrentPage(currentPage, pages);
         view.showStudent(service.getStudentPagination(currentPage, 25));
+        view.showYear();
+        view.showClass();
+        view.showRoom();
     }
 
     @Override
@@ -57,6 +70,9 @@ public class StudentController implements JoMVC, ActionListener, MouseListener, 
         view.getBtnSeach().addActionListener(this);
         view.getTxtCurrentPage().addKeyListener(this);
         popup.addActionListener(this);
+        view.handelChangeClass(e -> view.showRoom());
+        view.handelChangeYear(e -> view.showRoom());
+        view.handelFilter(e -> showFilterStudnet());
     }
 
     @Override
@@ -133,6 +149,11 @@ public class StudentController implements JoMVC, ActionListener, MouseListener, 
             AppStudentData studentData = new AppStudentData(StudentID);
         } else if (event.isEvent(popup.getItemDelete())) {
             Delete();
+        } else if (event.isEvent(popup.getMenuItem(3))) {
+            int StudentID = view.getTb_data().getIntValue(1);
+            String No = view.getTb_data().getValue(2);
+            DialogChangeStudentNo changeStudentNo = new DialogChangeStudentNo(GlobalDataModel.rootView, true, StudentID, No, view.getTb_data());
+            changeStudentNo.setVisible(true);
         }
     }
 
@@ -223,6 +244,16 @@ public class StudentController implements JoMVC, ActionListener, MouseListener, 
         } else {
             view.showStudent(service.getStudentPagination(currentPage, 25));
         }
+    }
+
+    private void showFilterStudnet() {
+        FinancialService financialService = new FinancialService();
+        List<StudentModel> studentList = new ArrayList<>();
+        List<FinancialModel> models = financialService.getStudentRegistered(view.RegisterID());
+        models.forEach(data -> {
+            studentList.add(service.getStudentById(data.getStudentID()));
+        });
+        view.showStudent(studentList);
     }
 
 }

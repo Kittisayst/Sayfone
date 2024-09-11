@@ -110,13 +110,6 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
         popup.addActionListener(this);
     }
 
-    private String convertMonth(HashMap<Integer, String> months) {
-        Collection<String> values = months.values();
-        // Convert the collection to a string array
-        String[] valuesArray = values.toArray(String[]::new);
-        return Arrays.toString(valuesArray);
-    }
-
     @Override
     public void Create() {
         view.getBtnSave().setEnabled(false);

@@ -194,10 +194,6 @@ public class DasboardController implements JoMVC, MouseListener, ActionListener,
                 financialRoom.open();
             }
         }
-//        System.out.println(yearID);
-//        System.out.println(financialID);
-//        AppFinancialRoom room = new AppFinancialRoom();
-//        room.open();
     }
 
 }

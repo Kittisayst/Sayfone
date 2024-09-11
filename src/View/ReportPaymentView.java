@@ -104,16 +104,16 @@ public class ReportPaymentView extends javax.swing.JPanel {
                 GlobalDataModel.rootView.setView(loading);
                 reportData.forEach(data -> {
                     StudentModel studentModel = new StudentService().getStudentById(data.getStudentID());
-                    tb_data.AddJoModel(new Object[]{
-                        tb_data.autoNumber(),
-                        studentModel.getFullName(),
-                        data.getFinancialMonth(),
-                        mf.formatMoney(data.getMoney()),
-                        mf.formatMoney(data.getTransferMoney()),
-                        mf.formatMoney(data.getOvertimePay()),
-                        mf.formatMoney(data.getDiscount()),
-                        data.getFinancialComment().equals("") ? "null" : data.getFinancialComment()
-                    });
+                        tb_data.AddJoModel(new Object[]{
+                            tb_data.autoNumber(),
+                            studentModel.getFullName(),
+                            data.getFinancialMonth(),
+                            mf.formatMoney(data.getMoney()),
+                            mf.formatMoney(data.getTransferMoney()),
+                            mf.formatMoney(data.getOvertimePay()),
+                            mf.formatMoney(data.getDiscount()),
+                            data.getFinancialComment().equals("") ? "null" : data.getFinancialComment()
+                        });
                     loading.StartProgress(reportData.size(), 50);
                 });
             } catch (Exception e) {

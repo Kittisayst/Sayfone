@@ -227,4 +227,27 @@ public class RegisterDAO implements RegisterFn {
         return models;
     }
 
+    public List<RegisterModel> getRegisterByYear_Class(int YearID, int ClassID) {
+        List<RegisterModel> models = new ArrayList<>();
+        JoConnect connect = new JoConnect();
+        try {
+            String sql = "SELECT * FROM tb_register\n"
+                    + "WHERE yearID=? AND classID=?";
+            PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sql);
+            pre.setInt(1, YearID);
+            pre.setInt(2, ClassID);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                models.add(getResult(rs));
+            }
+        } catch (SQLException e) {
+            JoAlert.Error(e, this);
+            JoLoger.saveLog(e, this);
+            System.out.println(e.getMessage());
+        } finally {
+            connect.close();
+        }
+        return models;
+    }
+
 }

@@ -69,6 +69,10 @@ public class FinancialService {
         return aO.getLastClass(StudentID);
     }
 
+    public String getLastClassByFinancialID(int FinancialID) {
+        return aO.getLastClassByFinancialID(FinancialID);
+    }
+
     public FinancialModel getLastRegister(int studentID) {
         return aO.getLastRegister(studentID);
     }

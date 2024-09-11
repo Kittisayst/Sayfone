@@ -74,7 +74,7 @@ public class StudentDashboradModel {
 
     public String getClassName() {
         FinancialService financialService = new FinancialService();
-        String lastClass = financialService.getLastClass(this.studentID);
+        String lastClass = financialService.getLastClassByFinancialID(this.FinancialID);
         return lastClass;
     }
 

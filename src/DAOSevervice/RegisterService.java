@@ -44,4 +44,8 @@ public class RegisterService {
         return aO.getRegisterAllByYearID(YearID);
     }
 
+    public List<RegisterModel> getRegisterByYear_Class(int YearID, int ClassID) {
+        return aO.getRegisterByYear_Class(YearID, ClassID);
+    }
+
 }
