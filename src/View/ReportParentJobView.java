@@ -6,6 +6,7 @@ import Components.JoButtonIconfont;
 import Components.JoTabbed;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.event.ActionListener;
 
 public class ReportParentJobView extends javax.swing.JPanel {
 
@@ -87,6 +88,14 @@ public class ReportParentJobView extends javax.swing.JPanel {
         return Tabab;
     }
 
+    public void handelEport1(ActionListener evt) {
+        btnExport1.addActionListener(evt);
+    }
+
+    public void handelEport2(ActionListener evt) {
+        btnExport2.addActionListener(evt);
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -106,6 +115,9 @@ public class ReportParentJobView extends javax.swing.JPanel {
         btnPiechart1 = new Components.JoButtonIconfont();
         btnBarchart1 = new Components.JoButtonIconfont();
         pnParent1 = new javax.swing.JPanel();
+        jPanel8 = new javax.swing.JPanel();
+        btnExport1 = new Components.JoButtonIconfont();
+        btnExport2 = new Components.JoButtonIconfont();
         jPanel7 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         btnPiechart2 = new Components.JoButtonIconfont();
@@ -165,6 +177,24 @@ public class ReportParentJobView extends javax.swing.JPanel {
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.weighty = 0.1;
         jPanel6.add(pnParent1, gridBagConstraints);
+
+        jPanel8.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 10, 5));
+
+        btnExport1.setBackground(new java.awt.Color(0, 102, 102));
+        btnExport1.setText("Excel ຜູ້ປົກຄອງ 1");
+        btnExport1.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.GRID_ON);
+        jPanel8.add(btnExport1);
+
+        btnExport2.setBackground(new java.awt.Color(0, 102, 102));
+        btnExport2.setText("Excel ຜູ້ປົກຄອງ 2");
+        btnExport2.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.GRID_ON);
+        jPanel8.add(btnExport2);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        jPanel6.add(jPanel8, gridBagConstraints);
 
         Tabab.addTab("ຜູ້ປົກຄອງ 1", jPanel6);
 
@@ -228,6 +258,8 @@ public class ReportParentJobView extends javax.swing.JPanel {
     private Components.JoTabbed Tabab;
     private Components.JoButtonIconfont btnBarchart1;
     private Components.JoButtonIconfont btnBarchart2;
+    private Components.JoButtonIconfont btnExport1;
+    private Components.JoButtonIconfont btnExport2;
     private Components.JoButtonIconfont btnPiechart1;
     private Components.JoButtonIconfont btnPiechart2;
     private Components.JoButtonIconfont btn_back;
@@ -239,6 +271,7 @@ public class ReportParentJobView extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private Components.JoLable lbl_title;
     private javax.swing.JPanel pnParent1;

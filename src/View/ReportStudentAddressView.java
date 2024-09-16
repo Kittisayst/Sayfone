@@ -8,6 +8,7 @@ import Components.JoTabbed;
 import Model.CountVillageModel;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 public class ReportStudentAddressView extends javax.swing.JPanel {
@@ -67,16 +68,16 @@ public class ReportStudentAddressView extends javax.swing.JPanel {
     }
 
     public void showTableVillageCurrent(List<CountVillageModel> models) {
-        tb_VillageCurrent.JoClearModel();
+        tb_VillageCurent.JoClearModel();
         for (CountVillageModel model : models) {
-            tb_VillageCurrent.AddJoModel(new Object[]{tb_VillageCurrent.autoNumber(), model.getProvinceName(), model.getDistrictName(), model.getVillageName(), model.getCount()});
+            tb_VillageCurent.AddJoModel(new Object[]{tb_VillageCurent.autoNumber(), model.getProvinceName(), model.getDistrictName(), model.getVillageName(), model.getCount()});
         }
     }
 
     public void showTableVillageNow(List<CountVillageModel> models) {
-        tb_Village.JoClearModel();
+        tb_VillageNow.JoClearModel();
         for (CountVillageModel model : models) {
-            tb_Village.AddJoModel(new Object[]{tb_Village.autoNumber(), model.getProvinceName(), model.getDistrictName(), model.getVillageName(), model.getCount()});
+            tb_VillageNow.AddJoModel(new Object[]{tb_VillageNow.autoNumber(), model.getProvinceName(), model.getDistrictName(), model.getVillageName(), model.getCount()});
         }
     }
 
@@ -111,6 +112,13 @@ public class ReportStudentAddressView extends javax.swing.JPanel {
     public JoTabbed getTabab() {
         return Tabab;
     }
+    
+    public void handelExportVillageCurent(ActionListener evt){
+        btnExportVillageCurent.addActionListener(evt);
+    }
+    public void handelExportVillageNow(ActionListener evt){
+        btnExportVillageNow.addActionListener(evt);
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -141,11 +149,15 @@ public class ReportStudentAddressView extends javax.swing.JPanel {
         jPanel8 = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tb_VillageCurrent = new Components.JoTable();
+        tb_VillageNow = new Components.JoTable();
+        jPanel12 = new javax.swing.JPanel();
+        btnExportVillageNow = new Components.JoButtonIconfont();
         jPanel11 = new javax.swing.JPanel();
         jPanel15 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tb_Village = new Components.JoTable();
+        tb_VillageCurent = new Components.JoTable();
+        jPanel14 = new javax.swing.JPanel();
+        btnExportVillageCurent = new Components.JoButtonIconfont();
 
         Pn_Navigation.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
         Pn_Navigation.setLayout(new java.awt.GridLayout(1, 0));
@@ -243,7 +255,7 @@ public class ReportStudentAddressView extends javax.swing.JPanel {
 
         jPanel13.setLayout(new java.awt.BorderLayout());
 
-        tb_VillageCurrent.setModel(new javax.swing.table.DefaultTableModel(
+        tb_VillageNow.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -259,15 +271,24 @@ public class ReportStudentAddressView extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane3.setViewportView(tb_VillageCurrent);
+        jScrollPane3.setViewportView(tb_VillageNow);
 
         jPanel13.add(jScrollPane3, java.awt.BorderLayout.CENTER);
+
+        jPanel12.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+
+        btnExportVillageNow.setBackground(new java.awt.Color(0, 102, 102));
+        btnExportVillageNow.setText("Excel");
+        btnExportVillageNow.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.GRID_ON);
+        jPanel12.add(btnExportVillageNow);
+
+        jPanel13.add(jPanel12, java.awt.BorderLayout.PAGE_END);
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, 1035, Short.MAX_VALUE)
+            .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -280,7 +301,7 @@ public class ReportStudentAddressView extends javax.swing.JPanel {
 
         jPanel15.setLayout(new java.awt.BorderLayout());
 
-        tb_Village.setModel(new javax.swing.table.DefaultTableModel(
+        tb_VillageCurent.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -296,15 +317,24 @@ public class ReportStudentAddressView extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tb_Village);
+        jScrollPane1.setViewportView(tb_VillageCurent);
 
         jPanel15.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        jPanel14.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+
+        btnExportVillageCurent.setBackground(new java.awt.Color(0, 102, 102));
+        btnExportVillageCurent.setText("Excel");
+        btnExportVillageCurent.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.GRID_ON);
+        jPanel14.add(btnExportVillageCurent);
+
+        jPanel15.add(jPanel14, java.awt.BorderLayout.PAGE_END);
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, 1035, Short.MAX_VALUE)
+            .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -345,6 +375,8 @@ public class ReportStudentAddressView extends javax.swing.JPanel {
     private Components.JoTabbed Tabab;
     private Components.JoButtonIconfont btnBarchart1;
     private Components.JoButtonIconfont btnBarchart2;
+    private Components.JoButtonIconfont btnExportVillageCurent;
+    private Components.JoButtonIconfont btnExportVillageNow;
     private Components.JoButtonIconfont btnPiechart1;
     private Components.JoButtonIconfont btnPiechart2;
     private Components.JoButtonIconfont btn_back;
@@ -353,7 +385,9 @@ public class ReportStudentAddressView extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -368,7 +402,7 @@ public class ReportStudentAddressView extends javax.swing.JPanel {
     private Components.JoLable lbl_title;
     private javax.swing.JPanel pnParent1;
     private javax.swing.JPanel pnParent2;
-    private Components.JoTable tb_Village;
-    private Components.JoTable tb_VillageCurrent;
+    private Components.JoTable tb_VillageCurent;
+    private Components.JoTable tb_VillageNow;
     // End of variables declaration//GEN-END:variables
 }

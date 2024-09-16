@@ -3,7 +3,6 @@ package View;
 import Chart.PieChartUI;
 import Chart.PieChartUIModel;
 import DAOSevervice.SayfoneService;
-import DAOSevervice.StudentKnowService;
 import Model.SayfoneModel;
 import Model.StudentKnowModel;
 import java.awt.BorderLayout;
@@ -55,6 +54,10 @@ public class ReportStudentKnowView extends javax.swing.JPanel {
         }
     }
 
+    public void handelExport(ActionListener evt) {
+        btnExportNkow.addActionListener(evt);
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -67,6 +70,7 @@ public class ReportStudentKnowView extends javax.swing.JPanel {
         jPanel5 = new javax.swing.JPanel();
         pn_Datatable = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
+        btnExportNkow = new Components.JoButtonIconfont();
 
         Pn_Navigation.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
         Pn_Navigation.setLayout(new java.awt.GridLayout(1, 0));
@@ -92,16 +96,12 @@ public class ReportStudentKnowView extends javax.swing.JPanel {
 
         pn_Datatable.setLayout(new java.awt.BorderLayout());
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 49, Short.MAX_VALUE)
-        );
+        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+
+        btnExportNkow.setBackground(new java.awt.Color(0, 102, 102));
+        btnExportNkow.setText("Excel");
+        btnExportNkow.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.GRID_ON);
+        jPanel1.add(btnExportNkow);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -116,7 +116,7 @@ public class ReportStudentKnowView extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(Pn_Navigation, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pn_Datatable, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+                .addComponent(pn_Datatable, javax.swing.GroupLayout.DEFAULT_SIZE, 598, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -125,6 +125,7 @@ public class ReportStudentKnowView extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Pn_Navigation;
+    private Components.JoButtonIconfont btnExportNkow;
     private Components.JoButtonIconfont btn_back;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;

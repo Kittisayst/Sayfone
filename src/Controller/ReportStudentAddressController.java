@@ -5,14 +5,17 @@ import Chart.PieChartUIModel;
 import Component.BarChart;
 import DAOSevervice.StudentAddressService;
 import Model.ChartStudentAddree;
+import Model.CountVillageModel;
 import Model.GlobalDataModel;
 import Tools.JoHookEvent;
+import Utility.JoExportExcel;
 import Utility.chart.ModelChart;
 import View.ReportStudentAddressView;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -21,9 +24,13 @@ public class ReportStudentAddressController implements JoMVC, ActionListener {
     private ReportStudentAddressView view;
     private boolean provinceState1 = false;
     private boolean provinceState2 = false;
+    private List<CountVillageModel> exportvillageCurent;
+    private List<CountVillageModel> exportvillageNow;
 
     public ReportStudentAddressController(ReportStudentAddressView view) {
         this.view = view;
+        exportvillageCurent = new ArrayList<>();
+        exportvillageNow = new ArrayList<>();
     }
 
     @Override
@@ -46,6 +53,8 @@ public class ReportStudentAddressController implements JoMVC, ActionListener {
         view.getBtnBarchart2().addActionListener(this);
         view.getBtnPiechart1().addActionListener(this);
         view.getBtnPiechart2().addActionListener(this);
+        view.handelExportVillageCurent(e -> exportVillageCurent());
+        view.handelExportVillageNow(e -> exportVillageNow());
     }
 
     @Override
@@ -173,12 +182,64 @@ public class ReportStudentAddressController implements JoMVC, ActionListener {
 
     private void showVillageCountCurrent() {
         StudentAddressService service = new StudentAddressService();
-        view.showTableVillageCurrent(service.getCountVillageCurrent());
+        exportvillageCurent = service.getCountVillageCurrent();
+        view.showTableVillageCurrent(exportvillageCurent);
     }
 
     private void showVillageCountNow() {
         StudentAddressService service = new StudentAddressService();
-        view.showTableVillageNow(service.getCountVillageNow());
+        exportvillageNow = service.getCountVillageNow();
+        view.showTableVillageNow(exportvillageNow);
+    }
+
+    private void exportVillageCurent() {
+        String[] columns = {
+            "ລຳດັບ",
+            "ແຂວງ",
+            "ເມືອງ",
+            "ບ້ານ",
+            "ຈຳນວນ",};
+        JoExportExcel excel = new JoExportExcel(columns, "ບ້ານເກີດນັກຮຽນ", "ລາຍງານບ້ານເກີດນັກຮຽນ");
+        Thread thread = new Thread(() -> {
+            try {
+                excel.showLoading("ກຳລັງສ້າງ Excel");
+                exportvillageCurent.forEach(data -> {
+                    excel.addRow(excel.getAutoNum(), data.getProvinceName(), data.getDistrictName(), data.getVillageName(), data.getCount());
+                    excel.setSleep(exportvillageCurent.size(), 100);
+                });
+                excel.createExport();
+            } catch (Exception e) {
+                System.err.println(e.getMessage());
+            } finally {
+                excel.closeExport(view);
+            }
+        });
+        thread.start();
+    }
+
+    private void exportVillageNow() {
+       String[] columns = {
+            "ລຳດັບ",
+            "ແຂວງ",
+            "ເມືອງ",
+            "ບ້ານ",
+            "ຈຳນວນ",};
+        JoExportExcel excel = new JoExportExcel(columns, "ບ້ານປະຈຸບັນນັກຮຽນ", "ລາຍງານບ້ານປະຈຸບັນນັກຮຽນ");
+        Thread thread = new Thread(() -> {
+            try {
+                excel.showLoading("ກຳລັງສ້າງ Excel");
+                exportvillageNow.forEach(data -> {
+                    excel.addRow(excel.getAutoNum(), data.getProvinceName(), data.getDistrictName(), data.getVillageName(), data.getCount());
+                    excel.setSleep(exportvillageNow.size(), 100);
+                });
+                excel.createExport();
+            } catch (Exception e) {
+                System.err.println(e.getMessage());
+            } finally {
+                excel.closeExport(view);
+            }
+        });
+        thread.start();
     }
 
 }

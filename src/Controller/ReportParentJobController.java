@@ -7,12 +7,14 @@ import DAOSevervice.StudentHistoryService;
 import Model.ChartParentJobModel;
 import Model.GlobalDataModel;
 import Tools.JoHookEvent;
+import Utility.JoExportExcel;
 import Utility.chart.ModelChart;
 import View.ReportParentJobView;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.List;
 import javax.swing.event.ChangeEvent;
@@ -21,9 +23,13 @@ import javax.swing.event.ChangeListener;
 public class ReportParentJobController implements JoMVC, ActionListener, ChangeListener {
 
     private final ReportParentJobView view;
+    List<ChartParentJobModel> exportData1;
+    List<ChartParentJobModel> exportData2;
 
     public ReportParentJobController(ReportParentJobView view) {
         this.view = view;
+        exportData1 = new ArrayList<>();
+        exportData2 = new ArrayList<>();
     }
 
     @Override
@@ -43,6 +49,8 @@ public class ReportParentJobController implements JoMVC, ActionListener, ChangeL
         view.getBtnPiechart1().addActionListener(this);
         view.getBtnPiechart2().addActionListener(this);
         view.getBtn_back().addActionListener(this);
+        view.handelEport1(e -> export1());
+        view.handelEport2(e -> export2());
     }
 
     @Override
@@ -99,6 +107,7 @@ public class ReportParentJobController implements JoMVC, ActionListener, ChangeL
 
     private void PiechartParent1() {
         List<ChartParentJobModel> models = new StudentHistoryService().getChartJobs("FatherJob");
+        exportData1 = models;
         PieChartUI chartUI = new PieChartUI();
         Random random = new Random();
         for (ChartParentJobModel model : models) {
@@ -116,6 +125,7 @@ public class ReportParentJobController implements JoMVC, ActionListener, ChangeL
 
     private void PiechartParent2() {
         List<ChartParentJobModel> models = new StudentHistoryService().getChartJobs("MotherJob");
+        exportData2 = models;
         PieChartUI chartUI = new PieChartUI();
         Random random = new Random();
         for (ChartParentJobModel model : models) {
@@ -144,8 +154,8 @@ public class ReportParentJobController implements JoMVC, ActionListener, ChangeL
         }
         view.setBarchatParent1(barChart);
     }
-    
-        private void BarcharParent2() {
+
+    private void BarcharParent2() {
         List<ChartParentJobModel> models = new StudentHistoryService().getChartJobs("MotherJob");
         BarChart barChart = new BarChart();
         barChart.setFont(new Font("Phetsarath OT", 0, 12));
@@ -157,6 +167,54 @@ public class ReportParentJobController implements JoMVC, ActionListener, ChangeL
             }
         }
         view.setBarchatParent2(barChart);
+    }
+
+    private void export1() {
+        String[] columns = {
+            "ລຳດັບ",
+            "ອາຊີບ",
+            "ຈຳນວນ"
+        };
+        JoExportExcel excel = new JoExportExcel(columns, "ອາຊີບຜູ້ປົກຄອງທີ່ 1", "ລາຍງານອາຊີບຜູ້ປົກຄອງ 1");
+        Thread thread = new Thread(() -> {
+            try {
+                excel.showLoading("ກຳລັງສ້າງ Excel");
+                exportData1.forEach(data -> {
+                    excel.addRow(excel.getAutoNum(), data.getName(), data.getCount());
+                    excel.setSleep(exportData1.size(), 100);
+                });
+                excel.createExport();
+            } catch (Exception e) {
+                System.err.println(e.getMessage());
+            } finally {
+                excel.closeExport(view);
+            }
+        });
+        thread.start();
+    }
+
+    private void export2() {
+        String[] columns = {
+            "ລຳດັບ",
+            "ອາຊີບ",
+            "ຈຳນວນ"
+        };
+        JoExportExcel excel = new JoExportExcel(columns, "ອາຊີບຜູ້ປົກຄອງທີ່ 2", "ລາຍງານອາຊີບຜູ້ປົກຄອງ 2");
+        Thread thread = new Thread(() -> {
+            try {
+                excel.showLoading("ກຳລັງສ້າງ Excel");
+                exportData2.forEach(data -> {
+                    excel.addRow(excel.getAutoNum(), data.getName(), data.getCount());
+                    excel.setSleep(exportData2.size(), 100);
+                });
+                excel.createExport();
+            } catch (Exception e) {
+                System.err.println(e.getMessage());
+            } finally {
+                excel.closeExport(view);
+            }
+        });
+        thread.start();
     }
 
 }

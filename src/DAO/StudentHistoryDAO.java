@@ -196,7 +196,7 @@ public class StudentHistoryDAO implements StudentHistoryFn {
         List<ChartParentJobModel> jobModels = new ArrayList<>();
         JoConnect connect = new JoConnect();
         try {
-            String sql = "SELECT "+parentCol+", COUNT(*)as jobcount FROM tb_studenthistory GROUP BY "+parentCol;
+            String sql = "SELECT "+parentCol+", COUNT(*)as jobcount FROM tb_studenthistory GROUP BY "+parentCol+" ORDER BY jobcount DESC";
             PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sql);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
