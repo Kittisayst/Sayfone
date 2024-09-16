@@ -108,6 +108,7 @@ public class DialogChangeClassRoom extends javax.swing.JDialog {
                 new JoAlert().messages("ຍ້າຍຫ້ອງ", "ຍ້າຍຫ້ອງຮຽນສຳເລັດ", JoAlert.Icons.success);
                 RegisterService registerService = new RegisterService();
                 AppFinancailStudent financailStudent = new AppFinancailStudent(registerService.getRegisterById(cbChangeRoom.getKeyInt()));
+                System.out.println(financailStudent);
                 this.dispose();
             } else {
                 new JoAlert().messages("ຍ້າຍຫ້ອງ", "ຍ້າຍຫ້ອງຮຽນຜິດພາດ", JoAlert.Icons.error);

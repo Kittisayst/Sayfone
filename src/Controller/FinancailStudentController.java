@@ -2,6 +2,7 @@ package Controller;
 
 import App.AppFinancial;
 import App.AppFinancialRoom;
+import Component.AuthenPopUp;
 import Component.DialogChangeClassRoom;
 import Component.DialogStudentsRegister;
 import DAOSevervice.FinancialService;
@@ -10,6 +11,7 @@ import Model.FinancialModel;
 import Model.GlobalDataModel;
 import Model.RegisterModel;
 import Model.StudentModel;
+import Model.UserModel;
 import Tools.JoHookEvent;
 import Tools.JoIconFont;
 import Utility.MyPopup;
@@ -118,9 +120,14 @@ public class FinancailStudentController implements JoMVC, ActionListener, MouseL
             StudentModel studentModel = studentService.getStudentById(view.getTb_data().getIntValue(1));
             AppFinancial app = new AppFinancial(registerModel, studentModel);
         } else if (event.isEvent(popup.getItemEdit())) {
-            int studentID = view.getTb_data().getIntValue(currentPage);
-            DialogChangeClassRoom classRoom = new DialogChangeClassRoom(GlobalDataModel.rootView, true, registerModel, studentID);
-            classRoom.setVisible(true);
+            AuthenPopUp auth = new AuthenPopUp(GlobalDataModel.rootView, true);
+            auth.setVisible(true);
+            UserModel model = auth.getUserModel();
+            if (model.getUserID() != 0) {
+                int studentID = view.getTb_data().getIntValue(currentPage);
+                DialogChangeClassRoom classRoom = new DialogChangeClassRoom(GlobalDataModel.rootView, true, registerModel, studentID);
+                classRoom.setVisible(true);
+            }
         }
     }
 
