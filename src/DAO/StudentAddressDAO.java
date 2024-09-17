@@ -165,21 +165,11 @@ public class StudentAddressDAO implements StudentAddressFn {
         JoConnect connect = new JoConnect();
         List<CountVillageModel> models = new ArrayList<>();
         try {
-            String sql = "SELECT\n"
-                    + "    p.pname AS ProvinceName,\n"
-                    + "    d.dname AS DistrictName,\n"
-                     + "    s.Village,\n"
-                    + "    COUNT(DISTINCT s.Village) AS VillageCount\n"
-                    + "FROM\n"
-                    + "    tb_studentlocation s\n"
-                    + "JOIN\n"
-                    + "    tb_district d ON s.did = d.did\n"
-                    + "JOIN\n"
-                    + "    tb_province p ON d.pid = p.pid\n"
-                    + "GROUP BY\n"
-                    + "    d.did, d.dname, p.pname\n"
-                    + "ORDER BY\n"
-                    + "    VillageCount DESC, p.pname, d.dname";
+            String sql = "SELECT p.pname AS ProvinceName,d.dname AS DistrictName,sl.Village,COUNT(*) AS VillageCount\n"
+                    + "FROM tb_studentlocation AS sl\n"
+                    + "JOIN tb_district AS d ON sl.did = d.did\n"
+                    + "JOIN tb_province AS p ON d.pid = p.pid\n"
+                    + "GROUP BY Village ORDER BY VillageCount DESC";
             ResultSet rs = connect.getConnectionDefault().createStatement().executeQuery(sql);
             while (rs.next()) {
                 models.add(new CountVillageModel(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4)));
@@ -197,21 +187,11 @@ public class StudentAddressDAO implements StudentAddressFn {
         JoConnect connect = new JoConnect();
         List<CountVillageModel> models = new ArrayList<>();
         try {
-            String sql = "SELECT\n"
-                    + "    p.pname AS ProvinceName,\n"
-                    + "    d.dname AS DistrictName,\n"
-                    + "    s.VillageNow,\n"
-                    + "    COUNT(DISTINCT s.VillageNow) AS VillageCount\n"
-                    + "FROM\n"
-                    + "    tb_studentlocation s\n"
-                    + "JOIN\n"
-                    + "    tb_district d ON s.didNow = d.did\n"
-                    + "JOIN\n"
-                    + "    tb_province p ON d.pid = p.pid\n"
-                    + "GROUP BY\n"
-                    + "    d.did, d.dname, p.pname\n"
-                    + "ORDER BY\n"
-                    + "    VillageCount DESC, p.pname, d.dname";
+            String sql = "SELECT p.pname AS ProvinceName,d.dname AS DistrictName,sl.VillageNow,COUNT(*) AS VillageCount\n"
+                    + "FROM tb_studentlocation AS sl\n"
+                    + "JOIN tb_district AS d ON sl.didNow = d.did\n"
+                    + "JOIN tb_province AS p ON d.pid = p.pid\n"
+                    + "GROUP BY sl.VillageNow ORDER BY VillageCount DESC";
             ResultSet rs = connect.getConnectionDefault().createStatement().executeQuery(sql);
             while (rs.next()) {
                 models.add(new CountVillageModel(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4)));

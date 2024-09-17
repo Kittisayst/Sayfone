@@ -297,7 +297,7 @@ public class ReportStudentAddressView extends javax.swing.JPanel {
                 .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, 604, Short.MAX_VALUE))
         );
 
-        Tabab.addTab("ບ້ານເກີດປະຈຸບັນ", jPanel8);
+        Tabab.addTab("ບ້ານຢູ່ປະຈຸບັນ", jPanel8);
 
         jPanel15.setLayout(new java.awt.BorderLayout());
 
