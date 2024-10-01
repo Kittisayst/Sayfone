@@ -313,7 +313,7 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
         } else if (event.isEvent(view.getBtnSave())) {  // ກົດປຸ່ມບັນທຶກ
             if (financialModel.getFinancialIID() == 0) {
                 if (view.MoneyEmpty() && view.TransferMoneyEmpty()) {
-                    view.Message("ກວດສອບຂໍ້ມູນ", "ຂໍ້ມູນບໍຄົບຖວນກະລຸນາກວດສອບ", JoAlert.Icons.warning);
+                    view.Message("ກວດສອບຂໍ້ມູນ", "ຂໍ້ມູນບໍ່ຄົບຖວນກະລຸນາກວດສອບ", JoAlert.Icons.warning);
                     view.getTxtMoney().requestFocus();
                 } else {
                     if (view.FoodMoney()) {
@@ -397,16 +397,33 @@ public class FinancialController implements JoMVC, ActionListener, MouseListener
 
     private void chekPaymentSettingOverpay() {
         settingPaymentModel pm = settingPaymentModel.toAttay(GlobalDataModel.settingModel.getValue());
-        if (pm.isOverpary()) {
+        if (pm.isOverpary()) { //ກວດສອບຈ່າຍຊ້າ
             if (repayCheck(view.getFinancialMonths().getMonths())) {
                 if (view.getTxtOverPay().TextEmpty()) {
                     Create();
                 }
             } else {
-                Create();
+                if (isPayFood()) {
+                    Create();
+                }
             }
         } else {
-            Create();
+            if (isPayFood()) {
+                Create();
+            }
+        }
+    }
+
+    private boolean isPayFood() {
+        if (!view.getFoodMonths().getMonths().equals("[]")) { //ກວດສອບເລືອກເດືອນ
+            if (view.getFoodMoney() == 0) { //ບໍ່ປ້ອນເງິນ
+                view.Message("ກວດສອບ", "ກະລຸນາປ້ອນເງິນຄ່າອາຫານ", JoAlert.Icons.warning);
+                return false;
+            } else {
+                return true;
+            }
+        } else { //ບໍ່ເລືອກມີການຈ່າຍຄ່າອາຫານ
+            return true;
         }
     }
 
