@@ -50,8 +50,7 @@ public class ReportPayLateFoodController implements JoMVC, ActionListener, ItemL
     @Override
     public void Start() {
         GlobalDataModel.rootView.setView(view);
-        view.showYear(new YearService().getYearAll());
-        view.getCbYear().setSelectedIndex(new YearService().getYearAll().size() - 1);
+        view.showYear();
         view.showClassRoom(new RegisterService().getRegisterAllByYearID(view.getCbYear().getKeyInt()));
         view.ExportEnable();
     }
