@@ -26,11 +26,8 @@ public class ReportPayLateFoodView extends javax.swing.JPanel {
         loading.setTitle("ກຳລັງໂຫຼດຂໍ້ມູນ");
     }
 
-    public void showYear(List<YearModel> models) {
-        cbYear.JoClearData();
-        models.forEach(data -> {
-            cbYear.JoAddIntModel(data.getYearID(), data.getYear());
-        });
+    public void showYear() {
+        cbYear.showYears();
     }
 
     public void showClassRoom(List<RegisterModel> models) {
@@ -134,12 +131,12 @@ public class ReportPayLateFoodView extends javax.swing.JPanel {
         tb_data = new Components.JoTable();
         jPanel1 = new javax.swing.JPanel();
         joLable1 = new Components.JoLable();
-        cbYear = new Components.JoCombobox();
         joLable2 = new Components.JoLable();
         cbClassRoom = new Components.JoCombobox();
         btnShow = new Components.JoButtonIconfont();
         cbMonth = new Components.JoCombobox();
         joLable3 = new Components.JoLable();
+        cbYear = new Component.ComboboxYears();
         jPanel2 = new javax.swing.JPanel();
         btnExport = new Components.JoButtonIconfont();
 
@@ -193,7 +190,7 @@ public class ReportPayLateFoodView extends javax.swing.JPanel {
         pn_Datatable.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
         java.awt.GridBagLayout jPanel1Layout = new java.awt.GridBagLayout();
-        jPanel1Layout.columnWidths = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
+        jPanel1Layout.columnWidths = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
         jPanel1Layout.rowHeights = new int[] {0, 5, 0};
         jPanel1.setLayout(jPanel1Layout);
 
@@ -207,15 +204,6 @@ public class ReportPayLateFoodView extends javax.swing.JPanel {
         gridBagConstraints.weighty = 0.1;
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel1.add(joLable1, gridBagConstraints);
-
-        cbYear.setPreferredSize(new java.awt.Dimension(100, 25));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
-        gridBagConstraints.weighty = 0.1;
-        gridBagConstraints.insets = new java.awt.Insets(2, 10, 2, 2);
-        jPanel1.add(cbYear, gridBagConstraints);
 
         joLable2.setText("ຫ້ອງຮຽນ");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -233,7 +221,7 @@ public class ReportPayLateFoodView extends javax.swing.JPanel {
         btnShow.setText("ສະແດງ");
         btnShow.setJoIcons(jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons.SEARCH);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 12;
+        gridBagConstraints.gridx = 14;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
         gridBagConstraints.weighty = 0.1;
@@ -243,7 +231,7 @@ public class ReportPayLateFoodView extends javax.swing.JPanel {
         cbMonth.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ທັງໝົດ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
         cbMonth.setFont(new java.awt.Font("Phetsarath OT", 0, 14)); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 10;
+        gridBagConstraints.gridx = 12;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(2, 9, 2, 2);
@@ -255,6 +243,12 @@ public class ReportPayLateFoodView extends javax.swing.JPanel {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel1.add(joLable3, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        gridBagConstraints.insets = new java.awt.Insets(2, 9, 2, 2);
+        jPanel1.add(cbYear, gridBagConstraints);
 
         jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
@@ -298,7 +292,7 @@ public class ReportPayLateFoodView extends javax.swing.JPanel {
     private Components.JoButtonIconfont btn_back;
     private Components.JoCombobox cbClassRoom;
     private Components.JoCombobox cbMonth;
-    private Components.JoCombobox cbYear;
+    private Component.ComboboxYears cbYear;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
