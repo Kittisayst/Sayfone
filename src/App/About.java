@@ -10,7 +10,7 @@ public class About {
     public About() {
         joProperties = new JoProperties("/Info/About.properties");
         joProperties.addValue("Bulid", "Sayfoneschool Buld");
-        joProperties.addValue("version", "2.23.4");
+        joProperties.addValue("version", "2.23.5");
         AppDBPing ping = new AppDBPing();
         //ຕັ້ງຕ່າເລີ່ມຕົ້ນປີ້ນເຕີ 0
         GlobalDataModel.printerBillState = Boolean.parseBoolean(joProperties.getValueAt("PrinterBillState"));  //ໃບບິນ

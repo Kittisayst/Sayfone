@@ -36,7 +36,7 @@ public class FinancialView extends javax.swing.JPanel {
     }
 
     public void showParent(StudentHistoryModel historyModel) {
-        lbl_parents.setText("ຜູ້ປົກຄອງ: " + historyModel.getFatherName() + " ເບີໂທ: " + historyModel.getFatherTel());
+        lbl_parents.setText("ຜູ້ປົກຄອງ: " + historyModel.getFatherName() + " ເບີໂທ: " + historyModel.getFatherTel()+" ຜູ້ປົກຄອງ2: "+historyModel.getMotherName()+" ເບີໂທ: "+historyModel.getMotherTel());
     }
 
     public void EnableDisCount(UserModel model) { // ສະແດງຂໍ້ມູນຜູ້ອານຸມັດ

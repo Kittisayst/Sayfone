@@ -574,7 +574,7 @@
                 </Component>
                 <Component class="Components.JoLable" name="joLable9">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="&#xe8a;&#xeb7;&#xec8; &#xec1;&#xea5;&#xeb0; &#xe99;&#xeb2;&#xea1;&#xeaa;&#xeb0;&#xe81;&#xeb8;&#xe99; &#xead;&#xec9;&#xeb2;&#xe8d;&#xe99;&#xec9;&#xead;&#xe87;"/>
+                    <Property name="text" type="java.lang.String" value="&#xe8a;&#xeb7;&#xec8; &#xec1;&#xea5;&#xeb0; &#xe99;&#xeb2;&#xea1;&#xeaa;&#xeb0;&#xe81;&#xeb8;&#xe99; &#xe9e;&#xeb5;&#xec8;&#xe99;&#xec9;&#xead;&#xe87;&#xec3;&#xe81;&#xec9;&#xe8a;&#xeb4;&#xe94;"/>
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">

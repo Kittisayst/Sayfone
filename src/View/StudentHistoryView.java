@@ -892,7 +892,7 @@ public class StudentHistoryView extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 8, 5, 0);
         joPanelTitle2.add(joLable8, gridBagConstraints);
 
-        joLable9.setText("ຊື່ ແລະ ນາມສະກຸນ ອ້າຍນ້ອງ");
+        joLable9.setText("ຊື່ ແລະ ນາມສະກຸນ ພີ່ນ້ອງໃກ້ຊິດ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 7;

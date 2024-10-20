@@ -429,10 +429,14 @@ public class StudentDAO implements StudentFn {
         JoConnect connect = new JoConnect();
         List<StudentModel> models = new ArrayList<>();
         try {
-            String sqlc = "SELECT * FROM tb_student WHERE StudentNo LIKE ? OR StudentName LIKE ? ORDER BY StudentID DESC";
+            String sqlc = "SELECT * FROM tb_student as s \n"
+                    + "LEFT JOIN tb_studenthistory sy ON s.StudentID = sy.StudentID\n"
+                    + "  WHERE s.StudentNo LIKE ? OR s.StudentName LIKE ? OR sy.FatherTel LIKE ? OR sy.MotherTel LIKE ? ORDER BY s.StudentID DESC";
             PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sqlc);
             pre.setString(1, search + "%");
             pre.setString(2, "%" + search + "%");
+            pre.setString(3, "%" + search + "%");
+            pre.setString(4, "%" + search + "%");
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
                 models.add(getResult(rs));
@@ -459,13 +463,19 @@ public class StudentDAO implements StudentFn {
                     + "COALESCE(MAX(f.FinancialID), 0) AS maxFinancial\n"
                     + "FROM tb_student s\n"
                     + "LEFT JOIN tb_financial f ON s.StudentID = f.StudentID\n";
-            if (isNumeric(text)) {
+            if (isPhoneNumber(text)) {
+                sql += " LEFT JOIN tb_studenthistory sy ON s.StudentID = sy.StudentID\n";
+                sql += "WHERE sy.FatherTel LIKE ? OR sy.MotherTel LIKE ? GROUP BY s.StudentID, s.StudentNo, s.Gender, s.StudentName, s.Status";
+            } else if (isNumeric(text)) {
                 sql += "WHERE s.StudentNo LIKE ? GROUP BY s.StudentID, s.StudentNo, s.Gender, s.StudentName, s.Status";
             } else {
                 sql += "WHERE s.StudentName LIKE ? GROUP BY s.StudentID, s.StudentNo, s.Gender, s.StudentName, s.Status";
             }
             PreparedStatement pre = connect.getConnectionDefault().prepareStatement(sql);
             pre.setString(1, "%" + text + "%");
+            if (isPhoneNumber(text)) { //ຄົນຫາຕາມເບີໂທ
+                 pre.setString(2, "%" + text + "%");
+            }
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
                 models.add(new StudentDashboradModel(
@@ -487,6 +497,10 @@ public class StudentDAO implements StudentFn {
 
     private boolean isNumeric(String str) {
         return str != null && str.matches("\\d+"); // Checks if the string contains only digits
+    }
+
+    private boolean isPhoneNumber(String text) {
+        return text != null && text.matches("\\d{8}"); // Checks if the string contains only digits
     }
 
     @Override
